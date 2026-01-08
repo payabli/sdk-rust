@@ -1,0 +1,9 @@
+{
+  "cliVersion": "3.32.0",
+  "generatorName": "fernapi/fern-rust-sdk",
+  "generatorVersion": "0.14.0",
+  "generatorConfig": {
+    "enableWireTests": true
+  },
+  "sdkVersion": "0.0.597"
+}

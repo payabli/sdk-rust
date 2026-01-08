@@ -1,0 +1,17 @@
+pub use crate::prelude::*;
+
+/// The required and recommended fields for a payment made with a stored payment method.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+pub struct PayMethodStoredMethod {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub initiator: Option<Initiator>,
+    /// Method to use for the transaction. Use either `card` or `ach`, depending on what kind of method was tokenized to use a saved payment method for this transaction.
+    pub method: PayMethodStoredMethodMethod,
+    /// Payabli identifier of a tokenized payment method.
+    #[serde(rename = "storedMethodId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stored_method_id: Option<Storedmethodid>,
+    #[serde(rename = "storedMethodUsageType")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stored_method_usage_type: Option<StoredMethodUsageType>,
+}

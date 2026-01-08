@@ -1,0 +1,12 @@
+pub use crate::prelude::*;
+
+/// Request type for API operation
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
+pub struct MfaValidationData {
+    #[serde(rename = "mfaCode")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub mfa_code: Option<String>,
+    #[serde(rename = "mfaValidationCode")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub mfa_validation_code: Option<MfaValidationCode>,
+}

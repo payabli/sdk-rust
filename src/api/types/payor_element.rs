@@ -1,0 +1,15 @@
+pub use crate::prelude::*;
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+pub struct PayorElement {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<Enabled>,
+    /// Array of Customer/Payor fields to show in section
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fields: Option<Vec<PayorFields>>,
+    /// Custom header text for section
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub header: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub order: Option<Order>,
+}
