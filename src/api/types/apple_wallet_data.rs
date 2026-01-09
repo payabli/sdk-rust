@@ -24,8 +24,8 @@ pub struct AppleWalletData {
     #[serde(rename = "markedForDeletionAt")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub marked_for_deletion_at: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub marked_for_deletion_at: Option<DateTime<Utc>>,
     #[serde(rename = "createdAt")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub created_at: Option<CreatedAt>,

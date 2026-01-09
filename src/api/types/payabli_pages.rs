@@ -12,8 +12,8 @@ pub struct PayabliPages {
     #[serde(rename = "lastAccess")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub last_access: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_access: Option<DateTime<Utc>>,
     /// Sections of page
     #[serde(rename = "pageContent")]
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -11,13 +11,13 @@ pub struct OcrResultData {
     #[serde(rename = "billDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub bill_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub bill_date: Option<DateTime<Utc>>,
     #[serde(rename = "dueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub due_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub due_date: Option<DateTime<Utc>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub comments: Option<String>,
     #[serde(rename = "billItems")]
@@ -39,8 +39,8 @@ pub struct OcrResultData {
     #[serde(rename = "endDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub end_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub end_date: Option<DateTime<Utc>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub frequency: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]

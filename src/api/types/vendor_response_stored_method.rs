@@ -48,11 +48,11 @@ pub struct VendorResponseStoredMethod {
     #[serde(rename = "LastUpdated")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub last_updated: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_updated: Option<DateTime<Utc>>,
     #[serde(rename = "CardUpdatedOn")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub card_updated_on: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub card_updated_on: Option<DateTime<Utc>>,
 }

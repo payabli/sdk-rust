@@ -14,8 +14,8 @@ pub struct QueryChargebacksResponseRecordsItem {
     #[serde(rename = "ChargebackDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub chargeback_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub chargeback_date: Option<DateTime<Utc>>,
     #[serde(rename = "CreatedAt")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub created_at: Option<CreatedAt>,

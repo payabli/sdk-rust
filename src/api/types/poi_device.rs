@@ -10,14 +10,14 @@ pub struct PoiDevice {
     #[serde(rename = "dateDeRegistered")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub date_de_registered: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub date_de_registered: Option<DateTime<Utc>>,
     /// The date the device was registered.
     #[serde(rename = "dateRegistered")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub date_registered: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub date_registered: Option<DateTime<Utc>>,
     /// The device identifier.
     #[serde(rename = "deviceId")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -34,20 +34,20 @@ pub struct PoiDevice {
     #[serde(rename = "lastConnectedDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub last_connected_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_connected_date: Option<DateTime<Utc>>,
     /// Last disconnected date.
     #[serde(rename = "lastDisconnectedDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub last_disconnected_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_disconnected_date: Option<DateTime<Utc>>,
     /// Last transaction date.
     #[serde(rename = "lastTransactionDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub last_transaction_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_transaction_date: Option<DateTime<Utc>>,
     /// The device manufacturer.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub make: Option<String>,

@@ -7,8 +7,8 @@ pub struct ChargebackQueryRecords {
     pub id: i64,
     /// Date of chargeback in format YYYY-MM-DD or MM/DD/YYYY.
     #[serde(rename = "ChargebackDate")]
-    #[serde(with = "crate::core::flexible_datetime::offset")]
-    pub chargeback_date: DateTime<FixedOffset>,
+    #[serde(with = "crate::core::flexible_datetime::utc")]
+    pub chargeback_date: DateTime<Utc>,
     /// Number of case assigned to the chargeback.
     #[serde(rename = "CaseNumber")]
     pub case_number: String,

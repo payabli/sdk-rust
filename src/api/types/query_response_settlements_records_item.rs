@@ -103,8 +103,8 @@ pub struct QueryResponseSettlementsRecordsItem {
     #[serde(rename = "SettlementDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub settlement_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub settlement_date: Option<DateTime<Utc>>,
     #[serde(rename = "Source")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,

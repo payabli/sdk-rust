@@ -49,8 +49,8 @@ pub struct BatchDetailResponseRecord {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub customer: Option<QueryTransactionPayorData>,
     #[serde(rename = "SettlementDate")]
-    #[serde(with = "crate::core::flexible_datetime::offset")]
-    pub settlement_date: DateTime<FixedOffset>,
+    #[serde(with = "crate::core::flexible_datetime::utc")]
+    pub settlement_date: DateTime<Utc>,
     #[serde(rename = "PaymentSettlementStatus")]
     pub payment_settlement_status: i64,
     #[serde(rename = "BatchStatus")]

@@ -19,8 +19,8 @@ pub struct ChargebackMessage {
     pub content: String,
     /// Timestamp when the message was created.
     #[serde(rename = "CreatedAt")]
-    #[serde(with = "crate::core::flexible_datetime::offset")]
-    pub created_at: DateTime<FixedOffset>,
+    #[serde(with = "crate::core::flexible_datetime::utc")]
+    pub created_at: DateTime<Utc>,
     /// Type of message.
     #[serde(rename = "MessageType")]
     pub message_type: i64,

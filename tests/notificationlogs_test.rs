@@ -21,8 +21,12 @@ async fn test_notificationlogs_search_notification_logs_with_wiremock() {
             &SearchNotificationLogsRequest {
                 page_size: Some(Pagesize(20)),
                 body: NotificationLogSearchRequest {
-                    start_date: DateTime::parse_from_rfc3339("2024-01-01T00:00:00Z").unwrap(),
-                    end_date: DateTime::parse_from_rfc3339("2024-01-31T23:59:59Z").unwrap(),
+                    start_date: DateTime::parse_from_rfc3339("2024-01-01T00:00:00Z")
+                        .unwrap()
+                        .with_timezone(&Utc),
+                    end_date: DateTime::parse_from_rfc3339("2024-01-31T23:59:59Z")
+                        .unwrap()
+                        .with_timezone(&Utc),
                     notification_event: Some("ActivatedMerchant".to_string()),
                     succeeded: Some(true),
                     org_id: Some(12345),

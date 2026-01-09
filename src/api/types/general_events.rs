@@ -9,8 +9,8 @@ pub struct GeneralEvents {
     #[serde(rename = "eventTime")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub event_time: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub event_time: Option<DateTime<Utc>>,
     /// Extra data.
     #[serde(rename = "extraData")]
     #[serde(skip_serializing_if = "Option::is_none")]

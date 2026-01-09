@@ -23,8 +23,8 @@ pub struct QueryBatchesResponseRecordsItem {
     #[serde(rename = "BatchDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub batch_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub batch_date: Option<DateTime<Utc>>,
     /// The amount of the batch.
     #[serde(rename = "BatchAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -104,8 +104,8 @@ pub struct QueryBatchesResponseRecordsItem {
     #[serde(rename = "TransferDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub transfer_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub transfer_date: Option<DateTime<Utc>>,
     /// Transfer details for the batch.
     #[serde(rename = "Transfer")]
     #[serde(skip_serializing_if = "Option::is_none")]

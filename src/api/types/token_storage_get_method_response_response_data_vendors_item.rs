@@ -31,8 +31,8 @@ pub struct GetMethodResponseResponseDataVendorsItem {
     #[serde(rename = "createdDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub created_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub created_date: Option<DateTime<Utc>>,
     /// Custom field 1 for vendor
     #[serde(rename = "customField1")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -67,8 +67,8 @@ pub struct GetMethodResponseResponseDataVendorsItem {
     #[serde(rename = "lastUpdated")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub last_updated: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_updated: Option<DateTime<Utc>>,
     /// Location code for vendor
     #[serde(rename = "locationCode")]
     #[serde(skip_serializing_if = "Option::is_none")]

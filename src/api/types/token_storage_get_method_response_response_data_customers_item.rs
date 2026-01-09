@@ -10,8 +10,8 @@ pub struct GetMethodResponseResponseDataCustomersItem {
     /// Creation timestamp
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub created: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub created: Option<DateTime<Utc>>,
     /// Customer consent information
     #[serde(rename = "customerConsent")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -34,8 +34,8 @@ pub struct GetMethodResponseResponseDataCustomersItem {
     #[serde(rename = "lastUpdated")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub last_updated: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_updated: Option<DateTime<Utc>>,
     /// Multi-factor authentication status
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mfa: Option<bool>,

@@ -81,12 +81,12 @@ pub struct VendorDataResponse {
     pub parent_org_id: i64,
     /// Date when vendor was created
     #[serde(rename = "CreatedDate")]
-    #[serde(with = "crate::core::flexible_datetime::offset")]
-    pub created_date: DateTime<FixedOffset>,
+    #[serde(with = "crate::core::flexible_datetime::utc")]
+    pub created_date: DateTime<Utc>,
     /// Date when vendor was last updated
     #[serde(rename = "LastUpdated")]
-    #[serde(with = "crate::core::flexible_datetime::offset")]
-    pub last_updated: DateTime<FixedOffset>,
+    #[serde(with = "crate::core::flexible_datetime::utc")]
+    pub last_updated: DateTime<Utc>,
     #[serde(rename = "remitAddress1")]
     pub remit_address_1: Remitaddress1,
     #[serde(rename = "remitAddress2")]

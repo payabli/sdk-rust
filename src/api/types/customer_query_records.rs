@@ -114,14 +114,14 @@ pub struct CustomerQueryRecords {
     #[serde(rename = "LastUpdated")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub last_updated: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_updated: Option<DateTime<Utc>>,
     /// Date and time created.
     #[serde(rename = "Created")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub created: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub created: Option<DateTime<Utc>>,
     /// List of additional custom fields in format key:value.
     #[serde(rename = "AdditionalFields")]
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -28,8 +28,8 @@ pub struct QueryBatchesOutResponseRecordsItem {
     #[serde(rename = "BatchDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub batch_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub batch_date: Option<DateTime<Utc>>,
     #[serde(rename = "BatchNumber")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_number: Option<BatchNumber>,

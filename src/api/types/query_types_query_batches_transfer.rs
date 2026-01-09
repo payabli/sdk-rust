@@ -11,8 +11,8 @@ pub struct QueryBatchesTransfer {
     #[serde(rename = "TransferDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::flexible_datetime::offset::option")]
-    pub transfer_date: Option<DateTime<FixedOffset>>,
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub transfer_date: Option<DateTime<Utc>>,
     /// The processor used for the transfer.
     #[serde(rename = "Processor")]
     #[serde(skip_serializing_if = "Option::is_none")]
