@@ -5,7 +5,7 @@ pub use crate::prelude::*;
 pub struct QuerySubscriptionResponse {
     #[serde(rename = "Records")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub records: Option<SubscriptionQueryRecords>,
+    pub records: Option<Vec<SubscriptionQueryRecords>>,
     #[serde(rename = "Summary")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub summary: Option<QuerySummary>,
