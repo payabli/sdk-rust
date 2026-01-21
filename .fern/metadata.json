@@ -3,8 +3,10 @@
   "generatorName": "fernapi/fern-rust-sdk",
   "generatorVersion": "0.14.3",
   "generatorConfig": {
+    "packageLicenseFile": "LICENSE.md",
     "enableWireTests": true,
     "dateTimeType": "utc",
+    "packageRepository": "https://github.com/payabli/sdk-rust",
     "extraDependencies": {
       "reqwest": {
         "version": "0.12",
@@ -12,5 +14,5 @@
       }
     }
   },
-  "sdkVersion": "0.0.614"
+  "sdkVersion": "0.0.615"
 }
