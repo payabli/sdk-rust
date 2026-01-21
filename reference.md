@@ -1,6 +1,6 @@
 # Reference
 ## Bill
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">add_bill</a>(entry: String, request: BillOutData) -> Result<BillResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">add_bill</a>(entry: String, request: BillOutData) -> Result&lt;BillResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -28,16 +28,6 @@ Creates a bill in an entrypoint.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AccountingField, AdditionalData, AdditionalDataString, AddressAddtlNullable, AddressNullable,
-    Attachments, BankAccountHolderName, BankAccountHolderType, BankName, BillItem, BillOutData,
-    BillOutDataScheduledOptions, BillingData, Billitems, Billstatus, Comments, Contacts,
-    ContactsField, Datenullable, Email, FileContent, FileContentFtype, Frequency, IdempotencyKey,
-    ItemCommodityCode, ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure,
-    LocationCode, Mcc, PayeeName, RemitEmail, Remitaddress1, Remitaddress2, Remitcity,
-    Remitcountry, Remitstate, Remitzip, RoutingAccount, Terms, TypeAccount, VendorData, VendorEin,
-    VendorName1, VendorName2, VendorNumber, VendorPaymentMethodString, VendorPhone, Vendorstatus,
-};
 
 #[tokio::main]
 async fn main() {
@@ -159,7 +149,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">delete_attached_from_bill</a>(id_bill: i64, filename: String, return_object: Option<Option<bool>>) -> Result<BillResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">delete_attached_from_bill</a>(id_bill: i64, filename: String, return_object: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;BillResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -266,7 +256,7 @@ request to `/api/Invoice/{idInvoice}`. Here, the filename is
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">delete_bill</a>(id_bill: i64) -> Result<BillResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">delete_bill</a>(id_bill: i64) -> Result&lt;BillResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -330,7 +320,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">edit_bill</a>(id_bill: i64, request: BillOutData) -> Result<EditBillResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">edit_bill</a>(id_bill: i64, request: BillOutData) -> Result&lt;EditBillResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -358,16 +348,6 @@ Updates a bill by ID.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AccountingField, AdditionalData, AdditionalDataString, AddressAddtlNullable, AddressNullable,
-    Attachments, BankAccountHolderName, BankAccountHolderType, BankName, BillItem, BillOutData,
-    BillOutDataScheduledOptions, BillingData, Billitems, Billstatus, Comments, Contacts,
-    ContactsField, Datenullable, Email, FileContent, FileContentFtype, Frequency,
-    ItemCommodityCode, ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure,
-    LocationCode, Mcc, PayeeName, RemitEmail, Remitaddress1, Remitaddress2, Remitcity,
-    Remitcountry, Remitstate, Remitzip, RoutingAccount, Terms, TypeAccount, VendorData, VendorEin,
-    VendorName1, VendorName2, VendorNumber, VendorPaymentMethodString, VendorPhone, Vendorstatus,
-};
 
 #[tokio::main]
 async fn main() {
@@ -434,7 +414,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">get_attached_from_bill</a>(id_bill: i64, filename: String, return_object: Option<Option<bool>>) -> Result<FileContent, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">get_attached_from_bill</a>(id_bill: i64, filename: String, return_object: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;FileContent, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -536,7 +516,7 @@ The filename in Payabli. Filename is `zipName` in response to a request to `/api
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">get_bill</a>(id_bill: i64) -> Result<GetBillResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">get_bill</a>(id_bill: i64) -> Result&lt;GetBillResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -600,7 +580,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">list_bills</a>(entry: String, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<BillQueryResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">list_bills</a>(entry: String, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;BillQueryResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -628,7 +608,6 @@ Retrieve a list of bills for an entrypoint. Use filters to limit results. Includ
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -762,7 +741,7 @@ Example: `totalAmount(gt)=20` returns all records with a `totalAmount` that's gr
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">list_bills_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<BillQueryResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">list_bills_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;BillQueryResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -790,7 +769,6 @@ Retrieve a list of bills for an organization. Use filters to limit results. Incl
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -924,7 +902,7 @@ Example: totalAmount(gt)=20 return all records with totalAmount greater than 20.
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">modify_approval_bill</a>(id_bill: i64, request: Vec<String>) -> Result<ModifyApprovalBillResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">modify_approval_bill</a>(id_bill: i64, request: Vec&lt;String&gt;) -> Result&lt;ModifyApprovalBillResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -991,7 +969,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">send_to_approval_bill</a>(id_bill: i64, request: Vec<String>, autocreate_user: Option<Option<bool>>) -> Result<BillResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">send_to_approval_bill</a>(id_bill: i64, request: Vec&lt;String&gt;, autocreate_user: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;BillResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1019,7 +997,6 @@ Send a bill to a user or list of users to approve.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::IdempotencyKey;
 
 #[tokio::main]
 async fn main() {
@@ -1077,7 +1054,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">set_approved_bill</a>(id_bill: i64, approved: String, email: Option<Option<String>>) -> Result<SetApprovedBillResponse, ApiError></code></summary>
+<details><summary><code>client.bill.<a href="/src/api/resources/bill/client.rs">set_approved_bill</a>(id_bill: i64, approved: String, email: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;SetApprovedBillResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1166,7 +1143,7 @@ async fn main() {
 </details>
 
 ## Boarding
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">add_application</a>(request: AddApplicationRequest) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">add_application</a>(request: AddApplicationRequest) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1194,29 +1171,6 @@ Creates a boarding application in an organization. This endpoint requires an app
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AccountNumber, AchSetup, AddApplicationRequest, AdditionalDataString, Annualrevenue,
-    ApplicationData, ApplicationDataManaged, ApplicationDataManagedContactsItem,
-    ApplicationDataManagedOwnershipItem, ApplicationDataOdp, ApplicationDataOdpContactsItem,
-    ApplicationDataOdpOwnershipItem, ApplicationDataPayIn, ApplicationDataPayInBankData,
-    ApplicationDataPayInContactsItem, ApplicationDataPayInOwnershipItem,
-    ApplicationDataPayInServices, ApplicationDataPayInServicesAch,
-    ApplicationDataPayInServicesCard, Attachments, AttestationDate, Avgmonthly, Baddress1,
-    Baddress2, Bank, BankAccountFunction, BankAccountHolderName, BankAccountHolderType, BankData,
-    BankName, BankNickname, Bcity, Bcountry, Binperson, Binphone, Binweb, BoardingAverageBillSize,
-    BoardingAvgMonthlyBill, BoardingBusinessFax, BoardingBusinessPhone, Bstate, Bsummary,
-    Busstartdate, Bzip, CardSetup, Contacts, ContactsField, Dbaname, Ein, Email,
-    ExternalPaypointId, FaxNumber, FileContent, FileContentFtype, Highticketamt, Legalname,
-    License, Licensestate, Maddress, Maddress1, Mcc, Mcity, Mcountry, Mstate, Mzip, OdpSetup,
-    OdpSetupProcessingRegion, OnCreate, Orgid, OwnType, Owners, Ownership,
-    PayoutAverageMonthlyVolume, PayoutAverageTicketLimit, PayoutCreditLimit,
-    PayoutHighTicketAmount, PciAttestation, PhoneNumber, RecipientEmailNotification, RepCode,
-    RepName, RepOffice, Resumable, RoutingAccount, Services, SignDate, SignedDocumentReference,
-    SignerAcceptance, SignerAddress1, SignerCity, SignerCountry, SignerDataRequest, SignerDob,
-    SignerName, SignerPhone, SignerSsn, SignerState, SignerZip, Signeraddress, Taxfillname,
-    TemplateId, Ticketamt, TypeAccount, Website, Whencharged, Whendelivered, Whenprovided,
-    Whenrefunded,
-};
 
 #[tokio::main]
 async fn main() {
@@ -1374,7 +1328,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">delete_application</a>(app_id: i64) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">delete_application</a>(app_id: i64) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1438,7 +1392,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_application</a>(app_id: i64) -> Result<ApplicationDetailsRecord, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_application</a>(app_id: i64) -> Result&lt;ApplicationDetailsRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1502,7 +1456,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_application_by_auth</a>(x_id: String, request: RequestAppByAuth) -> Result<ApplicationQueryRecord, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_application_by_auth</a>(x_id: String, request: RequestAppByAuth) -> Result&lt;ApplicationQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1530,7 +1484,6 @@ Gets a boarding application by authentication information. This endpoint require
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::Email;
 
 #[tokio::main]
 async fn main() {
@@ -1593,7 +1546,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_by_id_link_application</a>(boarding_link_id: i64) -> Result<BoardingLinkQueryRecord, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_by_id_link_application</a>(boarding_link_id: i64) -> Result&lt;BoardingLinkQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1657,7 +1610,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_by_template_id_link_application</a>(template_id: f64) -> Result<BoardingLinkQueryRecord, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_by_template_id_link_application</a>(template_id: f64) -> Result&lt;BoardingLinkQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1724,7 +1677,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_external_application</a>(app_id: i64, mail_2: String, send_email: Option<Option<bool>>) -> Result<PayabliApiResponse00, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_external_application</a>(app_id: i64, mail_2: String, send_email: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;PayabliApiResponse00, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1812,7 +1765,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_link_application</a>(boarding_link_reference: String) -> Result<BoardingLinkQueryRecord, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_link_application</a>(boarding_link_reference: String) -> Result&lt;BoardingLinkQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1879,7 +1832,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">list_applications</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryBoardingAppsListResponse, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">list_applications</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryBoardingAppsListResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1907,7 +1860,6 @@ Returns a list of boarding applications for an organization. Use filters to limi
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -2033,7 +1985,7 @@ List of comparison accepted - enclosed between parentheses:
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">list_boarding_links</a>(org_id: i64, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryBoardingLinksResponse, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">list_boarding_links</a>(org_id: i64, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryBoardingLinksResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2173,7 +2125,7 @@ Example: templateName(ct)=hoa return all records with template title containing 
 </dl>
 </details>
 
-<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">update_application</a>(app_id: i64, request: ApplicationData) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">update_application</a>(app_id: i64, request: ApplicationData) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2201,23 +2153,6 @@ Updates a boarding application by ID. This endpoint requires an application API 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AccountNumber, AchSetup, AdditionalDataString, Annualrevenue, ApplicationData, Attachments,
-    AttestationDate, Avgmonthly, Baddress1, Baddress2, Bank, BankAccountFunction,
-    BankAccountHolderName, BankAccountHolderType, BankName, BankNickname, Bcity, Bcountry,
-    Binperson, Binphone, Binweb, BoardingBusinessFax, BoardingBusinessPhone, Bstate, Bsummary,
-    Busstartdate, Bzip, CardSetup, Contacts, ContactsField, Dbaname, Ein, Email,
-    ExternalPaypointId, FileContent, FileContentFtype, Highticketamt, Legalname, License,
-    Licensestate, Maddress, Maddress1, Mcc, Mcity, Mcountry, Mstate, Mzip, OdpSetup,
-    OdpSetupProcessingRegion, OnCreate, Orgid, OwnType, Owners, Ownership,
-    PayoutAverageMonthlyVolume, PayoutAverageTicketLimit, PayoutCreditLimit,
-    PayoutHighTicketAmount, PciAttestation, RecipientEmailNotification, RepCode, RepName,
-    RepOffice, Resumable, RoutingAccount, Services, SignDate, SignedDocumentReference,
-    SignerAcceptance, SignerAddress1, SignerCity, SignerCountry, SignerDataRequest, SignerDob,
-    SignerName, SignerPhone, SignerSsn, SignerState, SignerZip, Signeraddress, Taxfillname,
-    TemplateId, Ticketamt, TypeAccount, Website, Whencharged, Whendelivered, Whenprovided,
-    Whenrefunded,
-};
 
 #[tokio::main]
 async fn main() {
@@ -2319,7 +2254,7 @@ async fn main() {
 </details>
 
 ## ChargeBacks
-<details><summary><code>client.charge_backs.<a href="/src/api/resources/charge_backs/client.rs">add_response</a>(id: String, request: ResponseChargeBack) -> Result<AddResponseResponse, ApiError></code></summary>
+<details><summary><code>client.charge_backs.<a href="/src/api/resources/charge_backs/client.rs">add_response</a>(id: String, request: ResponseChargeBack) -> Result&lt;AddResponseResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2347,7 +2282,6 @@ Add a response to a chargeback or ACH return.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Attachments, Email, FileContent, FileContentFtype, IdempotencyKey};
 
 #[tokio::main]
 async fn main() {
@@ -2431,7 +2365,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.charge_backs.<a href="/src/api/resources/charge_backs/client.rs">get_chargeback</a>(id: String) -> Result<ChargebackQueryRecords, ApiError></code></summary>
+<details><summary><code>client.charge_backs.<a href="/src/api/resources/charge_backs/client.rs">get_chargeback</a>(id: String) -> Result&lt;ChargebackQueryRecords, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2495,7 +2429,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.charge_backs.<a href="/src/api/resources/charge_backs/client.rs">get_chargeback_attachment</a>(id: String, file_name: String) -> Result<String, ApiError></code></summary>
+<details><summary><code>client.charge_backs.<a href="/src/api/resources/charge_backs/client.rs">get_chargeback_attachment</a>(id: String, file_name: String) -> Result&lt;String, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2571,7 +2505,7 @@ async fn main() {
 </details>
 
 ## CheckCapture
-<details><summary><code>client.check_capture.<a href="/src/api/resources/check_capture/client.rs">check_processing</a>(request: CheckCaptureRequestBody) -> Result<CheckCaptureResponse, ApiError></code></summary>
+<details><summary><code>client.check_capture.<a href="/src/api/resources/check_capture/client.rs">check_processing</a>(request: CheckCaptureRequestBody) -> Result&lt;CheckCaptureResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2599,7 +2533,6 @@ Captures a check for Remote Deposit Capture (RDC) using the provided check image
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::Entry;
 
 #[tokio::main]
 async fn main() {
@@ -2672,7 +2605,7 @@ async fn main() {
 </details>
 
 ## Cloud
-<details><summary><code>client.cloud.<a href="/src/api/resources/cloud/client.rs">add_device</a>(entry: String, request: DeviceEntry) -> Result<AddDeviceResponse, ApiError></code></summary>
+<details><summary><code>client.cloud.<a href="/src/api/resources/cloud/client.rs">add_device</a>(entry: String, request: DeviceEntry) -> Result&lt;AddDeviceResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2700,7 +2633,6 @@ Register a cloud device to an entrypoint. See [Devices Quickstart](/developers/d
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::IdempotencyKey;
 
 #[tokio::main]
 async fn main() {
@@ -2769,7 +2701,7 @@ The device registration code or serial number, depending on the model.
 </dl>
 </details>
 
-<details><summary><code>client.cloud.<a href="/src/api/resources/cloud/client.rs">history_device</a>(entry: String, device_id: String) -> Result<CloudQueryApiResponse, ApiError></code></summary>
+<details><summary><code>client.cloud.<a href="/src/api/resources/cloud/client.rs">history_device</a>(entry: String, device_id: String) -> Result&lt;CloudQueryApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2844,7 +2776,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.cloud.<a href="/src/api/resources/cloud/client.rs">list_device</a>(entry: String, force_refresh: Option<Option<bool>>) -> Result<CloudQueryApiResponse, ApiError></code></summary>
+<details><summary><code>client.cloud.<a href="/src/api/resources/cloud/client.rs">list_device</a>(entry: String, force_refresh: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;CloudQueryApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2925,7 +2857,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.cloud.<a href="/src/api/resources/cloud/client.rs">remove_device</a>(entry: String, device_id: String) -> Result<RemoveDeviceResponse, ApiError></code></summary>
+<details><summary><code>client.cloud.<a href="/src/api/resources/cloud/client.rs">remove_device</a>(entry: String, device_id: String) -> Result&lt;RemoveDeviceResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3005,7 +2937,7 @@ async fn main() {
 </details>
 
 ## Customer
-<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">add_customer</a>(entry: Entrypointfield, request: CustomerData, force_customer_creation: Option<Option<bool>>, replace_existing: Option<Option<i64>>) -> Result<PayabliApiResponseCustomerQuery, ApiError></code></summary>
+<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">add_customer</a>(entry: Entrypointfield, request: CustomerData, force_customer_creation: Option&lt;Option&lt;bool&gt;&gt;, replace_existing: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;PayabliApiResponseCustomerQuery, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3034,11 +2966,6 @@ If you don't include an identifier, the record is rejected.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    CreatedAt, CustomerData, CustomerNumberNullable, CustomerStatus, Email, Entrypointfield,
-    IdempotencyKey, Identifierfields, Shippingaddress, Shippingaddressadditional, Shippingcity,
-    Shippingcountry, Shippingstate, Shippingzip, Timezone,
-};
 
 #[tokio::main]
 async fn main() {
@@ -3129,7 +3056,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">delete_customer</a>(customer_id: i64) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">delete_customer</a>(customer_id: i64) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3193,7 +3120,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">get_customer</a>(customer_id: i64) -> Result<CustomerQueryRecords, ApiError></code></summary>
+<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">get_customer</a>(customer_id: i64) -> Result&lt;CustomerQueryRecords, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3257,7 +3184,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">link_customer_transaction</a>(customer_id: i64, trans_id: String) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">link_customer_transaction</a>(customer_id: i64, trans_id: String) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3332,7 +3259,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">request_consent</a>(customer_id: i64) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">request_consent</a>(customer_id: i64) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3396,7 +3323,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">update_customer</a>(customer_id: i64, request: CustomerData) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.customer.<a href="/src/api/resources/customer/client.rs">update_customer</a>(customer_id: i64, request: CustomerData) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3424,11 +3351,6 @@ Update a customer record. Include only the fields you want to change.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    CreatedAt, CustomerData, CustomerNumberNullable, CustomerStatus, Email, Identifierfields,
-    Shippingaddress, Shippingaddressadditional, Shippingcity, Shippingcountry, Shippingstate,
-    Shippingzip, Timezone,
-};
 
 #[tokio::main]
 async fn main() {
@@ -3500,7 +3422,7 @@ async fn main() {
 </details>
 
 ## Export
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_applications</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_applications</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3528,7 +3450,6 @@ Export a list of boarding applications for an organization. Use filters to limit
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -3671,7 +3592,7 @@ Example: `dbaname(ct)=hoa` returns all records with a `dbaname` containing "hoa"
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batch_details</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batch_details</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3699,7 +3620,6 @@ This endpoint is deprecated. Export batch details for a paypoint. Use filters to
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -3853,7 +3773,7 @@ Example: `amount(gt)=20` return all records with amount greater than 20.00
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batch_details_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batch_details_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3881,7 +3801,6 @@ This endpoint is deprecated. Export batch details for an organization. Use filte
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -4035,7 +3954,7 @@ Example: `amount(gt)=20` return all records with amount greater than 20.00
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batches</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batches</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -4063,7 +3982,6 @@ Export a list of batches for an entrypoint. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -4207,7 +4125,7 @@ Example: `batchAmount(gt)=20` returns all records with a `batchAmount` greater t
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batches_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batches_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -4235,7 +4153,6 @@ Export a list of batches for an organization. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -4377,7 +4294,7 @@ Example: `batchAmount(gt)=20` returns all records with a `batchAmount` greater t
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batches_out</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batches_out</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -4405,7 +4322,6 @@ Export a list of money out batches for a paypoint. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -4529,7 +4445,7 @@ Example: `batchAmount(gt)=20` returns all records with a `batchAmount` greater t
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batches_out_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_batches_out_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -4557,7 +4473,6 @@ Export a list of money out batches for an organization. Use filters to limit res
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -4681,7 +4596,7 @@ Example: `batchAmount(gt)=20` returns all records with a `batchAmount` greater t
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_bills</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_bills</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -4709,7 +4624,6 @@ Export a list of bills for an entrypoint. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -4851,7 +4765,7 @@ Example: totalAmount(gt)=20  return all records with totalAmount greater than 20
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_bills_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_bills_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -4879,7 +4793,6 @@ Export a list of bills for an organization. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -5021,7 +4934,7 @@ Example: totalAmount(gt)=20  return all records with totalAmount greater than 20
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_chargebacks</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_chargebacks</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -5049,7 +4962,6 @@ Export a list of chargebacks and ACH returns for an entrypoint. Use filters to l
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -5212,7 +5124,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_chargebacks_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_chargebacks_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -5240,7 +5152,6 @@ Export a list of chargebacks and ACH returns for an organization. Use filters to
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -5403,7 +5314,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_customers</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_customers</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -5431,7 +5342,6 @@ Export a list of customers for an entrypoint. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -5587,7 +5497,7 @@ balance(gt)=20 return all records with balance greater than 20.00
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_customers_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_customers_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -5615,7 +5525,6 @@ Exports a list of customers for an organization. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -5771,7 +5680,7 @@ balance(gt)=20 return all records with balance greater than 20.00
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_invoices</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_invoices</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -5799,7 +5708,6 @@ Export list of invoices for an entrypoint. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -5965,7 +5873,7 @@ Example: `totalAmount(gt)=20` returns all records with `totalAmount` greater tha
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_invoices_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_invoices_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -5993,7 +5901,6 @@ Export a list of invoices for an organization. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -6159,7 +6066,7 @@ Example: totalAmount(gt)=20  return all records with totalAmount greater than 20
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_organizations</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_organizations</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -6187,7 +6094,6 @@ Export a list of child organizations (suborganizations) for a parent organizatio
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -6328,7 +6234,7 @@ Example: name(ct)=hoa  return all records where name contains "hoa"
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_payout</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_payout</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -6356,7 +6262,6 @@ Export a list of payouts and their statuses for an entrypoint. Use filters to li
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -6496,7 +6401,7 @@ Example: totalAmount(gt)=20 return all records with totalAmount greater than 20.
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_payout_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_payout_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -6524,7 +6429,6 @@ Export a list of payouts and their details for an organization. Use filters to l
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -6664,7 +6568,7 @@ Example: totalAmount(gt)=20 return all records with totalAmount greater than 20.
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_paypoints</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_paypoints</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -6692,7 +6596,6 @@ Export a list of paypoints in an organization. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -6834,7 +6737,7 @@ Example: `dbaname(ct)=hoa` returns all records with `dbaname` containing "hoa"
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_settlements</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_settlements</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -6862,7 +6765,6 @@ Export a list of settled transactions for an entrypoint. Use filters to limit re
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -7024,7 +6926,7 @@ Example: `settledAmount(gt)=20` returns all records with a `settledAmount` great
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_settlements_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_settlements_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -7052,7 +6954,6 @@ Export a list of settled transactions for an organization. Use filters to limit 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -7214,7 +7115,7 @@ Example: `settledAmount(gt)=20` returns all records with a `settledAmount` great
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_subscriptions</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_subscriptions</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -7242,7 +7143,6 @@ Export a list of subscriptions for an entrypoint. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -7406,7 +7306,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_subscriptions_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_subscriptions_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -7434,7 +7334,6 @@ Export a list of subscriptions for an organization. Use filters to limit results
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -7598,7 +7497,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_transactions</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_transactions</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -7626,7 +7525,6 @@ Export a list of transactions for an entrypoint in a file in XLXS or CSV format.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -7794,7 +7692,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_transactions_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_transactions_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -7822,7 +7720,6 @@ Export a list of transactions for an org in a file in XLSX or CSV format. Use fi
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -7990,7 +7887,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_transfer_details</a>(format: ExportFormat1, entry: String, transfer_id: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_transfer_details</a>(format: ExportFormat1, entry: String, transfer_id: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -8018,7 +7915,6 @@ Export a list of transfer details for an entrypoint. Use filters to limit result
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -8168,7 +8064,7 @@ List of field names accepted:
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_transfers</a>(entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_transfers</a>(entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -8328,7 +8224,7 @@ List of field names accepted:
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_vendors</a>(format: ExportFormat1, entry: String, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_vendors</a>(format: ExportFormat1, entry: String, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -8356,7 +8252,6 @@ Export a list of vendors for an entrypoint. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -8502,7 +8397,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_vendors_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.export.<a href="/src/api/resources/export/client.rs">export_vendors_org</a>(format: ExportFormat1, org_id: i64, columns_export: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -8530,7 +8425,6 @@ Export a list of vendors for an organization. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat1;
 
 #[tokio::main]
 async fn main() {
@@ -8677,7 +8571,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </details>
 
 ## HostedPaymentPages
-<details><summary><code>client.hosted_payment_pages.<a href="/src/api/resources/hosted_payment_pages/client.rs">load_page</a>(entry: String, subdomain: String) -> Result<PayabliPages, ApiError></code></summary>
+<details><summary><code>client.hosted_payment_pages.<a href="/src/api/resources/hosted_payment_pages/client.rs">load_page</a>(entry: String, subdomain: String) -> Result&lt;PayabliPages, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -8756,7 +8650,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.hosted_payment_pages.<a href="/src/api/resources/hosted_payment_pages/client.rs">new_page</a>(entry: String, request: PayabliPages) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.hosted_payment_pages.<a href="/src/api/resources/hosted_payment_pages/client.rs">new_page</a>(entry: String, request: PayabliPages) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -8786,16 +8680,6 @@ Note: this operation doesn't create a new paypoint, just a payment page for an e
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AdditionalData, AmountElement, AutoElement, ButtonElement, ButtonElementSize, ContactElement,
-    DisplayProperty, Element, Enabled, FileContent, FileContentFtype, Finishtype, FrequencyList,
-    HeaderElement, IdempotencyKey, InvoiceElement, LabelElement, MethodElement,
-    MethodElementSettings, MethodElementSettingsApplePay, MethodElementSettingsApplePayButtonStyle,
-    MethodElementSettingsApplePayButtonType, MethodElementSettingsApplePayLanguage, MethodsList,
-    NoteElement, Order, PageContent, PageElement, PageIdentifier, PageSetting, PayCategory,
-    PayabliCredentials, PayabliPages, PayorElement, PayorFields, ReceiptContent, SettingElement,
-    Subdomain,
-};
 
 #[tokio::main]
 async fn main() {
@@ -8854,7 +8738,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.hosted_payment_pages.<a href="/src/api/resources/hosted_payment_pages/client.rs">save_page</a>(entry: String, subdomain: String, request: PayabliPages) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.hosted_payment_pages.<a href="/src/api/resources/hosted_payment_pages/client.rs">save_page</a>(entry: String, subdomain: String, request: PayabliPages) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -8882,16 +8766,6 @@ Updates a payment page in a paypoint.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AdditionalData, AmountElement, AutoElement, ButtonElement, ButtonElementSize, ContactElement,
-    DisplayProperty, Element, Enabled, FileContent, FileContentFtype, Finishtype, FrequencyList,
-    HeaderElement, InvoiceElement, LabelElement, MethodElement, MethodElementSettings,
-    MethodElementSettingsApplePay, MethodElementSettingsApplePayButtonStyle,
-    MethodElementSettingsApplePayButtonType, MethodElementSettingsApplePayLanguage, MethodsList,
-    NoteElement, Order, PageContent, PageElement, PageIdentifier, PageSetting, PayCategory,
-    PayabliCredentials, PayabliPages, PayorElement, PayorFields, ReceiptContent, SettingElement,
-    Subdomain,
-};
 
 #[tokio::main]
 async fn main() {
@@ -8957,7 +8831,7 @@ async fn main() {
 </details>
 
 ## Import
-<details><summary><code>client.import.<a href="/src/api/resources/import/client.rs">import_bills</a>(entry: String) -> Result<PayabliApiResponseImport, ApiError></code></summary>
+<details><summary><code>client.import.<a href="/src/api/resources/import/client.rs">import_bills</a>(entry: String) -> Result&lt;PayabliApiResponseImport, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9030,7 +8904,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.import.<a href="/src/api/resources/import/client.rs">import_customer</a>(entry: Entrypointfield, replace_existing: Option<Option<i64>>) -> Result<PayabliApiResponseImport, ApiError></code></summary>
+<details><summary><code>client.import.<a href="/src/api/resources/import/client.rs">import_customer</a>(entry: Entrypointfield, replace_existing: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;PayabliApiResponseImport, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9058,7 +8932,6 @@ Import a list of customers from a CSV file. See the [Import Guide](/developers/d
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::Entrypointfield;
 
 #[tokio::main]
 async fn main() {
@@ -9113,7 +8986,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.import.<a href="/src/api/resources/import/client.rs">import_vendor</a>(entry: Entrypointfield) -> Result<PayabliApiResponseImport, ApiError></code></summary>
+<details><summary><code>client.import.<a href="/src/api/resources/import/client.rs">import_vendor</a>(entry: Entrypointfield) -> Result&lt;PayabliApiResponseImport, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9141,7 +9014,6 @@ Import a list of vendors from a CSV file. See the [Import Guide](/developers/dev
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::Entrypointfield;
 
 #[tokio::main]
 async fn main() {
@@ -9188,7 +9060,7 @@ async fn main() {
 </details>
 
 ## Invoice
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">add_invoice</a>(entry: String, request: InvoiceDataRequest, force_customer_creation: Option<Option<ForceCustomerCreation>>) -> Result<InvoiceResponseWithoutData, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">add_invoice</a>(entry: String, request: InvoiceDataRequest, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;) -> Result&lt;InvoiceResponseWithoutData, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9216,18 +9088,6 @@ Creates an invoice in an entrypoint.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AdditionalData, AdditionalDataString, Attachments, BillData, BillDataPaymentTerms, BillItem,
-    BillOptions, BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, CustomerId, CustomerNumberNullable,
-    Datenullable, Discount, DutyAmount, Email, FileContent, FileContentFtype,
-    ForceCustomerCreation, FreightAmount, Frequency, IdempotencyKey, Identifierfields,
-    InvoiceAmount, InvoiceDataRequest, InvoiceNumber, InvoiceType, Invoicestatus,
-    ItemCommodityCode, ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure,
-    PayorDataRequest, PhoneNumber, PurchaseOrder, ShippingFromZip, Shippingaddress,
-    Shippingaddressadditional, Shippingcity, Shippingcountry, Shippingstate, Shippingzip,
-    SummaryCommodityCode, Tax, TermsConditions,
-};
 
 #[tokio::main]
 async fn main() {
@@ -9378,7 +9238,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">delete_attached_from_invoice</a>(id_invoice: i64, filename: String) -> Result<InvoiceResponseWithoutData, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">delete_attached_from_invoice</a>(id_invoice: i64, filename: String) -> Result&lt;InvoiceResponseWithoutData, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9465,7 +9325,7 @@ The filename in Payabli. Filename is `zipName` in response to a request to `/api
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">delete_invoice</a>(id_invoice: i64) -> Result<InvoiceResponseWithoutData, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">delete_invoice</a>(id_invoice: i64) -> Result&lt;InvoiceResponseWithoutData, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9529,7 +9389,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">edit_invoice</a>(id_invoice: i64, request: InvoiceDataRequest, force_customer_creation: Option<Option<bool>>) -> Result<InvoiceResponseWithoutData, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">edit_invoice</a>(id_invoice: i64, request: InvoiceDataRequest, force_customer_creation: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;InvoiceResponseWithoutData, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9557,17 +9417,6 @@ Updates details for a single invoice in an entrypoint.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AdditionalData, AdditionalDataString, Attachments, BillData, BillDataPaymentTerms, BillItem,
-    BillOptions, BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, CustomerId, CustomerNumberNullable,
-    Datenullable, Discount, DutyAmount, Email, FileContent, FileContentFtype, FreightAmount,
-    Frequency, Identifierfields, InvoiceAmount, InvoiceDataRequest, InvoiceNumber, InvoiceType,
-    Invoicestatus, ItemCommodityCode, ItemDescription, ItemProductCode, ItemProductName,
-    ItemUnitofMeasure, PayorDataRequest, PhoneNumber, PurchaseOrder, ShippingFromZip,
-    Shippingaddress, Shippingaddressadditional, Shippingcity, Shippingcountry, Shippingstate,
-    Shippingzip, SummaryCommodityCode, Tax, TermsConditions,
-};
 
 #[tokio::main]
 async fn main() {
@@ -9676,7 +9525,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">get_attached_file_from_invoice</a>(id_invoice: i64, filename: String, return_object: Option<Option<bool>>) -> Result<FileContent, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">get_attached_file_from_invoice</a>(id_invoice: i64, filename: String, return_object: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;FileContent, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9780,7 +9629,7 @@ The filename in Payabli. Filename is `zipName` in the response to a request to `
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">get_invoice</a>(id_invoice: i64) -> Result<GetInvoiceRecord, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">get_invoice</a>(id_invoice: i64) -> Result&lt;GetInvoiceRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9844,7 +9693,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">get_invoice_number</a>(entry: String) -> Result<InvoiceNumberResponse, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">get_invoice_number</a>(entry: String) -> Result&lt;InvoiceNumberResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9911,7 +9760,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">list_invoices</a>(entry: String, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryInvoiceResponse, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">list_invoices</a>(entry: String, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryInvoiceResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -9939,7 +9788,6 @@ Returns a list of invoices for an entrypoint. Use filters to limit results. Incl
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -10093,7 +9941,7 @@ Example: totalAmount(gt)=20 return all records with totalAmount greater than 20.
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">list_invoices_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryInvoiceResponse, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">list_invoices_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryInvoiceResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10121,7 +9969,6 @@ Returns a list of invoices for an org. Use filters to limit results. Include the
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -10275,7 +10122,7 @@ Example: totalAmount(gt)=20 return all records with totalAmount greater than 20.
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">send_invoice</a>(id_invoice: i64, attachfile: Option<Option<bool>>, mail_2: Option<Option<String>>) -> Result<SendInvoiceResponse, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">send_invoice</a>(id_invoice: i64, attachfile: Option&lt;Option&lt;bool&gt;&gt;, mail_2: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;SendInvoiceResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10365,7 +10212,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">get_invoice_pdf</a>(id_invoice: i64) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.invoice.<a href="/src/api/resources/invoice/client.rs">get_invoice_pdf</a>(id_invoice: i64) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10430,7 +10277,7 @@ async fn main() {
 </details>
 
 ## LineItem
-<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">add_item</a>(entry: String, request: LineItem) -> Result<PayabliApiResponse6, ApiError></code></summary>
+<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">add_item</a>(entry: String, request: LineItem) -> Result&lt;PayabliApiResponse6, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10458,10 +10305,6 @@ Adds products and services to an entrypoint's catalog. These are used as line it
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    ItemCommodityCode, ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure,
-    LineItem,
-};
 
 #[tokio::main]
 async fn main() {
@@ -10515,7 +10358,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">delete_item</a>(line_item_id: i64) -> Result<DeleteItemResponse, ApiError></code></summary>
+<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">delete_item</a>(line_item_id: i64) -> Result&lt;DeleteItemResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10579,7 +10422,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">get_item</a>(line_item_id: i64) -> Result<LineItemQueryRecord, ApiError></code></summary>
+<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">get_item</a>(line_item_id: i64) -> Result&lt;LineItemQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10643,7 +10486,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">list_line_items</a>(entry: String, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseItems, ApiError></code></summary>
+<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">list_line_items</a>(entry: String, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseItems, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10807,7 +10650,7 @@ Example: name(ct)=john return all records with name containing john
 </dl>
 </details>
 
-<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">update_item</a>(line_item_id: i64, request: LineItem) -> Result<PayabliApiResponse6, ApiError></code></summary>
+<details><summary><code>client.line_item.<a href="/src/api/resources/line_item/client.rs">update_item</a>(line_item_id: i64, request: LineItem) -> Result&lt;PayabliApiResponse6, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10835,10 +10678,6 @@ Updates an item.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    ItemCommodityCode, ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure,
-    LineItem,
-};
 
 #[tokio::main]
 async fn main() {
@@ -10893,7 +10732,7 @@ async fn main() {
 </details>
 
 ## MoneyIn
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">authorize</a>(request: TransRequestBody, force_customer_creation: Option<Option<ForceCustomerCreation>>) -> Result<AuthResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">authorize</a>(request: TransRequestBody, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;) -> Result&lt;AuthResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10925,23 +10764,6 @@ Only card transactions can be authorized. This endpoint can't be used for ACH tr
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Accountid, AchHolder, AchHolderType, AchSecCode, Achaccount, Achaccounttype, Achrouting,
-    AdditionalData, AdditionalDataString, Attachments, BillData, BillDataPaymentTerms, BillItem,
-    BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Cardcvv, Cardexp, Cardholder,
-    Cardnumber, Cardzip, Cash, Check, CustomerId, CustomerNumberNullable, Datenullable, Device,
-    Discount, DutyAmount, Email, Entrypointfield, FileContent, FileContentFtype,
-    ForceCustomerCreation, FreightAmount, Frequency, IdempotencyKey, Identifierfields, Initiator,
-    InvoiceAmount, InvoiceNumber, InvoiceType, Invoicestatus, IpAddress, ItemCommodityCode,
-    ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure, Methodall, OrderId,
-    Orderdescription, PayMethodAch, PayMethodBodyAllFields, PayMethodCloud, PayMethodCredit,
-    PayMethodStoredMethod, PayMethodStoredMethodMethod, PaymentCategories, PaymentDetail,
-    PaymentMethod, PayorDataRequest, PhoneNumber, PurchaseOrder, SaveIfSuccess, ShippingFromZip,
-    Shippingaddress, Shippingaddressadditional, Shippingcity, Shippingcountry, Shippingstate,
-    Shippingzip, Source, SplitFunding, SplitFundingContent, StoredMethodUsageType, Storedmethodid,
-    Subdomain, Subscriptionid, SummaryCommodityCode, Tax, TermsConditions, TransRequestBody,
-};
 
 #[tokio::main]
 async fn main() {
@@ -11039,7 +10861,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">capture</a>(trans_id: String, amount: f64) -> Result<CaptureResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">capture</a>(trans_id: String, amount: f64) -> Result&lt;CaptureResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -11123,7 +10945,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">capture_auth</a>(trans_id: String, request: CaptureRequest) -> Result<CaptureResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">capture_auth</a>(trans_id: String, request: CaptureRequest) -> Result&lt;CaptureResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -11157,7 +10979,6 @@ Consider migrating to the [v2 Capture endpoint](/developers/api-reference/moneyi
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{CapturePaymentDetails, CaptureRequest};
 
 #[tokio::main]
 async fn main() {
@@ -11206,7 +11027,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">credit</a>(request: RequestCredit, force_customer_creation: Option<Option<ForceCustomerCreation>>) -> Result<PayabliApiResponse0, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">credit</a>(request: RequestCredit, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;) -> Result&lt;PayabliApiResponse0, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -11236,15 +11057,6 @@ This feature must be enabled by Payabli on a per-merchant basis. Contact support
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Accountid, AchHolder, AchSecCode, Achaccount, Achaccounttype, Achrouting, AdditionalData,
-    BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, CustomerId, CustomerNumberNullable,
-    Email, Entrypointfield, ForceCustomerCreation, IdempotencyKey, Identifierfields, OrderId,
-    Orderdescription, PaymentDetailCredit, PayorDataRequest, PhoneNumber,
-    RequestCreditPaymentMethod, Shippingaddress, Shippingaddressadditional, Shippingcity,
-    Shippingcountry, Shippingstate, Shippingzip, Source, Subdomain,
-};
 
 #[tokio::main]
 async fn main() {
@@ -11408,7 +11220,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">details</a>(trans_id: String) -> Result<TransactionQueryRecordsCustomer, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">details</a>(trans_id: String) -> Result&lt;TransactionQueryRecordsCustomer, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -11475,7 +11287,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">getpaid</a>(request: TransRequestBody, ach_validation: Option<Option<AchValidation>>, force_customer_creation: Option<Option<ForceCustomerCreation>>, include_details: Option<Option<bool>>) -> Result<PayabliApiResponseGetPaid, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">getpaid</a>(request: TransRequestBody, ach_validation: Option&lt;Option&lt;AchValidation&gt;&gt;, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;, include_details: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;PayabliApiResponseGetPaid, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -11507,23 +11319,6 @@ Make a single transaction. This method authorizes and captures a payment in one 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Accountid, AchHolder, AchHolderType, AchSecCode, AchValidation, Achaccount, Achaccounttype,
-    Achrouting, AdditionalData, AdditionalDataString, Attachments, BillData, BillDataPaymentTerms,
-    BillItem, BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Cardcvv, Cardexp, Cardholder,
-    Cardnumber, Cardzip, Cash, Check, CustomerId, CustomerNumberNullable, Datenullable, Device,
-    Discount, DutyAmount, Email, Entrypointfield, FileContent, FileContentFtype,
-    ForceCustomerCreation, FreightAmount, Frequency, IdempotencyKey, Identifierfields, Initiator,
-    InvoiceAmount, InvoiceNumber, InvoiceType, Invoicestatus, IpAddress, ItemCommodityCode,
-    ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure, Methodall, OrderId,
-    Orderdescription, PayMethodAch, PayMethodBodyAllFields, PayMethodCloud, PayMethodCredit,
-    PayMethodStoredMethod, PayMethodStoredMethodMethod, PaymentCategories, PaymentDetail,
-    PaymentMethod, PayorDataRequest, PhoneNumber, PurchaseOrder, SaveIfSuccess, ShippingFromZip,
-    Shippingaddress, Shippingaddressadditional, Shippingcity, Shippingcountry, Shippingstate,
-    Shippingzip, Source, SplitFunding, SplitFundingContent, StoredMethodUsageType, Storedmethodid,
-    Subdomain, Subscriptionid, SummaryCommodityCode, Tax, TermsConditions, TransRequestBody,
-};
 
 #[tokio::main]
 async fn main() {
@@ -11639,7 +11434,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">reverse</a>(trans_id: String, amount: f64) -> Result<ReverseResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">reverse</a>(trans_id: String, amount: f64) -> Result&lt;ReverseResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -11725,7 +11520,7 @@ An amount equal to zero will refunds the total amount authorized minus any servi
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refund</a>(trans_id: String, amount: f64) -> Result<RefundResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refund</a>(trans_id: String, amount: f64) -> Result&lt;RefundResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -11815,7 +11610,7 @@ An amount equal to zero will refund the total amount authorized minus any servic
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refund_with_instructions</a>(trans_id: String, request: RequestRefund) -> Result<RefundWithInstructionsResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refund_with_instructions</a>(trans_id: String, request: RequestRefund) -> Result&lt;RefundWithInstructionsResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -11843,10 +11638,6 @@ Refunds a settled transaction with split instructions.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    IdempotencyKey, IpAddress, OrderId, Orderdescription, PaymentCategories, RefundDetail, Source,
-    SplitFundingRefundContent,
-};
 
 #[tokio::main]
 async fn main() {
@@ -11973,7 +11764,7 @@ An amount equal to zero will refund the total amount authorized minus any servic
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">reverse_credit</a>(trans_id: String) -> Result<PayabliApiResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">reverse_credit</a>(trans_id: String) -> Result&lt;PayabliApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12040,7 +11831,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">send_receipt_2_trans</a>(trans_id: String, email: Option<Option<String>>) -> Result<ReceiptResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">send_receipt_2_trans</a>(trans_id: String, email: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;ReceiptResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12125,7 +11916,7 @@ If not provided, the email address on file for the user owner of the transaction
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">validate</a>(request: RequestPaymentValidate) -> Result<ValidateResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">validate</a>(request: RequestPaymentValidate) -> Result&lt;ValidateResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12153,11 +11944,6 @@ Validates a card number without running a transaction or authorizing a charge.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Accountid, Cardexp, Cardholder, Cardnumber, Cardzip, Entrypointfield, IdempotencyKey, OrderId,
-    Orderdescription, RequestPaymentValidatePaymentMethod,
-    RequestPaymentValidatePaymentMethodMethod,
-};
 
 #[tokio::main]
 async fn main() {
@@ -12247,7 +12033,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">void</a>(trans_id: String) -> Result<VoidResponse, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">void</a>(trans_id: String) -> Result&lt;VoidResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12318,7 +12104,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">getpaidv_2</a>(request: TransRequestBody, ach_validation: Option<Option<AchValidation>>, force_customer_creation: Option<Option<ForceCustomerCreation>>) -> Result<V2TransactionResponseWrapper, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">getpaidv_2</a>(request: TransRequestBody, ach_validation: Option&lt;Option&lt;AchValidation&gt;&gt;, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12346,23 +12132,6 @@ Make a single transaction. This method authorizes and captures a payment in one 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Accountid, AchHolder, AchHolderType, AchSecCode, AchValidation, Achaccount, Achaccounttype,
-    Achrouting, AdditionalData, AdditionalDataString, Attachments, BillData, BillDataPaymentTerms,
-    BillItem, BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Cardcvv, Cardexp, Cardholder,
-    Cardnumber, Cardzip, Cash, Check, CustomerId, CustomerNumberNullable, Datenullable, Device,
-    Discount, DutyAmount, Email, Entrypointfield, FileContent, FileContentFtype,
-    ForceCustomerCreation, FreightAmount, Frequency, IdempotencyKey, Identifierfields, Initiator,
-    InvoiceAmount, InvoiceNumber, InvoiceType, Invoicestatus, IpAddress, ItemCommodityCode,
-    ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure, Methodall, OrderId,
-    Orderdescription, PayMethodAch, PayMethodBodyAllFields, PayMethodCloud, PayMethodCredit,
-    PayMethodStoredMethod, PayMethodStoredMethodMethod, PaymentCategories, PaymentDetail,
-    PaymentMethod, PayorDataRequest, PhoneNumber, PurchaseOrder, SaveIfSuccess, ShippingFromZip,
-    Shippingaddress, Shippingaddressadditional, Shippingcity, Shippingcountry, Shippingstate,
-    Shippingzip, Source, SplitFunding, SplitFundingContent, StoredMethodUsageType, Storedmethodid,
-    Subdomain, Subscriptionid, SummaryCommodityCode, Tax, TermsConditions, TransRequestBody,
-};
 
 #[tokio::main]
 async fn main() {
@@ -12469,7 +12238,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">authorizev_2</a>(request: TransRequestBody, force_customer_creation: Option<Option<ForceCustomerCreation>>) -> Result<V2TransactionResponseWrapper, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">authorizev_2</a>(request: TransRequestBody, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12499,23 +12268,6 @@ Authorize a card transaction. This returns an authorization code and reserves fu
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Accountid, AchHolder, AchHolderType, AchSecCode, Achaccount, Achaccounttype, Achrouting,
-    AdditionalData, AdditionalDataString, Attachments, BillData, BillDataPaymentTerms, BillItem,
-    BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Cardcvv, Cardexp, Cardholder,
-    Cardnumber, Cardzip, Cash, Check, CustomerId, CustomerNumberNullable, Datenullable, Device,
-    Discount, DutyAmount, Email, Entrypointfield, FileContent, FileContentFtype,
-    ForceCustomerCreation, FreightAmount, Frequency, IdempotencyKey, Identifierfields, Initiator,
-    InvoiceAmount, InvoiceNumber, InvoiceType, Invoicestatus, IpAddress, ItemCommodityCode,
-    ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure, Methodall, OrderId,
-    Orderdescription, PayMethodAch, PayMethodBodyAllFields, PayMethodCloud, PayMethodCredit,
-    PayMethodStoredMethod, PayMethodStoredMethodMethod, PaymentCategories, PaymentDetail,
-    PaymentMethod, PayorDataRequest, PhoneNumber, PurchaseOrder, SaveIfSuccess, ShippingFromZip,
-    Shippingaddress, Shippingaddressadditional, Shippingcity, Shippingcountry, Shippingstate,
-    Shippingzip, Source, SplitFunding, SplitFundingContent, StoredMethodUsageType, Storedmethodid,
-    Subdomain, Subscriptionid, SummaryCommodityCode, Tax, TermsConditions, TransRequestBody,
-};
 
 #[tokio::main]
 async fn main() {
@@ -12613,7 +12365,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">capturev_2</a>(trans_id: String, request: CaptureRequest) -> Result<V2TransactionResponseWrapper, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">capturev_2</a>(trans_id: String, request: CaptureRequest) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12641,7 +12393,6 @@ Capture an authorized transaction to complete the transaction and move funds fro
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{CapturePaymentDetails, CaptureRequest};
 
 #[tokio::main]
 async fn main() {
@@ -12690,7 +12441,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2</a>(trans_id: String) -> Result<V2TransactionResponseWrapper, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2</a>(trans_id: String) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12759,7 +12510,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2_amount</a>(trans_id: String, amount: f64) -> Result<V2TransactionResponseWrapper, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2_amount</a>(trans_id: String, amount: f64) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12840,7 +12591,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">voidv_2</a>(trans_id: String) -> Result<V2TransactionResponseWrapper, ApiError></code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">voidv_2</a>(trans_id: String) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12908,7 +12659,7 @@ async fn main() {
 </details>
 
 ## MoneyOut
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">authorize_out</a>(request: AuthorizePayoutBody, allow_duplicated_bills: Option<Option<bool>>, do_not_create_bills: Option<Option<bool>>, force_vendor_creation: Option<Option<bool>>) -> Result<AuthCapturePayoutResponse, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">authorize_out</a>(request: AuthorizePayoutBody, allow_duplicated_bills: Option&lt;Option&lt;bool&gt;&gt;, do_not_create_bills: Option&lt;Option&lt;bool&gt;&gt;, force_vendor_creation: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12936,19 +12687,6 @@ Authorizes transaction for payout. Authorized transactions aren't flagged for se
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AccountNumber, Accountid, AccountingField, AchHolderType, AchSecCode, AdditionalData,
-    AdditionalDataString, AddressAddtlNullable, AddressNullable, Attachments,
-    AuthorizePaymentMethod, AuthorizePayoutBody, BankAccountHolderName, BankName, BillId, Comments,
-    Contacts, ContactsField, Datenullable, Discount, Email, Entrypointfield, FileContent,
-    FileContentFtype, IdempotencyKey, Initiator, InvoiceNumber, LocationCode, LotNumber, Mcc,
-    NetAmountstring, OrderId, Orderdescription, PayeeName, Remitaddress1, Remitaddress2, Remitcity,
-    Remitcountry, Remitstate, Remitzip, RequestOutAuthorizeInvoiceData,
-    RequestOutAuthorizePaymentDetails, RequestOutAuthorizeVendorBillingData,
-    RequestOutAuthorizeVendorData, RoutingAccount, Source, StoredMethodUsageType, Subdomain,
-    Subscriptionid, Terms, TypeAccount, VendorCheckNumber, VendorEin, VendorName1, VendorName2,
-    VendorNumber, VendorPaymentMethod, VendorPhone, Vendorid, Vendorstatus,
-};
 
 #[tokio::main]
 async fn main() {
@@ -13088,7 +12826,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">cancel_all_out</a>(request: Vec<String>) -> Result<CaptureAllOutResponse, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">cancel_all_out</a>(request: Vec&lt;String&gt;) -> Result&lt;CaptureAllOutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13143,7 +12881,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">cancel_out_get</a>(reference_id: String) -> Result<PayabliApiResponse0000, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">cancel_out_get</a>(reference_id: String) -> Result&lt;PayabliApiResponse0000, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13210,7 +12948,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">cancel_out_delete</a>(reference_id: String) -> Result<PayabliApiResponse0000, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">cancel_out_delete</a>(reference_id: String) -> Result&lt;PayabliApiResponse0000, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13277,7 +13015,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">capture_all_out</a>(request: Vec<String>) -> Result<CaptureAllOutResponse, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">capture_all_out</a>(request: Vec&lt;String&gt;) -> Result&lt;CaptureAllOutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13305,7 +13043,6 @@ Captures an array of authorized payout transactions for settlement. The maximum 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::IdempotencyKey;
 
 #[tokio::main]
 async fn main() {
@@ -13333,7 +13070,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">capture_out</a>(reference_id: String) -> Result<AuthCapturePayoutResponse, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">capture_out</a>(reference_id: String) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13361,7 +13098,6 @@ Captures a single authorized payout transaction by ID.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::IdempotencyKey;
 
 #[tokio::main]
 async fn main() {
@@ -13401,7 +13137,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">payout_details</a>(trans_id: String) -> Result<BillDetailResponse, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">payout_details</a>(trans_id: String) -> Result&lt;BillDetailResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13468,7 +13204,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">v_card_get</a>(card_token: String) -> Result<VCardGetResponse, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">v_card_get</a>(card_token: String) -> Result&lt;VCardGetResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13535,7 +13271,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">send_v_card_link</a>(request: SendVCardLinkRequest) -> Result<OperationResult, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">send_v_card_link</a>(request: SendVCardLinkRequest) -> Result&lt;OperationResult, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13607,7 +13343,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">get_check_image</a>(asset_name: String) -> Result<String, ApiError></code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">get_check_image</a>(asset_name: String) -> Result&lt;String, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13691,7 +13427,7 @@ in the response when you make a GET request to `/MoneyOut/details/{transId}`.
 </details>
 
 ## Notification
-<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">add_notification</a>(request: AddNotificationRequest) -> Result<PayabliApiResponseNotifications, ApiError></code></summary>
+<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">add_notification</a>(request: AddNotificationRequest) -> Result&lt;PayabliApiResponseNotifications, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13719,15 +13455,6 @@ Create a new notification or autogenerated report.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AddNotificationRequest, KeyValueDuo, NotificationReportRequest,
-    NotificationReportRequestContent, NotificationReportRequestContentFileFormat,
-    NotificationReportRequestContentReportName, NotificationReportRequestFrequency,
-    NotificationReportRequestMethod, NotificationStandardRequest,
-    NotificationStandardRequestContent, NotificationStandardRequestContentEventType,
-    NotificationStandardRequestFrequency, NotificationStandardRequestMethod, Ownerid, Ownertype,
-    Statusnotification, Timezone,
-};
 
 #[tokio::main]
 async fn main() {
@@ -13770,7 +13497,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">delete_notification</a>(n_id: String) -> Result<PayabliApiResponseNotifications, ApiError></code></summary>
+<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">delete_notification</a>(n_id: String) -> Result&lt;PayabliApiResponseNotifications, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13837,7 +13564,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">get_notification</a>(n_id: String) -> Result<NotificationQueryRecord, ApiError></code></summary>
+<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">get_notification</a>(n_id: String) -> Result&lt;NotificationQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13904,7 +13631,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">update_notification</a>(n_id: String, request: UpdateNotificationRequest) -> Result<PayabliApiResponseNotifications, ApiError></code></summary>
+<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">update_notification</a>(n_id: String, request: UpdateNotificationRequest) -> Result&lt;PayabliApiResponseNotifications, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -13932,15 +13659,6 @@ Update a notification or autogenerated report.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    KeyValueDuo, NotificationReportRequest, NotificationReportRequestContent,
-    NotificationReportRequestContentFileFormat, NotificationReportRequestContentReportName,
-    NotificationReportRequestFrequency, NotificationReportRequestMethod,
-    NotificationStandardRequest, NotificationStandardRequestContent,
-    NotificationStandardRequestContentEventType, NotificationStandardRequestFrequency,
-    NotificationStandardRequestMethod, Ownerid, Ownertype, Statusnotification, Timezone,
-    UpdateNotificationRequest,
-};
 
 #[tokio::main]
 async fn main() {
@@ -13997,7 +13715,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">get_report_file</a>(id: String) -> Result<File, ApiError></code></summary>
+<details><summary><code>client.notification.<a href="/src/api/resources/notification/client.rs">get_report_file</a>(id: String) -> Result&lt;File, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14062,7 +13780,7 @@ async fn main() {
 </details>
 
 ## Notificationlogs
-<details><summary><code>client.notificationlogs.<a href="/src/api/resources/notificationlogs/client.rs">search_notification_logs</a>(request: NotificationLogSearchRequest, page_size: Option<Option<Pagesize>>, page: Option<Option<i64>>) -> Result<Vec<NotificationLog>, ApiError></code></summary>
+<details><summary><code>client.notificationlogs.<a href="/src/api/resources/notificationlogs/client.rs">search_notification_logs</a>(request: NotificationLogSearchRequest, page_size: Option&lt;Option&lt;Pagesize&gt;&gt;, page: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;Vec&lt;NotificationLog&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14094,7 +13812,6 @@ This endpoint requires the `notifications_create` OR `notifications_read` permis
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{NotificationLogSearchRequest, Pagesize};
 
 #[tokio::main]
 async fn main() {
@@ -14160,7 +13877,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.notificationlogs.<a href="/src/api/resources/notificationlogs/client.rs">get_notification_log</a>(uuid: String) -> Result<NotificationLogDetail, ApiError></code></summary>
+<details><summary><code>client.notificationlogs.<a href="/src/api/resources/notificationlogs/client.rs">get_notification_log</a>(uuid: String) -> Result&lt;NotificationLogDetail, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14231,7 +13948,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.notificationlogs.<a href="/src/api/resources/notificationlogs/client.rs">retry_notification_log</a>(uuid: String) -> Result<NotificationLogDetail, ApiError></code></summary>
+<details><summary><code>client.notificationlogs.<a href="/src/api/resources/notificationlogs/client.rs">retry_notification_log</a>(uuid: String) -> Result&lt;NotificationLogDetail, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14303,7 +14020,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.notificationlogs.<a href="/src/api/resources/notificationlogs/client.rs">bulk_retry_notification_logs</a>(request: BulkRetryRequest) -> Result<(), ApiError></code></summary>
+<details><summary><code>client.notificationlogs.<a href="/src/api/resources/notificationlogs/client.rs">bulk_retry_notification_logs</a>(request: BulkRetryRequest) -> Result&lt;(), ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14334,7 +14051,6 @@ This endpoint requires the `notifications_create` permission.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::BulkRetryRequest;
 
 #[tokio::main]
 async fn main() {
@@ -14367,7 +14083,7 @@ async fn main() {
 </details>
 
 ## Ocr
-<details><summary><code>client.ocr.<a href="/src/api/resources/ocr/client.rs">ocr_document_form</a>(type_result: TypeResult, request: FileContentImageOnly) -> Result<PayabliApiResponseOcr, ApiError></code></summary>
+<details><summary><code>client.ocr.<a href="/src/api/resources/ocr/client.rs">ocr_document_form</a>(type_result: TypeResult, request: FileContentImageOnly) -> Result&lt;PayabliApiResponseOcr, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14395,7 +14111,6 @@ Use this endpoint to upload an image file for OCR processing. The accepted file 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{FileContentFtype, FileContentImageOnly, TypeResult};
 
 #[tokio::main]
 async fn main() {
@@ -14444,7 +14159,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.ocr.<a href="/src/api/resources/ocr/client.rs">ocr_document_json</a>(type_result: TypeResult, request: FileContentImageOnly) -> Result<PayabliApiResponseOcr, ApiError></code></summary>
+<details><summary><code>client.ocr.<a href="/src/api/resources/ocr/client.rs">ocr_document_json</a>(type_result: TypeResult, request: FileContentImageOnly) -> Result&lt;PayabliApiResponseOcr, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14472,7 +14187,6 @@ Use this endpoint to submit a Base64-encoded image file for OCR processing. The 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{FileContentFtype, FileContentImageOnly, TypeResult};
 
 #[tokio::main]
 async fn main() {
@@ -14522,7 +14236,7 @@ async fn main() {
 </details>
 
 ## Organization
-<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">add_organization</a>(request: AddOrganizationRequest) -> Result<AddOrganizationResponse, ApiError></code></summary>
+<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">add_organization</a>(request: AddOrganizationRequest) -> Result&lt;AddOrganizationResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14550,13 +14264,6 @@ Creates an organization under a parent organization. This is also referred to as
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Achaccount, Achrouting, AdditionalDataString, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Contacts, ContactsField, Email,
-    Enabled, FileContent, FileContentFtype, IdempotencyKey, Instrument, OrgParentId, Orgaddress,
-    Orgcity, Orgcountry, Orgentryname, Orgidstring, Orgname, Orgstate, Orgtimezone, Orgtype,
-    Orgwebsite, Orgzip, ReplyToEmail, ServiceCost,
-};
 
 #[tokio::main]
 async fn main() {
@@ -14785,7 +14492,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">delete_organization</a>(org_id: i64) -> Result<DeleteOrganizationResponse, ApiError></code></summary>
+<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">delete_organization</a>(org_id: i64) -> Result&lt;DeleteOrganizationResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14849,7 +14556,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">edit_organization</a>(org_id: i64, request: OrganizationData) -> Result<EditOrganizationResponse, ApiError></code></summary>
+<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">edit_organization</a>(org_id: i64, request: OrganizationData) -> Result&lt;EditOrganizationResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -14877,13 +14584,6 @@ Updates an organization's details by ID.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Achaccount, Achrouting, AdditionalDataString, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Contacts, ContactsField, Email,
-    Enabled, FileContent, FileContentFtype, Instrument, OrgParentId, Orgaddress, Orgcity,
-    Orgcountry, Orgentryname, Orgidstring, Orgname, Orgstate, Orgtimezone, Orgtype, Orgwebsite,
-    Orgzip, ReplyToEmail, ServiceCost,
-};
 
 #[tokio::main]
 async fn main() {
@@ -15105,7 +14805,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">get_basic_organization</a>(entry: String) -> Result<OrganizationQueryRecord, ApiError></code></summary>
+<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">get_basic_organization</a>(entry: String) -> Result&lt;OrganizationQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15172,7 +14872,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">get_basic_organization_by_id</a>(org_id: i64) -> Result<OrganizationQueryRecord, ApiError></code></summary>
+<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">get_basic_organization_by_id</a>(org_id: i64) -> Result&lt;OrganizationQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15239,7 +14939,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">get_organization</a>(org_id: i64) -> Result<OrganizationQueryRecord, ApiError></code></summary>
+<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">get_organization</a>(org_id: i64) -> Result&lt;OrganizationQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15303,7 +15003,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">get_settings_organization</a>(org_id: i64) -> Result<SettingsQueryRecord, ApiError></code></summary>
+<details><summary><code>client.organization.<a href="/src/api/resources/organization/client.rs">get_settings_organization</a>(org_id: i64) -> Result&lt;SettingsQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15371,7 +15071,7 @@ async fn main() {
 </details>
 
 ## PaymentLink
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_invoice</a>(id_invoice: i64, request: PaymentPageRequestBody, amount_fixed: Option<Option<bool>>, mail_2: Option<Option<String>>) -> Result<PayabliApiResponsePaymentLinks, ApiError></code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_invoice</a>(id_invoice: i64, request: PaymentPageRequestBody, amount_fixed: Option&lt;Option&lt;bool&gt;&gt;, mail_2: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15399,14 +15099,6 @@ Generates a payment link for an invoice from the invoice ID.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    ContactElement, Element, Enabled, FileContent, FileContentFtype, HeaderElement, IdempotencyKey,
-    InvoiceElement, LabelElement, MethodElement, MethodElementSettings,
-    MethodElementSettingsApplePay, MethodElementSettingsApplePayButtonStyle,
-    MethodElementSettingsApplePayButtonType, MethodElementSettingsApplePayLanguage, MethodsList,
-    NoteElement, Order, PageElement, PagelinkSetting, PaymentPageRequestBody, PayorElement,
-    PayorFields,
-};
 
 #[tokio::main]
 async fn main() {
@@ -15570,7 +15262,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_bill</a>(bill_id: i64, request: PaymentPageRequestBody, amount_fixed: Option<Option<bool>>, mail_2: Option<Option<String>>) -> Result<PayabliApiResponsePaymentLinks, ApiError></code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_bill</a>(bill_id: i64, request: PaymentPageRequestBody, amount_fixed: Option&lt;Option&lt;bool&gt;&gt;, mail_2: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15598,14 +15290,6 @@ Generates a payment link for a bill from the bill ID.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    ContactElement, Element, Enabled, FileContent, FileContentFtype, HeaderElement, IdempotencyKey,
-    InvoiceElement, LabelElement, MethodElement, MethodElementSettings,
-    MethodElementSettingsApplePay, MethodElementSettingsApplePayButtonStyle,
-    MethodElementSettingsApplePayButtonType, MethodElementSettingsApplePayLanguage, MethodsList,
-    NoteElement, Order, PageElement, PagelinkSetting, PaymentPageRequestBody, PayorElement,
-    PayorFields,
-};
 
 #[tokio::main]
 async fn main() {
@@ -15752,7 +15436,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">delete_pay_link_from_id</a>(pay_link_id: String) -> Result<PayabliApiResponsePaymentLinks, ApiError></code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">delete_pay_link_from_id</a>(pay_link_id: String) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15819,7 +15503,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">get_pay_link_from_id</a>(paylink_id: String) -> Result<GetPayLinkFromIdResponse, ApiError></code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">get_pay_link_from_id</a>(paylink_id: String) -> Result&lt;GetPayLinkFromIdResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15886,7 +15570,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">push_pay_link_from_id</a>(pay_link_id: String, request: PushPayLinkRequest) -> Result<PayabliApiResponsePaymentLinks, ApiError></code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">push_pay_link_from_id</a>(pay_link_id: String, request: PushPayLinkRequest) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15914,7 +15598,6 @@ Send a payment link to the specified email addresses or phone numbers.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{PushPayLinkRequest, PushPayLinkRequestEmail, PushPayLinkRequestSms};
 
 #[tokio::main]
 async fn main() {
@@ -15960,7 +15643,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">refresh_pay_link_from_id</a>(pay_link_id: String, amount_fixed: Option<Option<bool>>) -> Result<PayabliApiResponsePaymentLinks, ApiError></code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">refresh_pay_link_from_id</a>(pay_link_id: String, amount_fixed: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16039,7 +15722,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">send_pay_link_from_id</a>(pay_link_id: String, attachfile: Option<Option<bool>>, mail_2: Option<Option<String>>) -> Result<PayabliApiResponsePaymentLinks, ApiError></code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">send_pay_link_from_id</a>(pay_link_id: String, attachfile: Option&lt;Option&lt;bool&gt;&gt;, mail_2: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16129,7 +15812,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">update_pay_link_from_id</a>(pay_link_id: String, request: PayLinkUpdateData) -> Result<PayabliApiResponsePaymentLinks, ApiError></code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">update_pay_link_from_id</a>(pay_link_id: String, request: PayLinkUpdateData) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16157,13 +15840,6 @@ Updates a payment link's details.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    ContactElement, Element, Enabled, FileContent, FileContentFtype, HeaderElement, LabelElement,
-    MethodElement, MethodElementSettings, MethodElementSettingsApplePay,
-    MethodElementSettingsApplePayButtonStyle, MethodElementSettingsApplePayButtonType,
-    MethodElementSettingsApplePayLanguage, MethodsList, NoteElement, Order, PageElement,
-    PagelinkSetting,
-};
 
 #[tokio::main]
 async fn main() {
@@ -16299,7 +15975,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_bill_lot_number</a>(lot_number: String, request: PaymentPageRequestBody, entry_point: Option<Entry>, vendor_number: Option<String>, mail_2: Option<Option<String>>, amount_fixed: Option<Option<String>>) -> Result<PayabliApiResponsePaymentLinks, ApiError></code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_bill_lot_number</a>(lot_number: String, request: PaymentPageRequestBody, entry_point: Option&lt;Entry&gt;, vendor_number: Option&lt;String&gt;, mail_2: Option&lt;Option&lt;String&gt;&gt;, amount_fixed: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16327,14 +16003,6 @@ Generates a vendor payment link for a specific bill lot number. This allows you 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    ContactElement, Element, Enabled, Entry, FileContent, FileContentFtype, HeaderElement,
-    InvoiceElement, LabelElement, MethodElement, MethodElementSettings,
-    MethodElementSettingsApplePay, MethodElementSettingsApplePayButtonStyle,
-    MethodElementSettingsApplePayButtonType, MethodElementSettingsApplePayLanguage, MethodsList,
-    NoteElement, Order, PageElement, PagelinkSetting, PaymentPageRequestBody, PayorElement,
-    PayorFields,
-};
 
 #[tokio::main]
 async fn main() {
@@ -16500,7 +16168,7 @@ async fn main() {
 </details>
 
 ## PaymentMethodDomain
-<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">add_payment_method_domain</a>(request: AddPaymentMethodDomainRequest) -> Result<AddPaymentMethodDomainApiResponse, ApiError></code></summary>
+<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">add_payment_method_domain</a>(request: AddPaymentMethodDomainRequest) -> Result&lt;AddPaymentMethodDomainApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16528,10 +16196,6 @@ Add a payment method domain to an organization or paypoint.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AddPaymentMethodDomainRequestApplePay, AddPaymentMethodDomainRequestGooglePay, DomainName,
-    EntityId, EntityType, IsEnabled,
-};
 
 #[tokio::main]
 async fn main() {
@@ -16616,7 +16280,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">cascade_payment_method_domain</a>(domain_id: String) -> Result<PaymentMethodDomainGeneralResponse, ApiError></code></summary>
+<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">cascade_payment_method_domain</a>(domain_id: String) -> Result&lt;PaymentMethodDomainGeneralResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16683,7 +16347,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">delete_payment_method_domain</a>(domain_id: String) -> Result<DeletePaymentMethodDomainResponse, ApiError></code></summary>
+<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">delete_payment_method_domain</a>(domain_id: String) -> Result&lt;DeletePaymentMethodDomainResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16750,7 +16414,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">get_payment_method_domain</a>(domain_id: String) -> Result<PaymentMethodDomainApiResponse, ApiError></code></summary>
+<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">get_payment_method_domain</a>(domain_id: String) -> Result&lt;PaymentMethodDomainApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16817,7 +16481,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">list_payment_method_domains</a>(entity_id: Option<Option<String>>, entity_type: Option<Option<String>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>) -> Result<ListPaymentMethodDomainsResponse, ApiError></code></summary>
+<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">list_payment_method_domains</a>(entity_id: Option&lt;Option&lt;String&gt;&gt;, entity_type: Option&lt;Option&lt;String&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;ListPaymentMethodDomainsResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16924,7 +16588,7 @@ The type of entity. Valid values:
 </dl>
 </details>
 
-<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">update_payment_method_domain</a>(domain_id: String, request: UpdatePaymentMethodDomainRequest) -> Result<PaymentMethodDomainGeneralResponse, ApiError></code></summary>
+<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">update_payment_method_domain</a>(domain_id: String, request: UpdatePaymentMethodDomainRequest) -> Result&lt;PaymentMethodDomainGeneralResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16952,7 +16616,6 @@ Update a payment method domain's configuration values.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{IsEnabled, UpdatePaymentMethodDomainRequestWallet};
 
 #[tokio::main]
 async fn main() {
@@ -17019,7 +16682,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">verify_payment_method_domain</a>(domain_id: String) -> Result<PaymentMethodDomainGeneralResponse, ApiError></code></summary>
+<details><summary><code>client.payment_method_domain.<a href="/src/api/resources/payment_method_domain/client.rs">verify_payment_method_domain</a>(domain_id: String) -> Result&lt;PaymentMethodDomainGeneralResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17087,7 +16750,7 @@ async fn main() {
 </details>
 
 ## Paypoint
-<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">get_basic_entry</a>(entry: String) -> Result<GetBasicEntryResponse, ApiError></code></summary>
+<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">get_basic_entry</a>(entry: String) -> Result&lt;GetBasicEntryResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17154,7 +16817,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">get_basic_entry_by_id</a>(id_paypoint: String) -> Result<GetBasicEntryByIdResponse, ApiError></code></summary>
+<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">get_basic_entry_by_id</a>(id_paypoint: String) -> Result&lt;GetBasicEntryByIdResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17221,7 +16884,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">get_entry_config</a>(entry: String, entrypages: Option<Option<String>>) -> Result<GetEntryConfigResponse, ApiError></code></summary>
+<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">get_entry_config</a>(entry: String, entrypages: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;GetEntryConfigResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17300,7 +16963,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">get_page</a>(entry: String, subdomain: String) -> Result<PayabliPages, ApiError></code></summary>
+<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">get_page</a>(entry: String, subdomain: String) -> Result&lt;PayabliPages, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17379,7 +17042,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">remove_page</a>(entry: String, subdomain: String) -> Result<PayabliApiResponseGeneric2Part, ApiError></code></summary>
+<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">remove_page</a>(entry: String, subdomain: String) -> Result&lt;PayabliApiResponseGeneric2Part, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17458,7 +17121,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">save_logo</a>(entry: String, request: FileContent) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError></code></summary>
+<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">save_logo</a>(entry: String, request: FileContent) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17486,7 +17149,6 @@ Updates a paypoint logo.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{FileContent, FileContentFtype};
 
 #[tokio::main]
 async fn main() {
@@ -17535,7 +17197,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">settings_page</a>(entry: String) -> Result<SettingsQueryRecord, ApiError></code></summary>
+<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">settings_page</a>(entry: String) -> Result&lt;SettingsQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17602,7 +17264,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">migrate</a>(request: PaypointMoveRequest) -> Result<MigratePaypointResponse, ApiError></code></summary>
+<details><summary><code>client.paypoint.<a href="/src/api/resources/paypoint/client.rs">migrate</a>(request: PaypointMoveRequest) -> Result&lt;MigratePaypointResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17630,7 +17292,6 @@ Migrates a paypoint to a new parent organization.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entrypointfield, NotificationRequest, PaypointMoveRequest, WebHeaderParameter};
 
 #[tokio::main]
 async fn main() {
@@ -17669,7 +17330,7 @@ async fn main() {
 </details>
 
 ## Query
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batch_details</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryBatchesDetailResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batch_details</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryBatchesDetailResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17698,7 +17359,6 @@ unsettled transactions for a paypoint. Use filters to limit results. Include the
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -17865,7 +17525,7 @@ Example: `settledAmount(gt)=20` returns all records with a `settledAmount` great
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batch_details_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseSettlements, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batch_details_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseSettlements, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17893,7 +17553,6 @@ Retrieve a list of batches and their details, including settled and unsettled tr
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -18059,7 +17718,7 @@ Example: `settledAmount(gt)=20` returns all records with a `settledAmount` great
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batches</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryBatchesResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batches</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryBatchesResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -18087,7 +17746,6 @@ Retrieve a list of batches for a paypoint. Use filters to limit results. Include
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -18232,7 +17890,7 @@ Example: `batchAmount(gt)=20` returns all records with a `batchAmount` greater t
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batches_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryBatchesResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batches_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryBatchesResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -18260,7 +17918,6 @@ Retrieve a list of batches for an org. Use filters to limit results. Include the
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -18405,7 +18062,7 @@ Example: `batchAmount(gt)=20` returns all records with a `batchAmount` greater t
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batches_out</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryBatchesOutResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batches_out</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryBatchesOutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -18433,7 +18090,6 @@ Retrieve a list of MoneyOut batches for a paypoint. Use filters to limit results
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -18540,7 +18196,7 @@ Collection of field names, conditions, and values used to filter the query. See 
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batches_out_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryBatchesOutResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_batches_out_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryBatchesOutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -18568,7 +18224,6 @@ Retrieve a list of MoneyOut batches for an org. Use filters to limit results. In
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -18690,7 +18345,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_chargebacks</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryChargebacksResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_chargebacks</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryChargebacksResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -18718,7 +18373,6 @@ Retrieves a list of chargebacks and returned transactions for a paypoint. Use fi
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -18880,7 +18534,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_chargebacks_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryChargebacksResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_chargebacks_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryChargebacksResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -18908,7 +18562,6 @@ Retrieve a list of chargebacks and returned transactions for an org. Use filters
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -19072,7 +18725,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_customers</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryCustomerResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_customers</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryCustomerResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -19100,7 +18753,6 @@ Retrieves a list of customers for a paypoint. Use filters to limit results. Incl
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -19256,7 +18908,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_customers_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryCustomerResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_customers_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryCustomerResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -19284,7 +18936,6 @@ Retrieves a list of customers for an org. Use filters to limit results. Include 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -19440,7 +19091,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_notification_reports</a>(entry: Entry, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseNotificationReports, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_notification_reports</a>(entry: Entry, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseNotificationReports, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -19468,7 +19119,6 @@ Returns a list of all reports generated in the last 60 days for a single entrypo
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::Entry;
 
 #[tokio::main]
 async fn main() {
@@ -19588,7 +19238,7 @@ Example: reportName(ct)=tr  return all records containing the string "tr"
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_notification_reports_org</a>(org_id: i64, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseNotificationReports, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_notification_reports_org</a>(org_id: i64, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseNotificationReports, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -19733,7 +19383,7 @@ Example: reportName(ct)=tr  return all records containing the string "tr"
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_notifications</a>(entry: Entry, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseNotifications, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_notifications</a>(entry: Entry, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseNotifications, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -19761,7 +19411,6 @@ Returns a list of notifications for an entrypoint. Use filters to limit results.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::Entry;
 
 #[tokio::main]
 async fn main() {
@@ -19883,7 +19532,7 @@ Example: totalAmount(gt)=20  return all records with totalAmount greater than 20
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_notifications_org</a>(org_id: i64, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseNotifications, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_notifications_org</a>(org_id: i64, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseNotifications, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20032,7 +19681,7 @@ Example: totalAmount(gt)=20  return all records with totalAmount greater than 20
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_organizations</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<ListOrganizationsResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_organizations</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;ListOrganizationsResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20060,7 +19709,6 @@ Retrieves a list of an organization's suborganizations and their full details su
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -20203,7 +19851,7 @@ Example: `dbaname(ct)=hoa` returns all records with a `dbaname` containing "hoa"
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_payout</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryPayoutTransaction, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_payout</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryPayoutTransaction, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20231,7 +19879,6 @@ Retrieves a list of money out transactions (payouts) for a paypoint. Use filters
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -20401,7 +20048,7 @@ List of field names accepted:
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_payout_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryPayoutTransaction, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_payout_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryPayoutTransaction, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20429,7 +20076,6 @@ Retrieves a list of money out transactions (payouts) for an organization. Use fi
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -20598,7 +20244,7 @@ List of field names accepted:
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_paypoints</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryEntrypointResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_paypoints</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryEntrypointResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20626,7 +20272,6 @@ Returns a list of paypoints in an organization. Use filters to limit results. In
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -20774,7 +20419,7 @@ Example: `dbaname(ct)=hoa` returns all records with a `dbaname` containing "hoa"
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_settlements</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseSettlements, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_settlements</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseSettlements, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20802,7 +20447,6 @@ Retrieve a list of settled transactions for a paypoint. Use filters to limit res
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -20969,7 +20613,7 @@ Example: `settledAmount(gt)=20` returns all records with a `settledAmount` great
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_settlements_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseSettlements, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_settlements_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseSettlements, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20997,7 +20641,6 @@ Retrieve a list of settled transactions for an organization. Include the `export
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -21164,7 +20807,7 @@ Example: `settledAmount(gt)=20` returns all records with a `settledAmount` great
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_subscriptions</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QuerySubscriptionResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_subscriptions</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QuerySubscriptionResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -21192,7 +20835,6 @@ Returns a list of subscriptions for a single paypoint. Use filters to limit resu
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -21359,7 +21001,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_subscriptions_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QuerySubscriptionResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_subscriptions_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QuerySubscriptionResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -21387,7 +21029,6 @@ Returns a list of subscriptions for a single org. Use filters to limit results. 
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -21554,7 +21195,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transactions</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseTransactions, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transactions</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseTransactions, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -21589,7 +21230,6 @@ For example, this request parameters filter for transactions between April 01, 2
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -21764,7 +21404,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transactions_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseTransactions, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transactions_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseTransactions, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -21806,7 +21446,6 @@ curl --request GET \
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -21981,7 +21620,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transfer_details</a>(entry: Entry, transfer_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<LimitRecord>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryTransferDetailResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transfer_details</a>(entry: Entry, transfer_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;LimitRecord&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryTransferDetailResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -22009,7 +21648,6 @@ Retrieve a list of transfer details records for a paypoint. Use filters to limit
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat, LimitRecord};
 
 #[tokio::main]
 async fn main() {
@@ -22148,7 +21786,7 @@ for more information.
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transfers</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<TransferQueryResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transfers</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;TransferQueryResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -22176,7 +21814,6 @@ Retrieve a list of transfers for a paypoint. Use filters to limit results. Inclu
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -22302,7 +21939,7 @@ List of field names accepted:
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transfers_org</a>(org_id: Orgid, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<TransferQueryResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transfers_org</a>(org_id: Orgid, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;TransferQueryResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -22330,7 +21967,6 @@ Retrieve a list of transfers for an org. Use filters to limit results. Include t
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{ExportFormat, Orgid};
 
 #[tokio::main]
 async fn main() {
@@ -22453,7 +22089,7 @@ List of field names accepted:
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_users_org</a>(org_id: i64, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryUserResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_users_org</a>(org_id: i64, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryUserResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -22604,7 +22240,7 @@ Example: `name(ct)=john`  return all records with name containing 'john'.
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_users_paypoint</a>(entry: String, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryUserResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_users_paypoint</a>(entry: String, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryUserResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -22755,7 +22391,7 @@ Example: `name(ct)=john`  return all records with name containing 'john'
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_vendors</a>(entry: String, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseVendors, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_vendors</a>(entry: String, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseVendors, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -22783,7 +22419,6 @@ Retrieve a list of vendors for an entrypoint. Use filters to limit results. Incl
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -22928,7 +22563,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_vendors_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<QueryResponseVendors, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_vendors_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseVendors, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -22956,7 +22591,6 @@ Retrieve a list of vendors for an organization. Use filters to limit results. In
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -23101,7 +22735,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_vcards</a>(entry: Entry, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<VCardQueryResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_vcards</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;VCardQueryResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -23129,7 +22763,6 @@ Retrieve a list of vcards (virtual credit cards) issued for an entrypoint. Use f
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, ExportFormat};
 
 #[tokio::main]
 async fn main() {
@@ -23266,7 +22899,7 @@ List of comparison accepted - enclosed between parentheses:
 </dl>
 </details>
 
-<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_vcards_org</a>(org_id: i64, export_format: Option<Option<ExportFormat>>, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<VCardQueryResponse, ApiError></code></summary>
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_vcards_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;VCardQueryResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -23294,7 +22927,6 @@ Retrieve a list of vcards (virtual credit cards) issued for an organization. Use
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::ExportFormat;
 
 #[tokio::main]
 async fn main() {
@@ -23432,7 +23064,7 @@ List of comparison accepted - enclosed between parentheses:
 </details>
 
 ## Statistic
-<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">basic_stats</a>(mode: String, freq: String, level: i64, entry_id: String, end_date: Option<Option<String>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, start_date: Option<Option<String>>) -> Result<Vec<StatBasicExtendedQueryRecord>, ApiError></code></summary>
+<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">basic_stats</a>(mode: String, freq: String, level: i64, entry_id: String, end_date: Option&lt;Option&lt;String&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, start_date: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;Vec&lt;StatBasicExtendedQueryRecord&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -23601,7 +23233,7 @@ Valid formats:
 </dl>
 </details>
 
-<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">customer_basic_stats</a>(mode: String, freq: String, customer_id: i64, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<Vec<SubscriptionStatsQueryRecord>, ApiError></code></summary>
+<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">customer_basic_stats</a>(mode: String, freq: String, customer_id: i64, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;Vec&lt;SubscriptionStatsQueryRecord&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -23721,7 +23353,7 @@ For example, `w` groups the results by week.
 </dl>
 </details>
 
-<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">sub_stats</a>(interval: String, level: i64, entry_id: String, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<Vec<StatBasicQueryRecord>, ApiError></code></summary>
+<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">sub_stats</a>(interval: String, level: i64, entry_id: String, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;Vec&lt;StatBasicQueryRecord&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -23830,7 +23462,7 @@ The entry level for the request:
 </dl>
 </details>
 
-<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">vendor_basic_stats</a>(mode: String, freq: String, id_vendor: i64, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>) -> Result<Vec<StatisticsVendorQueryRecord>, ApiError></code></summary>
+<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">vendor_basic_stats</a>(mode: String, freq: String, id_vendor: i64, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;Vec&lt;StatisticsVendorQueryRecord&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -23951,7 +23583,7 @@ For example, `w` groups the results by week.
 </details>
 
 ## Subscription
-<details><summary><code>client.subscription.<a href="/src/api/resources/subscription/client.rs">get_subscription</a>(sub_id: i64) -> Result<SubscriptionQueryRecords, ApiError></code></summary>
+<details><summary><code>client.subscription.<a href="/src/api/resources/subscription/client.rs">get_subscription</a>(sub_id: i64) -> Result&lt;SubscriptionQueryRecords, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24015,7 +23647,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.subscription.<a href="/src/api/resources/subscription/client.rs">new_subscription</a>(request: SubscriptionRequestBody, force_customer_creation: Option<Option<ForceCustomerCreation>>) -> Result<AddSubscriptionResponse, ApiError></code></summary>
+<details><summary><code>client.subscription.<a href="/src/api/resources/subscription/client.rs">new_subscription</a>(request: SubscriptionRequestBody, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;) -> Result&lt;AddSubscriptionResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24043,22 +23675,6 @@ Creates a subscription or scheduled payment to run at a specified time and frequ
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AchHolder, AchHolderType, AchSecCode, Achaccount, Achaccounttype, Achrouting, AdditionalData,
-    AdditionalDataString, Attachments, BillData, BillDataPaymentTerms, BillItem,
-    BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Cardcvv, Cardexp, Cardholder,
-    Cardnumber, Cardzip, CustomerId, CustomerNumberNullable, Datenullable, Device, Discount,
-    DutyAmount, Email, Entrypointfield, FileContent, FileContentFtype, ForceCustomerCreation,
-    FreightAmount, Frequency, IdempotencyKey, Identifierfields, Initiator, InvoiceAmount,
-    InvoiceNumber, InvoiceType, Invoicestatus, ItemCommodityCode, ItemDescription, ItemProductCode,
-    ItemProductName, ItemUnitofMeasure, PayMethodAch, PayMethodCredit, PaymentCategories,
-    PaymentDetail, PayorDataRequest, PhoneNumber, PurchaseOrder, RequestSchedulePaymentMethod,
-    RequestSchedulePaymentMethodInitiator, SaveIfSuccess, ScheduleDetail, SetPause,
-    ShippingFromZip, Shippingaddress, Shippingaddressadditional, Shippingcity, Shippingcountry,
-    Shippingstate, Shippingzip, Source, SplitFunding, SplitFundingContent, StoredMethodUsageType,
-    Storedmethodid, Subdomain, SubscriptionRequestBody, SummaryCommodityCode, Tax, TermsConditions,
-};
 
 #[tokio::main]
 async fn main() {
@@ -24160,7 +23776,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.subscription.<a href="/src/api/resources/subscription/client.rs">remove_subscription</a>(sub_id: i64) -> Result<RemoveSubscriptionResponse, ApiError></code></summary>
+<details><summary><code>client.subscription.<a href="/src/api/resources/subscription/client.rs">remove_subscription</a>(sub_id: i64) -> Result&lt;RemoveSubscriptionResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24224,7 +23840,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.subscription.<a href="/src/api/resources/subscription/client.rs">update_subscription</a>(sub_id: i64, request: RequestUpdateSchedule) -> Result<UpdateSubscriptionResponse, ApiError></code></summary>
+<details><summary><code>client.subscription.<a href="/src/api/resources/subscription/client.rs">update_subscription</a>(sub_id: i64, request: RequestUpdateSchedule) -> Result&lt;UpdateSubscriptionResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24252,10 +23868,6 @@ Updates a subscription's details.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Frequency, PaymentCategories, PaymentDetail, ScheduleDetail, SetPause, SplitFunding,
-    SplitFundingContent,
-};
 
 #[tokio::main]
 async fn main() {
@@ -24328,7 +23940,7 @@ async fn main() {
 </details>
 
 ## Templates
-<details><summary><code>client.templates.<a href="/src/api/resources/templates/client.rs">delete_template</a>(template_id: f64) -> Result<PayabliApiResponseTemplateId, ApiError></code></summary>
+<details><summary><code>client.templates.<a href="/src/api/resources/templates/client.rs">delete_template</a>(template_id: f64) -> Result&lt;PayabliApiResponseTemplateId, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24392,7 +24004,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.templates.<a href="/src/api/resources/templates/client.rs">getlink_template</a>(template_id: f64, ignore_empty: bool) -> Result<BoardingLinkApiResponse, ApiError></code></summary>
+<details><summary><code>client.templates.<a href="/src/api/resources/templates/client.rs">getlink_template</a>(template_id: f64, ignore_empty: bool) -> Result&lt;BoardingLinkApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24464,7 +24076,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.templates.<a href="/src/api/resources/templates/client.rs">get_template</a>(template_id: f64) -> Result<TemplateQueryRecord, ApiError></code></summary>
+<details><summary><code>client.templates.<a href="/src/api/resources/templates/client.rs">get_template</a>(template_id: f64) -> Result&lt;TemplateQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24528,7 +24140,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.templates.<a href="/src/api/resources/templates/client.rs">list_templates</a>(org_id: i64, from_record: Option<Option<i64>>, limit_record: Option<Option<i64>>, parameters: Option<Option<std::collections::HashMap<String, Option<String>>>>, sort_by: Option<Option<String>>) -> Result<TemplateQueryResponse, ApiError></code></summary>
+<details><summary><code>client.templates.<a href="/src/api/resources/templates/client.rs">list_templates</a>(org_id: i64, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;TemplateQueryResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24682,7 +24294,7 @@ Example: title(ct)=hoa return all records with title containing "hoa"
 </details>
 
 ## TokenStorage
-<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">add_method</a>(request: RequestTokenStorage, ach_validation: Option<Option<AchValidation>>, create_anonymous: Option<CreateAnonymous>, force_customer_creation: Option<Option<ForceCustomerCreation>>, temporary: Option<Temporary>) -> Result<AddMethodResponse, ApiError></code></summary>
+<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">add_method</a>(request: RequestTokenStorage, ach_validation: Option&lt;Option&lt;AchValidation&gt;&gt;, create_anonymous: Option&lt;CreateAnonymous&gt;, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;, temporary: Option&lt;Temporary&gt;) -> Result&lt;AddMethodResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24710,16 +24322,6 @@ Saves a payment method for reuse. This call exchanges sensitive payment informat
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AchHolder, AchHolderType, AchSecCode, AchValidation, Achaccount, Achaccounttype, Achrouting,
-    AdditionalData, BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Cardcvv, Cardexp, Cardholder,
-    Cardnumber, Cardzip, ConvertToken, CreateAnonymous, CustomerId, CustomerNumberNullable, Device,
-    Email, Entrypointfield, ForceCustomerCreation, IdempotencyKey, Identifierfields,
-    PayorDataRequest, PhoneNumber, RequestTokenStorage, RequestTokenStoragePaymentMethod,
-    Shippingaddress, Shippingaddressadditional, Shippingcity, Shippingcountry, Shippingstate,
-    Shippingzip, Source, Subdomain, Temporary, TokenizeAch, TokenizeCard, VendorDataRequest,
-};
 
 #[tokio::main]
 async fn main() {
@@ -24833,7 +24435,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">get_method</a>(method_id: String, card_expiration_format: Option<Option<i64>>, include_temporary: Option<Option<bool>>) -> Result<GetMethodResponse, ApiError></code></summary>
+<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">get_method</a>(method_id: String, card_expiration_format: Option&lt;Option&lt;i64&gt;&gt;, include_temporary: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;GetMethodResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24933,7 +24535,7 @@ Accepted values:
 </dl>
 </details>
 
-<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">remove_method</a>(method_id: String) -> Result<PayabliApiResponsePaymethodDelete, ApiError></code></summary>
+<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">remove_method</a>(method_id: String) -> Result&lt;PayabliApiResponsePaymethodDelete, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25000,7 +24602,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">update_method</a>(method_id: String, request: RequestTokenStorage, ach_validation: Option<Option<AchValidation>>) -> Result<PayabliApiResponsePaymethodDelete, ApiError></code></summary>
+<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">update_method</a>(method_id: String, request: RequestTokenStorage, ach_validation: Option&lt;Option&lt;AchValidation&gt;&gt;) -> Result&lt;PayabliApiResponsePaymethodDelete, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25028,16 +24630,6 @@ Updates a saved payment method.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AchHolder, AchHolderType, AchSecCode, AchValidation, Achaccount, Achaccounttype, Achrouting,
-    AdditionalData, BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Cardcvv, Cardexp, Cardholder,
-    Cardnumber, Cardzip, ConvertToken, CustomerId, CustomerNumberNullable, Device, Email,
-    Entrypointfield, Identifierfields, PayorDataRequest, PhoneNumber, RequestTokenStorage,
-    RequestTokenStoragePaymentMethod, Shippingaddress, Shippingaddressadditional, Shippingcity,
-    Shippingcountry, Shippingstate, Shippingzip, Source, Subdomain, TokenizeAch, TokenizeCard,
-    VendorDataRequest,
-};
 
 #[tokio::main]
 async fn main() {
@@ -25134,7 +24726,7 @@ async fn main() {
 </details>
 
 ## User
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">add_user</a>(request: UserData) -> Result<AddUserResponse, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">add_user</a>(request: UserData) -> Result&lt;AddUserResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25162,10 +24754,6 @@ Use this endpoint to add a new user to an organization.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AdditionalData, Email, Language, MfaData, MfaMode, NameUser, OrgScope, Orgid, Orgtype,
-    PhoneNumber, Timezone, UserData, UsrAccess, UsrStatus,
-};
 
 #[tokio::main]
 async fn main() {
@@ -25205,7 +24793,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">auth_refresh_user</a>() -> Result<PayabliApiResponseUserMfa, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">auth_refresh_user</a>() -> Result&lt;PayabliApiResponseUserMfa, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25254,7 +24842,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">auth_reset_user</a>(request: UserAuthResetRequest) -> Result<AuthResetUserResponse, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">auth_reset_user</a>(request: UserAuthResetRequest) -> Result&lt;AuthResetUserResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25282,7 +24870,6 @@ Use this endpoint to initiate a password reset for a user within an organization
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::Email;
 
 #[tokio::main]
 async fn main() {
@@ -25345,7 +24932,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">auth_user</a>(provider: String, request: UserAuthRequest) -> Result<PayabliApiResponseMfaBasic, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">auth_user</a>(provider: String, request: UserAuthRequest) -> Result&lt;PayabliApiResponseMfaBasic, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25373,7 +24960,6 @@ This endpoint requires an application API token.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::Email;
 
 #[tokio::main]
 async fn main() {
@@ -25472,7 +25058,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">change_psw_user</a>(request: UserAuthPswResetRequest) -> Result<ChangePswUserResponse, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">change_psw_user</a>(request: UserAuthPswResetRequest) -> Result&lt;ChangePswUserResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25539,7 +25125,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">delete_user</a>(user_id: String) -> Result<DeleteUserResponse, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">delete_user</a>(user_id: String) -> Result&lt;DeleteUserResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25603,7 +25189,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">edit_mfa_user</a>(user_id: String, request: MfaData) -> Result<EditMfaUserResponse, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">edit_mfa_user</a>(user_id: String, request: MfaData) -> Result&lt;EditMfaUserResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25631,7 +25217,6 @@ Use this endpoint to enable or disable multi-factor authentication (MFA) for a u
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{MfaData, MfaMode};
 
 #[tokio::main]
 async fn main() {
@@ -25678,7 +25263,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">edit_user</a>(user_id: String, request: UserData) -> Result<PayabliApiResponse, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">edit_user</a>(user_id: String, request: UserData) -> Result&lt;PayabliApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25706,10 +25291,6 @@ Use this endpoint to modify the details of a specific user within an organizatio
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AdditionalData, Email, Language, MfaData, MfaMode, NameUser, OrgScope, Orgid, Orgtype,
-    PhoneNumber, Timezone, UserData, UsrAccess, UsrStatus,
-};
 
 #[tokio::main]
 async fn main() {
@@ -25765,7 +25346,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">get_user</a>(user_id: String, entry: Option<Option<String>>, level: Option<Option<i64>>) -> Result<UserQueryRecord, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">get_user</a>(user_id: String, entry: Option&lt;Option&lt;String&gt;&gt;, level: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;UserQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25855,7 +25436,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">logout_user</a>() -> Result<LogoutUserResponse, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">logout_user</a>() -> Result&lt;LogoutUserResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25904,7 +25485,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">resend_mfa_code</a>(usrname: String, entry: String, entry_type: i64) -> Result<PayabliApiResponseMfaBasic, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">resend_mfa_code</a>(usrname: String, entry: String, entry_type: i64) -> Result&lt;PayabliApiResponseMfaBasic, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25987,7 +25568,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">validate_mfa_user</a>(request: MfaValidationData) -> Result<PayabliApiResponseUserMfa, ApiError></code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client.rs">validate_mfa_user</a>(request: MfaValidationData) -> Result&lt;PayabliApiResponseUserMfa, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -26015,7 +25596,6 @@ Use this endpoint to validate the multi-factor authentication (MFA) code for a u
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::MfaValidationCode;
 
 #[tokio::main]
 async fn main() {
@@ -26070,7 +25650,7 @@ async fn main() {
 </details>
 
 ## Vendor
-<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">add_vendor</a>(entry: String, request: VendorData) -> Result<PayabliApiResponseVendors, ApiError></code></summary>
+<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">add_vendor</a>(entry: String, request: VendorData) -> Result&lt;PayabliApiResponseVendors, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -26098,13 +25678,6 @@ Creates a vendor in an entrypoint.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AdditionalData, AdditionalDataString, AddressAddtlNullable, AddressNullable,
-    BankAccountHolderName, BankAccountHolderType, BankName, BillingData, Contacts, ContactsField,
-    Email, LocationCode, Mcc, PayeeName, RemitEmail, Remitaddress1, Remitaddress2, Remitcity,
-    Remitcountry, Remitstate, Remitzip, RoutingAccount, TypeAccount, VendorData, VendorEin,
-    VendorName1, VendorName2, VendorNumber, VendorPaymentMethodString, VendorPhone, Vendorstatus,
-};
 
 #[tokio::main]
 async fn main() {
@@ -26198,7 +25771,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">delete_vendor</a>(id_vendor: i64) -> Result<PayabliApiResponseVendors, ApiError></code></summary>
+<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">delete_vendor</a>(id_vendor: i64) -> Result&lt;PayabliApiResponseVendors, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -26262,7 +25835,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">edit_vendor</a>(id_vendor: i64, request: VendorData) -> Result<PayabliApiResponseVendors, ApiError></code></summary>
+<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">edit_vendor</a>(id_vendor: i64, request: VendorData) -> Result&lt;PayabliApiResponseVendors, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -26290,13 +25863,6 @@ Updates a vendor's information. Send only the fields you need to update.
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    AdditionalData, AdditionalDataString, AddressAddtlNullable, AddressNullable,
-    BankAccountHolderName, BankAccountHolderType, BankName, BillingData, Contacts, ContactsField,
-    Email, LocationCode, Mcc, PayeeName, RemitEmail, Remitaddress1, Remitaddress2, Remitcity,
-    Remitcountry, Remitstate, Remitzip, RoutingAccount, TypeAccount, VendorData, VendorEin,
-    VendorName1, VendorName2, VendorNumber, VendorPaymentMethodString, VendorPhone, Vendorstatus,
-};
 
 #[tokio::main]
 async fn main() {
@@ -26373,7 +25939,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">get_vendor</a>(id_vendor: i64) -> Result<VendorQueryRecord, ApiError></code></summary>
+<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">get_vendor</a>(id_vendor: i64) -> Result&lt;VendorQueryRecord, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -26438,7 +26004,7 @@ async fn main() {
 </details>
 
 ## Wallet
-<details><summary><code>client.wallet.<a href="/src/api/resources/wallet/client.rs">configure_apple_pay_organization</a>(request: ConfigureOrganizationRequestApplePay) -> Result<ConfigureApplePayOrganizationApiResponse, ApiError></code></summary>
+<details><summary><code>client.wallet.<a href="/src/api/resources/wallet/client.rs">configure_apple_pay_organization</a>(request: ConfigureOrganizationRequestApplePay) -> Result&lt;ConfigureApplePayOrganizationApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -26466,7 +26032,6 @@ Configure and activate Apple Pay for a Payabli organization
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Cascade, IsEnabled, OrganizationId};
 
 #[tokio::main]
 async fn main() {
@@ -26529,7 +26094,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.wallet.<a href="/src/api/resources/wallet/client.rs">configure_apple_pay_paypoint</a>(request: ConfigurePaypointRequestApplePay) -> Result<ConfigureApplePaypointApiResponse, ApiError></code></summary>
+<details><summary><code>client.wallet.<a href="/src/api/resources/wallet/client.rs">configure_apple_pay_paypoint</a>(request: ConfigurePaypointRequestApplePay) -> Result&lt;ConfigureApplePaypointApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -26557,7 +26122,6 @@ Configure and activate Apple Pay for a Payabli paypoint
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, IsEnabled};
 
 #[tokio::main]
 async fn main() {
@@ -26611,7 +26175,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.wallet.<a href="/src/api/resources/wallet/client.rs">configure_google_pay_organization</a>(request: ConfigureOrganizationRequestGooglePay) -> Result<ConfigureApplePayOrganizationApiResponse, ApiError></code></summary>
+<details><summary><code>client.wallet.<a href="/src/api/resources/wallet/client.rs">configure_google_pay_organization</a>(request: ConfigureOrganizationRequestGooglePay) -> Result&lt;ConfigureApplePayOrganizationApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -26639,7 +26203,6 @@ Configure and activate Google Pay for a Payabli organization
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Cascade, IsEnabled, OrganizationId};
 
 #[tokio::main]
 async fn main() {
@@ -26702,7 +26265,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.wallet.<a href="/src/api/resources/wallet/client.rs">configure_google_pay_paypoint</a>(request: ConfigurePaypointRequestGooglePay) -> Result<ConfigureGooglePaypointApiResponse, ApiError></code></summary>
+<details><summary><code>client.wallet.<a href="/src/api/resources/wallet/client.rs">configure_google_pay_paypoint</a>(request: ConfigurePaypointRequestGooglePay) -> Result&lt;ConfigureGooglePaypointApiResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -26730,7 +26293,6 @@ Configure and activate Google Pay for a Payabli paypoint
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{Entry, IsEnabled};
 
 #[tokio::main]
 async fn main() {

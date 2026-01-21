@@ -96,7 +96,7 @@ pub struct GetInvoiceRecord {
     pub parent_org_name: OrgParentName,
     #[serde(rename = "AdditionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
     #[serde(rename = "DocumentsRef")]
     pub documents_ref: DocumentsRef,
     #[serde(rename = "externalPaypointID")]

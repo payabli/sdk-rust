@@ -9,11 +9,9 @@ pub struct PayabliCredentialsPascal {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mode: Option<i64>,
     #[serde(rename = "MinTicket")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub min_ticket: Option<f64>,
+    pub min_ticket: MinTicket,
     #[serde(rename = "MaxTicket")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_ticket: Option<f64>,
+    pub max_ticket: MaxTicket,
     #[serde(rename = "CfeeFix")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub cfee_fix: Option<f64>,

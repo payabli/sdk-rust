@@ -4,7 +4,7 @@ pub use crate::prelude::*;
 pub struct BillData {
     #[serde(rename = "AdditionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub attachments: Option<Attachments>,
     /// Company name of the recipient of the invoice.

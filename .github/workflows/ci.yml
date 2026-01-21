@@ -55,3 +55,19 @@ jobs:
           if [ -f wiremock/docker-compose.test.yml ]; then
             docker compose -f wiremock/docker-compose.test.yml down
           fi
+
+  publish:
+    needs: [check, compile, test]
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Publish
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: cargo publish

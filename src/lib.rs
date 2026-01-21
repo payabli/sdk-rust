@@ -17,16 +17,6 @@
 //!
 //! ```rust
 //! use payabli_api::prelude::*;
-//! use payabli_api::{
-//!     AccountingField, AdditionalData, AdditionalDataString, AddressAddtlNullable, AddressNullable,
-//!     Attachments, BankAccountHolderName, BankAccountHolderType, BankName, BillItem, BillOutData,
-//!     BillOutDataScheduledOptions, BillingData, Billitems, Billstatus, Comments, Contacts,
-//!     ContactsField, Datenullable, Email, FileContent, FileContentFtype, Frequency, IdempotencyKey,
-//!     ItemCommodityCode, ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure,
-//!     LocationCode, Mcc, PayeeName, RemitEmail, Remitaddress1, Remitaddress2, Remitcity,
-//!     Remitcountry, Remitstate, Remitzip, RoutingAccount, Terms, TypeAccount, VendorData, VendorEin,
-//!     VendorName1, VendorName2, VendorNumber, VendorPaymentMethodString, VendorPhone, Vendorstatus,
-//! };
 //!
 //! #[tokio::main]
 //! async fn main() {

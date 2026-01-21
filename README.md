@@ -30,7 +30,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-payabli_api = "0.0.610"
+payabli_api = "0.0.611"
 ```
 
 Or install via cargo:
@@ -49,23 +49,6 @@ Instantiate and use the client with the following:
 
 ```rust
 use payabli_api::prelude::*;
-use payabli_api::{
-    Accountid, AchHolder, AchHolderType, AchSecCode, AchValidation, Achaccount, Achaccounttype,
-    Achrouting, AdditionalData, AdditionalDataString, Attachments, BillData, BillDataPaymentTerms,
-    BillItem, BillingAddressAddtlNullable, BillingAddressNullable, BillingCityNullable,
-    BillingCountryNullable, BillingStateNullable, BillingZip, Cardcvv, Cardexp, Cardholder,
-    Cardnumber, Cardzip, Cash, Check, CustomerId, CustomerNumberNullable, Datenullable, Device,
-    Discount, DutyAmount, Email, Entrypointfield, FileContent, FileContentFtype,
-    ForceCustomerCreation, FreightAmount, Frequency, IdempotencyKey, Identifierfields, Initiator,
-    InvoiceAmount, InvoiceNumber, InvoiceType, Invoicestatus, IpAddress, ItemCommodityCode,
-    ItemDescription, ItemProductCode, ItemProductName, ItemUnitofMeasure, Methodall, OrderId,
-    Orderdescription, PayMethodAch, PayMethodBodyAllFields, PayMethodCloud, PayMethodCredit,
-    PayMethodStoredMethod, PayMethodStoredMethodMethod, PaymentCategories, PaymentDetail,
-    PaymentMethod, PayorDataRequest, PhoneNumber, PurchaseOrder, SaveIfSuccess, ShippingFromZip,
-    Shippingaddress, Shippingaddressadditional, Shippingcity, Shippingcountry, Shippingstate,
-    Shippingzip, Source, SplitFunding, SplitFundingContent, StoredMethodUsageType, Storedmethodid,
-    Subdomain, Subscriptionid, SummaryCommodityCode, Tax, TermsConditions, TransRequestBody,
-};
 
 #[tokio::main]
 async fn main() {
