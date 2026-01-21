@@ -1,4 +1,4 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-pub struct MinTicket(pub Option<f64>);
+pub struct MinTicket(pub f64);
