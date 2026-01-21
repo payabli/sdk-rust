@@ -42,7 +42,7 @@ pub struct TransactionQueryRecordsCustomer {
     #[serde(rename = "GatewayTransId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub gateway_trans_id: Option<String>,
-    #[serde(rename = "InvoiceData")]
+    #[serde(rename = "invoiceData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub invoice_data: Option<BillData>,
     /// Payment method used: card, ach, or wallet.
