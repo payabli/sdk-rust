@@ -6,4 +6,6 @@ pub struct TransferBankAccount {
     pub account_number: AccountNumber,
     #[serde(rename = "routingNumber")]
     pub routing_number: RoutingAccount,
+    #[serde(rename = "bankName")]
+    pub bank_name: BankName,
 }

@@ -1178,6 +1178,133 @@ async fn test_query_list_transfers_org_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
+async fn test_query_list_transfers_out_org_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .query
+        .list_transfers_out_org(
+            77,
+            &ListTransfersOutOrgQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                parameters: None,
+                sort_by: None,
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/transfersOut/org/77",
+        Some(HashMap::from([
+            ("fromRecord".to_string(), "0".to_string()),
+            ("limitRecord".to_string(), "20".to_string()),
+        ])),
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_query_list_transfers_out_paypoint_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .query
+        .list_transfers_out_paypoint(
+            &Entry("47cade237".to_string()),
+            &ListTransfersOutPaypointQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                parameters: None,
+                sort_by: None,
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/transfersOut/47cade237",
+        Some(HashMap::from([
+            ("fromRecord".to_string(), "0".to_string()),
+            ("limitRecord".to_string(), "20".to_string()),
+        ])),
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_query_list_transfer_details_out_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .query
+        .list_transfer_details_out(
+            &Entry("47ace2b25".to_string()),
+            4521,
+            &ListTransferDetailsOutQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                parameters: None,
+                sort_by: None,
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/transferDetailsOut/47ace2b25/4521",
+        Some(HashMap::from([
+            ("fromRecord".to_string(), "0".to_string()),
+            ("limitRecord".to_string(), "20".to_string()),
+        ])),
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
 async fn test_query_list_users_org_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;

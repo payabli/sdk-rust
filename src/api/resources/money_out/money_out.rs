@@ -291,4 +291,43 @@ impl MoneyOutClient {
             )
             .await
     }
+
+    /// Updates the status of a processed check payment transaction. This endpoint handles the status transition, updates related bills, creates audit events, and triggers notifications.
+    ///
+    /// The transaction must meet all of the following criteria:
+    /// - **Status**: Must be in Processing or Processed status.
+    /// - **Payment method**: Must be a check payment method.
+    ///
+    /// ### Allowed status values
+    ///
+    /// | Value | Status | Description |
+    /// |-------|--------|-------------|
+    /// | `0` | Cancelled/Voided | Cancels the check transaction. Reverts associated bills to their previous state (Approved or Active), creates "Cancelled" events, and sends a `payout_transaction_voidedcancelled` notification if the notification is enabled. |
+    /// | `5` | Paid | Marks the check transaction as paid. Updates associated bills to "Paid" status, creates "Paid" events, and sends a `payout_transaction_paid` notification if the notification is enabled. |
+    ///
+    /// # Arguments
+    ///
+    /// * `trans_id` - The Payabli transaction ID for the check payment.
+    /// * `check_payment_status` - The new status to apply to the check transaction. To mark a check as `Paid`, send 5. To mark a check as `Cancelled`, send 0.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn update_check_payment_status(
+        &self,
+        trans_id: &String,
+        check_payment_status: &AllowedCheckPaymentStatus,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::PATCH,
+                &format!("MoneyOut/status/{}/{}", trans_id, check_payment_status),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
 }

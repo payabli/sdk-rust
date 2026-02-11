@@ -12,7 +12,7 @@ pub struct QueryTransactionEvents {
     #[serde(default)]
     #[serde(with = "crate::core::flexible_datetime::utc::option")]
     pub event_time: Option<DateTime<Utc>>,
-    /// Event descriptor. See [TransEvent Reference](/developers/references/transevents) for more details.
+    /// Event descriptor. See [TransEvent Reference](/guides/pay-in-transevents-reference) for more details.
     #[serde(rename = "TransEvent")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub trans_event: Option<String>,

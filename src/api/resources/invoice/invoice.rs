@@ -17,7 +17,7 @@ impl InvoiceClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -222,7 +222,7 @@ impl InvoiceClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -248,7 +248,7 @@ impl InvoiceClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query

@@ -95,7 +95,7 @@ impl OrganizationClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns

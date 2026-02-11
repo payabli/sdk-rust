@@ -137,7 +137,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -645,7 +645,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -2667,7 +2667,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -2756,7 +2756,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -2837,7 +2837,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -2916,7 +2916,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -3665,7 +3665,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -4027,7 +4027,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -4367,7 +4367,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -4669,7 +4669,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -5007,7 +5007,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -5387,7 +5387,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -5753,7 +5753,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -6307,7 +6307,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -6810,7 +6810,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -7188,7 +7188,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -7570,7 +7570,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -7962,7 +7962,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -8129,7 +8129,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -8297,7 +8297,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -8630,7 +8630,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -8726,7 +8726,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -8810,7 +8810,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -8892,7 +8892,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -9218,7 +9218,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -9748,7 +9748,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -9825,7 +9825,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -10346,7 +10346,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -10550,7 +10550,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -10744,7 +10744,7 @@ async fn main() {
 <dl>
 <dd>
 
-Authorize a card transaction. This returns an authorization code and reserves funds for the merchant. Authorized transactions aren't flagged for settlement until [captured](/api-reference/moneyin/capture-an-authorized-transaction).
+Authorize a card transaction. This returns an authorization code and reserves funds for the merchant. Authorized transactions aren't flagged for settlement until [captured](/developers/api-reference/moneyin/capture-an-authorized-transaction).
 Only card transactions can be authorized. This endpoint can't be used for ACH transactions.
 <Tip>
   Consider migrating to the [v2 Authorize endpoint](/developers/api-reference/moneyinV2/authorize-a-transaction) to take advantage of unified response codes and improved response consistency.
@@ -10874,11 +10874,11 @@ async fn main() {
 <dd>
 
 <Warning>
-  This endpoint is deprecated and will be sunset on November 24, 2025. Migrate to [POST `/capture/{transId}`](/api-reference/moneyin/capture-an-authorized-transaction)`.
+  This endpoint is deprecated and will be sunset on November 24, 2025. Migrate to [POST `/capture/{transId}`](/developers/api-reference/moneyin/capture-an-authorized-transaction)`.
 </Warning>
   
   Capture an [authorized
-transaction](/api-reference/moneyin/authorize-a-transaction) to complete the transaction and move funds from the customer to merchant account.
+transaction](/developers/api-reference/moneyin/authorize-a-transaction) to complete the transaction and move funds from the customer to merchant account.
 </dd>
 </dl>
 </dd>
@@ -10957,7 +10957,7 @@ async fn main() {
 <dl>
 <dd>
 
-Capture an [authorized transaction](/api-reference/moneyin/authorize-a-transaction) to complete the transaction and move funds from the customer to merchant account. 
+Capture an [authorized transaction](/developers/api-reference/moneyin/authorize-a-transaction) to complete the transaction and move funds from the customer to merchant account. 
 
 You can use this endpoint to capture both full and partial amounts of the original authorized transaction. See [Capture an authorized transaction](/developers/developer-guides/pay-in-auth-and-capture) for more information about this endpoint.
 
@@ -12116,7 +12116,7 @@ async fn main() {
 <dl>
 <dd>
 
-Make a single transaction. This method authorizes and captures a payment in one step. This is the v2 version of the `api/MoneyIn/getpaid` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/developers/references/pay-in-unified-response-codes) for more information.
+Make a single transaction. This method authorizes and captures a payment in one step. This is the v2 version of the `api/MoneyIn/getpaid` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
 </dd>
 </dl>
 </dd>
@@ -12250,7 +12250,7 @@ async fn main() {
 <dl>
 <dd>
 
-Authorize a card transaction. This returns an authorization code and reserves funds for the merchant. Authorized transactions aren't flagged for settlement until captured. This is the v2 version of the `api/MoneyIn/authorize` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/developers/references/pay-in-unified-response-codes) for more information.
+Authorize a card transaction. This returns an authorization code and reserves funds for the merchant. Authorized transactions aren't flagged for settlement until captured. This is the v2 version of the `api/MoneyIn/authorize` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
 
 **Note**: Only card transactions can be authorized. This endpoint can't be used for ACH transactions.
 </dd>
@@ -12377,7 +12377,7 @@ async fn main() {
 <dl>
 <dd>
 
-Capture an authorized transaction to complete the transaction and move funds from the customer to merchant account. This is the v2 version of the `api/MoneyIn/capture/{transId}` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/developers/references/pay-in-unified-response-codes) for more information.
+Capture an authorized transaction to complete the transaction and move funds from the customer to merchant account. This is the v2 version of the `api/MoneyIn/capture/{transId}` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
 </dd>
 </dl>
 </dd>
@@ -12455,7 +12455,7 @@ async fn main() {
 
 Give a full refund for a transaction that has settled and send money back to the account holder. To perform a partial refund, see [Partially refund a transaction](developers/api-reference/moneyinV2/partial-refund-a-settled-transaction).
 
-This is the v2 version of the refund endpoint, and returns the unified response format. See [Pay In unified response codes reference](/developers/references/pay-in-unified-response-codes) for more information.
+This is the v2 version of the refund endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
 </dd>
 </dl>
 </dd>
@@ -12524,7 +12524,7 @@ async fn main() {
 
 Refund a transaction that has settled and send money back to the account holder. If `amount` is omitted or set to 0, performs a full refund. When a non-zero `amount` is provided, this endpoint performs a partial refund.
 
-This is the v2 version of the refund endpoint, and returns the unified response format. See [Pay In unified response codes reference](/developers/references/pay-in-unified-response-codes) for more information.
+This is the v2 version of the refund endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
 </dd>
 </dl>
 </dd>
@@ -12603,7 +12603,7 @@ async fn main() {
 <dl>
 <dd>
 
-Cancel a transaction that hasn't been settled yet. Voiding non-captured authorizations prevents future captures. This is the v2 version of the `api/MoneyIn/void/{transId}` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/developers/references/pay-in-unified-response-codes) for more information.
+Cancel a transaction that hasn't been settled yet. Voiding non-captured authorizations prevents future captures. This is the v2 version of the `api/MoneyIn/void/{transId}` endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
 </dd>
 </dl>
 </dd>
@@ -13415,6 +13415,96 @@ in the response when you make a GET request to `/MoneyOut/details/{transId}`.
       "fContent": ""
   }
 ```
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">update_check_payment_status</a>(trans_id: String, check_payment_status: AllowedCheckPaymentStatus) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the status of a processed check payment transaction. This endpoint handles the status transition, updates related bills, creates audit events, and triggers notifications.
+
+The transaction must meet all of the following criteria:
+- **Status**: Must be in Processing or Processed status.
+- **Payment method**: Must be a check payment method.
+
+### Allowed status values
+
+| Value | Status | Description |
+|-------|--------|-------------|
+| `0` | Cancelled/Voided | Cancels the check transaction. Reverts associated bills to their previous state (Approved or Active), creates "Cancelled" events, and sends a `payout_transaction_voidedcancelled` notification if the notification is enabled. |
+| `5` | Paid | Marks the check transaction as paid. Updates associated bills to "Paid" status, creates "Paid" events, and sends a `payout_transaction_paid` notification if the notification is enabled. |
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .money_out
+        .update_check_payment_status(
+            &"TRANS123456".to_string(),
+            &AllowedCheckPaymentStatus::Paid,
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**trans_id:** `String` — The Payabli transaction ID for the check payment.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**check_payment_status:** `AllowedCheckPaymentStatus` — The new status to apply to the check transaction. To mark a check as `Paid`, send 5. To mark a check as `Cancelled`, send 0.
     
 </dd>
 </dl>
@@ -14860,7 +14950,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -16805,7 +16895,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -16943,7 +17033,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -17022,7 +17112,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -17101,7 +17191,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -17185,7 +17275,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -17252,7 +17342,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -17343,7 +17433,7 @@ async fn main() {
 <dd>
 
 Retrieve a list of batches and their details, including settled and
-unsettled transactions for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response. 
+unsettled transactions for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
 </dd>
 </dl>
 </dd>
@@ -18042,7 +18132,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 - `limitRecord`: max number of records for query (default="20", "0" or negative value for all)
 - `fromRecord`: initial record in query
 
-Example: `batchAmount(gt)=20` returns all records with a `batchAmount` greater than 20.00      
+Example: `batchAmount(gt)=20` returns all records with a `batchAmount` greater than 20.00
     
 </dd>
 </dl>
@@ -21175,7 +21265,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 - `ct` => contains
 - `nct` => not contains
 - `in` => inside array
-- `nin` => not inside array      
+- `nin` => not inside array
     
 </dd>
 </dl>
@@ -21384,7 +21474,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 - `ct` => contains
 - `nct` => not contains
 - `in` => inside array
-- `nin` => not inside array      
+- `nin` => not inside array
     
 </dd>
 </dl>
@@ -21600,7 +21690,6 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 - `nct` => not contains
 - `in` => inside array
 - `nin` => not inside array
-  
     
 </dd>
 </dl>
@@ -21766,7 +21855,6 @@ for more information.
   - `category` (eq, ne, ct, nct)
   - `type` (eq, ne, in, nin)
   - `method` (eq, ne, in, nin)
-  
     
 </dd>
 </dl>
@@ -22089,6 +22177,425 @@ List of field names accepted:
 </dl>
 </details>
 
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transfers_out_org</a>(org_id: i64, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;TransferOutQueryResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of outbound transfers for an organization. Use filters to limit results.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .query
+        .list_transfers_out_org(
+            77,
+            &ListTransfersOutOrgQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                parameters: None,
+                sort_by: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**org_id:** `i64` — The numeric identifier for organization, assigned by Payabli.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from_record:** `Option<i64>` — The number of records to skip before starting to collect the result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit_record:** `Option<i64>` — Max number of records to return for the query. Use `0` or negative value to return all records.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**parameters:** `Option<std::collections::HashMap<String, Option<String>>>` 
+
+Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+<Info>
+  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+
+  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+
+  For example:
+
+  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+
+  should become:
+
+  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+</Info>
+List of field names accepted:
+
+  - `transferDate` (gt, ge, lt, le, eq, ne)
+  - `grossAmount` (gt, ge, lt, le, eq, ne)
+  - `returnedAmount` (gt, ge, lt, le, eq, ne)
+  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)
+  - `netFundedAmount` (gt, ge, lt, le, eq, ne)
+  - `processor` (ne, eq, ct, nct)
+  - `transferStatus` (ne, eq, in, nin)
+  - `transferId` (ne, eq, in, nin)
+  - `paypointLegalName` (ne, eq, ct, nct)
+  - `paypointDbaName` (ne, eq, ct, nct)
+  - `batchNumber` (ne, eq, ct, nct)
+  - `batchId` (ne, eq, in, nin)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `Option<String>` — The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transfers_out_paypoint</a>(entry: Entry, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;TransferOutQueryResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a list of outbound transfers for a paypoint. Use filters to limit results.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .query
+        .list_transfers_out_paypoint(
+            &Entry("47cade237".to_string()),
+            &ListTransfersOutPaypointQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                parameters: None,
+                sort_by: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `Entry` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from_record:** `Option<i64>` — The number of records to skip before starting to collect the result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit_record:** `Option<i64>` — Max number of records to return for the query. Use `0` or negative value to return all records.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**parameters:** `Option<std::collections::HashMap<String, Option<String>>>` 
+
+Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+<Info>
+  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+
+  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+
+  For example:
+
+  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+
+  should become:
+
+  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+</Info>
+List of field names accepted:
+
+  - `transferDate` (gt, ge, lt, le, eq, ne)
+  - `grossAmount` (gt, ge, lt, le, eq, ne)
+  - `returnedAmount` (gt, ge, lt, le, eq, ne)
+  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)
+  - `netFundedAmount` (gt, ge, lt, le, eq, ne)
+  - `processor` (ne, eq, ct, nct)
+  - `transferStatus` (ne, eq, in, nin)
+  - `transferId` (ne, eq, in, nin)
+  - `paypointLegalName` (ne, eq, ct, nct)
+  - `paypointDbaName` (ne, eq, ct, nct)
+  - `batchNumber` (ne, eq, ct, nct)
+  - `batchId` (ne, eq, in, nin)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `Option<String>` — The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transfer_details_out</a>(entry: Entry, transfer_id: i64, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;TransferOutDetailQueryResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve details for a specific outbound transfer. Use filters to limit results.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .query
+        .list_transfer_details_out(
+            &Entry("47ace2b25".to_string()),
+            4521,
+            &ListTransferDetailsOutQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                parameters: None,
+                sort_by: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `Entry` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transfer_id:** `i64` — The numeric identifier for the transfer, assigned by Payabli.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from_record:** `Option<i64>` — The number of records to skip before starting to collect the result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit_record:** `Option<i64>` — Max number of records to return for the query. Use `0` or negative value to return all records.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**parameters:** `Option<std::collections::HashMap<String, Option<String>>>` 
+
+Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+<Info>
+  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+
+  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+
+  For example:
+
+  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+
+  should become:
+
+  --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+</Info>
+List of field names accepted:
+
+  - `grossAmount` (gt, ge, lt, le, eq, ne)
+  - `returnedAmount` (gt, ge, lt, le, eq, ne)
+  - `billingFeeAmount` (gt, ge, lt, le, eq, ne)
+  - `netFundedAmount` (gt, ge, lt, le, eq, ne)
+  - `adjustmentAmount` (gt, ge, lt, le, eq, ne)
+  - `transactionId` (eq, ne, in, nin)
+  - `category` (eq, ne, ct, nct)
+  - `type` (eq, ne, in, nin)
+  - `method` (eq, ne, in, nin)
+  - `walletType` (eq, ne, in, nin)
+  - `splitFundingAmount` (gt, ge, lt, le, eq, ne)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `Option<String>` — The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_users_org</a>(org_id: i64, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryUserResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
@@ -22304,7 +22811,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>
@@ -22456,7 +22963,7 @@ async fn main() {
 <dl>
 <dd>
 
-**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     
 </dd>
 </dl>

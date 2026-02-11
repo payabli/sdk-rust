@@ -2554,6 +2554,194 @@ impl QueryClient {
             .await
     }
 
+    /// Retrieve a list of outbound transfers for an organization. Use filters to limit results.
+    ///
+    /// # Arguments
+    ///
+    /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `from_record` - The number of records to skip before starting to collect the result set.
+    /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
+    /// * `parameters` - Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+    /// <Info>
+    /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+    ///
+    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+    ///
+    /// For example:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    ///
+    /// should become:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// </Info>
+    /// List of field names accepted:
+    ///
+    /// - `transferDate` (gt, ge, lt, le, eq, ne)
+    /// - `grossAmount` (gt, ge, lt, le, eq, ne)
+    /// - `returnedAmount` (gt, ge, lt, le, eq, ne)
+    /// - `billingFeeAmount` (gt, ge, lt, le, eq, ne)
+    /// - `netFundedAmount` (gt, ge, lt, le, eq, ne)
+    /// - `processor` (ne, eq, ct, nct)
+    /// - `transferStatus` (ne, eq, in, nin)
+    /// - `transferId` (ne, eq, in, nin)
+    /// - `paypointLegalName` (ne, eq, ct, nct)
+    /// - `paypointDbaName` (ne, eq, ct, nct)
+    /// - `batchNumber` (ne, eq, ct, nct)
+    /// - `batchId` (ne, eq, in, nin)
+    /// * `sort_by` - The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn list_transfers_out_org(
+        &self,
+        org_id: i64,
+        request: &ListTransfersOutOrgQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<TransferOutQueryResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Query/transfersOut/org/{}", org_id),
+                None,
+                QueryBuilder::new()
+                    .int("fromRecord", request.from_record.clone())
+                    .int("limitRecord", request.limit_record.clone())
+                    .serialize("parameters", request.parameters.clone())
+                    .string("sortBy", request.sort_by.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
+    /// Retrieve a list of outbound transfers for a paypoint. Use filters to limit results.
+    ///
+    /// # Arguments
+    ///
+    /// * `from_record` - The number of records to skip before starting to collect the result set.
+    /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
+    /// * `parameters` - Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+    /// <Info>
+    /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+    ///
+    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+    ///
+    /// For example:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    ///
+    /// should become:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// </Info>
+    /// List of field names accepted:
+    ///
+    /// - `transferDate` (gt, ge, lt, le, eq, ne)
+    /// - `grossAmount` (gt, ge, lt, le, eq, ne)
+    /// - `returnedAmount` (gt, ge, lt, le, eq, ne)
+    /// - `billingFeeAmount` (gt, ge, lt, le, eq, ne)
+    /// - `netFundedAmount` (gt, ge, lt, le, eq, ne)
+    /// - `processor` (ne, eq, ct, nct)
+    /// - `transferStatus` (ne, eq, in, nin)
+    /// - `transferId` (ne, eq, in, nin)
+    /// - `paypointLegalName` (ne, eq, ct, nct)
+    /// - `paypointDbaName` (ne, eq, ct, nct)
+    /// - `batchNumber` (ne, eq, ct, nct)
+    /// - `batchId` (ne, eq, in, nin)
+    /// * `sort_by` - The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn list_transfers_out_paypoint(
+        &self,
+        entry: &Entry,
+        request: &ListTransfersOutPaypointQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<TransferOutQueryResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Query/transfersOut/{}", entry.0),
+                None,
+                QueryBuilder::new()
+                    .int("fromRecord", request.from_record.clone())
+                    .int("limitRecord", request.limit_record.clone())
+                    .serialize("parameters", request.parameters.clone())
+                    .string("sortBy", request.sort_by.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
+    /// Retrieve details for a specific outbound transfer. Use filters to limit results.
+    ///
+    /// # Arguments
+    ///
+    /// * `transfer_id` - The numeric identifier for the transfer, assigned by Payabli.
+    /// * `from_record` - The number of records to skip before starting to collect the result set.
+    /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
+    /// * `parameters` - Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+    /// <Info>
+    /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+    ///
+    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+    ///
+    /// For example:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    ///
+    /// should become:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// </Info>
+    /// List of field names accepted:
+    ///
+    /// - `grossAmount` (gt, ge, lt, le, eq, ne)
+    /// - `returnedAmount` (gt, ge, lt, le, eq, ne)
+    /// - `billingFeeAmount` (gt, ge, lt, le, eq, ne)
+    /// - `netFundedAmount` (gt, ge, lt, le, eq, ne)
+    /// - `adjustmentAmount` (gt, ge, lt, le, eq, ne)
+    /// - `transactionId` (eq, ne, in, nin)
+    /// - `category` (eq, ne, ct, nct)
+    /// - `type` (eq, ne, in, nin)
+    /// - `method` (eq, ne, in, nin)
+    /// - `walletType` (eq, ne, in, nin)
+    /// - `splitFundingAmount` (gt, ge, lt, le, eq, ne)
+    /// * `sort_by` - The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn list_transfer_details_out(
+        &self,
+        entry: &Entry,
+        transfer_id: i64,
+        request: &ListTransferDetailsOutQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<TransferOutDetailQueryResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Query/transferDetailsOut/{}/{}", entry.0, transfer_id),
+                None,
+                QueryBuilder::new()
+                    .int("fromRecord", request.from_record.clone())
+                    .int("limitRecord", request.limit_record.clone())
+                    .serialize("parameters", request.parameters.clone())
+                    .string("sortBy", request.sort_by.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
     /// Get list of users for an org. Use filters to limit results.
     ///
     /// # Arguments
@@ -2635,7 +2823,7 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -2712,7 +2900,7 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query

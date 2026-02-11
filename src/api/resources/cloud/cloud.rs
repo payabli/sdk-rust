@@ -17,7 +17,7 @@ impl CloudClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -44,7 +44,7 @@ impl CloudClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `device_id` - ID of the cloud device.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
@@ -72,7 +72,7 @@ impl CloudClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `force_refresh` - When `true`, the request retrieves an updated list of devices from the processor instead of returning a cached list of devices.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
@@ -102,7 +102,7 @@ impl CloudClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `device_id` - ID of the cloud device.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///

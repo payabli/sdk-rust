@@ -3,11 +3,11 @@ pub use crate::prelude::*;
 /// Response data from payment processor
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub struct TransactionDetailResponseData {
-    /// Unified result code for the transaction. See [Pay In unified response codes](/developers/references/pay-in-unified-response-codes) for more information.
+    /// Unified result code for the transaction. See [Pay In unified response codes](/guides/pay-in-unified-response-codes-reference) for more information.
     #[serde(rename = "resultCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub result_code: Option<String>,
-    /// Description of the result code. See [Pay In unified response codes](/developers/references/pay-in-unified-response-codes) for more information.
+    /// Description of the result code. See [Pay In unified response codes](/guides/pay-in-unified-response-codes-reference) for more information.
     #[serde(rename = "resultCodeText")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub result_code_text: Option<String>,

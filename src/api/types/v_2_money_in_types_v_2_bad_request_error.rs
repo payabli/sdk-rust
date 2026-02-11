@@ -13,7 +13,7 @@ pub struct V2BadRequestError {
     pub detail: String,
     /// Request URL that caused the error.
     pub instance: String,
-    /// Payabli's unified response code for validation errors. Starts with 'E'. See [Pay In unified response codes reference](/developers/references/pay-in-unified-response-codes) for more information.
+    /// Payabli's unified response code for validation errors. Starts with 'E'. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
     pub code: String,
     /// Dictionary of field-specific validation errors. Keys are field paths (e.g., "paymentMethod.cardnumber") and values are arrays of error details.
     pub errors: HashMap<String, Vec<V2BadRequestErrorDetail>>,

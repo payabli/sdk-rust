@@ -106,7 +106,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -304,7 +304,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -480,7 +480,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -618,7 +618,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -792,7 +792,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -1008,7 +1008,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -1210,7 +1210,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -1518,7 +1518,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -1775,7 +1775,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -1989,7 +1989,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -2207,7 +2207,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -2433,7 +2433,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `transfer_id` - Transfer identifier.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
@@ -2516,7 +2516,7 @@ impl ExportClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -2595,7 +2595,7 @@ impl ExportClient {
     /// # Arguments
     ///
     /// * `format` - Format for the export, either XLSX or CSV.
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - The number of records to return for the query. The maximum is 30,000 records. When this parameter isn't sent, the API returns up to 25,000 records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
