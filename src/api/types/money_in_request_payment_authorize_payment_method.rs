@@ -3,11 +3,11 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 #[serde(untagged)]
 pub enum RequestPaymentAuthorizePaymentMethod {
-    PayMethodCredit(PayMethodCredit),
+        PayMethodCredit(PayMethodCredit),
 
-    PayMethodStoredMethod(PayMethodStoredMethod),
+        PayMethodStoredMethod(PayMethodStoredMethod),
 
-    PayMethodCloud(PayMethodCloud),
+        PayMethodCloud(PayMethodCloud),
 }
 
 impl RequestPaymentAuthorizePaymentMethod {
@@ -23,67 +23,57 @@ impl RequestPaymentAuthorizePaymentMethod {
         matches!(self, Self::PayMethodCloud(_))
     }
 
+
     pub fn as_paymethodcredit(&self) -> Option<&PayMethodCredit> {
         match self {
-            Self::PayMethodCredit(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodCredit(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_paymethodcredit(self) -> Option<PayMethodCredit> {
         match self {
-            Self::PayMethodCredit(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodCredit(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn as_paymethodstoredmethod(&self) -> Option<&PayMethodStoredMethod> {
         match self {
-            Self::PayMethodStoredMethod(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodStoredMethod(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_paymethodstoredmethod(self) -> Option<PayMethodStoredMethod> {
         match self {
-            Self::PayMethodStoredMethod(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodStoredMethod(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn as_paymethodcloud(&self) -> Option<&PayMethodCloud> {
         match self {
-            Self::PayMethodCloud(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodCloud(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_paymethodcloud(self) -> Option<PayMethodCloud> {
         match self {
-            Self::PayMethodCloud(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodCloud(value) => Some(value),
+                    _ => None,
+                }
     }
+
 }
 
 impl fmt::Display for RequestPaymentAuthorizePaymentMethod {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::PayMethodCredit(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
-            Self::PayMethodStoredMethod(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
-            Self::PayMethodCloud(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
+            Self::PayMethodCredit(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
+            Self::PayMethodStoredMethod(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
+            Self::PayMethodCloud(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
         }
     }
 }

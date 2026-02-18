@@ -30,7 +30,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-payabli_api = "0.0.618"
+payabli_api = "1.0.1"
 ```
 
 Or install via cargo:
@@ -98,6 +98,7 @@ async fn main() {
                         currency: None,
                         service_fee: Some(0.0),
                         split_funding: None,
+                        check_unique_id: None,
                         total_amount: 100.0,
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {

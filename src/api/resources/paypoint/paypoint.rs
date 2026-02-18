@@ -1,6 +1,6 @@
-use crate::api::*;
-use crate::{ApiError, ClientConfig, HttpClient, QueryBuilder, RequestOptions};
-use reqwest::Method;
+use crate::{ClientConfig, ApiError, HttpClient, RequestOptions, QueryBuilder};
+use reqwest::{Method};
+use crate::api::{*};
 
 pub struct PaypointClient {
     pub http_client: HttpClient,
@@ -9,8 +9,8 @@ pub struct PaypointClient {
 impl PaypointClient {
     pub fn new(config: ClientConfig) -> Result<Self, ApiError> {
         Ok(Self {
-            http_client: HttpClient::new(config.clone())?,
-        })
+    http_client: HttpClient::new(config.clone())?
+})
     }
 
     /// Gets the basic details for a paypoint.
@@ -23,20 +23,14 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn get_basic_entry(
-        &self,
-        entry: &String,
-        options: Option<RequestOptions>,
-    ) -> Result<GetBasicEntryResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::GET,
-                &format!("Paypoint/basic/{}", entry),
-                None,
-                None,
-                options,
-            )
-            .await
+    pub async fn get_basic_entry(&self, entry: &String, options: Option<RequestOptions>) -> Result<GetBasicEntryResponse, ApiError> {
+        self.http_client.execute_request(
+            Method::GET,
+            &format!("Paypoint/basic/{}", entry),
+            None,
+            None,
+            options,
+        ).await
     }
 
     /// Retrieves the basic details for a paypoint by ID.
@@ -49,20 +43,14 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn get_basic_entry_by_id(
-        &self,
-        id_paypoint: &String,
-        options: Option<RequestOptions>,
-    ) -> Result<GetBasicEntryByIdResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::GET,
-                &format!("Paypoint/basicById/{}", id_paypoint),
-                None,
-                None,
-                options,
-            )
-            .await
+    pub async fn get_basic_entry_by_id(&self, id_paypoint: &String, options: Option<RequestOptions>) -> Result<GetBasicEntryByIdResponse, ApiError> {
+        self.http_client.execute_request(
+            Method::GET,
+            &format!("Paypoint/basicById/{}", id_paypoint),
+            None,
+            None,
+            options,
+        ).await
     }
 
     /// Gets the details for a single paypoint.
@@ -75,23 +63,15 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn get_entry_config(
-        &self,
-        entry: &String,
-        request: &GetEntryConfigQueryRequest,
-        options: Option<RequestOptions>,
-    ) -> Result<GetEntryConfigResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::GET,
-                &format!("Paypoint/{}", entry),
-                None,
-                QueryBuilder::new()
-                    .string("entrypages", request.entrypages.clone())
-                    .build(),
-                options,
-            )
-            .await
+    pub async fn get_entry_config(&self, entry: &String, request: &GetEntryConfigQueryRequest, options: Option<RequestOptions>) -> Result<GetEntryConfigResponse, ApiError> {
+        self.http_client.execute_request(
+            Method::GET,
+            &format!("Paypoint/{}", entry),
+            None,
+            QueryBuilder::new().string("entrypages", request.entrypages.clone())
+            .build(),
+            options,
+        ).await
     }
 
     /// Gets the details for single payment page for a paypoint.
@@ -105,21 +85,14 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn get_page(
-        &self,
-        entry: &String,
-        subdomain: &String,
-        options: Option<RequestOptions>,
-    ) -> Result<PayabliPages, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::GET,
-                &format!("Paypoint/{}/{}", entry, subdomain),
-                None,
-                None,
-                options,
-            )
-            .await
+    pub async fn get_page(&self, entry: &String, subdomain: &String, options: Option<RequestOptions>) -> Result<PayabliPages, ApiError> {
+        self.http_client.execute_request(
+            Method::GET,
+            &format!("Paypoint/{}/{}", entry, subdomain),
+            None,
+            None,
+            options,
+        ).await
     }
 
     /// Deletes a payment page in a paypoint.
@@ -133,21 +106,14 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn remove_page(
-        &self,
-        entry: &String,
-        subdomain: &String,
-        options: Option<RequestOptions>,
-    ) -> Result<PayabliApiResponseGeneric2Part, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::DELETE,
-                &format!("Paypoint/{}/{}", entry, subdomain),
-                None,
-                None,
-                options,
-            )
-            .await
+    pub async fn remove_page(&self, entry: &String, subdomain: &String, options: Option<RequestOptions>) -> Result<PayabliApiResponseGeneric2Part, ApiError> {
+        self.http_client.execute_request(
+            Method::DELETE,
+            &format!("Paypoint/{}/{}", entry, subdomain),
+            None,
+            None,
+            options,
+        ).await
     }
 
     /// Updates a paypoint logo.
@@ -160,21 +126,14 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn save_logo(
-        &self,
-        entry: &String,
-        request: &FileContent,
-        options: Option<RequestOptions>,
-    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::PUT,
-                &format!("Paypoint/logo/{}", entry),
-                Some(serde_json::to_value(request).unwrap_or_default()),
-                None,
-                options,
-            )
-            .await
+    pub async fn save_logo(&self, entry: &String, request: &FileContent, options: Option<RequestOptions>) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        self.http_client.execute_request(
+            Method::PUT,
+            &format!("Paypoint/logo/{}", entry),
+            Some(serde_json::to_value(request).unwrap_or_default()),
+            None,
+            options,
+        ).await
     }
 
     /// Retrieves an paypoint's basic settings like custom fields, identifiers, and invoicing settings.
@@ -187,20 +146,14 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn settings_page(
-        &self,
-        entry: &String,
-        options: Option<RequestOptions>,
-    ) -> Result<SettingsQueryRecord, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::GET,
-                &format!("Paypoint/settings/{}", entry),
-                None,
-                None,
-                options,
-            )
-            .await
+    pub async fn settings_page(&self, entry: &String, options: Option<RequestOptions>) -> Result<SettingsQueryRecord, ApiError> {
+        self.http_client.execute_request(
+            Method::GET,
+            &format!("Paypoint/settings/{}", entry),
+            None,
+            None,
+            options,
+        ).await
     }
 
     /// Migrates a paypoint to a new parent organization.
@@ -212,19 +165,15 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn migrate(
-        &self,
-        request: &PaypointMoveRequest,
-        options: Option<RequestOptions>,
-    ) -> Result<MigratePaypointResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::POST,
-                "Paypoint/migrate",
-                Some(serde_json::to_value(request).unwrap_or_default()),
-                None,
-                options,
-            )
-            .await
+    pub async fn migrate(&self, request: &PaypointMoveRequest, options: Option<RequestOptions>) -> Result<MigratePaypointResponse, ApiError> {
+        self.http_client.execute_request(
+            Method::POST,
+            "Paypoint/migrate",
+            Some(serde_json::to_value(request).unwrap_or_default()),
+            None,
+            options,
+        ).await
     }
+
 }
+

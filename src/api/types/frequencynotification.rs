@@ -4,7 +4,7 @@ pub use crate::prelude::*;
 /// For notifications using the *email* ,*sms*, or *web* `method`, the allowed values are:
 /// - `untilcancelled`
 /// - `one-time`
-///
+/// 
 /// For notifications using the *report-email* or *report-web* `method`, the allowed values are:
 /// - `one-time`
 /// - `daily`

@@ -3,19 +3,19 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 #[serde(untagged)]
 pub enum PaymentMethod {
-    PayMethodCredit(PayMethodCredit),
+        PayMethodCredit(PayMethodCredit),
 
-    PayMethodAch(PayMethodAch),
+        PayMethodAch(PayMethodAch),
 
-    PayMethodStoredMethod(PayMethodStoredMethod),
+        PayMethodStoredMethod(PayMethodStoredMethod),
 
-    PayMethodCloud(PayMethodCloud),
+        PayMethodCloud(PayMethodCloud),
 
-    Check(Check),
+        Check(Check),
 
-    Cash(Cash),
+        Cash(Cash),
 
-    PayMethodBodyAllFields(PayMethodBodyAllFields),
+        PayMethodBodyAllFields(PayMethodBodyAllFields),
 }
 
 impl PaymentMethod {
@@ -47,143 +47,117 @@ impl PaymentMethod {
         matches!(self, Self::PayMethodBodyAllFields(_))
     }
 
+
     pub fn as_paymethodcredit(&self) -> Option<&PayMethodCredit> {
         match self {
-            Self::PayMethodCredit(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodCredit(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_paymethodcredit(self) -> Option<PayMethodCredit> {
         match self {
-            Self::PayMethodCredit(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodCredit(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn as_paymethodach(&self) -> Option<&PayMethodAch> {
         match self {
-            Self::PayMethodAch(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodAch(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_paymethodach(self) -> Option<PayMethodAch> {
         match self {
-            Self::PayMethodAch(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodAch(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn as_paymethodstoredmethod(&self) -> Option<&PayMethodStoredMethod> {
         match self {
-            Self::PayMethodStoredMethod(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodStoredMethod(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_paymethodstoredmethod(self) -> Option<PayMethodStoredMethod> {
         match self {
-            Self::PayMethodStoredMethod(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodStoredMethod(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn as_paymethodcloud(&self) -> Option<&PayMethodCloud> {
         match self {
-            Self::PayMethodCloud(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodCloud(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_paymethodcloud(self) -> Option<PayMethodCloud> {
         match self {
-            Self::PayMethodCloud(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodCloud(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn as_check(&self) -> Option<&Check> {
         match self {
-            Self::Check(value) => Some(value),
-            _ => None,
-        }
+                    Self::Check(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_check(self) -> Option<Check> {
         match self {
-            Self::Check(value) => Some(value),
-            _ => None,
-        }
+                    Self::Check(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn as_cash(&self) -> Option<&Cash> {
         match self {
-            Self::Cash(value) => Some(value),
-            _ => None,
-        }
+                    Self::Cash(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_cash(self) -> Option<Cash> {
         match self {
-            Self::Cash(value) => Some(value),
-            _ => None,
-        }
+                    Self::Cash(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn as_paymethodbodyallfields(&self) -> Option<&PayMethodBodyAllFields> {
         match self {
-            Self::PayMethodBodyAllFields(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodBodyAllFields(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_paymethodbodyallfields(self) -> Option<PayMethodBodyAllFields> {
         match self {
-            Self::PayMethodBodyAllFields(value) => Some(value),
-            _ => None,
-        }
+                    Self::PayMethodBodyAllFields(value) => Some(value),
+                    _ => None,
+                }
     }
+
 }
 
 impl fmt::Display for PaymentMethod {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Self::PayMethodCredit(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
-            Self::PayMethodAch(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
-            Self::PayMethodStoredMethod(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
-            Self::PayMethodCloud(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
-            Self::Check(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
-            Self::Cash(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
-            Self::PayMethodBodyAllFields(value) => write!(
-                f,
-                "{}",
-                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
-            ),
+            Self::PayMethodCredit(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
+            Self::PayMethodAch(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
+            Self::PayMethodStoredMethod(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
+            Self::PayMethodCloud(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
+            Self::Check(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
+            Self::Cash(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
+            Self::PayMethodBodyAllFields(value) => write!(f, "{}", serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))),
         }
     }
 }

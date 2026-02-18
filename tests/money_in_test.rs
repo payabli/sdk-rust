@@ -56,6 +56,7 @@ async fn test_money_in_authorize_with_wiremock() {
                         currency: None,
                         service_fee: Some(0.0),
                         split_funding: None,
+                        check_unique_id: None,
                         total_amount: 100.0,
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
@@ -319,6 +320,7 @@ async fn test_money_in_getpaid_with_wiremock() {
                         currency: None,
                         service_fee: Some(0.0),
                         split_funding: None,
+                        check_unique_id: None,
                         total_amount: 100.0,
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
@@ -676,6 +678,7 @@ async fn test_money_in_getpaidv_2_with_wiremock() {
                         currency: None,
                         service_fee: Some(0.0),
                         split_funding: None,
+                        check_unique_id: None,
                         total_amount: 100.0,
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
@@ -760,6 +763,7 @@ async fn test_money_in_authorizev_2_with_wiremock() {
                         currency: None,
                         service_fee: Some(0.0),
                         split_funding: None,
+                        check_unique_id: None,
                         total_amount: 100.0,
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {

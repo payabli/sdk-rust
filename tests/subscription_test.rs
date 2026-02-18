@@ -74,6 +74,7 @@ async fn test_subscription_new_subscription_with_wiremock() {
                         currency: None,
                         service_fee: Some(0.0),
                         split_funding: None,
+                        check_unique_id: None,
                         total_amount: 100.0,
                     }),
                     payment_method: Some(RequestSchedulePaymentMethod::PayMethodCredit(

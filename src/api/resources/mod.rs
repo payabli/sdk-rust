@@ -34,8 +34,11 @@
 //! - **Vendor**
 //! - **Wallet**
 
-use crate::{ApiError, ClientConfig};
+use crate::{ClientConfig, ApiError};
 
+pub mod money_out_types;
+pub mod query_types;
+pub mod v_2_money_in_types;
 pub mod bill;
 pub mod boarding;
 pub mod charge_backs;
@@ -49,7 +52,6 @@ pub mod invoice;
 pub mod line_item;
 pub mod money_in;
 pub mod money_out;
-pub mod money_out_types;
 pub mod notification;
 pub mod notificationlogs;
 pub mod ocr;
@@ -58,13 +60,11 @@ pub mod payment_link;
 pub mod payment_method_domain;
 pub mod paypoint;
 pub mod query;
-pub mod query_types;
 pub mod statistic;
 pub mod subscription;
 pub mod templates;
 pub mod token_storage;
 pub mod user;
-pub mod v_2_money_in_types;
 pub mod vendor;
 pub mod wallet;
 pub struct ApiClient {
@@ -130,11 +130,15 @@ impl ApiClient {
             token_storage: TokenStorageClient::new(config.clone())?,
             user: UserClient::new(config.clone())?,
             vendor: VendorClient::new(config.clone())?,
-            wallet: WalletClient::new(config.clone())?,
+            wallet: WalletClient::new(config.clone())?
         })
     }
+
 }
 
+pub use money_out_types::MoneyOutTypesClient;
+pub use query_types::QueryTypesClient;
+pub use v_2_money_in_types::V2MoneyInTypesClient;
 pub use bill::BillClient;
 pub use boarding::BoardingClient;
 pub use charge_backs::ChargeBacksClient;
@@ -148,7 +152,6 @@ pub use invoice::InvoiceClient;
 pub use line_item::LineItemClient;
 pub use money_in::MoneyInClient;
 pub use money_out::MoneyOutClient;
-pub use money_out_types::MoneyOutTypesClient;
 pub use notification::NotificationClient;
 pub use notificationlogs::NotificationlogsClient;
 pub use ocr::OcrClient;
@@ -157,12 +160,10 @@ pub use payment_link::PaymentLinkClient;
 pub use payment_method_domain::PaymentMethodDomainClient;
 pub use paypoint::PaypointClient;
 pub use query::QueryClient;
-pub use query_types::QueryTypesClient;
 pub use statistic::StatisticClient;
 pub use subscription::SubscriptionClient;
 pub use templates::TemplatesClient;
 pub use token_storage::TokenStorageClient;
 pub use user::UserClient;
-pub use v_2_money_in_types::V2MoneyInTypesClient;
 pub use vendor::VendorClient;
 pub use wallet::WalletClient;

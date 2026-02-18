@@ -3,9 +3,9 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 #[serde(untagged)]
 pub enum Responsedatanonobject {
-    String(String),
+        String(String),
 
-    Integer(i64),
+        Integer(i64),
 }
 
 impl Responsedatanonobject {
@@ -17,33 +17,35 @@ impl Responsedatanonobject {
         matches!(self, Self::Integer(_))
     }
 
+
     pub fn as_string(&self) -> Option<&String> {
         match self {
-            Self::String(value) => Some(value),
-            _ => None,
-        }
+                    Self::String(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_string(self) -> Option<String> {
         match self {
-            Self::String(value) => Some(value),
-            _ => None,
-        }
+                    Self::String(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn as_integer(&self) -> Option<&i64> {
         match self {
-            Self::Integer(value) => Some(value),
-            _ => None,
-        }
+                    Self::Integer(value) => Some(value),
+                    _ => None,
+                }
     }
 
     pub fn into_integer(self) -> Option<i64> {
         match self {
-            Self::Integer(value) => Some(value),
-            _ => None,
-        }
+                    Self::Integer(value) => Some(value),
+                    _ => None,
+                }
     }
+
 }
 
 impl fmt::Display for Responsedatanonobject {

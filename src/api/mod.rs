@@ -11,13 +11,6 @@
 pub mod resources;
 pub mod types;
 
-pub use resources::{
-    ApiClient, BillClient, BoardingClient, ChargeBacksClient, CheckCaptureClient, CloudClient,
-    CustomerClient, ExportClient, HostedPaymentPagesClient, ImportClient, InvoiceClient,
-    LineItemClient, MoneyInClient, MoneyOutClient, MoneyOutTypesClient, NotificationClient,
-    NotificationlogsClient, OcrClient, OrganizationClient, PaymentLinkClient,
-    PaymentMethodDomainClient, PaypointClient, QueryClient, QueryTypesClient, StatisticClient,
-    SubscriptionClient, TemplatesClient, TokenStorageClient, UserClient, V2MoneyInTypesClient,
-    VendorClient, WalletClient,
-};
-pub use types::*;
+pub use resources::{MoneyOutTypesClient, QueryTypesClient, V2MoneyInTypesClient, BillClient, BoardingClient, ChargeBacksClient, CheckCaptureClient, CloudClient, CustomerClient, ExportClient, HostedPaymentPagesClient, ImportClient, InvoiceClient, LineItemClient, MoneyInClient, MoneyOutClient, NotificationClient, NotificationlogsClient, OcrClient, OrganizationClient, PaymentLinkClient, PaymentMethodDomainClient, PaypointClient, QueryClient, StatisticClient, SubscriptionClient, TemplatesClient, TokenStorageClient, UserClient, VendorClient, WalletClient, ApiClient};
+pub use types::{*};
+
