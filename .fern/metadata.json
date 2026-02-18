@@ -10,9 +10,12 @@
     "extraDependencies": {
       "reqwest": {
         "version": "0.12",
-        "defaultFeatures": true
+        "defaultFeatures": false,
+        "features": [
+          "rustls-tls"
+        ]
       }
     }
   },
-  "sdkVersion": "1.0.1"
+  "sdkVersion": "1.0.2"
 }
