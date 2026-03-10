@@ -1,4 +1,4 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-pub struct TemplateCode(pub Option<String>);
+pub struct TemplateCode(pub String);

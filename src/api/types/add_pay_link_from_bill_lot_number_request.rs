@@ -18,5 +18,5 @@ pub struct AddPayLinkFromBillLotNumberRequest {
     #[serde(rename = "amountFixed")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub amount_fixed: Option<String>,
-    pub body: PaymentPageRequestBody,
+    pub body: PaymentPageRequestBodyOut,
 }

@@ -9,10 +9,12 @@ pub struct AddMethodRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ach_validation: Option<AchValidation>,
     #[serde(rename = "createAnonymous")]
-    pub create_anonymous: CreateAnonymous,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub create_anonymous: Option<CreateAnonymous>,
     #[serde(rename = "forceCustomerCreation")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub force_customer_creation: Option<ForceCustomerCreation>,
-    pub temporary: Temporary,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub temporary: Option<Temporary>,
     pub body: RequestTokenStorage,
 }

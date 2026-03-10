@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 /// Information about the application's signer.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct SignerDataRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<SignerName>,
@@ -40,7 +40,7 @@ pub struct SignerDataRequest {
     pub attestation_date: Option<AttestationDate>,
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
     #[serde(rename = "signDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sign_date: Option<SignDate>,

@@ -17,7 +17,7 @@ pub struct BillOutData {
     /// Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "billDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bill_date: Option<Datenullable>,
+    pub bill_date: Option<NaiveDate>,
     #[serde(rename = "billItems")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bill_items: Option<Billitems>,
@@ -33,11 +33,11 @@ pub struct BillOutData {
     /// Due date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "dueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<Datenullable>,
+    pub due_date: Option<NaiveDate>,
     /// End Date for scheduled bills. Applied only in `Mode` = 1. Accepted formats: YYYY-MM-DD, MM/DD/YYYY
     #[serde(rename = "endDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub end_date: Option<Datenullable>,
+    pub end_date: Option<NaiveDate>,
     /// Frequency for scheduled bills. Applied only in `Mode` = 1.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub frequency: Option<Frequency>,

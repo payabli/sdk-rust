@@ -23,16 +23,14 @@ async fn test_bill_add_bill_with_wiremock() {
                 accounting_field_1: Some(AccountingField("MyInternalId".to_string())),
                 accounting_field_2: None,
                 additional_data: None,
-                attachments: Some(Attachments(Some(vec![FileContent {
+                attachments: Some(Attachments(vec![FileContent {
                     f_content: None,
                     filename: Some("my-doc.pdf".to_string()),
                     ftype: Some(FileContentFtype::Pdf),
                     furl: Some("https://mysite.com/my-doc.pdf".to_string()),
-                }]))),
-                bill_date: Some(Datenullable(Some(
-                    NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap(),
-                ))),
-                bill_items: Some(Billitems(Some(vec![BillItem {
+                }])),
+                bill_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
+                bill_items: Some(Billitems(vec![BillItem {
                     item_categories: Some(vec![Some("deposits".to_string())]),
                     item_commodity_code: Some(ItemCommodityCode("010".to_string())),
                     item_cost: 5.0,
@@ -45,16 +43,12 @@ async fn test_bill_add_bill_with_wiremock() {
                     item_tax_rate: Some(0.075),
                     item_total_amount: Some(123.0),
                     item_unit_of_measure: Some(ItemUnitofMeasure("SqFt".to_string())),
-                }]))),
+                }])),
                 bill_number: Some("ABC-123".to_string()),
                 comments: Some(Comments("Deposit for materials".to_string())),
                 discount: None,
-                due_date: Some(Datenullable(Some(
-                    NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap(),
-                ))),
-                end_date: Some(Datenullable(Some(
-                    NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap(),
-                ))),
+                due_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
+                end_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
                 frequency: Some(Frequency::Monthly),
                 lot_number: None,
                 mode: Some(0),
@@ -190,9 +184,7 @@ async fn test_bill_edit_bill_with_wiremock() {
                 accounting_field_2: None,
                 additional_data: None,
                 attachments: None,
-                bill_date: Some(Datenullable(Some(
-                    NaiveDate::parse_from_str("2025-07-01", "%Y-%m-%d").unwrap(),
-                ))),
+                bill_date: Some(NaiveDate::parse_from_str("2025-07-01", "%Y-%m-%d").unwrap()),
                 bill_items: None,
                 bill_number: None,
                 comments: None,

@@ -31,15 +31,15 @@ pub struct BillData {
     /// Invoice date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "invoiceDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub invoice_date: Option<Datenullable>,
+    pub invoice_date: Option<NaiveDate>,
     /// Invoice due date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "invoiceDueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub invoice_due_date: Option<Datenullable>,
+    pub invoice_due_date: Option<NaiveDate>,
     /// Indicate the date to finish a scheduled invoice cycle (`invoiceType`` = 1) in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "invoiceEndDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub invoice_end_date: Option<Datenullable>,
+    pub invoice_end_date: Option<NaiveDate>,
     /// Invoice number. Identifies the invoice under a paypoint.
     #[serde(rename = "invoiceNumber")]
     #[serde(skip_serializing_if = "Option::is_none")]

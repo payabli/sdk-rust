@@ -11,11 +11,11 @@ pub struct RequestOutAuthorizeInvoiceData {
     /// Invoice date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "invoiceDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub invoice_date: Option<Datenullable>,
+    pub invoice_date: Option<NaiveDate>,
     /// Invoice due date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "dueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<Datenullable>,
+    pub due_date: Option<NaiveDate>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub comments: Option<Comments>,
     #[serde(rename = "lotNumber")]

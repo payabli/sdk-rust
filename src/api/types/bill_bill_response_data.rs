@@ -24,11 +24,11 @@ pub struct BillResponseData {
     /// Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY
     #[serde(rename = "BillDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bill_date: Option<Datenullable>,
+    pub bill_date: Option<NaiveDate>,
     /// Due Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY
     #[serde(rename = "DueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<Datenullable>,
+    pub due_date: Option<NaiveDate>,
     /// Comments associated with the bill. For managed payables, the character limit is 200. For on demand payouts, the characters limit is 250.
     #[serde(rename = "Comments")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -81,7 +81,7 @@ pub struct BillResponseData {
     /// End date for scheduled bills. Applied only in `Mode` = 1.
     #[serde(rename = "EndDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub end_date: Option<Datenullable>,
+    pub end_date: Option<NaiveDate>,
     #[serde(rename = "LastUpdated")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub last_updated: Option<LastModified>,

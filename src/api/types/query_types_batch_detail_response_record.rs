@@ -33,7 +33,8 @@ pub struct BatchDetailResponseRecord {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_data: Option<QueryPaymentData>,
     #[serde(rename = "NetAmount")]
-    pub net_amount: Netamountnullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub net_amount: Option<Netamountnullable>,
     #[serde(rename = "Operation")]
     pub operation: Operation,
     #[serde(rename = "Category")]
@@ -100,13 +101,15 @@ pub struct BatchDetailResponseRecord {
     #[serde(rename = "PaypointId")]
     pub paypoint_id: PaypointId,
     #[serde(rename = "PendingFeeAmount")]
-    pub pending_fee_amount: PendingFeeAmount,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pending_fee_amount: Option<PendingFeeAmount>,
     #[serde(rename = "RefundId")]
     pub refund_id: RefundId,
     #[serde(rename = "ReturnedId")]
     pub returned_id: ReturnedId,
     #[serde(rename = "splitFundingInstructions")]
-    pub split_funding_instructions: SplitFunding,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub split_funding_instructions: Option<SplitFunding>,
     #[serde(rename = "TotalAmount")]
     pub total_amount: f64,
     #[serde(rename = "CfeeTransactions")]

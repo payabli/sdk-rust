@@ -18,7 +18,7 @@ pub struct ApplicationData {
     pub baddress_1: Option<Baddress2>,
     #[serde(rename = "bankData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bank_data: Option<Bank>,
+    pub bank_data: Option<BankData>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bcity: Option<Bcity>,
     #[serde(skip_serializing_if = "Option::is_none")]

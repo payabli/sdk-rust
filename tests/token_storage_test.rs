@@ -45,8 +45,8 @@ async fn test_token_storage_add_method_with_wiremock() {
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     fallback_auth: Some(true),
-                    fallback_auth_amount: None,
-                    method_description: None,
+                    fallback_auth_amount: Some(100),
+                    method_description: Some("Primary Visa card".to_string()),
                     payment_method: Some(RequestTokenStoragePaymentMethod::TokenizeCard(
                         TokenizeCard {
                             method: "card".to_string(),
@@ -58,13 +58,13 @@ async fn test_token_storage_add_method_with_wiremock() {
                         },
                     )),
                     vendor_data: None,
-                    source: None,
+                    source: Some(Source("api".to_string())),
                     subdomain: None,
                 },
                 ach_validation: None,
-                create_anonymous: CreateAnonymous(Default::default()),
+                create_anonymous: None,
                 force_customer_creation: None,
-                temporary: Temporary(Default::default()),
+                temporary: None,
             },
             None,
         )

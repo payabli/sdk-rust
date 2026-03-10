@@ -36,7 +36,7 @@ impl PaymentLinkClient {
         ).await
     }
 
-    /// Generates a payment link for a bill from the bill ID.
+    /// Generates a payment link for a bill from the bill ID. The vendor receives a secure page where they can select their preferred payment method (ACH, virtual card, or check) and complete the payment.
     ///
     /// # Arguments
     ///
@@ -204,6 +204,46 @@ impl PaymentLinkClient {
             Some(serde_json::to_value(&request.body).unwrap_or_default()),
             QueryBuilder::new().serialize("entryPoint", Some(request.entry_point.clone())).string("vendorNumber", request.vendor_number.clone()).string("mail2", request.mail_2.clone()).string("amountFixed", request.amount_fixed.clone())
             .build(),
+            options,
+        ).await
+    }
+
+    /// Partially updates a Pay Out payment link's content, expiration date, and/or status. Use this to modify the payment page configuration, extend or change the expiration, or cancel a link. Updating the expiration date of an expired link reactivates it to Active status.
+    ///
+    /// # Arguments
+    ///
+    /// * `paylink_id` - ID for the payment link.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn patch_out_payment_link(&self, paylink_id: &String, request: &PatchOutPaymentLinkRequest, options: Option<RequestOptions>) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
+        self.http_client.execute_request(
+            Method::PATCH,
+            &format!("PaymentLink/out/{}", paylink_id),
+            Some(serde_json::to_value(request).unwrap_or_default()),
+            None,
+            options,
+        ).await
+    }
+
+    /// Updates the payment page content for a Pay Out payment link. Use this to change the branding, messaging, payment methods offered, or other page configuration.
+    ///
+    /// # Arguments
+    ///
+    /// * `paylink_id` - ID for the payment link.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn update_pay_link_out_from_id(&self, paylink_id: &String, request: &PaymentPageRequestBodyOut, options: Option<RequestOptions>) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
+        self.http_client.execute_request(
+            Method::PATCH,
+            &format!("PaymentLink/updateOut/{}", paylink_id),
+            Some(serde_json::to_value(request).unwrap_or_default()),
+            None,
             options,
         ).await
     }

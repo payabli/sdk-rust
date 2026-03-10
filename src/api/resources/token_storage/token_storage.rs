@@ -27,7 +27,7 @@ impl TokenStorageClient {
             Method::POST,
             "TokenStorage/add",
             Some(serde_json::to_value(&request.body).unwrap_or_default()),
-            QueryBuilder::new().serialize("achValidation", request.ach_validation.clone()).serialize("createAnonymous", Some(request.create_anonymous.clone())).serialize("forceCustomerCreation", request.force_customer_creation.clone()).serialize("temporary", Some(request.temporary.clone()))
+            QueryBuilder::new().serialize("achValidation", request.ach_validation.clone()).serialize("createAnonymous", request.create_anonymous.clone()).serialize("forceCustomerCreation", request.force_customer_creation.clone()).serialize("temporary", request.temporary.clone())
             .build(),
             options,
         ).await

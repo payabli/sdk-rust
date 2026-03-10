@@ -11,15 +11,24 @@ pub struct GetInvoiceRecord {
     #[serde(rename = "invoiceNumber")]
     pub invoice_number: InvoiceNumber,
     #[serde(rename = "invoiceDate")]
-    pub invoice_date: Datenullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub invoice_date: Option<NaiveDate>,
     #[serde(rename = "invoiceDueDate")]
-    pub invoice_due_date: Datenullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub invoice_due_date: Option<NaiveDate>,
     #[serde(rename = "invoiceSentDate")]
-    pub invoice_sent_date: DatetimeNullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub invoice_sent_date: Option<DateTime<Utc>>,
     #[serde(rename = "invoiceEndDate")]
-    pub invoice_end_date: Datenullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub invoice_end_date: Option<NaiveDate>,
     #[serde(rename = "lastPaymentDate")]
-    pub last_payment_date: DatetimeNullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_payment_date: Option<DateTime<Utc>>,
     #[serde(rename = "createdAt")]
     pub created_at: CreatedAt,
     #[serde(rename = "invoiceStatus")]
@@ -34,16 +43,20 @@ pub struct GetInvoiceRecord {
     pub terms_conditions: Option<TermsConditions>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
-    pub tax: Tax,
-    pub discount: Discount,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tax: Option<Tax>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub discount: Option<Discount>,
     #[serde(rename = "invoiceAmount")]
     pub invoice_amount: InvoiceAmount,
     #[serde(rename = "invoicePaidAmount")]
     pub invoice_paid_amount: InvoicePaidAmount,
     #[serde(rename = "freightAmount")]
-    pub freight_amount: FreightAmount,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub freight_amount: Option<FreightAmount>,
     #[serde(rename = "dutyAmount")]
-    pub duty_amount: DutyAmount,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub duty_amount: Option<DutyAmount>,
     #[serde(rename = "purchaseOrder")]
     pub purchase_order: PurchaseOrder,
     /// First name of the recipient of the invoice.
@@ -83,7 +96,8 @@ pub struct GetInvoiceRecord {
     #[serde(rename = "paylinkId")]
     pub paylink_id: PaylinkId,
     #[serde(rename = "billEvents")]
-    pub bill_events: BillEvents,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub bill_events: Option<BillEvents>,
     #[serde(rename = "scheduledOptions")]
     pub scheduled_options: BillOptions,
     #[serde(rename = "PaypointLegalname")]

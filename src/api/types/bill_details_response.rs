@@ -24,11 +24,11 @@ pub struct BillDetailsResponse {
     /// Bill due date in format YYYY-MM-DD or MM/DD/YYYY.
     #[serde(rename = "dueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<Datenullable>,
+    pub due_date: Option<NaiveDate>,
     /// Bill date in format YYYY-MM-DD or MM/DD/YYYY.
     #[serde(rename = "invoiceDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub invoice_date: Option<Datenullable>,
+    pub invoice_date: Option<NaiveDate>,
     /// Any comments about bill. **For managed payouts, this field has a limit of 100 characters**.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub comments: Option<Comments>,

@@ -173,7 +173,7 @@ pub struct ApplicationQueryRecord {
     pub whenrefund: Option<Whenrefunded>,
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
     #[serde(rename = "RepCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rep_code: Option<RepCode>,

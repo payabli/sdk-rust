@@ -1,4 +1,4 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-pub struct SaveIfSuccess(pub Option<bool>);
+pub struct SaveIfSuccess(pub bool);

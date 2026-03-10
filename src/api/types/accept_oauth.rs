@@ -1,4 +1,4 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-pub struct AcceptOauth(pub Option<bool>);
+pub struct AcceptOauth(pub bool);

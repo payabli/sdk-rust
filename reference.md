@@ -44,16 +44,14 @@ async fn main() {
                 accounting_field_1: Some(AccountingField("MyInternalId".to_string())),
                 accounting_field_2: None,
                 additional_data: None,
-                attachments: Some(Attachments(Some(vec![FileContent {
+                attachments: Some(Attachments(vec![FileContent {
                     f_content: None,
                     filename: Some("my-doc.pdf".to_string()),
                     ftype: Some(FileContentFtype::Pdf),
                     furl: Some("https://mysite.com/my-doc.pdf".to_string()),
-                }]))),
-                bill_date: Some(Datenullable(Some(
-                    NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap(),
-                ))),
-                bill_items: Some(Billitems(Some(vec![BillItem {
+                }])),
+                bill_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
+                bill_items: Some(Billitems(vec![BillItem {
                     item_categories: Some(vec![Some("deposits".to_string())]),
                     item_commodity_code: Some(ItemCommodityCode("010".to_string())),
                     item_cost: 5.0,
@@ -66,16 +64,12 @@ async fn main() {
                     item_tax_rate: Some(0.075),
                     item_total_amount: Some(123.0),
                     item_unit_of_measure: Some(ItemUnitofMeasure("SqFt".to_string())),
-                }]))),
+                }])),
                 bill_number: Some("ABC-123".to_string()),
                 comments: Some(Comments("Deposit for materials".to_string())),
                 discount: None,
-                due_date: Some(Datenullable(Some(
-                    NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap(),
-                ))),
-                end_date: Some(Datenullable(Some(
-                    NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap(),
-                ))),
+                due_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
+                end_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
                 frequency: Some(Frequency::Monthly),
                 lot_number: None,
                 mode: Some(0),
@@ -365,9 +359,7 @@ async fn main() {
                 accounting_field_2: None,
                 additional_data: None,
                 attachments: None,
-                bill_date: Some(Datenullable(Some(
-                    NaiveDate::parse_from_str("2025-07-01", "%Y-%m-%d").unwrap(),
-                ))),
+                bill_date: Some(NaiveDate::parse_from_str("2025-07-01", "%Y-%m-%d").unwrap()),
                 bill_items: None,
                 bill_number: None,
                 comments: None,
@@ -1179,143 +1171,179 @@ async fn main() {
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
-    client.boarding.add_application(&AddApplicationRequest::ApplicationDataPayIn(ApplicationDataPayIn {
-        services: ApplicationDataPayInServices {
-            ach: ApplicationDataPayInServicesAch {
-                ach_setup_fields: AchSetup {
-                    accept_ccd: None,
-                    accept_ppd: None,
-                    accept_web: None
-                }
-            },
-            card: ApplicationDataPayInServicesCard {
-                card_setup_fields: CardSetup {
-                    accept_amex: Some(true),
-                    accept_discover: Some(true),
-                    accept_mastercard: Some(true),
-                    accept_visa: Some(true)
-                }
-            },
-            odp: None
-        },
-        annual_revenue: Some(Annualrevenue(Some(1000.0))),
-        average_bill_size: Some(BoardingAverageBillSize("500".to_string())),
-        average_monthly_bill: Some(BoardingAvgMonthlyBill("5650".to_string())),
-        avgmonthly: Some(Avgmonthly(Some(1000.0))),
-        baddress: Some(Baddress1("123 Walnut Street".to_string())),
-        baddress_1: Some(Baddress2("Suite 103".to_string())),
-        bank_data: ApplicationDataPayInBankData {
-            bank_fields: Bank {
-                id: None,
-                account_id: None,
-                nickname: None,
-                bank_name: None,
-                routing_account: None,
-                account_number: None,
-                type_account: None,
-                bank_account_holder_name: None,
-                bank_account_holder_type: None,
-                bank_account_function: None,
-                verified: None,
-                status: None,
-                services: None
-            }
-        },
-        bcity: Some(Bcity("New Vegas".to_string())),
-        bcountry: Some(Bcountry("US".to_string())),
-        binperson: Some(Binperson(60)),
-        binphone: Some(Binphone(20)),
-        binweb: Some(Binweb(20)),
-        boarding_link_id: None,
-        bstate: Some(Bstate("FL".to_string())),
-        bsummary: Some(Bsummary("Brick and mortar store that sells office supplies".to_string())),
-        btype: Some(OwnType::LimitedLiabilityCompany),
-        bzip: Some(Bzip("33000".to_string())),
-        contacts: Some(vec![ApplicationDataPayInContactsItem {
-            contacts_fields: Contacts {
-                contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
-                contact_name: Some("Herman Martinez".to_string()),
-                contact_phone: Some("3055550000".to_string()),
-                contact_title: Some("Owner".to_string()),
-                additional_data: None
-            }
-        }]),
-        credit_limit: Some("creditLimit".to_string()),
-        dba_name: Some(Dbaname("Sunshine Gutters".to_string())),
-        ein: Some(Ein("123456789".to_string())),
-        externalpaypoint_id: None,
-        faxnumber: Some(FaxNumber("1234567890".to_string())),
-        highticketamt: Some(Highticketamt(Some(1000.0))),
-        legal_name: Some(Legalname("Sunshine Services, LLC".to_string())),
-        license: Some(License("2222222FFG".to_string())),
-        licstate: Some(Licensestate("CA".to_string())),
-        maddress: Some(Maddress("123 Walnut Street".to_string())),
-        maddress_1: Some(Maddress1("STE 900".to_string())),
-        mcc: Some(Mcc("7777".to_string())),
-        mcity: Some(Mcity("Johnson City".to_string())),
-        mcountry: Some(Mcountry("US".to_string())),
-        mstate: Some(Mstate("TN".to_string())),
-        mzip: Some(Mzip("37615".to_string())),
-        org_id: Some(Orgid(123)),
-        ownership: Some(vec![ApplicationDataPayInOwnershipItem {
-            owners_fields: Owners {
-                ownername: Some("John Smith".to_string()),
-                ownertitle: Some("CEO".to_string()),
-                ownerpercent: Some(100),
-                ownerssn: Some("123456789".to_string()),
-                ownerdob: Some("01/01/1990".to_string()),
-                ownerphone_1: Some("555888111".to_string()),
-                ownerphone_2: Some("555888111".to_string()),
-                owneremail: Some(Email("test@email.com".to_string())),
-                ownerdriver: Some("CA6677778".to_string()),
-                oaddress: Some("33 North St".to_string()),
-                ocity: Some("Any City".to_string()),
-                ocountry: Some("US".to_string()),
-                odriverstate: Some("CA".to_string()),
-                ostate: Some("CA".to_string()),
-                ozip: Some("55555".to_string()),
-                additional_data: None
-            }
-        }]),
-        phonenumber: PhoneNumber("1234567890".to_string()),
-        processing_region: "US".to_string(),
-        recipient_email: Some(Email("josephray@example.com".to_string())),
-        recipient_email_notification: Some(RecipientEmailNotification(true)),
-        resumable: Some(Resumable(true)),
-        signer: SignerDataRequest {
-            name: Some(SignerName("John Smith".to_string())),
-            ssn: Some(SignerSsn("123456789".to_string())),
-            dob: Some(SignerDob("01/01/1976".to_string())),
-            phone: Some(SignerPhone("555888111".to_string())),
-            email: Some(Email("test@email.com".to_string())),
-            address: Some(Signeraddress("33 North St".to_string())),
-            address_1: Some(SignerAddress1("STE 900".to_string())),
-            city: Some(SignerCity("Bristol".to_string())),
-            country: Some(SignerCountry("US".to_string())),
-            state: Some(SignerState("TN".to_string())),
-            zip: Some(SignerZip("55555".to_string())),
-            acceptance: None,
-            signed_document_reference: Some(SignedDocumentReference("https://example.com/signed-document.pdf".to_string())),
-            pci_attestation: Some(PciAttestation(Some(true))),
-            attestation_date: Some(AttestationDate("04/20/2025".to_string())),
-            additional_data: Some(AdditionalDataString("{\"deviceId\":\"499585-389fj484-3jcj8hj3\",\"session\":\"fifji4-fiu443-fn4843\",\"timeWithCompany\":\"6 Years\"}".to_string())),
-            sign_date: Some(SignDate("04/20/2025".to_string()))
-        },
-        startdate: Some(Busstartdate("01/01/1990".to_string())),
-        tax_fill_name: Some(Taxfillname("Sunshine LLC".to_string())),
-        template_id: Some(TemplateId(22)),
-        ticketamt: Some(Ticketamt(Some(1000.0))),
-        website: Some(Website("www.example.com".to_string())),
-        when_charged: Whencharged::WhenServiceProvided,
-        when_delivered: Whendelivered::Over30Days,
-        when_provided: Whenprovided::ThirtyDaysOrLess,
-        when_refunded: Whenrefunded::ThirtyDaysOrLess,
-        additional_data: None,
-        rep_code: None,
-        rep_name: None,
-        rep_office: None,
-        on_create: None
-    }), None).await;
+    client
+        .boarding
+        .add_application(
+            &AddApplicationRequest::ApplicationDataPayIn(ApplicationDataPayIn {
+                services: ApplicationDataPayInServices {
+                    ach: ApplicationDataPayInServicesAch {
+                        ach_setup_fields: AchSetup {
+                            accept_ccd: None,
+                            accept_ppd: None,
+                            accept_web: None,
+                        },
+                    },
+                    card: ApplicationDataPayInServicesCard {
+                        card_setup_fields: CardSetup {
+                            accept_amex: Some(true),
+                            accept_discover: Some(true),
+                            accept_mastercard: Some(true),
+                            accept_visa: Some(true),
+                        },
+                    },
+                    odp: None,
+                },
+                annual_revenue: Some(Annualrevenue(1000.0)),
+                average_bill_size: Some(BoardingAverageBillSize("500".to_string())),
+                average_monthly_bill: Some(BoardingAvgMonthlyBill("5650".to_string())),
+                avgmonthly: Some(Avgmonthly(1000.0)),
+                baddress: Some(Baddress1("123 Walnut Street".to_string())),
+                baddress_1: Some(Baddress2("Suite 103".to_string())),
+                bank_data: BankData(vec![
+                    Bank {
+                        id: None,
+                        account_id: Some("123-456".to_string()),
+                        nickname: Some(BankNickname("Withdrawal Account".to_string())),
+                        bank_name: Some(BankName("Test Bank".to_string())),
+                        routing_account: Some(RoutingAccount("123123123".to_string())),
+                        account_number: Some(AccountNumber("123123123".to_string())),
+                        type_account: Some(TypeAccount::Checking),
+                        bank_account_holder_name: Some(BankAccountHolderName(
+                            "Gruzya Adventure Outfitters LLC".to_string(),
+                        )),
+                        bank_account_holder_type: Some(BankAccountHolderType::Business),
+                        bank_account_function: Some(BankAccountFunction(1)),
+                        verified: None,
+                        status: None,
+                        services: None,
+                    },
+                    Bank {
+                        id: None,
+                        account_id: Some("123-456".to_string()),
+                        nickname: Some(BankNickname("Deposit Account".to_string())),
+                        bank_name: Some(BankName("Test Bank".to_string())),
+                        routing_account: Some(RoutingAccount("123123123".to_string())),
+                        account_number: Some(AccountNumber("123123123".to_string())),
+                        type_account: Some(TypeAccount::Checking),
+                        bank_account_holder_name: Some(BankAccountHolderName(
+                            "Gruzya Adventure Outfitters LLC".to_string(),
+                        )),
+                        bank_account_holder_type: Some(BankAccountHolderType::Business),
+                        bank_account_function: Some(BankAccountFunction(0)),
+                        verified: None,
+                        status: None,
+                        services: None,
+                    },
+                ]),
+                bcity: Some(Bcity("New Vegas".to_string())),
+                bcountry: Some(Bcountry("US".to_string())),
+                binperson: Some(Binperson(60)),
+                binphone: Some(Binphone(20)),
+                binweb: Some(Binweb(20)),
+                boarding_link_id: None,
+                bstate: Some(Bstate("FL".to_string())),
+                bsummary: Some(Bsummary(
+                    "Brick and mortar store that sells office supplies".to_string(),
+                )),
+                btype: Some(OwnType::LimitedLiabilityCompany),
+                bzip: Some(Bzip("33000".to_string())),
+                contacts: Some(vec![ApplicationDataPayInContactsItem {
+                    contacts_fields: Contacts {
+                        contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
+                        contact_name: Some("Herman Martinez".to_string()),
+                        contact_phone: Some("3055550000".to_string()),
+                        contact_title: Some("Owner".to_string()),
+                        additional_data: None,
+                    },
+                }]),
+                credit_limit: Some("creditLimit".to_string()),
+                dba_name: Some(Dbaname("Sunshine Gutters".to_string())),
+                ein: Some(Ein("123456789".to_string())),
+                externalpaypoint_id: None,
+                faxnumber: Some(FaxNumber("1234567890".to_string())),
+                highticketamt: Some(Highticketamt(1000.0)),
+                legal_name: Some(Legalname("Sunshine Services, LLC".to_string())),
+                license: Some(License("2222222FFG".to_string())),
+                licstate: Some(Licensestate("CA".to_string())),
+                maddress: Some(Maddress("123 Walnut Street".to_string())),
+                maddress_1: Some(Maddress1("STE 900".to_string())),
+                mcc: Some(Mcc("7777".to_string())),
+                mcity: Some(Mcity("Johnson City".to_string())),
+                mcountry: Some(Mcountry("US".to_string())),
+                mstate: Some(Mstate("TN".to_string())),
+                mzip: Some(Mzip("37615".to_string())),
+                org_id: Some(Orgid(123)),
+                ownership: Some(vec![ApplicationDataPayInOwnershipItem {
+                    owners_fields: Owners {
+                        ownername: Some("John Smith".to_string()),
+                        ownertitle: Some("CEO".to_string()),
+                        ownerpercent: Some(100),
+                        ownerssn: Some("123456789".to_string()),
+                        ownerdob: Some("01/01/1990".to_string()),
+                        ownerphone_1: Some("555888111".to_string()),
+                        ownerphone_2: Some("555888111".to_string()),
+                        owneremail: Some(Email("test@email.com".to_string())),
+                        ownerdriver: Some("CA6677778".to_string()),
+                        oaddress: Some("33 North St".to_string()),
+                        ocity: Some("Any City".to_string()),
+                        ocountry: Some("US".to_string()),
+                        odriverstate: Some("CA".to_string()),
+                        ostate: Some("CA".to_string()),
+                        ozip: Some("55555".to_string()),
+                        additional_data: None,
+                    },
+                }]),
+                phonenumber: PhoneNumber("1234567890".to_string()),
+                processing_region: "US".to_string(),
+                recipient_email: Some(Email("josephray@example.com".to_string())),
+                recipient_email_notification: Some(RecipientEmailNotification(true)),
+                resumable: Some(Resumable(true)),
+                signer: SignerDataRequest {
+                    name: Some(SignerName("John Smith".to_string())),
+                    ssn: Some(SignerSsn("123456789".to_string())),
+                    dob: Some(SignerDob("01/01/1976".to_string())),
+                    phone: Some(SignerPhone("555888111".to_string())),
+                    email: Some(Email("test@email.com".to_string())),
+                    address: Some(Signeraddress("33 North St".to_string())),
+                    address_1: Some(SignerAddress1("STE 900".to_string())),
+                    city: Some(SignerCity("Bristol".to_string())),
+                    country: Some(SignerCountry("US".to_string())),
+                    state: Some(SignerState("TN".to_string())),
+                    zip: Some(SignerZip("55555".to_string())),
+                    acceptance: None,
+                    signed_document_reference: Some(SignedDocumentReference(
+                        "https://example.com/signed-document.pdf".to_string(),
+                    )),
+                    pci_attestation: Some(PciAttestation(true)),
+                    attestation_date: Some(AttestationDate("04/20/2025".to_string())),
+                    additional_data: Some(AdditionalDataMap(HashMap::from([
+                        (
+                            "deviceId".to_string(),
+                            "499585-389fj484-3jcj8hj3".to_string(),
+                        ),
+                        ("session".to_string(), "fifji4-fiu443-fn4843".to_string()),
+                        ("timeWithCompany".to_string(), "6 Years".to_string()),
+                    ]))),
+                    sign_date: Some(SignDate("04/20/2025".to_string())),
+                },
+                startdate: Some(Busstartdate("01/01/1990".to_string())),
+                tax_fill_name: Some(Taxfillname("Sunshine LLC".to_string())),
+                template_id: Some(TemplateId(22)),
+                ticketamt: Some(Ticketamt(1000.0)),
+                website: Some(Website("www.example.com".to_string())),
+                when_charged: Whencharged::WhenServiceProvided,
+                when_delivered: Whendelivered::Over30Days,
+                when_provided: Whenprovided::ThirtyDaysOrLess,
+                when_refunded: Whenrefunded::ThirtyDaysOrLess,
+                additional_data: None,
+                rep_code: None,
+                rep_name: None,
+                rep_office: None,
+                on_create: None,
+            }),
+            None,
+        )
+        .await;
 }
 ```
 </dd>
@@ -9129,15 +9157,15 @@ async fn main() {
                         additional_data: None,
                         attachments: None,
                         company: None,
-                        discount: Some(Discount(Some(10.0))),
+                        discount: Some(Discount(10.0)),
                         duty_amount: None,
                         first_name: None,
                         freight_amount: None,
                         frequency: Some(Frequency::OneTime),
                         invoice_amount: Some(InvoiceAmount(982.37)),
-                        invoice_date: Some(Datenullable(Some(
+                        invoice_date: Some(
                             NaiveDate::parse_from_str("2025-10-19", "%Y-%m-%d").unwrap(),
-                        ))),
+                        ),
                         invoice_due_date: None,
                         invoice_end_date: None,
                         invoice_number: Some(InvoiceNumber("INV-3".to_string())),
@@ -9442,9 +9470,9 @@ async fn main() {
                         freight_amount: None,
                         frequency: None,
                         invoice_amount: Some(InvoiceAmount(982.37)),
-                        invoice_date: Some(Datenullable(Some(
+                        invoice_date: Some(
                             NaiveDate::parse_from_str("2025-10-19", "%Y-%m-%d").unwrap(),
-                        ))),
+                        ),
                         invoice_due_date: None,
                         invoice_end_date: None,
                         invoice_number: Some(InvoiceNumber("INV-6".to_string())),
@@ -11040,7 +11068,7 @@ async fn main() {
 <dl>
 <dd>
 
-Make a temporary microdeposit in a customer account to verify the customer's ownership and access to the target account. Reverse the microdeposit with `reverseCredit`.
+Make a temporary microdeposit in a customer account to verify the customer's ownership and access to the target account. Reverse the microdeposit with `reverseCredit`. Payabli doesn't automatically make microdeposits when you add a bank account, you must manually make the requests.
 
 This feature must be enabled by Payabli on a per-merchant basis. Contact support for help. 
 </dd>
@@ -13571,7 +13599,7 @@ async fn main() {
                 }),
                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
                 method: NotificationStandardRequestMethod::Web,
-                owner_id: Some(Ownerid("236".to_string())),
+                owner_id: Some(Ownerid(236)),
                 owner_type: Ownertype(0),
                 status: Some(Statusnotification(1)),
                 target: "https://webhook.site/2871b8f8-edc7-441a-b376-98d8c8e33275".to_string(),
@@ -13774,7 +13802,7 @@ async fn main() {
                 }),
                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
                 method: NotificationStandardRequestMethod::Email,
-                owner_id: Some(Ownerid("136".to_string())),
+                owner_id: Some(Ownerid(136)),
                 owner_type: Ownertype(0),
                 status: Some(Statusnotification(1)),
                 target: "newemail@email.com".to_string(),
@@ -14379,13 +14407,13 @@ async fn main() {
                     billing_state: Some(BillingStateNullable("TN".to_string())),
                     billing_zip: Some(BillingZip("37615".to_string())),
                 }),
-                contacts: Some(ContactsField(Some(vec![Contacts {
+                contacts: Some(ContactsField(vec![Contacts {
                     contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
                     additional_data: None,
-                }]))),
+                }])),
                 has_billing: Some(true),
                 has_residual: Some(true),
                 org_address: Some(Orgaddress("123 Walnut Street".to_string())),
@@ -14691,13 +14719,13 @@ async fn main() {
         .edit_organization(
             123,
             &OrganizationData {
-                contacts: Some(ContactsField(Some(vec![Contacts {
+                contacts: Some(ContactsField(vec![Contacts {
                     contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
                     additional_data: None,
-                }]))),
+                }])),
                 org_address: Some(Orgaddress("123 Walnut Street".to_string())),
                 org_city: Some(Orgcity("Johnson City".to_string())),
                 org_country: Some(Orgcountry("US".to_string())),
@@ -15356,7 +15384,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_bill</a>(bill_id: i64, request: PaymentPageRequestBody, amount_fixed: Option&lt;Option&lt;bool&gt;&gt;, mail_2: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_bill</a>(bill_id: i64, request: PaymentPageRequestBodyOut, amount_fixed: Option&lt;Option&lt;bool&gt;&gt;, mail_2: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15368,7 +15396,7 @@ async fn main() {
 <dl>
 <dd>
 
-Generates a payment link for a bill from the bill ID. 
+Generates a payment link for a bill from the bill ID. The vendor receives a secure page where they can select their preferred payment method (ACH, virtual card, or check) and complete the payment.
 </dd>
 </dl>
 </dd>
@@ -15398,7 +15426,7 @@ async fn main() {
             23548884,
             &AddPayLinkFromBillRequest {
                 mail_2: Some("jo@example.com; ceo@example.com".to_string()),
-                body: PaymentPageRequestBody {
+                body: PaymentPageRequestBodyOut {
                     contact_us: Some(ContactElement {
                         email_label: Some("Email".to_string()),
                         enabled: Some(Enabled(true)),
@@ -15407,7 +15435,6 @@ async fn main() {
                         payment_icons: Some(true),
                         phone_label: Some("Phone".to_string()),
                     }),
-                    invoices: None,
                     logo: Some(Element {
                         enabled: Some(Enabled(true)),
                         order: Some(Order(0)),
@@ -15435,44 +15462,26 @@ async fn main() {
                         label: Some("Pay Now".to_string()),
                         order: Some(Order(0)),
                     }),
-                    payment_methods: Some(MethodElement {
+                    payment_methods: Some(MethodElementOut {
                         all_methods_checked: Some(true),
-                        enabled: Some(Enabled(true)),
+                        allow_multiple_methods: Some(true),
+                        default_method: Some("vcard".to_string()),
+                        enabled: Some(true),
                         header: Some("Payment Methods".to_string()),
-                        methods: Some(MethodsList {
-                            amex: Some(true),
-                            apple_pay: Some(true),
-                            google_pay: None,
-                            discover: Some(true),
-                            e_check: Some(true),
-                            mastercard: Some(true),
-                            visa: Some(true),
+                        methods: Some(MethodsListOut {
+                            ach: Some(true),
+                            check: Some(true),
+                            vcard: Some(true),
                         }),
-                        order: Some(Order(0)),
-                        settings: None,
-                    }),
-                    payor: Some(PayorElement {
-                        enabled: Some(Enabled(true)),
-                        fields: Some(vec![PayorFields {
-                            display: Some(true),
-                            fixed: Some(true),
-                            identifier: Some(true),
-                            label: Some("Full Name".to_string()),
-                            name: Some("fullName".to_string()),
-                            order: Some(Order(0)),
-                            required: Some(true),
-                            validation: Some("alpha".to_string()),
-                            value: Some("".to_string()),
-                            width: Some(0),
-                        }]),
-                        header: Some("Payor Information".to_string()),
-                        order: Some(Order(0)),
+                        order: Some(0),
+                        show_preview_virtual_card: Some(true),
                     }),
                     review: Some(HeaderElement {
                         enabled: Some(Enabled(true)),
                         header: Some("Review Payment".to_string()),
                         order: Some(Order(0)),
                     }),
+                    bills: None,
                     settings: Some(PagelinkSetting {
                         color: Some("#000000".to_string()),
                         custom_css_url: None,
@@ -15568,7 +15577,10 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .payment_link
-        .delete_pay_link_from_id(&"payLinkId".to_string(), None)
+        .delete_pay_link_from_id(
+            &"2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234".to_string(),
+            None,
+        )
         .await;
 }
 ```
@@ -16069,7 +16081,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_bill_lot_number</a>(lot_number: String, request: PaymentPageRequestBody, entry_point: Option&lt;Entry&gt;, vendor_number: Option&lt;String&gt;, mail_2: Option&lt;Option&lt;String&gt;&gt;, amount_fixed: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">add_pay_link_from_bill_lot_number</a>(lot_number: String, request: PaymentPageRequestBodyOut, entry_point: Option&lt;Entry&gt;, vendor_number: Option&lt;String&gt;, mail_2: Option&lt;Option&lt;String&gt;&gt;, amount_fixed: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16114,7 +16126,7 @@ async fn main() {
                 vendor_number: "VENDOR-123".to_string(),
                 mail_2: Some("customer@example.com; billing@example.com".to_string()),
                 amount_fixed: Some("true".to_string()),
-                body: PaymentPageRequestBody {
+                body: PaymentPageRequestBodyOut {
                     contact_us: Some(ContactElement {
                         email_label: Some("Email".to_string()),
                         enabled: Some(Enabled(true)),
@@ -16123,7 +16135,6 @@ async fn main() {
                         payment_icons: Some(true),
                         phone_label: Some("Phone".to_string()),
                     }),
-                    invoices: None,
                     logo: Some(Element {
                         enabled: Some(Enabled(true)),
                         order: Some(Order(0)),
@@ -16151,44 +16162,26 @@ async fn main() {
                         label: Some("Pay Now".to_string()),
                         order: Some(Order(0)),
                     }),
-                    payment_methods: Some(MethodElement {
+                    payment_methods: Some(MethodElementOut {
                         all_methods_checked: Some(true),
-                        enabled: Some(Enabled(true)),
+                        allow_multiple_methods: Some(true),
+                        default_method: Some("vcard".to_string()),
+                        enabled: Some(true),
                         header: Some("Payment Methods".to_string()),
-                        methods: Some(MethodsList {
-                            amex: Some(true),
-                            apple_pay: Some(true),
-                            google_pay: None,
-                            discover: Some(true),
-                            e_check: Some(true),
-                            mastercard: Some(true),
-                            visa: Some(true),
+                        methods: Some(MethodsListOut {
+                            ach: Some(true),
+                            check: Some(true),
+                            vcard: Some(true),
                         }),
-                        order: Some(Order(0)),
-                        settings: None,
-                    }),
-                    payor: Some(PayorElement {
-                        enabled: Some(Enabled(true)),
-                        fields: Some(vec![PayorFields {
-                            display: Some(true),
-                            fixed: Some(true),
-                            identifier: Some(true),
-                            label: Some("Full Name".to_string()),
-                            name: Some("fullName".to_string()),
-                            order: Some(Order(0)),
-                            required: Some(true),
-                            validation: Some("alpha".to_string()),
-                            value: Some("".to_string()),
-                            width: Some(0),
-                        }]),
-                        header: Some("Payor Information".to_string()),
-                        order: Some(Order(0)),
+                        order: Some(0),
+                        show_preview_virtual_card: Some(true),
                     }),
                     review: Some(HeaderElement {
                         enabled: Some(Enabled(true)),
                         header: Some("Review Payment".to_string()),
                         order: Some(Order(0)),
                     }),
+                    bills: None,
                     settings: Some(PagelinkSetting {
                         color: Some("#000000".to_string()),
                         custom_css_url: None,
@@ -16250,6 +16243,216 @@ async fn main() {
 <dd>
 
 **amount_fixed:** `Option<String>` — Indicates whether customer can modify the payment amount. A value of `true` means the amount isn't modifiable, a value `false` means the payor can modify the amount to pay.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">patch_out_payment_link</a>(paylink_id: String, request: PatchOutPaymentLinkRequest) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Partially updates a Pay Out payment link's content, expiration date, and/or status. Use this to modify the payment page configuration, extend or change the expiration, or cancel a link. Updating the expiration date of an expired link reactivates it to Active status.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payment_link
+        .patch_out_payment_link(
+            &"2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234".to_string(),
+            &PatchOutPaymentLinkRequest {
+                bill_page_data: None,
+                expiration_date: Some("2026-06-01T00:00:00Z".to_string()),
+                status: Some(PaymentLinkStatus::Active),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**paylink_id:** `String` — ID for the payment link.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payment_link.<a href="/src/api/resources/payment_link/client.rs">update_pay_link_out_from_id</a>(paylink_id: String, request: PaymentPageRequestBodyOut) -> Result&lt;PayabliApiResponsePaymentLinks, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the payment page content for a Pay Out payment link. Use this to change the branding, messaging, payment methods offered, or other page configuration.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payment_link
+        .update_pay_link_out_from_id(
+            &"2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234".to_string(),
+            &PaymentPageRequestBodyOut {
+                contact_us: Some(ContactElement {
+                    email_label: Some("Email".to_string()),
+                    enabled: Some(Enabled(true)),
+                    header: Some("Contact Us".to_string()),
+                    order: Some(Order(0)),
+                    payment_icons: Some(true),
+                    phone_label: Some("Phone".to_string()),
+                }),
+                logo: Some(Element {
+                    enabled: Some(Enabled(true)),
+                    order: Some(Order(0)),
+                }),
+                message_before_paying: Some(LabelElement {
+                    enabled: Some(Enabled(true)),
+                    label: Some("Please review your payment details".to_string()),
+                    order: Some(Order(0)),
+                }),
+                notes: Some(NoteElement {
+                    enabled: Some(Enabled(true)),
+                    header: Some("Additional Notes".to_string()),
+                    order: Some(Order(0)),
+                    placeholder: Some("Enter any additional notes here".to_string()),
+                    value: Some("".to_string()),
+                }),
+                page: Some(PageElement {
+                    description: Some("Get paid securely".to_string()),
+                    enabled: Some(Enabled(true)),
+                    header: Some("Payment Page".to_string()),
+                    order: Some(Order(0)),
+                }),
+                payment_button: Some(LabelElement {
+                    enabled: Some(Enabled(true)),
+                    label: Some("Pay Now".to_string()),
+                    order: Some(Order(0)),
+                }),
+                payment_methods: Some(MethodElementOut {
+                    all_methods_checked: Some(true),
+                    allow_multiple_methods: Some(true),
+                    default_method: Some("vcard".to_string()),
+                    enabled: Some(true),
+                    header: Some("Payment Methods".to_string()),
+                    methods: Some(MethodsListOut {
+                        ach: Some(true),
+                        check: Some(true),
+                        vcard: Some(true),
+                    }),
+                    order: Some(0),
+                    show_preview_virtual_card: Some(true),
+                }),
+                review: Some(HeaderElement {
+                    enabled: Some(Enabled(true)),
+                    header: Some("Review Payment".to_string()),
+                    order: Some(Order(0)),
+                }),
+                bills: None,
+                settings: Some(PagelinkSetting {
+                    color: Some("#000000".to_string()),
+                    custom_css_url: None,
+                    language: Some("en".to_string()),
+                    page_logo: None,
+                    redirect_after_approve: None,
+                    redirect_after_approve_url: None,
+                }),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**paylink_id:** `String` — ID for the payment link.
     
 </dd>
 </dl>
@@ -24806,7 +25009,7 @@ Example: title(ct)=hoa return all records with title containing "hoa"
 </details>
 
 ## TokenStorage
-<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">add_method</a>(request: RequestTokenStorage, ach_validation: Option&lt;Option&lt;AchValidation&gt;&gt;, create_anonymous: Option&lt;CreateAnonymous&gt;, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;, temporary: Option&lt;Temporary&gt;) -> Result&lt;AddMethodResponse, ApiError&gt;</code></summary>
+<details><summary><code>client.token_storage.<a href="/src/api/resources/token_storage/client.rs">add_method</a>(request: RequestTokenStorage, ach_validation: Option&lt;Option&lt;AchValidation&gt;&gt;, create_anonymous: Option&lt;Option&lt;CreateAnonymous&gt;&gt;, force_customer_creation: Option&lt;Option&lt;ForceCustomerCreation&gt;&gt;, temporary: Option&lt;Option&lt;Temporary&gt;&gt;) -> Result&lt;AddMethodResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24872,8 +25075,8 @@ async fn main() {
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     fallback_auth: Some(true),
-                    fallback_auth_amount: None,
-                    method_description: None,
+                    fallback_auth_amount: Some(100),
+                    method_description: Some("Primary Visa card".to_string()),
                     payment_method: Some(RequestTokenStoragePaymentMethod::TokenizeCard(
                         TokenizeCard {
                             method: "card".to_string(),
@@ -24885,13 +25088,13 @@ async fn main() {
                         },
                     )),
                     vendor_data: None,
-                    source: None,
+                    source: Some(Source("api".to_string())),
                     subdomain: None,
                 },
                 ach_validation: None,
-                create_anonymous: CreateAnonymous(Default::default()),
+                create_anonymous: None,
                 force_customer_creation: None,
-                temporary: Temporary(Default::default()),
+                temporary: None,
             },
             None,
         )
@@ -24919,7 +25122,7 @@ async fn main() {
 <dl>
 <dd>
 
-**create_anonymous:** `CreateAnonymous` 
+**create_anonymous:** `Option<CreateAnonymous>` 
     
 </dd>
 </dl>
@@ -24935,7 +25138,7 @@ async fn main() {
 <dl>
 <dd>
 
-**temporary:** `Temporary` 
+**temporary:** `Option<Temporary>` 
     
 </dd>
 </dl>
@@ -26220,13 +26423,13 @@ async fn main() {
                     type_account: Some(TypeAccount::Checking),
                 }),
                 city: Some("Miami".to_string()),
-                contacts: Some(ContactsField(Some(vec![Contacts {
+                contacts: Some(ContactsField(vec![Contacts {
                     contact_email: Some(Email("example@email.com".to_string())),
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
                     additional_data: None,
-                }]))),
+                }])),
                 country: Some("US".to_string()),
                 custom_field_1: None,
                 custom_field_2: None,
@@ -26241,7 +26444,7 @@ async fn main() {
                 payee_name_1: Some(PayeeName("<string>".to_string())),
                 payee_name_2: Some(PayeeName("<string>".to_string())),
                 payment_method: Some(VendorPaymentMethodString("managed".to_string())),
-                phone: Some(VendorPhone(Some("5555555555".to_string()))),
+                phone: Some(VendorPhone("5555555555".to_string())),
                 remit_address_1: Some(Remitaddress1("123 Walnut Street".to_string())),
                 remit_address_2: Some(Remitaddress2("Suite 900".to_string())),
                 remit_city: Some(Remitcity("Miami".to_string())),

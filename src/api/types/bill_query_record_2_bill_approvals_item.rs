@@ -8,7 +8,9 @@ pub struct BillQueryRecord2BillApprovalsItem {
     /// Timestamp of when the approval was made, in UTC.
     #[serde(rename = "approvedTime")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub approved_time: Option<DatetimeNullable>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub approved_time: Option<DateTime<Utc>>,
     /// Additional comments on the approval.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub comments: Option<String>,

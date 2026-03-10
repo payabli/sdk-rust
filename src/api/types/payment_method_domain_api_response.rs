@@ -27,5 +27,6 @@ pub struct PaymentMethodDomainApiResponse {
     #[serde(rename = "ownerEntityType")]
     pub owner_entity_type: OwnerEntityType,
     #[serde(rename = "updatedAt")]
-    pub updated_at: LastModified,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub updated_at: Option<LastModified>,
 }

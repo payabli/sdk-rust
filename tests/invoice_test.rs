@@ -48,15 +48,15 @@ async fn test_invoice_add_invoice_with_wiremock() {
                         additional_data: None,
                         attachments: None,
                         company: None,
-                        discount: Some(Discount(Some(10.0))),
+                        discount: Some(Discount(10.0)),
                         duty_amount: None,
                         first_name: None,
                         freight_amount: None,
                         frequency: Some(Frequency::OneTime),
                         invoice_amount: Some(InvoiceAmount(982.37)),
-                        invoice_date: Some(Datenullable(Some(
+                        invoice_date: Some(
                             NaiveDate::parse_from_str("2025-10-19", "%Y-%m-%d").unwrap(),
-                        ))),
+                        ),
                         invoice_due_date: None,
                         invoice_end_date: None,
                         invoice_number: Some(InvoiceNumber("INV-3".to_string())),
@@ -212,9 +212,9 @@ async fn test_invoice_edit_invoice_with_wiremock() {
                         freight_amount: None,
                         frequency: None,
                         invoice_amount: Some(InvoiceAmount(982.37)),
-                        invoice_date: Some(Datenullable(Some(
+                        invoice_date: Some(
                             NaiveDate::parse_from_str("2025-10-19", "%Y-%m-%d").unwrap(),
-                        ))),
+                        ),
                         invoice_due_date: None,
                         invoice_end_date: None,
                         invoice_number: Some(InvoiceNumber("INV-6".to_string())),

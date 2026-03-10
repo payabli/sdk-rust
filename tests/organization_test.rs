@@ -28,13 +28,13 @@ async fn test_organization_add_organization_with_wiremock() {
                     billing_state: Some(BillingStateNullable("TN".to_string())),
                     billing_zip: Some(BillingZip("37615".to_string())),
                 }),
-                contacts: Some(ContactsField(Some(vec![Contacts {
+                contacts: Some(ContactsField(vec![Contacts {
                     contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
                     additional_data: None,
-                }]))),
+                }])),
                 has_billing: Some(true),
                 has_residual: Some(true),
                 org_address: Some(Orgaddress("123 Walnut Street".to_string())),
@@ -112,13 +112,13 @@ async fn test_organization_edit_organization_with_wiremock() {
         .edit_organization(
             123,
             &OrganizationData {
-                contacts: Some(ContactsField(Some(vec![Contacts {
+                contacts: Some(ContactsField(vec![Contacts {
                     contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
                     additional_data: None,
-                }]))),
+                }])),
                 org_address: Some(Orgaddress("123 Walnut Street".to_string())),
                 org_city: Some(Orgcity("Johnson City".to_string())),
                 org_country: Some(Orgcountry("US".to_string())),

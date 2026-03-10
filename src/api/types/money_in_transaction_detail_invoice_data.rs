@@ -8,13 +8,13 @@ pub struct TransactionDetailInvoiceData {
     pub invoice_number: Option<InvoiceNumber>,
     #[serde(rename = "invoiceDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub invoice_date: Option<Datenullable>,
+    pub invoice_date: Option<NaiveDate>,
     #[serde(rename = "invoiceDueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub invoice_due_date: Option<Datenullable>,
+    pub invoice_due_date: Option<NaiveDate>,
     #[serde(rename = "invoiceEndDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub invoice_end_date: Option<Datenullable>,
+    pub invoice_end_date: Option<NaiveDate>,
     #[serde(rename = "invoiceStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub invoice_status: Option<Invoicestatus>,

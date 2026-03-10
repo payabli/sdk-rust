@@ -12,7 +12,9 @@ pub struct SubscriptionQueryRecords {
     /// The subscription's end date.
     #[serde(rename = "EndDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub end_date: Option<DatetimeNullable>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub end_date: Option<DateTime<Utc>>,
     #[serde(rename = "EntrypageId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub entrypage_id: Option<EntrypageId>,
@@ -37,7 +39,9 @@ pub struct SubscriptionQueryRecords {
     /// The last time the subscription was processed.
     #[serde(rename = "LastRun")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub last_run: Option<DatetimeNullable>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_run: Option<DateTime<Utc>>,
     /// The last date and time the subscription was updated.
     #[serde(rename = "LastUpdated")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -57,7 +61,9 @@ pub struct SubscriptionQueryRecords {
     /// The next date the subscription will be processed.
     #[serde(rename = "NextDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub next_date: Option<DatetimeNullable>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub next_date: Option<DateTime<Utc>>,
     #[serde(rename = "ParentOrgName")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub parent_org_name: Option<OrgParentName>,
@@ -89,7 +95,9 @@ pub struct SubscriptionQueryRecords {
     /// The subscription start date.
     #[serde(rename = "StartDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub start_date: Option<DatetimeNullable>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub start_date: Option<DateTime<Utc>>,
     /// Events associated with the subscription.
     #[serde(rename = "SubEvents")]
     #[serde(skip_serializing_if = "Option::is_none")]

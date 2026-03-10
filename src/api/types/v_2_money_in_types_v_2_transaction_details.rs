@@ -91,11 +91,14 @@ pub struct V2TransactionDetails {
     #[serde(rename = "transactionEvents")]
     pub transaction_events: Vec<TransactionDetailEvent>,
     #[serde(rename = "pendingFeeAmount")]
-    pub pending_fee_amount: PendingFeeAmount,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pending_fee_amount: Option<PendingFeeAmount>,
     #[serde(rename = "riskFlagged")]
-    pub risk_flagged: RiskFlagged,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub risk_flagged: Option<RiskFlagged>,
     #[serde(rename = "riskFlaggedOn")]
-    pub risk_flagged_on: RiskFlaggedOn,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub risk_flagged_on: Option<RiskFlaggedOn>,
     #[serde(rename = "riskStatus")]
     pub risk_status: RiskStatus,
     #[serde(rename = "riskReason")]
@@ -103,7 +106,8 @@ pub struct V2TransactionDetails {
     #[serde(rename = "riskAction")]
     pub risk_action: RiskAction,
     #[serde(rename = "riskActionCode")]
-    pub risk_action_code: RiskActionCode,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub risk_action_code: Option<RiskActionCode>,
     #[serde(rename = "deviceId")]
     pub device_id: Device,
     #[serde(rename = "achSecCode")]

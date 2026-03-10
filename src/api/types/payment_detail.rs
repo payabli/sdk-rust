@@ -26,7 +26,7 @@ pub struct PaymentDetail {
     #[serde(rename = "splitFunding")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub split_funding: Option<SplitFunding>,
-    /// Unique identifier for a processed check image. Required for RDC (Remote Deposit Capture) transactions where `achCode` is `BOC`. Use the `id` value from the [check processing](/developers/api-reference/checkcapture/process-a-check-image) response.
+    /// Unique identifier for a processed check image. Required for RDC (Remote Deposit Capture) transactions where `achCode` is `BOC`. Use the `id` value from the [check processing](/developers/api-reference/moneyin/check-capture) response.
     #[serde(rename = "checkUniqueId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub check_unique_id: Option<String>,

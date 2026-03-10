@@ -55,7 +55,8 @@ pub struct ChargebackQueryRecords {
     pub order_id: OrderId,
     /// Net amount in chargeback or ACH return.
     #[serde(rename = "NetAmount")]
-    pub net_amount: Netamountnullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub net_amount: Option<Netamountnullable>,
     #[serde(rename = "TransactionTime")]
     pub transaction_time: TransactionTime,
     #[serde(rename = "Customer")]

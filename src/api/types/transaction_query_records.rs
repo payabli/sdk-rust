@@ -129,7 +129,9 @@ pub struct TransactionQueryRecords {
     /// Transaction date and time, in UTC.
     #[serde(rename = "TransactionTime")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub transaction_time: Option<DatetimeNullable>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub transaction_time: Option<DateTime<Utc>>,
     #[serde(rename = "TransAdditionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub trans_additional_data: Option<serde_json::Value>,

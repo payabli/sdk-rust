@@ -13,5 +13,5 @@ pub struct AddPayLinkFromBillRequest {
     #[serde(rename = "mail2")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mail_2: Option<String>,
-    pub body: PaymentPageRequestBody,
+    pub body: PaymentPageRequestBodyOut,
 }

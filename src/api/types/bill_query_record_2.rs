@@ -22,7 +22,7 @@ pub struct BillQueryRecord2 {
     /// Bill creation date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "BillDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bill_date: Option<Datenullable>,
+    pub bill_date: Option<NaiveDate>,
     /// Events associated with the bill.
     #[serde(rename = "billEvents")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -54,11 +54,11 @@ pub struct BillQueryRecord2 {
     /// Bill due date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "DueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<Datenullable>,
+    pub due_date: Option<NaiveDate>,
     /// End date for the bill.
     #[serde(rename = "EndDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub end_date: Option<Datenullable>,
+    pub end_date: Option<NaiveDate>,
     /// Entity identifier associated with the bill.
     #[serde(rename = "EntityID")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -77,7 +77,9 @@ pub struct BillQueryRecord2 {
     /// Timestamp of when bill was last updated, in UTC.
     #[serde(rename = "LastUpdated")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub last_updated: Option<DatetimeNullable>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub last_updated: Option<DateTime<Utc>>,
     /// Lot number associated with the bill.
     #[serde(rename = "LotNumber")]
     #[serde(skip_serializing_if = "Option::is_none")]

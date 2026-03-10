@@ -21,7 +21,7 @@ pub struct ApplicationDataPayIn {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub baddress_1: Option<Baddress2>,
     #[serde(rename = "bankData")]
-    pub bank_data: ApplicationDataPayInBankData,
+    pub bank_data: BankData,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bcity: Option<Bcity>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -47,7 +47,7 @@ pub struct ApplicationDataPayIn {
     /// List of contacts for the business.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub contacts: Option<Vec<ApplicationDataPayInContactsItem>>,
-    /// The maximum amount of credit that our lending partner, has authorized to your business. It's the upper boundary on how much you can spend or owe on a credit account at any given time.
+    /// The maximum amount of credit that our lending partner has authorized to your business for Pay In processing. It's the upper boundary on how much you can spend or owe on a credit account at any given time. For on-demand payout (Pay Out) credit limits, see `payoutCreditLimit`.
     #[serde(rename = "creditLimit")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub credit_limit: Option<String>,
@@ -131,7 +131,7 @@ pub struct ApplicationDataPayIn {
     pub when_refunded: Whenrefunded,
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
     #[serde(rename = "RepCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub rep_code: Option<RepCode>,
