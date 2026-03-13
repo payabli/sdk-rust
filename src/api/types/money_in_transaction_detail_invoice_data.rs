@@ -91,5 +91,5 @@ pub struct TransactionDetailInvoiceData {
     pub attachments: Option<Attachments>,
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
 }

@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 /// Customer information associated with the transaction
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct TransactionDetailCustomer {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub identifiers: Option<Identifierfields>,
@@ -47,5 +47,5 @@ pub struct TransactionDetailCustomer {
     pub customer_status: CustomerStatus,
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
 }
