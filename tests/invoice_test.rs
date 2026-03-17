@@ -6,7 +6,7 @@ mod wire_test_utils;
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_add_invoice_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -134,7 +134,7 @@ async fn test_invoice_add_invoice_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_delete_attached_from_invoice_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -164,7 +164,7 @@ async fn test_invoice_delete_attached_from_invoice_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_delete_invoice_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -186,7 +186,7 @@ async fn test_invoice_delete_invoice_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_edit_invoice_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -272,7 +272,7 @@ async fn test_invoice_edit_invoice_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_get_attached_file_from_invoice_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -309,7 +309,7 @@ async fn test_invoice_get_attached_file_from_invoice_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_get_invoice_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -331,7 +331,7 @@ async fn test_invoice_get_invoice_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_get_invoice_number_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -356,7 +356,7 @@ async fn test_invoice_get_invoice_number_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_list_invoices_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -400,7 +400,7 @@ async fn test_invoice_list_invoices_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_list_invoices_org_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -444,7 +444,7 @@ async fn test_invoice_list_invoices_org_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_send_invoice_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -484,7 +484,7 @@ async fn test_invoice_send_invoice_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_invoice_get_invoice_pdf_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),

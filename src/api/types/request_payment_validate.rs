@@ -5,7 +5,7 @@ pub use crate::prelude::*;
 pub struct RequestPaymentValidate {
     #[serde(rename = "accountId")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub account_id: Option<Accountid>,
+    pub account_id: Option<AccountId>,
     #[serde(rename = "entryPoint")]
     pub entry_point: Entrypointfield,
     #[serde(rename = "orderDescription")]

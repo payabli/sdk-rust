@@ -4,9 +4,10 @@ pub use crate::prelude::*;
 pub struct BillingDataResponse {
     /// The bank's ID in Payabli.
     pub id: i64,
+    /// An identifier for the bank account. If not provided during creation or update, the system generates one in the format `acct-{first_digit}xxxxx{last_4_digits}` based on the account number. If a duplicate exists within the same service at the paypoint, a numeric suffix is appended, such as `-2`. This value is also used as the identifier for the bank account's associated payment connector.
     #[serde(rename = "accountId")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub account_id: Option<serde_json::Value>,
+    pub account_id: Option<AccountId>,
     pub nickname: String,
     #[serde(rename = "bankName")]
     pub bank_name: BankName,

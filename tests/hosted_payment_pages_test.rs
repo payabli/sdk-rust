@@ -6,7 +6,7 @@ mod wire_test_utils;
 #[allow(unused_variables, unreachable_code)]
 async fn test_hosted_payment_pages_load_page_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -40,7 +40,7 @@ async fn test_hosted_payment_pages_load_page_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_hosted_payment_pages_new_page_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -84,7 +84,7 @@ async fn test_hosted_payment_pages_new_page_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_hosted_payment_pages_save_page_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),

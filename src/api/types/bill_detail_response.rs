@@ -2,7 +2,7 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct BillDetailResponse {
-    /// Events associated to this transaction.
+    /// Bills associated with this transaction.
     #[serde(rename = "Bills")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bills: Option<Vec<BillDetailsResponse>>,
@@ -96,7 +96,7 @@ pub struct BillDetailResponse {
     #[serde(rename = "Status")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<i64>,
-    /// Status of payout transaction.
+    /// Text description of the payout transaction status.
     #[serde(rename = "StatusText")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status_text: Option<String>,

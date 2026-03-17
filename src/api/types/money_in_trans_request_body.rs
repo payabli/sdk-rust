@@ -4,7 +4,7 @@ pub use crate::prelude::*;
 pub struct TransRequestBody {
     #[serde(rename = "accountId")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub account_id: Option<Accountid>,
+    pub account_id: Option<AccountId>,
     /// Object describing the Customer/Payor. Which fields are required depends on the paypoint's custom identifier settings.
     #[serde(rename = "customerData")]
     #[serde(skip_serializing_if = "Option::is_none")]

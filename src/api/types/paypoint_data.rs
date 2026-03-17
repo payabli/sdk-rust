@@ -60,4 +60,8 @@ pub struct PaypointData {
     pub website_address: Option<Website>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub zip: Option<Zip>,
+    /// Configuration for billing statement email recipients and sender address. `null` if not configured.
+    #[serde(rename = "statementEmail")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub statement_email: Option<StatementEmailConfig>,
 }

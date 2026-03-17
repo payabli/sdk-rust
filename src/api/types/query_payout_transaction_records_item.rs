@@ -9,7 +9,7 @@ pub struct QueryPayoutTransactionRecordsItem {
     #[serde(rename = "BatchId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_id: Option<i64>,
-    /// Events associated with this transaction.
+    /// Bills associated with this transaction.
     #[serde(rename = "Bills")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bills: Option<Vec<BillPayOutData>>,

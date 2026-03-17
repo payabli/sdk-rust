@@ -1,6 +1,6 @@
-use crate::{ClientConfig, ApiError, HttpClient, RequestOptions};
-use reqwest::{Method};
-use crate::api::{*};
+use crate::api::*;
+use crate::{ApiError, ClientConfig, HttpClient, RequestOptions};
+use reqwest::Method;
 
 pub struct HostedPaymentPagesClient {
     pub http_client: HttpClient,
@@ -9,8 +9,8 @@ pub struct HostedPaymentPagesClient {
 impl HostedPaymentPagesClient {
     pub fn new(config: ClientConfig) -> Result<Self, ApiError> {
         Ok(Self {
-    http_client: HttpClient::new(config.clone())?
-})
+            http_client: HttpClient::new(config.clone())?,
+        })
     }
 
     /// Loads all of a payment page's details including `pageIdentifier` and `validationCode`. This endpoint requires an `application` API token.
@@ -24,14 +24,21 @@ impl HostedPaymentPagesClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn load_page(&self, entry: &String, subdomain: &String, options: Option<RequestOptions>) -> Result<PayabliPages, ApiError> {
-        self.http_client.execute_request(
-            Method::GET,
-            &format!("Paypoint/load/{}/{}", entry, subdomain),
-            None,
-            None,
-            options,
-        ).await
+    pub async fn load_page(
+        &self,
+        entry: &String,
+        subdomain: &String,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliPages, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Paypoint/load/{}/{}", entry, subdomain),
+                None,
+                None,
+                options,
+            )
+            .await
     }
 
     /// Creates a new payment page for a paypoint.
@@ -45,14 +52,21 @@ impl HostedPaymentPagesClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn new_page(&self, entry: &String, request: &PayabliPages, options: Option<RequestOptions>) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
-        self.http_client.execute_request(
-            Method::POST,
-            &format!("Paypoint/{}", entry),
-            Some(serde_json::to_value(request).unwrap_or_default()),
-            None,
-            options,
-        ).await
+    pub async fn new_page(
+        &self,
+        entry: &String,
+        request: &PayabliPages,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                &format!("Paypoint/{}", entry),
+                Some(serde_json::to_value(request).unwrap_or_default()),
+                None,
+                options,
+            )
+            .await
     }
 
     /// Updates a payment page in a paypoint.
@@ -66,15 +80,21 @@ impl HostedPaymentPagesClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn save_page(&self, entry: &String, subdomain: &String, request: &PayabliPages, options: Option<RequestOptions>) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
-        self.http_client.execute_request(
-            Method::PUT,
-            &format!("Paypoint/{}/{}", entry, subdomain),
-            Some(serde_json::to_value(request).unwrap_or_default()),
-            None,
-            options,
-        ).await
+    pub async fn save_page(
+        &self,
+        entry: &String,
+        subdomain: &String,
+        request: &PayabliPages,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::PUT,
+                &format!("Paypoint/{}/{}", entry, subdomain),
+                Some(serde_json::to_value(request).unwrap_or_default()),
+                None,
+                options,
+            )
+            .await
     }
-
 }
-

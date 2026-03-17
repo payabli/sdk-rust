@@ -28,9 +28,10 @@ pub struct PayabliCredentialsPascal {
     #[serde(rename = "CfeeMax")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub cfee_max: Option<f64>,
+    /// The identifier for the payment connector, matching the `accountId` of the linked bank account.
     #[serde(rename = "AccountId")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub account_id: Option<String>,
+    pub account_id: Option<AccountId>,
     #[serde(rename = "ReferenceId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reference_id: Option<i64>,
@@ -41,4 +42,13 @@ pub struct PayabliCredentialsPascal {
     #[serde(rename = "Currency")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub currency: Option<String>,
+    #[serde(rename = "GreaterValueAllowed")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub greater_value_allowed: Option<GreaterValueAllowed>,
+    #[serde(rename = "AbsorbDifference")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub absorb_difference: Option<AbsorbDifference>,
+    #[serde(rename = "AllowOverride")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub allow_override: Option<AllowOverride>,
 }

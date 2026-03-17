@@ -6,7 +6,7 @@ mod wire_test_utils;
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_authorize_out_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -115,7 +115,7 @@ async fn test_money_out_authorize_out_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_cancel_all_out_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -143,7 +143,7 @@ async fn test_money_out_cancel_all_out_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_cancel_out_get_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -168,7 +168,7 @@ async fn test_money_out_cancel_out_get_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_cancel_out_delete_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -193,7 +193,7 @@ async fn test_money_out_cancel_out_delete_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_capture_all_out_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -221,7 +221,7 @@ async fn test_money_out_capture_all_out_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_capture_out_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -246,7 +246,7 @@ async fn test_money_out_capture_out_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_payout_details_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -276,7 +276,7 @@ async fn test_money_out_payout_details_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_v_card_get_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -301,7 +301,7 @@ async fn test_money_out_v_card_get_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_send_v_card_link_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -331,7 +331,7 @@ async fn test_money_out_send_v_card_link_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_get_check_image_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -364,7 +364,7 @@ async fn test_money_out_get_check_image_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_money_out_update_check_payment_status_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -387,4 +387,52 @@ async fn test_money_out_update_check_payment_status_with_wiremock() {
     wire_test_utils::verify_request_count("PATCH", "/MoneyOut/status/TRANS123456/5", None, 1)
         .await
         .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_money_out_reissue_out_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .money_out
+        .reissue_out(
+            &ReissueOutRequest {
+                trans_id: "129-219".to_string(),
+                body: ReissuePayoutBody {
+                    payment_method: ReissuePaymentMethod {
+                        method: "ach".to_string(),
+                        ach_holder: Some("Acme Corp".to_string()),
+                        ach_routing: Some("021000021".to_string()),
+                        ach_account: Some("9876543210".to_string()),
+                        ach_account_type: Some("savings".to_string()),
+                        ach_holder_type: Some(AchHolderType::Business),
+                    },
+                },
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "POST",
+        "/MoneyOut/reissue",
+        Some(HashMap::from([(
+            "transId".to_string(),
+            "129-219".to_string(),
+        )])),
+        1,
+    )
+    .await
+    .unwrap();
 }

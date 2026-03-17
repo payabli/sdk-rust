@@ -1,6 +1,6 @@
-use crate::{ClientConfig, ApiError, HttpClient, RequestOptions, QueryBuilder};
-use reqwest::{Method};
-use crate::api::{*};
+use crate::api::*;
+use crate::{ApiError, ClientConfig, HttpClient, QueryBuilder, RequestOptions};
+use reqwest::Method;
 
 pub struct MoneyOutClient {
     pub http_client: HttpClient,
@@ -9,8 +9,8 @@ pub struct MoneyOutClient {
 impl MoneyOutClient {
     pub fn new(config: ClientConfig) -> Result<Self, ApiError> {
         Ok(Self {
-    http_client: HttpClient::new(config.clone())?
-})
+            http_client: HttpClient::new(config.clone())?,
+        })
     }
 
     /// Authorizes transaction for payout. Authorized transactions aren't flagged for settlement until captured. Use `referenceId` returned in the response to capture the transaction.
@@ -25,15 +25,27 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn authorize_out(&self, request: &AuthorizeOutRequest, options: Option<RequestOptions>) -> Result<AuthCapturePayoutResponse, ApiError> {
-        self.http_client.execute_request(
-            Method::POST,
-            "MoneyOut/authorize",
-            Some(serde_json::to_value(&request.body).unwrap_or_default()),
-            QueryBuilder::new().bool("allowDuplicatedBills", request.allow_duplicated_bills.clone()).bool("doNotCreateBills", request.do_not_create_bills.clone()).bool("forceVendorCreation", request.force_vendor_creation.clone())
-            .build(),
-            options,
-        ).await
+    pub async fn authorize_out(
+        &self,
+        request: &AuthorizeOutRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<AuthCapturePayoutResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                "MoneyOut/authorize",
+                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                QueryBuilder::new()
+                    .bool(
+                        "allowDuplicatedBills",
+                        request.allow_duplicated_bills.clone(),
+                    )
+                    .bool("doNotCreateBills", request.do_not_create_bills.clone())
+                    .bool("forceVendorCreation", request.force_vendor_creation.clone())
+                    .build(),
+                options,
+            )
+            .await
     }
 
     /// Cancels an array of payout transactions.
@@ -46,14 +58,20 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn cancel_all_out(&self, request: &Vec<String>, options: Option<RequestOptions>) -> Result<CaptureAllOutResponse, ApiError> {
-        self.http_client.execute_request(
-            Method::POST,
-            "MoneyOut/cancelAll",
-            Some(serde_json::to_value(request).unwrap_or_default()),
-            None,
-            options,
-        ).await
+    pub async fn cancel_all_out(
+        &self,
+        request: &Vec<String>,
+        options: Option<RequestOptions>,
+    ) -> Result<CaptureAllOutResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                "MoneyOut/cancelAll",
+                Some(serde_json::to_value(request).unwrap_or_default()),
+                None,
+                options,
+            )
+            .await
     }
 
     /// Cancel a payout transaction by ID.
@@ -66,14 +84,20 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn cancel_out_get(&self, reference_id: &String, options: Option<RequestOptions>) -> Result<PayabliApiResponse0000, ApiError> {
-        self.http_client.execute_request(
-            Method::GET,
-            &format!("MoneyOut/cancel/{}", reference_id),
-            None,
-            None,
-            options,
-        ).await
+    pub async fn cancel_out_get(
+        &self,
+        reference_id: &String,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse0000, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("MoneyOut/cancel/{}", reference_id),
+                None,
+                None,
+                options,
+            )
+            .await
     }
 
     /// Cancel a payout transaction by ID.
@@ -86,14 +110,20 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn cancel_out_delete(&self, reference_id: &String, options: Option<RequestOptions>) -> Result<PayabliApiResponse0000, ApiError> {
-        self.http_client.execute_request(
-            Method::DELETE,
-            &format!("MoneyOut/cancel/{}", reference_id),
-            None,
-            None,
-            options,
-        ).await
+    pub async fn cancel_out_delete(
+        &self,
+        reference_id: &String,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse0000, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::DELETE,
+                &format!("MoneyOut/cancel/{}", reference_id),
+                None,
+                None,
+                options,
+            )
+            .await
     }
 
     /// Captures an array of authorized payout transactions for settlement. The maximum number of transactions that can be captured in a single request is 500.
@@ -106,14 +136,20 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn capture_all_out(&self, request: &Vec<String>, options: Option<RequestOptions>) -> Result<CaptureAllOutResponse, ApiError> {
-        self.http_client.execute_request(
-            Method::POST,
-            "MoneyOut/captureAll",
-            Some(serde_json::to_value(request).unwrap_or_default()),
-            None,
-            options,
-        ).await
+    pub async fn capture_all_out(
+        &self,
+        request: &Vec<String>,
+        options: Option<RequestOptions>,
+    ) -> Result<CaptureAllOutResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                "MoneyOut/captureAll",
+                Some(serde_json::to_value(request).unwrap_or_default()),
+                None,
+                options,
+            )
+            .await
     }
 
     /// Captures a single authorized payout transaction by ID.
@@ -126,14 +162,20 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn capture_out(&self, reference_id: &String, options: Option<RequestOptions>) -> Result<AuthCapturePayoutResponse, ApiError> {
-        self.http_client.execute_request(
-            Method::GET,
-            &format!("MoneyOut/capture/{}", reference_id),
-            None,
-            None,
-            options,
-        ).await
+    pub async fn capture_out(
+        &self,
+        reference_id: &String,
+        options: Option<RequestOptions>,
+    ) -> Result<AuthCapturePayoutResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("MoneyOut/capture/{}", reference_id),
+                None,
+                None,
+                options,
+            )
+            .await
     }
 
     /// Returns details for a processed money out transaction.
@@ -146,14 +188,20 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn payout_details(&self, trans_id: &String, options: Option<RequestOptions>) -> Result<BillDetailResponse, ApiError> {
-        self.http_client.execute_request(
-            Method::GET,
-            &format!("MoneyOut/details/{}", trans_id),
-            None,
-            None,
-            options,
-        ).await
+    pub async fn payout_details(
+        &self,
+        trans_id: &String,
+        options: Option<RequestOptions>,
+    ) -> Result<BillDetailResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("MoneyOut/details/{}", trans_id),
+                None,
+                None,
+                options,
+            )
+            .await
     }
 
     /// Retrieves vCard details for a single card in an entrypoint.
@@ -166,14 +214,20 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn v_card_get(&self, card_token: &String, options: Option<RequestOptions>) -> Result<VCardGetResponse, ApiError> {
-        self.http_client.execute_request(
-            Method::GET,
-            &format!("MoneyOut/vcard/{}", card_token),
-            None,
-            None,
-            options,
-        ).await
+    pub async fn v_card_get(
+        &self,
+        card_token: &String,
+        options: Option<RequestOptions>,
+    ) -> Result<VCardGetResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("MoneyOut/vcard/{}", card_token),
+                None,
+                None,
+                options,
+            )
+            .await
     }
 
     /// Sends a virtual card link via email to the vendor associated with the `transId`.
@@ -185,14 +239,20 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn send_v_card_link(&self, request: &SendVCardLinkRequest, options: Option<RequestOptions>) -> Result<OperationResult, ApiError> {
-        self.http_client.execute_request(
-            Method::POST,
-            "vcard/send-card-link",
-            Some(serde_json::to_value(request).unwrap_or_default()),
-            None,
-            options,
-        ).await
+    pub async fn send_v_card_link(
+        &self,
+        request: &SendVCardLinkRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<OperationResult, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                "vcard/send-card-link",
+                Some(serde_json::to_value(request).unwrap_or_default()),
+                None,
+                options,
+            )
+            .await
     }
 
     /// Retrieve the image of a check associated with a processed transaction.
@@ -216,24 +276,30 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn get_check_image(&self, asset_name: &String, options: Option<RequestOptions>) -> Result<String, ApiError> {
-        self.http_client.execute_request(
-            Method::GET,
-            &format!("MoneyOut/checkimage/{}", asset_name),
-            None,
-            None,
-            options,
-        ).await
+    pub async fn get_check_image(
+        &self,
+        asset_name: &String,
+        options: Option<RequestOptions>,
+    ) -> Result<String, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("MoneyOut/checkimage/{}", asset_name),
+                None,
+                None,
+                options,
+            )
+            .await
     }
 
     /// Updates the status of a processed check payment transaction. This endpoint handles the status transition, updates related bills, creates audit events, and triggers notifications.
-    /// 
+    ///
     /// The transaction must meet all of the following criteria:
     /// - **Status**: Must be in Processing or Processed status.
     /// - **Payment method**: Must be a check payment method.
-    /// 
+    ///
     /// ### Allowed status values
-    /// 
+    ///
     /// | Value | Status | Description |
     /// |-------|--------|-------------|
     /// | `0` | Cancelled/Voided | Cancels the check transaction. Reverts associated bills to their previous state (Approved or Active), creates "Cancelled" events, and sends a `payout_transaction_voidedcancelled` notification if the notification is enabled. |
@@ -248,15 +314,52 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn update_check_payment_status(&self, trans_id: &String, check_payment_status: &AllowedCheckPaymentStatus, options: Option<RequestOptions>) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
-        self.http_client.execute_request(
-            Method::PATCH,
-            &format!("MoneyOut/status/{}/{}", trans_id, check_payment_status),
-            None,
-            None,
-            options,
-        ).await
+    pub async fn update_check_payment_status(
+        &self,
+        trans_id: &String,
+        check_payment_status: &AllowedCheckPaymentStatus,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::PATCH,
+                &format!("MoneyOut/status/{}/{}", trans_id, check_payment_status),
+                None,
+                None,
+                options,
+            )
+            .await
     }
 
+    /// Reissues a payout transaction with a new payment method. This creates a new transaction linked to the original and marks the original transaction as reissued.
+    ///
+    /// The original transaction must be in **Processing** or **Processed** status. The payment method in the request body is used directly. The endpoint doesn't fall back to vendor-managed payment methods.
+    ///
+    /// The new transaction goes through the standard authorize-and-capture flow automatically. Both the original and new transactions are linked through their event histories for audit purposes.
+    ///
+    /// # Arguments
+    ///
+    /// * `trans_id` - The transaction ID of the payout to reissue.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn reissue_out(
+        &self,
+        request: &ReissueOutRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<ReissuePayoutResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                "MoneyOut/reissue",
+                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                QueryBuilder::new()
+                    .string("transId", request.trans_id.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
 }
-

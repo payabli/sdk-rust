@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-/// 
+///
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub struct BoardingLinkApiResponse {
     /// Reference name for boarding link (if responseText = Success) or

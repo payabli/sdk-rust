@@ -1,4 +1,4 @@
-use crate::{ClientConfig, ApiError, HttpClient};
+use crate::{ApiError, ClientConfig, HttpClient};
 
 pub struct V2MoneyInTypesClient {
     pub http_client: HttpClient,
@@ -7,9 +7,7 @@ pub struct V2MoneyInTypesClient {
 impl V2MoneyInTypesClient {
     pub fn new(config: ClientConfig) -> Result<Self, ApiError> {
         Ok(Self {
-    http_client: HttpClient::new(config.clone())?
-})
+            http_client: HttpClient::new(config.clone())?,
+        })
     }
-
 }
-

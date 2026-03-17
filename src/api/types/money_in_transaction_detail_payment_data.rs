@@ -26,7 +26,7 @@ pub struct TransactionDetailPaymentData {
     pub order_description: Orderdescription,
     #[serde(rename = "accountId")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub account_id: Option<Accountid>,
+    pub account_id: Option<AccountId>,
     #[serde(rename = "signatureData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub signature_data: Option<Signaturedata>,

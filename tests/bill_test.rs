@@ -6,7 +6,7 @@ mod wire_test_utils;
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_add_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -107,7 +107,7 @@ async fn test_bill_add_bill_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_delete_attached_from_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -144,7 +144,7 @@ async fn test_bill_delete_attached_from_bill_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_delete_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -166,7 +166,7 @@ async fn test_bill_delete_bill_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_edit_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -216,7 +216,7 @@ async fn test_bill_edit_bill_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_get_attached_from_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -256,7 +256,7 @@ async fn test_bill_get_attached_from_bill_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_get_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -278,7 +278,7 @@ async fn test_bill_get_bill_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_list_bills_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -322,7 +322,7 @@ async fn test_bill_list_bills_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_list_bills_org_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -366,7 +366,7 @@ async fn test_bill_list_bills_org_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_modify_approval_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -391,7 +391,7 @@ async fn test_bill_modify_approval_bill_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_send_to_approval_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -426,7 +426,7 @@ async fn test_bill_send_to_approval_bill_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_bill_set_approved_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),

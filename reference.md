@@ -1202,7 +1202,7 @@ async fn main() {
                 bank_data: BankData(vec![
                     Bank {
                         id: None,
-                        account_id: Some("123-456".to_string()),
+                        account_id: Some(AccountId("123-456".to_string())),
                         nickname: Some(BankNickname("Withdrawal Account".to_string())),
                         bank_name: Some(BankName("Test Bank".to_string())),
                         routing_account: Some(RoutingAccount("123123123".to_string())),
@@ -1219,7 +1219,7 @@ async fn main() {
                     },
                     Bank {
                         id: None,
-                        account_id: Some("123-456".to_string()),
+                        account_id: Some(AccountId("123-456".to_string())),
                         nickname: Some(BankNickname("Deposit Account".to_string())),
                         bank_name: Some(BankName("Test Bank".to_string())),
                         routing_account: Some(RoutingAccount("123123123".to_string())),
@@ -11165,7 +11165,7 @@ async fn main() {
 <dl>
 <dd>
 
-**account_id:** `Option<Accountid>` 
+**account_id:** `Option<AccountId>` 
     
 </dd>
 </dl>
@@ -12019,7 +12019,7 @@ async fn main() {
 <dl>
 <dd>
 
-**account_id:** `Option<Accountid>` 
+**account_id:** `Option<AccountId>` 
     
 </dd>
 </dl>
@@ -13537,6 +13537,92 @@ async fn main() {
 <dd>
 
 **check_payment_status:** `AllowedCheckPaymentStatus` — The new status to apply to the check transaction. To mark a check as `Paid`, send 5. To mark a check as `Cancelled`, send 0.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">reissue_out</a>(request: ReissuePayoutBody, trans_id: Option&lt;String&gt;) -> Result&lt;ReissuePayoutResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Reissues a payout transaction with a new payment method. This creates a new transaction linked to the original and marks the original transaction as reissued.
+
+The original transaction must be in **Processing** or **Processed** status. The payment method in the request body is used directly. The endpoint doesn't fall back to vendor-managed payment methods.
+
+The new transaction goes through the standard authorize-and-capture flow automatically. Both the original and new transactions are linked through their event histories for audit purposes.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .money_out
+        .reissue_out(
+            &ReissueOutRequest {
+                trans_id: "129-219".to_string(),
+                body: ReissuePayoutBody {
+                    payment_method: ReissuePaymentMethod {
+                        method: "ach".to_string(),
+                        ach_holder: Some("Acme Corp".to_string()),
+                        ach_routing: Some("021000021".to_string()),
+                        ach_account: Some("9876543210".to_string()),
+                        ach_account_type: Some("savings".to_string()),
+                        ach_holder_type: Some(AchHolderType::Business),
+                    },
+                },
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**trans_id:** `String` — The transaction ID of the payout to reissue.
     
 </dd>
 </dl>
@@ -27060,3 +27146,4 @@ async fn main() {
 </dd>
 </dl>
 </details>
+

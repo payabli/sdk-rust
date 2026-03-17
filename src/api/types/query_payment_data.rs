@@ -7,7 +7,7 @@ pub struct QueryPaymentData {
     pub account_exp: Option<Accountexp>,
     #[serde(rename = "accountId")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub account_id: Option<Accountid>,
+    pub account_id: Option<AccountId>,
     #[serde(rename = "AccountType")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub account_type: Option<Accounttype>,

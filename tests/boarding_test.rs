@@ -6,7 +6,7 @@ mod wire_test_utils;
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_add_application_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -46,7 +46,7 @@ async fn test_boarding_add_application_with_wiremock() {
                 bank_data: BankData(vec![
                     Bank {
                         id: None,
-                        account_id: Some("123-456".to_string()),
+                        account_id: Some(AccountId("123-456".to_string())),
                         nickname: Some(BankNickname("Withdrawal Account".to_string())),
                         bank_name: Some(BankName("Test Bank".to_string())),
                         routing_account: Some(RoutingAccount("123123123".to_string())),
@@ -63,7 +63,7 @@ async fn test_boarding_add_application_with_wiremock() {
                     },
                     Bank {
                         id: None,
-                        account_id: Some("123-456".to_string()),
+                        account_id: Some(AccountId("123-456".to_string())),
                         nickname: Some(BankNickname("Deposit Account".to_string())),
                         bank_name: Some(BankName("Test Bank".to_string())),
                         routing_account: Some(RoutingAccount("123123123".to_string())),
@@ -200,7 +200,7 @@ async fn test_boarding_add_application_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_delete_application_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -222,7 +222,7 @@ async fn test_boarding_delete_application_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_get_application_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -244,7 +244,7 @@ async fn test_boarding_get_application_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_get_application_by_auth_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -276,7 +276,7 @@ async fn test_boarding_get_application_by_auth_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_get_by_id_link_application_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -298,7 +298,7 @@ async fn test_boarding_get_by_id_link_application_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_get_by_template_id_link_application_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -323,7 +323,7 @@ async fn test_boarding_get_by_template_id_link_application_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_get_external_application_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -353,7 +353,7 @@ async fn test_boarding_get_external_application_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_get_link_application_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -378,7 +378,7 @@ async fn test_boarding_get_link_application_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_list_applications_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -422,7 +422,7 @@ async fn test_boarding_list_applications_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_list_boarding_links_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -465,7 +465,7 @@ async fn test_boarding_list_boarding_links_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_boarding_update_application_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),

@@ -79,11 +79,11 @@ pub struct TransactionOutQueryRecord {
     #[serde(rename = "PaymentData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_data: Option<QueryPaymentData>,
-    /// Events associated to this transaction.
+    /// Bills associated with this transaction.
     #[serde(rename = "Bills")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bills: Option<Vec<BillPayOutData>>,
-    /// Events associated to this transaction.
+    /// Events associated with this transaction.
     #[serde(rename = "Events")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub events: Option<Vec<QueryTransactionEvents>>,

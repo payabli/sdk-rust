@@ -11,8 +11,9 @@ pub struct TokenizeAch {
     #[serde(rename = "achCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ach_code: Option<AchSecCode>,
+    /// Bank account holder. This field is **required** when `method` is `ach`. Only letters, numbers, spaces, hyphens, apostrophes, and periods are allowed.
     #[serde(rename = "achHolder")]
-    pub ach_holder: AchHolder,
+    pub ach_holder: String,
     #[serde(rename = "achHolderType")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ach_holder_type: Option<AchHolderType>,

@@ -6,7 +6,7 @@ mod wire_test_utils;
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_add_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -46,7 +46,7 @@ async fn test_user_add_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_auth_refresh_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -68,7 +68,7 @@ async fn test_user_auth_refresh_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_auth_reset_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -100,7 +100,7 @@ async fn test_user_auth_reset_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_auth_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -136,7 +136,7 @@ async fn test_user_auth_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_change_psw_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -161,7 +161,7 @@ async fn test_user_change_psw_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_delete_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -183,7 +183,7 @@ async fn test_user_delete_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_edit_mfa_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -215,7 +215,7 @@ async fn test_user_edit_mfa_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_edit_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -256,7 +256,7 @@ async fn test_user_edit_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_get_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -296,7 +296,7 @@ async fn test_user_get_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_logout_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -318,7 +318,7 @@ async fn test_user_logout_user_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_resend_mfa_code_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),
@@ -343,7 +343,7 @@ async fn test_user_resend_mfa_code_with_wiremock() {
 #[allow(unused_variables, unreachable_code)]
 async fn test_user_validate_mfa_user_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::WIREMOCK_BASE_URL;
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
         api_key: Some("<value>".to_string()),

@@ -6,7 +6,7 @@ pub struct SplitFundingContent {
     #[serde(rename = "accountId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub account_id: Option<String>,
-    /// Amount from the transaction to sent to this recipient.
+    /// Amount from the transaction to send to this recipient.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub amount: Option<f64>,
     /// A description for the split.
