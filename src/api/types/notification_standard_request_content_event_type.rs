@@ -3,32 +3,8 @@ pub use crate::prelude::*;
 /// The notification's event name.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub enum NotificationStandardRequestContentEventType {
-    #[serde(rename = "payin_transaction_initiated")]
-    PayinTransactionInitiated,
-    #[serde(rename = "payin_transaction_authorized")]
-    PayinTransactionAuthorized,
-    #[serde(rename = "payin_transaction_approvedcaptured")]
-    PayinTransactionApprovedcaptured,
-    #[serde(rename = "payin_transaction_declined")]
-    PayinTransactionDeclined,
-    #[serde(rename = "payin_transaction_technicaldecline")]
-    PayinTransactionTechnicaldecline,
-    #[serde(rename = "payin_transaction_failed")]
-    PayinTransactionFailed,
-    #[serde(rename = "payin_transaction_error")]
-    PayinTransactionError,
-    #[serde(rename = "payin_transaction_paid")]
-    PayinTransactionPaid,
-    #[serde(rename = "payin_transaction_returned")]
-    PayinTransactionReturned,
     #[serde(rename = "payin_transaction_rejected")]
     PayinTransactionRejected,
-    #[serde(rename = "payin_transaction_voidedcancelled")]
-    PayinTransactionVoidedcancelled,
-    #[serde(rename = "payin_transaction_processing")]
-    PayinTransactionProcessing,
-    #[serde(rename = "payin_transaction_processed")]
-    PayinTransactionProcessed,
     #[serde(rename = "payin_transaction_onhold")]
     PayinTransactionOnhold,
     #[serde(rename = "payin_transaction_released")]
@@ -67,30 +43,10 @@ pub enum NotificationStandardRequestContentEventType {
     PayoutTransactionReleased,
     #[serde(rename = "payout_transaction_recovered")]
     PayoutTransactionRecovered,
-    #[serde(rename = "payin_batch_open")]
-    PayinBatchOpen,
     #[serde(rename = "payin_batch_onhold")]
     PayinBatchOnhold,
     #[serde(rename = "payin_batch_released")]
     PayinBatchReleased,
-    #[serde(rename = "payin_batch_processed")]
-    PayinBatchProcessed,
-    #[serde(rename = "payin_batch_paid")]
-    PayinBatchPaid,
-    #[serde(rename = "payin_batch_funded")]
-    PayinBatchFunded,
-    #[serde(rename = "payin_batch_closed")]
-    PayinBatchClosed,
-    #[serde(rename = "payin_batch_notclosed")]
-    PayinBatchNotclosed,
-    #[serde(rename = "payin_batch_fundpending")]
-    PayinBatchFundpending,
-    #[serde(rename = "payin_batch_cancelled")]
-    PayinBatchCancelled,
-    #[serde(rename = "payin_batch_transferred")]
-    PayinBatchTransferred,
-    #[serde(rename = "payin_batch_resolved")]
-    PayinBatchResolved,
     #[serde(rename = "payout_batch_open")]
     PayoutBatchOpen,
     #[serde(rename = "payout_batch_onhold")]
@@ -115,24 +71,6 @@ pub enum NotificationStandardRequestContentEventType {
     PayoutBatchTransferred,
     #[serde(rename = "payout_batch_resolved")]
     PayoutBatchResolved,
-    #[serde(rename = "payin_batch_settlement_pending")]
-    PayinBatchSettlementPending,
-    #[serde(rename = "payin_batch_settlement_intransit")]
-    PayinBatchSettlementIntransit,
-    #[serde(rename = "payin_batch_settlement_transferred")]
-    PayinBatchSettlementTransferred,
-    #[serde(rename = "payin_batch_settlement_funded")]
-    PayinBatchSettlementFunded,
-    #[serde(rename = "payin_batch_settlement_resolved")]
-    PayinBatchSettlementResolved,
-    #[serde(rename = "payin_batch_settlement_exception")]
-    PayinBatchSettlementException,
-    #[serde(rename = "payin_batch_settlement_achreturn")]
-    PayinBatchSettlementAchreturn,
-    #[serde(rename = "payin_batch_settlement_held")]
-    PayinBatchSettlementHeld,
-    #[serde(rename = "payin_batch_settlement_released")]
-    PayinBatchSettlementReleased,
     #[serde(rename = "payout_batch_settlement_pending")]
     PayoutBatchSettlementPending,
     #[serde(rename = "payout_batch_settlement_intransit")]
@@ -245,19 +183,7 @@ pub enum NotificationStandardRequestContentEventType {
 impl fmt::Display for NotificationStandardRequestContentEventType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = match self {
-            Self::PayinTransactionInitiated => "payin_transaction_initiated",
-            Self::PayinTransactionAuthorized => "payin_transaction_authorized",
-            Self::PayinTransactionApprovedcaptured => "payin_transaction_approvedcaptured",
-            Self::PayinTransactionDeclined => "payin_transaction_declined",
-            Self::PayinTransactionTechnicaldecline => "payin_transaction_technicaldecline",
-            Self::PayinTransactionFailed => "payin_transaction_failed",
-            Self::PayinTransactionError => "payin_transaction_error",
-            Self::PayinTransactionPaid => "payin_transaction_paid",
-            Self::PayinTransactionReturned => "payin_transaction_returned",
             Self::PayinTransactionRejected => "payin_transaction_rejected",
-            Self::PayinTransactionVoidedcancelled => "payin_transaction_voidedcancelled",
-            Self::PayinTransactionProcessing => "payin_transaction_processing",
-            Self::PayinTransactionProcessed => "payin_transaction_processed",
             Self::PayinTransactionOnhold => "payin_transaction_onhold",
             Self::PayinTransactionReleased => "payin_transaction_released",
             Self::PayinTransactionRecovered => "payin_transaction_recovered",
@@ -277,18 +203,8 @@ impl fmt::Display for NotificationStandardRequestContentEventType {
             Self::PayoutTransactionOnhold => "payout_transaction_onhold",
             Self::PayoutTransactionReleased => "payout_transaction_released",
             Self::PayoutTransactionRecovered => "payout_transaction_recovered",
-            Self::PayinBatchOpen => "payin_batch_open",
             Self::PayinBatchOnhold => "payin_batch_onhold",
             Self::PayinBatchReleased => "payin_batch_released",
-            Self::PayinBatchProcessed => "payin_batch_processed",
-            Self::PayinBatchPaid => "payin_batch_paid",
-            Self::PayinBatchFunded => "payin_batch_funded",
-            Self::PayinBatchClosed => "payin_batch_closed",
-            Self::PayinBatchNotclosed => "payin_batch_notclosed",
-            Self::PayinBatchFundpending => "payin_batch_fundpending",
-            Self::PayinBatchCancelled => "payin_batch_cancelled",
-            Self::PayinBatchTransferred => "payin_batch_transferred",
-            Self::PayinBatchResolved => "payin_batch_resolved",
             Self::PayoutBatchOpen => "payout_batch_open",
             Self::PayoutBatchOnhold => "payout_batch_onhold",
             Self::PayoutBatchReleased => "payout_batch_released",
@@ -301,15 +217,6 @@ impl fmt::Display for NotificationStandardRequestContentEventType {
             Self::PayoutBatchCancelled => "payout_batch_cancelled",
             Self::PayoutBatchTransferred => "payout_batch_transferred",
             Self::PayoutBatchResolved => "payout_batch_resolved",
-            Self::PayinBatchSettlementPending => "payin_batch_settlement_pending",
-            Self::PayinBatchSettlementIntransit => "payin_batch_settlement_intransit",
-            Self::PayinBatchSettlementTransferred => "payin_batch_settlement_transferred",
-            Self::PayinBatchSettlementFunded => "payin_batch_settlement_funded",
-            Self::PayinBatchSettlementResolved => "payin_batch_settlement_resolved",
-            Self::PayinBatchSettlementException => "payin_batch_settlement_exception",
-            Self::PayinBatchSettlementAchreturn => "payin_batch_settlement_achreturn",
-            Self::PayinBatchSettlementHeld => "payin_batch_settlement_held",
-            Self::PayinBatchSettlementReleased => "payin_batch_settlement_released",
             Self::PayoutBatchSettlementPending => "payout_batch_settlement_pending",
             Self::PayoutBatchSettlementIntransit => "payout_batch_settlement_intransit",
             Self::PayoutBatchSettlementTransferred => "payout_batch_settlement_transferred",
