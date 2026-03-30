@@ -33,7 +33,7 @@ impl ChargeBacksClient {
             .execute_request(
                 Method::POST,
                 &format!("ChargeBacks/response/{}", id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -80,7 +80,7 @@ impl ChargeBacksClient {
     pub async fn get_chargeback_attachment(
         &self,
         id: i64,
-        file_name: &String,
+        file_name: &str,
         options: Option<RequestOptions>,
     ) -> Result<String, ApiError> {
         self.http_client

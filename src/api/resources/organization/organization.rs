@@ -31,7 +31,7 @@ impl OrganizationClient {
             .execute_request(
                 Method::POST,
                 "Organization",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -84,7 +84,7 @@ impl OrganizationClient {
             .execute_request(
                 Method::PUT,
                 &format!("Organization/{}", org_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -103,7 +103,7 @@ impl OrganizationClient {
     /// JSON response from the API
     pub async fn get_basic_organization(
         &self,
-        entry: &String,
+        entry: &str,
         options: Option<RequestOptions>,
     ) -> Result<OrganizationQueryRecord, ApiError> {
         self.http_client

@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct ScheduleDetail {
     /// Subscription end date in any of the accepted formats: YYYY-MM-DD, MM/DD/YYYY or the value `untilcancelled` to indicate a scheduled payment with infinite cycle.
     #[serde(rename = "endDate")]
@@ -17,4 +17,51 @@ pub struct ScheduleDetail {
     #[serde(rename = "startDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub start_date: Option<String>,
+}
+
+impl ScheduleDetail {
+    pub fn builder() -> ScheduleDetailBuilder {
+        <ScheduleDetailBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct ScheduleDetailBuilder {
+    end_date: Option<String>,
+    frequency: Option<Frequency>,
+    plan_id: Option<i64>,
+    start_date: Option<String>,
+}
+
+impl ScheduleDetailBuilder {
+    pub fn end_date(mut self, value: impl Into<String>) -> Self {
+        self.end_date = Some(value.into());
+        self
+    }
+
+    pub fn frequency(mut self, value: Frequency) -> Self {
+        self.frequency = Some(value);
+        self
+    }
+
+    pub fn plan_id(mut self, value: i64) -> Self {
+        self.plan_id = Some(value);
+        self
+    }
+
+    pub fn start_date(mut self, value: impl Into<String>) -> Self {
+        self.start_date = Some(value.into());
+        self
+    }
+
+    /// Consumes the builder and constructs a [`ScheduleDetail`].
+    pub fn build(self) -> Result<ScheduleDetail, BuildError> {
+        Ok(ScheduleDetail {
+            end_date: self.end_date,
+            frequency: self.frequency,
+            plan_id: self.plan_id,
+            start_date: self.start_date,
+        })
+    }
 }

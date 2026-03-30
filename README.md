@@ -11,6 +11,7 @@ The Payabli Rust library provides convenient access to the Payabli APIs from Rus
 - [Installation](#installation)
 - [Reference](#reference)
 - [Usage](#usage)
+- [Environments](#environments)
 - [Errors](#errors)
 - [Request Types](#request-types)
 - [Advanced](#advanced)
@@ -30,7 +31,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-payabli_api = "1.0.6"
+payabli_api = "1.0.7"
 ```
 
 Or install via cargo:
@@ -64,27 +65,8 @@ async fn main() {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     invoice_data: None,
@@ -92,14 +74,9 @@ async fn main() {
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
                         cardcvv: Some(Cardcvv("999".to_string())),
@@ -123,6 +100,20 @@ async fn main() {
         )
         .await;
 }
+```
+
+## Environments
+
+This SDK allows you to configure different environments for API requests.
+
+```rust
+use payabli_api::prelude::{*};
+
+let config = ClientConfig {
+    base_url: Environment::Sandbox.url().to_string(),
+    ..Default::default()
+};
+let client = Client::new(config).expect("Failed to build client");
 ```
 
 ## Errors

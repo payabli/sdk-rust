@@ -23,9 +23,7 @@ async fn test_notification_add_notification_with_wiremock() {
                     event_type: Some(
                         NotificationStandardRequestContentEventType::CreatedApplication,
                     ),
-                    internal_data: None,
-                    transaction_id: None,
-                    web_header_parameters: None,
+                    ..Default::default()
                 }),
                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
                 method: NotificationStandardRequestMethod::Web,
@@ -115,9 +113,7 @@ async fn test_notification_update_notification_with_wiremock() {
             &UpdateNotificationRequest::NotificationStandardRequest(NotificationStandardRequest {
                 content: Some(NotificationStandardRequestContent {
                     event_type: Some(NotificationStandardRequestContentEventType::ApprovedPayment),
-                    internal_data: None,
-                    transaction_id: None,
-                    web_header_parameters: None,
+                    ..Default::default()
                 }),
                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
                 method: NotificationStandardRequestMethod::Email,

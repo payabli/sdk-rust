@@ -2088,12 +2088,208 @@ impl QueryClient {
             .await
     }
 
+    /// Returns a list of payout subscriptions for a single paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.
+    ///
+    /// # Arguments
+    ///
+    /// * `from_record` - The number of records to skip before starting to collect the result set.
+    /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
+    /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
+    /// <Info>
+    /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+    ///
+    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+    ///
+    /// For example:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/entry123?parameters=totalAmount(gt)=1000&limitRecord=20
+    ///
+    /// should become:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/entry123?totalAmount(gt)=1000&limitRecord=20
+    /// </Info>
+    /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+    /// **List of field names accepted:**
+    ///
+    /// - `startDate` (gt, ge, lt, le, eq, ne)
+    /// - `endDate` (gt, ge, lt, le, eq, ne)
+    /// - `nextDate` (gt, ge, lt, le, eq, ne)
+    /// - `frequency` (in, nin, ne, eq)
+    /// - `method` (in, nin, eq, ne)
+    /// - `totalAmount` (gt, ge, lt, le, eq, ne)
+    /// - `netAmount` (gt, ge, lt, le, eq, ne)
+    /// - `feeAmount` (gt, ge, lt, le, eq, ne)
+    /// - `status` (in, nin, eq, ne)
+    /// - `untilcancelled` (eq, ne)
+    /// - `payaccountLastfour` (ct, nct)
+    /// - `payaccountType` (ne, eq, in, nin)
+    /// - `payaccountCurrency` (ne, eq, in, nin)
+    /// - `paypointId` (ne, eq)
+    /// - `paypointLegal` (ne, eq, ct, nct)
+    /// - `paypointDba` (ne, eq, ct, nct)
+    /// - `orgName` (ne, eq, ct, nct, nin, in)
+    /// - `parentOrgId` (ne, eq, nin, in)
+    /// - `subscriptionId` (eq, ne)
+    /// - `orderDescription` (ct, nct)
+    /// - `cycles` (eq, ne, gt, ge, lt, le)
+    /// - `leftcycles` (eq, ne, gt, ge, lt, le)
+    /// - `createdAt` (eq, ne, gt, ge, lt, le)
+    /// - `updatedOn` (eq, ne, gt, ge, lt, le)
+    /// - `vendorNumber` (ne, eq, ct, nct)
+    /// - `name` (ne, eq, ct, nct)
+    /// - `phone` (ne, eq, ct, nct)
+    /// - `email` (ne, eq, ct, nct)
+    /// - `address` (ne, eq, ct, nct)
+    /// - `remitAddress` (ct, nct)
+    /// - `city` (ne, eq, ct, nct)
+    /// - `state` (ne, eq, ct, nct)
+    /// - `country` (ne, eq, ct, nct)
+    /// - `zip` (ne, eq, ct, nct)
+    ///
+    /// **List of comparison operators accepted:**
+    /// - `eq` or empty => equal
+    /// - `gt` => greater than
+    /// - `ge` => greater or equal
+    /// - `lt` => less than
+    /// - `le` => less or equal
+    /// - `ne` => not equal
+    /// - `ct` => contains
+    /// - `nct` => not contains
+    /// - `in` => inside array
+    /// - `nin` => not inside array
+    /// * `sort_by` - The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn list_payout_subscriptions(
+        &self,
+        entry: &Entry,
+        request: &ListPayoutSubscriptionsQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<QueryPayoutSubscriptionResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Query/payoutsubscriptions/{}", entry.0),
+                None,
+                QueryBuilder::new()
+                    .serialize("exportFormat", request.export_format.clone())
+                    .int("fromRecord", request.from_record.clone())
+                    .int("limitRecord", request.limit_record.clone())
+                    .serialize("parameters", request.parameters.clone())
+                    .string("sortBy", request.sort_by.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
+    /// Returns a list of payout subscriptions for a single org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.
+    ///
+    /// # Arguments
+    ///
+    /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `from_record` - The number of records to skip before starting to collect the result set.
+    /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
+    /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
+    /// <Info>
+    /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+    ///
+    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+    ///
+    /// For example:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    ///
+    /// should become:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// </Info>
+    /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+    /// **List of field names accepted:**
+    ///
+    /// - `startDate` (gt, ge, lt, le, eq, ne)
+    /// - `endDate` (gt, ge, lt, le, eq, ne)
+    /// - `nextDate` (gt, ge, lt, le, eq, ne)
+    /// - `frequency` (in, nin, ne, eq)
+    /// - `method` (in, nin, eq, ne)
+    /// - `totalAmount` (gt, ge, lt, le, eq, ne)
+    /// - `netAmount` (gt, ge, lt, le, eq, ne)
+    /// - `feeAmount` (gt, ge, lt, le, eq, ne)
+    /// - `status` (in, nin, eq, ne)
+    /// - `untilcancelled` (eq, ne)
+    /// - `payaccountLastfour` (ct, nct)
+    /// - `payaccountType` (ne, eq, in, nin)
+    /// - `payaccountCurrency` (ne, eq, in, nin)
+    /// - `paypointId` (ne, eq)
+    /// - `paypointLegal` (ne, eq, ct, nct)
+    /// - `paypointDba` (ne, eq, ct, nct)
+    /// - `orgName` (ne, eq, ct, nct, nin, in)
+    /// - `parentOrgId` (ne, eq, nin, in)
+    /// - `subscriptionId` (eq, ne)
+    /// - `orderDescription` (ct, nct)
+    /// - `cycles` (eq, ne, gt, ge, lt, le)
+    /// - `leftcycles` (eq, ne, gt, ge, lt, le)
+    /// - `createdAt` (eq, ne, gt, ge, lt, le)
+    /// - `updatedOn` (eq, ne, gt, ge, lt, le)
+    /// - `vendorNumber` (ne, eq, ct, nct)
+    /// - `name` (ne, eq, ct, nct)
+    /// - `phone` (ne, eq, ct, nct)
+    /// - `email` (ne, eq, ct, nct)
+    /// - `address` (ne, eq, ct, nct)
+    /// - `remitAddress` (ct, nct)
+    /// - `city` (ne, eq, ct, nct)
+    /// - `state` (ne, eq, ct, nct)
+    /// - `country` (ne, eq, ct, nct)
+    /// - `zip` (ne, eq, ct, nct)
+    ///
+    /// **List of comparison operators accepted:**
+    /// - `eq` or empty => equal
+    /// - `gt` => greater than
+    /// - `ge` => greater or equal
+    /// - `lt` => less than
+    /// - `le` => less or equal
+    /// - `ne` => not equal
+    /// - `ct` => contains
+    /// - `nct` => not contains
+    /// - `in` => inside array
+    /// - `nin` => not inside array
+    /// * `sort_by` - The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn list_payout_subscriptions_org(
+        &self,
+        org_id: i64,
+        request: &ListPayoutSubscriptionsOrgQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<QueryPayoutSubscriptionResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Query/payoutsubscriptions/org/{}", org_id),
+                None,
+                QueryBuilder::new()
+                    .serialize("exportFormat", request.export_format.clone())
+                    .int("fromRecord", request.from_record.clone())
+                    .int("limitRecord", request.limit_record.clone())
+                    .serialize("parameters", request.parameters.clone())
+                    .string("sortBy", request.sort_by.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
     /// Retrieve a list of transactions for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
     /// By default, this endpoint returns only transactions from the last 60 days. To query transactions outside of this period, include `transactionDate` filters.
     /// For example, this request parameters filter for transactions between April 01, 2024 and April 09, 2024.
-    /// ``` curl --request GET \
-    /// --url https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59\
-    /// --header 'requestToken: <api-key>'
+    /// ``` curl -X GET https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59\
+    /// -H 'requestToken: <API TOKEN>'
     ///
     /// ```
     ///
@@ -2222,9 +2418,8 @@ impl QueryClient {
     /// For example, this request parameters filter for transactions between April 01, 2024 and April 09, 2024.
     ///
     /// ```
-    /// curl --request GET \
-    /// --url https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59\
-    /// --header 'requestToken: <api-key>'
+    /// curl -X GET "https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59"\
+    /// -H 'requestToken: <API TOKEN>'
     ///
     /// ```
     ///
@@ -2876,7 +3071,7 @@ impl QueryClient {
     /// JSON response from the API
     pub async fn list_users_paypoint(
         &self,
-        entry: &String,
+        entry: &str,
         request: &ListUsersPaypointQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<QueryUserResponse, ApiError> {
@@ -2965,7 +3160,7 @@ impl QueryClient {
     /// JSON response from the API
     pub async fn list_vendors(
         &self,
-        entry: &String,
+        entry: &str,
         request: &ListVendorsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<QueryResponseVendors, ApiError> {

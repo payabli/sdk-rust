@@ -22,6 +22,7 @@ async fn test_cloud_add_device_with_wiremock() {
             &DeviceEntry {
                 description: Some("Front Desk POS".to_string()),
                 registration_code: Some("YS7DS5".to_string()),
+                ..Default::default()
             },
             None,
         )
@@ -77,7 +78,7 @@ async fn test_cloud_list_device_with_wiremock() {
         .list_device(
             &"8cfec329267".to_string(),
             &ListDeviceQueryRequest {
-                force_refresh: None,
+                ..Default::default()
             },
             None,
         )

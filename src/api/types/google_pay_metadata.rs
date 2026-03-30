@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 /// This metadata appears only when the domain verification check fails. It gives more information about why the check failed.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct GooglePayMetadata {
     /// The status code return by the domain verification URL.
     #[serde(rename = "statusCode")]
@@ -15,4 +15,44 @@ pub struct GooglePayMetadata {
     #[serde(rename = "redirectDomainName")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub redirect_domain_name: Option<String>,
+}
+
+impl GooglePayMetadata {
+    pub fn builder() -> GooglePayMetadataBuilder {
+        <GooglePayMetadataBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct GooglePayMetadataBuilder {
+    status_code: Option<i64>,
+    redirect_url: Option<String>,
+    redirect_domain_name: Option<String>,
+}
+
+impl GooglePayMetadataBuilder {
+    pub fn status_code(mut self, value: i64) -> Self {
+        self.status_code = Some(value);
+        self
+    }
+
+    pub fn redirect_url(mut self, value: impl Into<String>) -> Self {
+        self.redirect_url = Some(value.into());
+        self
+    }
+
+    pub fn redirect_domain_name(mut self, value: impl Into<String>) -> Self {
+        self.redirect_domain_name = Some(value.into());
+        self
+    }
+
+    /// Consumes the builder and constructs a [`GooglePayMetadata`].
+    pub fn build(self) -> Result<GooglePayMetadata, BuildError> {
+        Ok(GooglePayMetadata {
+            status_code: self.status_code,
+            redirect_url: self.redirect_url,
+            redirect_domain_name: self.redirect_domain_name,
+        })
+    }
 }

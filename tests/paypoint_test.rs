@@ -69,7 +69,9 @@ async fn test_paypoint_get_entry_config_with_wiremock() {
         .paypoint
         .get_entry_config(
             &"8cfec329267".to_string(),
-            &GetEntryConfigQueryRequest { entrypages: None },
+            &GetEntryConfigQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -162,10 +164,7 @@ async fn test_paypoint_save_logo_with_wiremock() {
         .save_logo(
             &"8cfec329267".to_string(),
             &FileContent {
-                f_content: None,
-                filename: None,
-                ftype: None,
-                furl: None,
+                ..Default::default()
             },
             None,
         )
@@ -227,8 +226,11 @@ async fn test_paypoint_migrate_with_wiremock() {
                     web_header_parameters: Some(vec![WebHeaderParameter {
                         key: "testheader".to_string(),
                         value: "1234567890".to_string(),
+                        ..Default::default()
                     }]),
+                    ..Default::default()
                 }),
+                ..Default::default()
             },
             None,
         )

@@ -57,7 +57,7 @@ impl SubscriptionClient {
             .execute_request(
                 Method::POST,
                 "Subscription/add",
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize(
                         "forceCustomerCreation",
@@ -115,7 +115,7 @@ impl SubscriptionClient {
             .execute_request(
                 Method::PUT,
                 &format!("Subscription/{}", sub_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

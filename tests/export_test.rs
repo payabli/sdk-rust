@@ -24,7 +24,7 @@ async fn test_export_export_applications_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -71,7 +71,7 @@ async fn test_export_export_batch_details_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -118,7 +118,7 @@ async fn test_export_export_batch_details_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -165,7 +165,7 @@ async fn test_export_export_batches_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -212,7 +212,7 @@ async fn test_export_export_batches_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -259,7 +259,7 @@ async fn test_export_export_batches_out_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -306,7 +306,7 @@ async fn test_export_export_batches_out_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -353,7 +353,7 @@ async fn test_export_export_bills_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -400,7 +400,7 @@ async fn test_export_export_bills_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -447,7 +447,7 @@ async fn test_export_export_chargebacks_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -494,7 +494,7 @@ async fn test_export_export_chargebacks_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -541,7 +541,7 @@ async fn test_export_export_customers_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -588,7 +588,7 @@ async fn test_export_export_customers_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -635,7 +635,7 @@ async fn test_export_export_invoices_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -682,7 +682,7 @@ async fn test_export_export_invoices_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -729,7 +729,7 @@ async fn test_export_export_organizations_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -776,7 +776,7 @@ async fn test_export_export_payout_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -823,7 +823,7 @@ async fn test_export_export_payout_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -870,7 +870,7 @@ async fn test_export_export_paypoints_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -917,7 +917,7 @@ async fn test_export_export_settlements_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -964,7 +964,7 @@ async fn test_export_export_settlements_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1011,7 +1011,7 @@ async fn test_export_export_subscriptions_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1058,7 +1058,7 @@ async fn test_export_export_subscriptions_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1105,7 +1105,7 @@ async fn test_export_export_transactions_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1152,7 +1152,7 @@ async fn test_export_export_transactions_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1201,7 +1201,7 @@ async fn test_export_export_transfer_details_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(1000),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1249,7 +1249,7 @@ async fn test_export_export_transfers_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(1000),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1297,7 +1297,7 @@ async fn test_export_export_vendors_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1344,7 +1344,7 @@ async fn test_export_export_vendors_org_with_wiremock() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )

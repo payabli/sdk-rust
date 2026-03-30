@@ -1,8 +1,6 @@
 pub use crate::prelude::*;
 
 /// Query parameters for ListNotificationReports
-///
-/// Request type for the ListNotificationReportsQueryRequest operation.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ListNotificationReportsQueryRequest {
     /// The number of records to skip before starting to collect the result set.
@@ -57,4 +55,51 @@ pub struct ListNotificationReportsQueryRequest {
     #[serde(rename = "sortBy")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sort_by: Option<String>,
+}
+
+impl ListNotificationReportsQueryRequest {
+    pub fn builder() -> ListNotificationReportsQueryRequestBuilder {
+        <ListNotificationReportsQueryRequestBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct ListNotificationReportsQueryRequestBuilder {
+    from_record: Option<i64>,
+    limit_record: Option<i64>,
+    parameters: Option<HashMap<String, Option<String>>>,
+    sort_by: Option<String>,
+}
+
+impl ListNotificationReportsQueryRequestBuilder {
+    pub fn from_record(mut self, value: i64) -> Self {
+        self.from_record = Some(value);
+        self
+    }
+
+    pub fn limit_record(mut self, value: i64) -> Self {
+        self.limit_record = Some(value);
+        self
+    }
+
+    pub fn parameters(mut self, value: HashMap<String, Option<String>>) -> Self {
+        self.parameters = Some(value);
+        self
+    }
+
+    pub fn sort_by(mut self, value: impl Into<String>) -> Self {
+        self.sort_by = Some(value.into());
+        self
+    }
+
+    /// Consumes the builder and constructs a [`ListNotificationReportsQueryRequest`].
+    pub fn build(self) -> Result<ListNotificationReportsQueryRequest, BuildError> {
+        Ok(ListNotificationReportsQueryRequest {
+            from_record: self.from_record,
+            limit_record: self.limit_record,
+            parameters: self.parameters,
+            sort_by: self.sort_by,
+        })
+    }
 }

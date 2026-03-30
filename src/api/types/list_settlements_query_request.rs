@@ -1,8 +1,6 @@
 pub use crate::prelude::*;
 
 /// Query parameters for ListSettlements
-///
-/// Request type for the ListSettlementsQueryRequest operation.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ListSettlementsQueryRequest {
     #[serde(rename = "exportFormat")]
@@ -97,4 +95,58 @@ pub struct ListSettlementsQueryRequest {
     #[serde(rename = "sortBy")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sort_by: Option<String>,
+}
+
+impl ListSettlementsQueryRequest {
+    pub fn builder() -> ListSettlementsQueryRequestBuilder {
+        <ListSettlementsQueryRequestBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct ListSettlementsQueryRequestBuilder {
+    export_format: Option<ExportFormat>,
+    from_record: Option<i64>,
+    limit_record: Option<i64>,
+    parameters: Option<HashMap<String, Option<String>>>,
+    sort_by: Option<String>,
+}
+
+impl ListSettlementsQueryRequestBuilder {
+    pub fn export_format(mut self, value: ExportFormat) -> Self {
+        self.export_format = Some(value);
+        self
+    }
+
+    pub fn from_record(mut self, value: i64) -> Self {
+        self.from_record = Some(value);
+        self
+    }
+
+    pub fn limit_record(mut self, value: i64) -> Self {
+        self.limit_record = Some(value);
+        self
+    }
+
+    pub fn parameters(mut self, value: HashMap<String, Option<String>>) -> Self {
+        self.parameters = Some(value);
+        self
+    }
+
+    pub fn sort_by(mut self, value: impl Into<String>) -> Self {
+        self.sort_by = Some(value.into());
+        self
+    }
+
+    /// Consumes the builder and constructs a [`ListSettlementsQueryRequest`].
+    pub fn build(self) -> Result<ListSettlementsQueryRequest, BuildError> {
+        Ok(ListSettlementsQueryRequest {
+            export_format: self.export_format,
+            from_record: self.from_record,
+            limit_record: self.limit_record,
+            parameters: self.parameters,
+            sort_by: self.sort_by,
+        })
+    }
 }

@@ -25,7 +25,7 @@ impl CloudClient {
     /// JSON response from the API
     pub async fn add_device(
         &self,
-        entry: &String,
+        entry: &str,
         request: &DeviceEntry,
         options: Option<RequestOptions>,
     ) -> Result<AddDeviceResponse, ApiError> {
@@ -33,7 +33,7 @@ impl CloudClient {
             .execute_request(
                 Method::POST,
                 &format!("Cloud/register/{}", entry),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -53,8 +53,8 @@ impl CloudClient {
     /// JSON response from the API
     pub async fn history_device(
         &self,
-        entry: &String,
-        device_id: &String,
+        entry: &str,
+        device_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<CloudQueryApiResponse, ApiError> {
         self.http_client
@@ -81,7 +81,7 @@ impl CloudClient {
     /// JSON response from the API
     pub async fn list_device(
         &self,
-        entry: &String,
+        entry: &str,
         request: &ListDeviceQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<CloudQueryApiResponse, ApiError> {
@@ -111,8 +111,8 @@ impl CloudClient {
     /// JSON response from the API
     pub async fn remove_device(
         &self,
-        entry: &String,
-        device_id: &String,
+        entry: &str,
+        device_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<RemoveDeviceResponse, ApiError> {
         self.http_client

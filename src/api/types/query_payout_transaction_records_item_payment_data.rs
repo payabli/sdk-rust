@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct QueryPayoutTransactionRecordsItemPaymentData {
     #[serde(rename = "AccountExp")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -58,4 +58,149 @@ pub struct QueryPayoutTransactionRecordsItemPaymentData {
     #[serde(rename = "StoredMethodUsageType")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub stored_method_usage_type: Option<StoredMethodUsageType>,
+}
+
+impl QueryPayoutTransactionRecordsItemPaymentData {
+    pub fn builder() -> QueryPayoutTransactionRecordsItemPaymentDataBuilder {
+        <QueryPayoutTransactionRecordsItemPaymentDataBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct QueryPayoutTransactionRecordsItemPaymentDataBuilder {
+    account_exp: Option<Accountexp>,
+    account_id: Option<AccountId>,
+    account_type: Option<Accounttype>,
+    account_zip: Option<Accountzip>,
+    bank_account: Option<String>,
+    bin_data: Option<BinData>,
+    cloud_signature_data: Option<String>,
+    cloud_signature_format: Option<String>,
+    gateway_connector: Option<PayoutGatewayConnector>,
+    holder_name: Option<Holdername>,
+    initiator: Option<Initiator>,
+    masked_account: Option<Maskedaccount>,
+    order_description: Option<Orderdescription>,
+    payment_details: Option<PaymentDetail>,
+    payor_data: Option<String>,
+    sequence: Option<Sequence>,
+    stored_id: Option<Storedmethodid>,
+    stored_method_usage_type: Option<StoredMethodUsageType>,
+}
+
+impl QueryPayoutTransactionRecordsItemPaymentDataBuilder {
+    pub fn account_exp(mut self, value: Accountexp) -> Self {
+        self.account_exp = Some(value);
+        self
+    }
+
+    pub fn account_id(mut self, value: AccountId) -> Self {
+        self.account_id = Some(value);
+        self
+    }
+
+    pub fn account_type(mut self, value: Accounttype) -> Self {
+        self.account_type = Some(value);
+        self
+    }
+
+    pub fn account_zip(mut self, value: Accountzip) -> Self {
+        self.account_zip = Some(value);
+        self
+    }
+
+    pub fn bank_account(mut self, value: impl Into<String>) -> Self {
+        self.bank_account = Some(value.into());
+        self
+    }
+
+    pub fn bin_data(mut self, value: BinData) -> Self {
+        self.bin_data = Some(value);
+        self
+    }
+
+    pub fn cloud_signature_data(mut self, value: impl Into<String>) -> Self {
+        self.cloud_signature_data = Some(value.into());
+        self
+    }
+
+    pub fn cloud_signature_format(mut self, value: impl Into<String>) -> Self {
+        self.cloud_signature_format = Some(value.into());
+        self
+    }
+
+    pub fn gateway_connector(mut self, value: PayoutGatewayConnector) -> Self {
+        self.gateway_connector = Some(value);
+        self
+    }
+
+    pub fn holder_name(mut self, value: Holdername) -> Self {
+        self.holder_name = Some(value);
+        self
+    }
+
+    pub fn initiator(mut self, value: Initiator) -> Self {
+        self.initiator = Some(value);
+        self
+    }
+
+    pub fn masked_account(mut self, value: Maskedaccount) -> Self {
+        self.masked_account = Some(value);
+        self
+    }
+
+    pub fn order_description(mut self, value: Orderdescription) -> Self {
+        self.order_description = Some(value);
+        self
+    }
+
+    pub fn payment_details(mut self, value: PaymentDetail) -> Self {
+        self.payment_details = Some(value);
+        self
+    }
+
+    pub fn payor_data(mut self, value: impl Into<String>) -> Self {
+        self.payor_data = Some(value.into());
+        self
+    }
+
+    pub fn sequence(mut self, value: Sequence) -> Self {
+        self.sequence = Some(value);
+        self
+    }
+
+    pub fn stored_id(mut self, value: Storedmethodid) -> Self {
+        self.stored_id = Some(value);
+        self
+    }
+
+    pub fn stored_method_usage_type(mut self, value: StoredMethodUsageType) -> Self {
+        self.stored_method_usage_type = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`QueryPayoutTransactionRecordsItemPaymentData`].
+    pub fn build(self) -> Result<QueryPayoutTransactionRecordsItemPaymentData, BuildError> {
+        Ok(QueryPayoutTransactionRecordsItemPaymentData {
+            account_exp: self.account_exp,
+            account_id: self.account_id,
+            account_type: self.account_type,
+            account_zip: self.account_zip,
+            bank_account: self.bank_account,
+            bin_data: self.bin_data,
+            cloud_signature_data: self.cloud_signature_data,
+            cloud_signature_format: self.cloud_signature_format,
+            gateway_connector: self.gateway_connector,
+            holder_name: self.holder_name,
+            initiator: self.initiator,
+            masked_account: self.masked_account,
+            order_description: self.order_description,
+            payment_details: self.payment_details,
+            payor_data: self.payor_data,
+            sequence: self.sequence,
+            stored_id: self.stored_id,
+            stored_method_usage_type: self.stored_method_usage_type,
+        })
+    }
 }

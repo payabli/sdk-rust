@@ -13,72 +13,72 @@ pub enum AddApplicationRequest {
 }
 
 impl AddApplicationRequest {
-    pub fn is_applicationdatapayin(&self) -> bool {
+    pub fn is_application_data_pay_in(&self) -> bool {
         matches!(self, Self::ApplicationDataPayIn(_))
     }
 
-    pub fn is_applicationdatamanaged(&self) -> bool {
+    pub fn is_application_data_managed(&self) -> bool {
         matches!(self, Self::ApplicationDataManaged(_))
     }
 
-    pub fn is_applicationdataodp(&self) -> bool {
+    pub fn is_application_data_odp(&self) -> bool {
         matches!(self, Self::ApplicationDataOdp(_))
     }
 
-    pub fn is_applicationdata(&self) -> bool {
+    pub fn is_application_data(&self) -> bool {
         matches!(self, Self::ApplicationData(_))
     }
 
-    pub fn as_applicationdatapayin(&self) -> Option<&ApplicationDataPayIn> {
+    pub fn as_application_data_pay_in(&self) -> Option<&ApplicationDataPayIn> {
         match self {
             Self::ApplicationDataPayIn(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_applicationdatapayin(self) -> Option<ApplicationDataPayIn> {
+    pub fn into_application_data_pay_in(self) -> Option<ApplicationDataPayIn> {
         match self {
             Self::ApplicationDataPayIn(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn as_applicationdatamanaged(&self) -> Option<&ApplicationDataManaged> {
+    pub fn as_application_data_managed(&self) -> Option<&ApplicationDataManaged> {
         match self {
             Self::ApplicationDataManaged(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_applicationdatamanaged(self) -> Option<ApplicationDataManaged> {
+    pub fn into_application_data_managed(self) -> Option<ApplicationDataManaged> {
         match self {
             Self::ApplicationDataManaged(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn as_applicationdataodp(&self) -> Option<&ApplicationDataOdp> {
+    pub fn as_application_data_odp(&self) -> Option<&ApplicationDataOdp> {
         match self {
             Self::ApplicationDataOdp(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_applicationdataodp(self) -> Option<ApplicationDataOdp> {
+    pub fn into_application_data_odp(self) -> Option<ApplicationDataOdp> {
         match self {
             Self::ApplicationDataOdp(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn as_applicationdata(&self) -> Option<&ApplicationData> {
+    pub fn as_application_data(&self) -> Option<&ApplicationData> {
         match self {
             Self::ApplicationData(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_applicationdata(self) -> Option<ApplicationData> {
+    pub fn into_application_data(self) -> Option<ApplicationData> {
         match self {
             Self::ApplicationData(value) => Some(value),
             _ => None,

@@ -22,10 +22,9 @@ async fn test_boarding_add_application_with_wiremock() {
                 services: ApplicationDataPayInServices {
                     ach: ApplicationDataPayInServicesAch {
                         ach_setup_fields: AchSetup {
-                            accept_ccd: None,
-                            accept_ppd: None,
-                            accept_web: None,
+                            ..Default::default()
                         },
+                        ..Default::default()
                     },
                     card: ApplicationDataPayInServicesCard {
                         card_setup_fields: CardSetup {
@@ -33,9 +32,11 @@ async fn test_boarding_add_application_with_wiremock() {
                             accept_discover: Some(true),
                             accept_mastercard: Some(true),
                             accept_visa: Some(true),
+                            ..Default::default()
                         },
+                        ..Default::default()
                     },
-                    odp: None,
+                    ..Default::default()
                 },
                 annual_revenue: Some(Annualrevenue(1000.0)),
                 average_bill_size: Some(BoardingAverageBillSize("500".to_string())),
@@ -45,7 +46,6 @@ async fn test_boarding_add_application_with_wiremock() {
                 baddress_1: Some(Baddress2("Suite 103".to_string())),
                 bank_data: BankData(vec![
                     Bank {
-                        id: None,
                         account_id: Some(AccountId("123-456".to_string())),
                         nickname: Some(BankNickname("Withdrawal Account".to_string())),
                         bank_name: Some(BankName("Test Bank".to_string())),
@@ -57,12 +57,9 @@ async fn test_boarding_add_application_with_wiremock() {
                         )),
                         bank_account_holder_type: Some(BankAccountHolderType::Business),
                         bank_account_function: Some(BankAccountFunction(1)),
-                        verified: None,
-                        status: None,
-                        services: None,
+                        ..Default::default()
                     },
                     Bank {
-                        id: None,
                         account_id: Some(AccountId("123-456".to_string())),
                         nickname: Some(BankNickname("Deposit Account".to_string())),
                         bank_name: Some(BankName("Test Bank".to_string())),
@@ -74,9 +71,7 @@ async fn test_boarding_add_application_with_wiremock() {
                         )),
                         bank_account_holder_type: Some(BankAccountHolderType::Business),
                         bank_account_function: Some(BankAccountFunction(0)),
-                        verified: None,
-                        status: None,
-                        services: None,
+                        ..Default::default()
                     },
                 ]),
                 bcity: Some(Bcity("New Vegas".to_string())),
@@ -97,8 +92,9 @@ async fn test_boarding_add_application_with_wiremock() {
                         contact_name: Some("Herman Martinez".to_string()),
                         contact_phone: Some("3055550000".to_string()),
                         contact_title: Some("Owner".to_string()),
-                        additional_data: None,
+                        ..Default::default()
                     },
+                    ..Default::default()
                 }]),
                 credit_limit: Some("creditLimit".to_string()),
                 dba_name: Some(Dbaname("Sunshine Gutters".to_string())),
@@ -134,8 +130,9 @@ async fn test_boarding_add_application_with_wiremock() {
                         odriverstate: Some("CA".to_string()),
                         ostate: Some("CA".to_string()),
                         ozip: Some("55555".to_string()),
-                        additional_data: None,
+                        ..Default::default()
                     },
+                    ..Default::default()
                 }]),
                 phonenumber: PhoneNumber("1234567890".to_string()),
                 processing_region: "US".to_string(),
@@ -154,7 +151,6 @@ async fn test_boarding_add_application_with_wiremock() {
                     country: Some(SignerCountry("US".to_string())),
                     state: Some(SignerState("TN".to_string())),
                     zip: Some(SignerZip("55555".to_string())),
-                    acceptance: None,
                     signed_document_reference: Some(SignedDocumentReference(
                         "https://example.com/signed-document.pdf".to_string(),
                     )),
@@ -169,6 +165,7 @@ async fn test_boarding_add_application_with_wiremock() {
                         ("timeWithCompany".to_string(), "6 Years".to_string()),
                     ]))),
                     sign_date: Some(SignDate("04/20/2025".to_string())),
+                    ..Default::default()
                 },
                 startdate: Some(Busstartdate("01/01/1990".to_string())),
                 tax_fill_name: Some(Taxfillname("Sunshine LLC".to_string())),
@@ -260,6 +257,7 @@ async fn test_boarding_get_application_by_auth_with_wiremock() {
             &RequestAppByAuth {
                 email: Some(Email("admin@email.com".to_string())),
                 reference_id: Some("n6UCd1f1ygG7".to_string()),
+                ..Default::default()
             },
             None,
         )
@@ -337,7 +335,9 @@ async fn test_boarding_get_external_application_with_wiremock() {
         .get_external_application(
             352,
             &"mail2".to_string(),
-            &GetExternalApplicationQueryRequest { send_email: None },
+            &GetExternalApplicationQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -395,8 +395,7 @@ async fn test_boarding_list_applications_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -439,7 +438,7 @@ async fn test_boarding_list_boarding_links_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -479,62 +478,7 @@ async fn test_boarding_update_application_with_wiremock() {
         .update_application(
             352,
             &ApplicationData {
-                services: None,
-                annual_revenue: None,
-                attachments: None,
-                avgmonthly: None,
-                baddress: None,
-                baddress_1: None,
-                bank_data: None,
-                bcity: None,
-                bcountry: None,
-                binperson: None,
-                binphone: None,
-                binweb: None,
-                bstate: None,
-                bsummary: None,
-                btype: None,
-                bzip: None,
-                contacts: None,
-                dbaname: None,
-                ein: None,
-                external_paypoint_id: None,
-                faxnumber: None,
-                highticketamt: None,
-                legalname: None,
-                license: None,
-                licstate: None,
-                maddress: None,
-                maddress_1: None,
-                mcc: None,
-                mcity: None,
-                mcountry: None,
-                mstate: None,
-                mzip: None,
-                org_id: None,
-                ownership: None,
-                payout_average_monthly_volume: None,
-                payout_average_ticket_limit: None,
-                payout_credit_limit: None,
-                payout_high_ticket_amount: None,
-                phonenumber: None,
-                recipient_email: None,
-                recipient_email_notification: None,
-                resumable: None,
-                signer: None,
-                startdate: None,
-                taxfillname: None,
-                template_id: None,
-                ticketamt: None,
-                website: None,
-                when_charged: None,
-                when_delivered: None,
-                when_provided: None,
-                when_refunded: None,
-                rep_code: None,
-                rep_name: None,
-                rep_office: None,
-                on_create: None,
+                ..Default::default()
             },
             None,
         )

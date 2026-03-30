@@ -42,13 +42,11 @@ async fn main() {
             &"8cfec329267".to_string(),
             &BillOutData {
                 accounting_field_1: Some(AccountingField("MyInternalId".to_string())),
-                accounting_field_2: None,
-                additional_data: None,
                 attachments: Some(Attachments(vec![FileContent {
-                    f_content: None,
                     filename: Some("my-doc.pdf".to_string()),
                     ftype: Some(FileContentFtype::Pdf),
                     furl: Some("https://mysite.com/my-doc.pdf".to_string()),
+                    ..Default::default()
                 }])),
                 bill_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
                 bill_items: Some(Billitems(vec![BillItem {
@@ -64,54 +62,22 @@ async fn main() {
                     item_tax_rate: Some(0.075),
                     item_total_amount: Some(123.0),
                     item_unit_of_measure: Some(ItemUnitofMeasure("SqFt".to_string())),
+                    ..Default::default()
                 }])),
                 bill_number: Some("ABC-123".to_string()),
                 comments: Some(Comments("Deposit for materials".to_string())),
-                discount: None,
                 due_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
                 end_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
                 frequency: Some(Frequency::Monthly),
-                lot_number: None,
                 mode: Some(0),
                 net_amount: Some(3762.87),
-                scheduled_options: None,
                 status: Some(Billstatus(-99)),
                 terms: Some(Terms("NET30".to_string())),
-                total_amount: None,
                 vendor: Some(VendorData {
                     vendor_number: Some(VendorNumber("1234-A".to_string())),
-                    additional_data: None,
-                    address_1: None,
-                    address_2: None,
-                    billing_data: None,
-                    city: None,
-                    contacts: None,
-                    country: None,
-                    custom_field_1: None,
-                    custom_field_2: None,
-                    customer_vendor_account: None,
-                    ein: None,
-                    email: None,
-                    internal_reference_id: None,
-                    location_code: None,
-                    mcc: None,
-                    name_1: None,
-                    name_2: None,
-                    payee_name_1: None,
-                    payee_name_2: None,
-                    payment_method: None,
-                    phone: None,
-                    remit_address_1: None,
-                    remit_address_2: None,
-                    remit_city: None,
-                    remit_country: None,
-                    remit_email: None,
-                    remit_state: None,
-                    remit_zip: None,
-                    state: None,
-                    vendor_status: None,
-                    zip: None,
+                    ..Default::default()
                 }),
+                ..Default::default()
             },
             None,
         )
@@ -185,7 +151,7 @@ async fn main() {
             285,
             &"0_Bill.pdf".to_string(),
             &DeleteAttachedFromBillQueryRequest {
-                return_object: None,
+                ..Default::default()
             },
             None,
         )
@@ -355,26 +321,9 @@ async fn main() {
         .edit_bill(
             285,
             &BillOutData {
-                accounting_field_1: None,
-                accounting_field_2: None,
-                additional_data: None,
-                attachments: None,
                 bill_date: Some(NaiveDate::parse_from_str("2025-07-01", "%Y-%m-%d").unwrap()),
-                bill_items: None,
-                bill_number: None,
-                comments: None,
-                discount: None,
-                due_date: None,
-                end_date: None,
-                frequency: None,
-                lot_number: None,
-                mode: None,
                 net_amount: Some(3762.87),
-                scheduled_options: None,
-                status: None,
-                terms: None,
-                total_amount: None,
-                vendor: None,
+                ..Default::default()
             },
             None,
         )
@@ -449,6 +398,7 @@ async fn main() {
             &"0_Bill.pdf".to_string(),
             &GetAttachedFromBillQueryRequest {
                 return_object: Some(true),
+                ..Default::default()
             },
             None,
         )
@@ -616,8 +566,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -777,8 +726,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1087,7 +1035,9 @@ async fn main() {
         .set_approved_bill(
             285,
             &"true".to_string(),
-            &SetApprovedBillQueryRequest { email: None },
+            &SetApprovedBillQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -1178,10 +1128,9 @@ async fn main() {
                 services: ApplicationDataPayInServices {
                     ach: ApplicationDataPayInServicesAch {
                         ach_setup_fields: AchSetup {
-                            accept_ccd: None,
-                            accept_ppd: None,
-                            accept_web: None,
+                            ..Default::default()
                         },
+                        ..Default::default()
                     },
                     card: ApplicationDataPayInServicesCard {
                         card_setup_fields: CardSetup {
@@ -1189,9 +1138,11 @@ async fn main() {
                             accept_discover: Some(true),
                             accept_mastercard: Some(true),
                             accept_visa: Some(true),
+                            ..Default::default()
                         },
+                        ..Default::default()
                     },
-                    odp: None,
+                    ..Default::default()
                 },
                 annual_revenue: Some(Annualrevenue(1000.0)),
                 average_bill_size: Some(BoardingAverageBillSize("500".to_string())),
@@ -1201,7 +1152,6 @@ async fn main() {
                 baddress_1: Some(Baddress2("Suite 103".to_string())),
                 bank_data: BankData(vec![
                     Bank {
-                        id: None,
                         account_id: Some(AccountId("123-456".to_string())),
                         nickname: Some(BankNickname("Withdrawal Account".to_string())),
                         bank_name: Some(BankName("Test Bank".to_string())),
@@ -1213,12 +1163,9 @@ async fn main() {
                         )),
                         bank_account_holder_type: Some(BankAccountHolderType::Business),
                         bank_account_function: Some(BankAccountFunction(1)),
-                        verified: None,
-                        status: None,
-                        services: None,
+                        ..Default::default()
                     },
                     Bank {
-                        id: None,
                         account_id: Some(AccountId("123-456".to_string())),
                         nickname: Some(BankNickname("Deposit Account".to_string())),
                         bank_name: Some(BankName("Test Bank".to_string())),
@@ -1230,9 +1177,7 @@ async fn main() {
                         )),
                         bank_account_holder_type: Some(BankAccountHolderType::Business),
                         bank_account_function: Some(BankAccountFunction(0)),
-                        verified: None,
-                        status: None,
-                        services: None,
+                        ..Default::default()
                     },
                 ]),
                 bcity: Some(Bcity("New Vegas".to_string())),
@@ -1253,8 +1198,9 @@ async fn main() {
                         contact_name: Some("Herman Martinez".to_string()),
                         contact_phone: Some("3055550000".to_string()),
                         contact_title: Some("Owner".to_string()),
-                        additional_data: None,
+                        ..Default::default()
                     },
+                    ..Default::default()
                 }]),
                 credit_limit: Some("creditLimit".to_string()),
                 dba_name: Some(Dbaname("Sunshine Gutters".to_string())),
@@ -1290,8 +1236,9 @@ async fn main() {
                         odriverstate: Some("CA".to_string()),
                         ostate: Some("CA".to_string()),
                         ozip: Some("55555".to_string()),
-                        additional_data: None,
+                        ..Default::default()
                     },
+                    ..Default::default()
                 }]),
                 phonenumber: PhoneNumber("1234567890".to_string()),
                 processing_region: "US".to_string(),
@@ -1310,7 +1257,6 @@ async fn main() {
                     country: Some(SignerCountry("US".to_string())),
                     state: Some(SignerState("TN".to_string())),
                     zip: Some(SignerZip("55555".to_string())),
-                    acceptance: None,
                     signed_document_reference: Some(SignedDocumentReference(
                         "https://example.com/signed-document.pdf".to_string(),
                     )),
@@ -1325,6 +1271,7 @@ async fn main() {
                         ("timeWithCompany".to_string(), "6 Years".to_string()),
                     ]))),
                     sign_date: Some(SignDate("04/20/2025".to_string())),
+                    ..Default::default()
                 },
                 startdate: Some(Busstartdate("01/01/1990".to_string())),
                 tax_fill_name: Some(Taxfillname("Sunshine LLC".to_string())),
@@ -1527,6 +1474,7 @@ async fn main() {
             &RequestAppByAuth {
                 email: Some(Email("admin@email.com".to_string())),
                 reference_id: Some("n6UCd1f1ygG7".to_string()),
+                ..Default::default()
             },
             None,
         )
@@ -1746,7 +1694,9 @@ async fn main() {
         .get_external_application(
             352,
             &"mail2".to_string(),
-            &GetExternalApplicationQueryRequest { send_email: None },
+            &GetExternalApplicationQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -1904,8 +1854,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -2057,7 +2006,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -2194,62 +2143,7 @@ async fn main() {
         .update_application(
             352,
             &ApplicationData {
-                services: None,
-                annual_revenue: None,
-                attachments: None,
-                avgmonthly: None,
-                baddress: None,
-                baddress_1: None,
-                bank_data: None,
-                bcity: None,
-                bcountry: None,
-                binperson: None,
-                binphone: None,
-                binweb: None,
-                bstate: None,
-                bsummary: None,
-                btype: None,
-                bzip: None,
-                contacts: None,
-                dbaname: None,
-                ein: None,
-                external_paypoint_id: None,
-                faxnumber: None,
-                highticketamt: None,
-                legalname: None,
-                license: None,
-                licstate: None,
-                maddress: None,
-                maddress_1: None,
-                mcc: None,
-                mcity: None,
-                mcountry: None,
-                mstate: None,
-                mzip: None,
-                org_id: None,
-                ownership: None,
-                payout_average_monthly_volume: None,
-                payout_average_ticket_limit: None,
-                payout_credit_limit: None,
-                payout_high_ticket_amount: None,
-                phonenumber: None,
-                recipient_email: None,
-                recipient_email_notification: None,
-                resumable: None,
-                signer: None,
-                startdate: None,
-                taxfillname: None,
-                template_id: None,
-                ticketamt: None,
-                website: None,
-                when_charged: None,
-                when_delivered: None,
-                when_provided: None,
-                when_refunded: None,
-                rep_code: None,
-                rep_name: None,
-                rep_office: None,
-                on_create: None,
+                ..Default::default()
             },
             None,
         )
@@ -2323,10 +2217,7 @@ async fn main() {
         .add_response(
             1000000,
             &ResponseChargeBack {
-                attachments: None,
-                contact_email: None,
-                contact_name: None,
-                notes: None,
+                ..Default::default()
             },
             Some(
                 RequestOptions::new()
@@ -2676,6 +2567,7 @@ async fn main() {
             &DeviceEntry {
                 description: Some("Front Desk POS".to_string()),
                 registration_code: Some("YS7DS5".to_string()),
+                ..Default::default()
             },
             None,
         )
@@ -2845,7 +2737,7 @@ async fn main() {
         .list_device(
             &"8cfec329267".to_string(),
             &ListDeviceQueryRequest {
-                force_refresh: None,
+                ..Default::default()
             },
             None,
         )
@@ -3009,31 +2901,17 @@ async fn main() {
             &AddCustomerRequest {
                 body: CustomerData {
                     customer_number: Some(CustomerNumberNullable("12356ACB".to_string())),
-                    customer_username: None,
-                    customer_psw: None,
-                    customer_status: None,
-                    company: None,
                     firstname: Some("Irene".to_string()),
                     lastname: Some("Canizales".to_string()),
-                    phone: None,
                     email: Some(Email("irene@canizalesconcrete.com".to_string())),
-                    address: None,
                     address_1: Some("123 Bishop's Trail".to_string()),
                     city: Some("Mountain City".to_string()),
                     state: Some("TN".to_string()),
                     zip: Some("37612".to_string()),
                     country: Some("US".to_string()),
-                    shipping_address: None,
-                    shipping_address_1: None,
-                    shipping_city: None,
-                    shipping_state: None,
-                    shipping_zip: None,
-                    shipping_country: None,
-                    balance: None,
                     time_zone: Some(Timezone(-5)),
-                    additional_fields: None,
                     identifier_fields: Some(Identifierfields(vec![Some("email".to_string())])),
-                    created_at: None,
+                    ..Default::default()
                 },
                 force_customer_creation: None,
                 replace_existing: None,
@@ -3392,32 +3270,14 @@ async fn main() {
         .update_customer(
             998,
             &CustomerData {
-                customer_number: None,
-                customer_username: None,
-                customer_psw: None,
-                customer_status: None,
-                company: None,
                 firstname: Some("Irene".to_string()),
                 lastname: Some("Canizales".to_string()),
-                phone: None,
-                email: None,
-                address: None,
                 address_1: Some("145 Bishop's Trail".to_string()),
                 city: Some("Mountain City".to_string()),
                 state: Some("TN".to_string()),
                 zip: Some("37612".to_string()),
                 country: Some("US".to_string()),
-                shipping_address: None,
-                shipping_address_1: None,
-                shipping_city: None,
-                shipping_state: None,
-                shipping_zip: None,
-                shipping_country: None,
-                balance: None,
-                time_zone: None,
-                additional_fields: None,
-                identifier_fields: None,
-                created_at: None,
+                ..Default::default()
             },
             None,
         )
@@ -3495,7 +3355,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -3665,7 +3525,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -3846,7 +3706,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -4027,7 +3887,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -4198,7 +4058,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -4367,7 +4227,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -4518,7 +4378,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -4669,7 +4529,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -4838,7 +4698,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -5007,7 +4867,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -5197,7 +5057,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -5387,7 +5247,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -5570,7 +5430,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -5753,7 +5613,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -5946,7 +5806,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -6139,7 +5999,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -6307,7 +6167,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -6474,7 +6334,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -6641,7 +6501,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -6810,7 +6670,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -6999,7 +6859,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -7188,7 +7048,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -7379,7 +7239,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -7570,7 +7430,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -7765,7 +7625,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -7962,7 +7822,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(1000),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -8137,7 +7997,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(1000),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -8297,7 +8157,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -8470,7 +8330,7 @@ async fn main() {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
                 limit_record: Some(1000),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -8587,6 +8447,315 @@ List of parameters accepted:
 - fromRecord : initial record in query
 
 Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## GhostCard
+<details><summary><code>client.ghost_card.<a href="/src/api/resources/ghost_card/client.rs">create_ghost_card</a>(entry: Entry, request: CreateGhostCardRequestBody) -> Result&lt;CreateGhostCardResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a ghost card, a multi-use virtual debit card issued to a vendor for recurring or discretionary spend.
+
+Unlike single-use virtual cards issued as part of a payout transaction, ghost cards aren't tied to a specific payout. They're issued directly to a vendor and can be reused up to a configurable number of times within the card's spending limits.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .ghost_card
+        .create_ghost_card(
+            &Entry("8cfec2e0fa".to_string()),
+            &CreateGhostCardRequestBody {
+                vendor_id: 42,
+                expense_limit: 500.0,
+                max_number_of_uses: Some(3),
+                exact_amount: Some(false),
+                expense_limit_period: Some("monthly".to_string()),
+                billing_cycle: Some("monthly".to_string()),
+                billing_cycle_day: Some("1".to_string()),
+                daily_transaction_count: Some(5),
+                daily_amount_limit: Some(200.0),
+                transaction_amount_limit: Some(100),
+                mcc: Some("5411".to_string()),
+                tcc: Some("R".to_string()),
+                misc_1: Some("PO-98765".to_string()),
+                misc_2: Some("Dept-Finance".to_string()),
+                expiration_date: None,
+                amount: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `Entry` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vendor_id:** `String` — ID of the vendor who receives the card. The vendor must belong to the paypoint and have an active status.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expense_limit:** `f64` — Spending limit for the card. Must be greater than `0` and can't exceed the paypoint's configured payout credit limit.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiration_date:** `Option<String>` — Requested expiration date for the card. If not provided, defaults to 30 days from creation.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount:** `Option<f64>` — Initial load amount for the card. Defaults to `0`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_number_of_uses:** `Option<i64>` — Maximum number of times the card can be used. If `0` or negative, defaults to `9999`. Ignored and set to `1` when `exactAmount` is `true`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**exact_amount:** `Option<bool>` — When `true`, restricts the card to a single use. `maxNumberOfUses` is automatically set to `1` regardless of any other value provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expense_limit_period:** `Option<String>` — Time period over which `expenseLimit` applies (for example, `monthly` or `weekly`). No server-side enforcement.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**billing_cycle:** `Option<String>` — Billing cycle identifier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**billing_cycle_day:** `Option<String>` — Day within the billing cycle.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**daily_transaction_count:** `Option<i64>` — Maximum number of transactions allowed per day. Defaults to `0` (unlimited).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**daily_amount_limit:** `Option<f64>` — Maximum total spend allowed per day. Defaults to `0` (unlimited).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**transaction_amount_limit:** `Option<i64>` — Maximum spend allowed per single transaction. Defaults to `0` (unlimited).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mcc:** `Option<String>` — Merchant Category Code to restrict where the card can be used. Must be a valid MCC if provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tcc:** `Option<String>` — Transaction Category Code to restrict where the card can be used. Must be a valid TCC if provided.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**misc_1:** `Option<String>` — Custom metadata field. Stored on the card record.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**misc_2:** `Option<String>` — Custom metadata field. Stored on the card record.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ghost_card.<a href="/src/api/resources/ghost_card/client.rs">update_card</a>(entry: Entry, request: UpdateCardRequestBody) -> Result&lt;PayabliApiResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the status of a virtual card (including ghost cards) under a paypoint.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .ghost_card
+        .update_card(
+            &Entry("8cfec2e0fa".to_string()),
+            &UpdateCardRequestBody {
+                card_token: "gc_abc123def456".to_string(),
+                status: Some(CardStatus::Cancelled),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `Entry` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**card_token:** `String` — Token that uniquely identifies the card. This is the `ReferenceId` returned when the card was created.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `Option<CardStatus>` — The new status to set on the card.
     
 </dd>
 </dl>
@@ -8721,17 +8890,7 @@ async fn main() {
         .new_page(
             &"8cfec329267".to_string(),
             &PayabliPages {
-                additional_data: None,
-                credentials: None,
-                last_access: None,
-                page_content: None,
-                page_identifier: None,
-                page_settings: None,
-                published: None,
-                receipt_content: None,
-                subdomain: None,
-                total_amount: None,
-                validation_code: None,
+                ..Default::default()
             },
             Some(
                 RequestOptions::new()
@@ -8808,17 +8967,7 @@ async fn main() {
             &"8cfec329267".to_string(),
             &"pay-your-fees-1".to_string(),
             &PayabliPages {
-                additional_data: None,
-                credentials: None,
-                last_access: None,
-                page_content: None,
-                page_identifier: None,
-                page_settings: None,
-                published: None,
-                receipt_content: None,
-                subdomain: None,
-                total_amount: None,
-                validation_code: None,
+                ..Default::default()
             },
             None,
         )
@@ -9131,100 +9280,49 @@ async fn main() {
             &AddInvoiceRequest {
                 body: InvoiceDataRequest {
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
-                        customer_id: None,
                         customer_number: Some(CustomerNumberNullable("3".to_string())),
                         first_name: Some("Tamara".to_string()),
-                        identifier_fields: None,
                         last_name: Some("Bagratoni".to_string()),
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     invoice_data: Some(BillData {
-                        additional_data: None,
-                        attachments: None,
-                        company: None,
                         discount: Some(Discount(10.0)),
-                        duty_amount: None,
-                        first_name: None,
-                        freight_amount: None,
                         frequency: Some(Frequency::OneTime),
                         invoice_amount: Some(InvoiceAmount(982.37)),
                         invoice_date: Some(
                             NaiveDate::parse_from_str("2025-10-19", "%Y-%m-%d").unwrap(),
                         ),
-                        invoice_due_date: None,
-                        invoice_end_date: None,
                         invoice_number: Some(InvoiceNumber("INV-3".to_string())),
                         invoice_status: Some(Invoicestatus(1)),
                         invoice_type: Some(InvoiceType(0)),
                         items: Some(vec![
                             BillItem {
-                                item_categories: None,
-                                item_commodity_code: None,
                                 item_cost: 100.0,
                                 item_description: Some(ItemDescription(
                                     "Consultation for Georgian tours".to_string(),
                                 )),
                                 item_mode: Some(1),
-                                item_product_code: None,
                                 item_product_name: Some(ItemProductName(
                                     "Adventure Consult".to_string(),
                                 )),
                                 item_qty: Some(1),
-                                item_tax_amount: None,
-                                item_tax_rate: None,
                                 item_total_amount: Some(1.0),
-                                item_unit_of_measure: None,
+                                ..Default::default()
                             },
                             BillItem {
-                                item_categories: None,
-                                item_commodity_code: None,
                                 item_cost: 882.37,
                                 item_description: Some(ItemDescription(
                                     "Deposit for trip planning".to_string(),
                                 )),
-                                item_mode: None,
-                                item_product_code: None,
                                 item_product_name: Some(ItemProductName("Deposit ".to_string())),
                                 item_qty: Some(1),
-                                item_tax_amount: None,
-                                item_tax_rate: None,
                                 item_total_amount: Some(1.0),
-                                item_unit_of_measure: None,
+                                ..Default::default()
                             },
                         ]),
-                        last_name: None,
-                        notes: None,
-                        payment_terms: None,
-                        purchase_order: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_email: None,
-                        shipping_from_zip: None,
-                        shipping_phone: None,
-                        shipping_state: None,
-                        shipping_zip: None,
-                        summary_commodity_code: None,
-                        tax: None,
-                        terms_conditions: None,
+                        ..Default::default()
                     }),
-                    scheduled_options: None,
+                    ..Default::default()
                 },
                 force_customer_creation: None,
             },
@@ -9459,59 +9557,24 @@ async fn main() {
             332,
             &EditInvoiceRequest {
                 body: InvoiceDataRequest {
-                    customer_data: None,
                     invoice_data: Some(BillData {
-                        additional_data: None,
-                        attachments: None,
-                        company: None,
-                        discount: None,
-                        duty_amount: None,
-                        first_name: None,
-                        freight_amount: None,
-                        frequency: None,
                         invoice_amount: Some(InvoiceAmount(982.37)),
                         invoice_date: Some(
                             NaiveDate::parse_from_str("2025-10-19", "%Y-%m-%d").unwrap(),
                         ),
-                        invoice_due_date: None,
-                        invoice_end_date: None,
                         invoice_number: Some(InvoiceNumber("INV-6".to_string())),
-                        invoice_status: None,
-                        invoice_type: None,
                         items: Some(vec![BillItem {
-                            item_categories: None,
-                            item_commodity_code: None,
                             item_cost: 882.37,
                             item_description: Some(ItemDescription(
                                 "Deposit for trip planning".to_string(),
                             )),
-                            item_mode: None,
-                            item_product_code: None,
                             item_product_name: Some(ItemProductName("Deposit".to_string())),
                             item_qty: Some(1),
-                            item_tax_amount: None,
-                            item_tax_rate: None,
-                            item_total_amount: None,
-                            item_unit_of_measure: None,
+                            ..Default::default()
                         }]),
-                        last_name: None,
-                        notes: None,
-                        payment_terms: None,
-                        purchase_order: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_email: None,
-                        shipping_from_zip: None,
-                        shipping_phone: None,
-                        shipping_state: None,
-                        shipping_zip: None,
-                        summary_commodity_code: None,
-                        tax: None,
-                        terms_conditions: None,
+                        ..Default::default()
                     }),
-                    scheduled_options: None,
+                    ..Default::default()
                 },
                 force_customer_creation: None,
             },
@@ -9595,7 +9658,7 @@ async fn main() {
             1,
             &"filename".to_string(),
             &GetAttachedFileFromInvoiceQueryRequest {
-                return_object: None,
+                ..Default::default()
             },
             None,
         )
@@ -9832,8 +9895,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -10013,8 +10075,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -10193,6 +10254,7 @@ async fn main() {
             &SendInvoiceQueryRequest {
                 attachfile: Some(true),
                 mail_2: Some("tamara@example.com".to_string()),
+                ..Default::default()
             },
             None,
         )
@@ -10346,7 +10408,6 @@ async fn main() {
         .add_item(
             &"47cae3d74".to_string(),
             &LineItem {
-                item_categories: None,
                 item_commodity_code: Some(ItemCommodityCode("010".to_string())),
                 item_cost: 12.45,
                 item_description: Some(ItemDescription("Deposit for materials".to_string())),
@@ -10355,6 +10416,7 @@ async fn main() {
                 item_product_name: Some(ItemProductName("Materials deposit".to_string())),
                 item_qty: 1,
                 item_unit_of_measure: Some(ItemUnitofMeasure("SqFt".to_string())),
+                ..Default::default()
             },
             None,
         )
@@ -10558,7 +10620,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -10719,15 +10781,9 @@ async fn main() {
         .update_item(
             700,
             &LineItem {
-                item_categories: None,
-                item_commodity_code: None,
                 item_cost: 12.45,
-                item_description: None,
-                item_mode: None,
-                item_product_code: None,
-                item_product_name: None,
                 item_qty: 1,
-                item_unit_of_measure: None,
+                ..Default::default()
             },
             None,
         )
@@ -10807,27 +10863,8 @@ async fn main() {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     invoice_data: None,
@@ -10835,14 +10872,9 @@ async fn main() {
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
                         cardcvv: Some(Cardcvv("999".to_string())),
@@ -11024,7 +11056,9 @@ async fn main() {
                 payment_details: CapturePaymentDetails {
                     total_amount: 105.0,
                     service_fee: Some(5.0),
+                    ..Default::default()
                 },
+                ..Default::default()
             },
             None,
         )
@@ -11099,35 +11133,17 @@ async fn main() {
         .credit(
             &RequestCredit {
                 customer_data: PayorDataRequest {
-                    additional_data: None,
                     billing_address_1: Some(BillingAddressNullable(
                         "5127 Linkwood ave".to_string(),
                     )),
-                    billing_address_2: None,
-                    billing_city: None,
-                    billing_country: None,
-                    billing_email: None,
-                    billing_phone: None,
-                    billing_state: None,
-                    billing_zip: None,
-                    company: None,
-                    customer_id: None,
                     customer_number: Some(CustomerNumberNullable("100".to_string())),
-                    first_name: None,
-                    identifier_fields: None,
-                    last_name: None,
-                    shipping_address_1: None,
-                    shipping_address_2: None,
-                    shipping_city: None,
-                    shipping_country: None,
-                    shipping_state: None,
-                    shipping_zip: None,
+                    ..Default::default()
                 },
                 entrypoint: Some(Entrypointfield("my-entrypoint".to_string())),
                 payment_details: PaymentDetailCredit {
-                    currency: None,
                     service_fee: Some(0.0),
                     total_amount: 1.0,
+                    ..Default::default()
                 },
                 payment_method: RequestCreditPaymentMethod {
                     ach_account: Some(Achaccount("88354454".to_string())),
@@ -11363,27 +11379,8 @@ async fn main() {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     invoice_data: None,
@@ -11391,14 +11388,9 @@ async fn main() {
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
                         cardcvv: Some(Cardcvv("999".to_string())),
@@ -11684,13 +11676,13 @@ async fn main() {
                 amount: Some(100.0),
                 order_description: Some(Orderdescription("Materials deposit".to_string())),
                 refund_details: Some(RefundDetail {
-                    categories: None,
                     split_refunding: Some(vec![
                         SplitFundingRefundContent {
                             account_id: Some("187-342".to_string()),
                             amount: Some(60.0),
                             description: Some("Refunding undelivered materials".to_string()),
                             origination_entry_point: Some("7f1a381696".to_string()),
+                            ..Default::default()
                         },
                         SplitFundingRefundContent {
                             account_id: Some("187-343".to_string()),
@@ -11699,12 +11691,13 @@ async fn main() {
                                 "Refunding deposit for undelivered materials".to_string(),
                             ),
                             origination_entry_point: Some("7f1a381696".to_string()),
+                            ..Default::default()
                         },
                     ]),
+                    ..Default::default()
                 }),
                 source: Some(Source("api".to_string())),
-                ipaddress: None,
-                order_id: None,
+                ..Default::default()
             },
             Some(
                 RequestOptions::new()
@@ -11903,6 +11896,7 @@ async fn main() {
             &"45-as456777hhhhhhhhhh77777777-324".to_string(),
             &SendReceipt2TransQueryRequest {
                 email: Some("example@email.com".to_string()),
+                ..Default::default()
             },
             None,
         )
@@ -12177,27 +12171,8 @@ async fn main() {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     invoice_data: None,
@@ -12205,14 +12180,9 @@ async fn main() {
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
                         cardcvv: Some(Cardcvv("999".to_string())),
@@ -12314,27 +12284,8 @@ async fn main() {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     invoice_data: None,
@@ -12342,14 +12293,9 @@ async fn main() {
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
                         cardcvv: Some(Cardcvv("999".to_string())),
@@ -12441,7 +12387,9 @@ async fn main() {
                 payment_details: CapturePaymentDetails {
                     total_amount: 105.0,
                     service_fee: Some(5.0),
+                    ..Default::default()
                 },
+                ..Default::default()
             },
             None,
         )
@@ -12733,80 +12681,25 @@ async fn main() {
             &AuthorizeOutRequest {
                 body: AuthorizePayoutBody {
                     entry_point: Entrypointfield("48acde49".to_string()),
-                    source: None,
-                    order_id: None,
                     order_description: Some(Orderdescription("Window Painting".to_string())),
                     payment_method: AuthorizePaymentMethod {
                         method: "managed".to_string(),
-                        ach_holder: None,
-                        ach_routing: None,
-                        ach_account: None,
-                        ach_account_type: None,
-                        ach_code: None,
-                        ach_holder_type: None,
-                        stored_method_id: None,
-                        initiator: None,
-                        stored_method_usage_type: None,
+                        ..Default::default()
                     },
                     payment_details: RequestOutAuthorizePaymentDetails {
-                        check_number: None,
-                        currency: None,
-                        service_fee: None,
                         total_amount: Some(47.0),
                         unbundled: Some(false),
+                        ..Default::default()
                     },
                     vendor_data: RequestOutAuthorizeVendorData {
                         vendor_number: Some(VendorNumber("7895433".to_string())),
-                        name_1: None,
-                        name_2: None,
-                        ein: None,
-                        phone: None,
-                        email: None,
-                        address_1: None,
-                        city: None,
-                        state: None,
-                        zip: None,
-                        country: None,
-                        mcc: None,
-                        contacts: None,
-                        billing_data: None,
-                        vendor_status: None,
-                        remit_address_1: None,
-                        remit_address_2: None,
-                        remit_city: None,
-                        remit_state: None,
-                        remit_zip: None,
-                        remit_country: None,
-                        customer_vendor_account: None,
-                        custom_field_1: None,
-                        custom_field_2: None,
-                        additional_data: None,
-                        address_2: None,
-                        internal_reference_id: None,
-                        location_code: None,
-                        payee_name_1: None,
-                        payee_name_2: None,
-                        payment_method: None,
-                        vendor_id: None,
+                        ..Default::default()
                     },
                     invoice_data: vec![RequestOutAuthorizeInvoiceData {
-                        invoice_number: None,
-                        net_amount: None,
-                        invoice_date: None,
-                        due_date: None,
-                        comments: None,
-                        lot_number: None,
                         bill_id: Some(BillId(54323)),
-                        discount: None,
-                        terms: None,
-                        accounting_field_1: None,
-                        accounting_field_2: None,
-                        additional_data: None,
-                        attachments: None,
+                        ..Default::default()
                     }],
-                    account_id: None,
-                    subdomain: None,
-                    subscription_id: None,
+                    ..Default::default()
                 },
                 allow_duplicated_bills: None,
                 do_not_create_bills: None,
@@ -13601,7 +13494,9 @@ async fn main() {
                         ach_account: Some("9876543210".to_string()),
                         ach_account_type: Some("savings".to_string()),
                         ach_holder_type: Some(AchHolderType::Business),
+                        ..Default::default()
                     },
+                    ..Default::default()
                 },
             },
             None,
@@ -13679,9 +13574,7 @@ async fn main() {
                     event_type: Some(
                         NotificationStandardRequestContentEventType::CreatedApplication,
                     ),
-                    internal_data: None,
-                    transaction_id: None,
-                    web_header_parameters: None,
+                    ..Default::default()
                 }),
                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
                 method: NotificationStandardRequestMethod::Web,
@@ -13882,9 +13775,7 @@ async fn main() {
             &UpdateNotificationRequest::NotificationStandardRequest(NotificationStandardRequest {
                 content: Some(NotificationStandardRequestContent {
                     event_type: Some(NotificationStandardRequestContentEventType::ApprovedPayment),
-                    internal_data: None,
-                    transaction_id: None,
-                    web_header_parameters: None,
+                    ..Default::default()
                 }),
                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
                 method: NotificationStandardRequestMethod::Email,
@@ -14043,7 +13934,7 @@ async fn main() {
                     notification_event: Some("ActivatedMerchant".to_string()),
                     succeeded: Some(true),
                     org_id: Some(12345),
-                    paypoint_id: None,
+                    ..Default::default()
                 },
                 page: None,
             },
@@ -14332,10 +14223,7 @@ async fn main() {
         .ocr_document_form(
             &TypeResult("typeResult".to_string()),
             &FileContentImageOnly {
-                ftype: None,
-                filename: None,
-                furl: None,
-                f_content: None,
+                ..Default::default()
             },
             None,
         )
@@ -14408,10 +14296,7 @@ async fn main() {
         .ocr_document_json(
             &TypeResult("typeResult".to_string()),
             &FileContentImageOnly {
-                ftype: None,
-                filename: None,
-                furl: None,
-                f_content: None,
+                ..Default::default()
             },
             None,
         )
@@ -14492,13 +14377,14 @@ async fn main() {
                     billing_country: Some(BillingCountryNullable("US".to_string())),
                     billing_state: Some(BillingStateNullable("TN".to_string())),
                     billing_zip: Some(BillingZip("37615".to_string())),
+                    ..Default::default()
                 }),
                 contacts: Some(ContactsField(vec![Contacts {
                     contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
-                    additional_data: None,
+                    ..Default::default()
                 }])),
                 has_billing: Some(true),
                 has_residual: Some(true),
@@ -14512,6 +14398,7 @@ async fn main() {
                     filename: Some("my-doc.pdf".to_string()),
                     ftype: Some(FileContentFtype::Pdf),
                     furl: Some("https://mysite.com/my-doc.pdf".to_string()),
+                    ..Default::default()
                 }),
                 org_name: Orgname("Pilgrim Planner".to_string()),
                 org_parent_id: Some(OrgParentId(236)),
@@ -14810,7 +14697,7 @@ async fn main() {
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
-                    additional_data: None,
+                    ..Default::default()
                 }])),
                 org_address: Some(Orgaddress("123 Walnut Street".to_string())),
                 org_city: Some(Orgcity("Johnson City".to_string())),
@@ -14823,13 +14710,7 @@ async fn main() {
                 org_type: Some(Orgtype(0)),
                 org_website: Some(Orgwebsite("www.pilgrimageplanner.com".to_string())),
                 org_zip: Some(Orgzip("37615".to_string())),
-                services: None,
-                billing_info: None,
-                has_billing: None,
-                has_residual: None,
-                org_logo: None,
-                org_parent_id: None,
-                reply_to_email: None,
+                ..Default::default()
             },
             None,
         )
@@ -15324,48 +15205,57 @@ async fn main() {
                 header: Some("Contact Us".to_string()),
                 order: Some(Order(0)),
                 payment_icons: Some(true),
-                phone_label: Some("Phone".to_string())
+                phone_label: Some("Phone".to_string()),
+                ..Default::default()
             }),
             invoices: Some(InvoiceElement {
                 enabled: Some(Enabled(true)),
                 invoice_link: Some(LabelElement {
                     enabled: Some(Enabled(true)),
                     label: Some("View Invoice".to_string()),
-                    order: Some(Order(0))
+                    order: Some(Order(0)),
+                    ..Default::default()
                 }),
                 order: Some(Order(0)),
                 view_invoice_details: Some(LabelElement {
                     enabled: Some(Enabled(true)),
                     label: Some("Invoice Details".to_string()),
-                    order: Some(Order(0))
-                })
+                    order: Some(Order(0)),
+                    ..Default::default()
+                }),
+                ..Default::default()
             }),
             logo: Some(Element {
                 enabled: Some(Enabled(true)),
-                order: Some(Order(0))
+                order: Some(Order(0)),
+                ..Default::default()
             }),
             message_before_paying: Some(LabelElement {
                 enabled: Some(Enabled(true)),
                 label: Some("Please review your payment details".to_string()),
-                order: Some(Order(0))
+                order: Some(Order(0)),
+                ..Default::default()
             }),
             notes: Some(NoteElement {
                 enabled: Some(Enabled(true)),
                 header: Some("Additional Notes".to_string()),
                 order: Some(Order(0)),
                 placeholder: Some("Enter any additional notes here".to_string()),
-                value: Some("".to_string())
+                value: Some("".to_string()),
+                ..Default::default()
             }),
             page: Some(PageElement {
                 description: Some("Complete your payment securely".to_string()),
                 enabled: Some(Enabled(true)),
                 header: Some("Payment Page".to_string()),
-                order: Some(Order(0))
+                order: Some(Order(0)),
+                ..Default::default()
             }),
             payment_button: Some(LabelElement {
                 enabled: Some(Enabled(true)),
                 label: Some("Pay Now".to_string()),
-                order: Some(Order(0))
+                order: Some(Order(0)),
+                ..Default::default()
             }),
             payment_methods: Some(MethodElement {
                 all_methods_checked: Some(true),
@@ -15374,20 +15264,23 @@ async fn main() {
                 methods: Some(MethodsList {
                     amex: Some(true),
                     apple_pay: Some(true),
-                    google_pay: None,
                     discover: Some(true),
                     e_check: Some(true),
                     mastercard: Some(true),
-                    visa: Some(true)
+                    visa: Some(true),
+                    ..Default::default()
                 }),
                 order: Some(Order(0)),
                 settings: Some(MethodElementSettings {
                     apple_pay: Some(MethodElementSettingsApplePay {
                         button_style: Some(MethodElementSettingsApplePayButtonStyle::Black),
                         button_type: Some(MethodElementSettingsApplePayButtonType::Pay),
-                        language: Some(MethodElementSettingsApplePayLanguage::EnUs)
-                    })
-                })
+                        language: Some(MethodElementSettingsApplePayLanguage::EnUs),
+                        ..Default::default()
+                    }),
+                    ..Default::default()
+                }),
+                ..Default::default()
             }),
             payor: Some(PayorElement {
                 enabled: Some(Enabled(true)),
@@ -15401,15 +15294,18 @@ async fn main() {
                     required: Some(true),
                     validation: Some("alpha".to_string()),
                     value: Some("".to_string()),
-                    width: Some(0)
+                    width: Some(0),
+                    ..Default::default()
                 }]),
                 header: Some("Payor Information".to_string()),
-                order: Some(Order(0))
+                order: Some(Order(0)),
+                ..Default::default()
             }),
             review: Some(HeaderElement {
                 enabled: Some(Enabled(true)),
                 header: Some("Review Payment".to_string()),
-                order: Some(Order(0))
+                order: Some(Order(0)),
+                ..Default::default()
             }),
             settings: Some(PagelinkSetting {
                 color: Some("#000000".to_string()),
@@ -15419,11 +15315,14 @@ async fn main() {
                     f_content: Some("PHN2ZyB2aWV3Qm94PSIwIDAgODAwIDEwMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPCEtLSBCYWNrZ3JvdW5kIC0tPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0id2hpdGUiLz4KICAKICA8IS0tIENvbXBhbnkgSGVhZGVyIC0tPgogIDx0ZXh0IHg9IjQwIiB5PSI2MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzJjM2U1MCI+R3J1enlhIEFkdmVudHVyZSBPdXRmaXR0ZXJzPC90ZXh0PgogIDxsaW5lIHgxPSI0MCIgeTE9IjgwIiB4Mj0iNzYwIiB5Mj0iODAiIHN0cm9rZT0iIzJjM2U1MCIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgCiAgPCEtLSBDb21wYW55IERldGFpbHMgLS0+CiAgPHRleHQgeD0iNDAiIHk9IjExMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzQ0OTVlIj4xMjMgTW91bnRhaW4gVmlldyBSb2FkPC90ZXh0PgogIDx0ZXh0IHg9IjQwIiB5PSIxMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+VGJpbGlzaSwgR2VvcmdpYSAwMTA1PC90ZXh0PgogIDx0ZXh0IHg9IjQwIiB5PSIxNTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+VGVsOiArOTk1IDMyIDEyMyA0NTY3PC90ZXh0PgogIDx0ZXh0IHg9IjQwIiB5PSIxNzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+RW1haWw6IGluZm9AZ3J1enlhYWR2ZW50dXJlcy5jb208L3RleHQ+CgogIDwhLS0gSW52b2ljZSBUaXRsZSAtLT4KICA8dGV4dCB4PSI2MDAiIHk9IjExMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzJjM2U1MCI+SU5WT0lDRTwvdGV4dD4KICA8dGV4dCB4PSI2MDAiIHk9IjE0MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzQ0OTVlIj5EYXRlOiAxMi8xMS8yMDI0PC90ZXh0PgogIDx0ZXh0IHg9IjYwMCIgeT0iMTYwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzNDQ5NWUiPkludm9pY2UgIzogR1JaLTIwMjQtMTEyMzwvdGV4dD4KCiAgPCEtLSBCaWxsIFRvIFNlY3Rpb24gLS0+CiAgPHRleHQgeD0iNDAiIHk9IjIyMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzJjM2U1MCI+QklMTCBUTzo8L3RleHQ+CiAgPHJlY3QgeD0iNDAiIHk9IjIzNSIgd2lkdGg9IjMwMCIgaGVpZ2h0PSI4MCIgZmlsbD0iI2Y3ZjlmYSIvPgogIDx0ZXh0IHg9IjUwIiB5PSIyNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+W0N1c3RvbWVyIE5hbWVdPC90ZXh0PgogIDx0ZXh0IHg9IjUwIiB5PSIyODAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+W0FkZHJlc3MgTGluZSAxXTwvdGV4dD4KICA8dGV4dCB4PSI1MCIgeT0iMzAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzNDQ5NWUiPltDaXR5LCBDb3VudHJ5XTwvdGV4dD4KCiAgPCEtLSBUYWJsZSBIZWFkZXJzIC0tPgogIDxyZWN0IHg9IjQwIiB5PSIzNDAiIHdpZHRoPSI3MjAiIGhlaWdodD0iMzAiIGZpbGw9IiMyYzNlNTAiLz4KICA8dGV4dCB4PSI1MCIgeT0iMzYwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSI+RGVzY3JpcHRpb248L3RleHQ+CiAgPHRleHQgeD0iNDUwIiB5PSIzNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIj5RdWFudGl0eTwvdGV4dD4KICA8dGV4dCB4PSI1NTAiIHk9IjM2MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiPlJhdGU8L3RleHQ+CiAgPHRleHQgeD0iNjgwIiB5PSIzNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIj5BbW91bnQ8L3RleHQ+CgogIDwhLS0gVGFibGUgUm93cyAtLT4KICA8cmVjdCB4PSI0MCIgeT0iMzcwIiB3aWR0aD0iNzIwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjZjdmOWZhIi8+CiAgPHRleHQgeD0iNTAiIHk9IjM5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzQ0OTVlIj5Nb3VudGFpbiBDbGltYmluZyBFcXVpcG1lbnQgUmVudGFsPC90ZXh0PgogIDx0ZXh0IHg9IjQ1MCIgeT0iMzkwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzNDQ5NWUiPjE8L3RleHQ+CiAgPHRleHQgeD0iNTUwIiB5PSIzOTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+JDI1MC4wMDwvdGV4dD4KICA8dGV4dCB4PSI2ODAiIHk9IjM5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzQ0OTVlIj4kMjUwLjAwPC90ZXh0PgoKICA8cmVjdCB4PSI0MCIgeT0iNDAwIiB3aWR0aD0iNzIwIiBoZWlnaHQ9IjMwIiBmaWxsPSJ3aGl0ZSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI0MjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+R3VpZGVkIFRyZWsgUGFja2FnZSAtIDIgRGF5czwvdGV4dD4KICA8dGV4dCB4PSI0NTAiIHk9IjQyMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzQ0OTVlIj4xPC90ZXh0PgogIDx0ZXh0IHg9IjU1MCIgeT0iNDIwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzNDQ5NWUiPiQ0MDAuMDA8L3RleHQ+CiAgPHRleHQgeD0iNjgwIiB5PSI0MjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+JDQwMC4wMDwvdGV4dD4KCiAgPHJlY3QgeD0iNDAiIHk9IjQzMCIgd2lkdGg9IjcyMCIgaGVpZ2h0PSIzMCIgZmlsbD0iI2Y3ZjlmYSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI0NTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+U2FmZXR5IEVxdWlwbWVudCBQYWNrYWdlPC90ZXh0PgogIDx0ZXh0IHg9IjQ1MCIgeT0iNDUwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzNDQ5NWUiPjE8L3RleHQ+CiAgPHRleHQgeD0iNTUwIiB5PSI0NTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+JDE1MC4wMDwvdGV4dD4KICA8dGV4dCB4PSI2ODAiIHk9IjQ1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzQ0OTVlIj4kMTUwLjAwPC90ZXh0PgoKICA8IS0tIFRvdGFscyAtLT4KICA8bGluZSB4MT0iNDAiIHkxPSI0ODAiIHgyPSI3NjAiIHkyPSI0ODAiIHN0cm9rZT0iIzJjM2U1MCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHRleHQgeD0iNTUwIiB5PSI1MTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMzNDQ5NWUiPlN1YnRvdGFsOjwvdGV4dD4KICA8dGV4dCB4PSI2ODAiIHk9IjUxMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzQ0OTVlIj4kODAwLjAwPC90ZXh0PgogIDx0ZXh0IHg9IjU1MCIgeT0iNTM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzQ0OTVlIj5UYXggKDE4JSk6PC90ZXh0PgogIDx0ZXh0IHg9IjY4MCIgeT0iNTM1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzNDQ5NWUiPiQxNDQuMDA8L3RleHQ+CiAgPHRleHQgeD0iNTUwIiB5PSI1NzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMyYzNlNTAiPlRvdGFsOjwvdGV4dD4KICA8dGV4dCB4PSI2ODAiIHk9IjU3MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzJjM2U1MCI+JDk0NC4wMDwvdGV4dD4KCiAgPCEtLSBQYXltZW50IFRlcm1zIC0tPgogIDx0ZXh0IHg9IjQwIiB5PSI2NDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMyYzNlNTAiPlBheW1lbnQgVGVybXM8L3RleHQ+CiAgPHRleHQgeD0iNDAiIHk9IjY3MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzQ0OTVlIj5QYXltZW50IGlzIGR1ZSB3aXRoaW4gMzAgZGF5czwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iNjkwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzNDQ5NWUiPlBsZWFzZSBpbmNsdWRlIGludm9pY2UgbnVtYmVyIG9uIHBheW1lbnQ8L3RleHQ+CgogIDwhLS0gQmFuayBEZXRhaWxzIC0tPgogIDx0ZXh0IHg9IjQwIiB5PSI3MzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMyYzNlNTAiPkJhbmsgRGV0YWlsczwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iNzYwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzNDQ5NWUiPkJhbms6IEJhbmsgb2YgR2VvcmdpYTwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iNzgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiMzNDQ5NWUiPklCQU46IEdFMTIzNDU2Nzg5MDEyMzQ1Njc4PC90ZXh0PgogIDx0ZXh0IHg9IjQwIiB5PSI4MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM0NDk1ZSI+U1dJRlQ6IEJBR0FHRTIyPC90ZXh0PgoKICA8IS0tIEZvb3RlciAtLT4KICA8bGluZSB4MT0iNDAiIHkxPSI5MDAiIHgyPSI3NjAiIHkyPSI5MDAiIHN0cm9rZT0iIzJjM2U1MCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHRleHQgeD0iNDAiIHk9IjkzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSIjN2Y4YzhkIj5UaGFuayB5b3UgZm9yIGNob29zaW5nIEdydXp5YSBBZHZlbnR1cmUgT3V0Zml0dGVyczwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iOTUwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM3ZjhjOGQiPnd3dy5ncnV6eWFhZHZlbnR1cmVzLmNvbTwvdGV4dD4KPC9zdmc+Cg==".to_string()),
                     filename: Some("logo.jpg".to_string()),
                     ftype: Some(FileContentFtype::Jpg),
-                    furl: Some("".to_string())
+                    furl: Some("".to_string()),
+                    ..Default::default()
                 }),
                 redirect_after_approve: Some(true),
-                redirect_after_approve_url: Some("https://example.com/success".to_string())
-            })
+                redirect_after_approve_url: Some("https://example.com/success".to_string()),
+                ..Default::default()
+            }),
+            ..Default::default()
         },
         amount_fixed: None
     }, None).await;
@@ -15520,15 +15419,18 @@ async fn main() {
                         order: Some(Order(0)),
                         payment_icons: Some(true),
                         phone_label: Some("Phone".to_string()),
+                        ..Default::default()
                     }),
                     logo: Some(Element {
                         enabled: Some(Enabled(true)),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
                     message_before_paying: Some(LabelElement {
                         enabled: Some(Enabled(true)),
                         label: Some("Please review your payment details".to_string()),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
                     notes: Some(NoteElement {
                         enabled: Some(Enabled(true)),
@@ -15536,17 +15438,20 @@ async fn main() {
                         order: Some(Order(0)),
                         placeholder: Some("Enter any additional notes here".to_string()),
                         value: Some("".to_string()),
+                        ..Default::default()
                     }),
                     page: Some(PageElement {
                         description: Some("Get paid securely".to_string()),
                         enabled: Some(Enabled(true)),
                         header: Some("Payment Page".to_string()),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
                     payment_button: Some(LabelElement {
                         enabled: Some(Enabled(true)),
                         label: Some("Pay Now".to_string()),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
                     payment_methods: Some(MethodElementOut {
                         all_methods_checked: Some(true),
@@ -15558,24 +15463,24 @@ async fn main() {
                             ach: Some(true),
                             check: Some(true),
                             vcard: Some(true),
+                            ..Default::default()
                         }),
                         order: Some(0),
                         show_preview_virtual_card: Some(true),
+                        ..Default::default()
                     }),
                     review: Some(HeaderElement {
                         enabled: Some(Enabled(true)),
                         header: Some("Review Payment".to_string()),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
-                    bills: None,
                     settings: Some(PagelinkSetting {
                         color: Some("#000000".to_string()),
-                        custom_css_url: None,
                         language: Some("en".to_string()),
-                        page_logo: None,
-                        redirect_after_approve: None,
-                        redirect_after_approve_url: None,
+                        ..Default::default()
                     }),
+                    ..Default::default()
                 },
                 amount_fixed: None,
             },
@@ -15800,13 +15705,7 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .payment_link
-        .push_pay_link_from_id(
-            &"payLinkId".to_string(),
-            &PushPayLinkRequest::Sms {
-                data: PushPayLinkRequestSms {},
-            },
-            None,
-        )
+        .push_pay_link_from_id(&"payLinkId".to_string(), &PushPayLinkRequest::sms(), None)
         .await;
 }
 ```
@@ -15875,7 +15774,9 @@ async fn main() {
         .payment_link
         .refresh_pay_link_from_id(
             &"payLinkId".to_string(),
-            &RefreshPayLinkFromIdQueryRequest { amount_fixed: None },
+            &RefreshPayLinkFromIdQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -15956,7 +15857,7 @@ async fn main() {
             &"payLinkId".to_string(),
             &SendPayLinkFromIdQueryRequest {
                 mail_2: Some("jo@example.com; ceo@example.com".to_string()),
-                attachfile: None,
+                ..Default::default()
             },
             None,
         )
@@ -16051,19 +15952,15 @@ async fn main() {
                     order: Some(Order(0)),
                     placeholder: Some("Enter any additional notes here".to_string()),
                     value: Some("".to_string()),
+                    ..Default::default()
                 }),
                 payment_button: Some(LabelElement {
                     enabled: Some(Enabled(true)),
                     label: Some("Pay Now".to_string()),
                     order: Some(Order(0)),
+                    ..Default::default()
                 }),
-                contact_us: None,
-                logo: None,
-                message_before_paying: None,
-                page: None,
-                payment_methods: None,
-                review: None,
-                settings: None,
+                ..Default::default()
             },
             None,
         )
@@ -16220,15 +16117,18 @@ async fn main() {
                         order: Some(Order(0)),
                         payment_icons: Some(true),
                         phone_label: Some("Phone".to_string()),
+                        ..Default::default()
                     }),
                     logo: Some(Element {
                         enabled: Some(Enabled(true)),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
                     message_before_paying: Some(LabelElement {
                         enabled: Some(Enabled(true)),
                         label: Some("Please review your payment details".to_string()),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
                     notes: Some(NoteElement {
                         enabled: Some(Enabled(true)),
@@ -16236,17 +16136,20 @@ async fn main() {
                         order: Some(Order(0)),
                         placeholder: Some("Enter any additional notes here".to_string()),
                         value: Some("".to_string()),
+                        ..Default::default()
                     }),
                     page: Some(PageElement {
                         description: Some("Get paid securely".to_string()),
                         enabled: Some(Enabled(true)),
                         header: Some("Payment Page".to_string()),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
                     payment_button: Some(LabelElement {
                         enabled: Some(Enabled(true)),
                         label: Some("Pay Now".to_string()),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
                     payment_methods: Some(MethodElementOut {
                         all_methods_checked: Some(true),
@@ -16258,24 +16161,24 @@ async fn main() {
                             ach: Some(true),
                             check: Some(true),
                             vcard: Some(true),
+                            ..Default::default()
                         }),
                         order: Some(0),
                         show_preview_virtual_card: Some(true),
+                        ..Default::default()
                     }),
                     review: Some(HeaderElement {
                         enabled: Some(Enabled(true)),
                         header: Some("Review Payment".to_string()),
                         order: Some(Order(0)),
+                        ..Default::default()
                     }),
-                    bills: None,
                     settings: Some(PagelinkSetting {
                         color: Some("#000000".to_string()),
-                        custom_css_url: None,
                         language: Some("en".to_string()),
-                        page_logo: None,
-                        redirect_after_approve: None,
-                        redirect_after_approve_url: None,
+                        ..Default::default()
                     }),
+                    ..Default::default()
                 },
             },
             None,
@@ -16381,9 +16284,9 @@ async fn main() {
         .patch_out_payment_link(
             &"2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234".to_string(),
             &PatchOutPaymentLinkRequest {
-                bill_page_data: None,
                 expiration_date: Some("2026-06-01T00:00:00Z".to_string()),
                 status: Some(PaymentLinkStatus::Active),
+                ..Default::default()
             },
             None,
         )
@@ -16463,15 +16366,18 @@ async fn main() {
                     order: Some(Order(0)),
                     payment_icons: Some(true),
                     phone_label: Some("Phone".to_string()),
+                    ..Default::default()
                 }),
                 logo: Some(Element {
                     enabled: Some(Enabled(true)),
                     order: Some(Order(0)),
+                    ..Default::default()
                 }),
                 message_before_paying: Some(LabelElement {
                     enabled: Some(Enabled(true)),
                     label: Some("Please review your payment details".to_string()),
                     order: Some(Order(0)),
+                    ..Default::default()
                 }),
                 notes: Some(NoteElement {
                     enabled: Some(Enabled(true)),
@@ -16479,17 +16385,20 @@ async fn main() {
                     order: Some(Order(0)),
                     placeholder: Some("Enter any additional notes here".to_string()),
                     value: Some("".to_string()),
+                    ..Default::default()
                 }),
                 page: Some(PageElement {
                     description: Some("Get paid securely".to_string()),
                     enabled: Some(Enabled(true)),
                     header: Some("Payment Page".to_string()),
                     order: Some(Order(0)),
+                    ..Default::default()
                 }),
                 payment_button: Some(LabelElement {
                     enabled: Some(Enabled(true)),
                     label: Some("Pay Now".to_string()),
                     order: Some(Order(0)),
+                    ..Default::default()
                 }),
                 payment_methods: Some(MethodElementOut {
                     all_methods_checked: Some(true),
@@ -16501,24 +16410,24 @@ async fn main() {
                         ach: Some(true),
                         check: Some(true),
                         vcard: Some(true),
+                        ..Default::default()
                     }),
                     order: Some(0),
                     show_preview_virtual_card: Some(true),
+                    ..Default::default()
                 }),
                 review: Some(HeaderElement {
                     enabled: Some(Enabled(true)),
                     header: Some("Review Payment".to_string()),
                     order: Some(Order(0)),
+                    ..Default::default()
                 }),
-                bills: None,
                 settings: Some(PagelinkSetting {
                     color: Some("#000000".to_string()),
-                    custom_css_url: None,
                     language: Some("en".to_string()),
-                    page_logo: None,
-                    redirect_after_approve: None,
-                    redirect_after_approve_url: None,
+                    ..Default::default()
                 }),
+                ..Default::default()
             },
             None,
         )
@@ -16593,13 +16502,16 @@ async fn main() {
             &AddPaymentMethodDomainRequest {
                 apple_pay: Some(AddPaymentMethodDomainRequestApplePay {
                     is_enabled: Some(IsEnabled(true)),
+                    ..Default::default()
                 }),
                 google_pay: Some(AddPaymentMethodDomainRequestGooglePay {
                     is_enabled: Some(IsEnabled(true)),
+                    ..Default::default()
                 }),
                 domain_name: Some(DomainName("checkout.example.com".to_string())),
                 entity_id: Some(EntityId(109)),
                 entity_type: Some(EntityType("paypoint".to_string())),
+                ..Default::default()
             },
             None,
         )
@@ -16906,8 +16818,7 @@ async fn main() {
             &ListPaymentMethodDomainsQueryRequest {
                 entity_id: Some(1147),
                 entity_type: Some("paypoint".to_string()),
-                from_record: None,
-                limit_record: None,
+                ..Default::default()
             },
             None,
         )
@@ -17014,10 +16925,13 @@ async fn main() {
             &UpdatePaymentMethodDomainRequest {
                 apple_pay: Some(UpdatePaymentMethodDomainRequestWallet {
                     is_enabled: Some(IsEnabled(false)),
+                    ..Default::default()
                 }),
                 google_pay: Some(UpdatePaymentMethodDomainRequestWallet {
                     is_enabled: Some(IsEnabled(false)),
+                    ..Default::default()
                 }),
+                ..Default::default()
             },
             None,
         )
@@ -17121,6 +17035,306 @@ async fn main() {
 <dd>
 
 **domain_id:** `String` — The payment method domain's ID in Payabli.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## PayoutSubscription
+<details><summary><code>client.payout_subscription.<a href="/src/api/resources/payout_subscription/client.rs">create_payout_subscription</a>(request: PayoutSubscriptionRequestBody) -> Result&lt;AddPayoutSubscriptionResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a payout subscription to automatically send payouts to a vendor on a recurring schedule. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for a step-by-step guide.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payout_subscription
+        .create_payout_subscription(
+            &PayoutSubscriptionRequestBody {
+                entry_point: Entrypointfield("d193cf9a46".to_string()),
+                payment_method: AuthorizePaymentMethod {
+                    method: "ach".to_string(),
+                    ach_holder: Some("Herman Coatings".to_string()),
+                    ach_routing: Some("021000021".to_string()),
+                    ach_account: Some("3453445666".to_string()),
+                    ach_account_type: Some("checking".to_string()),
+                    ..Default::default()
+                },
+                payment_details: Some(PayoutPaymentDetail {
+                    total_amount: 500.0,
+                    service_fee: Some(0.0),
+                    currency: Some("USD".to_string()),
+                    ..Default::default()
+                }),
+                vendor_data: RequestOutAuthorizeVendorData {
+                    vendor_id: Some(Vendorid(1501)),
+                    ..Default::default()
+                },
+                bill_data: Some(vec![BillPayOutDataRequest {
+                    due_date: Some(NaiveDate::parse_from_str("2025-08-15", "%Y-%m-%d").unwrap()),
+                    invoice_date: Some(
+                        NaiveDate::parse_from_str("2025-08-01", "%Y-%m-%d").unwrap(),
+                    ),
+                    invoice_number: Some(InvoiceNumber("INV-5001".to_string())),
+                    net_amount: Some(NetAmountstring("500".to_string())),
+                    ..Default::default()
+                }]),
+                schedule_details: Some(PayoutScheduleDetail {
+                    start_date: Some("09/01/2025".to_string()),
+                    end_date: Some("09/01/2026".to_string()),
+                    frequency: Some(Frequency::Monthly),
+                    ..Default::default()
+                }),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payout_subscription.<a href="/src/api/resources/payout_subscription/client.rs">get_payout_subscription</a>(id: String) -> Result&lt;GetPayoutSubscriptionResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a single payout subscription's details. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payout_subscription
+        .get_payout_subscription(42, None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `String` — The payout subscription ID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payout_subscription.<a href="/src/api/resources/payout_subscription/client.rs">update_payout_subscription</a>(id: String, request: UpdatePayoutSubscriptionBody) -> Result&lt;UpdatePayoutSubscriptionResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates a payout subscription's details. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payout_subscription
+        .update_payout_subscription(
+            42,
+            &UpdatePayoutSubscriptionBody {
+                set_pause: Some(PayoutSetPause(true)),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `String` — The payout subscription ID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payout_subscription.<a href="/src/api/resources/payout_subscription/client.rs">delete_payout_subscription</a>(id: String) -> Result&lt;DeletePayoutSubscriptionResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a payout subscription and prevents future payouts. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payout_subscription
+        .delete_payout_subscription(42, None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `String` — The payout subscription ID.
     
 </dd>
 </dl>
@@ -17307,7 +17521,9 @@ async fn main() {
         .paypoint
         .get_entry_config(
             &"8cfec329267".to_string(),
-            &GetEntryConfigQueryRequest { entrypages: None },
+            &GetEntryConfigQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -17545,10 +17761,7 @@ async fn main() {
         .save_logo(
             &"8cfec329267".to_string(),
             &FileContent {
-                f_content: None,
-                filename: None,
-                ftype: None,
-                furl: None,
+                ..Default::default()
             },
             None,
         )
@@ -17694,8 +17907,11 @@ async fn main() {
                     web_header_parameters: Some(vec![WebHeaderParameter {
                         key: "testheader".to_string(),
                         value: "1234567890".to_string(),
+                        ..Default::default()
                     }]),
+                    ..Default::default()
                 }),
+                ..Default::default()
             },
             None,
         )
@@ -17758,8 +17974,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -17952,8 +18167,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -18145,8 +18359,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -18317,8 +18530,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -18489,8 +18701,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -18623,8 +18834,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -18772,8 +18982,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -18961,8 +19170,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -19152,8 +19360,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -19335,8 +19542,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -19518,7 +19724,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -19665,7 +19871,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -19810,7 +20016,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -19959,7 +20165,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -20108,8 +20314,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -20278,8 +20483,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -20475,8 +20679,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -20671,8 +20874,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -20846,8 +21048,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -21040,8 +21241,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -21234,8 +21434,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -21428,8 +21627,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -21578,6 +21776,368 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 </dl>
 </details>
 
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_payout_subscriptions</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryPayoutSubscriptionResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of payout subscriptions for a single paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .query
+        .list_payout_subscriptions(
+            &Entry("8cfec329267".to_string()),
+            &ListPayoutSubscriptionsQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                sort_by: Some("desc(field_name)".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `Entry` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_format:** `Option<ExportFormat>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from_record:** `Option<i64>` — The number of records to skip before starting to collect the result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit_record:** `Option<i64>` — Max number of records to return for the query. Use `0` or negative value to return all records.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**parameters:** `Option<std::collections::HashMap<String, Option<String>>>` 
+
+
+Collection of field names, conditions, and values used to filter the query.
+<Info>
+  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+
+  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+
+  For example:
+
+  --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/entry123?parameters=totalAmount(gt)=1000&limitRecord=20
+
+  should become:
+
+  --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/entry123?totalAmount(gt)=1000&limitRecord=20
+</Info>
+See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+**List of field names accepted:**
+
+- `startDate` (gt, ge, lt, le, eq, ne)
+- `endDate` (gt, ge, lt, le, eq, ne)
+- `nextDate` (gt, ge, lt, le, eq, ne)
+- `frequency` (in, nin, ne, eq)
+- `method` (in, nin, eq, ne)
+- `totalAmount` (gt, ge, lt, le, eq, ne)
+- `netAmount` (gt, ge, lt, le, eq, ne)
+- `feeAmount` (gt, ge, lt, le, eq, ne)
+- `status` (in, nin, eq, ne)
+- `untilcancelled` (eq, ne)
+- `payaccountLastfour` (ct, nct)
+- `payaccountType` (ne, eq, in, nin)
+- `payaccountCurrency` (ne, eq, in, nin)
+- `paypointId` (ne, eq)
+- `paypointLegal` (ne, eq, ct, nct)
+- `paypointDba` (ne, eq, ct, nct)
+- `orgName` (ne, eq, ct, nct, nin, in)
+- `parentOrgId` (ne, eq, nin, in)
+- `subscriptionId` (eq, ne)
+- `orderDescription` (ct, nct)
+- `cycles` (eq, ne, gt, ge, lt, le)
+- `leftcycles` (eq, ne, gt, ge, lt, le)
+- `createdAt` (eq, ne, gt, ge, lt, le)
+- `updatedOn` (eq, ne, gt, ge, lt, le)
+- `vendorNumber` (ne, eq, ct, nct)
+- `name` (ne, eq, ct, nct)
+- `phone` (ne, eq, ct, nct)
+- `email` (ne, eq, ct, nct)
+- `address` (ne, eq, ct, nct)
+- `remitAddress` (ct, nct)
+- `city` (ne, eq, ct, nct)
+- `state` (ne, eq, ct, nct)
+- `country` (ne, eq, ct, nct)
+- `zip` (ne, eq, ct, nct)
+
+**List of comparison operators accepted:**
+- `eq` or empty => equal
+- `gt` => greater than
+- `ge` => greater or equal
+- `lt` => less than
+- `le` => less or equal
+- `ne` => not equal
+- `ct` => contains
+- `nct` => not contains
+- `in` => inside array
+- `nin` => not inside array
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `Option<String>` — The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_payout_subscriptions_org</a>(org_id: i64, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryPayoutSubscriptionResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of payout subscriptions for a single org. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response. See [Manage payout subscriptions](/guides/pay-out-developer-payout-subscriptions-manage) for more information.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .query
+        .list_payout_subscriptions_org(
+            123,
+            &ListPayoutSubscriptionsOrgQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                sort_by: Some("desc(field_name)".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**org_id:** `i64` — The numeric identifier for organization, assigned by Payabli.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_format:** `Option<ExportFormat>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from_record:** `Option<i64>` — The number of records to skip before starting to collect the result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit_record:** `Option<i64>` — Max number of records to return for the query. Use `0` or negative value to return all records.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**parameters:** `Option<std::collections::HashMap<String, Option<String>>>` 
+
+
+Collection of field names, conditions, and values used to filter the query.
+<Info>
+  **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+
+  Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+
+  For example:
+
+  --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+
+  should become:
+
+  --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/236?totalAmount(gt)=1000&limitRecord=20
+</Info>
+See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
+**List of field names accepted:**
+
+- `startDate` (gt, ge, lt, le, eq, ne)
+- `endDate` (gt, ge, lt, le, eq, ne)
+- `nextDate` (gt, ge, lt, le, eq, ne)
+- `frequency` (in, nin, ne, eq)
+- `method` (in, nin, eq, ne)
+- `totalAmount` (gt, ge, lt, le, eq, ne)
+- `netAmount` (gt, ge, lt, le, eq, ne)
+- `feeAmount` (gt, ge, lt, le, eq, ne)
+- `status` (in, nin, eq, ne)
+- `untilcancelled` (eq, ne)
+- `payaccountLastfour` (ct, nct)
+- `payaccountType` (ne, eq, in, nin)
+- `payaccountCurrency` (ne, eq, in, nin)
+- `paypointId` (ne, eq)
+- `paypointLegal` (ne, eq, ct, nct)
+- `paypointDba` (ne, eq, ct, nct)
+- `orgName` (ne, eq, ct, nct, nin, in)
+- `parentOrgId` (ne, eq, nin, in)
+- `subscriptionId` (eq, ne)
+- `orderDescription` (ct, nct)
+- `cycles` (eq, ne, gt, ge, lt, le)
+- `leftcycles` (eq, ne, gt, ge, lt, le)
+- `createdAt` (eq, ne, gt, ge, lt, le)
+- `updatedOn` (eq, ne, gt, ge, lt, le)
+- `vendorNumber` (ne, eq, ct, nct)
+- `name` (ne, eq, ct, nct)
+- `phone` (ne, eq, ct, nct)
+- `email` (ne, eq, ct, nct)
+- `address` (ne, eq, ct, nct)
+- `remitAddress` (ct, nct)
+- `city` (ne, eq, ct, nct)
+- `state` (ne, eq, ct, nct)
+- `country` (ne, eq, ct, nct)
+- `zip` (ne, eq, ct, nct)
+
+**List of comparison operators accepted:**
+- `eq` or empty => equal
+- `gt` => greater than
+- `ge` => greater or equal
+- `lt` => less than
+- `le` => less or equal
+- `ne` => not equal
+- `ct` => contains
+- `nct` => not contains
+- `in` => inside array
+- `nin` => not inside array
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `Option<String>` — The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.query.<a href="/src/api/resources/query/client.rs">list_transactions</a>(entry: Entry, export_format: Option&lt;Option&lt;ExportFormat&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;QueryResponseTransactions, ApiError&gt;</code></summary>
 <dl>
 <dd>
@@ -21593,9 +22153,8 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 Retrieve a list of transactions for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
 By default, this endpoint returns only transactions from the last 60 days. To query transactions outside of this period, include `transactionDate` filters.
 For example, this request parameters filter for transactions between April 01, 2024 and April 09, 2024. 
-``` curl --request GET \
-  --url https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59\
-  --header 'requestToken: <api-key>'
+``` curl -X GET https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59\
+  -H 'requestToken: <API TOKEN>'
 
   ```
 </dd>
@@ -21629,8 +22188,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -21809,9 +22367,8 @@ By default, this endpoint returns only transactions from the last 60 days. To qu
 For example, this request parameters filter for transactions between April 01, 2024 and April 09, 2024. 
 
 ```
-curl --request GET \
-  --url https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59\
-  --header 'requestToken: <api-key>'
+curl -X GET "https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59"\
+  -H 'requestToken: <API TOKEN>'
 
   ```
 </dd>
@@ -21845,8 +22402,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -22044,11 +22600,7 @@ async fn main() {
             &Entry("47862acd".to_string()),
             123456,
             &ListTransferDetailsQueryRequest {
-                export_format: None,
-                from_record: None,
-                limit_record: None,
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -22210,9 +22762,7 @@ async fn main() {
             &ListTransfersQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                export_format: None,
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -22363,9 +22913,7 @@ async fn main() {
             &ListTransfersOrgQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                export_format: None,
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -22513,8 +23061,7 @@ async fn main() {
             &ListTransfersOutOrgQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -22650,8 +23197,7 @@ async fn main() {
             &ListTransfersOutPaypointQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -22788,8 +23334,7 @@ async fn main() {
             &ListTransferDetailsOutQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -22933,7 +23478,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -23084,7 +23629,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -23235,8 +23780,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -23407,8 +23951,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -23579,8 +24122,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -23743,8 +24285,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -23910,7 +24451,7 @@ async fn main() {
             &BasicStatsQueryRequest {
                 end_date: Some("2025-11-01".to_string()),
                 start_date: Some("2025-11-30".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -24075,7 +24616,9 @@ async fn main() {
             &"ytd".to_string(),
             &"m".to_string(),
             998,
-            &CustomerBasicStatsQueryRequest { parameters: None },
+            &CustomerBasicStatsQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -24195,7 +24738,9 @@ async fn main() {
             &"30".to_string(),
             1,
             1000000,
-            &SubStatsQueryRequest { parameters: None },
+            &SubStatsQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -24304,7 +24849,9 @@ async fn main() {
             &"ytd".to_string(),
             &"m".to_string(),
             1,
-            &VendorBasicStatsQueryRequest { parameters: None },
+            &VendorBasicStatsQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -24489,39 +25036,14 @@ async fn main() {
             &NewSubscriptionRequest {
                 body: SubscriptionRequestBody {
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
-                    invoice_data: None,
                     payment_details: Some(PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     }),
                     payment_method: Some(RequestSchedulePaymentMethod::PayMethodCredit(
                         PayMethodCredit {
@@ -24540,10 +25062,9 @@ async fn main() {
                         frequency: Some(Frequency::Weekly),
                         plan_id: Some(1),
                         start_date: Some("09-20-2024".to_string()),
+                        ..Default::default()
                     }),
-                    set_pause: None,
-                    source: None,
-                    subdomain: None,
+                    ..Default::default()
                 },
                 force_customer_creation: None,
             },
@@ -24683,8 +25204,7 @@ async fn main() {
             231,
             &RequestUpdateSchedule {
                 set_pause: Some(SetPause(true)),
-                payment_details: None,
-                schedule_details: None,
+                ..Default::default()
             },
             None,
         )
@@ -24985,7 +25505,7 @@ async fn main() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -25137,27 +25657,8 @@ async fn main() {
             &AddMethodRequest {
                 body: RequestTokenStorage {
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     fallback_auth: Some(true),
@@ -25171,11 +25672,11 @@ async fn main() {
                             card_holder: Cardholder("John Doe".to_string()),
                             cardnumber: Cardnumber("4111111111111111".to_string()),
                             cardzip: Some(Cardzip("12345".to_string())),
+                            ..Default::default()
                         },
                     )),
-                    vendor_data: None,
                     source: Some(Source("api".to_string())),
-                    subdomain: None,
+                    ..Default::default()
                 },
                 ach_validation: None,
                 create_anonymous: None,
@@ -25279,6 +25780,7 @@ async fn main() {
             &GetMethodQueryRequest {
                 card_expiration_format: Some(1),
                 include_temporary: Some(false),
+                ..Default::default()
             },
             None,
         )
@@ -25446,32 +25948,11 @@ async fn main() {
             &UpdateMethodRequest {
                 body: RequestTokenStorage {
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     fallback_auth: Some(true),
-                    fallback_auth_amount: None,
-                    method_description: None,
                     payment_method: Some(RequestTokenStoragePaymentMethod::TokenizeCard(
                         TokenizeCard {
                             method: "card".to_string(),
@@ -25480,11 +25961,10 @@ async fn main() {
                             card_holder: Cardholder("John Doe".to_string()),
                             cardnumber: Cardnumber("4111111111111111".to_string()),
                             cardzip: Some(Cardzip("12345".to_string())),
+                            ..Default::default()
                         },
                     )),
-                    vendor_data: None,
-                    source: None,
-                    subdomain: None,
+                    ..Default::default()
                 },
                 ach_validation: None,
             },
@@ -25567,17 +26047,7 @@ async fn main() {
         .user
         .add_user(
             &UserData {
-                access: None,
-                additional_data: None,
-                email: None,
-                language: None,
-                mfa_data: None,
-                name: None,
-                phone: None,
-                pwd: None,
-                scope: None,
-                time_zone: None,
-                usr_status: None,
+                ..Default::default()
             },
             None,
         )
@@ -25683,9 +26153,7 @@ async fn main() {
         .user
         .auth_reset_user(
             &UserAuthResetRequest {
-                email: None,
-                entry: None,
-                entry_type: None,
+                ..Default::default()
             },
             None,
         )
@@ -25774,12 +26242,7 @@ async fn main() {
         .auth_user(
             &"provider".to_string(),
             &UserAuthRequest {
-                email: None,
-                entry: None,
-                entry_type: None,
-                psw: None,
-                user_id: None,
-                user_token_id: None,
+                ..Default::default()
             },
             None,
         )
@@ -25897,7 +26360,12 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .user
-        .change_psw_user(&UserAuthPswResetRequest { psw: None }, None)
+        .change_psw_user(
+            &UserAuthPswResetRequest {
+                ..Default::default()
+            },
+            None,
+        )
         .await;
 }
 ```
@@ -26031,8 +26499,7 @@ async fn main() {
         .edit_mfa_user(
             1000000,
             &MfaData {
-                mfa: None,
-                mfa_mode: None,
+                ..Default::default()
             },
             None,
         )
@@ -26105,17 +26572,7 @@ async fn main() {
         .edit_user(
             1000000,
             &UserData {
-                access: None,
-                additional_data: None,
-                email: None,
-                language: None,
-                mfa_data: None,
-                name: None,
-                phone: None,
-                pwd: None,
-                scope: None,
-                time_zone: None,
-                usr_status: None,
+                ..Default::default()
             },
             None,
         )
@@ -26189,7 +26646,7 @@ async fn main() {
             1000000,
             &GetUserQueryRequest {
                 entry: Some("478ae1234".to_string()),
-                level: None,
+                ..Default::default()
             },
             None,
         )
@@ -26409,8 +26866,7 @@ async fn main() {
         .user
         .validate_mfa_user(
             &MfaValidationData {
-                mfa_code: None,
-                mfa_validation_code: None,
+                ..Default::default()
             },
             None,
         )
@@ -26493,7 +26949,6 @@ async fn main() {
             &"8cfec329267".to_string(),
             &VendorData {
                 vendor_number: Some(VendorNumber("1234".to_string())),
-                additional_data: None,
                 address_1: Some(AddressNullable("123 Ocean Drive".to_string())),
                 address_2: Some(AddressAddtlNullable("Suite 400".to_string())),
                 billing_data: Some(BillingData {
@@ -26507,6 +26962,7 @@ async fn main() {
                     id: Some(123),
                     routing_account: Some(RoutingAccount("123123123".to_string())),
                     type_account: Some(TypeAccount::Checking),
+                    ..Default::default()
                 }),
                 city: Some("Miami".to_string()),
                 contacts: Some(ContactsField(vec![Contacts {
@@ -26514,11 +26970,9 @@ async fn main() {
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
-                    additional_data: None,
+                    ..Default::default()
                 }])),
                 country: Some("US".to_string()),
-                custom_field_1: None,
-                custom_field_2: None,
                 customer_vendor_account: Some("A-37622".to_string()),
                 ein: Some(VendorEin("12-3456789".to_string())),
                 email: Some(Email("example@email.com".to_string())),
@@ -26535,12 +26989,12 @@ async fn main() {
                 remit_address_2: Some(Remitaddress2("Suite 900".to_string())),
                 remit_city: Some(Remitcity("Miami".to_string())),
                 remit_country: Some(Remitcountry("US".to_string())),
-                remit_email: None,
                 remit_state: Some(Remitstate("FL".to_string())),
                 remit_zip: Some(Remitzip("31113".to_string())),
                 state: Some("FL".to_string()),
                 vendor_status: Some(Vendorstatus(1)),
                 zip: Some("33139".to_string()),
+                ..Default::default()
             },
             None,
         )
@@ -26677,38 +27131,8 @@ async fn main() {
         .edit_vendor(
             1,
             &VendorData {
-                vendor_number: None,
-                additional_data: None,
-                address_1: None,
-                address_2: None,
-                billing_data: None,
-                city: None,
-                contacts: None,
-                country: None,
-                custom_field_1: None,
-                custom_field_2: None,
-                customer_vendor_account: None,
-                ein: None,
-                email: None,
-                internal_reference_id: None,
-                location_code: None,
-                mcc: None,
                 name_1: Some(VendorName1("Theodore's Janitorial".to_string())),
-                name_2: None,
-                payee_name_1: None,
-                payee_name_2: None,
-                payment_method: None,
-                phone: None,
-                remit_address_1: None,
-                remit_address_2: None,
-                remit_city: None,
-                remit_country: None,
-                remit_email: None,
-                remit_state: None,
-                remit_zip: None,
-                state: None,
-                vendor_status: None,
-                zip: None,
+                ..Default::default()
             },
             None,
         )
@@ -26848,6 +27272,7 @@ async fn main() {
                 cascade: Some(Cascade(true)),
                 is_enabled: Some(IsEnabled(true)),
                 org_id: Some(OrganizationId(901)),
+                ..Default::default()
             },
             None,
         )
@@ -26937,6 +27362,7 @@ async fn main() {
             &ConfigurePaypointRequestApplePay {
                 entry: Some(Entry("8cfec329267".to_string())),
                 is_enabled: Some(IsEnabled(true)),
+                ..Default::default()
             },
             None,
         )
@@ -27019,6 +27445,7 @@ async fn main() {
                 cascade: Some(Cascade(true)),
                 is_enabled: Some(IsEnabled(true)),
                 org_id: Some(OrganizationId(901)),
+                ..Default::default()
             },
             None,
         )
@@ -27108,6 +27535,7 @@ async fn main() {
             &ConfigurePaypointRequestGooglePay {
                 entry: Some(Entry("8cfec329267".to_string())),
                 is_enabled: Some(IsEnabled(true)),
+                ..Default::default()
             },
             None,
         )

@@ -35,7 +35,7 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 "MoneyIn/authorize",
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize(
                         "forceCustomerCreation",
@@ -65,7 +65,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn capture(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         amount: f64,
         options: Option<RequestOptions>,
     ) -> Result<CaptureResponse, ApiError> {
@@ -98,7 +98,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn capture_auth(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         request: &CaptureRequest,
         options: Option<RequestOptions>,
     ) -> Result<CaptureResponse, ApiError> {
@@ -106,7 +106,7 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 &format!("MoneyIn/capture/{}", trans_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -133,7 +133,7 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 "MoneyIn/makecredit",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize(
                         "forceCustomerCreation",
@@ -157,7 +157,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn details(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<TransactionQueryRecordsCustomer, ApiError> {
         self.http_client
@@ -194,7 +194,7 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 "MoneyIn/getpaid",
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize("achValidation", request.ach_validation.clone())
                     .serialize(
@@ -225,7 +225,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn reverse(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         amount: f64,
         options: Option<RequestOptions>,
     ) -> Result<ReverseResponse, ApiError> {
@@ -261,7 +261,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn refund(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         amount: f64,
         options: Option<RequestOptions>,
     ) -> Result<RefundResponse, ApiError> {
@@ -288,7 +288,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn refund_with_instructions(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         request: &RequestRefund,
         options: Option<RequestOptions>,
     ) -> Result<RefundWithInstructionsResponse, ApiError> {
@@ -296,7 +296,7 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 &format!("MoneyIn/refund/{}", trans_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -315,7 +315,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn reverse_credit(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse, ApiError> {
         self.http_client
@@ -344,7 +344,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn send_receipt_2_trans(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         request: &SendReceipt2TransQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<ReceiptResponse, ApiError> {
@@ -379,7 +379,7 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 "MoneyIn/validate",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -402,7 +402,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn void(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<VoidResponse, ApiError> {
         self.http_client
@@ -434,7 +434,7 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 "v2/MoneyIn/getpaid",
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize("achValidation", request.ach_validation.clone())
                     .serialize(
@@ -467,7 +467,7 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 "v2/MoneyIn/authorize",
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize(
                         "forceCustomerCreation",
@@ -491,7 +491,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn capturev_2(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         request: &CaptureRequest,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
@@ -499,7 +499,7 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 &format!("v2/MoneyIn/capture/{}", trans_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -520,7 +520,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn refundv_2(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
         self.http_client
@@ -549,7 +549,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn refundv_2_amount(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         amount: f64,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
@@ -576,7 +576,7 @@ impl MoneyInClient {
     /// JSON response from the API
     pub async fn voidv_2(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
         self.http_client

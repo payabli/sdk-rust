@@ -31,7 +31,7 @@ impl BoardingClient {
             .execute_request(
                 Method::POST,
                 "Boarding/app",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -102,7 +102,7 @@ impl BoardingClient {
     /// JSON response from the API
     pub async fn get_application_by_auth(
         &self,
-        x_id: &String,
+        x_id: &str,
         request: &RequestAppByAuth,
         options: Option<RequestOptions>,
     ) -> Result<ApplicationQueryRecord, ApiError> {
@@ -110,7 +110,7 @@ impl BoardingClient {
             .execute_request(
                 Method::POST,
                 &format!("Boarding/read/{}", x_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -184,7 +184,7 @@ impl BoardingClient {
     pub async fn get_external_application(
         &self,
         app_id: i64,
-        mail_2: &String,
+        mail_2: &str,
         request: &GetExternalApplicationQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00, ApiError> {
@@ -213,7 +213,7 @@ impl BoardingClient {
     /// JSON response from the API
     pub async fn get_link_application(
         &self,
-        boarding_link_reference: &String,
+        boarding_link_reference: &str,
         options: Option<RequestOptions>,
     ) -> Result<BoardingLinkQueryRecord, ApiError> {
         self.http_client
@@ -384,7 +384,7 @@ impl BoardingClient {
             .execute_request(
                 Method::PUT,
                 &format!("Boarding/app/{}", app_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

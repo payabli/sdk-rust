@@ -23,8 +23,7 @@ async fn test_query_list_batch_details_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -67,8 +66,7 @@ async fn test_query_list_batch_details_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -111,8 +109,7 @@ async fn test_query_list_batches_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -155,8 +152,7 @@ async fn test_query_list_batches_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -199,8 +195,7 @@ async fn test_query_list_batches_out_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -243,8 +238,7 @@ async fn test_query_list_batches_out_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -287,8 +281,7 @@ async fn test_query_list_chargebacks_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -331,8 +324,7 @@ async fn test_query_list_chargebacks_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -375,8 +367,7 @@ async fn test_query_list_customers_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -419,8 +410,7 @@ async fn test_query_list_customers_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -463,7 +453,7 @@ async fn test_query_list_notification_reports_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -506,7 +496,7 @@ async fn test_query_list_notification_reports_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -549,7 +539,7 @@ async fn test_query_list_notifications_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -592,7 +582,7 @@ async fn test_query_list_notifications_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -635,8 +625,7 @@ async fn test_query_list_organizations_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -679,8 +668,7 @@ async fn test_query_list_payout_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -723,8 +711,7 @@ async fn test_query_list_payout_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -767,8 +754,7 @@ async fn test_query_list_paypoints_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -811,8 +797,7 @@ async fn test_query_list_settlements_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -855,8 +840,7 @@ async fn test_query_list_settlements_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -899,8 +883,7 @@ async fn test_query_list_subscriptions_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -943,8 +926,7 @@ async fn test_query_list_subscriptions_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -958,6 +940,92 @@ async fn test_query_list_subscriptions_org_with_wiremock() {
         Some(HashMap::from([
             ("fromRecord".to_string(), "251".to_string()),
             ("limitRecord".to_string(), "0".to_string()),
+            ("sortBy".to_string(), "desc(field_name)".to_string()),
+        ])),
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_query_list_payout_subscriptions_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .query
+        .list_payout_subscriptions(
+            &Entry("8cfec329267".to_string()),
+            &ListPayoutSubscriptionsQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                sort_by: Some("desc(field_name)".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/payoutsubscriptions/8cfec329267",
+        Some(HashMap::from([
+            ("fromRecord".to_string(), "0".to_string()),
+            ("limitRecord".to_string(), "20".to_string()),
+            ("sortBy".to_string(), "desc(field_name)".to_string()),
+        ])),
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_query_list_payout_subscriptions_org_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .query
+        .list_payout_subscriptions_org(
+            123,
+            &ListPayoutSubscriptionsOrgQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                sort_by: Some("desc(field_name)".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/payoutsubscriptions/org/123",
+        Some(HashMap::from([
+            ("fromRecord".to_string(), "0".to_string()),
+            ("limitRecord".to_string(), "20".to_string()),
             ("sortBy".to_string(), "desc(field_name)".to_string()),
         ])),
         1,
@@ -987,8 +1055,7 @@ async fn test_query_list_transactions_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1031,8 +1098,7 @@ async fn test_query_list_transactions_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1073,11 +1139,7 @@ async fn test_query_list_transfer_details_with_wiremock() {
             &Entry("47862acd".to_string()),
             123456,
             &ListTransferDetailsQueryRequest {
-                export_format: None,
-                from_record: None,
-                limit_record: None,
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -1110,9 +1172,7 @@ async fn test_query_list_transfers_with_wiremock() {
             &ListTransfersQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                export_format: None,
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -1153,9 +1213,7 @@ async fn test_query_list_transfers_org_with_wiremock() {
             &ListTransfersOrgQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                export_format: None,
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -1196,8 +1254,7 @@ async fn test_query_list_transfers_out_org_with_wiremock() {
             &ListTransfersOutOrgQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -1238,8 +1295,7 @@ async fn test_query_list_transfers_out_paypoint_with_wiremock() {
             &ListTransfersOutPaypointQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -1281,8 +1337,7 @@ async fn test_query_list_transfer_details_out_with_wiremock() {
             &ListTransferDetailsOutQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
-                parameters: None,
-                sort_by: None,
+                ..Default::default()
             },
             None,
         )
@@ -1324,7 +1379,7 @@ async fn test_query_list_users_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1367,7 +1422,7 @@ async fn test_query_list_users_paypoint_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1410,8 +1465,7 @@ async fn test_query_list_vendors_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1454,8 +1508,7 @@ async fn test_query_list_vendors_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1498,8 +1551,7 @@ async fn test_query_list_vcards_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -1542,8 +1594,7 @@ async fn test_query_list_vcards_org_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                export_format: None,
-                parameters: None,
+                ..Default::default()
             },
             None,
         )

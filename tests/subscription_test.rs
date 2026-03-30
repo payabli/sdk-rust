@@ -43,39 +43,14 @@ async fn test_subscription_new_subscription_with_wiremock() {
             &NewSubscriptionRequest {
                 body: SubscriptionRequestBody {
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
-                    invoice_data: None,
                     payment_details: Some(PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     }),
                     payment_method: Some(RequestSchedulePaymentMethod::PayMethodCredit(
                         PayMethodCredit {
@@ -94,10 +69,9 @@ async fn test_subscription_new_subscription_with_wiremock() {
                         frequency: Some(Frequency::Weekly),
                         plan_id: Some(1),
                         start_date: Some("09-20-2024".to_string()),
+                        ..Default::default()
                     }),
-                    set_pause: None,
-                    source: None,
-                    subdomain: None,
+                    ..Default::default()
                 },
                 force_customer_creation: None,
             },
@@ -153,8 +127,7 @@ async fn test_subscription_update_subscription_with_wiremock() {
             231,
             &RequestUpdateSchedule {
                 set_pause: Some(SetPause(true)),
-                payment_details: None,
-                schedule_details: None,
+                ..Default::default()
             },
             None,
         )

@@ -31,7 +31,7 @@ impl UserClient {
             .execute_request(
                 Method::POST,
                 "User",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -74,7 +74,7 @@ impl UserClient {
             .execute_request(
                 Method::POST,
                 "User/authreset",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -93,7 +93,7 @@ impl UserClient {
     /// JSON response from the API
     pub async fn auth_user(
         &self,
-        provider: &String,
+        provider: &str,
         request: &UserAuthRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseMfaBasic, ApiError> {
@@ -101,7 +101,7 @@ impl UserClient {
             .execute_request(
                 Method::POST,
                 &format!("User/auth/{}", provider),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -126,7 +126,7 @@ impl UserClient {
             .execute_request(
                 Method::PUT,
                 "User/authpsw",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -179,7 +179,7 @@ impl UserClient {
             .execute_request(
                 Method::PUT,
                 &format!("User/mfa/{}", user_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -206,7 +206,7 @@ impl UserClient {
             .execute_request(
                 Method::PUT,
                 &format!("User/{}", user_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -277,8 +277,8 @@ impl UserClient {
     /// JSON response from the API
     pub async fn resend_mfa_code(
         &self,
-        usrname: &String,
-        entry: &String,
+        usrname: &str,
+        entry: &str,
         entry_type: i64,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseMfaBasic, ApiError> {
@@ -311,7 +311,7 @@ impl UserClient {
             .execute_request(
                 Method::POST,
                 "User/mfa",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

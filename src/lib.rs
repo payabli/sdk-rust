@@ -31,13 +31,11 @@
 //!             &"8cfec329267".to_string(),
 //!             &BillOutData {
 //!                 accounting_field_1: Some(AccountingField("MyInternalId".to_string())),
-//!                 accounting_field_2: None,
-//!                 additional_data: None,
 //!                 attachments: Some(Attachments(vec![FileContent {
-//!                     f_content: None,
 //!                     filename: Some("my-doc.pdf".to_string()),
 //!                     ftype: Some(FileContentFtype::Pdf),
 //!                     furl: Some("https://mysite.com/my-doc.pdf".to_string()),
+//!                     ..Default::default()
 //!                 }])),
 //!                 bill_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
 //!                 bill_items: Some(Billitems(vec![BillItem {
@@ -53,54 +51,22 @@
 //!                     item_tax_rate: Some(0.075),
 //!                     item_total_amount: Some(123.0),
 //!                     item_unit_of_measure: Some(ItemUnitofMeasure("SqFt".to_string())),
+//!                     ..Default::default()
 //!                 }])),
 //!                 bill_number: Some("ABC-123".to_string()),
 //!                 comments: Some(Comments("Deposit for materials".to_string())),
-//!                 discount: None,
 //!                 due_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
 //!                 end_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
 //!                 frequency: Some(Frequency::Monthly),
-//!                 lot_number: None,
 //!                 mode: Some(0),
 //!                 net_amount: Some(3762.87),
-//!                 scheduled_options: None,
 //!                 status: Some(Billstatus(-99)),
 //!                 terms: Some(Terms("NET30".to_string())),
-//!                 total_amount: None,
 //!                 vendor: Some(VendorData {
 //!                     vendor_number: Some(VendorNumber("1234-A".to_string())),
-//!                     additional_data: None,
-//!                     address_1: None,
-//!                     address_2: None,
-//!                     billing_data: None,
-//!                     city: None,
-//!                     contacts: None,
-//!                     country: None,
-//!                     custom_field_1: None,
-//!                     custom_field_2: None,
-//!                     customer_vendor_account: None,
-//!                     ein: None,
-//!                     email: None,
-//!                     internal_reference_id: None,
-//!                     location_code: None,
-//!                     mcc: None,
-//!                     name_1: None,
-//!                     name_2: None,
-//!                     payee_name_1: None,
-//!                     payee_name_2: None,
-//!                     payment_method: None,
-//!                     phone: None,
-//!                     remit_address_1: None,
-//!                     remit_address_2: None,
-//!                     remit_city: None,
-//!                     remit_country: None,
-//!                     remit_email: None,
-//!                     remit_state: None,
-//!                     remit_zip: None,
-//!                     state: None,
-//!                     vendor_status: None,
-//!                     zip: None,
+//!                     ..Default::default()
 //!                 }),
+//!                 ..Default::default()
 //!             },
 //!             None,
 //!         )
@@ -130,4 +96,4 @@ pub use client::*;
 pub use config::*;
 pub use core::*;
 pub use environment::*;
-pub use error::ApiError;
+pub use error::{ApiError, BuildError};

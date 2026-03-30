@@ -25,7 +25,7 @@ impl BillClient {
     /// JSON response from the API
     pub async fn add_bill(
         &self,
-        entry: &String,
+        entry: &str,
         request: &BillOutData,
         options: Option<RequestOptions>,
     ) -> Result<BillResponse, ApiError> {
@@ -33,7 +33,7 @@ impl BillClient {
             .execute_request(
                 Method::POST,
                 &format!("Bill/single/{}", entry),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -70,7 +70,7 @@ impl BillClient {
     pub async fn delete_attached_from_bill(
         &self,
         id_bill: i64,
-        filename: &String,
+        filename: &str,
         request: &DeleteAttachedFromBillQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<BillResponse, ApiError> {
@@ -133,7 +133,7 @@ impl BillClient {
             .execute_request(
                 Method::PUT,
                 &format!("Bill/{}", id_bill),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -165,7 +165,7 @@ impl BillClient {
     pub async fn get_attached_from_bill(
         &self,
         id_bill: i64,
-        filename: &String,
+        filename: &str,
         request: &GetAttachedFromBillQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<FileContent, ApiError> {
@@ -266,7 +266,7 @@ impl BillClient {
     /// JSON response from the API
     pub async fn list_bills(
         &self,
-        entry: &String,
+        entry: &str,
         request: &ListBillsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<BillQueryResponse, ApiError> {
@@ -386,7 +386,7 @@ impl BillClient {
             .execute_request(
                 Method::PUT,
                 &format!("Bill/approval/{}", id_bill),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -414,7 +414,7 @@ impl BillClient {
             .execute_request(
                 Method::POST,
                 &format!("Bill/approval/{}", id_bill),
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .bool("autocreateUser", request.autocreate_user.clone())
                     .build(),
@@ -438,7 +438,7 @@ impl BillClient {
     pub async fn set_approved_bill(
         &self,
         id_bill: i64,
-        approved: &String,
+        approved: &str,
         request: &SetApprovedBillQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<SetApprovedBillResponse, ApiError> {

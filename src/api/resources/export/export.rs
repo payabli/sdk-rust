@@ -180,7 +180,7 @@ impl ExportClient {
     pub async fn export_batch_details(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportBatchDetailsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -368,7 +368,7 @@ impl ExportClient {
     pub async fn export_batches(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportBatchesQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -524,7 +524,7 @@ impl ExportClient {
     pub async fn export_batches_out(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportBatchesOutQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -680,7 +680,7 @@ impl ExportClient {
     pub async fn export_bills(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportBillsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -875,7 +875,7 @@ impl ExportClient {
     pub async fn export_chargebacks(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportChargebacksQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -1084,7 +1084,7 @@ impl ExportClient {
     pub async fn export_customers(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportCustomersQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -1296,7 +1296,7 @@ impl ExportClient {
     pub async fn export_invoices(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportInvoicesQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -1578,7 +1578,7 @@ impl ExportClient {
     pub async fn export_payout(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportPayoutQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -1857,7 +1857,7 @@ impl ExportClient {
     pub async fn export_settlements(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportSettlementsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -2073,7 +2073,7 @@ impl ExportClient {
     pub async fn export_subscriptions(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportSubscriptionsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -2295,7 +2295,7 @@ impl ExportClient {
     pub async fn export_transactions(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportTransactionsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -2487,7 +2487,7 @@ impl ExportClient {
     pub async fn export_transfer_details(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         transfer_id: i64,
         request: &ExportTransferDetailsQueryRequest,
         options: Option<RequestOptions>,
@@ -2569,7 +2569,7 @@ impl ExportClient {
     /// JSON response from the API
     pub async fn export_transfers(
         &self,
-        entry: &String,
+        entry: &str,
         request: &ExportTransfersQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
@@ -2661,7 +2661,7 @@ impl ExportClient {
     pub async fn export_vendors(
         &self,
         format: &ExportFormat1,
-        entry: &String,
+        entry: &str,
         request: &ExportVendorsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {

@@ -25,7 +25,7 @@ async fn test_statistic_basic_stats_with_wiremock() {
             &BasicStatsQueryRequest {
                 end_date: Some("2025-11-01".to_string()),
                 start_date: Some("2025-11-30".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -65,7 +65,9 @@ async fn test_statistic_customer_basic_stats_with_wiremock() {
             &"ytd".to_string(),
             &"m".to_string(),
             998,
-            &CustomerBasicStatsQueryRequest { parameters: None },
+            &CustomerBasicStatsQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -96,7 +98,9 @@ async fn test_statistic_sub_stats_with_wiremock() {
             &"30".to_string(),
             1,
             1000000,
-            &SubStatsQueryRequest { parameters: None },
+            &SubStatsQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -127,7 +131,9 @@ async fn test_statistic_vendor_basic_stats_with_wiremock() {
             &"ytd".to_string(),
             &"m".to_string(),
             1,
-            &VendorBasicStatsQueryRequest { parameters: None },
+            &VendorBasicStatsQueryRequest {
+                ..Default::default()
+            },
             None,
         )
         .await;

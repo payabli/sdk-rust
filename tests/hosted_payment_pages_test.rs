@@ -54,17 +54,7 @@ async fn test_hosted_payment_pages_new_page_with_wiremock() {
         .new_page(
             &"8cfec329267".to_string(),
             &PayabliPages {
-                additional_data: None,
-                credentials: None,
-                last_access: None,
-                page_content: None,
-                page_identifier: None,
-                page_settings: None,
-                published: None,
-                receipt_content: None,
-                subdomain: None,
-                total_amount: None,
-                validation_code: None,
+                ..Default::default()
             },
             Some(
                 RequestOptions::new()
@@ -99,17 +89,7 @@ async fn test_hosted_payment_pages_save_page_with_wiremock() {
             &"8cfec329267".to_string(),
             &"pay-your-fees-1".to_string(),
             &PayabliPages {
-                additional_data: None,
-                credentials: None,
-                last_access: None,
-                page_content: None,
-                page_identifier: None,
-                page_settings: None,
-                published: None,
-                receipt_content: None,
-                subdomain: None,
-                total_amount: None,
-                validation_code: None,
+                ..Default::default()
             },
             None,
         )

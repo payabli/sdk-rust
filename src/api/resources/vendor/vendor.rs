@@ -25,7 +25,7 @@ impl VendorClient {
     /// JSON response from the API
     pub async fn add_vendor(
         &self,
-        entry: &String,
+        entry: &str,
         request: &VendorData,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseVendors, ApiError> {
@@ -33,7 +33,7 @@ impl VendorClient {
             .execute_request(
                 Method::POST,
                 &format!("Vendor/single/{}", entry),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -86,7 +86,7 @@ impl VendorClient {
             .execute_request(
                 Method::PUT,
                 &format!("Vendor/{}", id_vendor),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

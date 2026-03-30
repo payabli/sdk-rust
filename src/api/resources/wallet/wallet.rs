@@ -31,7 +31,7 @@ impl WalletClient {
             .execute_request(
                 Method::POST,
                 "Wallet/applepay/configure-organization",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -56,7 +56,7 @@ impl WalletClient {
             .execute_request(
                 Method::POST,
                 "Wallet/applepay/configure-paypoint",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -81,7 +81,7 @@ impl WalletClient {
             .execute_request(
                 Method::POST,
                 "Wallet/googlepay/configure-organization",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -106,7 +106,7 @@ impl WalletClient {
             .execute_request(
                 Method::POST,
                 "Wallet/googlepay/configure-paypoint",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

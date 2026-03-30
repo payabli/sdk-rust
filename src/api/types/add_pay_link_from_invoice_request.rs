@@ -1,9 +1,7 @@
 pub use crate::prelude::*;
 
 /// Request for AddPayLinkFromInvoice (body + query parameters)
-///
-/// Request type for the AddPayLinkFromInvoiceRequest operation.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct AddPayLinkFromInvoiceRequest {
     /// Indicates whether customer can modify the payment amount. A value of `true` means the amount isn't modifiable, a value `false` means the payor can modify the amount to pay.
     #[serde(rename = "amountFixed")]
@@ -13,5 +11,48 @@ pub struct AddPayLinkFromInvoiceRequest {
     #[serde(rename = "mail2")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mail_2: Option<String>,
+    #[serde(default)]
     pub body: PaymentPageRequestBody,
+}
+
+impl AddPayLinkFromInvoiceRequest {
+    pub fn builder() -> AddPayLinkFromInvoiceRequestBuilder {
+        <AddPayLinkFromInvoiceRequestBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct AddPayLinkFromInvoiceRequestBuilder {
+    amount_fixed: Option<bool>,
+    mail_2: Option<String>,
+    body: Option<PaymentPageRequestBody>,
+}
+
+impl AddPayLinkFromInvoiceRequestBuilder {
+    pub fn amount_fixed(mut self, value: bool) -> Self {
+        self.amount_fixed = Some(value);
+        self
+    }
+
+    pub fn mail_2(mut self, value: impl Into<String>) -> Self {
+        self.mail_2 = Some(value.into());
+        self
+    }
+
+    pub fn body(mut self, value: PaymentPageRequestBody) -> Self {
+        self.body = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`AddPayLinkFromInvoiceRequest`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`body`](AddPayLinkFromInvoiceRequestBuilder::body)
+    pub fn build(self) -> Result<AddPayLinkFromInvoiceRequest, BuildError> {
+        Ok(AddPayLinkFromInvoiceRequest {
+            amount_fixed: self.amount_fixed,
+            mail_2: self.mail_2,
+            body: self.body.ok_or_else(|| BuildError::missing_field("body"))?,
+        })
+    }
 }

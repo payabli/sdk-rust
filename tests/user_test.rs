@@ -19,17 +19,7 @@ async fn test_user_add_user_with_wiremock() {
         .user
         .add_user(
             &UserData {
-                access: None,
-                additional_data: None,
-                email: None,
-                language: None,
-                mfa_data: None,
-                name: None,
-                phone: None,
-                pwd: None,
-                scope: None,
-                time_zone: None,
-                usr_status: None,
+                ..Default::default()
             },
             None,
         )
@@ -81,9 +71,7 @@ async fn test_user_auth_reset_user_with_wiremock() {
         .user
         .auth_reset_user(
             &UserAuthResetRequest {
-                email: None,
-                entry: None,
-                entry_type: None,
+                ..Default::default()
             },
             None,
         )
@@ -114,12 +102,7 @@ async fn test_user_auth_user_with_wiremock() {
         .auth_user(
             &"provider".to_string(),
             &UserAuthRequest {
-                email: None,
-                entry: None,
-                entry_type: None,
-                psw: None,
-                user_id: None,
-                user_token_id: None,
+                ..Default::default()
             },
             None,
         )
@@ -147,7 +130,12 @@ async fn test_user_change_psw_user_with_wiremock() {
 
     let result = client
         .user
-        .change_psw_user(&UserAuthPswResetRequest { psw: None }, None)
+        .change_psw_user(
+            &UserAuthPswResetRequest {
+                ..Default::default()
+            },
+            None,
+        )
         .await;
 
     assert!(result.is_ok(), "Client method call should succeed");
@@ -197,8 +185,7 @@ async fn test_user_edit_mfa_user_with_wiremock() {
         .edit_mfa_user(
             1000000,
             &MfaData {
-                mfa: None,
-                mfa_mode: None,
+                ..Default::default()
             },
             None,
         )
@@ -229,17 +216,7 @@ async fn test_user_edit_user_with_wiremock() {
         .edit_user(
             1000000,
             &UserData {
-                access: None,
-                additional_data: None,
-                email: None,
-                language: None,
-                mfa_data: None,
-                name: None,
-                phone: None,
-                pwd: None,
-                scope: None,
-                time_zone: None,
-                usr_status: None,
+                ..Default::default()
             },
             None,
         )
@@ -271,7 +248,7 @@ async fn test_user_get_user_with_wiremock() {
             1000000,
             &GetUserQueryRequest {
                 entry: Some("478ae1234".to_string()),
-                level: None,
+                ..Default::default()
             },
             None,
         )
@@ -356,8 +333,7 @@ async fn test_user_validate_mfa_user_with_wiremock() {
         .user
         .validate_mfa_user(
             &MfaValidationData {
-                mfa_code: None,
-                mfa_validation_code: None,
+                ..Default::default()
             },
             None,
         )

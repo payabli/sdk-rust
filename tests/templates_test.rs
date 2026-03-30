@@ -89,7 +89,7 @@ async fn test_templates_list_templates_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )

@@ -27,13 +27,14 @@ async fn test_organization_add_organization_with_wiremock() {
                     billing_country: Some(BillingCountryNullable("US".to_string())),
                     billing_state: Some(BillingStateNullable("TN".to_string())),
                     billing_zip: Some(BillingZip("37615".to_string())),
+                    ..Default::default()
                 }),
                 contacts: Some(ContactsField(vec![Contacts {
                     contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
-                    additional_data: None,
+                    ..Default::default()
                 }])),
                 has_billing: Some(true),
                 has_residual: Some(true),
@@ -47,6 +48,7 @@ async fn test_organization_add_organization_with_wiremock() {
                     filename: Some("my-doc.pdf".to_string()),
                     ftype: Some(FileContentFtype::Pdf),
                     furl: Some("https://mysite.com/my-doc.pdf".to_string()),
+                    ..Default::default()
                 }),
                 org_name: Orgname("Pilgrim Planner".to_string()),
                 org_parent_id: Some(OrgParentId(236)),
@@ -117,7 +119,7 @@ async fn test_organization_edit_organization_with_wiremock() {
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
-                    additional_data: None,
+                    ..Default::default()
                 }])),
                 org_address: Some(Orgaddress("123 Walnut Street".to_string())),
                 org_city: Some(Orgcity("Johnson City".to_string())),
@@ -130,13 +132,7 @@ async fn test_organization_edit_organization_with_wiremock() {
                 org_type: Some(Orgtype(0)),
                 org_website: Some(Orgwebsite("www.pilgrimageplanner.com".to_string())),
                 org_zip: Some(Orgzip("37615".to_string())),
-                services: None,
-                billing_info: None,
-                has_billing: None,
-                has_residual: None,
-                org_logo: None,
-                org_parent_id: None,
-                reply_to_email: None,
+                ..Default::default()
             },
             None,
         )

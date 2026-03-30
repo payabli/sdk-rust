@@ -26,8 +26,8 @@ impl HostedPaymentPagesClient {
     /// JSON response from the API
     pub async fn load_page(
         &self,
-        entry: &String,
-        subdomain: &String,
+        entry: &str,
+        subdomain: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliPages, ApiError> {
         self.http_client
@@ -54,7 +54,7 @@ impl HostedPaymentPagesClient {
     /// JSON response from the API
     pub async fn new_page(
         &self,
-        entry: &String,
+        entry: &str,
         request: &PayabliPages,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
@@ -62,7 +62,7 @@ impl HostedPaymentPagesClient {
             .execute_request(
                 Method::POST,
                 &format!("Paypoint/{}", entry),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -82,8 +82,8 @@ impl HostedPaymentPagesClient {
     /// JSON response from the API
     pub async fn save_page(
         &self,
-        entry: &String,
-        subdomain: &String,
+        entry: &str,
+        subdomain: &str,
         request: &PayabliPages,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
@@ -91,7 +91,7 @@ impl HostedPaymentPagesClient {
             .execute_request(
                 Method::PUT,
                 &format!("Paypoint/{}/{}", entry, subdomain),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

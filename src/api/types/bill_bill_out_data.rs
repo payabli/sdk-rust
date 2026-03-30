@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct BillOutData {
     #[serde(rename = "accountingField1")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -67,4 +67,163 @@ pub struct BillOutData {
     /// The vendor associated with the bill. Although you can create a vendor in a create bill request, Payabli recommends creating a vendor separately and passing a valid `vendorNumber` here. At minimum, the `vendorNumber` is required.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vendor: Option<VendorData>,
+}
+
+impl BillOutData {
+    pub fn builder() -> BillOutDataBuilder {
+        <BillOutDataBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct BillOutDataBuilder {
+    accounting_field_1: Option<AccountingField>,
+    accounting_field_2: Option<AccountingField>,
+    additional_data: Option<AdditionalDataString>,
+    attachments: Option<Attachments>,
+    bill_date: Option<NaiveDate>,
+    bill_items: Option<Billitems>,
+    bill_number: Option<String>,
+    comments: Option<Comments>,
+    discount: Option<f64>,
+    due_date: Option<NaiveDate>,
+    end_date: Option<NaiveDate>,
+    frequency: Option<Frequency>,
+    lot_number: Option<String>,
+    mode: Option<i64>,
+    net_amount: Option<f64>,
+    scheduled_options: Option<BillOutDataScheduledOptions>,
+    status: Option<Billstatus>,
+    terms: Option<Terms>,
+    total_amount: Option<f64>,
+    vendor: Option<VendorData>,
+}
+
+impl BillOutDataBuilder {
+    pub fn accounting_field_1(mut self, value: AccountingField) -> Self {
+        self.accounting_field_1 = Some(value);
+        self
+    }
+
+    pub fn accounting_field_2(mut self, value: AccountingField) -> Self {
+        self.accounting_field_2 = Some(value);
+        self
+    }
+
+    pub fn additional_data(mut self, value: AdditionalDataString) -> Self {
+        self.additional_data = Some(value);
+        self
+    }
+
+    pub fn attachments(mut self, value: Attachments) -> Self {
+        self.attachments = Some(value);
+        self
+    }
+
+    pub fn bill_date(mut self, value: NaiveDate) -> Self {
+        self.bill_date = Some(value);
+        self
+    }
+
+    pub fn bill_items(mut self, value: Billitems) -> Self {
+        self.bill_items = Some(value);
+        self
+    }
+
+    pub fn bill_number(mut self, value: impl Into<String>) -> Self {
+        self.bill_number = Some(value.into());
+        self
+    }
+
+    pub fn comments(mut self, value: Comments) -> Self {
+        self.comments = Some(value);
+        self
+    }
+
+    pub fn discount(mut self, value: f64) -> Self {
+        self.discount = Some(value);
+        self
+    }
+
+    pub fn due_date(mut self, value: NaiveDate) -> Self {
+        self.due_date = Some(value);
+        self
+    }
+
+    pub fn end_date(mut self, value: NaiveDate) -> Self {
+        self.end_date = Some(value);
+        self
+    }
+
+    pub fn frequency(mut self, value: Frequency) -> Self {
+        self.frequency = Some(value);
+        self
+    }
+
+    pub fn lot_number(mut self, value: impl Into<String>) -> Self {
+        self.lot_number = Some(value.into());
+        self
+    }
+
+    pub fn mode(mut self, value: i64) -> Self {
+        self.mode = Some(value);
+        self
+    }
+
+    pub fn net_amount(mut self, value: f64) -> Self {
+        self.net_amount = Some(value);
+        self
+    }
+
+    pub fn scheduled_options(mut self, value: BillOutDataScheduledOptions) -> Self {
+        self.scheduled_options = Some(value);
+        self
+    }
+
+    pub fn status(mut self, value: Billstatus) -> Self {
+        self.status = Some(value);
+        self
+    }
+
+    pub fn terms(mut self, value: Terms) -> Self {
+        self.terms = Some(value);
+        self
+    }
+
+    pub fn total_amount(mut self, value: f64) -> Self {
+        self.total_amount = Some(value);
+        self
+    }
+
+    pub fn vendor(mut self, value: VendorData) -> Self {
+        self.vendor = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`BillOutData`].
+    pub fn build(self) -> Result<BillOutData, BuildError> {
+        Ok(BillOutData {
+            accounting_field_1: self.accounting_field_1,
+            accounting_field_2: self.accounting_field_2,
+            additional_data: self.additional_data,
+            attachments: self.attachments,
+            bill_date: self.bill_date,
+            bill_items: self.bill_items,
+            bill_number: self.bill_number,
+            comments: self.comments,
+            discount: self.discount,
+            due_date: self.due_date,
+            end_date: self.end_date,
+            frequency: self.frequency,
+            lot_number: self.lot_number,
+            mode: self.mode,
+            net_amount: self.net_amount,
+            scheduled_options: self.scheduled_options,
+            status: self.status,
+            terms: self.terms,
+            total_amount: self.total_amount,
+            vendor: self.vendor,
+        })
+    }
 }

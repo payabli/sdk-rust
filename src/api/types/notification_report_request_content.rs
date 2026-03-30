@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct NotificationReportRequestContent {
     /// The notification's event name.
     #[serde(rename = "eventType")]
@@ -29,4 +29,72 @@ pub struct NotificationReportRequestContent {
     #[serde(rename = "webHeaderParameters")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub web_header_parameters: Option<Vec<KeyValueDuo>>,
+}
+
+impl NotificationReportRequestContent {
+    pub fn builder() -> NotificationReportRequestContentBuilder {
+        <NotificationReportRequestContentBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct NotificationReportRequestContentBuilder {
+    event_type: Option<String>,
+    file_format: Option<NotificationReportRequestContentFileFormat>,
+    internal_data: Option<Vec<KeyValueDuo>>,
+    report_name: Option<NotificationReportRequestContentReportName>,
+    time_zone: Option<Timezone>,
+    transaction_id: Option<String>,
+    web_header_parameters: Option<Vec<KeyValueDuo>>,
+}
+
+impl NotificationReportRequestContentBuilder {
+    pub fn event_type(mut self, value: impl Into<String>) -> Self {
+        self.event_type = Some(value.into());
+        self
+    }
+
+    pub fn file_format(mut self, value: NotificationReportRequestContentFileFormat) -> Self {
+        self.file_format = Some(value);
+        self
+    }
+
+    pub fn internal_data(mut self, value: Vec<KeyValueDuo>) -> Self {
+        self.internal_data = Some(value);
+        self
+    }
+
+    pub fn report_name(mut self, value: NotificationReportRequestContentReportName) -> Self {
+        self.report_name = Some(value);
+        self
+    }
+
+    pub fn time_zone(mut self, value: Timezone) -> Self {
+        self.time_zone = Some(value);
+        self
+    }
+
+    pub fn transaction_id(mut self, value: impl Into<String>) -> Self {
+        self.transaction_id = Some(value.into());
+        self
+    }
+
+    pub fn web_header_parameters(mut self, value: Vec<KeyValueDuo>) -> Self {
+        self.web_header_parameters = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`NotificationReportRequestContent`].
+    pub fn build(self) -> Result<NotificationReportRequestContent, BuildError> {
+        Ok(NotificationReportRequestContent {
+            event_type: self.event_type,
+            file_format: self.file_format,
+            internal_data: self.internal_data,
+            report_name: self.report_name,
+            time_zone: self.time_zone,
+            transaction_id: self.transaction_id,
+            web_header_parameters: self.web_header_parameters,
+        })
+    }
 }

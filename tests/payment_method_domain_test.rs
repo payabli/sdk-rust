@@ -21,13 +21,16 @@ async fn test_payment_method_domain_add_payment_method_domain_with_wiremock() {
             &AddPaymentMethodDomainRequest {
                 apple_pay: Some(AddPaymentMethodDomainRequestApplePay {
                     is_enabled: Some(IsEnabled(true)),
+                    ..Default::default()
                 }),
                 google_pay: Some(AddPaymentMethodDomainRequestGooglePay {
                     is_enabled: Some(IsEnabled(true)),
+                    ..Default::default()
                 }),
                 domain_name: Some(DomainName("checkout.example.com".to_string())),
                 entity_id: Some(EntityId(109)),
                 entity_type: Some(EntityType("paypoint".to_string())),
+                ..Default::default()
             },
             None,
         )
@@ -149,8 +152,7 @@ async fn test_payment_method_domain_list_payment_method_domains_with_wiremock() 
             &ListPaymentMethodDomainsQueryRequest {
                 entity_id: Some(1147),
                 entity_type: Some("paypoint".to_string()),
-                from_record: None,
-                limit_record: None,
+                ..Default::default()
             },
             None,
         )
@@ -191,10 +193,13 @@ async fn test_payment_method_domain_update_payment_method_domain_with_wiremock()
             &UpdatePaymentMethodDomainRequest {
                 apple_pay: Some(UpdatePaymentMethodDomainRequestWallet {
                     is_enabled: Some(IsEnabled(false)),
+                    ..Default::default()
                 }),
                 google_pay: Some(UpdatePaymentMethodDomainRequestWallet {
                     is_enabled: Some(IsEnabled(false)),
+                    ..Default::default()
                 }),
+                ..Default::default()
             },
             None,
         )

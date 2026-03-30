@@ -21,7 +21,6 @@ async fn test_vendor_add_vendor_with_wiremock() {
             &"8cfec329267".to_string(),
             &VendorData {
                 vendor_number: Some(VendorNumber("1234".to_string())),
-                additional_data: None,
                 address_1: Some(AddressNullable("123 Ocean Drive".to_string())),
                 address_2: Some(AddressAddtlNullable("Suite 400".to_string())),
                 billing_data: Some(BillingData {
@@ -35,6 +34,7 @@ async fn test_vendor_add_vendor_with_wiremock() {
                     id: Some(123),
                     routing_account: Some(RoutingAccount("123123123".to_string())),
                     type_account: Some(TypeAccount::Checking),
+                    ..Default::default()
                 }),
                 city: Some("Miami".to_string()),
                 contacts: Some(ContactsField(vec![Contacts {
@@ -42,11 +42,9 @@ async fn test_vendor_add_vendor_with_wiremock() {
                     contact_name: Some("Herman Martinez".to_string()),
                     contact_phone: Some("3055550000".to_string()),
                     contact_title: Some("Owner".to_string()),
-                    additional_data: None,
+                    ..Default::default()
                 }])),
                 country: Some("US".to_string()),
-                custom_field_1: None,
-                custom_field_2: None,
                 customer_vendor_account: Some("A-37622".to_string()),
                 ein: Some(VendorEin("12-3456789".to_string())),
                 email: Some(Email("example@email.com".to_string())),
@@ -63,12 +61,12 @@ async fn test_vendor_add_vendor_with_wiremock() {
                 remit_address_2: Some(Remitaddress2("Suite 900".to_string())),
                 remit_city: Some(Remitcity("Miami".to_string())),
                 remit_country: Some(Remitcountry("US".to_string())),
-                remit_email: None,
                 remit_state: Some(Remitstate("FL".to_string())),
                 remit_zip: Some(Remitzip("31113".to_string())),
                 state: Some("FL".to_string()),
                 vendor_status: Some(Vendorstatus(1)),
                 zip: Some("33139".to_string()),
+                ..Default::default()
             },
             None,
         )
@@ -121,38 +119,8 @@ async fn test_vendor_edit_vendor_with_wiremock() {
         .edit_vendor(
             1,
             &VendorData {
-                vendor_number: None,
-                additional_data: None,
-                address_1: None,
-                address_2: None,
-                billing_data: None,
-                city: None,
-                contacts: None,
-                country: None,
-                custom_field_1: None,
-                custom_field_2: None,
-                customer_vendor_account: None,
-                ein: None,
-                email: None,
-                internal_reference_id: None,
-                location_code: None,
-                mcc: None,
                 name_1: Some(VendorName1("Theodore's Janitorial".to_string())),
-                name_2: None,
-                payee_name_1: None,
-                payee_name_2: None,
-                payment_method: None,
-                phone: None,
-                remit_address_1: None,
-                remit_address_2: None,
-                remit_city: None,
-                remit_country: None,
-                remit_email: None,
-                remit_state: None,
-                remit_zip: None,
-                state: None,
-                vendor_status: None,
-                zip: None,
+                ..Default::default()
             },
             None,
         )

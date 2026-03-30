@@ -63,8 +63,8 @@ impl StatisticClient {
     /// JSON response from the API
     pub async fn basic_stats(
         &self,
-        mode: &String,
-        freq: &String,
+        mode: &str,
+        freq: &str,
         level: i64,
         entry_id: i64,
         request: &BasicStatsQueryRequest,
@@ -119,8 +119,8 @@ impl StatisticClient {
     /// JSON response from the API
     pub async fn customer_basic_stats(
         &self,
-        mode: &String,
-        freq: &String,
+        mode: &str,
+        freq: &str,
         customer_id: i64,
         request: &CustomerBasicStatsQueryRequest,
         options: Option<RequestOptions>,
@@ -161,7 +161,7 @@ impl StatisticClient {
     /// JSON response from the API
     pub async fn sub_stats(
         &self,
-        interval: &String,
+        interval: &str,
         level: i64,
         entry_id: i64,
         request: &SubStatsQueryRequest,
@@ -217,8 +217,8 @@ impl StatisticClient {
     /// JSON response from the API
     pub async fn vendor_basic_stats(
         &self,
-        mode: &String,
-        freq: &String,
+        mode: &str,
+        freq: &str,
         id_vendor: i64,
         request: &VendorBasicStatsQueryRequest,
         options: Option<RequestOptions>,

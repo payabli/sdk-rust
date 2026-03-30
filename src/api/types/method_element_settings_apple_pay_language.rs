@@ -1,130 +1,191 @@
 pub use crate::prelude::*;
 
 /// The Apple Pay button locale. See [Apple Pay Button Language](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-language) for more information.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[non_exhaustive]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum MethodElementSettingsApplePayLanguage {
-    #[serde(rename = "en-US")]
     EnUs,
-    #[serde(rename = "ar-AB")]
     ArAb,
-    #[serde(rename = "ca-ES")]
     CaEs,
-    #[serde(rename = "zh-CN")]
     ZhCn,
-    #[serde(rename = "zh-HK")]
     ZhHk,
-    #[serde(rename = "zh-TW")]
     ZhTw,
-    #[serde(rename = "hr-HR")]
     HrHr,
-    #[serde(rename = "cs-CZ")]
     CsCz,
-    #[serde(rename = "da-DK")]
     DaDk,
-    #[serde(rename = "de-DE")]
     DeDe,
-    #[serde(rename = "nl-NL")]
     NlNl,
-    #[serde(rename = "en-AU")]
     EnAu,
-    #[serde(rename = "en-GB")]
     EnGb,
-    #[serde(rename = "fi-FI")]
     FiFi,
-    #[serde(rename = "fr-CA")]
     FrCa,
-    #[serde(rename = "fr-FR")]
     FrFr,
-    #[serde(rename = "el-GR")]
     ElGr,
-    #[serde(rename = "he-IL")]
     HeIl,
-    #[serde(rename = "hi-IN")]
     HiIn,
-    #[serde(rename = "hu-HU")]
     HuHu,
-    #[serde(rename = "id-ID")]
     IdId,
-    #[serde(rename = "it-IT")]
     ItIt,
-    #[serde(rename = "ja-JP")]
     JaJp,
-    #[serde(rename = "ko-KR")]
     KoKr,
-    #[serde(rename = "ms-MY")]
     MsMy,
-    #[serde(rename = "nb-NO")]
     NbNo,
-    #[serde(rename = "pl-PL")]
     PlPl,
-    #[serde(rename = "pt-BR")]
     PtBr,
-    #[serde(rename = "pt-PT")]
     PtPt,
-    #[serde(rename = "ro-RO")]
     RoRo,
-    #[serde(rename = "ru-RU")]
     RuRu,
-    #[serde(rename = "sk-SK")]
     SkSk,
-    #[serde(rename = "es-MX")]
     EsMx,
-    #[serde(rename = "es-ES")]
     EsEs,
-    #[serde(rename = "sv-SE")]
     SvSe,
-    #[serde(rename = "th-TH")]
     ThTh,
-    #[serde(rename = "tr-TR")]
     TrTr,
-    #[serde(rename = "uk-UA")]
     UkUa,
-    #[serde(rename = "vi-VN")]
     ViVn,
+    /// This variant is used for forward compatibility.
+    /// If the server sends a value not recognized by the current SDK version,
+    /// it will be captured here with the raw string value.
+    __Unknown(String),
 }
+impl Serialize for MethodElementSettingsApplePayLanguage {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        match self {
+            Self::EnUs => serializer.serialize_str("en-US"),
+            Self::ArAb => serializer.serialize_str("ar-AB"),
+            Self::CaEs => serializer.serialize_str("ca-ES"),
+            Self::ZhCn => serializer.serialize_str("zh-CN"),
+            Self::ZhHk => serializer.serialize_str("zh-HK"),
+            Self::ZhTw => serializer.serialize_str("zh-TW"),
+            Self::HrHr => serializer.serialize_str("hr-HR"),
+            Self::CsCz => serializer.serialize_str("cs-CZ"),
+            Self::DaDk => serializer.serialize_str("da-DK"),
+            Self::DeDe => serializer.serialize_str("de-DE"),
+            Self::NlNl => serializer.serialize_str("nl-NL"),
+            Self::EnAu => serializer.serialize_str("en-AU"),
+            Self::EnGb => serializer.serialize_str("en-GB"),
+            Self::FiFi => serializer.serialize_str("fi-FI"),
+            Self::FrCa => serializer.serialize_str("fr-CA"),
+            Self::FrFr => serializer.serialize_str("fr-FR"),
+            Self::ElGr => serializer.serialize_str("el-GR"),
+            Self::HeIl => serializer.serialize_str("he-IL"),
+            Self::HiIn => serializer.serialize_str("hi-IN"),
+            Self::HuHu => serializer.serialize_str("hu-HU"),
+            Self::IdId => serializer.serialize_str("id-ID"),
+            Self::ItIt => serializer.serialize_str("it-IT"),
+            Self::JaJp => serializer.serialize_str("ja-JP"),
+            Self::KoKr => serializer.serialize_str("ko-KR"),
+            Self::MsMy => serializer.serialize_str("ms-MY"),
+            Self::NbNo => serializer.serialize_str("nb-NO"),
+            Self::PlPl => serializer.serialize_str("pl-PL"),
+            Self::PtBr => serializer.serialize_str("pt-BR"),
+            Self::PtPt => serializer.serialize_str("pt-PT"),
+            Self::RoRo => serializer.serialize_str("ro-RO"),
+            Self::RuRu => serializer.serialize_str("ru-RU"),
+            Self::SkSk => serializer.serialize_str("sk-SK"),
+            Self::EsMx => serializer.serialize_str("es-MX"),
+            Self::EsEs => serializer.serialize_str("es-ES"),
+            Self::SvSe => serializer.serialize_str("sv-SE"),
+            Self::ThTh => serializer.serialize_str("th-TH"),
+            Self::TrTr => serializer.serialize_str("tr-TR"),
+            Self::UkUa => serializer.serialize_str("uk-UA"),
+            Self::ViVn => serializer.serialize_str("vi-VN"),
+            Self::__Unknown(val) => serializer.serialize_str(val),
+        }
+    }
+}
+
+impl<'de> Deserialize<'de> for MethodElementSettingsApplePayLanguage {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = String::deserialize(deserializer)?;
+        match value.as_str() {
+            "en-US" => Ok(Self::EnUs),
+            "ar-AB" => Ok(Self::ArAb),
+            "ca-ES" => Ok(Self::CaEs),
+            "zh-CN" => Ok(Self::ZhCn),
+            "zh-HK" => Ok(Self::ZhHk),
+            "zh-TW" => Ok(Self::ZhTw),
+            "hr-HR" => Ok(Self::HrHr),
+            "cs-CZ" => Ok(Self::CsCz),
+            "da-DK" => Ok(Self::DaDk),
+            "de-DE" => Ok(Self::DeDe),
+            "nl-NL" => Ok(Self::NlNl),
+            "en-AU" => Ok(Self::EnAu),
+            "en-GB" => Ok(Self::EnGb),
+            "fi-FI" => Ok(Self::FiFi),
+            "fr-CA" => Ok(Self::FrCa),
+            "fr-FR" => Ok(Self::FrFr),
+            "el-GR" => Ok(Self::ElGr),
+            "he-IL" => Ok(Self::HeIl),
+            "hi-IN" => Ok(Self::HiIn),
+            "hu-HU" => Ok(Self::HuHu),
+            "id-ID" => Ok(Self::IdId),
+            "it-IT" => Ok(Self::ItIt),
+            "ja-JP" => Ok(Self::JaJp),
+            "ko-KR" => Ok(Self::KoKr),
+            "ms-MY" => Ok(Self::MsMy),
+            "nb-NO" => Ok(Self::NbNo),
+            "pl-PL" => Ok(Self::PlPl),
+            "pt-BR" => Ok(Self::PtBr),
+            "pt-PT" => Ok(Self::PtPt),
+            "ro-RO" => Ok(Self::RoRo),
+            "ru-RU" => Ok(Self::RuRu),
+            "sk-SK" => Ok(Self::SkSk),
+            "es-MX" => Ok(Self::EsMx),
+            "es-ES" => Ok(Self::EsEs),
+            "sv-SE" => Ok(Self::SvSe),
+            "th-TH" => Ok(Self::ThTh),
+            "tr-TR" => Ok(Self::TrTr),
+            "uk-UA" => Ok(Self::UkUa),
+            "vi-VN" => Ok(Self::ViVn),
+            _ => Ok(Self::__Unknown(value)),
+        }
+    }
+}
+
 impl fmt::Display for MethodElementSettingsApplePayLanguage {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = match self {
-            Self::EnUs => "en-US",
-            Self::ArAb => "ar-AB",
-            Self::CaEs => "ca-ES",
-            Self::ZhCn => "zh-CN",
-            Self::ZhHk => "zh-HK",
-            Self::ZhTw => "zh-TW",
-            Self::HrHr => "hr-HR",
-            Self::CsCz => "cs-CZ",
-            Self::DaDk => "da-DK",
-            Self::DeDe => "de-DE",
-            Self::NlNl => "nl-NL",
-            Self::EnAu => "en-AU",
-            Self::EnGb => "en-GB",
-            Self::FiFi => "fi-FI",
-            Self::FrCa => "fr-CA",
-            Self::FrFr => "fr-FR",
-            Self::ElGr => "el-GR",
-            Self::HeIl => "he-IL",
-            Self::HiIn => "hi-IN",
-            Self::HuHu => "hu-HU",
-            Self::IdId => "id-ID",
-            Self::ItIt => "it-IT",
-            Self::JaJp => "ja-JP",
-            Self::KoKr => "ko-KR",
-            Self::MsMy => "ms-MY",
-            Self::NbNo => "nb-NO",
-            Self::PlPl => "pl-PL",
-            Self::PtBr => "pt-BR",
-            Self::PtPt => "pt-PT",
-            Self::RoRo => "ro-RO",
-            Self::RuRu => "ru-RU",
-            Self::SkSk => "sk-SK",
-            Self::EsMx => "es-MX",
-            Self::EsEs => "es-ES",
-            Self::SvSe => "sv-SE",
-            Self::ThTh => "th-TH",
-            Self::TrTr => "tr-TR",
-            Self::UkUa => "uk-UA",
-            Self::ViVn => "vi-VN",
-        };
-        write!(f, "{}", s)
+        match self {
+            Self::EnUs => write!(f, "en-US"),
+            Self::ArAb => write!(f, "ar-AB"),
+            Self::CaEs => write!(f, "ca-ES"),
+            Self::ZhCn => write!(f, "zh-CN"),
+            Self::ZhHk => write!(f, "zh-HK"),
+            Self::ZhTw => write!(f, "zh-TW"),
+            Self::HrHr => write!(f, "hr-HR"),
+            Self::CsCz => write!(f, "cs-CZ"),
+            Self::DaDk => write!(f, "da-DK"),
+            Self::DeDe => write!(f, "de-DE"),
+            Self::NlNl => write!(f, "nl-NL"),
+            Self::EnAu => write!(f, "en-AU"),
+            Self::EnGb => write!(f, "en-GB"),
+            Self::FiFi => write!(f, "fi-FI"),
+            Self::FrCa => write!(f, "fr-CA"),
+            Self::FrFr => write!(f, "fr-FR"),
+            Self::ElGr => write!(f, "el-GR"),
+            Self::HeIl => write!(f, "he-IL"),
+            Self::HiIn => write!(f, "hi-IN"),
+            Self::HuHu => write!(f, "hu-HU"),
+            Self::IdId => write!(f, "id-ID"),
+            Self::ItIt => write!(f, "it-IT"),
+            Self::JaJp => write!(f, "ja-JP"),
+            Self::KoKr => write!(f, "ko-KR"),
+            Self::MsMy => write!(f, "ms-MY"),
+            Self::NbNo => write!(f, "nb-NO"),
+            Self::PlPl => write!(f, "pl-PL"),
+            Self::PtBr => write!(f, "pt-BR"),
+            Self::PtPt => write!(f, "pt-PT"),
+            Self::RoRo => write!(f, "ro-RO"),
+            Self::RuRu => write!(f, "ru-RU"),
+            Self::SkSk => write!(f, "sk-SK"),
+            Self::EsMx => write!(f, "es-MX"),
+            Self::EsEs => write!(f, "es-ES"),
+            Self::SvSe => write!(f, "sv-SE"),
+            Self::ThTh => write!(f, "th-TH"),
+            Self::TrTr => write!(f, "tr-TR"),
+            Self::UkUa => write!(f, "uk-UA"),
+            Self::ViVn => write!(f, "vi-VN"),
+            Self::__Unknown(val) => write!(f, "{}", val),
+        }
     }
 }

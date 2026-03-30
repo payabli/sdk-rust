@@ -11,47 +11,47 @@ pub enum RequestSchedulePaymentMethod {
 }
 
 impl RequestSchedulePaymentMethod {
-    pub fn is_paymethodcredit(&self) -> bool {
+    pub fn is_pay_method_credit(&self) -> bool {
         matches!(self, Self::PayMethodCredit(_))
     }
 
-    pub fn is_paymethodach(&self) -> bool {
+    pub fn is_pay_method_ach(&self) -> bool {
         matches!(self, Self::PayMethodAch(_))
     }
 
-    pub fn is_requestschedulepaymentmethodinitiator(&self) -> bool {
+    pub fn is_request_schedule_payment_method_initiator(&self) -> bool {
         matches!(self, Self::RequestSchedulePaymentMethodInitiator(_))
     }
 
-    pub fn as_paymethodcredit(&self) -> Option<&PayMethodCredit> {
+    pub fn as_pay_method_credit(&self) -> Option<&PayMethodCredit> {
         match self {
             Self::PayMethodCredit(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_paymethodcredit(self) -> Option<PayMethodCredit> {
+    pub fn into_pay_method_credit(self) -> Option<PayMethodCredit> {
         match self {
             Self::PayMethodCredit(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn as_paymethodach(&self) -> Option<&PayMethodAch> {
+    pub fn as_pay_method_ach(&self) -> Option<&PayMethodAch> {
         match self {
             Self::PayMethodAch(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_paymethodach(self) -> Option<PayMethodAch> {
+    pub fn into_pay_method_ach(self) -> Option<PayMethodAch> {
         match self {
             Self::PayMethodAch(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn as_requestschedulepaymentmethodinitiator(
+    pub fn as_request_schedule_payment_method_initiator(
         &self,
     ) -> Option<&RequestSchedulePaymentMethodInitiator> {
         match self {
@@ -60,7 +60,7 @@ impl RequestSchedulePaymentMethod {
         }
     }
 
-    pub fn into_requestschedulepaymentmethodinitiator(
+    pub fn into_request_schedule_payment_method_initiator(
         self,
     ) -> Option<RequestSchedulePaymentMethodInitiator> {
         match self {

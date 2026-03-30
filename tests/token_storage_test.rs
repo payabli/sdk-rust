@@ -21,27 +21,8 @@ async fn test_token_storage_add_method_with_wiremock() {
             &AddMethodRequest {
                 body: RequestTokenStorage {
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     fallback_auth: Some(true),
@@ -55,11 +36,11 @@ async fn test_token_storage_add_method_with_wiremock() {
                             card_holder: Cardholder("John Doe".to_string()),
                             cardnumber: Cardnumber("4111111111111111".to_string()),
                             cardzip: Some(Cardzip("12345".to_string())),
+                            ..Default::default()
                         },
                     )),
-                    vendor_data: None,
                     source: Some(Source("api".to_string())),
-                    subdomain: None,
+                    ..Default::default()
                 },
                 ach_validation: None,
                 create_anonymous: None,
@@ -97,6 +78,7 @@ async fn test_token_storage_get_method_with_wiremock() {
             &GetMethodQueryRequest {
                 card_expiration_format: Some(1),
                 include_temporary: Some(false),
+                ..Default::default()
             },
             None,
         )
@@ -167,32 +149,11 @@ async fn test_token_storage_update_method_with_wiremock() {
             &UpdateMethodRequest {
                 body: RequestTokenStorage {
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     fallback_auth: Some(true),
-                    fallback_auth_amount: None,
-                    method_description: None,
                     payment_method: Some(RequestTokenStoragePaymentMethod::TokenizeCard(
                         TokenizeCard {
                             method: "card".to_string(),
@@ -201,11 +162,10 @@ async fn test_token_storage_update_method_with_wiremock() {
                             card_holder: Cardholder("John Doe".to_string()),
                             cardnumber: Cardnumber("4111111111111111".to_string()),
                             cardzip: Some(Cardzip("12345".to_string())),
+                            ..Default::default()
                         },
                     )),
-                    vendor_data: None,
-                    source: None,
-                    subdomain: None,
+                    ..Default::default()
                 },
                 ach_validation: None,
             },

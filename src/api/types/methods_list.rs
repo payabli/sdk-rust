@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct MethodsList {
     /// When `true`, American Express is accepted.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -26,4 +26,72 @@ pub struct MethodsList {
     /// When `true`, Visa is accepted.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub visa: Option<bool>,
+}
+
+impl MethodsList {
+    pub fn builder() -> MethodsListBuilder {
+        <MethodsListBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct MethodsListBuilder {
+    amex: Option<bool>,
+    apple_pay: Option<bool>,
+    google_pay: Option<bool>,
+    discover: Option<bool>,
+    e_check: Option<bool>,
+    mastercard: Option<bool>,
+    visa: Option<bool>,
+}
+
+impl MethodsListBuilder {
+    pub fn amex(mut self, value: bool) -> Self {
+        self.amex = Some(value);
+        self
+    }
+
+    pub fn apple_pay(mut self, value: bool) -> Self {
+        self.apple_pay = Some(value);
+        self
+    }
+
+    pub fn google_pay(mut self, value: bool) -> Self {
+        self.google_pay = Some(value);
+        self
+    }
+
+    pub fn discover(mut self, value: bool) -> Self {
+        self.discover = Some(value);
+        self
+    }
+
+    pub fn e_check(mut self, value: bool) -> Self {
+        self.e_check = Some(value);
+        self
+    }
+
+    pub fn mastercard(mut self, value: bool) -> Self {
+        self.mastercard = Some(value);
+        self
+    }
+
+    pub fn visa(mut self, value: bool) -> Self {
+        self.visa = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`MethodsList`].
+    pub fn build(self) -> Result<MethodsList, BuildError> {
+        Ok(MethodsList {
+            amex: self.amex,
+            apple_pay: self.apple_pay,
+            google_pay: self.google_pay,
+            discover: self.discover,
+            e_check: self.e_check,
+            mastercard: self.mastercard,
+            visa: self.visa,
+        })
+    }
 }

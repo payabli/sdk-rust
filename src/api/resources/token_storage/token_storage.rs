@@ -31,7 +31,7 @@ impl TokenStorageClient {
             .execute_request(
                 Method::POST,
                 "TokenStorage/add",
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize("achValidation", request.ach_validation.clone())
                     .serialize("createAnonymous", request.create_anonymous.clone())
@@ -68,7 +68,7 @@ impl TokenStorageClient {
     /// JSON response from the API
     pub async fn get_method(
         &self,
-        method_id: &String,
+        method_id: &str,
         request: &GetMethodQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<GetMethodResponse, ApiError> {
@@ -101,7 +101,7 @@ impl TokenStorageClient {
     /// JSON response from the API
     pub async fn remove_method(
         &self,
-        method_id: &String,
+        method_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymethodDelete, ApiError> {
         self.http_client
@@ -127,7 +127,7 @@ impl TokenStorageClient {
     /// JSON response from the API
     pub async fn update_method(
         &self,
-        method_id: &String,
+        method_id: &str,
         request: &UpdateMethodRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymethodDelete, ApiError> {
@@ -135,7 +135,7 @@ impl TokenStorageClient {
             .execute_request(
                 Method::PUT,
                 &format!("TokenStorage/{}", method_id),
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize("achValidation", request.ach_validation.clone())
                     .build(),

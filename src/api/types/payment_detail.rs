@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 /// Details about the payment.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct PaymentDetail {
     /// Array of payment categories/line items describing the amount to be paid.
     /// **Note**: These categories are for information only and aren't validated against the total amount provided.
@@ -32,5 +32,85 @@ pub struct PaymentDetail {
     pub check_unique_id: Option<String>,
     /// Total amount to be charged. If a service fee is sent, then this amount should include the service fee."
     #[serde(rename = "totalAmount")]
+    #[serde(default)]
     pub total_amount: f64,
+}
+
+impl PaymentDetail {
+    pub fn builder() -> PaymentDetailBuilder {
+        <PaymentDetailBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct PaymentDetailBuilder {
+    categories: Option<Vec<PaymentCategories>>,
+    check_image: Option<HashMap<String, serde_json::Value>>,
+    check_number: Option<String>,
+    currency: Option<String>,
+    service_fee: Option<f64>,
+    split_funding: Option<SplitFunding>,
+    check_unique_id: Option<String>,
+    total_amount: Option<f64>,
+}
+
+impl PaymentDetailBuilder {
+    pub fn categories(mut self, value: Vec<PaymentCategories>) -> Self {
+        self.categories = Some(value);
+        self
+    }
+
+    pub fn check_image(mut self, value: HashMap<String, serde_json::Value>) -> Self {
+        self.check_image = Some(value);
+        self
+    }
+
+    pub fn check_number(mut self, value: impl Into<String>) -> Self {
+        self.check_number = Some(value.into());
+        self
+    }
+
+    pub fn currency(mut self, value: impl Into<String>) -> Self {
+        self.currency = Some(value.into());
+        self
+    }
+
+    pub fn service_fee(mut self, value: f64) -> Self {
+        self.service_fee = Some(value);
+        self
+    }
+
+    pub fn split_funding(mut self, value: SplitFunding) -> Self {
+        self.split_funding = Some(value);
+        self
+    }
+
+    pub fn check_unique_id(mut self, value: impl Into<String>) -> Self {
+        self.check_unique_id = Some(value.into());
+        self
+    }
+
+    pub fn total_amount(mut self, value: f64) -> Self {
+        self.total_amount = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`PaymentDetail`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`total_amount`](PaymentDetailBuilder::total_amount)
+    pub fn build(self) -> Result<PaymentDetail, BuildError> {
+        Ok(PaymentDetail {
+            categories: self.categories,
+            check_image: self.check_image,
+            check_number: self.check_number,
+            currency: self.currency,
+            service_fee: self.service_fee,
+            split_funding: self.split_funding,
+            check_unique_id: self.check_unique_id,
+            total_amount: self
+                .total_amount
+                .ok_or_else(|| BuildError::missing_field("total_amount"))?,
+        })
+    }
 }

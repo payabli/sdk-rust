@@ -1,8 +1,6 @@
 pub use crate::prelude::*;
 
 /// Query parameters for ListSettlementsOrg
-///
-/// Request type for the ListSettlementsOrgQueryRequest operation.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ListSettlementsOrgQueryRequest {
     #[serde(rename = "exportFormat")]
@@ -97,4 +95,58 @@ pub struct ListSettlementsOrgQueryRequest {
     #[serde(rename = "sortBy")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sort_by: Option<String>,
+}
+
+impl ListSettlementsOrgQueryRequest {
+    pub fn builder() -> ListSettlementsOrgQueryRequestBuilder {
+        <ListSettlementsOrgQueryRequestBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct ListSettlementsOrgQueryRequestBuilder {
+    export_format: Option<ExportFormat>,
+    from_record: Option<i64>,
+    limit_record: Option<i64>,
+    parameters: Option<HashMap<String, Option<String>>>,
+    sort_by: Option<String>,
+}
+
+impl ListSettlementsOrgQueryRequestBuilder {
+    pub fn export_format(mut self, value: ExportFormat) -> Self {
+        self.export_format = Some(value);
+        self
+    }
+
+    pub fn from_record(mut self, value: i64) -> Self {
+        self.from_record = Some(value);
+        self
+    }
+
+    pub fn limit_record(mut self, value: i64) -> Self {
+        self.limit_record = Some(value);
+        self
+    }
+
+    pub fn parameters(mut self, value: HashMap<String, Option<String>>) -> Self {
+        self.parameters = Some(value);
+        self
+    }
+
+    pub fn sort_by(mut self, value: impl Into<String>) -> Self {
+        self.sort_by = Some(value.into());
+        self
+    }
+
+    /// Consumes the builder and constructs a [`ListSettlementsOrgQueryRequest`].
+    pub fn build(self) -> Result<ListSettlementsOrgQueryRequest, BuildError> {
+        Ok(ListSettlementsOrgQueryRequest {
+            export_format: self.export_format,
+            from_record: self.from_record,
+            limit_record: self.limit_record,
+            parameters: self.parameters,
+            sort_by: self.sort_by,
+        })
+    }
 }

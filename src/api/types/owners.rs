@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct Owners {
     /// Person who is registered as the beneficial owner of the business. This is a combination of first and last name.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -52,4 +52,135 @@ pub struct Owners {
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub additional_data: Option<AdditionalDataString>,
+}
+
+impl Owners {
+    pub fn builder() -> OwnersBuilder {
+        <OwnersBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct OwnersBuilder {
+    ownername: Option<String>,
+    ownertitle: Option<String>,
+    ownerpercent: Option<i64>,
+    ownerssn: Option<String>,
+    ownerdob: Option<String>,
+    ownerphone_1: Option<String>,
+    ownerphone_2: Option<String>,
+    owneremail: Option<Email>,
+    ownerdriver: Option<String>,
+    oaddress: Option<String>,
+    ocity: Option<String>,
+    ocountry: Option<String>,
+    odriverstate: Option<String>,
+    ostate: Option<String>,
+    ozip: Option<String>,
+    additional_data: Option<AdditionalDataString>,
+}
+
+impl OwnersBuilder {
+    pub fn ownername(mut self, value: impl Into<String>) -> Self {
+        self.ownername = Some(value.into());
+        self
+    }
+
+    pub fn ownertitle(mut self, value: impl Into<String>) -> Self {
+        self.ownertitle = Some(value.into());
+        self
+    }
+
+    pub fn ownerpercent(mut self, value: i64) -> Self {
+        self.ownerpercent = Some(value);
+        self
+    }
+
+    pub fn ownerssn(mut self, value: impl Into<String>) -> Self {
+        self.ownerssn = Some(value.into());
+        self
+    }
+
+    pub fn ownerdob(mut self, value: impl Into<String>) -> Self {
+        self.ownerdob = Some(value.into());
+        self
+    }
+
+    pub fn ownerphone_1(mut self, value: impl Into<String>) -> Self {
+        self.ownerphone_1 = Some(value.into());
+        self
+    }
+
+    pub fn ownerphone_2(mut self, value: impl Into<String>) -> Self {
+        self.ownerphone_2 = Some(value.into());
+        self
+    }
+
+    pub fn owneremail(mut self, value: Email) -> Self {
+        self.owneremail = Some(value);
+        self
+    }
+
+    pub fn ownerdriver(mut self, value: impl Into<String>) -> Self {
+        self.ownerdriver = Some(value.into());
+        self
+    }
+
+    pub fn oaddress(mut self, value: impl Into<String>) -> Self {
+        self.oaddress = Some(value.into());
+        self
+    }
+
+    pub fn ocity(mut self, value: impl Into<String>) -> Self {
+        self.ocity = Some(value.into());
+        self
+    }
+
+    pub fn ocountry(mut self, value: impl Into<String>) -> Self {
+        self.ocountry = Some(value.into());
+        self
+    }
+
+    pub fn odriverstate(mut self, value: impl Into<String>) -> Self {
+        self.odriverstate = Some(value.into());
+        self
+    }
+
+    pub fn ostate(mut self, value: impl Into<String>) -> Self {
+        self.ostate = Some(value.into());
+        self
+    }
+
+    pub fn ozip(mut self, value: impl Into<String>) -> Self {
+        self.ozip = Some(value.into());
+        self
+    }
+
+    pub fn additional_data(mut self, value: AdditionalDataString) -> Self {
+        self.additional_data = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`Owners`].
+    pub fn build(self) -> Result<Owners, BuildError> {
+        Ok(Owners {
+            ownername: self.ownername,
+            ownertitle: self.ownertitle,
+            ownerpercent: self.ownerpercent,
+            ownerssn: self.ownerssn,
+            ownerdob: self.ownerdob,
+            ownerphone_1: self.ownerphone_1,
+            ownerphone_2: self.ownerphone_2,
+            owneremail: self.owneremail,
+            ownerdriver: self.ownerdriver,
+            oaddress: self.oaddress,
+            ocity: self.ocity,
+            ocountry: self.ocountry,
+            odriverstate: self.odriverstate,
+            ostate: self.ostate,
+            ozip: self.ozip,
+            additional_data: self.additional_data,
+        })
+    }
 }

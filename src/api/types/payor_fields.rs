@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct PayorFields {
     /// Flag indicating if the input field will show in container
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -49,4 +49,93 @@ pub struct PayorFields {
     /// - 12 = 3/3
     #[serde(skip_serializing_if = "Option::is_none")]
     pub width: Option<i64>,
+}
+
+impl PayorFields {
+    pub fn builder() -> PayorFieldsBuilder {
+        <PayorFieldsBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct PayorFieldsBuilder {
+    display: Option<bool>,
+    fixed: Option<bool>,
+    identifier: Option<bool>,
+    label: Option<String>,
+    name: Option<String>,
+    order: Option<Order>,
+    required: Option<bool>,
+    validation: Option<String>,
+    value: Option<String>,
+    width: Option<i64>,
+}
+
+impl PayorFieldsBuilder {
+    pub fn display(mut self, value: bool) -> Self {
+        self.display = Some(value);
+        self
+    }
+
+    pub fn fixed(mut self, value: bool) -> Self {
+        self.fixed = Some(value);
+        self
+    }
+
+    pub fn identifier(mut self, value: bool) -> Self {
+        self.identifier = Some(value);
+        self
+    }
+
+    pub fn label(mut self, value: impl Into<String>) -> Self {
+        self.label = Some(value.into());
+        self
+    }
+
+    pub fn name(mut self, value: impl Into<String>) -> Self {
+        self.name = Some(value.into());
+        self
+    }
+
+    pub fn order(mut self, value: Order) -> Self {
+        self.order = Some(value);
+        self
+    }
+
+    pub fn required(mut self, value: bool) -> Self {
+        self.required = Some(value);
+        self
+    }
+
+    pub fn validation(mut self, value: impl Into<String>) -> Self {
+        self.validation = Some(value.into());
+        self
+    }
+
+    pub fn value(mut self, value: impl Into<String>) -> Self {
+        self.value = Some(value.into());
+        self
+    }
+
+    pub fn width(mut self, value: i64) -> Self {
+        self.width = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`PayorFields`].
+    pub fn build(self) -> Result<PayorFields, BuildError> {
+        Ok(PayorFields {
+            display: self.display,
+            fixed: self.fixed,
+            identifier: self.identifier,
+            label: self.label,
+            name: self.name,
+            order: self.order,
+            required: self.required,
+            validation: self.validation,
+            value: self.value,
+            width: self.width,
+        })
+    }
 }

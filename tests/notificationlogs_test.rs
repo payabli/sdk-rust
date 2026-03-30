@@ -30,7 +30,7 @@ async fn test_notificationlogs_search_notification_logs_with_wiremock() {
                     notification_event: Some("ActivatedMerchant".to_string()),
                     succeeded: Some(true),
                     org_id: Some(12345),
-                    paypoint_id: None,
+                    ..Default::default()
                 },
                 page: None,
             },

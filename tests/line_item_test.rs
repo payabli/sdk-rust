@@ -20,7 +20,6 @@ async fn test_line_item_add_item_with_wiremock() {
         .add_item(
             &"47cae3d74".to_string(),
             &LineItem {
-                item_categories: None,
                 item_commodity_code: Some(ItemCommodityCode("010".to_string())),
                 item_cost: 12.45,
                 item_description: Some(ItemDescription("Deposit for materials".to_string())),
@@ -29,6 +28,7 @@ async fn test_line_item_add_item_with_wiremock() {
                 item_product_name: Some(ItemProductName("Materials deposit".to_string())),
                 item_qty: 1,
                 item_unit_of_measure: Some(ItemUnitofMeasure("SqFt".to_string())),
+                ..Default::default()
             },
             None,
         )
@@ -106,7 +106,7 @@ async fn test_line_item_list_line_items_with_wiremock() {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
-                parameters: None,
+                ..Default::default()
             },
             None,
         )
@@ -146,15 +146,9 @@ async fn test_line_item_update_item_with_wiremock() {
         .update_item(
             700,
             &LineItem {
-                item_categories: None,
-                item_commodity_code: None,
                 item_cost: 12.45,
-                item_description: None,
-                item_mode: None,
-                item_product_code: None,
-                item_product_name: None,
                 item_qty: 1,
-                item_unit_of_measure: None,
+                ..Default::default()
             },
             None,
         )

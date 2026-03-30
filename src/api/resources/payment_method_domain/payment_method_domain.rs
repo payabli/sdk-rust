@@ -31,7 +31,7 @@ impl PaymentMethodDomainClient {
             .execute_request(
                 Method::POST,
                 "PaymentMethodDomain",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -50,7 +50,7 @@ impl PaymentMethodDomainClient {
     /// JSON response from the API
     pub async fn cascade_payment_method_domain(
         &self,
-        domain_id: &String,
+        domain_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PaymentMethodDomainGeneralResponse, ApiError> {
         self.http_client
@@ -76,7 +76,7 @@ impl PaymentMethodDomainClient {
     /// JSON response from the API
     pub async fn delete_payment_method_domain(
         &self,
-        domain_id: &String,
+        domain_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<DeletePaymentMethodDomainResponse, ApiError> {
         self.http_client
@@ -102,7 +102,7 @@ impl PaymentMethodDomainClient {
     /// JSON response from the API
     pub async fn get_payment_method_domain(
         &self,
-        domain_id: &String,
+        domain_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PaymentMethodDomainApiResponse, ApiError> {
         self.http_client
@@ -166,7 +166,7 @@ impl PaymentMethodDomainClient {
     /// JSON response from the API
     pub async fn update_payment_method_domain(
         &self,
-        domain_id: &String,
+        domain_id: &str,
         request: &UpdatePaymentMethodDomainRequest,
         options: Option<RequestOptions>,
     ) -> Result<PaymentMethodDomainGeneralResponse, ApiError> {
@@ -174,7 +174,7 @@ impl PaymentMethodDomainClient {
             .execute_request(
                 Method::PATCH,
                 &format!("PaymentMethodDomain/{}", domain_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -193,7 +193,7 @@ impl PaymentMethodDomainClient {
     /// JSON response from the API
     pub async fn verify_payment_method_domain(
         &self,
-        domain_id: &String,
+        domain_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PaymentMethodDomainGeneralResponse, ApiError> {
         self.http_client

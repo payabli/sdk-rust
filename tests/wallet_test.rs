@@ -22,6 +22,7 @@ async fn test_wallet_configure_apple_pay_organization_with_wiremock() {
                 cascade: Some(Cascade(true)),
                 is_enabled: Some(IsEnabled(true)),
                 org_id: Some(OrganizationId(901)),
+                ..Default::default()
             },
             None,
         )
@@ -58,6 +59,7 @@ async fn test_wallet_configure_apple_pay_paypoint_with_wiremock() {
             &ConfigurePaypointRequestApplePay {
                 entry: Some(Entry("8cfec329267".to_string())),
                 is_enabled: Some(IsEnabled(true)),
+                ..Default::default()
             },
             None,
         )
@@ -90,6 +92,7 @@ async fn test_wallet_configure_google_pay_organization_with_wiremock() {
                 cascade: Some(Cascade(true)),
                 is_enabled: Some(IsEnabled(true)),
                 org_id: Some(OrganizationId(901)),
+                ..Default::default()
             },
             None,
         )
@@ -126,6 +129,7 @@ async fn test_wallet_configure_google_pay_paypoint_with_wiremock() {
             &ConfigurePaypointRequestGooglePay {
                 entry: Some(Entry("8cfec329267".to_string())),
                 is_enabled: Some(IsEnabled(true)),
+                ..Default::default()
             },
             None,
         )

@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct LineItem {
     /// Array of tags classifying item or product.
     #[serde(rename = "itemCategories")]
@@ -11,6 +11,7 @@ pub struct LineItem {
     pub item_commodity_code: Option<ItemCommodityCode>,
     /// Item or product price per unit.
     #[serde(rename = "itemCost")]
+    #[serde(default)]
     pub item_cost: f64,
     #[serde(rename = "itemDescription")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -27,8 +28,98 @@ pub struct LineItem {
     pub item_product_name: Option<ItemProductName>,
     /// Quantity of item or product.
     #[serde(rename = "itemQty")]
+    #[serde(default)]
     pub item_qty: i64,
     #[serde(rename = "itemUnitOfMeasure")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub item_unit_of_measure: Option<ItemUnitofMeasure>,
+}
+
+impl LineItem {
+    pub fn builder() -> LineItemBuilder {
+        <LineItemBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct LineItemBuilder {
+    item_categories: Option<Vec<Option<String>>>,
+    item_commodity_code: Option<ItemCommodityCode>,
+    item_cost: Option<f64>,
+    item_description: Option<ItemDescription>,
+    item_mode: Option<i64>,
+    item_product_code: Option<ItemProductCode>,
+    item_product_name: Option<ItemProductName>,
+    item_qty: Option<i64>,
+    item_unit_of_measure: Option<ItemUnitofMeasure>,
+}
+
+impl LineItemBuilder {
+    pub fn item_categories(mut self, value: Vec<Option<String>>) -> Self {
+        self.item_categories = Some(value);
+        self
+    }
+
+    pub fn item_commodity_code(mut self, value: ItemCommodityCode) -> Self {
+        self.item_commodity_code = Some(value);
+        self
+    }
+
+    pub fn item_cost(mut self, value: f64) -> Self {
+        self.item_cost = Some(value);
+        self
+    }
+
+    pub fn item_description(mut self, value: ItemDescription) -> Self {
+        self.item_description = Some(value);
+        self
+    }
+
+    pub fn item_mode(mut self, value: i64) -> Self {
+        self.item_mode = Some(value);
+        self
+    }
+
+    pub fn item_product_code(mut self, value: ItemProductCode) -> Self {
+        self.item_product_code = Some(value);
+        self
+    }
+
+    pub fn item_product_name(mut self, value: ItemProductName) -> Self {
+        self.item_product_name = Some(value);
+        self
+    }
+
+    pub fn item_qty(mut self, value: i64) -> Self {
+        self.item_qty = Some(value);
+        self
+    }
+
+    pub fn item_unit_of_measure(mut self, value: ItemUnitofMeasure) -> Self {
+        self.item_unit_of_measure = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`LineItem`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`item_cost`](LineItemBuilder::item_cost)
+    /// - [`item_qty`](LineItemBuilder::item_qty)
+    pub fn build(self) -> Result<LineItem, BuildError> {
+        Ok(LineItem {
+            item_categories: self.item_categories,
+            item_commodity_code: self.item_commodity_code,
+            item_cost: self
+                .item_cost
+                .ok_or_else(|| BuildError::missing_field("item_cost"))?,
+            item_description: self.item_description,
+            item_mode: self.item_mode,
+            item_product_code: self.item_product_code,
+            item_product_name: self.item_product_name,
+            item_qty: self
+                .item_qty
+                .ok_or_else(|| BuildError::missing_field("item_qty"))?,
+            item_unit_of_measure: self.item_unit_of_measure,
+        })
+    }
 }

@@ -1,8 +1,6 @@
 pub use crate::prelude::*;
 
 /// Query parameters for ExportTransfers
-///
-/// Request type for the ExportTransfersQueryRequest operation.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ExportTransfersQueryRequest {
     #[serde(rename = "columnsExport")]
@@ -64,4 +62,58 @@ pub struct ExportTransfersQueryRequest {
     #[serde(rename = "sortBy")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sort_by: Option<String>,
+}
+
+impl ExportTransfersQueryRequest {
+    pub fn builder() -> ExportTransfersQueryRequestBuilder {
+        <ExportTransfersQueryRequestBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct ExportTransfersQueryRequestBuilder {
+    columns_export: Option<String>,
+    from_record: Option<i64>,
+    limit_record: Option<i64>,
+    parameters: Option<HashMap<String, Option<String>>>,
+    sort_by: Option<String>,
+}
+
+impl ExportTransfersQueryRequestBuilder {
+    pub fn columns_export(mut self, value: impl Into<String>) -> Self {
+        self.columns_export = Some(value.into());
+        self
+    }
+
+    pub fn from_record(mut self, value: i64) -> Self {
+        self.from_record = Some(value);
+        self
+    }
+
+    pub fn limit_record(mut self, value: i64) -> Self {
+        self.limit_record = Some(value);
+        self
+    }
+
+    pub fn parameters(mut self, value: HashMap<String, Option<String>>) -> Self {
+        self.parameters = Some(value);
+        self
+    }
+
+    pub fn sort_by(mut self, value: impl Into<String>) -> Self {
+        self.sort_by = Some(value.into());
+        self
+    }
+
+    /// Consumes the builder and constructs a [`ExportTransfersQueryRequest`].
+    pub fn build(self) -> Result<ExportTransfersQueryRequest, BuildError> {
+        Ok(ExportTransfersQueryRequest {
+            columns_export: self.columns_export,
+            from_record: self.from_record,
+            limit_record: self.limit_record,
+            parameters: self.parameters,
+            sort_by: self.sort_by,
+        })
+    }
 }

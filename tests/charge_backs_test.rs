@@ -20,10 +20,7 @@ async fn test_charge_backs_add_response_with_wiremock() {
         .add_response(
             1000000,
             &ResponseChargeBack {
-                attachments: None,
-                contact_email: None,
-                contact_name: None,
-                notes: None,
+                ..Default::default()
             },
             Some(
                 RequestOptions::new()

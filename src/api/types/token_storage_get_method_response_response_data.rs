@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct GetMethodResponseResponseData {
     /// Bank routing number
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -65,4 +65,149 @@ pub struct GetMethodResponseResponseData {
     pub postal_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vendors: Option<Vec<GetMethodResponseResponseDataVendorsItem>>,
+}
+
+impl GetMethodResponseResponseData {
+    pub fn builder() -> GetMethodResponseResponseDataBuilder {
+        <GetMethodResponseResponseDataBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct GetMethodResponseResponseDataBuilder {
+    aba: Option<String>,
+    ach_holder_type: Option<AchHolderType>,
+    ach_sec_code: Option<AchSecCode>,
+    bin: Option<String>,
+    bin_data: Option<BinData>,
+    card_updated_on: Option<DateTime<Utc>>,
+    customers: Option<Vec<GetMethodResponseResponseDataCustomersItem>>,
+    descriptor: Option<Descriptor>,
+    exp_date: Option<String>,
+    holder_name: Option<Holdername>,
+    id_pmethod: Option<String>,
+    is_validated_ach: Option<bool>,
+    last_updated: Option<DateTime<Utc>>,
+    masked_account: Option<Maskedaccount>,
+    method: Option<String>,
+    method_type: Option<String>,
+    postal_code: Option<String>,
+    vendors: Option<Vec<GetMethodResponseResponseDataVendorsItem>>,
+}
+
+impl GetMethodResponseResponseDataBuilder {
+    pub fn aba(mut self, value: impl Into<String>) -> Self {
+        self.aba = Some(value.into());
+        self
+    }
+
+    pub fn ach_holder_type(mut self, value: AchHolderType) -> Self {
+        self.ach_holder_type = Some(value);
+        self
+    }
+
+    pub fn ach_sec_code(mut self, value: AchSecCode) -> Self {
+        self.ach_sec_code = Some(value);
+        self
+    }
+
+    pub fn bin(mut self, value: impl Into<String>) -> Self {
+        self.bin = Some(value.into());
+        self
+    }
+
+    pub fn bin_data(mut self, value: BinData) -> Self {
+        self.bin_data = Some(value);
+        self
+    }
+
+    pub fn card_updated_on(mut self, value: DateTime<Utc>) -> Self {
+        self.card_updated_on = Some(value);
+        self
+    }
+
+    pub fn customers(mut self, value: Vec<GetMethodResponseResponseDataCustomersItem>) -> Self {
+        self.customers = Some(value);
+        self
+    }
+
+    pub fn descriptor(mut self, value: Descriptor) -> Self {
+        self.descriptor = Some(value);
+        self
+    }
+
+    pub fn exp_date(mut self, value: impl Into<String>) -> Self {
+        self.exp_date = Some(value.into());
+        self
+    }
+
+    pub fn holder_name(mut self, value: Holdername) -> Self {
+        self.holder_name = Some(value);
+        self
+    }
+
+    pub fn id_pmethod(mut self, value: impl Into<String>) -> Self {
+        self.id_pmethod = Some(value.into());
+        self
+    }
+
+    pub fn is_validated_ach(mut self, value: bool) -> Self {
+        self.is_validated_ach = Some(value);
+        self
+    }
+
+    pub fn last_updated(mut self, value: DateTime<Utc>) -> Self {
+        self.last_updated = Some(value);
+        self
+    }
+
+    pub fn masked_account(mut self, value: Maskedaccount) -> Self {
+        self.masked_account = Some(value);
+        self
+    }
+
+    pub fn method(mut self, value: impl Into<String>) -> Self {
+        self.method = Some(value.into());
+        self
+    }
+
+    pub fn method_type(mut self, value: impl Into<String>) -> Self {
+        self.method_type = Some(value.into());
+        self
+    }
+
+    pub fn postal_code(mut self, value: impl Into<String>) -> Self {
+        self.postal_code = Some(value.into());
+        self
+    }
+
+    pub fn vendors(mut self, value: Vec<GetMethodResponseResponseDataVendorsItem>) -> Self {
+        self.vendors = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`GetMethodResponseResponseData`].
+    pub fn build(self) -> Result<GetMethodResponseResponseData, BuildError> {
+        Ok(GetMethodResponseResponseData {
+            aba: self.aba,
+            ach_holder_type: self.ach_holder_type,
+            ach_sec_code: self.ach_sec_code,
+            bin: self.bin,
+            bin_data: self.bin_data,
+            card_updated_on: self.card_updated_on,
+            customers: self.customers,
+            descriptor: self.descriptor,
+            exp_date: self.exp_date,
+            holder_name: self.holder_name,
+            id_pmethod: self.id_pmethod,
+            is_validated_ach: self.is_validated_ach,
+            last_updated: self.last_updated,
+            masked_account: self.masked_account,
+            method: self.method,
+            method_type: self.method_type,
+            postal_code: self.postal_code,
+            vendors: self.vendors,
+        })
+    }
 }

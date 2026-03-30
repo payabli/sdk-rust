@@ -25,7 +25,7 @@ impl LineItemClient {
     /// JSON response from the API
     pub async fn add_item(
         &self,
-        entry: &String,
+        entry: &str,
         request: &LineItem,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse6, ApiError> {
@@ -33,7 +33,7 @@ impl LineItemClient {
             .execute_request(
                 Method::POST,
                 &format!("LineItem/{}", entry),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -161,7 +161,7 @@ impl LineItemClient {
     /// JSON response from the API
     pub async fn list_line_items(
         &self,
-        entry: &String,
+        entry: &str,
         request: &ListLineItemsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<QueryResponseItems, ApiError> {
@@ -201,7 +201,7 @@ impl LineItemClient {
             .execute_request(
                 Method::PUT,
                 &format!("LineItem/{}", line_item_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

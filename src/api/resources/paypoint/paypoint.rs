@@ -25,7 +25,7 @@ impl PaypointClient {
     /// JSON response from the API
     pub async fn get_basic_entry(
         &self,
-        entry: &String,
+        entry: &str,
         options: Option<RequestOptions>,
     ) -> Result<GetBasicEntryResponse, ApiError> {
         self.http_client
@@ -51,7 +51,7 @@ impl PaypointClient {
     /// JSON response from the API
     pub async fn get_basic_entry_by_id(
         &self,
-        id_paypoint: &String,
+        id_paypoint: &str,
         options: Option<RequestOptions>,
     ) -> Result<GetBasicEntryByIdResponse, ApiError> {
         self.http_client
@@ -77,7 +77,7 @@ impl PaypointClient {
     /// JSON response from the API
     pub async fn get_entry_config(
         &self,
-        entry: &String,
+        entry: &str,
         request: &GetEntryConfigQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<GetEntryConfigResponse, ApiError> {
@@ -107,8 +107,8 @@ impl PaypointClient {
     /// JSON response from the API
     pub async fn get_page(
         &self,
-        entry: &String,
-        subdomain: &String,
+        entry: &str,
+        subdomain: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliPages, ApiError> {
         self.http_client
@@ -135,8 +135,8 @@ impl PaypointClient {
     /// JSON response from the API
     pub async fn remove_page(
         &self,
-        entry: &String,
-        subdomain: &String,
+        entry: &str,
+        subdomain: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseGeneric2Part, ApiError> {
         self.http_client
@@ -162,7 +162,7 @@ impl PaypointClient {
     /// JSON response from the API
     pub async fn save_logo(
         &self,
-        entry: &String,
+        entry: &str,
         request: &FileContent,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
@@ -170,7 +170,7 @@ impl PaypointClient {
             .execute_request(
                 Method::PUT,
                 &format!("Paypoint/logo/{}", entry),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -189,7 +189,7 @@ impl PaypointClient {
     /// JSON response from the API
     pub async fn settings_page(
         &self,
-        entry: &String,
+        entry: &str,
         options: Option<RequestOptions>,
     ) -> Result<SettingsQueryRecord, ApiError> {
         self.http_client
@@ -221,7 +221,7 @@ impl PaypointClient {
             .execute_request(
                 Method::POST,
                 "Paypoint/migrate",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

@@ -25,7 +25,7 @@ impl InvoiceClient {
     /// JSON response from the API
     pub async fn add_invoice(
         &self,
-        entry: &String,
+        entry: &str,
         request: &AddInvoiceRequest,
         options: Option<RequestOptions>,
     ) -> Result<InvoiceResponseWithoutData, ApiError> {
@@ -33,7 +33,7 @@ impl InvoiceClient {
             .execute_request(
                 Method::POST,
                 &format!("Invoice/{}", entry),
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize(
                         "forceCustomerCreation",
@@ -69,7 +69,7 @@ impl InvoiceClient {
     pub async fn delete_attached_from_invoice(
         &self,
         id_invoice: i64,
-        filename: &String,
+        filename: &str,
         options: Option<RequestOptions>,
     ) -> Result<InvoiceResponseWithoutData, ApiError> {
         self.http_client
@@ -133,7 +133,7 @@ impl InvoiceClient {
             .execute_request(
                 Method::PUT,
                 &format!("Invoice/{}", id_invoice),
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .bool(
                         "forceCustomerCreation",
@@ -172,7 +172,7 @@ impl InvoiceClient {
     pub async fn get_attached_file_from_invoice(
         &self,
         id_invoice: i64,
-        filename: &String,
+        filename: &str,
         request: &GetAttachedFileFromInvoiceQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<FileContent, ApiError> {
@@ -230,7 +230,7 @@ impl InvoiceClient {
     /// JSON response from the API
     pub async fn get_invoice_number(
         &self,
-        entry: &String,
+        entry: &str,
         options: Option<RequestOptions>,
     ) -> Result<InvoiceNumberResponse, ApiError> {
         self.http_client
@@ -322,7 +322,7 @@ impl InvoiceClient {
     /// JSON response from the API
     pub async fn list_invoices(
         &self,
-        entry: &String,
+        entry: &str,
         request: &ListInvoicesQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<QueryInvoiceResponse, ApiError> {

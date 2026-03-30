@@ -9,36 +9,36 @@ pub enum AddNotificationRequest {
 }
 
 impl AddNotificationRequest {
-    pub fn is_notificationstandardrequest(&self) -> bool {
+    pub fn is_notification_standard_request(&self) -> bool {
         matches!(self, Self::NotificationStandardRequest(_))
     }
 
-    pub fn is_notificationreportrequest(&self) -> bool {
+    pub fn is_notification_report_request(&self) -> bool {
         matches!(self, Self::NotificationReportRequest(_))
     }
 
-    pub fn as_notificationstandardrequest(&self) -> Option<&NotificationStandardRequest> {
+    pub fn as_notification_standard_request(&self) -> Option<&NotificationStandardRequest> {
         match self {
             Self::NotificationStandardRequest(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_notificationstandardrequest(self) -> Option<NotificationStandardRequest> {
+    pub fn into_notification_standard_request(self) -> Option<NotificationStandardRequest> {
         match self {
             Self::NotificationStandardRequest(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn as_notificationreportrequest(&self) -> Option<&NotificationReportRequest> {
+    pub fn as_notification_report_request(&self) -> Option<&NotificationReportRequest> {
         match self {
             Self::NotificationReportRequest(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_notificationreportrequest(self) -> Option<NotificationReportRequest> {
+    pub fn into_notification_report_request(self) -> Option<NotificationReportRequest> {
         match self {
             Self::NotificationReportRequest(value) => Some(value),
             _ => None,

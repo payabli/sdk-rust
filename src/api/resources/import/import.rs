@@ -25,7 +25,7 @@ impl ImportClient {
     /// JSON response from the API
     pub async fn import_bills(
         &self,
-        entry: &String,
+        entry: &str,
         request: &ImportBillsRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseImport, ApiError> {

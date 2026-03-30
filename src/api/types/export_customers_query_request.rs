@@ -1,8 +1,6 @@
 pub use crate::prelude::*;
 
 /// Query parameters for ExportCustomers
-///
-/// Request type for the ExportCustomersQueryRequest operation.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ExportCustomersQueryRequest {
     #[serde(rename = "columnsExport")]
@@ -83,4 +81,51 @@ pub struct ExportCustomersQueryRequest {
     /// balance(gt)=20 return all records with balance greater than 20.00
     #[serde(skip_serializing_if = "Option::is_none")]
     pub parameters: Option<HashMap<String, Option<String>>>,
+}
+
+impl ExportCustomersQueryRequest {
+    pub fn builder() -> ExportCustomersQueryRequestBuilder {
+        <ExportCustomersQueryRequestBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct ExportCustomersQueryRequestBuilder {
+    columns_export: Option<String>,
+    from_record: Option<i64>,
+    limit_record: Option<i64>,
+    parameters: Option<HashMap<String, Option<String>>>,
+}
+
+impl ExportCustomersQueryRequestBuilder {
+    pub fn columns_export(mut self, value: impl Into<String>) -> Self {
+        self.columns_export = Some(value.into());
+        self
+    }
+
+    pub fn from_record(mut self, value: i64) -> Self {
+        self.from_record = Some(value);
+        self
+    }
+
+    pub fn limit_record(mut self, value: i64) -> Self {
+        self.limit_record = Some(value);
+        self
+    }
+
+    pub fn parameters(mut self, value: HashMap<String, Option<String>>) -> Self {
+        self.parameters = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`ExportCustomersQueryRequest`].
+    pub fn build(self) -> Result<ExportCustomersQueryRequest, BuildError> {
+        Ok(ExportCustomersQueryRequest {
+            columns_export: self.columns_export,
+            from_record: self.from_record,
+            limit_record: self.limit_record,
+            parameters: self.parameters,
+        })
+    }
 }

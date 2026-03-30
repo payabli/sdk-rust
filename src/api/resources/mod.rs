@@ -12,6 +12,7 @@
 //! - **Cloud**
 //! - **Customer**
 //! - **Export**
+//! - **GhostCard**
 //! - **HostedPaymentPages**
 //! - **Import**
 //! - **Invoice**
@@ -24,6 +25,7 @@
 //! - **Organization**
 //! - **PaymentLink**
 //! - **PaymentMethodDomain**
+//! - **PayoutSubscription**
 //! - **Paypoint**
 //! - **Query**
 //! - **Statistic**
@@ -43,6 +45,7 @@ pub mod check_capture;
 pub mod cloud;
 pub mod customer;
 pub mod export;
+pub mod ghost_card;
 pub mod hosted_payment_pages;
 pub mod import;
 pub mod invoice;
@@ -56,6 +59,7 @@ pub mod ocr;
 pub mod organization;
 pub mod payment_link;
 pub mod payment_method_domain;
+pub mod payout_subscription;
 pub mod paypoint;
 pub mod query;
 pub mod query_types;
@@ -76,6 +80,7 @@ pub struct ApiClient {
     pub cloud: CloudClient,
     pub customer: CustomerClient,
     pub export: ExportClient,
+    pub ghost_card: GhostCardClient,
     pub hosted_payment_pages: HostedPaymentPagesClient,
     pub import: ImportClient,
     pub invoice: InvoiceClient,
@@ -88,6 +93,7 @@ pub struct ApiClient {
     pub organization: OrganizationClient,
     pub payment_link: PaymentLinkClient,
     pub payment_method_domain: PaymentMethodDomainClient,
+    pub payout_subscription: PayoutSubscriptionClient,
     pub paypoint: PaypointClient,
     pub query: QueryClient,
     pub statistic: StatisticClient,
@@ -110,6 +116,7 @@ impl ApiClient {
             cloud: CloudClient::new(config.clone())?,
             customer: CustomerClient::new(config.clone())?,
             export: ExportClient::new(config.clone())?,
+            ghost_card: GhostCardClient::new(config.clone())?,
             hosted_payment_pages: HostedPaymentPagesClient::new(config.clone())?,
             import: ImportClient::new(config.clone())?,
             invoice: InvoiceClient::new(config.clone())?,
@@ -122,6 +129,7 @@ impl ApiClient {
             organization: OrganizationClient::new(config.clone())?,
             payment_link: PaymentLinkClient::new(config.clone())?,
             payment_method_domain: PaymentMethodDomainClient::new(config.clone())?,
+            payout_subscription: PayoutSubscriptionClient::new(config.clone())?,
             paypoint: PaypointClient::new(config.clone())?,
             query: QueryClient::new(config.clone())?,
             statistic: StatisticClient::new(config.clone())?,
@@ -142,6 +150,7 @@ pub use check_capture::CheckCaptureClient;
 pub use cloud::CloudClient;
 pub use customer::CustomerClient;
 pub use export::ExportClient;
+pub use ghost_card::GhostCardClient;
 pub use hosted_payment_pages::HostedPaymentPagesClient;
 pub use import::ImportClient;
 pub use invoice::InvoiceClient;
@@ -155,6 +164,7 @@ pub use ocr::OcrClient;
 pub use organization::OrganizationClient;
 pub use payment_link::PaymentLinkClient;
 pub use payment_method_domain::PaymentMethodDomainClient;
+pub use payout_subscription::PayoutSubscriptionClient;
 pub use paypoint::PaypointClient;
 pub use query::QueryClient;
 pub use query_types::QueryTypesClient;

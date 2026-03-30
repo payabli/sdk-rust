@@ -37,7 +37,7 @@ impl NotificationlogsClient {
             .execute_request(
                 Method::POST,
                 "/v2/notificationlogs",
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize("PageSize", request.page_size.clone())
                     .int("Page", request.page.clone())
@@ -123,7 +123,7 @@ impl NotificationlogsClient {
             .execute_request(
                 Method::POST,
                 "/v2/notificationlogs/retry",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

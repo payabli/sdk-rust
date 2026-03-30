@@ -34,7 +34,7 @@ impl MoneyOutClient {
             .execute_request(
                 Method::POST,
                 "MoneyOut/authorize",
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .bool(
                         "allowDuplicatedBills",
@@ -67,7 +67,7 @@ impl MoneyOutClient {
             .execute_request(
                 Method::POST,
                 "MoneyOut/cancelAll",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -86,7 +86,7 @@ impl MoneyOutClient {
     /// JSON response from the API
     pub async fn cancel_out_get(
         &self,
-        reference_id: &String,
+        reference_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse0000, ApiError> {
         self.http_client
@@ -112,7 +112,7 @@ impl MoneyOutClient {
     /// JSON response from the API
     pub async fn cancel_out_delete(
         &self,
-        reference_id: &String,
+        reference_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse0000, ApiError> {
         self.http_client
@@ -145,7 +145,7 @@ impl MoneyOutClient {
             .execute_request(
                 Method::POST,
                 "MoneyOut/captureAll",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -164,7 +164,7 @@ impl MoneyOutClient {
     /// JSON response from the API
     pub async fn capture_out(
         &self,
-        reference_id: &String,
+        reference_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<AuthCapturePayoutResponse, ApiError> {
         self.http_client
@@ -190,7 +190,7 @@ impl MoneyOutClient {
     /// JSON response from the API
     pub async fn payout_details(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<BillDetailResponse, ApiError> {
         self.http_client
@@ -216,7 +216,7 @@ impl MoneyOutClient {
     /// JSON response from the API
     pub async fn v_card_get(
         &self,
-        card_token: &String,
+        card_token: &str,
         options: Option<RequestOptions>,
     ) -> Result<VCardGetResponse, ApiError> {
         self.http_client
@@ -248,7 +248,7 @@ impl MoneyOutClient {
             .execute_request(
                 Method::POST,
                 "vcard/send-card-link",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -278,7 +278,7 @@ impl MoneyOutClient {
     /// JSON response from the API
     pub async fn get_check_image(
         &self,
-        asset_name: &String,
+        asset_name: &str,
         options: Option<RequestOptions>,
     ) -> Result<String, ApiError> {
         self.http_client
@@ -316,7 +316,7 @@ impl MoneyOutClient {
     /// JSON response from the API
     pub async fn update_check_payment_status(
         &self,
-        trans_id: &String,
+        trans_id: &str,
         check_payment_status: &AllowedCheckPaymentStatus,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
@@ -354,7 +354,7 @@ impl MoneyOutClient {
             .execute_request(
                 Method::POST,
                 "MoneyOut/reissue",
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .string("transId", request.trans_id.clone())
                     .build(),

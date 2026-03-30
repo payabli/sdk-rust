@@ -19,19 +19,19 @@ pub enum PaymentMethod {
 }
 
 impl PaymentMethod {
-    pub fn is_paymethodcredit(&self) -> bool {
+    pub fn is_pay_method_credit(&self) -> bool {
         matches!(self, Self::PayMethodCredit(_))
     }
 
-    pub fn is_paymethodach(&self) -> bool {
+    pub fn is_pay_method_ach(&self) -> bool {
         matches!(self, Self::PayMethodAch(_))
     }
 
-    pub fn is_paymethodstoredmethod(&self) -> bool {
+    pub fn is_pay_method_stored_method(&self) -> bool {
         matches!(self, Self::PayMethodStoredMethod(_))
     }
 
-    pub fn is_paymethodcloud(&self) -> bool {
+    pub fn is_pay_method_cloud(&self) -> bool {
         matches!(self, Self::PayMethodCloud(_))
     }
 
@@ -43,60 +43,60 @@ impl PaymentMethod {
         matches!(self, Self::Cash(_))
     }
 
-    pub fn is_paymethodbodyallfields(&self) -> bool {
+    pub fn is_pay_method_body_all_fields(&self) -> bool {
         matches!(self, Self::PayMethodBodyAllFields(_))
     }
 
-    pub fn as_paymethodcredit(&self) -> Option<&PayMethodCredit> {
+    pub fn as_pay_method_credit(&self) -> Option<&PayMethodCredit> {
         match self {
             Self::PayMethodCredit(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_paymethodcredit(self) -> Option<PayMethodCredit> {
+    pub fn into_pay_method_credit(self) -> Option<PayMethodCredit> {
         match self {
             Self::PayMethodCredit(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn as_paymethodach(&self) -> Option<&PayMethodAch> {
+    pub fn as_pay_method_ach(&self) -> Option<&PayMethodAch> {
         match self {
             Self::PayMethodAch(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_paymethodach(self) -> Option<PayMethodAch> {
+    pub fn into_pay_method_ach(self) -> Option<PayMethodAch> {
         match self {
             Self::PayMethodAch(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn as_paymethodstoredmethod(&self) -> Option<&PayMethodStoredMethod> {
+    pub fn as_pay_method_stored_method(&self) -> Option<&PayMethodStoredMethod> {
         match self {
             Self::PayMethodStoredMethod(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_paymethodstoredmethod(self) -> Option<PayMethodStoredMethod> {
+    pub fn into_pay_method_stored_method(self) -> Option<PayMethodStoredMethod> {
         match self {
             Self::PayMethodStoredMethod(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn as_paymethodcloud(&self) -> Option<&PayMethodCloud> {
+    pub fn as_pay_method_cloud(&self) -> Option<&PayMethodCloud> {
         match self {
             Self::PayMethodCloud(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_paymethodcloud(self) -> Option<PayMethodCloud> {
+    pub fn into_pay_method_cloud(self) -> Option<PayMethodCloud> {
         match self {
             Self::PayMethodCloud(value) => Some(value),
             _ => None,
@@ -131,14 +131,14 @@ impl PaymentMethod {
         }
     }
 
-    pub fn as_paymethodbodyallfields(&self) -> Option<&PayMethodBodyAllFields> {
+    pub fn as_pay_method_body_all_fields(&self) -> Option<&PayMethodBodyAllFields> {
         match self {
             Self::PayMethodBodyAllFields(value) => Some(value),
             _ => None,
         }
     }
 
-    pub fn into_paymethodbodyallfields(self) -> Option<PayMethodBodyAllFields> {
+    pub fn into_pay_method_body_all_fields(self) -> Option<PayMethodBodyAllFields> {
         match self {
             Self::PayMethodBodyAllFields(value) => Some(value),
             _ => None,

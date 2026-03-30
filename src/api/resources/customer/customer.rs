@@ -35,7 +35,7 @@ impl CustomerClient {
             .execute_request(
                 Method::POST,
                 &format!("Customer/single/{}", entry.0),
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .bool(
                         "forceCustomerCreation",
@@ -114,7 +114,7 @@ impl CustomerClient {
     pub async fn link_customer_transaction(
         &self,
         customer_id: i64,
-        trans_id: &String,
+        trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
         self.http_client
@@ -174,7 +174,7 @@ impl CustomerClient {
             .execute_request(
                 Method::PUT,
                 &format!("Customer/{}", customer_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

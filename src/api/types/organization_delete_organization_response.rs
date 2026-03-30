@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct DeleteOrganizationResponse {
     #[serde(rename = "isSuccess")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -10,5 +10,50 @@ pub struct DeleteOrganizationResponse {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub response_data: Option<Responsedatanonobject>,
     #[serde(rename = "responseText")]
+    #[serde(default)]
     pub response_text: ResponseText,
+}
+
+impl DeleteOrganizationResponse {
+    pub fn builder() -> DeleteOrganizationResponseBuilder {
+        <DeleteOrganizationResponseBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct DeleteOrganizationResponseBuilder {
+    is_success: Option<IsSuccess>,
+    response_data: Option<Responsedatanonobject>,
+    response_text: Option<ResponseText>,
+}
+
+impl DeleteOrganizationResponseBuilder {
+    pub fn is_success(mut self, value: IsSuccess) -> Self {
+        self.is_success = Some(value);
+        self
+    }
+
+    pub fn response_data(mut self, value: Responsedatanonobject) -> Self {
+        self.response_data = Some(value);
+        self
+    }
+
+    pub fn response_text(mut self, value: ResponseText) -> Self {
+        self.response_text = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`DeleteOrganizationResponse`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`response_text`](DeleteOrganizationResponseBuilder::response_text)
+    pub fn build(self) -> Result<DeleteOrganizationResponse, BuildError> {
+        Ok(DeleteOrganizationResponse {
+            is_success: self.is_success,
+            response_data: self.response_data,
+            response_text: self
+                .response_text
+                .ok_or_else(|| BuildError::missing_field("response_text"))?,
+        })
+    }
 }

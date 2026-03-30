@@ -1,8 +1,6 @@
 pub use crate::prelude::*;
 
 /// Query parameters for ExportBatchesOrg
-///
-/// Request type for the ExportBatchesOrgQueryRequest operation.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ExportBatchesOrgQueryRequest {
     #[serde(rename = "columnsExport")]
@@ -69,4 +67,51 @@ pub struct ExportBatchesOrgQueryRequest {
     /// Example: `batchAmount(gt)=20` returns all records with a `batchAmount` greater than 20.00
     #[serde(skip_serializing_if = "Option::is_none")]
     pub parameters: Option<HashMap<String, Option<String>>>,
+}
+
+impl ExportBatchesOrgQueryRequest {
+    pub fn builder() -> ExportBatchesOrgQueryRequestBuilder {
+        <ExportBatchesOrgQueryRequestBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct ExportBatchesOrgQueryRequestBuilder {
+    columns_export: Option<String>,
+    from_record: Option<i64>,
+    limit_record: Option<i64>,
+    parameters: Option<HashMap<String, Option<String>>>,
+}
+
+impl ExportBatchesOrgQueryRequestBuilder {
+    pub fn columns_export(mut self, value: impl Into<String>) -> Self {
+        self.columns_export = Some(value.into());
+        self
+    }
+
+    pub fn from_record(mut self, value: i64) -> Self {
+        self.from_record = Some(value);
+        self
+    }
+
+    pub fn limit_record(mut self, value: i64) -> Self {
+        self.limit_record = Some(value);
+        self
+    }
+
+    pub fn parameters(mut self, value: HashMap<String, Option<String>>) -> Self {
+        self.parameters = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`ExportBatchesOrgQueryRequest`].
+    pub fn build(self) -> Result<ExportBatchesOrgQueryRequest, BuildError> {
+        Ok(ExportBatchesOrgQueryRequest {
+            columns_export: self.columns_export,
+            from_record: self.from_record,
+            limit_record: self.limit_record,
+            parameters: self.parameters,
+        })
+    }
 }

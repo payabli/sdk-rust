@@ -20,10 +20,7 @@ async fn test_ocr_ocr_document_form_with_wiremock() {
         .ocr_document_form(
             &TypeResult("typeResult".to_string()),
             &FileContentImageOnly {
-                ftype: None,
-                filename: None,
-                furl: None,
-                f_content: None,
+                ..Default::default()
             },
             None,
         )
@@ -54,10 +51,7 @@ async fn test_ocr_ocr_document_json_with_wiremock() {
         .ocr_document_json(
             &TypeResult("typeResult".to_string()),
             &FileContentImageOnly {
-                ftype: None,
-                filename: None,
-                furl: None,
-                f_content: None,
+                ..Default::default()
             },
             None,
         )

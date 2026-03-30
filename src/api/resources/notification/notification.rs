@@ -31,7 +31,7 @@ impl NotificationClient {
             .execute_request(
                 Method::POST,
                 "Notification",
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -50,7 +50,7 @@ impl NotificationClient {
     /// JSON response from the API
     pub async fn delete_notification(
         &self,
-        n_id: &String,
+        n_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseNotifications, ApiError> {
         self.http_client
@@ -76,7 +76,7 @@ impl NotificationClient {
     /// JSON response from the API
     pub async fn get_notification(
         &self,
-        n_id: &String,
+        n_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<NotificationQueryRecord, ApiError> {
         self.http_client
@@ -102,7 +102,7 @@ impl NotificationClient {
     /// JSON response from the API
     pub async fn update_notification(
         &self,
-        n_id: &String,
+        n_id: &str,
         request: &UpdateNotificationRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseNotifications, ApiError> {
@@ -110,7 +110,7 @@ impl NotificationClient {
             .execute_request(
                 Method::PUT,
                 &format!("Notification/{}", n_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

@@ -1,34 +1,63 @@
 pub use crate::prelude::*;
 
 /// Frequency for operation.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[non_exhaustive]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Frequency {
-    #[serde(rename = "onetime")]
     OneTime,
-    #[serde(rename = "weekly")]
     Weekly,
-    #[serde(rename = "every2weeks")]
     Every2Weeks,
-    #[serde(rename = "every6months")]
     Every6Months,
-    #[serde(rename = "monthly")]
     Monthly,
-    #[serde(rename = "every3months")]
     Every3Months,
-    #[serde(rename = "annually")]
     Annually,
+    /// This variant is used for forward compatibility.
+    /// If the server sends a value not recognized by the current SDK version,
+    /// it will be captured here with the raw string value.
+    __Unknown(String),
 }
+impl Serialize for Frequency {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        match self {
+            Self::OneTime => serializer.serialize_str("onetime"),
+            Self::Weekly => serializer.serialize_str("weekly"),
+            Self::Every2Weeks => serializer.serialize_str("every2weeks"),
+            Self::Every6Months => serializer.serialize_str("every6months"),
+            Self::Monthly => serializer.serialize_str("monthly"),
+            Self::Every3Months => serializer.serialize_str("every3months"),
+            Self::Annually => serializer.serialize_str("annually"),
+            Self::__Unknown(val) => serializer.serialize_str(val),
+        }
+    }
+}
+
+impl<'de> Deserialize<'de> for Frequency {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = String::deserialize(deserializer)?;
+        match value.as_str() {
+            "onetime" => Ok(Self::OneTime),
+            "weekly" => Ok(Self::Weekly),
+            "every2weeks" => Ok(Self::Every2Weeks),
+            "every6months" => Ok(Self::Every6Months),
+            "monthly" => Ok(Self::Monthly),
+            "every3months" => Ok(Self::Every3Months),
+            "annually" => Ok(Self::Annually),
+            _ => Ok(Self::__Unknown(value)),
+        }
+    }
+}
+
 impl fmt::Display for Frequency {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = match self {
-            Self::OneTime => "onetime",
-            Self::Weekly => "weekly",
-            Self::Every2Weeks => "every2weeks",
-            Self::Every6Months => "every6months",
-            Self::Monthly => "monthly",
-            Self::Every3Months => "every3months",
-            Self::Annually => "annually",
-        };
-        write!(f, "{}", s)
+        match self {
+            Self::OneTime => write!(f, "onetime"),
+            Self::Weekly => write!(f, "weekly"),
+            Self::Every2Weeks => write!(f, "every2weeks"),
+            Self::Every6Months => write!(f, "every6months"),
+            Self::Monthly => write!(f, "monthly"),
+            Self::Every3Months => write!(f, "every3months"),
+            Self::Annually => write!(f, "annually"),
+            Self::__Unknown(val) => write!(f, "{}", val),
+        }
     }
 }

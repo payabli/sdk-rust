@@ -35,7 +35,7 @@ impl PaymentLinkClient {
             .execute_request(
                 Method::POST,
                 &format!("PaymentLink/{}", id_invoice),
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .bool("amountFixed", request.amount_fixed.clone())
                     .string("mail2", request.mail_2.clone())
@@ -67,7 +67,7 @@ impl PaymentLinkClient {
             .execute_request(
                 Method::POST,
                 &format!("PaymentLink/bill/{}", bill_id),
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .bool("amountFixed", request.amount_fixed.clone())
                     .string("mail2", request.mail_2.clone())
@@ -89,7 +89,7 @@ impl PaymentLinkClient {
     /// JSON response from the API
     pub async fn delete_pay_link_from_id(
         &self,
-        pay_link_id: &String,
+        pay_link_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
         self.http_client
@@ -115,7 +115,7 @@ impl PaymentLinkClient {
     /// JSON response from the API
     pub async fn get_pay_link_from_id(
         &self,
-        paylink_id: &String,
+        paylink_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<GetPayLinkFromIdResponse, ApiError> {
         self.http_client
@@ -141,7 +141,7 @@ impl PaymentLinkClient {
     /// JSON response from the API
     pub async fn push_pay_link_from_id(
         &self,
-        pay_link_id: &String,
+        pay_link_id: &str,
         request: &PushPayLinkRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
@@ -149,7 +149,7 @@ impl PaymentLinkClient {
             .execute_request(
                 Method::POST,
                 &format!("PaymentLink/push/{}", pay_link_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -169,7 +169,7 @@ impl PaymentLinkClient {
     /// JSON response from the API
     pub async fn refresh_pay_link_from_id(
         &self,
-        pay_link_id: &String,
+        pay_link_id: &str,
         request: &RefreshPayLinkFromIdQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
@@ -200,7 +200,7 @@ impl PaymentLinkClient {
     /// JSON response from the API
     pub async fn send_pay_link_from_id(
         &self,
-        pay_link_id: &String,
+        pay_link_id: &str,
         request: &SendPayLinkFromIdQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
@@ -230,7 +230,7 @@ impl PaymentLinkClient {
     /// JSON response from the API
     pub async fn update_pay_link_from_id(
         &self,
-        pay_link_id: &String,
+        pay_link_id: &str,
         request: &PayLinkUpdateData,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
@@ -238,7 +238,7 @@ impl PaymentLinkClient {
             .execute_request(
                 Method::PUT,
                 &format!("PaymentLink/update/{}", pay_link_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -260,7 +260,7 @@ impl PaymentLinkClient {
     /// JSON response from the API
     pub async fn add_pay_link_from_bill_lot_number(
         &self,
-        lot_number: &String,
+        lot_number: &str,
         request: &AddPayLinkFromBillLotNumberRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
@@ -268,7 +268,7 @@ impl PaymentLinkClient {
             .execute_request(
                 Method::POST,
                 &format!("PaymentLink/bill/lotNumber/{}", lot_number),
-                Some(serde_json::to_value(&request.body).unwrap_or_default()),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize("entryPoint", Some(request.entry_point.clone()))
                     .string("vendorNumber", request.vendor_number.clone())
@@ -292,7 +292,7 @@ impl PaymentLinkClient {
     /// JSON response from the API
     pub async fn patch_out_payment_link(
         &self,
-        paylink_id: &String,
+        paylink_id: &str,
         request: &PatchOutPaymentLinkRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
@@ -300,7 +300,7 @@ impl PaymentLinkClient {
             .execute_request(
                 Method::PATCH,
                 &format!("PaymentLink/out/{}", paylink_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -319,7 +319,7 @@ impl PaymentLinkClient {
     /// JSON response from the API
     pub async fn update_pay_link_out_from_id(
         &self,
-        paylink_id: &String,
+        paylink_id: &str,
         request: &PaymentPageRequestBodyOut,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
@@ -327,7 +327,7 @@ impl PaymentLinkClient {
             .execute_request(
                 Method::PATCH,
                 &format!("PaymentLink/updateOut/{}", paylink_id),
-                Some(serde_json::to_value(request).unwrap_or_default()),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

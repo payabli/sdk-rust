@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct QueryTransactionEvents {
     /// Any data associated to the event received from processor. Contents vary by event type.
     #[serde(rename = "EventData")]
@@ -16,4 +16,44 @@ pub struct QueryTransactionEvents {
     #[serde(rename = "TransEvent")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub trans_event: Option<String>,
+}
+
+impl QueryTransactionEvents {
+    pub fn builder() -> QueryTransactionEventsBuilder {
+        <QueryTransactionEventsBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct QueryTransactionEventsBuilder {
+    event_data: Option<QueryTransactionEventsEventData>,
+    event_time: Option<DateTime<Utc>>,
+    trans_event: Option<String>,
+}
+
+impl QueryTransactionEventsBuilder {
+    pub fn event_data(mut self, value: QueryTransactionEventsEventData) -> Self {
+        self.event_data = Some(value);
+        self
+    }
+
+    pub fn event_time(mut self, value: DateTime<Utc>) -> Self {
+        self.event_time = Some(value);
+        self
+    }
+
+    pub fn trans_event(mut self, value: impl Into<String>) -> Self {
+        self.trans_event = Some(value.into());
+        self
+    }
+
+    /// Consumes the builder and constructs a [`QueryTransactionEvents`].
+    pub fn build(self) -> Result<QueryTransactionEvents, BuildError> {
+        Ok(QueryTransactionEvents {
+            event_data: self.event_data,
+            event_time: self.event_time,
+            trans_event: self.trans_event,
+        })
+    }
 }

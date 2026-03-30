@@ -1,8 +1,6 @@
 pub use crate::prelude::*;
 
 /// Query parameters for ListPaymentMethodDomains
-///
-/// Request type for the ListPaymentMethodDomainsQueryRequest operation.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct ListPaymentMethodDomainsQueryRequest {
     /// Identifier for the organization or paypoint.
@@ -25,4 +23,51 @@ pub struct ListPaymentMethodDomainsQueryRequest {
     #[serde(rename = "limitRecord")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub limit_record: Option<i64>,
+}
+
+impl ListPaymentMethodDomainsQueryRequest {
+    pub fn builder() -> ListPaymentMethodDomainsQueryRequestBuilder {
+        <ListPaymentMethodDomainsQueryRequestBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct ListPaymentMethodDomainsQueryRequestBuilder {
+    entity_id: Option<i64>,
+    entity_type: Option<String>,
+    from_record: Option<i64>,
+    limit_record: Option<i64>,
+}
+
+impl ListPaymentMethodDomainsQueryRequestBuilder {
+    pub fn entity_id(mut self, value: i64) -> Self {
+        self.entity_id = Some(value);
+        self
+    }
+
+    pub fn entity_type(mut self, value: impl Into<String>) -> Self {
+        self.entity_type = Some(value.into());
+        self
+    }
+
+    pub fn from_record(mut self, value: i64) -> Self {
+        self.from_record = Some(value);
+        self
+    }
+
+    pub fn limit_record(mut self, value: i64) -> Self {
+        self.limit_record = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`ListPaymentMethodDomainsQueryRequest`].
+    pub fn build(self) -> Result<ListPaymentMethodDomainsQueryRequest, BuildError> {
+        Ok(ListPaymentMethodDomainsQueryRequest {
+            entity_id: self.entity_id,
+            entity_type: self.entity_type,
+            from_record: self.from_record,
+            limit_record: self.limit_record,
+        })
+    }
 }

@@ -22,27 +22,8 @@ async fn test_money_in_authorize_with_wiremock() {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     invoice_data: None,
@@ -50,14 +31,9 @@ async fn test_money_in_authorize_with_wiremock() {
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
                         cardcvv: Some(Cardcvv("999".to_string())),
@@ -141,7 +117,9 @@ async fn test_money_in_capture_auth_with_wiremock() {
                 payment_details: CapturePaymentDetails {
                     total_amount: 105.0,
                     service_fee: Some(5.0),
+                    ..Default::default()
                 },
+                ..Default::default()
             },
             None,
         )
@@ -177,35 +155,17 @@ async fn test_money_in_credit_with_wiremock() {
         .credit(
             &RequestCredit {
                 customer_data: PayorDataRequest {
-                    additional_data: None,
                     billing_address_1: Some(BillingAddressNullable(
                         "5127 Linkwood ave".to_string(),
                     )),
-                    billing_address_2: None,
-                    billing_city: None,
-                    billing_country: None,
-                    billing_email: None,
-                    billing_phone: None,
-                    billing_state: None,
-                    billing_zip: None,
-                    company: None,
-                    customer_id: None,
                     customer_number: Some(CustomerNumberNullable("100".to_string())),
-                    first_name: None,
-                    identifier_fields: None,
-                    last_name: None,
-                    shipping_address_1: None,
-                    shipping_address_2: None,
-                    shipping_city: None,
-                    shipping_country: None,
-                    shipping_state: None,
-                    shipping_zip: None,
+                    ..Default::default()
                 },
                 entrypoint: Some(Entrypointfield("my-entrypoint".to_string())),
                 payment_details: PaymentDetailCredit {
-                    currency: None,
                     service_fee: Some(0.0),
                     total_amount: 1.0,
+                    ..Default::default()
                 },
                 payment_method: RequestCreditPaymentMethod {
                     ach_account: Some(Achaccount("88354454".to_string())),
@@ -286,27 +246,8 @@ async fn test_money_in_getpaid_with_wiremock() {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     invoice_data: None,
@@ -314,14 +255,9 @@ async fn test_money_in_getpaid_with_wiremock() {
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
                         cardcvv: Some(Cardcvv("999".to_string())),
@@ -441,13 +377,13 @@ async fn test_money_in_refund_with_instructions_with_wiremock() {
                 amount: Some(100.0),
                 order_description: Some(Orderdescription("Materials deposit".to_string())),
                 refund_details: Some(RefundDetail {
-                    categories: None,
                     split_refunding: Some(vec![
                         SplitFundingRefundContent {
                             account_id: Some("187-342".to_string()),
                             amount: Some(60.0),
                             description: Some("Refunding undelivered materials".to_string()),
                             origination_entry_point: Some("7f1a381696".to_string()),
+                            ..Default::default()
                         },
                         SplitFundingRefundContent {
                             account_id: Some("187-343".to_string()),
@@ -456,12 +392,13 @@ async fn test_money_in_refund_with_instructions_with_wiremock() {
                                 "Refunding deposit for undelivered materials".to_string(),
                             ),
                             origination_entry_point: Some("7f1a381696".to_string()),
+                            ..Default::default()
                         },
                     ]),
+                    ..Default::default()
                 }),
                 source: Some(Source("api".to_string())),
-                ipaddress: None,
-                order_id: None,
+                ..Default::default()
             },
             Some(
                 RequestOptions::new()
@@ -531,6 +468,7 @@ async fn test_money_in_send_receipt_2_trans_with_wiremock() {
             &"45-as456777hhhhhhhhhh77777777-324".to_string(),
             &SendReceipt2TransQueryRequest {
                 email: Some("example@email.com".to_string()),
+                ..Default::default()
             },
             None,
         )
@@ -644,27 +582,8 @@ async fn test_money_in_getpaidv_2_with_wiremock() {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     invoice_data: None,
@@ -672,14 +591,9 @@ async fn test_money_in_getpaidv_2_with_wiremock() {
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
                         cardcvv: Some(Cardcvv("999".to_string())),
@@ -729,27 +643,8 @@ async fn test_money_in_authorizev_2_with_wiremock() {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
-                        additional_data: None,
-                        billing_address_1: None,
-                        billing_address_2: None,
-                        billing_city: None,
-                        billing_country: None,
-                        billing_email: None,
-                        billing_phone: None,
-                        billing_state: None,
-                        billing_zip: None,
-                        company: None,
                         customer_id: Some(CustomerId(4440)),
-                        customer_number: None,
-                        first_name: None,
-                        identifier_fields: None,
-                        last_name: None,
-                        shipping_address_1: None,
-                        shipping_address_2: None,
-                        shipping_city: None,
-                        shipping_country: None,
-                        shipping_state: None,
-                        shipping_zip: None,
+                        ..Default::default()
                     }),
                     entry_point: Some(Entrypointfield("f743aed24a".to_string())),
                     invoice_data: None,
@@ -757,14 +652,9 @@ async fn test_money_in_authorizev_2_with_wiremock() {
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        categories: None,
-                        check_image: None,
-                        check_number: None,
-                        currency: None,
                         service_fee: Some(0.0),
-                        split_funding: None,
-                        check_unique_id: None,
                         total_amount: 100.0,
+                        ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
                         cardcvv: Some(Cardcvv("999".to_string())),
@@ -814,7 +704,9 @@ async fn test_money_in_capturev_2_with_wiremock() {
                 payment_details: CapturePaymentDetails {
                     total_amount: 105.0,
                     service_fee: Some(5.0),
+                    ..Default::default()
                 },
+                ..Default::default()
             },
             None,
         )

@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 /// A record representing an outbound transfer.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct TransferOutRecord {
     /// Unique identifier for the transfer.
     #[serde(rename = "transferId")]
@@ -139,4 +139,261 @@ pub struct TransferOutRecord {
     /// List of messages associated with the transfer.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub messages: Option<Vec<TransferOutMessage>>,
+}
+
+impl TransferOutRecord {
+    pub fn builder() -> TransferOutRecordBuilder {
+        <TransferOutRecordBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct TransferOutRecordBuilder {
+    transfer_id: Option<i64>,
+    paypoint_id: Option<i64>,
+    batch_number: Option<String>,
+    batch_currency: Option<String>,
+    batch_records: Option<i64>,
+    transfer_identifier: Option<String>,
+    batch_id: Option<i64>,
+    batch_net_amount: Option<f64>,
+    batch_status: Option<i64>,
+    paypoint_entry_name: Option<String>,
+    paypoint_legal_name: Option<String>,
+    paypoint_dba_name: Option<String>,
+    paypoint_logo: Option<String>,
+    parent_org_name: Option<String>,
+    parent_org_id: Option<i64>,
+    parent_org_logo: Option<String>,
+    parent_org_entry_name: Option<String>,
+    external_paypoint_id: Option<String>,
+    bank_account: Option<TransferOutBankAccount>,
+    transfer_date: Option<DateTime<Utc>>,
+    processor: Option<String>,
+    transfer_status: Option<i64>,
+    gross_amount: Option<f64>,
+    charge_back_amount: Option<f64>,
+    returned_amount: Option<f64>,
+    hold_amount: Option<f64>,
+    released_amount: Option<f64>,
+    billing_fees_amount: Option<f64>,
+    third_party_paid_amount: Option<f64>,
+    adjustments_amount: Option<f64>,
+    net_transfer_amount: Option<f64>,
+    split_amount: Option<f64>,
+    events_data: Option<Vec<TransferOutEventData>>,
+    messages: Option<Vec<TransferOutMessage>>,
+}
+
+impl TransferOutRecordBuilder {
+    pub fn transfer_id(mut self, value: i64) -> Self {
+        self.transfer_id = Some(value);
+        self
+    }
+
+    pub fn paypoint_id(mut self, value: i64) -> Self {
+        self.paypoint_id = Some(value);
+        self
+    }
+
+    pub fn batch_number(mut self, value: impl Into<String>) -> Self {
+        self.batch_number = Some(value.into());
+        self
+    }
+
+    pub fn batch_currency(mut self, value: impl Into<String>) -> Self {
+        self.batch_currency = Some(value.into());
+        self
+    }
+
+    pub fn batch_records(mut self, value: i64) -> Self {
+        self.batch_records = Some(value);
+        self
+    }
+
+    pub fn transfer_identifier(mut self, value: impl Into<String>) -> Self {
+        self.transfer_identifier = Some(value.into());
+        self
+    }
+
+    pub fn batch_id(mut self, value: i64) -> Self {
+        self.batch_id = Some(value);
+        self
+    }
+
+    pub fn batch_net_amount(mut self, value: f64) -> Self {
+        self.batch_net_amount = Some(value);
+        self
+    }
+
+    pub fn batch_status(mut self, value: i64) -> Self {
+        self.batch_status = Some(value);
+        self
+    }
+
+    pub fn paypoint_entry_name(mut self, value: impl Into<String>) -> Self {
+        self.paypoint_entry_name = Some(value.into());
+        self
+    }
+
+    pub fn paypoint_legal_name(mut self, value: impl Into<String>) -> Self {
+        self.paypoint_legal_name = Some(value.into());
+        self
+    }
+
+    pub fn paypoint_dba_name(mut self, value: impl Into<String>) -> Self {
+        self.paypoint_dba_name = Some(value.into());
+        self
+    }
+
+    pub fn paypoint_logo(mut self, value: impl Into<String>) -> Self {
+        self.paypoint_logo = Some(value.into());
+        self
+    }
+
+    pub fn parent_org_name(mut self, value: impl Into<String>) -> Self {
+        self.parent_org_name = Some(value.into());
+        self
+    }
+
+    pub fn parent_org_id(mut self, value: i64) -> Self {
+        self.parent_org_id = Some(value);
+        self
+    }
+
+    pub fn parent_org_logo(mut self, value: impl Into<String>) -> Self {
+        self.parent_org_logo = Some(value.into());
+        self
+    }
+
+    pub fn parent_org_entry_name(mut self, value: impl Into<String>) -> Self {
+        self.parent_org_entry_name = Some(value.into());
+        self
+    }
+
+    pub fn external_paypoint_id(mut self, value: impl Into<String>) -> Self {
+        self.external_paypoint_id = Some(value.into());
+        self
+    }
+
+    pub fn bank_account(mut self, value: TransferOutBankAccount) -> Self {
+        self.bank_account = Some(value);
+        self
+    }
+
+    pub fn transfer_date(mut self, value: DateTime<Utc>) -> Self {
+        self.transfer_date = Some(value);
+        self
+    }
+
+    pub fn processor(mut self, value: impl Into<String>) -> Self {
+        self.processor = Some(value.into());
+        self
+    }
+
+    pub fn transfer_status(mut self, value: i64) -> Self {
+        self.transfer_status = Some(value);
+        self
+    }
+
+    pub fn gross_amount(mut self, value: f64) -> Self {
+        self.gross_amount = Some(value);
+        self
+    }
+
+    pub fn charge_back_amount(mut self, value: f64) -> Self {
+        self.charge_back_amount = Some(value);
+        self
+    }
+
+    pub fn returned_amount(mut self, value: f64) -> Self {
+        self.returned_amount = Some(value);
+        self
+    }
+
+    pub fn hold_amount(mut self, value: f64) -> Self {
+        self.hold_amount = Some(value);
+        self
+    }
+
+    pub fn released_amount(mut self, value: f64) -> Self {
+        self.released_amount = Some(value);
+        self
+    }
+
+    pub fn billing_fees_amount(mut self, value: f64) -> Self {
+        self.billing_fees_amount = Some(value);
+        self
+    }
+
+    pub fn third_party_paid_amount(mut self, value: f64) -> Self {
+        self.third_party_paid_amount = Some(value);
+        self
+    }
+
+    pub fn adjustments_amount(mut self, value: f64) -> Self {
+        self.adjustments_amount = Some(value);
+        self
+    }
+
+    pub fn net_transfer_amount(mut self, value: f64) -> Self {
+        self.net_transfer_amount = Some(value);
+        self
+    }
+
+    pub fn split_amount(mut self, value: f64) -> Self {
+        self.split_amount = Some(value);
+        self
+    }
+
+    pub fn events_data(mut self, value: Vec<TransferOutEventData>) -> Self {
+        self.events_data = Some(value);
+        self
+    }
+
+    pub fn messages(mut self, value: Vec<TransferOutMessage>) -> Self {
+        self.messages = Some(value);
+        self
+    }
+
+    /// Consumes the builder and constructs a [`TransferOutRecord`].
+    pub fn build(self) -> Result<TransferOutRecord, BuildError> {
+        Ok(TransferOutRecord {
+            transfer_id: self.transfer_id,
+            paypoint_id: self.paypoint_id,
+            batch_number: self.batch_number,
+            batch_currency: self.batch_currency,
+            batch_records: self.batch_records,
+            transfer_identifier: self.transfer_identifier,
+            batch_id: self.batch_id,
+            batch_net_amount: self.batch_net_amount,
+            batch_status: self.batch_status,
+            paypoint_entry_name: self.paypoint_entry_name,
+            paypoint_legal_name: self.paypoint_legal_name,
+            paypoint_dba_name: self.paypoint_dba_name,
+            paypoint_logo: self.paypoint_logo,
+            parent_org_name: self.parent_org_name,
+            parent_org_id: self.parent_org_id,
+            parent_org_logo: self.parent_org_logo,
+            parent_org_entry_name: self.parent_org_entry_name,
+            external_paypoint_id: self.external_paypoint_id,
+            bank_account: self.bank_account,
+            transfer_date: self.transfer_date,
+            processor: self.processor,
+            transfer_status: self.transfer_status,
+            gross_amount: self.gross_amount,
+            charge_back_amount: self.charge_back_amount,
+            returned_amount: self.returned_amount,
+            hold_amount: self.hold_amount,
+            released_amount: self.released_amount,
+            billing_fees_amount: self.billing_fees_amount,
+            third_party_paid_amount: self.third_party_paid_amount,
+            adjustments_amount: self.adjustments_amount,
+            net_transfer_amount: self.net_transfer_amount,
+            split_amount: self.split_amount,
+            events_data: self.events_data,
+            messages: self.messages,
+        })
+    }
 }

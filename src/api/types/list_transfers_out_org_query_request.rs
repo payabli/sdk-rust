@@ -1,8 +1,6 @@
 pub use crate::prelude::*;
 
 /// Query parameters for ListTransfersOutOrg
-///
-/// Request type for the ListTransfersOutOrgQueryRequest operation.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ListTransfersOutOrgQueryRequest {
     /// The number of records to skip before starting to collect the result set.
@@ -47,4 +45,51 @@ pub struct ListTransfersOutOrgQueryRequest {
     #[serde(rename = "sortBy")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sort_by: Option<String>,
+}
+
+impl ListTransfersOutOrgQueryRequest {
+    pub fn builder() -> ListTransfersOutOrgQueryRequestBuilder {
+        <ListTransfersOutOrgQueryRequestBuilder as Default>::default()
+    }
+}
+
+#[derive(Clone, PartialEq, Default, Debug)]
+#[non_exhaustive]
+pub struct ListTransfersOutOrgQueryRequestBuilder {
+    from_record: Option<i64>,
+    limit_record: Option<i64>,
+    parameters: Option<HashMap<String, Option<String>>>,
+    sort_by: Option<String>,
+}
+
+impl ListTransfersOutOrgQueryRequestBuilder {
+    pub fn from_record(mut self, value: i64) -> Self {
+        self.from_record = Some(value);
+        self
+    }
+
+    pub fn limit_record(mut self, value: i64) -> Self {
+        self.limit_record = Some(value);
+        self
+    }
+
+    pub fn parameters(mut self, value: HashMap<String, Option<String>>) -> Self {
+        self.parameters = Some(value);
+        self
+    }
+
+    pub fn sort_by(mut self, value: impl Into<String>) -> Self {
+        self.sort_by = Some(value.into());
+        self
+    }
+
+    /// Consumes the builder and constructs a [`ListTransfersOutOrgQueryRequest`].
+    pub fn build(self) -> Result<ListTransfersOutOrgQueryRequest, BuildError> {
+        Ok(ListTransfersOutOrgQueryRequest {
+            from_record: self.from_record,
+            limit_record: self.limit_record,
+            parameters: self.parameters,
+            sort_by: self.sort_by,
+        })
+    }
 }
