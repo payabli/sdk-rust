@@ -10,6 +10,7 @@ The Payabli Rust library provides convenient access to the Payabli APIs from Rus
 - [Documentation](#documentation)
 - [Installation](#installation)
 - [Reference](#reference)
+- [Changelog](#changelog)
 - [Usage](#usage)
 - [Environments](#environments)
 - [Errors](#errors)
@@ -31,7 +32,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-payabli_api = "1.0.7"
+payabli_api = "1.0.8"
 ```
 
 Or install via cargo:
@@ -43,6 +44,11 @@ cargo add payabli_api
 ## Reference
 
 A full reference for this library is available [here](https://github.com/payabli/sdk-rust/blob/HEAD/./reference.md).
+
+## Changelog
+
+The changelog for the official Payabli Rust SDK is available on the Payabli Docs site. See [Rust SDK Changelog](https://docs.payabli.com/changelog/rust-sdk) for more information.
+
 
 ## Usage
 

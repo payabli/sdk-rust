@@ -8474,6 +8474,8 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 Creates a ghost card, a multi-use virtual debit card issued to a vendor for recurring or discretionary spend.
 
 Unlike single-use virtual cards issued as part of a payout transaction, ghost cards aren't tied to a specific payout. They're issued directly to a vendor and can be reused up to a configurable number of times within the card's spending limits.
+
+Only one ghost card can exist per vendor per paypoint. To issue a new card to the same vendor, cancel the existing card first.
 </dd>
 </dl>
 </dd>
@@ -8504,20 +8506,20 @@ async fn main() {
             &CreateGhostCardRequestBody {
                 vendor_id: 42,
                 expense_limit: 500.0,
-                max_number_of_uses: Some(3),
-                exact_amount: Some(false),
-                expense_limit_period: Some("monthly".to_string()),
-                billing_cycle: Some("monthly".to_string()),
-                billing_cycle_day: Some("1".to_string()),
-                daily_transaction_count: Some(5),
-                daily_amount_limit: Some(200.0),
-                transaction_amount_limit: Some(100),
+                amount: 500.0,
+                max_number_of_uses: 3,
+                exact_amount: false,
+                expense_limit_period: "monthly".to_string(),
+                billing_cycle: "monthly".to_string(),
+                billing_cycle_day: "1".to_string(),
+                daily_transaction_count: 5,
+                daily_amount_limit: 200.0,
+                transaction_amount_limit: 100,
                 mcc: Some("5411".to_string()),
                 tcc: Some("R".to_string()),
                 misc_1: Some("PO-98765".to_string()),
                 misc_2: Some("Dept-Finance".to_string()),
                 expiration_date: None,
-                amount: None,
             },
             None,
         )
@@ -8569,7 +8571,7 @@ async fn main() {
 <dl>
 <dd>
 
-**amount:** `Option<f64>` — Initial load amount for the card. Defaults to `0`.
+**amount:** `f64` — Initial load amount for the card.
     
 </dd>
 </dl>
@@ -8577,7 +8579,7 @@ async fn main() {
 <dl>
 <dd>
 
-**max_number_of_uses:** `Option<i64>` — Maximum number of times the card can be used. If `0` or negative, defaults to `9999`. Ignored and set to `1` when `exactAmount` is `true`.
+**max_number_of_uses:** `i64` — Maximum number of times the card can be used. Ignored and set to `1` when `exactAmount` is `true`.
     
 </dd>
 </dl>
@@ -8585,7 +8587,7 @@ async fn main() {
 <dl>
 <dd>
 
-**exact_amount:** `Option<bool>` — When `true`, restricts the card to a single use. `maxNumberOfUses` is automatically set to `1` regardless of any other value provided.
+**exact_amount:** `bool` — When `true`, restricts the card to a single use. `maxNumberOfUses` is automatically set to `1` regardless of any other value provided.
     
 </dd>
 </dl>
@@ -8593,7 +8595,7 @@ async fn main() {
 <dl>
 <dd>
 
-**expense_limit_period:** `Option<String>` — Time period over which `expenseLimit` applies (for example, `monthly` or `weekly`). No server-side enforcement.
+**expense_limit_period:** `String` — Time period over which `expenseLimit` applies (for example, `monthly` or `weekly`).
     
 </dd>
 </dl>
@@ -8601,7 +8603,7 @@ async fn main() {
 <dl>
 <dd>
 
-**billing_cycle:** `Option<String>` — Billing cycle identifier.
+**billing_cycle:** `String` — Billing cycle identifier.
     
 </dd>
 </dl>
@@ -8609,7 +8611,7 @@ async fn main() {
 <dl>
 <dd>
 
-**billing_cycle_day:** `Option<String>` — Day within the billing cycle.
+**billing_cycle_day:** `String` — Day within the billing cycle.
     
 </dd>
 </dl>
@@ -8617,7 +8619,7 @@ async fn main() {
 <dl>
 <dd>
 
-**daily_transaction_count:** `Option<i64>` — Maximum number of transactions allowed per day. Defaults to `0` (unlimited).
+**daily_transaction_count:** `i64` — Maximum number of transactions allowed per day.
     
 </dd>
 </dl>
@@ -8625,7 +8627,7 @@ async fn main() {
 <dl>
 <dd>
 
-**daily_amount_limit:** `Option<f64>` — Maximum total spend allowed per day. Defaults to `0` (unlimited).
+**daily_amount_limit:** `f64` — Maximum total spend allowed per day.
     
 </dd>
 </dl>
@@ -8633,7 +8635,7 @@ async fn main() {
 <dl>
 <dd>
 
-**transaction_amount_limit:** `Option<i64>` — Maximum spend allowed per single transaction. Defaults to `0` (unlimited).
+**transaction_amount_limit:** `i64` — Maximum spend allowed per single transaction.
     
 </dd>
 </dl>

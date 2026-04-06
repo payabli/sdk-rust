@@ -14,41 +14,41 @@ pub struct CreateGhostCardRequestBody {
     #[serde(rename = "expirationDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub expiration_date: Option<String>,
-    /// Initial load amount for the card. Defaults to `0`.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub amount: Option<f64>,
-    /// Maximum number of times the card can be used. If `0` or negative, defaults to `9999`. Ignored and set to `1` when `exactAmount` is `true`.
+    /// Initial load amount for the card.
+    #[serde(default)]
+    pub amount: f64,
+    /// Maximum number of times the card can be used. Ignored and set to `1` when `exactAmount` is `true`.
     #[serde(rename = "maxNumberOfUses")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_number_of_uses: Option<i64>,
+    #[serde(default)]
+    pub max_number_of_uses: i64,
     /// When `true`, restricts the card to a single use. `maxNumberOfUses` is automatically set to `1` regardless of any other value provided.
     #[serde(rename = "exactAmount")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub exact_amount: Option<bool>,
-    /// Time period over which `expenseLimit` applies (for example, `monthly` or `weekly`). No server-side enforcement.
+    #[serde(default)]
+    pub exact_amount: bool,
+    /// Time period over which `expenseLimit` applies (for example, `monthly` or `weekly`).
     #[serde(rename = "expenseLimitPeriod")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub expense_limit_period: Option<String>,
+    #[serde(default)]
+    pub expense_limit_period: String,
     /// Billing cycle identifier.
     #[serde(rename = "billingCycle")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub billing_cycle: Option<String>,
+    #[serde(default)]
+    pub billing_cycle: String,
     /// Day within the billing cycle.
     #[serde(rename = "billingCycleDay")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub billing_cycle_day: Option<String>,
-    /// Maximum number of transactions allowed per day. Defaults to `0` (unlimited).
+    #[serde(default)]
+    pub billing_cycle_day: String,
+    /// Maximum number of transactions allowed per day.
     #[serde(rename = "dailyTransactionCount")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub daily_transaction_count: Option<i64>,
-    /// Maximum total spend allowed per day. Defaults to `0` (unlimited).
+    #[serde(default)]
+    pub daily_transaction_count: i64,
+    /// Maximum total spend allowed per day.
     #[serde(rename = "dailyAmountLimit")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub daily_amount_limit: Option<f64>,
-    /// Maximum spend allowed per single transaction. Defaults to `0` (unlimited).
+    #[serde(default)]
+    pub daily_amount_limit: f64,
+    /// Maximum spend allowed per single transaction.
     #[serde(rename = "transactionAmountLimit")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub transaction_amount_limit: Option<i64>,
+    #[serde(default)]
+    pub transaction_amount_limit: i64,
     /// Merchant Category Code to restrict where the card can be used. Must be a valid MCC if provided.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mcc: Option<String>,
@@ -177,6 +177,15 @@ impl CreateGhostCardRequestBodyBuilder {
     /// This method will fail if any of the following fields are not set:
     /// - [`vendor_id`](CreateGhostCardRequestBodyBuilder::vendor_id)
     /// - [`expense_limit`](CreateGhostCardRequestBodyBuilder::expense_limit)
+    /// - [`amount`](CreateGhostCardRequestBodyBuilder::amount)
+    /// - [`max_number_of_uses`](CreateGhostCardRequestBodyBuilder::max_number_of_uses)
+    /// - [`exact_amount`](CreateGhostCardRequestBodyBuilder::exact_amount)
+    /// - [`expense_limit_period`](CreateGhostCardRequestBodyBuilder::expense_limit_period)
+    /// - [`billing_cycle`](CreateGhostCardRequestBodyBuilder::billing_cycle)
+    /// - [`billing_cycle_day`](CreateGhostCardRequestBodyBuilder::billing_cycle_day)
+    /// - [`daily_transaction_count`](CreateGhostCardRequestBodyBuilder::daily_transaction_count)
+    /// - [`daily_amount_limit`](CreateGhostCardRequestBodyBuilder::daily_amount_limit)
+    /// - [`transaction_amount_limit`](CreateGhostCardRequestBodyBuilder::transaction_amount_limit)
     pub fn build(self) -> Result<CreateGhostCardRequestBody, BuildError> {
         Ok(CreateGhostCardRequestBody {
             vendor_id: self
@@ -186,15 +195,33 @@ impl CreateGhostCardRequestBodyBuilder {
                 .expense_limit
                 .ok_or_else(|| BuildError::missing_field("expense_limit"))?,
             expiration_date: self.expiration_date,
-            amount: self.amount,
-            max_number_of_uses: self.max_number_of_uses,
-            exact_amount: self.exact_amount,
-            expense_limit_period: self.expense_limit_period,
-            billing_cycle: self.billing_cycle,
-            billing_cycle_day: self.billing_cycle_day,
-            daily_transaction_count: self.daily_transaction_count,
-            daily_amount_limit: self.daily_amount_limit,
-            transaction_amount_limit: self.transaction_amount_limit,
+            amount: self
+                .amount
+                .ok_or_else(|| BuildError::missing_field("amount"))?,
+            max_number_of_uses: self
+                .max_number_of_uses
+                .ok_or_else(|| BuildError::missing_field("max_number_of_uses"))?,
+            exact_amount: self
+                .exact_amount
+                .ok_or_else(|| BuildError::missing_field("exact_amount"))?,
+            expense_limit_period: self
+                .expense_limit_period
+                .ok_or_else(|| BuildError::missing_field("expense_limit_period"))?,
+            billing_cycle: self
+                .billing_cycle
+                .ok_or_else(|| BuildError::missing_field("billing_cycle"))?,
+            billing_cycle_day: self
+                .billing_cycle_day
+                .ok_or_else(|| BuildError::missing_field("billing_cycle_day"))?,
+            daily_transaction_count: self
+                .daily_transaction_count
+                .ok_or_else(|| BuildError::missing_field("daily_transaction_count"))?,
+            daily_amount_limit: self
+                .daily_amount_limit
+                .ok_or_else(|| BuildError::missing_field("daily_amount_limit"))?,
+            transaction_amount_limit: self
+                .transaction_amount_limit
+                .ok_or_else(|| BuildError::missing_field("transaction_amount_limit"))?,
             mcc: self.mcc,
             tcc: self.tcc,
             misc_1: self.misc_1,
