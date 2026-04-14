@@ -79,7 +79,6 @@ pub enum NotificationStandardRequestContentEventType {
     ApprovedApplication,
     FailedBoardingApplication,
     SubmittedApplication,
-    UnderWritingApplication,
     ActivatedMerchant,
     ReceivedChargeBack,
     ChargebackUpdated,
@@ -270,7 +269,6 @@ impl Serialize for NotificationStandardRequestContentEventType {
                 serializer.serialize_str("FailedBoardingApplication")
             }
             Self::SubmittedApplication => serializer.serialize_str("SubmittedApplication"),
-            Self::UnderWritingApplication => serializer.serialize_str("UnderWritingApplication"),
             Self::ActivatedMerchant => serializer.serialize_str("ActivatedMerchant"),
             Self::ReceivedChargeBack => serializer.serialize_str("ReceivedChargeBack"),
             Self::ChargebackUpdated => serializer.serialize_str("ChargebackUpdated"),
@@ -416,7 +414,6 @@ impl<'de> Deserialize<'de> for NotificationStandardRequestContentEventType {
             "ApprovedApplication" => Ok(Self::ApprovedApplication),
             "FailedBoardingApplication" => Ok(Self::FailedBoardingApplication),
             "SubmittedApplication" => Ok(Self::SubmittedApplication),
-            "UnderWritingApplication" => Ok(Self::UnderWritingApplication),
             "ActivatedMerchant" => Ok(Self::ActivatedMerchant),
             "ReceivedChargeBack" => Ok(Self::ReceivedChargeBack),
             "ChargebackUpdated" => Ok(Self::ChargebackUpdated),
@@ -559,7 +556,6 @@ impl fmt::Display for NotificationStandardRequestContentEventType {
             Self::ApprovedApplication => write!(f, "ApprovedApplication"),
             Self::FailedBoardingApplication => write!(f, "FailedBoardingApplication"),
             Self::SubmittedApplication => write!(f, "SubmittedApplication"),
-            Self::UnderWritingApplication => write!(f, "UnderWritingApplication"),
             Self::ActivatedMerchant => write!(f, "ActivatedMerchant"),
             Self::ReceivedChargeBack => write!(f, "ReceivedChargeBack"),
             Self::ChargebackUpdated => write!(f, "ChargebackUpdated"),

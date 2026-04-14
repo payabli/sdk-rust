@@ -39,6 +39,7 @@ async fn test_money_out_authorize_out_with_wiremock() {
                         bill_id: Some(BillId(54323)),
                         ..Default::default()
                     }],
+                    auto_capture: Some(AutoCapture(true)),
                     ..Default::default()
                 },
                 allow_duplicated_bills: None,

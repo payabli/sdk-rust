@@ -134,6 +134,36 @@ pub struct VendorQueryRecord {
     #[serde(rename = "Zip")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub zip: Option<Zip>,
+    /// URL for the vendor's online payment portal, if known. Populated by the vendor enrichment pipeline.
+    #[serde(rename = "PaymentPortalUrl")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payment_portal_url: Option<String>,
+    /// Whether the vendor accepts card payments. Values are `yes`, `no`, or `unable to determine`. Populated by the vendor enrichment pipeline.
+    #[serde(rename = "CardAccepted")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub card_accepted: Option<String>,
+    /// Whether the vendor accepts ACH payments. Values are `yes`, `no`, or `unable to determine`. Populated by the vendor enrichment pipeline.
+    #[serde(rename = "AchAccepted")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ach_accepted: Option<String>,
+    /// Current enrichment state of the vendor. Values are `not_enriched`, `partially_enriched`, `fully_enriched`, or `fallback_applied`.
+    #[serde(rename = "EnrichmentStatus")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub enrichment_status: Option<String>,
+    /// Which enrichment method resolved the vendor's payment acceptance info. Values are `invoice_scan`, `web_search`, `vendor_network`, or `manual`.
+    #[serde(rename = "EnrichedBy")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub enriched_by: Option<String>,
+    /// When the vendor was last enriched (UTC).
+    #[serde(rename = "EnrichedAt")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub enriched_at: Option<DateTime<Utc>>,
+    /// Identifier for the enrichment request that last updated this vendor.
+    #[serde(rename = "EnrichmentId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub enrichment_id: Option<String>,
 }
 
 impl VendorQueryRecord {
@@ -189,6 +219,13 @@ pub struct VendorQueryRecordBuilder {
     vendor_number: Option<VendorNumber>,
     vendor_status: Option<Vendorstatus>,
     zip: Option<Zip>,
+    payment_portal_url: Option<String>,
+    card_accepted: Option<String>,
+    ach_accepted: Option<String>,
+    enrichment_status: Option<String>,
+    enriched_by: Option<String>,
+    enriched_at: Option<DateTime<Utc>>,
+    enrichment_id: Option<String>,
 }
 
 impl VendorQueryRecordBuilder {
@@ -412,6 +449,41 @@ impl VendorQueryRecordBuilder {
         self
     }
 
+    pub fn payment_portal_url(mut self, value: impl Into<String>) -> Self {
+        self.payment_portal_url = Some(value.into());
+        self
+    }
+
+    pub fn card_accepted(mut self, value: impl Into<String>) -> Self {
+        self.card_accepted = Some(value.into());
+        self
+    }
+
+    pub fn ach_accepted(mut self, value: impl Into<String>) -> Self {
+        self.ach_accepted = Some(value.into());
+        self
+    }
+
+    pub fn enrichment_status(mut self, value: impl Into<String>) -> Self {
+        self.enrichment_status = Some(value.into());
+        self
+    }
+
+    pub fn enriched_by(mut self, value: impl Into<String>) -> Self {
+        self.enriched_by = Some(value.into());
+        self
+    }
+
+    pub fn enriched_at(mut self, value: DateTime<Utc>) -> Self {
+        self.enriched_at = Some(value);
+        self
+    }
+
+    pub fn enrichment_id(mut self, value: impl Into<String>) -> Self {
+        self.enrichment_id = Some(value.into());
+        self
+    }
+
     /// Consumes the builder and constructs a [`VendorQueryRecord`].
     pub fn build(self) -> Result<VendorQueryRecord, BuildError> {
         Ok(VendorQueryRecord {
@@ -459,6 +531,13 @@ impl VendorQueryRecordBuilder {
             vendor_number: self.vendor_number,
             vendor_status: self.vendor_status,
             zip: self.zip,
+            payment_portal_url: self.payment_portal_url,
+            card_accepted: self.card_accepted,
+            ach_accepted: self.ach_accepted,
+            enrichment_status: self.enrichment_status,
+            enriched_by: self.enriched_by,
+            enriched_at: self.enriched_at,
+            enrichment_id: self.enrichment_id,
         })
     }
 }

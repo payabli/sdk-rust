@@ -93,7 +93,7 @@ impl VendorClient {
             .await
     }
 
-    /// Retrieves a vendor's details.
+    /// Retrieves a vendor's details, including enrichment status and payment acceptance info when available.
     ///
     /// # Arguments
     ///
@@ -113,6 +113,33 @@ impl VendorClient {
                 Method::GET,
                 &format!("Vendor/{}", id_vendor),
                 None,
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Triggers AI-powered vendor enrichment for an existing vendor. Runs one or more enrichment stages (invoice scan, web search) based on the `scope` parameter. Can automatically apply extracted payment acceptance info and vendor contact information to the vendor record, or return raw results for manual review. Contact Payabli to enable this feature.
+    ///
+    /// # Arguments
+    ///
+    /// * `entry` - Entrypoint identifier.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn enrich_vendor(
+        &self,
+        entry: &str,
+        request: &VendorEnrichRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<VendorEnrichResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                &format!("Vendor/enrich/{}", entry),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

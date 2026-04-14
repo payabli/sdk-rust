@@ -102,6 +102,19 @@ pub struct VendorData {
     /// Vendor's ZIP or postal code. Required if any address field is provided. For US addresses, use five digits (`12345`) or ZIP+4 format (`12345-6789`).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub zip: Option<String>,
+    /// Identifier for the vendor's default stored payment method.
+    #[serde(rename = "defaultMethodId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub default_method_id: Option<String>,
+    /// PDF invoice attachment for AI-powered vendor enrichment.
+    /// When this feature is enabled and you include an attachment, the invoice is scanned and extracted vendor information is merged into the request.
+    /// Fields in the request body take precedence over extracted data.
+    /// If the scan fails, vendor creation proceeds with the original request data.
+    ///
+    /// See the [vendor enrichment guide](/guides/pay-out-vendor-enrichment-overview) for details.
+    /// Contact Payabli to enable this feature.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub attachment: Option<FileContent>,
 }
 
 impl VendorData {
@@ -145,6 +158,8 @@ pub struct VendorDataBuilder {
     state: Option<String>,
     vendor_status: Option<Vendorstatus>,
     zip: Option<String>,
+    default_method_id: Option<String>,
+    attachment: Option<FileContent>,
 }
 
 impl VendorDataBuilder {
@@ -308,6 +323,16 @@ impl VendorDataBuilder {
         self
     }
 
+    pub fn default_method_id(mut self, value: impl Into<String>) -> Self {
+        self.default_method_id = Some(value.into());
+        self
+    }
+
+    pub fn attachment(mut self, value: FileContent) -> Self {
+        self.attachment = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`VendorData`].
     pub fn build(self) -> Result<VendorData, BuildError> {
         Ok(VendorData {
@@ -343,6 +368,8 @@ impl VendorDataBuilder {
             state: self.state,
             vendor_status: self.vendor_status,
             zip: self.zip,
+            default_method_id: self.default_method_id,
+            attachment: self.attachment,
         })
     }
 }

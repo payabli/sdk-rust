@@ -12653,7 +12653,7 @@ async fn main() {
 <dl>
 <dd>
 
-Authorizes transaction for payout. Authorized transactions aren't flagged for settlement until captured. Use `referenceId` returned in the response to capture the transaction. 
+Authorizes transaction for payout.  If you don't pass the `autoCapture` field with a value of `true`, authorized transactions aren't flagged for settlement until captured.  Use `referenceId` returned in the response to capture the transaction. 
 </dd>
 </dl>
 </dd>
@@ -12701,6 +12701,7 @@ async fn main() {
                         bill_id: Some(BillId(54323)),
                         ..Default::default()
                     }],
+                    auto_capture: Some(AutoCapture(true)),
                     ..Default::default()
                 },
                 allow_duplicated_bills: None,
@@ -13009,7 +13010,7 @@ async fn main() {
 <dl>
 <dd>
 
-Captures a single authorized payout transaction by ID.
+Captures a single authorized payout transaction by ID. If the transaction was authorized with `autoCapture` set to `true`,  you don't need to call this endpoint to capture the transaction for processing.
 </dd>
 </dl>
 </dd>
@@ -27178,7 +27179,7 @@ async fn main() {
 <dl>
 <dd>
 
-Retrieves a vendor's details.
+Retrieves a vendor's details, including enrichment status and payment acceptance info when available.
 </dd>
 </dl>
 </dd>
@@ -27219,6 +27220,89 @@ async fn main() {
 <dd>
 
 **id_vendor:** `i64` — Vendor ID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">enrich_vendor</a>(entry: String, request: VendorEnrichRequest) -> Result&lt;VendorEnrichResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Triggers AI-powered vendor enrichment for an existing vendor. Runs one or more enrichment stages (invoice scan, web search) based on the `scope` parameter. Can automatically apply extracted payment acceptance info and vendor contact information to the vendor record, or return raw results for manual review. Contact Payabli to enable this feature.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .vendor
+        .enrich_vendor(
+            &"8cfec329267".to_string(),
+            &VendorEnrichRequest {
+                vendor_id: 3890,
+                scope: Some(vec!["invoice_scan".to_string()]),
+                apply_enrichment_data: Some(false),
+                invoice_file: Some(FileContent {
+                    f_content: Some("<base64-encoded-pdf>".to_string()),
+                    filename: Some("invoice-2026-001.pdf".to_string()),
+                    ftype: Some(FileContentFtype::Pdf),
+                    ..Default::default()
+                }),
+                fallback_method: Some("check".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `String` — Entrypoint identifier.
     
 </dd>
 </dl>

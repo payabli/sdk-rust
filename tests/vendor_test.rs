@@ -154,3 +154,44 @@ async fn test_vendor_get_vendor_with_wiremock() {
         .await
         .unwrap();
 }
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_vendor_enrich_vendor_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .vendor
+        .enrich_vendor(
+            &"8cfec329267".to_string(),
+            &VendorEnrichRequest {
+                vendor_id: 3890,
+                scope: Some(vec!["invoice_scan".to_string()]),
+                apply_enrichment_data: Some(false),
+                invoice_file: Some(FileContent {
+                    f_content: Some("<base64-encoded-pdf>".to_string()),
+                    filename: Some("invoice-2026-001.pdf".to_string()),
+                    ftype: Some(FileContentFtype::Pdf),
+                    ..Default::default()
+                }),
+                fallback_method: Some("check".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("POST", "/Vendor/enrich/8cfec329267", None, 1)
+        .await
+        .unwrap();
+}

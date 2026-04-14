@@ -36,6 +36,9 @@ pub struct AuthorizePayoutBody {
     #[serde(rename = "subscriptionId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub subscription_id: Option<Subscriptionid>,
+    #[serde(rename = "autoCapture")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub auto_capture: Option<AutoCapture>,
 }
 
 impl AuthorizePayoutBody {
@@ -58,6 +61,7 @@ pub struct AuthorizePayoutBodyBuilder {
     account_id: Option<AccountId>,
     subdomain: Option<Subdomain>,
     subscription_id: Option<Subscriptionid>,
+    auto_capture: Option<AutoCapture>,
 }
 
 impl AuthorizePayoutBodyBuilder {
@@ -116,6 +120,11 @@ impl AuthorizePayoutBodyBuilder {
         self
     }
 
+    pub fn auto_capture(mut self, value: AutoCapture) -> Self {
+        self.auto_capture = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`AuthorizePayoutBody`].
     /// This method will fail if any of the following fields are not set:
     /// - [`entry_point`](AuthorizePayoutBodyBuilder::entry_point)
@@ -146,6 +155,7 @@ impl AuthorizePayoutBodyBuilder {
             account_id: self.account_id,
             subdomain: self.subdomain,
             subscription_id: self.subscription_id,
+            auto_capture: self.auto_capture,
         })
     }
 }
