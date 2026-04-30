@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 /// Complete transaction details returned by v2 Money In endpoints. This matches the structure of the transaction details previously returned by the v1 details endpoint.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct V2TransactionDetails {
     #[serde(rename = "parentOrgName")]
     #[serde(default)]
@@ -154,7 +154,8 @@ pub struct V2TransactionDetails {
     #[serde(default)]
     pub ach_sec_code: AchSecCode,
     #[serde(rename = "achHolderType")]
-    pub ach_holder_type: AchHolderType,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ach_holder_type: Option<AchHolderType>,
     #[serde(rename = "ipAddress")]
     #[serde(default)]
     pub ip_address: IpAddress,
@@ -534,7 +535,6 @@ impl V2TransactionDetailsBuilder {
     /// - [`risk_action`](V2TransactionDetailsBuilder::risk_action)
     /// - [`device_id`](V2TransactionDetailsBuilder::device_id)
     /// - [`ach_sec_code`](V2TransactionDetailsBuilder::ach_sec_code)
-    /// - [`ach_holder_type`](V2TransactionDetailsBuilder::ach_holder_type)
     /// - [`ip_address`](V2TransactionDetailsBuilder::ip_address)
     /// - [`is_same_day_ach`](V2TransactionDetailsBuilder::is_same_day_ach)
     pub fn build(self) -> Result<V2TransactionDetails, BuildError> {
@@ -667,9 +667,7 @@ impl V2TransactionDetailsBuilder {
             ach_sec_code: self
                 .ach_sec_code
                 .ok_or_else(|| BuildError::missing_field("ach_sec_code"))?,
-            ach_holder_type: self
-                .ach_holder_type
-                .ok_or_else(|| BuildError::missing_field("ach_holder_type"))?,
+            ach_holder_type: self.ach_holder_type,
             ip_address: self
                 .ip_address
                 .ok_or_else(|| BuildError::missing_field("ip_address"))?,

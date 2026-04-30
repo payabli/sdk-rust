@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 /// Response wrapper for declined v2 Money In transaction endpoints (HTTP 402). Returned when a transaction is declined by the card network or issuer. All decline responses use this format with unified response codes starting with 'D'. The `data` field contains transaction details.
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct V2DeclinedTransactionResponseWrapper {
     #[serde(default)]
     pub code: V2ResponseCode,
@@ -11,6 +11,7 @@ pub struct V2DeclinedTransactionResponseWrapper {
     pub explanation: V2ResponseExplanation,
     #[serde(default)]
     pub action: V2ResponseAction,
+    #[serde(default)]
     pub data: V2TransactionDetails,
     /// Pagination token (equivalent to `pageIdentifier` in v1 APIs). Returns `null` when pagination is not applicable.
     #[serde(skip_serializing_if = "Option::is_none")]
