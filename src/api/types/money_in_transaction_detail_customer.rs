@@ -12,53 +12,53 @@ pub struct TransactionDetailCustomer {
     #[serde(default)]
     pub last_name: String,
     #[serde(rename = "companyName")]
-    #[serde(default)]
-    pub company_name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub company_name: Option<String>,
     #[serde(rename = "billingAddress1")]
-    #[serde(default)]
-    pub billing_address_1: BillingAddressNullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_address_1: Option<BillingAddressNullable>,
     #[serde(rename = "billingAddress2")]
-    #[serde(default)]
-    pub billing_address_2: BillingAddressAddtlNullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_address_2: Option<BillingAddressAddtlNullable>,
     #[serde(rename = "billingCity")]
-    #[serde(default)]
-    pub billing_city: BillingCityNullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_city: Option<BillingCityNullable>,
     #[serde(rename = "billingState")]
-    #[serde(default)]
-    pub billing_state: BillingStateNullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_state: Option<BillingStateNullable>,
     #[serde(rename = "billingZip")]
-    #[serde(default)]
-    pub billing_zip: BillingZip,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_zip: Option<BillingZip>,
     #[serde(rename = "billingCountry")]
-    #[serde(default)]
-    pub billing_country: BillingCountryNullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_country: Option<BillingCountryNullable>,
     #[serde(rename = "billingPhone")]
-    #[serde(default)]
-    pub billing_phone: PhoneNumber,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_phone: Option<PhoneNumber>,
     #[serde(rename = "billingEmail")]
-    #[serde(default)]
-    pub billing_email: Email,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_email: Option<Email>,
     #[serde(rename = "customerNumber")]
-    #[serde(default)]
-    pub customer_number: CustomerNumberNullable,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub customer_number: Option<CustomerNumberNullable>,
     #[serde(rename = "shippingAddress1")]
-    #[serde(default)]
-    pub shipping_address_1: Shippingaddress,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub shipping_address_1: Option<Shippingaddress>,
     #[serde(rename = "shippingAddress2")]
-    #[serde(default)]
-    pub shipping_address_2: Shippingaddressadditional,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub shipping_address_2: Option<Shippingaddressadditional>,
     #[serde(rename = "shippingCity")]
-    #[serde(default)]
-    pub shipping_city: Shippingcity,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub shipping_city: Option<Shippingcity>,
     #[serde(rename = "shippingState")]
-    #[serde(default)]
-    pub shipping_state: Shippingstate,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub shipping_state: Option<Shippingstate>,
     #[serde(rename = "shippingZip")]
-    #[serde(default)]
-    pub shipping_zip: Shippingzip,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub shipping_zip: Option<Shippingzip>,
     #[serde(rename = "shippingCountry")]
-    #[serde(default)]
-    pub shipping_country: Shippingcountry,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub shipping_country: Option<Shippingcountry>,
     #[serde(rename = "customerId")]
     #[serde(default)]
     pub customer_id: CustomerId,
@@ -218,22 +218,6 @@ impl TransactionDetailCustomerBuilder {
     /// This method will fail if any of the following fields are not set:
     /// - [`first_name`](TransactionDetailCustomerBuilder::first_name)
     /// - [`last_name`](TransactionDetailCustomerBuilder::last_name)
-    /// - [`company_name`](TransactionDetailCustomerBuilder::company_name)
-    /// - [`billing_address_1`](TransactionDetailCustomerBuilder::billing_address_1)
-    /// - [`billing_address_2`](TransactionDetailCustomerBuilder::billing_address_2)
-    /// - [`billing_city`](TransactionDetailCustomerBuilder::billing_city)
-    /// - [`billing_state`](TransactionDetailCustomerBuilder::billing_state)
-    /// - [`billing_zip`](TransactionDetailCustomerBuilder::billing_zip)
-    /// - [`billing_country`](TransactionDetailCustomerBuilder::billing_country)
-    /// - [`billing_phone`](TransactionDetailCustomerBuilder::billing_phone)
-    /// - [`billing_email`](TransactionDetailCustomerBuilder::billing_email)
-    /// - [`customer_number`](TransactionDetailCustomerBuilder::customer_number)
-    /// - [`shipping_address_1`](TransactionDetailCustomerBuilder::shipping_address_1)
-    /// - [`shipping_address_2`](TransactionDetailCustomerBuilder::shipping_address_2)
-    /// - [`shipping_city`](TransactionDetailCustomerBuilder::shipping_city)
-    /// - [`shipping_state`](TransactionDetailCustomerBuilder::shipping_state)
-    /// - [`shipping_zip`](TransactionDetailCustomerBuilder::shipping_zip)
-    /// - [`shipping_country`](TransactionDetailCustomerBuilder::shipping_country)
     /// - [`customer_id`](TransactionDetailCustomerBuilder::customer_id)
     /// - [`customer_status`](TransactionDetailCustomerBuilder::customer_status)
     pub fn build(self) -> Result<TransactionDetailCustomer, BuildError> {
@@ -245,54 +229,22 @@ impl TransactionDetailCustomerBuilder {
             last_name: self
                 .last_name
                 .ok_or_else(|| BuildError::missing_field("last_name"))?,
-            company_name: self
-                .company_name
-                .ok_or_else(|| BuildError::missing_field("company_name"))?,
-            billing_address_1: self
-                .billing_address_1
-                .ok_or_else(|| BuildError::missing_field("billing_address_1"))?,
-            billing_address_2: self
-                .billing_address_2
-                .ok_or_else(|| BuildError::missing_field("billing_address_2"))?,
-            billing_city: self
-                .billing_city
-                .ok_or_else(|| BuildError::missing_field("billing_city"))?,
-            billing_state: self
-                .billing_state
-                .ok_or_else(|| BuildError::missing_field("billing_state"))?,
-            billing_zip: self
-                .billing_zip
-                .ok_or_else(|| BuildError::missing_field("billing_zip"))?,
-            billing_country: self
-                .billing_country
-                .ok_or_else(|| BuildError::missing_field("billing_country"))?,
-            billing_phone: self
-                .billing_phone
-                .ok_or_else(|| BuildError::missing_field("billing_phone"))?,
-            billing_email: self
-                .billing_email
-                .ok_or_else(|| BuildError::missing_field("billing_email"))?,
-            customer_number: self
-                .customer_number
-                .ok_or_else(|| BuildError::missing_field("customer_number"))?,
-            shipping_address_1: self
-                .shipping_address_1
-                .ok_or_else(|| BuildError::missing_field("shipping_address_1"))?,
-            shipping_address_2: self
-                .shipping_address_2
-                .ok_or_else(|| BuildError::missing_field("shipping_address_2"))?,
-            shipping_city: self
-                .shipping_city
-                .ok_or_else(|| BuildError::missing_field("shipping_city"))?,
-            shipping_state: self
-                .shipping_state
-                .ok_or_else(|| BuildError::missing_field("shipping_state"))?,
-            shipping_zip: self
-                .shipping_zip
-                .ok_or_else(|| BuildError::missing_field("shipping_zip"))?,
-            shipping_country: self
-                .shipping_country
-                .ok_or_else(|| BuildError::missing_field("shipping_country"))?,
+            company_name: self.company_name,
+            billing_address_1: self.billing_address_1,
+            billing_address_2: self.billing_address_2,
+            billing_city: self.billing_city,
+            billing_state: self.billing_state,
+            billing_zip: self.billing_zip,
+            billing_country: self.billing_country,
+            billing_phone: self.billing_phone,
+            billing_email: self.billing_email,
+            customer_number: self.customer_number,
+            shipping_address_1: self.shipping_address_1,
+            shipping_address_2: self.shipping_address_2,
+            shipping_city: self.shipping_city,
+            shipping_state: self.shipping_state,
+            shipping_zip: self.shipping_zip,
+            shipping_country: self.shipping_country,
             customer_id: self
                 .customer_id
                 .ok_or_else(|| BuildError::missing_field("customer_id"))?,

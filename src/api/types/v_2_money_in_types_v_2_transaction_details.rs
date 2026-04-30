@@ -105,8 +105,8 @@ pub struct V2TransactionDetails {
     #[serde(default)]
     pub entrypage_id: EntrypageId,
     #[serde(rename = "externalPaypointID")]
-    #[serde(default)]
-    pub external_paypoint_id: ExternalPaypointId,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub external_paypoint_id: Option<ExternalPaypointId>,
     /// Indicates if ACH account was validated in real-time.
     #[serde(rename = "isValidatedACH")]
     #[serde(default)]
@@ -524,7 +524,6 @@ impl V2TransactionDetailsBuilder {
     /// - [`retrieval_id`](V2TransactionDetailsBuilder::retrieval_id)
     /// - [`invoice_data`](V2TransactionDetailsBuilder::invoice_data)
     /// - [`entrypage_id`](V2TransactionDetailsBuilder::entrypage_id)
-    /// - [`external_paypoint_id`](V2TransactionDetailsBuilder::external_paypoint_id)
     /// - [`is_validated_ach`](V2TransactionDetailsBuilder::is_validated_ach)
     /// - [`transaction_time`](V2TransactionDetailsBuilder::transaction_time)
     /// - [`customer`](V2TransactionDetailsBuilder::customer)
@@ -632,9 +631,7 @@ impl V2TransactionDetailsBuilder {
             entrypage_id: self
                 .entrypage_id
                 .ok_or_else(|| BuildError::missing_field("entrypage_id"))?,
-            external_paypoint_id: self
-                .external_paypoint_id
-                .ok_or_else(|| BuildError::missing_field("external_paypoint_id"))?,
+            external_paypoint_id: self.external_paypoint_id,
             is_validated_ach: self
                 .is_validated_ach
                 .ok_or_else(|| BuildError::missing_field("is_validated_ach"))?,
