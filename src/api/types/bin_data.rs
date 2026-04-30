@@ -17,7 +17,8 @@ pub struct BinData {
     #[serde(rename = "binCardBrand")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bin_card_brand: Option<String>,
-    /// The type of card: Credit or Debit.
+    /// The type of card: `Credit` or `Debit`. Case can vary between
+    /// processors, so compare this value case-insensitively.
     #[serde(rename = "binCardType")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bin_card_type: Option<String>,

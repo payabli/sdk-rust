@@ -434,6 +434,92 @@ async fn test_query_list_customers_org_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
+async fn test_query_list_devices_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .query
+        .list_devices(
+            &Entry("8cfec329267".to_string()),
+            &ListDevicesQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                sort_by: Some("desc(createdAt)".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/devices/8cfec329267",
+        Some(HashMap::from([
+            ("fromRecord".to_string(), "0".to_string()),
+            ("limitRecord".to_string(), "20".to_string()),
+            ("sortBy".to_string(), "desc(createdAt)".to_string()),
+        ])),
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_query_list_devices_org_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .query
+        .list_devices_org(
+            100,
+            &ListDevicesOrgQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                sort_by: Some("desc(createdAt)".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/devices/org/100",
+        Some(HashMap::from([
+            ("fromRecord".to_string(), "0".to_string()),
+            ("limitRecord".to_string(), "20".to_string()),
+            ("sortBy".to_string(), "desc(createdAt)".to_string()),
+        ])),
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
 async fn test_query_list_notification_reports_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();

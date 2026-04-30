@@ -6,6 +6,9 @@ pub struct VCardRecord {
     #[serde(rename = "vcardSent")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vcard_sent: Option<bool>,
+    #[serde(rename = "cardType")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub card_type: Option<VCardCardType>,
     #[serde(rename = "cardToken")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub card_token: Option<String>,
@@ -104,6 +107,7 @@ impl VCardRecord {
 #[non_exhaustive]
 pub struct VCardRecordBuilder {
     vcard_sent: Option<bool>,
+    card_type: Option<VCardCardType>,
     card_token: Option<String>,
     card_number: Option<String>,
     cvc: Option<String>,
@@ -135,6 +139,11 @@ pub struct VCardRecordBuilder {
 impl VCardRecordBuilder {
     pub fn vcard_sent(mut self, value: bool) -> Self {
         self.vcard_sent = Some(value);
+        self
+    }
+
+    pub fn card_type(mut self, value: VCardCardType) -> Self {
+        self.card_type = Some(value);
         self
     }
 
@@ -272,6 +281,7 @@ impl VCardRecordBuilder {
     pub fn build(self) -> Result<VCardRecord, BuildError> {
         Ok(VCardRecord {
             vcard_sent: self.vcard_sent,
+            card_type: self.card_type,
             card_token: self.card_token,
             card_number: self.card_number,
             cvc: self.cvc,

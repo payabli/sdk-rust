@@ -38,6 +38,21 @@ pub struct ProcessingSection {
     #[serde(rename = "whenRefunded")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub when_refunded: Option<TemplateElement>,
+    #[serde(rename = "CombinedBatches")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub combined_batches: Option<TemplateElement>,
+    #[serde(rename = "payoutAverageMonthlyVolume")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payout_average_monthly_volume: Option<TemplateElement>,
+    #[serde(rename = "payoutHighTicketAmount")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payout_high_ticket_amount: Option<TemplateElement>,
+    #[serde(rename = "payoutAverageTicketAmount")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payout_average_ticket_amount: Option<TemplateElement>,
+    #[serde(rename = "payoutCreditLimit")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payout_credit_limit: Option<TemplateElement>,
 }
 
 impl ProcessingSection {
@@ -64,6 +79,11 @@ pub struct ProcessingSectionBuilder {
     when_delivered: Option<TemplateElement>,
     when_provided: Option<TemplateElement>,
     when_refunded: Option<TemplateElement>,
+    combined_batches: Option<TemplateElement>,
+    payout_average_monthly_volume: Option<TemplateElement>,
+    payout_high_ticket_amount: Option<TemplateElement>,
+    payout_average_ticket_amount: Option<TemplateElement>,
+    payout_credit_limit: Option<TemplateElement>,
 }
 
 impl ProcessingSectionBuilder {
@@ -142,6 +162,31 @@ impl ProcessingSectionBuilder {
         self
     }
 
+    pub fn combined_batches(mut self, value: TemplateElement) -> Self {
+        self.combined_batches = Some(value);
+        self
+    }
+
+    pub fn payout_average_monthly_volume(mut self, value: TemplateElement) -> Self {
+        self.payout_average_monthly_volume = Some(value);
+        self
+    }
+
+    pub fn payout_high_ticket_amount(mut self, value: TemplateElement) -> Self {
+        self.payout_high_ticket_amount = Some(value);
+        self
+    }
+
+    pub fn payout_average_ticket_amount(mut self, value: TemplateElement) -> Self {
+        self.payout_average_ticket_amount = Some(value);
+        self
+    }
+
+    pub fn payout_credit_limit(mut self, value: TemplateElement) -> Self {
+        self.payout_credit_limit = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`ProcessingSection`].
     pub fn build(self) -> Result<ProcessingSection, BuildError> {
         Ok(ProcessingSection {
@@ -160,6 +205,11 @@ impl ProcessingSectionBuilder {
             when_delivered: self.when_delivered,
             when_provided: self.when_provided,
             when_refunded: self.when_refunded,
+            combined_batches: self.combined_batches,
+            payout_average_monthly_volume: self.payout_average_monthly_volume,
+            payout_high_ticket_amount: self.payout_high_ticket_amount,
+            payout_average_ticket_amount: self.payout_average_ticket_amount,
+            payout_credit_limit: self.payout_credit_limit,
         })
     }
 }

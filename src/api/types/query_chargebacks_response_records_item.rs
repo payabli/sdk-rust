@@ -92,7 +92,14 @@ pub struct QueryChargebacksResponseRecordsItem {
     #[serde(rename = "ScheduleReference")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub schedule_reference: Option<i64>,
-    /// Status of the transaction.
+    /// Status of the chargeback or ACH return.
+    ///
+    /// - 0: Open (chargebacks only)
+    /// - 1: Pending (chargebacks only)
+    /// - 2: ClosedWon (chargebacks only)
+    /// - 3: ClosedLost (chargebacks only)
+    /// - 4: ACH return (any Nacha return code except R29)
+    /// - 5: AchDispute (R29 only — debit block)
     #[serde(rename = "Status")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<i64>,

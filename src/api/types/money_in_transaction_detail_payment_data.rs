@@ -26,8 +26,8 @@ pub struct TransactionDetailPaymentData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sequence: Option<Sequence>,
     #[serde(rename = "orderDescription")]
-    #[serde(default)]
-    pub order_description: Orderdescription,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub order_description: Option<Orderdescription>,
     #[serde(rename = "accountId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub account_id: Option<AccountId>,
@@ -137,7 +137,6 @@ impl TransactionDetailPaymentDataBuilder {
     /// - [`masked_account`](TransactionDetailPaymentDataBuilder::masked_account)
     /// - [`account_type`](TransactionDetailPaymentDataBuilder::account_type)
     /// - [`holder_name`](TransactionDetailPaymentDataBuilder::holder_name)
-    /// - [`order_description`](TransactionDetailPaymentDataBuilder::order_description)
     /// - [`payment_details`](TransactionDetailPaymentDataBuilder::payment_details)
     pub fn build(self) -> Result<TransactionDetailPaymentData, BuildError> {
         Ok(TransactionDetailPaymentData {
@@ -155,9 +154,7 @@ impl TransactionDetailPaymentDataBuilder {
             initiator: self.initiator,
             stored_method_usage_type: self.stored_method_usage_type,
             sequence: self.sequence,
-            order_description: self
-                .order_description
-                .ok_or_else(|| BuildError::missing_field("order_description"))?,
+            order_description: self.order_description,
             account_id: self.account_id,
             signature_data: self.signature_data,
             bin_data: self.bin_data,

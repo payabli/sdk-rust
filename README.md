@@ -33,7 +33,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-payabli_api = "1.0.10"
+payabli_api = "1.0.11"
 ```
 
 Or install via cargo:
@@ -72,8 +72,8 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .money_in
-        .getpaid(
-            &GetpaidRequest {
+        .getpaidv_2(
+            &Getpaidv2Request {
                 body: TransRequestBody {
                     account_id: None,
                     customer_data: Some(PayorDataRequest {
@@ -106,7 +106,6 @@ async fn main() {
                 },
                 ach_validation: None,
                 force_customer_creation: None,
-                include_details: None,
             },
             None,
         )
@@ -133,7 +132,7 @@ let client = Client::new(config).expect("Failed to build client");
 When the API returns a non-success status code (4xx or 5xx response), an error will be returned.
 
 ```rust
-match client.money_in.getpaid(None)?.await {
+match client.money_in.getpaidv_2(None)?.await {
     Ok(response) => {
         println!("Success: {:?}", response);
     },
@@ -175,7 +174,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `max_retries` method to configure this behavior.
 
 ```rust
-let response = client.money_in.getpaid(
+let response = client.money_in.getpaidv_2(
     Some(RequestOptions::new().max_retries(3))
 )?.await;
 ```
@@ -185,7 +184,7 @@ let response = client.money_in.getpaid(
 The SDK defaults to a 30 second timeout. Use the `timeout` method to configure this behavior.
 
 ```rust
-let response = client.money_in.getpaid(
+let response = client.money_in.getpaidv_2(
     Some(RequestOptions::new().timeout_seconds(30))
 )?.await;
 ```
@@ -195,7 +194,7 @@ let response = client.money_in.getpaid(
 You can add custom headers to requests using `RequestOptions`.
 
 ```rust
-let response = client.money_in.getpaid(
+let response = client.money_in.getpaidv_2(
     Some(
         RequestOptions::new()
             .additional_header("X-Custom-Header", "custom-value")
@@ -210,7 +209,7 @@ let response = client.money_in.getpaid(
 You can add custom query parameters to requests using `RequestOptions`.
 
 ```rust
-let response = client.money_in.getpaid(
+let response = client.money_in.getpaidv_2(
     Some(
         RequestOptions::new()
             .additional_query_param("filter", "active")

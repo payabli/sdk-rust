@@ -945,6 +945,261 @@ impl QueryClient {
             .await
     }
 
+    /// Returns a list of cloud devices for a single paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
+    ///
+    /// # Arguments
+    ///
+    /// * `from_record` - The number of records to skip before starting to collect the result set.
+    /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
+    /// * `parameters` - Collection of field names, conditions, and values used to filter
+    /// the query.
+    ///
+    /// <Info>
+    /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+    ///
+    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+    ///
+    /// For example:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/devices/8cfec329267?parameters=status=1&limitRecord=20
+    ///
+    /// should become:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/devices/8cfec329267?status=1&limitRecord=20
+    /// </Info>
+    ///
+    /// See [Filters and Conditions
+    /// Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference)
+    /// for more information.
+    ///
+    /// **List of field names accepted:**
+    ///
+    ///
+    /// - `deviceId` (eq, ne, ct, nct)
+    ///
+    /// - `serialNumber` (eq, ne, ct, nct)
+    ///
+    /// - `friendlyName` (eq, ne, ct, nct)
+    ///
+    /// - `description` (eq, ne, ct, nct)
+    ///
+    /// - `model` (eq, ne, ct, nct)
+    ///
+    /// - `make` (eq, ne, ct, nct)
+    ///
+    /// - `macAddress` (eq, ne, ct, nct)
+    ///
+    /// - `registrationCode` (eq, ne, ct, nct)
+    ///
+    /// - `status` (eq, ne, in, nin)
+    ///
+    /// - `deviceType` (eq, ne, in, nin)
+    ///
+    /// - `deviceOs` (eq, ne, in, nin)
+    ///
+    /// - `activationAttempts` (eq, ne, gt, ge, lt, le)
+    ///
+    /// - `createdDate` (gt, ge, lt, le, eq, ne)
+    ///
+    /// - `updatedDate` (gt, ge, lt, le, eq, ne)
+    ///
+    /// - `lastHealthCheck` (gt, ge, lt, le, eq, ne)
+    ///
+    /// - `activationExpiry` (gt, ge, lt, le, eq, ne). This filter corresponds to the `activationCodeExpiry` response field.
+    ///
+    /// - `paypointId` (eq, ne)
+    ///
+    /// - `paypointDba` (eq, ne, ct, nct)
+    ///
+    /// - `paypointLegal` (eq, ne, ct, nct)
+    ///
+    /// - `paypointEntry` (eq, ne, ct, nct)
+    ///
+    /// - `externalPaypointId` (eq, ne, ct, nct)
+    ///
+    /// - `parentOrgId` (eq, ne)
+    ///
+    /// - `parentOrgName` (eq, ne, ct, nct)
+    ///
+    ///
+    /// **List of comparison operators accepted:**
+    ///
+    /// - `eq` or empty => equal
+    ///
+    /// - `gt` => greater than
+    ///
+    /// - `ge` => greater or equal
+    ///
+    /// - `lt` => less than
+    ///
+    /// - `le` => less or equal
+    ///
+    /// - `ne` => not equal
+    ///
+    /// - `ct` => contains
+    ///
+    /// - `nct` => not contains
+    ///
+    /// - `in` => inside array
+    ///
+    /// - `nin` => not inside array
+    /// * `sort_by` - The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn list_devices(
+        &self,
+        entry: &Entry,
+        request: &ListDevicesQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<QueryDeviceResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Query/devices/{}", entry.0),
+                None,
+                QueryBuilder::new()
+                    .serialize("exportFormat", request.export_format.clone())
+                    .int("fromRecord", request.from_record.clone())
+                    .int("limitRecord", request.limit_record.clone())
+                    .serialize("parameters", request.parameters.clone())
+                    .string("sortBy", request.sort_by.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
+    /// Returns a list of cloud devices for a single organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
+    ///
+    /// # Arguments
+    ///
+    /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `from_record` - The number of records to skip before starting to collect the result set.
+    /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
+    /// * `parameters` - Collection of field names, conditions, and values used to filter
+    /// the query.
+    ///
+    /// <Info>
+    /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+    ///
+    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
+    ///
+    /// For example:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/devices/org/236?parameters=status=1&limitRecord=20
+    ///
+    /// should become:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/devices/org/236?status=1&limitRecord=20
+    /// </Info>
+    ///
+    /// See [Filters and Conditions
+    /// Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference)
+    /// for more information.
+    ///
+    /// **List of field names accepted:**
+    ///
+    ///
+    /// - `deviceId` (eq, ne, ct, nct)
+    ///
+    /// - `serialNumber` (eq, ne, ct, nct)
+    ///
+    /// - `friendlyName` (eq, ne, ct, nct)
+    ///
+    /// - `description` (eq, ne, ct, nct)
+    ///
+    /// - `model` (eq, ne, ct, nct)
+    ///
+    /// - `make` (eq, ne, ct, nct)
+    ///
+    /// - `macAddress` (eq, ne, ct, nct)
+    ///
+    /// - `registrationCode` (eq, ne, ct, nct)
+    ///
+    /// - `status` (eq, ne, in, nin)
+    ///
+    /// - `deviceType` (eq, ne, in, nin)
+    ///
+    /// - `deviceOs` (eq, ne, in, nin)
+    ///
+    /// - `activationAttempts` (eq, ne, gt, ge, lt, le)
+    ///
+    /// - `createdDate` (gt, ge, lt, le, eq, ne)
+    ///
+    /// - `updatedDate` (gt, ge, lt, le, eq, ne)
+    ///
+    /// - `lastHealthCheck` (gt, ge, lt, le, eq, ne)
+    ///
+    /// - `activationExpiry` (gt, ge, lt, le, eq, ne). This filter corresponds to the `activationCodeExpiry` response field.
+    ///
+    /// - `paypointId` (eq, ne)
+    ///
+    /// - `paypointDba` (eq, ne, ct, nct)
+    ///
+    /// - `paypointLegal` (eq, ne, ct, nct)
+    ///
+    /// - `paypointEntry` (eq, ne, ct, nct)
+    ///
+    /// - `externalPaypointId` (eq, ne, ct, nct)
+    ///
+    /// - `parentOrgId` (eq, ne)
+    ///
+    /// - `parentOrgName` (eq, ne, ct, nct)
+    ///
+    ///
+    /// **List of comparison operators accepted:**
+    ///
+    /// - `eq` or empty => equal
+    ///
+    /// - `gt` => greater than
+    ///
+    /// - `ge` => greater or equal
+    ///
+    /// - `lt` => less than
+    ///
+    /// - `le` => less or equal
+    ///
+    /// - `ne` => not equal
+    ///
+    /// - `ct` => contains
+    ///
+    /// - `nct` => not contains
+    ///
+    /// - `in` => inside array
+    ///
+    /// - `nin` => not inside array
+    /// * `sort_by` - The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn list_devices_org(
+        &self,
+        org_id: i64,
+        request: &ListDevicesOrgQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<QueryDeviceResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Query/devices/org/{}", org_id),
+                None,
+                QueryBuilder::new()
+                    .serialize("exportFormat", request.export_format.clone())
+                    .int("fromRecord", request.from_record.clone())
+                    .int("limitRecord", request.limit_record.clone())
+                    .serialize("parameters", request.parameters.clone())
+                    .string("sortBy", request.sort_by.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
     /// Returns a list of all reports generated in the last 60 days for a single entrypoint. Use filters to limit results.
     ///
     /// # Arguments
@@ -3310,6 +3565,7 @@ impl QueryClient {
     /// - `orgName` (ne, eq, ct, nct)
     /// - `externalPaypointId` (ct, nct, eq, ne)
     /// - `paypointId` (in, nin, eq, ne)
+    /// - `cardType` (eq)
     ///
     /// List of comparison accepted - enclosed between parentheses:
     ///
@@ -3392,6 +3648,7 @@ impl QueryClient {
     /// - `orgName` (ne, eq, ct, nct)
     /// - `externalPaypointId` (ct, nct, eq, ne)
     /// - `paypointId` (in, nin, eq, ne)
+    /// - `cardType` (eq)
     ///
     /// List of comparison accepted - enclosed between parentheses:
     ///

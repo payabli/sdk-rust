@@ -17,6 +17,7 @@
 //! - **Import**
 //! - **Invoice**
 //! - **LineItem**
+//! - **Management**
 //! - **MoneyIn**
 //! - **MoneyOut**
 //! - **Notification**
@@ -50,6 +51,7 @@ pub mod hosted_payment_pages;
 pub mod import;
 pub mod invoice;
 pub mod line_item;
+pub mod management;
 pub mod money_in;
 pub mod money_out;
 pub mod money_out_types;
@@ -85,6 +87,7 @@ pub struct ApiClient {
     pub import: ImportClient,
     pub invoice: InvoiceClient,
     pub line_item: LineItemClient,
+    pub management: ManagementClient,
     pub money_in: MoneyInClient,
     pub money_out: MoneyOutClient,
     pub notification: NotificationClient,
@@ -121,6 +124,7 @@ impl ApiClient {
             import: ImportClient::new(config.clone())?,
             invoice: InvoiceClient::new(config.clone())?,
             line_item: LineItemClient::new(config.clone())?,
+            management: ManagementClient::new(config.clone())?,
             money_in: MoneyInClient::new(config.clone())?,
             money_out: MoneyOutClient::new(config.clone())?,
             notification: NotificationClient::new(config.clone())?,
@@ -155,6 +159,7 @@ pub use hosted_payment_pages::HostedPaymentPagesClient;
 pub use import::ImportClient;
 pub use invoice::InvoiceClient;
 pub use line_item::LineItemClient;
+pub use management::ManagementClient;
 pub use money_in::MoneyInClient;
 pub use money_out::MoneyOutClient;
 pub use money_out_types::MoneyOutTypesClient;

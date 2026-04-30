@@ -3288,6 +3288,37 @@
       }
     },
     {
+      "id": "21a04719-f19d-4bbe-a6c2-483a1dd1053a",
+      "name": "Verify bank account details - default",
+      "request": {
+        "urlPathTemplate": "/Management/verifyAccountDetails/{entry}",
+        "method": "POST",
+        "pathParameters": {
+          "entry": {
+            "equalTo": "entry752"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"isSuccess\": true,\n  \"responseText\": \"Success\",\n  \"responseData\": {\n    \"aba\": \"122105278\",\n    \"accountNumber\": \"0000000016\",\n    \"isValid\": true,\n    \"errorMessage\": null,\n    \"verificationResponse\": \"Pass\",\n    \"responseCode\": \"2\",\n    \"responseValue\": \"CA11\",\n    \"responseDescription\": \"Customer authentication passed gAuthenticate.\",\n    \"bankName\": null,\n    \"reportedAccountType\": null,\n    \"accountAddedDate\": null,\n    \"accountLastUpdatedDate\": null,\n    \"accountClosedDate\": null\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "21a04719-f19d-4bbe-a6c2-483a1dd1053a",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "e2a6c78e-efb0-4af2-a697-b6a1ecdb8bf9",
       "name": "Authorize card transaction - default",
       "request": {
@@ -6136,6 +6167,90 @@
       }
     },
     {
+      "id": "d541b0f7-287c-46d9-85a3-2b416c3bdc30",
+      "name": "Get list of devices for a paypoint - default",
+      "request": {
+        "urlPathTemplate": "/Query/devices/{entry}",
+        "method": "GET",
+        "pathParameters": {
+          "entry": {
+            "equalTo": "8cfec329267"
+          }
+        },
+        "queryParameters": {
+          "fromRecord": {
+            "equalTo": "0"
+          },
+          "limitRecord": {
+            "equalTo": "20"
+          },
+          "sortBy": {
+            "equalTo": "desc(createdAt)"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"Summary\": {\n    \"pageIdentifier\": null,\n    \"pageSize\": 20,\n    \"totalAmount\": 0,\n    \"totalNetAmount\": 0,\n    \"totalPages\": 2,\n    \"totalRecords\": 28\n  },\n  \"Records\": [\n    {\n      \"deviceId\": \"DEV-A1B2C3D4\",\n      \"idCloud\": 142,\n      \"description\": \"Front Counter Terminal\",\n      \"serialNumber\": \"SN-90210-XR\",\n      \"friendlyName\": \"Front Counter Terminal\",\n      \"make\": \"Ingenico\",\n      \"model\": \"LK2500\",\n      \"deviceType\": 1,\n      \"deviceStatus\": 1,\n      \"deviceOs\": null,\n      \"macAddress\": \"1A2B3C4D5E6F\",\n      \"lastHealthCheck\": \"2026-04-09T14:49:42Z\",\n      \"registrationCode\": \"REG-A1B2C3D4\",\n      \"activationAttempts\": 0,\n      \"activationCodeExpiry\": \"2026-04-09T14:49:42Z\",\n      \"createdAt\": \"2026-04-09T01:14:37Z\",\n      \"updatedAt\": \"2026-04-09T14:49:42Z\",\n      \"paypointId\": 12345,\n      \"paypointDba\": \"Gruzya Adventure Outfitters\",\n      \"paypointLegal\": \"Gruzya Adventure Outfitters, LLC\",\n      \"paypointEntry\": \"8cfec329267\",\n      \"externalPaypointId\": \"GRUZYA-01\",\n      \"parentOrgId\": 100,\n      \"parentOrgName\": \"Example Corp\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "d541b0f7-287c-46d9-85a3-2b416c3bdc30",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "010384a1-78f2-4d64-a3f1-a89b46841539",
+      "name": "Get list of devices for an org - default",
+      "request": {
+        "urlPathTemplate": "/Query/devices/org/{orgId}",
+        "method": "GET",
+        "pathParameters": {
+          "orgId": {
+            "equalTo": "100"
+          }
+        },
+        "queryParameters": {
+          "fromRecord": {
+            "equalTo": "0"
+          },
+          "limitRecord": {
+            "equalTo": "20"
+          },
+          "sortBy": {
+            "equalTo": "desc(createdAt)"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"Summary\": {\n    \"pageIdentifier\": null,\n    \"pageSize\": 20,\n    \"totalAmount\": 0,\n    \"totalNetAmount\": 0,\n    \"totalPages\": 2,\n    \"totalRecords\": 28\n  },\n  \"Records\": [\n    {\n      \"deviceId\": \"DEV-A1B2C3D4\",\n      \"idCloud\": 142,\n      \"description\": \"Front Counter Terminal\",\n      \"serialNumber\": \"SN-90210-XR\",\n      \"friendlyName\": \"Front Counter Terminal\",\n      \"make\": \"Ingenico\",\n      \"model\": \"LK2500\",\n      \"deviceType\": 1,\n      \"deviceStatus\": 1,\n      \"deviceOs\": null,\n      \"macAddress\": \"1A2B3C4D5E6F\",\n      \"lastHealthCheck\": \"2026-04-09T14:49:42Z\",\n      \"registrationCode\": \"REG-A1B2C3D4\",\n      \"activationAttempts\": 0,\n      \"activationCodeExpiry\": \"2026-04-09T14:49:42Z\",\n      \"createdAt\": \"2026-04-09T01:14:37Z\",\n      \"updatedAt\": \"2026-04-09T14:49:42Z\",\n      \"paypointId\": 12345,\n      \"paypointDba\": \"Gruzya Adventure Outfitters\",\n      \"paypointLegal\": \"Gruzya Adventure Outfitters, LLC\",\n      \"paypointEntry\": \"8cfec329267\",\n      \"externalPaypointId\": \"GRUZYA-01\",\n      \"parentOrgId\": 100,\n      \"parentOrgName\": \"Example Corp\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "010384a1-78f2-4d64-a3f1-a89b46841539",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "133859f6-adbb-4c38-a8e6-1c88d2708f53",
       "name": "Get list of reports generated in last 60 days for entrypoint - default",
       "request": {
@@ -7232,7 +7347,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"Records\": [\n    {\n      \"vcardSent\": true,\n      \"cardToken\": \"vcrd_5Ty8NrBzXjKuqHm9DwElfP\",\n      \"cardNumber\": \"44XX XXXX XXXX 1234\",\n      \"cvc\": \"XXX\",\n      \"expirationDate\": \"2025-12\",\n      \"status\": \"Active\",\n      \"amount\": 500,\n      \"currentBalance\": 375.25,\n      \"expenseLimit\": 100,\n      \"expenseLimitPeriod\": \"monthly\",\n      \"maxNumberOfUses\": 10,\n      \"currentNumberOfUses\": 3,\n      \"exactAmount\": false,\n      \"mcc\": \"5812\",\n      \"tcc\": \"T01\",\n      \"misc1\": \"Invoice #12345\",\n      \"misc2\": \"Project: Office Supplies\",\n      \"dateCreated\": \"2023-01-15T09:30:00Z\",\n      \"dateModified\": \"2023-02-20T14:15:22Z\",\n      \"associatedVendor\": {\n        \"VendorNumber\": \"V-12345\",\n        \"Name1\": \"Office Supply Co.\",\n        \"EIN\": \"XXXXX6789\",\n        \"Email\": \"billing@officesupply.example.com\",\n        \"VendorId\": 1542\n      },\n      \"associatedCustomer\": {\n        \"firstname\": \"Acme\",\n        \"lastname\": \"Corporation\"\n      },\n      \"PaypointDbaname\": \"Global Factory LLC\",\n      \"PaypointLegalname\": \"Global Factory LLC\",\n      \"PaypointEntryname\": \"4872acb376a\",\n      \"externalPaypointID\": \"pay-10\",\n      \"ParentOrgName\": \"SupplyPro\",\n      \"paypointId\": 236\n    }\n  ],\n  \"Summary\": {\n    \"pageIdentifier\": \"XXXXXXXXXXXXXX\",\n    \"pageSize\": 20,\n    \"totalAmount\": 2500,\n    \"totalactive\": 5,\n    \"totalamounteactive\": 2500,\n    \"totalbalanceactive\": 1875.25,\n    \"totalPages\": 1,\n    \"totalRecords\": 5\n  }\n}",
+        "body": "{\n  \"Records\": [\n    {\n      \"vcardSent\": true,\n      \"cardType\": 0,\n      \"cardToken\": \"vcrd_5Ty8NrBzXjKuqHm9DwElfP\",\n      \"cardNumber\": \"44XX XXXX XXXX 1234\",\n      \"cvc\": \"XXX\",\n      \"expirationDate\": \"2025-12\",\n      \"status\": \"Active\",\n      \"amount\": 500,\n      \"currentBalance\": 375.25,\n      \"expenseLimit\": 100,\n      \"expenseLimitPeriod\": \"monthly\",\n      \"maxNumberOfUses\": 10,\n      \"currentNumberOfUses\": 3,\n      \"exactAmount\": false,\n      \"mcc\": \"5812\",\n      \"tcc\": \"T01\",\n      \"misc1\": \"Invoice #12345\",\n      \"misc2\": \"Project: Office Supplies\",\n      \"dateCreated\": \"2023-01-15T09:30:00Z\",\n      \"dateModified\": \"2023-02-20T14:15:22Z\",\n      \"associatedVendor\": {\n        \"VendorNumber\": \"V-12345\",\n        \"Name1\": \"Office Supply Co.\",\n        \"EIN\": \"XXXXX6789\",\n        \"Email\": \"billing@officesupply.example.com\",\n        \"VendorId\": 1542\n      },\n      \"associatedCustomer\": {\n        \"firstname\": \"Acme\",\n        \"lastname\": \"Corporation\"\n      },\n      \"PaypointDbaname\": \"Global Factory LLC\",\n      \"PaypointLegalname\": \"Global Factory LLC\",\n      \"PaypointEntryname\": \"4872acb376a\",\n      \"externalPaypointID\": \"pay-10\",\n      \"ParentOrgName\": \"SupplyPro\",\n      \"paypointId\": 236\n    }\n  ],\n  \"Summary\": {\n    \"pageIdentifier\": \"XXXXXXXXXXXXXX\",\n    \"pageSize\": 20,\n    \"totalAmount\": 2500,\n    \"totalactive\": 5,\n    \"totalamounteactive\": 2500,\n    \"totalbalanceactive\": 1875.25,\n    \"totalPages\": 1,\n    \"totalRecords\": 5\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -7274,7 +7389,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"Records\": [\n    {\n      \"vcardSent\": true,\n      \"cardToken\": \"vcrd_5Ty8NrBzXjKuqHm9DwElfP\",\n      \"cardNumber\": \"44XX XXXX XXXX 1234\",\n      \"cvc\": \"XXX\",\n      \"expirationDate\": \"2025-12\",\n      \"status\": \"Active\",\n      \"amount\": 500,\n      \"currentBalance\": 375.25,\n      \"expenseLimit\": 100,\n      \"expenseLimitPeriod\": \"monthly\",\n      \"maxNumberOfUses\": 10,\n      \"currentNumberOfUses\": 3,\n      \"exactAmount\": false,\n      \"mcc\": \"5812\",\n      \"tcc\": \"T01\",\n      \"misc1\": \"Invoice #12345\",\n      \"misc2\": \"Project: Office Supplies\",\n      \"dateCreated\": \"2023-01-15T09:30:00Z\",\n      \"dateModified\": \"2023-02-20T14:15:22Z\",\n      \"associatedVendor\": {\n        \"VendorNumber\": \"V-12345\",\n        \"Name1\": \"Office Supply Co.\",\n        \"EIN\": \"XXXXX6789\",\n        \"Email\": \"billing@officesupply.example.com\",\n        \"VendorId\": 1542\n      },\n      \"associatedCustomer\": {\n        \"firstname\": \"Acme\",\n        \"lastname\": \"Corporation\"\n      },\n      \"PaypointDbaname\": \"Global Factory LLC\",\n      \"PaypointLegalname\": \"Global Factory LLC\",\n      \"PaypointEntryname\": \"4872acb376a\",\n      \"externalPaypointID\": \"pay-10\",\n      \"ParentOrgName\": \"SupplyPro\",\n      \"paypointId\": 236\n    }\n  ],\n  \"Summary\": {\n    \"pageIdentifier\": \"XXXXXXXXXXXXXX\",\n    \"pageSize\": 20,\n    \"totalAmount\": 2500,\n    \"totalactive\": 5,\n    \"totalamounteactive\": 2500,\n    \"totalbalanceactive\": 1875.25,\n    \"totalPages\": 1,\n    \"totalRecords\": 5\n  }\n}",
+        "body": "{\n  \"Records\": [\n    {\n      \"vcardSent\": true,\n      \"cardType\": 0,\n      \"cardToken\": \"vcrd_5Ty8NrBzXjKuqHm9DwElfP\",\n      \"cardNumber\": \"44XX XXXX XXXX 1234\",\n      \"cvc\": \"XXX\",\n      \"expirationDate\": \"2025-12\",\n      \"status\": \"Active\",\n      \"amount\": 500,\n      \"currentBalance\": 375.25,\n      \"expenseLimit\": 100,\n      \"expenseLimitPeriod\": \"monthly\",\n      \"maxNumberOfUses\": 10,\n      \"currentNumberOfUses\": 3,\n      \"exactAmount\": false,\n      \"mcc\": \"5812\",\n      \"tcc\": \"T01\",\n      \"misc1\": \"Invoice #12345\",\n      \"misc2\": \"Project: Office Supplies\",\n      \"dateCreated\": \"2023-01-15T09:30:00Z\",\n      \"dateModified\": \"2023-02-20T14:15:22Z\",\n      \"associatedVendor\": {\n        \"VendorNumber\": \"V-12345\",\n        \"Name1\": \"Office Supply Co.\",\n        \"EIN\": \"XXXXX6789\",\n        \"Email\": \"billing@officesupply.example.com\",\n        \"VendorId\": 1542\n      },\n      \"associatedCustomer\": {\n        \"firstname\": \"Acme\",\n        \"lastname\": \"Corporation\"\n      },\n      \"PaypointDbaname\": \"Global Factory LLC\",\n      \"PaypointLegalname\": \"Global Factory LLC\",\n      \"PaypointEntryname\": \"4872acb376a\",\n      \"externalPaypointID\": \"pay-10\",\n      \"ParentOrgName\": \"SupplyPro\",\n      \"paypointId\": 236\n    }\n  ],\n  \"Summary\": {\n    \"pageIdentifier\": \"XXXXXXXXXXXXXX\",\n    \"pageSize\": 20,\n    \"totalAmount\": 2500,\n    \"totalactive\": 5,\n    \"totalamounteactive\": 2500,\n    \"totalbalanceactive\": 1875.25,\n    \"totalPages\": 1,\n    \"totalRecords\": 5\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -8449,6 +8564,6 @@
     }
   ],
   "meta": {
-    "total": 243
+    "total": 246
   }
 }

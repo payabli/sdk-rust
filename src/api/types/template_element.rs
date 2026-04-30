@@ -15,6 +15,8 @@ pub struct TemplateElement {
     pub value: Option<ValueTemplates>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub visible: Option<Visible>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub required: Option<RequiredElement>,
 }
 
 impl TemplateElement {
@@ -31,6 +33,7 @@ pub struct TemplateElementBuilder {
     read_only: Option<ReadOnly>,
     value: Option<ValueTemplates>,
     visible: Option<Visible>,
+    required: Option<RequiredElement>,
 }
 
 impl TemplateElementBuilder {
@@ -59,6 +62,11 @@ impl TemplateElementBuilder {
         self
     }
 
+    pub fn required(mut self, value: RequiredElement) -> Self {
+        self.required = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`TemplateElement`].
     pub fn build(self) -> Result<TemplateElement, BuildError> {
         Ok(TemplateElement {
@@ -67,6 +75,7 @@ impl TemplateElementBuilder {
             read_only: self.read_only,
             value: self.value,
             visible: self.visible,
+            required: self.required,
         })
     }
 }
