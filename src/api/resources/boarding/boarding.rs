@@ -390,4 +390,55 @@ impl BoardingClient {
             )
             .await
     }
+
+    /// Creates a new boarding application linked to an existing paypoint as part of the multi-product boarding flow. Use this endpoint to add new services to a paypoint without creating a duplicate record. The system copies eligible business, contact, banking, and address data from the paypoint to the new application based on 1:1 field matching. The merchant only needs to provide fields that are specific to the new service. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-product) guide for the full flow.
+    ///
+    /// # Arguments
+    ///
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn add_service_to_paypoint_from_app(
+        &self,
+        request: &CreateApplicationFromPaypointRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<CreateApplicationFromPaypointResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                "Boarding/applications",
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Returns all boarding applications associated with a specific paypoint, including those created through the multi-product boarding flow. Use this endpoint to track underwriting progress across multiple service additions or to build reporting views. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-product) guide for the full flow.
+    ///
+    /// # Arguments
+    ///
+    /// * `paypoint_id` - ID of the paypoint to retrieve applications for.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn get_applications_by_paypoint_id(
+        &self,
+        paypoint_id: i64,
+        options: Option<RequestOptions>,
+    ) -> Result<QueryBoardingAppsListResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Boarding/applications/{}", paypoint_id),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
 }

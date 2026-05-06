@@ -1,5 +1,5 @@
 {
-  "cliVersion": "4.94.0",
+  "cliVersion": "5.7.9",
   "generatorName": "fernapi/fern-rust-sdk",
   "generatorVersion": "0.27.2",
   "generatorConfig": {
@@ -17,6 +17,6 @@
       }
     }
   },
-  "originGitCommit": "9269a0d8c7f3d0f1ef4be9605e8e32605cd6cae4",
-  "sdkVersion": "1.0.13"
+  "originGitCommit": "79e919583299a97df80fae84192f3486e233160b",
+  "sdkVersion": "1.0.14"
 }

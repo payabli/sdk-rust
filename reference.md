@@ -2175,6 +2175,135 @@ async fn main() {
 </dl>
 </details>
 
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">add_service_to_paypoint_from_app</a>(request: CreateApplicationFromPaypointRequest) -> Result&lt;CreateApplicationFromPaypointResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new boarding application linked to an existing paypoint as part of the multi-product boarding flow. Use this endpoint to add new services to a paypoint without creating a duplicate record. The system copies eligible business, contact, banking, and address data from the paypoint to the new application based on 1:1 field matching. The merchant only needs to provide fields that are specific to the new service. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-product) guide for the full flow.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .boarding
+        .add_service_to_paypoint_from_app(
+            &CreateApplicationFromPaypointRequest {
+                paypoint_id: 123,
+                template_id: 456,
+                recipient_email: "merchant@example.com".to_string(),
+                return_boarding_access_info_in_line: Some(true),
+                on_create: Some(vec!["submitApplication".to_string()]),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">get_applications_by_paypoint_id</a>(paypoint_id: String) -> Result&lt;QueryBoardingAppsListResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns all boarding applications associated with a specific paypoint, including those created through the multi-product boarding flow. Use this endpoint to track underwriting progress across multiple service additions or to build reporting views. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-product) guide for the full flow.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .boarding
+        .get_applications_by_paypoint_id(12345, None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**paypoint_id:** `String` — ID of the paypoint to retrieve applications for.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ChargeBacks
 <details><summary><code>client.charge_backs.<a href="/src/api/resources/charge_backs/client.rs">add_response</a>(id: String, request: ResponseChargeBack) -> Result&lt;AddResponseResponse, ApiError&gt;</code></summary>
 <dl>
@@ -12786,7 +12915,11 @@ async fn main() {
 <dl>
 <dd>
 
-Authorizes transaction for payout.  If you don't pass the `autoCapture` field with a value of `true`, authorized transactions aren't flagged for settlement until captured.  Use `referenceId` returned in the response to capture the transaction. 
+Authorizes a transaction for payout.
+
+If you don't pass `autoCapture` with a value of `true`, authorized transactions aren't flagged for settlement until captured. Use the `referenceId` returned in the response to capture the transaction.
+
+When `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transaction_approvedcaptured`](/developers/webhooks/payout-transaction-approved-captured) webhook event.
 </dd>
 </dl>
 </dd>

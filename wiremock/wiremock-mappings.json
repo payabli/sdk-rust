@@ -739,6 +739,63 @@
       }
     },
     {
+      "id": "e627c75f-541a-4618-8e54-644ebf377026",
+      "name": "Create multi-product boarding application - default",
+      "request": {
+        "urlPathTemplate": "/Boarding/applications",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"responseCode\": 1,\n  \"pageIdentifier\": null,\n  \"roomId\": 66594,\n  \"isSuccess\": true,\n  \"responseText\": \"Success\",\n  \"responseData\": {\n    \"appId\": 66594,\n    \"boardingLink\": \"https://boarding-sandbox.payabli.com/boarding/externalapp/load/10422?mode=25&email=merchant@example.com&referenceId=YpYNRPDOcGsm\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e627c75f-541a-4618-8e54-644ebf377026",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "d76b1d89-ff45-4c23-b817-3a692dc146a0",
+      "name": "Get multi-product boarding applications for a paypoint - default",
+      "request": {
+        "urlPathTemplate": "/Boarding/applications/{paypointId}",
+        "method": "GET",
+        "pathParameters": {
+          "paypointId": {
+            "equalTo": "12345"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"Records\": [\n    {\n      \"idApplication\": 68388,\n      \"orgId\": 3125,\n      \"dbaName\": \"Meadowbrook Phase II HOA A\",\n      \"legalName\": \"Meadowbrook Phase II HOA B\",\n      \"ein\": \"601907058\",\n      \"boardingStatus\": 7,\n      \"boardingSubStatus\": 0,\n      \"templateId\": 8233,\n      \"boardingLinkId\": 6344,\n      \"contactData\": [\n        {\n          \"contactName\": \"Gary Heaney\",\n          \"contactEmail\": \"hello@meadowbrookphaseii.com\",\n          \"contactTitle\": \"Human Group Designer\",\n          \"contactPhone\": \"7863078875\"\n        }\n      ],\n      \"generalEvents\": [\n        {\n          \"description\": \"Created\",\n          \"eventTime\": \"2026-03-17T18:56:39.8854072Z\"\n        },\n        {\n          \"description\": \"Linked to paypoint 6257\",\n          \"eventTime\": \"2026-03-17T18:56:39.885413Z\"\n        },\n        {\n          \"description\": \"Updated Status: 7, 0\",\n          \"eventTime\": \"2026-03-18T19:32:39.4012114Z\"\n        }\n      ]\n    }\n  ],\n  \"Summary\": {\n    \"pageIdentifier\": \"null\",\n    \"pageSize\": 0,\n    \"totalAmount\": 0,\n    \"totalNetAmount\": 0,\n    \"totalPages\": 0,\n    \"totalRecords\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "d76b1d89-ff45-4c23-b817-3a692dc146a0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "9c7fd5b5-7180-46f3-9e7a-389ccaa662f2",
       "name": "Add response to chargeback or return - default",
       "request": {
@@ -8564,6 +8621,6 @@
     }
   ],
   "meta": {
-    "total": 246
+    "total": 248
   }
 }

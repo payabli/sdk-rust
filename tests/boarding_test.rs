@@ -490,3 +490,63 @@ async fn test_boarding_update_application_with_wiremock() {
         .await
         .unwrap();
 }
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_boarding_add_service_to_paypoint_from_app_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .boarding
+        .add_service_to_paypoint_from_app(
+            &CreateApplicationFromPaypointRequest {
+                paypoint_id: 123,
+                template_id: 456,
+                recipient_email: "merchant@example.com".to_string(),
+                return_boarding_access_info_in_line: Some(true),
+                on_create: Some(vec!["submitApplication".to_string()]),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("POST", "/Boarding/applications", None, 1)
+        .await
+        .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_boarding_get_applications_by_paypoint_id_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .boarding
+        .get_applications_by_paypoint_id(12345, None)
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("GET", "/Boarding/applications/12345", None, 1)
+        .await
+        .unwrap();
+}
