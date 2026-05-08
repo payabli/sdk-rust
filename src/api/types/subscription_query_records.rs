@@ -33,7 +33,7 @@ pub struct SubscriptionQueryRecords {
     #[serde(rename = "IdSub")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub id_sub: Option<i64>,
-    #[serde(rename = "InvoiceData")]
+    #[serde(rename = "invoiceData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub invoice_data: Option<BillData>,
     /// The last time the subscription was processed.
