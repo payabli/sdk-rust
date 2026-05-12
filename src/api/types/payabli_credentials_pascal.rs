@@ -18,15 +18,23 @@ pub struct PayabliCredentialsPascal {
     pub max_ticket: Option<MaxTicket>,
     #[serde(rename = "CfeeFix")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub cfee_fix: Option<f64>,
     #[serde(rename = "CfeeFloat")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub cfee_float: Option<f64>,
     #[serde(rename = "CfeeMin")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub cfee_min: Option<f64>,
     #[serde(rename = "CfeeMax")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub cfee_max: Option<f64>,
     /// The identifier for the payment connector, matching the `accountId` of the linked bank account.
     #[serde(rename = "AccountId")]

@@ -27,13 +27,19 @@ pub struct VCardRecord {
     pub status: Option<String>,
     /// The vCard amount.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub amount: Option<f64>,
     /// The vCard's current balance.
     #[serde(rename = "currentBalance")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub current_balance: Option<f64>,
     #[serde(rename = "expenseLimit")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub expense_limit: Option<f64>,
     #[serde(rename = "expenseLimitPeriod")]
     #[serde(skip_serializing_if = "Option::is_none")]

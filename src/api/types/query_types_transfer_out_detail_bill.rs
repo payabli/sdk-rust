@@ -54,10 +54,14 @@ pub struct TransferOutDetailBill {
     pub identifier: Option<String>,
     /// Discount applied.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub discount: Option<f64>,
     /// Total amount of the bill.
     #[serde(rename = "totalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
 }
 

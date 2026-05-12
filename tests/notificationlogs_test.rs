@@ -13,6 +13,7 @@ async fn test_notificationlogs_search_notification_logs_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -43,7 +44,7 @@ async fn test_notificationlogs_search_notification_logs_with_wiremock() {
     wire_test_utils::verify_request_count(
         "POST",
         "/v2/notificationlogs",
-        Some(HashMap::from([("PageSize".to_string(), "20".to_string())])),
+        Some(HashMap::from([("PageSize".to_string(), json!("20"))])),
         1,
     )
     .await
@@ -61,6 +62,7 @@ async fn test_notificationlogs_get_notification_log_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -94,6 +96,7 @@ async fn test_notificationlogs_retry_notification_log_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -127,6 +130,7 @@ async fn test_notificationlogs_bulk_retry_notification_logs_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

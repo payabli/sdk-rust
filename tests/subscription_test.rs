@@ -13,6 +13,7 @@ async fn test_subscription_get_subscription_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.subscription.get_subscription(263, None).await;
@@ -35,6 +36,7 @@ async fn test_subscription_new_subscription_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -97,6 +99,7 @@ async fn test_subscription_remove_subscription_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.subscription.remove_subscription(396, None).await;
@@ -119,6 +122,7 @@ async fn test_subscription_update_subscription_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

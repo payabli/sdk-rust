@@ -1,11 +1,8 @@
 pub use crate::prelude::*;
 
-/// Query parameters for ListVendors
+/// Query parameters for ListVcardsTransactionsOrg
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
-pub struct ListVendorsQueryRequest {
-    #[serde(rename = "exportFormat")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub export_format: Option<ExportFormat>,
+pub struct ListVcardsTransactionsOrgQueryRequest {
     /// The number of records to skip before starting to collect the result set.
     #[serde(rename = "fromRecord")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -14,7 +11,8 @@ pub struct ListVendorsQueryRequest {
     #[serde(rename = "limitRecord")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub limit_record: Option<i64>,
-    /// Collection of field names, conditions, and values used to filter the query
+    /// Collection of field names, conditions, and values used to filter the query.
+    ///
     /// <Info>
     /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
     ///
@@ -22,37 +20,40 @@ pub struct ListVendorsQueryRequest {
     ///
     /// For example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/org/236?parameters=transactionAmount(gt)=100&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/org/236?transactionAmount(gt)=100&limitRecord=20
     /// </Info>
-    /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
     /// List of field names accepted:
-    /// - `method` (in, nin, eq, ne)
-    /// - `enrollmentStatus` (in,nin, eq, ne)
-    /// - `status` (in, nin, eq, ne)
-    /// - `vendorNumber` (ct, nct, eq, ne)
-    /// - `name` (ct, nct, eq, ne)
-    /// - `ein` (ct, nct, eq, ne)
-    /// - `phone` (ct, nct, eq, ne)
-    /// - `email` (ct, nct, eq, ne)
-    /// - `remitEmail` (ct, nct, eq, ne)
-    /// - `address` (ct, nct, eq, ne)
-    /// - `city` (ct, nct, eq, ne)
-    /// - `state` (ct, nct, eq, ne)
-    /// - `country` (ct, nct, eq, ne)
-    /// - `zip` (ct, nct, eq, ne)
+    ///
+    /// - `identifier` (eq, ne, ct, nct)
+    /// - `transactionType` (eq, ne, ct, nct)
+    /// - `transactionStatus` (eq, ne, ct, nct, in, nin)
+    /// - `transactionAmount` (eq, ne, gt, ge, lt, le, ct, nct)
+    /// - `transactionCreatedOn` (eq, ne, gt, ge, lt, le)
+    /// - `cardToken` (ct, nct, eq, ne)
+    /// - `lastFour` (ct, nct, eq, ne)
+    /// - `expirationDate` (ct, nct, eq, ne)
     /// - `mcc` (ct, nct, eq, ne)
-    /// - `locationCode` (ct, nct, eq, ne)
+    /// - `payoutId` (gt, lt, eq, ne)
+    /// - `customerId` (gt, lt, eq, ne)
+    /// - `vendorId` (gt, lt, eq, ne)
+    /// - `miscData1` (ct, nct, eq, ne)
+    /// - `miscData2` (ct, nct, eq, ne)
+    /// - `currentUses` (gt, ge, lt, le, eq, ne)
+    /// - `amount` (gt, ge, lt, le, eq, ne)
+    /// - `balance` (gt, ge, lt, le, eq, ne)
     /// - `paypointLegal` (ne, eq, ct, nct)
-    /// - `parentOrgId` (ne, eq, nin, in)
     /// - `paypointDba` (ne, eq, ct, nct)
-    /// - `orgName` (ne, eq, ct, nct)
+    /// - `orgName` (ne, eq, ct, nct, in, nin)
+    /// - `externalPaypointID` (ct, nct, eq, ne)
+    /// - `paypointId` (gt, lt, eq, ne)
     ///
     /// List of comparison accepted - enclosed between parentheses:
+    ///
     /// - eq or empty => equal
     /// - gt => greater than
     /// - ge => greater or equal
@@ -63,12 +64,6 @@ pub struct ListVendorsQueryRequest {
     /// - nct => not contains
     /// - in => inside array separated by "|"
     /// - nin => not inside array separated by "|"
-    ///
-    /// List of parameters accepted:
-    /// - limitRecord : max number of records for query (default="20", "0" or negative value for all)
-    /// - fromRecord : initial record in query
-    ///
-    /// Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00
     #[serde(skip_serializing_if = "Option::is_none")]
     pub parameters: Option<HashMap<String, Option<String>>>,
     /// The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
@@ -77,28 +72,22 @@ pub struct ListVendorsQueryRequest {
     pub sort_by: Option<String>,
 }
 
-impl ListVendorsQueryRequest {
-    pub fn builder() -> ListVendorsQueryRequestBuilder {
-        <ListVendorsQueryRequestBuilder as Default>::default()
+impl ListVcardsTransactionsOrgQueryRequest {
+    pub fn builder() -> ListVcardsTransactionsOrgQueryRequestBuilder {
+        <ListVcardsTransactionsOrgQueryRequestBuilder as Default>::default()
     }
 }
 
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
-pub struct ListVendorsQueryRequestBuilder {
-    export_format: Option<ExportFormat>,
+pub struct ListVcardsTransactionsOrgQueryRequestBuilder {
     from_record: Option<i64>,
     limit_record: Option<i64>,
     parameters: Option<HashMap<String, Option<String>>>,
     sort_by: Option<String>,
 }
 
-impl ListVendorsQueryRequestBuilder {
-    pub fn export_format(mut self, value: ExportFormat) -> Self {
-        self.export_format = Some(value);
-        self
-    }
-
+impl ListVcardsTransactionsOrgQueryRequestBuilder {
     pub fn from_record(mut self, value: i64) -> Self {
         self.from_record = Some(value);
         self
@@ -119,10 +108,9 @@ impl ListVendorsQueryRequestBuilder {
         self
     }
 
-    /// Consumes the builder and constructs a [`ListVendorsQueryRequest`].
-    pub fn build(self) -> Result<ListVendorsQueryRequest, BuildError> {
-        Ok(ListVendorsQueryRequest {
-            export_format: self.export_format,
+    /// Consumes the builder and constructs a [`ListVcardsTransactionsOrgQueryRequest`].
+    pub fn build(self) -> Result<ListVcardsTransactionsOrgQueryRequest, BuildError> {
+        Ok(ListVcardsTransactionsOrgQueryRequest {
             from_record: self.from_record,
             limit_record: self.limit_record,
             parameters: self.parameters,

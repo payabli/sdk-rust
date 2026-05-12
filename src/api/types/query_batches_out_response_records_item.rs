@@ -4,6 +4,8 @@ pub use crate::prelude::*;
 pub struct QueryBatchesOutResponseRecordsItem {
     #[serde(rename = "AchAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub ach_amount: Option<f64>,
     #[serde(rename = "AchRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -17,9 +19,13 @@ pub struct QueryBatchesOutResponseRecordsItem {
     /// The amount of the batch.
     #[serde(rename = "BatchAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_amount: Option<f64>,
     #[serde(rename = "BatchCancelledAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_cancelled_amount: Option<f64>,
     #[serde(rename = "BatchCancelledRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -35,18 +41,24 @@ pub struct QueryBatchesOutResponseRecordsItem {
     pub batch_number: Option<BatchNumber>,
     #[serde(rename = "BatchPaidAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_paid_amount: Option<f64>,
     #[serde(rename = "BatchPaidRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_paid_records: Option<i64>,
     #[serde(rename = "BatchProcessedAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_processed_amount: Option<f64>,
     #[serde(rename = "BatchProcessedRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_processed_records: Option<i64>,
     #[serde(rename = "BatchProcessingAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_processing_amount: Option<f64>,
     #[serde(rename = "BatchProcessingRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -65,6 +77,8 @@ pub struct QueryBatchesOutResponseRecordsItem {
     pub batch_status_text: Option<String>,
     #[serde(rename = "CardAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub card_amount: Option<f64>,
     #[serde(rename = "CardRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -77,6 +91,8 @@ pub struct QueryBatchesOutResponseRecordsItem {
     pub card_status_text: Option<String>,
     #[serde(rename = "CheckAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub check_amount: Option<f64>,
     #[serde(rename = "CheckRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -115,6 +131,8 @@ pub struct QueryBatchesOutResponseRecordsItem {
     pub paypoint_name: Option<String>,
     #[serde(rename = "VcardAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub vcard_amount: Option<f64>,
     #[serde(rename = "VcardRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -127,6 +145,8 @@ pub struct QueryBatchesOutResponseRecordsItem {
     pub vcard_status_text: Option<String>,
     #[serde(rename = "WireAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub wire_amount: Option<f64>,
     #[serde(rename = "WireRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -13,6 +13,7 @@ async fn test_user_add_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -43,6 +44,7 @@ async fn test_user_auth_refresh_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.user.auth_refresh_user(None).await;
@@ -65,6 +67,7 @@ async fn test_user_auth_reset_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -95,6 +98,7 @@ async fn test_user_auth_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -126,6 +130,7 @@ async fn test_user_change_psw_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -156,6 +161,7 @@ async fn test_user_delete_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.user.delete_user(1000000, None).await;
@@ -178,6 +184,7 @@ async fn test_user_edit_mfa_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -209,6 +216,7 @@ async fn test_user_edit_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -240,6 +248,7 @@ async fn test_user_get_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -259,10 +268,7 @@ async fn test_user_get_user_with_wiremock() {
     wire_test_utils::verify_request_count(
         "GET",
         "/User/1000000",
-        Some(HashMap::from([(
-            "entry".to_string(),
-            "478ae1234".to_string(),
-        )])),
+        Some(HashMap::from([("entry".to_string(), json!("478ae1234"))])),
         1,
     )
     .await
@@ -280,6 +286,7 @@ async fn test_user_logout_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.user.logout_user(None).await;
@@ -302,6 +309,7 @@ async fn test_user_resend_mfa_code_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -327,6 +335,7 @@ async fn test_user_validate_mfa_user_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

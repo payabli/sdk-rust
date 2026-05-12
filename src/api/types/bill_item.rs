@@ -12,6 +12,7 @@ pub struct BillItem {
     /// Item or product price per unit.
     #[serde(rename = "itemCost")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub item_cost: f64,
     #[serde(rename = "itemDescription")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -33,14 +34,20 @@ pub struct BillItem {
     /// Tax amount applied to item or product.
     #[serde(rename = "itemTaxAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub item_tax_amount: Option<f64>,
     /// Tax rate applied to item or product.
     #[serde(rename = "itemTaxRate")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub item_tax_rate: Option<f64>,
     /// Total amount in item or product.
     #[serde(rename = "itemTotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub item_total_amount: Option<f64>,
     #[serde(rename = "itemUnitOfMeasure")]
     #[serde(skip_serializing_if = "Option::is_none")]

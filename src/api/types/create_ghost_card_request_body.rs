@@ -9,6 +9,7 @@ pub struct CreateGhostCardRequestBody {
     /// Spending limit for the card. Must be greater than `0` and can't exceed the paypoint's configured payout credit limit.
     #[serde(rename = "expenseLimit")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub expense_limit: f64,
     /// Requested expiration date for the card. If not provided, defaults to 30 days from creation.
     #[serde(rename = "expirationDate")]
@@ -16,6 +17,7 @@ pub struct CreateGhostCardRequestBody {
     pub expiration_date: Option<String>,
     /// Initial load amount for the card.
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub amount: f64,
     /// Maximum number of times the card can be used. Ignored and set to `1` when `exactAmount` is `true`.
     #[serde(rename = "maxNumberOfUses")]
@@ -44,6 +46,7 @@ pub struct CreateGhostCardRequestBody {
     /// Maximum total spend allowed per day.
     #[serde(rename = "dailyAmountLimit")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub daily_amount_limit: f64,
     /// Maximum spend allowed per single transaction.
     #[serde(rename = "transactionAmountLimit")]

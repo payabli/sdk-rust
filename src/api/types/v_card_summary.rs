@@ -11,19 +11,27 @@ pub struct VCardSummary {
     /// Total amount for the records.
     #[serde(rename = "totalAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
+    /// Total net amount for the records.
+    #[serde(rename = "totalNetAmount")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
+    pub total_net_amount: Option<f64>,
     /// Total number of active vCards.
     #[serde(default)]
     pub totalactive: i64,
     /// Total amount of active vCards.
     #[serde(default)]
-    pub totalamounteactive: f64,
+    #[serde(with = "crate::core::number_serializers")]
+    pub totalamountactive: f64,
     /// Total balance of active vCards.
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub totalbalanceactive: f64,
-    #[serde(rename = "pageIdentifier")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub page_identifier: Option<PageIdentifier>,
+    pub pageidentifier: Option<PageIdentifier>,
     #[serde(rename = "pageSize")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub page_size: Option<Pagesize>,
@@ -41,10 +49,11 @@ pub struct VCardSummaryBuilder {
     total_pages: Option<Totalpages>,
     total_records: Option<Totalrecords>,
     total_amount: Option<f64>,
+    total_net_amount: Option<f64>,
     totalactive: Option<i64>,
-    totalamounteactive: Option<f64>,
+    totalamountactive: Option<f64>,
     totalbalanceactive: Option<f64>,
-    page_identifier: Option<PageIdentifier>,
+    pageidentifier: Option<PageIdentifier>,
     page_size: Option<Pagesize>,
 }
 
@@ -64,13 +73,18 @@ impl VCardSummaryBuilder {
         self
     }
 
+    pub fn total_net_amount(mut self, value: f64) -> Self {
+        self.total_net_amount = Some(value);
+        self
+    }
+
     pub fn totalactive(mut self, value: i64) -> Self {
         self.totalactive = Some(value);
         self
     }
 
-    pub fn totalamounteactive(mut self, value: f64) -> Self {
-        self.totalamounteactive = Some(value);
+    pub fn totalamountactive(mut self, value: f64) -> Self {
+        self.totalamountactive = Some(value);
         self
     }
 
@@ -79,8 +93,8 @@ impl VCardSummaryBuilder {
         self
     }
 
-    pub fn page_identifier(mut self, value: PageIdentifier) -> Self {
-        self.page_identifier = Some(value);
+    pub fn pageidentifier(mut self, value: PageIdentifier) -> Self {
+        self.pageidentifier = Some(value);
         self
     }
 
@@ -95,7 +109,7 @@ impl VCardSummaryBuilder {
     /// - [`total_records`](VCardSummaryBuilder::total_records)
     /// - [`total_amount`](VCardSummaryBuilder::total_amount)
     /// - [`totalactive`](VCardSummaryBuilder::totalactive)
-    /// - [`totalamounteactive`](VCardSummaryBuilder::totalamounteactive)
+    /// - [`totalamountactive`](VCardSummaryBuilder::totalamountactive)
     /// - [`totalbalanceactive`](VCardSummaryBuilder::totalbalanceactive)
     pub fn build(self) -> Result<VCardSummary, BuildError> {
         Ok(VCardSummary {
@@ -108,16 +122,17 @@ impl VCardSummaryBuilder {
             total_amount: self
                 .total_amount
                 .ok_or_else(|| BuildError::missing_field("total_amount"))?,
+            total_net_amount: self.total_net_amount,
             totalactive: self
                 .totalactive
                 .ok_or_else(|| BuildError::missing_field("totalactive"))?,
-            totalamounteactive: self
-                .totalamounteactive
-                .ok_or_else(|| BuildError::missing_field("totalamounteactive"))?,
+            totalamountactive: self
+                .totalamountactive
+                .ok_or_else(|| BuildError::missing_field("totalamountactive"))?,
             totalbalanceactive: self
                 .totalbalanceactive
                 .ok_or_else(|| BuildError::missing_field("totalbalanceactive"))?,
-            page_identifier: self.page_identifier,
+            pageidentifier: self.pageidentifier,
             page_size: self.page_size,
         })
     }

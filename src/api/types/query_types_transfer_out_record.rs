@@ -34,6 +34,8 @@ pub struct TransferOutRecord {
     /// The net amount of the batch.
     #[serde(rename = "batchNetAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_net_amount: Option<f64>,
     /// The status of the batch.
     #[serde(rename = "batchStatus")]
@@ -95,42 +97,62 @@ pub struct TransferOutRecord {
     /// The gross amount of the transfer.
     #[serde(rename = "grossAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub gross_amount: Option<f64>,
     /// The chargeback amount deducted from the transfer.
     #[serde(rename = "chargeBackAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub charge_back_amount: Option<f64>,
     /// The returned amount deducted from the transfer.
     #[serde(rename = "returnedAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub returned_amount: Option<f64>,
     /// The amount being held.
     #[serde(rename = "holdAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub hold_amount: Option<f64>,
     /// The amount that has been released.
     #[serde(rename = "releasedAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub released_amount: Option<f64>,
     /// The billing fees amount.
     #[serde(rename = "billingFeesAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub billing_fees_amount: Option<f64>,
     /// The third party paid amount.
     #[serde(rename = "thirdPartyPaidAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub third_party_paid_amount: Option<f64>,
     /// The adjustments amount.
     #[serde(rename = "adjustmentsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub adjustments_amount: Option<f64>,
     /// The net transfer amount after all deductions.
     #[serde(rename = "netTransferAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub net_transfer_amount: Option<f64>,
     /// The split funding amount.
     #[serde(rename = "splitAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub split_amount: Option<f64>,
     /// List of events associated with the transfer.
     #[serde(rename = "eventsData")]

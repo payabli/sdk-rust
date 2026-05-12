@@ -5,57 +5,91 @@ pub struct QueryTransferSummary {
     /// ACH returns deducted from the batch.
     #[serde(rename = "achReturns")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub ach_returns: Option<f64>,
     /// Corrections applied to Billing & Fees charges.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub adjustments: Option<f64>,
     /// Charges applied for transactions and services.
     #[serde(rename = "billingFees")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub billing_fees: Option<f64>,
     /// Chargebacks deducted from batch.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub chargebacks: Option<f64>,
     /// The gross batch amount before deductions.
     #[serde(rename = "grossTransferAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub gross_transfer_amount: Option<f64>,
     /// Previously held funds that have been released after a risk review.
     #[serde(rename = "releaseAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub release_amount: Option<f64>,
     /// Payments captured in the batch cycle that are deposited separately. For example,  checks or cash payments recorded in the batch but not deposited via Payabli,  or card brands making a direct transfer in certain situations.
     #[serde(rename = "thirdPartyPaid")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub third_party_paid: Option<f64>,
     /// The gross batch amount minus service fees.
     #[serde(rename = "totalNetAmountTransfer")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_net_amount_transfer: Option<f64>,
     /// The sum of each splitFundingAmount of each record in the transfer.
     #[serde(rename = "splitAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub split_amount: Option<f64>,
     /// Service fees are any pass-through fees charged to the customer at the time of payment.  These aren't transferred to the merchant when the batch is transferred and funded.
     #[serde(rename = "serviceFees")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub service_fees: Option<f64>,
     /// The net batch amount is the gross batch amount minus any returns, refunds,
     /// billing and fees items, chargebacks, adjustments, and third party payments.
     #[serde(rename = "netBatchAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub net_batch_amount: Option<f64>,
     /// The transfer amount is the net batch amount plus or minus any returns, refunds,  billing and fees items, chargebacks, adjustments, and third party payments.  This is the amount from the batch that is transferred to the merchant bank account.
     #[serde(rename = "transferAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub transfer_amount: Option<f64>,
     /// Refunds deducted from batch.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub refunds: Option<f64>,
     /// Funds being held for fraud or risk concerns.
     #[serde(rename = "heldAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub held_amount: Option<f64>,
+    /// Total amount rejected by card networks or issuing banks after authorization or settling. This value is the sum of all rejected amounts for transactions in the transfer.
+    #[serde(rename = "cardRejectedAmount")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
+    pub card_rejected_amount: Option<f64>,
     /// Number of records in the response.
     #[serde(rename = "totalRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -63,10 +97,14 @@ pub struct QueryTransferSummary {
     /// The total sum of the transfers in the response.
     #[serde(rename = "totalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// The total sum of the transfers in the response.
     #[serde(rename = "totalNetAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_net_amount: Option<f64>,
     /// Number of pages in the response.
     #[serde(rename = "totalPages")]
@@ -104,6 +142,7 @@ pub struct QueryTransferSummaryBuilder {
     transfer_amount: Option<f64>,
     refunds: Option<f64>,
     held_amount: Option<f64>,
+    card_rejected_amount: Option<f64>,
     total_records: Option<Totalrecords>,
     total_amount: Option<f64>,
     total_net_amount: Option<f64>,
@@ -183,6 +222,11 @@ impl QueryTransferSummaryBuilder {
         self
     }
 
+    pub fn card_rejected_amount(mut self, value: f64) -> Self {
+        self.card_rejected_amount = Some(value);
+        self
+    }
+
     pub fn total_records(mut self, value: Totalrecords) -> Self {
         self.total_records = Some(value);
         self
@@ -230,6 +274,7 @@ impl QueryTransferSummaryBuilder {
             transfer_amount: self.transfer_amount,
             refunds: self.refunds,
             held_amount: self.held_amount,
+            card_rejected_amount: self.card_rejected_amount,
             total_records: self.total_records,
             total_amount: self.total_amount,
             total_net_amount: self.total_net_amount,

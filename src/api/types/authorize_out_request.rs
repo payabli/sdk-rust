@@ -5,15 +5,15 @@ pub use crate::prelude::*;
 pub struct AuthorizeOutRequest {
     /// When `true`, the authorization bypasses the requirement for unique bills, identified by vendor invoice number. This allows you to make more than one payout authorization for a bill, like a split payment.
     #[serde(rename = "allowDuplicatedBills")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub allow_duplicated_bills: Option<bool>,
     /// When `true`, Payabli won't automatically create a bill for this payout transaction.
     #[serde(rename = "doNotCreateBills")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub do_not_create_bills: Option<bool>,
     /// When `true`, the request creates a new vendor record, regardless of whether the vendor already exists.
     #[serde(rename = "forceVendorCreation")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub force_vendor_creation: Option<bool>,
     #[serde(default)]
     pub body: AuthorizePayoutBody,

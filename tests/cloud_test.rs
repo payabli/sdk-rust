@@ -13,6 +13,7 @@ async fn test_cloud_add_device_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -46,6 +47,7 @@ async fn test_cloud_history_device_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -71,6 +73,7 @@ async fn test_cloud_list_device_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -102,6 +105,7 @@ async fn test_cloud_remove_device_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

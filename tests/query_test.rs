@@ -13,6 +13,7 @@ async fn test_query_list_batch_details_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -35,9 +36,9 @@ async fn test_query_list_batch_details_with_wiremock() {
         "GET",
         "/Query/batchDetails/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -56,6 +57,7 @@ async fn test_query_list_batch_details_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -78,9 +80,9 @@ async fn test_query_list_batch_details_org_with_wiremock() {
         "GET",
         "/Query/batchDetails/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -99,6 +101,7 @@ async fn test_query_list_batches_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -121,9 +124,9 @@ async fn test_query_list_batches_with_wiremock() {
         "GET",
         "/Query/batches/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -142,6 +145,7 @@ async fn test_query_list_batches_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -164,9 +168,9 @@ async fn test_query_list_batches_org_with_wiremock() {
         "GET",
         "/Query/batches/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -185,6 +189,7 @@ async fn test_query_list_batches_out_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -207,9 +212,9 @@ async fn test_query_list_batches_out_with_wiremock() {
         "GET",
         "/Query/batchesOut/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -228,6 +233,7 @@ async fn test_query_list_batches_out_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -250,9 +256,9 @@ async fn test_query_list_batches_out_org_with_wiremock() {
         "GET",
         "/Query/batchesOut/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -271,6 +277,7 @@ async fn test_query_list_chargebacks_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -293,9 +300,9 @@ async fn test_query_list_chargebacks_with_wiremock() {
         "GET",
         "/Query/chargebacks/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -314,6 +321,7 @@ async fn test_query_list_chargebacks_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -336,9 +344,9 @@ async fn test_query_list_chargebacks_org_with_wiremock() {
         "GET",
         "/Query/chargebacks/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -357,6 +365,7 @@ async fn test_query_list_customers_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -379,9 +388,9 @@ async fn test_query_list_customers_with_wiremock() {
         "GET",
         "/Query/customers/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -400,6 +409,7 @@ async fn test_query_list_customers_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -422,9 +432,9 @@ async fn test_query_list_customers_org_with_wiremock() {
         "GET",
         "/Query/customers/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -443,6 +453,7 @@ async fn test_query_list_devices_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -465,9 +476,9 @@ async fn test_query_list_devices_with_wiremock() {
         "GET",
         "/Query/devices/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "0".to_string()),
-            ("limitRecord".to_string(), "20".to_string()),
-            ("sortBy".to_string(), "desc(createdAt)".to_string()),
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
+            ("sortBy".to_string(), json!("desc(createdAt)")),
         ])),
         1,
     )
@@ -486,6 +497,7 @@ async fn test_query_list_devices_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -508,9 +520,9 @@ async fn test_query_list_devices_org_with_wiremock() {
         "GET",
         "/Query/devices/org/100",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "0".to_string()),
-            ("limitRecord".to_string(), "20".to_string()),
-            ("sortBy".to_string(), "desc(createdAt)".to_string()),
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
+            ("sortBy".to_string(), json!("desc(createdAt)")),
         ])),
         1,
     )
@@ -529,6 +541,7 @@ async fn test_query_list_notification_reports_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -551,9 +564,9 @@ async fn test_query_list_notification_reports_with_wiremock() {
         "GET",
         "/Query/notificationReports/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -572,6 +585,7 @@ async fn test_query_list_notification_reports_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -594,9 +608,9 @@ async fn test_query_list_notification_reports_org_with_wiremock() {
         "GET",
         "/Query/notificationReports/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -615,6 +629,7 @@ async fn test_query_list_notifications_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -637,9 +652,9 @@ async fn test_query_list_notifications_with_wiremock() {
         "GET",
         "/Query/notifications/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -658,6 +673,7 @@ async fn test_query_list_notifications_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -680,9 +696,9 @@ async fn test_query_list_notifications_org_with_wiremock() {
         "GET",
         "/Query/notifications/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -701,6 +717,7 @@ async fn test_query_list_organizations_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -723,9 +740,9 @@ async fn test_query_list_organizations_with_wiremock() {
         "GET",
         "/Query/organizations/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -744,6 +761,7 @@ async fn test_query_list_payout_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -766,9 +784,9 @@ async fn test_query_list_payout_with_wiremock() {
         "GET",
         "/Query/payouts/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -787,6 +805,7 @@ async fn test_query_list_payout_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -809,9 +828,9 @@ async fn test_query_list_payout_org_with_wiremock() {
         "GET",
         "/Query/payouts/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -830,6 +849,7 @@ async fn test_query_list_paypoints_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -852,9 +872,9 @@ async fn test_query_list_paypoints_with_wiremock() {
         "GET",
         "/Query/paypoints/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -873,6 +893,7 @@ async fn test_query_list_settlements_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -895,9 +916,9 @@ async fn test_query_list_settlements_with_wiremock() {
         "GET",
         "/Query/settlements/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -916,6 +937,7 @@ async fn test_query_list_settlements_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -938,9 +960,9 @@ async fn test_query_list_settlements_org_with_wiremock() {
         "GET",
         "/Query/settlements/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -959,6 +981,7 @@ async fn test_query_list_subscriptions_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -981,9 +1004,9 @@ async fn test_query_list_subscriptions_with_wiremock() {
         "GET",
         "/Query/subscriptions/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1002,6 +1025,7 @@ async fn test_query_list_subscriptions_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1024,9 +1048,9 @@ async fn test_query_list_subscriptions_org_with_wiremock() {
         "GET",
         "/Query/subscriptions/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1045,6 +1069,7 @@ async fn test_query_list_payout_subscriptions_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1067,9 +1092,9 @@ async fn test_query_list_payout_subscriptions_with_wiremock() {
         "GET",
         "/Query/payoutsubscriptions/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "0".to_string()),
-            ("limitRecord".to_string(), "20".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1088,6 +1113,7 @@ async fn test_query_list_payout_subscriptions_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1110,9 +1136,9 @@ async fn test_query_list_payout_subscriptions_org_with_wiremock() {
         "GET",
         "/Query/payoutsubscriptions/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "0".to_string()),
-            ("limitRecord".to_string(), "20".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1131,6 +1157,7 @@ async fn test_query_list_transactions_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1153,9 +1180,9 @@ async fn test_query_list_transactions_with_wiremock() {
         "GET",
         "/Query/transactions/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1174,6 +1201,7 @@ async fn test_query_list_transactions_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1196,9 +1224,9 @@ async fn test_query_list_transactions_org_with_wiremock() {
         "GET",
         "/Query/transactions/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1217,6 +1245,7 @@ async fn test_query_list_transfer_details_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1249,6 +1278,7 @@ async fn test_query_list_transfers_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1270,8 +1300,8 @@ async fn test_query_list_transfers_with_wiremock() {
         "GET",
         "/Query/transfers/47862acd",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "0".to_string()),
-            ("limitRecord".to_string(), "20".to_string()),
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
         ])),
         1,
     )
@@ -1290,6 +1320,7 @@ async fn test_query_list_transfers_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1311,8 +1342,8 @@ async fn test_query_list_transfers_org_with_wiremock() {
         "GET",
         "/Query/transfers/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "0".to_string()),
-            ("limitRecord".to_string(), "20".to_string()),
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
         ])),
         1,
     )
@@ -1331,6 +1362,7 @@ async fn test_query_list_transfers_out_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1352,8 +1384,8 @@ async fn test_query_list_transfers_out_org_with_wiremock() {
         "GET",
         "/Query/transfersOut/org/77",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "0".to_string()),
-            ("limitRecord".to_string(), "20".to_string()),
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
         ])),
         1,
     )
@@ -1372,6 +1404,7 @@ async fn test_query_list_transfers_out_paypoint_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1393,8 +1426,8 @@ async fn test_query_list_transfers_out_paypoint_with_wiremock() {
         "GET",
         "/Query/transfersOut/47cade237",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "0".to_string()),
-            ("limitRecord".to_string(), "20".to_string()),
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
         ])),
         1,
     )
@@ -1413,6 +1446,7 @@ async fn test_query_list_transfer_details_out_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1435,8 +1469,8 @@ async fn test_query_list_transfer_details_out_with_wiremock() {
         "GET",
         "/Query/transferDetailsOut/47ace2b25/4521",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "0".to_string()),
-            ("limitRecord".to_string(), "20".to_string()),
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
         ])),
         1,
     )
@@ -1455,6 +1489,7 @@ async fn test_query_list_users_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1477,9 +1512,9 @@ async fn test_query_list_users_org_with_wiremock() {
         "GET",
         "/Query/users/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1498,6 +1533,7 @@ async fn test_query_list_users_paypoint_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1520,9 +1556,9 @@ async fn test_query_list_users_paypoint_with_wiremock() {
         "GET",
         "/Query/users/point/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1541,6 +1577,7 @@ async fn test_query_list_vendors_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1563,9 +1600,9 @@ async fn test_query_list_vendors_with_wiremock() {
         "GET",
         "/Query/vendors/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1584,6 +1621,7 @@ async fn test_query_list_vendors_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1606,9 +1644,9 @@ async fn test_query_list_vendors_org_with_wiremock() {
         "GET",
         "/Query/vendors/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1627,6 +1665,7 @@ async fn test_query_list_vcards_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1649,9 +1688,97 @@ async fn test_query_list_vcards_with_wiremock() {
         "GET",
         "/Query/vcards/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
+        ])),
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_query_list_vcards_transactions_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .query
+        .list_vcards_transactions(
+            &Entry("8cfec329267".to_string()),
+            &ListVcardsTransactionsQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                sort_by: Some("desc(CreatedOn)".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/vcardsTransactions/8cfec329267",
+        Some(HashMap::from([
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
+            ("sortBy".to_string(), json!("desc(CreatedOn)")),
+        ])),
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_query_list_vcards_transactions_org_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .query
+        .list_vcards_transactions_org(
+            123,
+            &ListVcardsTransactionsOrgQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                sort_by: Some("desc(CreatedOn)".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/vcardsTransactions/org/123",
+        Some(HashMap::from([
+            ("fromRecord".to_string(), json!("0")),
+            ("limitRecord".to_string(), json!("20")),
+            ("sortBy".to_string(), json!("desc(CreatedOn)")),
         ])),
         1,
     )
@@ -1670,6 +1797,7 @@ async fn test_query_list_vcards_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -1692,9 +1820,9 @@ async fn test_query_list_vcards_org_with_wiremock() {
         "GET",
         "/Query/vcards/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )

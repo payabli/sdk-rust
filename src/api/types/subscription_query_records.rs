@@ -24,6 +24,8 @@ pub struct SubscriptionQueryRecords {
     /// Fee applied to the subscription.
     #[serde(rename = "FeeAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub fee_amount: Option<f64>,
     /// The subscription's frequency.
     #[serde(rename = "Frequency")]
@@ -98,6 +100,16 @@ pub struct SubscriptionQueryRecords {
     #[serde(default)]
     #[serde(with = "crate::core::flexible_datetime::utc::option")]
     pub start_date: Option<DateTime<Utc>>,
+    /// The full stored payment method record linked to the subscription
+    /// and charged on each billing cycle. Returned as `null` for legacy
+    /// subscriptions that don't have a linked stored method.
+    ///
+    /// The shape is the same across payment vehicles (card, ACH, check).
+    /// Only the populated fields differ. For example, `ABA` is populated
+    /// for ACH, while `ExpDate` and `binData` are populated for card.
+    #[serde(rename = "StoredMethod")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stored_method: Option<VendorResponseStoredMethod>,
     /// Events associated with the subscription.
     #[serde(rename = "SubEvents")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -111,6 +123,8 @@ pub struct SubscriptionQueryRecords {
     /// The subscription amount, including any fees.
     #[serde(rename = "TotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// The total number of cycles the subscription is set to run.
     #[serde(rename = "TotalCycles")]
@@ -155,6 +169,7 @@ pub struct SubscriptionQueryRecordsBuilder {
     plan_id: Option<i64>,
     source: Option<Source>,
     start_date: Option<DateTime<Utc>>,
+    stored_method: Option<VendorResponseStoredMethod>,
     sub_events: Option<Vec<GeneralEvents>>,
     sub_status: Option<i64>,
     total_amount: Option<f64>,
@@ -283,6 +298,11 @@ impl SubscriptionQueryRecordsBuilder {
         self
     }
 
+    pub fn stored_method(mut self, value: VendorResponseStoredMethod) -> Self {
+        self.stored_method = Some(value);
+        self
+    }
+
     pub fn sub_events(mut self, value: Vec<GeneralEvents>) -> Self {
         self.sub_events = Some(value);
         self
@@ -335,6 +355,7 @@ impl SubscriptionQueryRecordsBuilder {
             plan_id: self.plan_id,
             source: self.source,
             start_date: self.start_date,
+            stored_method: self.stored_method,
             sub_events: self.sub_events,
             sub_status: self.sub_status,
             total_amount: self.total_amount,

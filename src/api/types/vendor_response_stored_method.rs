@@ -35,7 +35,7 @@ pub struct VendorResponseStoredMethod {
     pub bin: Option<String>,
     #[serde(rename = "binData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bin_data: Option<String>,
+    pub bin_data: Option<BinData>,
     #[serde(rename = "ABA")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub aba: Option<String>,
@@ -76,7 +76,7 @@ pub struct VendorResponseStoredMethodBuilder {
     ach_holder_type: Option<String>,
     is_validated_ach: Option<bool>,
     bin: Option<String>,
-    bin_data: Option<String>,
+    bin_data: Option<BinData>,
     aba: Option<String>,
     postal_code: Option<String>,
     method_type: Option<String>,
@@ -135,8 +135,8 @@ impl VendorResponseStoredMethodBuilder {
         self
     }
 
-    pub fn bin_data(mut self, value: impl Into<String>) -> Self {
-        self.bin_data = Some(value.into());
+    pub fn bin_data(mut self, value: BinData) -> Self {
+        self.bin_data = Some(value);
         self
     }
 

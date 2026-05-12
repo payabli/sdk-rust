@@ -10,6 +10,7 @@ pub struct SubscriptionStatsQueryRecord {
     pub count: i64,
     /// Subscription volume
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub volume: f64,
 }
 

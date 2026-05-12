@@ -46,6 +46,8 @@ pub struct BillQueryRecord2 {
     /// Discount amount applied to the bill.
     #[serde(rename = "Discount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub discount: Option<f64>,
     /// Reference to documents associated with the bill.
     #[serde(rename = "DocumentsRef")]
@@ -91,6 +93,8 @@ pub struct BillQueryRecord2 {
     /// Net amount of the bill.
     #[serde(rename = "NetAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub net_amount: Option<f64>,
     /// Parent organization identifier.
     #[serde(rename = "ParentOrgId")]
@@ -136,6 +140,8 @@ pub struct BillQueryRecord2 {
     /// Total amount of the bill including taxes and fees.
     #[serde(rename = "TotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// MoneyOut transaction associated to the bill.
     #[serde(rename = "Transaction")]

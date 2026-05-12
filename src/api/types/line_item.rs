@@ -12,6 +12,7 @@ pub struct LineItem {
     /// Item or product price per unit.
     #[serde(rename = "itemCost")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub item_cost: f64,
     #[serde(rename = "itemDescription")]
     #[serde(skip_serializing_if = "Option::is_none")]

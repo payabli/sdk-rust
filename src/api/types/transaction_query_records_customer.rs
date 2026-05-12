@@ -11,6 +11,8 @@ pub struct TransactionQueryRecordsCustomer {
     /// Batch amount.
     #[serde(rename = "BatchAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_amount: Option<f64>,
     #[serde(rename = "BatchNumber")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -118,9 +120,14 @@ pub struct TransactionQueryRecordsCustomer {
     #[serde(rename = "splitFundingInstructions")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub split_funding_instructions: Option<SplitFunding>,
+    #[serde(rename = "splitCount")]
+    #[serde(default)]
+    pub split_count: SplitCount,
     /// Transaction total amount (including service fee or sub-charge)
     #[serde(rename = "TotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// Events associated with this transaction.
     #[serde(rename = "TransactionEvents")]
@@ -184,6 +191,7 @@ pub struct TransactionQueryRecordsCustomerBuilder {
     settlement_status: Option<i64>,
     source: Option<Source>,
     split_funding_instructions: Option<SplitFunding>,
+    split_count: Option<SplitCount>,
     total_amount: Option<f64>,
     transaction_events: Option<Vec<QueryTransactionEvents>>,
     transaction_time: Option<DateTime<Utc>>,
@@ -362,6 +370,11 @@ impl TransactionQueryRecordsCustomerBuilder {
         self
     }
 
+    pub fn split_count(mut self, value: SplitCount) -> Self {
+        self.split_count = Some(value);
+        self
+    }
+
     pub fn total_amount(mut self, value: f64) -> Self {
         self.total_amount = Some(value);
         self
@@ -388,6 +401,8 @@ impl TransactionQueryRecordsCustomerBuilder {
     }
 
     /// Consumes the builder and constructs a [`TransactionQueryRecordsCustomer`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`split_count`](TransactionQueryRecordsCustomerBuilder::split_count)
     pub fn build(self) -> Result<TransactionQueryRecordsCustomer, BuildError> {
         Ok(TransactionQueryRecordsCustomer {
             ach_holder_type: self.ach_holder_type,
@@ -424,6 +439,9 @@ impl TransactionQueryRecordsCustomerBuilder {
             settlement_status: self.settlement_status,
             source: self.source,
             split_funding_instructions: self.split_funding_instructions,
+            split_count: self
+                .split_count
+                .ok_or_else(|| BuildError::missing_field("split_count"))?,
             total_amount: self.total_amount,
             transaction_events: self.transaction_events,
             transaction_time: self.transaction_time,

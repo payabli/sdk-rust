@@ -28,7 +28,7 @@ pub struct RequestCredit {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub subdomain: Option<Subdomain>,
     #[serde(rename = "forceCustomerCreation")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub force_customer_creation: Option<ForceCustomerCreation>,
 }
 

@@ -5,9 +5,11 @@ pub use crate::prelude::*;
 pub struct TransactionDetailPaymentDetails {
     #[serde(rename = "totalAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
     #[serde(rename = "serviceFee")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub service_fee: f64,
     #[serde(rename = "checkNumber")]
     #[serde(skip_serializing_if = "Option::is_none")]

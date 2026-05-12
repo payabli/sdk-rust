@@ -89,6 +89,7 @@ pub struct CheckCaptureResponse {
     /// Only personal checks are supported for check capture.
     #[serde(rename = "checkType")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub check_type: f64,
     /// Reference number for the transaction.
     #[serde(rename = "referenceNumber")]

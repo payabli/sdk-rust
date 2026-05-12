@@ -13,6 +13,7 @@ async fn test_payment_method_domain_add_payment_method_domain_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -54,6 +55,7 @@ async fn test_payment_method_domain_cascade_payment_method_domain_with_wiremock(
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -84,6 +86,7 @@ async fn test_payment_method_domain_delete_payment_method_domain_with_wiremock()
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -114,6 +117,7 @@ async fn test_payment_method_domain_get_payment_method_domain_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -144,6 +148,7 @@ async fn test_payment_method_domain_list_payment_method_domains_with_wiremock() 
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -164,8 +169,8 @@ async fn test_payment_method_domain_list_payment_method_domains_with_wiremock() 
         "GET",
         "/PaymentMethodDomain/list",
         Some(HashMap::from([
-            ("entityId".to_string(), "1147".to_string()),
-            ("entityType".to_string(), "paypoint".to_string()),
+            ("entityId".to_string(), json!("1147")),
+            ("entityType".to_string(), json!("paypoint")),
         ])),
         1,
     )
@@ -184,6 +189,7 @@ async fn test_payment_method_domain_update_payment_method_domain_with_wiremock()
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -228,6 +234,7 @@ async fn test_payment_method_domain_verify_payment_method_domain_with_wiremock()
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
+    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

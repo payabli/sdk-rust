@@ -7,6 +7,8 @@ pub struct OcrResultData {
     pub bill_number: Option<String>,
     #[serde(rename = "netAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub net_amount: Option<f64>,
     #[serde(rename = "billDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
