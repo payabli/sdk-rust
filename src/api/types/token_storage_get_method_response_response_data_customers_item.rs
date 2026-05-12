@@ -6,8 +6,6 @@ pub struct GetMethodResponseResponseDataCustomersItem {
     pub payor_data_request_fields: PayorDataRequest,
     /// Customer's current balance
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub balance: Option<f64>,
     /// Creation timestamp
     #[serde(skip_serializing_if = "Option::is_none")]

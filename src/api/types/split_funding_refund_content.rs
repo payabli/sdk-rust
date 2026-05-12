@@ -8,8 +8,6 @@ pub struct SplitFundingRefundContent {
     pub account_id: Option<String>,
     /// The amount to refund to this account.
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub amount: Option<f64>,
     /// Refund description.
     #[serde(skip_serializing_if = "Option::is_none")]

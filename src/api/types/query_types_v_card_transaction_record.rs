@@ -49,14 +49,10 @@ pub struct VCardTransactionRecord {
     /// Authorized amount on the virtual card.
     #[serde(rename = "Amount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub amount: Option<f64>,
     /// Current balance remaining on the virtual card.
     #[serde(rename = "Balance")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub balance: Option<f64>,
     /// Numeric identifier of the paypoint that issued the virtual card.
     #[serde(rename = "PaypointId")]

@@ -13,7 +13,6 @@ async fn test_token_storage_add_method_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -70,7 +69,6 @@ async fn test_token_storage_get_method_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -92,8 +90,8 @@ async fn test_token_storage_get_method_with_wiremock() {
         "GET",
         "/TokenStorage/32-8877drt00045632-678",
         Some(HashMap::from([
-            ("cardExpirationFormat".to_string(), json!("1")),
-            ("includeTemporary".to_string(), json!("false")),
+            ("cardExpirationFormat".to_string(), "1".to_string()),
+            ("includeTemporary".to_string(), "false".to_string()),
         ])),
         1,
     )
@@ -112,7 +110,6 @@ async fn test_token_storage_remove_method_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -143,7 +140,6 @@ async fn test_token_storage_update_method_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

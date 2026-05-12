@@ -13,7 +13,6 @@ async fn test_import_import_bills_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -45,7 +44,6 @@ async fn test_import_import_customer_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -78,7 +76,6 @@ async fn test_import_import_vendor_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

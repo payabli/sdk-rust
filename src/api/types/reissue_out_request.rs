@@ -5,7 +5,6 @@ pub use crate::prelude::*;
 pub struct ReissueOutRequest {
     /// The transaction ID of the payout to reissue.
     #[serde(rename = "transId")]
-    #[serde(skip_serializing)]
     #[serde(default)]
     pub trans_id: String,
     #[serde(default)]

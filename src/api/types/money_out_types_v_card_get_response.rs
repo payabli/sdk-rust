@@ -26,20 +26,14 @@ pub struct VCardGetResponse {
     pub status: Option<String>,
     /// The initial amount loaded on the card.
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub amount: Option<f64>,
     /// The current balance available on the card.
     #[serde(rename = "currentBalance")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub current_balance: Option<f64>,
     /// The set limit for expenses.
     #[serde(rename = "expenseLimit")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub expense_limit: Option<f64>,
     /// The period for the expense limit.
     #[serde(rename = "expenseLimitPeriod")]

@@ -4,29 +4,23 @@ pub use crate::prelude::*;
 pub struct BatchDetailResponseSummary {
     #[serde(rename = "serviceFees")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub service_fees: f64,
     #[serde(rename = "transferAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub transfer_amount: f64,
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub refunds: f64,
     #[serde(rename = "heldAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub held_amount: f64,
     #[serde(rename = "totalRecords")]
     #[serde(default)]
     pub total_records: Totalrecords,
     #[serde(rename = "totalAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
     #[serde(rename = "totalNetAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub total_net_amount: f64,
     #[serde(rename = "totalPages")]
     #[serde(default)]

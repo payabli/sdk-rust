@@ -52,8 +52,6 @@ pub struct VendorEnrichmentInvoiceScan {
     /// Invoice amount due in USD.
     #[serde(rename = "amountDue")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub amount_due: Option<f64>,
     /// Payment due date. Format is `YYYY-MM-DD`.
     #[serde(rename = "dueDate")]

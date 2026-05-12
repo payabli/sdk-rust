@@ -81,53 +81,42 @@ pub struct Transfer {
     /// Gross batch is the total amount of the payments grouped in the batch. This amount includes service fees.
     #[serde(rename = "grossAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub gross_amount: f64,
     /// Amount of chargebacks to be deducted from batch.
     #[serde(rename = "chargeBackAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub charge_back_amount: f64,
     /// Amount of ACH returns to be deducted from batch.
     #[serde(rename = "returnedAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub returned_amount: f64,
     /// Amount being held for fraud or risk concerns.
     #[serde(rename = "holdAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub hold_amount: f64,
     /// Amount of previously held funds that have been released after a risk review.
     #[serde(rename = "releasedAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub released_amount: f64,
     /// Amount of charges and fees applied for services and transactions.
     #[serde(rename = "billingFeesAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub billing_fees_amount: f64,
     /// Amount of payments captured in the batch cycle that are deposited separately. For example, checks or cash payments recorded in the batch but not deposited via Payabli, or card brands making a direct transfer in certain situations.
     #[serde(rename = "thirdPartyPaidAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub third_party_paid_amount: f64,
     /// Amount of corrections applied to Billing & Fees charges.
     #[serde(rename = "adjustmentsAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub adjustments_amount: f64,
     /// The net transfer amount after all deductions and additions.
     #[serde(rename = "netTransferAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub net_transfer_amount: f64,
     /// The sum of each splitFundingAmount of each record in the transfer.
     #[serde(rename = "splitAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub split_amount: Option<f64>,
     /// List of events associated with the transfer.
     #[serde(rename = "eventsData")]

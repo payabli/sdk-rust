@@ -13,7 +13,6 @@ pub struct StatBasicQueryRecord {
     /// Volume of incoming transactions
     #[serde(rename = "inTransactionsVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_transactions_volume: f64,
     /// Number of incoming wallet transactions
     #[serde(rename = "inWalletTransactions")]
@@ -22,7 +21,6 @@ pub struct StatBasicQueryRecord {
     /// Volume of incoming wallet transactions
     #[serde(rename = "inWalletVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_wallet_volume: f64,
 }
 

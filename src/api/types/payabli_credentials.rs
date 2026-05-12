@@ -8,31 +8,19 @@ pub struct PayabliCredentials {
     pub account_id: Option<AccountId>,
     #[serde(rename = "cfeeFix")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub cfee_fix: Option<f64>,
     #[serde(rename = "cfeeFloat")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub cfee_float: Option<f64>,
     #[serde(rename = "cfeeMax")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub cfee_max: Option<f64>,
     #[serde(rename = "cfeeMin")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub cfee_min: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub maxticket: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub minticket: Option<f64>,
     /// The payment mode supported by this service. `0` for one-time payments, `1` for recurring payments, `2` for both.
     #[serde(skip_serializing_if = "Option::is_none")]

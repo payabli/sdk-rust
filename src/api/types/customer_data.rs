@@ -71,8 +71,6 @@ pub struct CustomerData {
     pub shipping_country: Option<Shippingcountry>,
     /// Customer balance.
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub balance: Option<f64>,
     #[serde(rename = "timeZone")]
     #[serde(skip_serializing_if = "Option::is_none")]

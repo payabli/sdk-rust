@@ -5,8 +5,6 @@ pub struct QueryResponseSettlementsRecordsItem {
     /// The batch amount.
     #[serde(rename = "BatchAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_amount: Option<f64>,
     #[serde(rename = "BatchNumber")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -100,8 +98,6 @@ pub struct QueryResponseSettlementsRecordsItem {
     /// The transaction amount.
     #[serde(rename = "SettledAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub settled_amount: Option<f64>,
     /// The date and time when the transaction was settled. This field is null when the transaction's `SettlementStatus` is -1, -5, or -6 (Exception, Held, or Released).
     #[serde(rename = "SettlementDate")]

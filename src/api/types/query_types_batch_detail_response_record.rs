@@ -13,7 +13,6 @@ pub struct BatchDetailResponseRecord {
     pub wallet_type: Option<String>,
     #[serde(rename = "SettledAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub settled_amount: f64,
     #[serde(rename = "Type")]
     #[serde(default)]
@@ -23,7 +22,6 @@ pub struct BatchDetailResponseRecord {
     pub batch_number: BatchNumber,
     #[serde(rename = "BatchAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub batch_amount: f64,
     #[serde(rename = "PaymentTransId")]
     #[serde(default)]
@@ -153,7 +151,6 @@ pub struct BatchDetailResponseRecord {
     pub split_funding_instructions: Option<SplitFunding>,
     #[serde(rename = "TotalAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
     #[serde(rename = "CfeeTransactions")]
     #[serde(default)]

@@ -13,7 +13,6 @@ async fn test_hosted_payment_pages_load_page_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -48,7 +47,6 @@ async fn test_hosted_payment_pages_new_page_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -83,7 +81,6 @@ async fn test_hosted_payment_pages_save_page_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

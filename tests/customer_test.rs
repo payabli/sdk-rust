@@ -13,7 +13,6 @@ async fn test_customer_add_customer_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -60,7 +59,6 @@ async fn test_customer_delete_customer_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.customer.delete_customer(998, None).await;
@@ -83,7 +81,6 @@ async fn test_customer_get_customer_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.customer.get_customer(998, None).await;
@@ -106,7 +103,6 @@ async fn test_customer_link_customer_transaction_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -137,7 +133,6 @@ async fn test_customer_request_consent_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.customer.request_consent(998, None).await;
@@ -160,7 +155,6 @@ async fn test_customer_update_customer_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

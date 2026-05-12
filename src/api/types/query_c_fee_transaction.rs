@@ -7,8 +7,6 @@ pub struct QueryCFeeTransaction {
     pub c_fee_transid: Option<String>,
     #[serde(rename = "feeAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub fee_amount: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub operation: Option<String>,

@@ -80,8 +80,6 @@ pub struct CustomerQueryRecords {
     /// Customer balance.
     #[serde(rename = "Balance")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub balance: Option<f64>,
     #[serde(rename = "TimeZone")]
     #[serde(skip_serializing_if = "Option::is_none")]

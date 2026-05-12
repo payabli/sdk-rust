@@ -13,7 +13,6 @@ async fn test_boarding_add_application_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -205,7 +204,6 @@ async fn test_boarding_delete_application_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.boarding.delete_application(352, None).await;
@@ -228,7 +226,6 @@ async fn test_boarding_get_application_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.boarding.get_application(352, None).await;
@@ -251,7 +248,6 @@ async fn test_boarding_get_application_by_auth_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -285,7 +281,6 @@ async fn test_boarding_get_by_id_link_application_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.boarding.get_by_id_link_application(91, None).await;
@@ -308,7 +303,6 @@ async fn test_boarding_get_by_template_id_link_application_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -334,7 +328,6 @@ async fn test_boarding_get_external_application_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -367,7 +360,6 @@ async fn test_boarding_get_link_application_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -393,7 +385,6 @@ async fn test_boarding_list_applications_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -416,9 +407,9 @@ async fn test_boarding_list_applications_with_wiremock() {
         "GET",
         "/Query/boarding/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), json!("251")),
-            ("limitRecord".to_string(), json!("0")),
-            ("sortBy".to_string(), json!("desc(field_name)")),
+            ("fromRecord".to_string(), "251".to_string()),
+            ("limitRecord".to_string(), "0".to_string()),
+            ("sortBy".to_string(), "desc(field_name)".to_string()),
         ])),
         1,
     )
@@ -437,7 +428,6 @@ async fn test_boarding_list_boarding_links_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -460,9 +450,9 @@ async fn test_boarding_list_boarding_links_with_wiremock() {
         "GET",
         "/Query/boardinglinks/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), json!("251")),
-            ("limitRecord".to_string(), json!("0")),
-            ("sortBy".to_string(), json!("desc(field_name)")),
+            ("fromRecord".to_string(), "251".to_string()),
+            ("limitRecord".to_string(), "0".to_string()),
+            ("sortBy".to_string(), "desc(field_name)".to_string()),
         ])),
         1,
     )
@@ -481,7 +471,6 @@ async fn test_boarding_update_application_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -513,7 +502,6 @@ async fn test_boarding_add_service_to_paypoint_from_app_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -549,7 +537,6 @@ async fn test_boarding_get_applications_by_paypoint_id_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

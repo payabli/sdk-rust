@@ -34,8 +34,6 @@ pub struct TransactionOutQueryRecord {
     /// Transaction total amount (including service fee or sub-charge).
     #[serde(rename = "TotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     #[serde(rename = "NetAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]

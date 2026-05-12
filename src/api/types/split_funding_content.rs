@@ -8,8 +8,6 @@ pub struct SplitFundingContent {
     pub account_id: Option<String>,
     /// Amount from the transaction to send to this recipient.
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub amount: Option<f64>,
     /// A description for the split.
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -13,7 +13,6 @@ async fn test_templates_delete_template_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.templates.delete_template(80.0, None).await;
@@ -36,7 +35,6 @@ async fn test_templates_getlink_template_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.templates.getlink_template(80.0, true, None).await;
@@ -59,7 +57,6 @@ async fn test_templates_get_template_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.templates.get_template(80.0, None).await;
@@ -82,7 +79,6 @@ async fn test_templates_list_templates_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -105,9 +101,9 @@ async fn test_templates_list_templates_with_wiremock() {
         "GET",
         "/Query/templates/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), json!("251")),
-            ("limitRecord".to_string(), json!("0")),
-            ("sortBy".to_string(), json!("desc(field_name)")),
+            ("fromRecord".to_string(), "251".to_string()),
+            ("limitRecord".to_string(), "0".to_string()),
+            ("sortBy".to_string(), "desc(field_name)".to_string()),
         ])),
         1,
     )

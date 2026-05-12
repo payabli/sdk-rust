@@ -13,7 +13,6 @@ async fn test_statistic_basic_stats_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -38,8 +37,8 @@ async fn test_statistic_basic_stats_with_wiremock() {
         "GET",
         "/Statistic/basic/ytd/m/1/1000000",
         Some(HashMap::from([
-            ("endDate".to_string(), json!("2025-11-01")),
-            ("startDate".to_string(), json!("2025-11-30")),
+            ("endDate".to_string(), "2025-11-01".to_string()),
+            ("startDate".to_string(), "2025-11-30".to_string()),
         ])),
         1,
     )
@@ -58,7 +57,6 @@ async fn test_statistic_customer_basic_stats_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -92,7 +90,6 @@ async fn test_statistic_sub_stats_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -126,7 +123,6 @@ async fn test_statistic_vendor_basic_stats_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

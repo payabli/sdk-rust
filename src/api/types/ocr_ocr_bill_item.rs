@@ -4,18 +4,12 @@ pub use crate::prelude::*;
 pub struct OcrBillItem {
     #[serde(rename = "itemTotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub item_total_amount: Option<f64>,
     #[serde(rename = "itemTaxAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub item_tax_amount: Option<f64>,
     #[serde(rename = "itemTaxRate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub item_tax_rate: Option<f64>,
     #[serde(rename = "itemProductCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -34,8 +28,6 @@ pub struct OcrBillItem {
     pub item_unit_of_measure: Option<String>,
     #[serde(rename = "itemCost")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub item_cost: Option<f64>,
     #[serde(rename = "itemQty")]
     #[serde(skip_serializing_if = "Option::is_none")]

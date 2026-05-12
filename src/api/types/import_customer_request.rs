@@ -6,7 +6,7 @@ pub struct ImportCustomerRequest {
     #[serde(with = "crate::core::base64_bytes")]
     pub file: Vec<u8>,
     #[serde(rename = "replaceExisting")]
-    #[serde(skip_serializing)]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub replace_existing: Option<i64>,
 }
 impl ImportCustomerRequest {
@@ -20,6 +20,12 @@ impl ImportCustomerRequest {
                 .mime_str("application/octet-stream")
                 .unwrap(),
         );
+
+        if let Some(ref value) = self.replace_existing {
+            if let Ok(json_str) = serde_json::to_string(value) {
+                form = form.text("replaceExisting", json_str);
+            }
+        }
 
         form
     }

@@ -6,13 +6,10 @@ pub struct PayoutPaymentDetail {
     /// Total payout amount. If a service fee is included, this amount should include the service fee.
     #[serde(rename = "totalAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
     /// Service fee to be deducted from the total amount. This amount must be a number, percentages aren't accepted.
     #[serde(rename = "serviceFee")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub service_fee: Option<f64>,
     /// Currency code ISO-4217. If no code is provided, the currency in the paypoint setting is used. Default is `USD`.
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -13,7 +13,6 @@ async fn test_money_out_authorize_out_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -69,7 +68,6 @@ async fn test_money_out_cancel_all_out_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -98,7 +96,6 @@ async fn test_money_out_cancel_out_get_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -124,7 +121,6 @@ async fn test_money_out_cancel_out_delete_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -150,7 +146,6 @@ async fn test_money_out_capture_all_out_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -179,7 +174,6 @@ async fn test_money_out_capture_out_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -205,7 +199,6 @@ async fn test_money_out_payout_details_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -236,7 +229,6 @@ async fn test_money_out_v_card_get_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -262,7 +254,6 @@ async fn test_money_out_send_v_card_link_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -293,7 +284,6 @@ async fn test_money_out_get_check_image_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -327,7 +317,6 @@ async fn test_money_out_update_check_payment_status_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -357,7 +346,6 @@ async fn test_money_out_reissue_out_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -387,7 +375,10 @@ async fn test_money_out_reissue_out_with_wiremock() {
     wire_test_utils::verify_request_count(
         "POST",
         "/MoneyOut/reissue",
-        Some(HashMap::from([("transId".to_string(), json!("129-219"))])),
+        Some(HashMap::from([(
+            "transId".to_string(),
+            "129-219".to_string(),
+        )])),
         1,
     )
     .await

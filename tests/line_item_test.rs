@@ -13,7 +13,6 @@ async fn test_line_item_add_item_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -53,7 +52,6 @@ async fn test_line_item_delete_item_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.line_item.delete_item(700, None).await;
@@ -76,7 +74,6 @@ async fn test_line_item_get_item_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.line_item.get_item(700, None).await;
@@ -99,7 +96,6 @@ async fn test_line_item_list_line_items_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -122,9 +118,9 @@ async fn test_line_item_list_line_items_with_wiremock() {
         "GET",
         "/Query/lineitems/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), json!("251")),
-            ("limitRecord".to_string(), json!("0")),
-            ("sortBy".to_string(), json!("desc(field_name)")),
+            ("fromRecord".to_string(), "251".to_string()),
+            ("limitRecord".to_string(), "0".to_string()),
+            ("sortBy".to_string(), "desc(field_name)".to_string()),
         ])),
         1,
     )
@@ -143,7 +139,6 @@ async fn test_line_item_update_item_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

@@ -11,24 +11,19 @@ pub struct VCardSummary {
     /// Total amount for the records.
     #[serde(rename = "totalAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
     /// Total net amount for the records.
     #[serde(rename = "totalNetAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub total_net_amount: Option<f64>,
     /// Total number of active vCards.
     #[serde(default)]
     pub totalactive: i64,
     /// Total amount of active vCards.
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub totalamountactive: f64,
     /// Total balance of active vCards.
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub totalbalanceactive: f64,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub pageidentifier: Option<PageIdentifier>,

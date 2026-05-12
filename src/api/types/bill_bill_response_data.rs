@@ -12,20 +12,14 @@ pub struct BillResponseData {
     /// Net amount owed in bill.
     #[serde(rename = "NetAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub net_amount: Option<f64>,
     /// Bill discount amount.
     #[serde(rename = "Discount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub discount: Option<f64>,
     /// Total amount for the bill.
     #[serde(rename = "TotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY
     #[serde(rename = "BillDate")]

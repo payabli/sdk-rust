@@ -6,13 +6,10 @@ pub struct CapturePaymentDetails {
     /// total amount of the transaction, and can't be more than 15% lower than the original amount.
     #[serde(rename = "totalAmount")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
     /// Service fee to capture for the transaction.
     #[serde(rename = "serviceFee")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub service_fee: Option<f64>,
 }
 

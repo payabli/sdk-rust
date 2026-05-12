@@ -5,7 +5,7 @@ pub use crate::prelude::*;
 pub struct EditInvoiceRequest {
     /// When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer.
     #[serde(rename = "forceCustomerCreation")]
-    #[serde(skip_serializing)]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub force_customer_creation: Option<bool>,
     #[serde(default)]
     pub body: InvoiceDataRequest,

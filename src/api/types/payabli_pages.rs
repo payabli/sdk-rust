@@ -38,8 +38,6 @@ pub struct PayabliPages {
     /// Total amount to pay in this page
     #[serde(rename = "totalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(default)]
-    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// Base64 encoded image of CAPTCHA associated to this page load
     #[serde(rename = "validationCode")]

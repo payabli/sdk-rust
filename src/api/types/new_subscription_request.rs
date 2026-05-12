@@ -4,7 +4,7 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct NewSubscriptionRequest {
     #[serde(rename = "forceCustomerCreation")]
-    #[serde(skip_serializing)]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub force_customer_creation: Option<ForceCustomerCreation>,
     #[serde(default)]
     pub body: SubscriptionRequestBody,

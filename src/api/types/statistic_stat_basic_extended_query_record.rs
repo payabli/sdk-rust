@@ -45,37 +45,30 @@ pub struct StatBasicExtendedQueryRecord {
     /// Outbound (payout) volume.
     #[serde(rename = "outTransactionsVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub out_transactions_volume: f64,
     /// Recurring outbound (payout) volume.
     #[serde(rename = "outSubscriptionsPaidVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub out_subscriptions_paid_volume: f64,
     /// Outbound (payout) pCard transactions volume.
     #[serde(rename = "outCardVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub out_card_volume: f64,
     /// Outbound (payout) vCard transactions volume.
     #[serde(rename = "outVCardVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub out_v_card_volume: f64,
     /// Outbound (payout) ACH transactions volume.
     #[serde(rename = "outACHVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub out_ach_volume: f64,
     /// Outbound (payout) check transactions volume.
     #[serde(rename = "outCheckVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub out_check_volume: f64,
     /// Outbound (payout) Managed Payables volume.
     #[serde(rename = "outPendingMethodVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub out_pending_method_volume: f64,
     /// Inbound transactions count.
     #[serde(rename = "inTransactions")]
@@ -124,47 +117,38 @@ pub struct StatBasicExtendedQueryRecord {
     /// Inbound volume.
     #[serde(rename = "inTransactionsVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_transactions_volume: f64,
     /// Inbound recurring payments volume.
     #[serde(rename = "inSubscriptionsPaidVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_subscriptions_paid_volume: f64,
     /// Inbound card volume.
     #[serde(rename = "inCardVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_card_volume: f64,
     /// Inbound ACH volume.
     #[serde(rename = "inACHVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_ach_volume: f64,
     /// Inbound check volume.
     #[serde(rename = "inCheckVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_check_volume: f64,
     /// Inbound cash volume recognized.
     #[serde(rename = "inCashVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_cash_volume: f64,
     /// Inbound wallet transactions.
     #[serde(rename = "inWalletVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_wallet_volume: f64,
     /// Inbound Card chargebacks and returns volume.
     #[serde(rename = "inCardChargeBackVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_card_charge_back_volume: f64,
     /// Inbound ACH returns volume.
     #[serde(rename = "inACHReturnsVolume")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
     pub in_ach_returns_volume: f64,
 }
 

@@ -13,7 +13,6 @@ async fn test_bill_add_bill_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -81,7 +80,6 @@ async fn test_bill_delete_attached_from_bill_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -119,7 +117,6 @@ async fn test_bill_delete_bill_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.bill.delete_bill(285, None).await;
@@ -142,7 +139,6 @@ async fn test_bill_edit_bill_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -176,7 +172,6 @@ async fn test_bill_get_attached_from_bill_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -197,7 +192,10 @@ async fn test_bill_get_attached_from_bill_with_wiremock() {
     wire_test_utils::verify_request_count(
         "GET",
         "/Bill/attachedFileFromBill/285/0_Bill.pdf",
-        Some(HashMap::from([("returnObject".to_string(), json!("true"))])),
+        Some(HashMap::from([(
+            "returnObject".to_string(),
+            "true".to_string(),
+        )])),
         1,
     )
     .await
@@ -215,7 +213,6 @@ async fn test_bill_get_bill_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.bill.get_bill(285, None).await;
@@ -238,7 +235,6 @@ async fn test_bill_list_bills_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -261,9 +257,9 @@ async fn test_bill_list_bills_with_wiremock() {
         "GET",
         "/Query/bills/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), json!("251")),
-            ("limitRecord".to_string(), json!("0")),
-            ("sortBy".to_string(), json!("desc(field_name)")),
+            ("fromRecord".to_string(), "251".to_string()),
+            ("limitRecord".to_string(), "0".to_string()),
+            ("sortBy".to_string(), "desc(field_name)".to_string()),
         ])),
         1,
     )
@@ -282,7 +278,6 @@ async fn test_bill_list_bills_org_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -305,9 +300,9 @@ async fn test_bill_list_bills_org_with_wiremock() {
         "GET",
         "/Query/bills/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), json!("251")),
-            ("limitRecord".to_string(), json!("0")),
-            ("sortBy".to_string(), json!("desc(field_name)")),
+            ("fromRecord".to_string(), "251".to_string()),
+            ("limitRecord".to_string(), "0".to_string()),
+            ("sortBy".to_string(), "desc(field_name)".to_string()),
         ])),
         1,
     )
@@ -326,7 +321,6 @@ async fn test_bill_modify_approval_bill_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -352,7 +346,6 @@ async fn test_bill_send_to_approval_bill_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -388,7 +381,6 @@ async fn test_bill_set_approved_bill_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client

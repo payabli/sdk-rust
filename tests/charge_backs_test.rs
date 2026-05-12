@@ -13,7 +13,6 @@ async fn test_charge_backs_add_response_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
@@ -48,7 +47,6 @@ async fn test_charge_backs_get_chargeback_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client.charge_backs.get_chargeback(1000000, None).await;
@@ -71,7 +69,6 @@ async fn test_charge_backs_get_chargeback_attachment_with_wiremock() {
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
-    config.environment = None;
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
