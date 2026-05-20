@@ -38,34 +38,50 @@ pub struct VCardGetResponseAssociatedVendorSummary {
     /// Total amount of active bills.
     #[serde(rename = "ActiveBillsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub active_bills_amount: Option<f64>,
     /// Total amount of pending bills.
     #[serde(rename = "PendingBillsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub pending_bills_amount: Option<f64>,
     /// Total amount of bills in transit.
     #[serde(rename = "InTransitBillsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub in_transit_bills_amount: Option<f64>,
     /// Total amount of paid bills.
     #[serde(rename = "PaidBillsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub paid_bills_amount: Option<f64>,
     /// Total amount of overdue bills.
     #[serde(rename = "OverdueBillsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub overdue_bills_amount: Option<f64>,
     /// Total amount of approved bills.
     #[serde(rename = "ApprovedBillsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub approved_bills_amount: Option<f64>,
     /// Total amount of rejected bills.
     #[serde(rename = "DisapprovedBillsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub disapproved_bills_amount: Option<f64>,
     /// Total amount of all bills.
     #[serde(rename = "TotalBillsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_bills_amount: Option<f64>,
 }
 

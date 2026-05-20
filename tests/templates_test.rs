@@ -101,9 +101,9 @@ async fn test_templates_list_templates_with_wiremock() {
         "GET",
         "/Query/templates/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )

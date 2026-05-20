@@ -4,6 +4,7 @@ pub use crate::prelude::*;
 pub struct PaymentCategories {
     /// Price/cost per unit of item or category.
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub amount: f64,
     /// Description of item or category
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -481,7 +481,7 @@ async fn test_money_in_send_receipt_2_trans_with_wiremock() {
         "/MoneyIn/sendreceipt/45-as456777hhhhhhhhhh77777777-324",
         Some(HashMap::from([(
             "email".to_string(),
-            "example@email.com".to_string(),
+            json!("example@email.com"),
         )])),
         1,
     )

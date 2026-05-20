@@ -192,10 +192,7 @@ async fn test_bill_get_attached_from_bill_with_wiremock() {
     wire_test_utils::verify_request_count(
         "GET",
         "/Bill/attachedFileFromBill/285/0_Bill.pdf",
-        Some(HashMap::from([(
-            "returnObject".to_string(),
-            "true".to_string(),
-        )])),
+        Some(HashMap::from([("returnObject".to_string(), json!("true"))])),
         1,
     )
     .await
@@ -257,9 +254,9 @@ async fn test_bill_list_bills_with_wiremock() {
         "GET",
         "/Query/bills/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -300,9 +297,9 @@ async fn test_bill_list_bills_org_with_wiremock() {
         "GET",
         "/Query/bills/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )

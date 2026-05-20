@@ -32,6 +32,8 @@ pub struct PayoutSubscriptionQueryRecord {
     /// The payout subscription amount, including any fees.
     #[serde(rename = "totalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// The payout subscription amount, minus any fees.
     #[serde(rename = "netAmount")]
@@ -40,6 +42,8 @@ pub struct PayoutSubscriptionQueryRecord {
     /// Fee applied to the payout subscription.
     #[serde(rename = "feeAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub fee_amount: Option<f64>,
     #[serde(rename = "paymentData")]
     #[serde(skip_serializing_if = "Option::is_none")]

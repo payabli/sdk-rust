@@ -13,10 +13,14 @@ pub struct CustomerSummaryRecord {
     /// Total amount in transactions
     #[serde(rename = "TotalAmountTransactions")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount_transactions: Option<f64>,
     /// Total net amount in transactions
     #[serde(rename = "TotalNetAmountTransactions")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_net_amount_transactions: Option<f64>,
 }
 

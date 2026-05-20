@@ -27,50 +27,74 @@ pub struct TransferDetailRecord {
     /// The gross amount of the transaction
     #[serde(rename = "grossAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub gross_amount: Option<f64>,
     /// Chargeback amount deducted from transaction
     #[serde(rename = "chargeBackAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub charge_back_amount: Option<f64>,
     /// ACH return amount deducted from transaction
     #[serde(rename = "returnedAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub returned_amount: Option<f64>,
     /// Refund amount deducted from transaction
     #[serde(rename = "refundAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub refund_amount: Option<f64>,
     /// Amount being held for fraud or risk concerns
     #[serde(rename = "holdAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub hold_amount: Option<f64>,
     /// Previously held funds that have been released after a risk review
     #[serde(rename = "releasedAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub released_amount: Option<f64>,
     /// Charges applied for transactions and services
     #[serde(rename = "billingFeesAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub billing_fees_amount: Option<f64>,
     /// Payments captured in the batch cycle that are deposited separately. For example,  checks or cash payments recorded in the batch but not deposited via Payabli,  or card brands making a direct transfer in certain situations.
     #[serde(rename = "thirdPartyPaidAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub third_party_paid_amount: Option<f64>,
     /// Corrections applied to Billing & Fees charges
     #[serde(rename = "adjustmentsAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub adjustments_amount: Option<f64>,
     /// The net amount after all deductions
     #[serde(rename = "netTransferAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub net_transfer_amount: Option<f64>,
     /// Total amount directed to split funding destinations
     #[serde(rename = "splitFundingAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub split_funding_amount: Option<f64>,
     /// Total amount rejected by card networks or issuing banks after authorization or settling in this transaction
     #[serde(rename = "cardRejectedAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub card_rejected_amount: Option<f64>,
     #[serde(rename = "billingFeesDetails")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -116,6 +140,8 @@ pub struct TransferDetailRecord {
     /// The amount of the batch
     #[serde(rename = "BatchAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_amount: Option<f64>,
     /// Unique ID for customer linked to the transaction
     #[serde(rename = "PayorId")]
@@ -136,6 +162,8 @@ pub struct TransferDetailRecord {
     /// Transaction total amount (including service fee or sub-charge)
     #[serde(rename = "TotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// Net amount paid
     #[serde(rename = "NetAmount")]

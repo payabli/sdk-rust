@@ -9,10 +9,13 @@ pub struct PaymentDetailCredit {
     /// Service fee to be deducted from the total amount. This amount must be a number, percentages aren't accepted. If you are using a percentage-based fee schedule, you must calculate the value manually.
     #[serde(rename = "serviceFee")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub service_fee: Option<f64>,
     /// Total amount to be charged. If a service fee is provided, then this amount should include the service fee.
     #[serde(rename = "totalAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
 }
 

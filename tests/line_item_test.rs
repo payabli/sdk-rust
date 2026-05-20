@@ -118,9 +118,9 @@ async fn test_line_item_list_line_items_with_wiremock() {
         "GET",
         "/Query/lineitems/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )

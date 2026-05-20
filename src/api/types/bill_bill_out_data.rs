@@ -31,6 +31,8 @@ pub struct BillOutData {
     pub comments: Option<Comments>,
     /// Discount amount applied to the bill.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub discount: Option<f64>,
     /// Due date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY.
     #[serde(rename = "dueDate")]
@@ -53,6 +55,8 @@ pub struct BillOutData {
     /// Net Amount owed in bill. Required when adding a bill.
     #[serde(rename = "netAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub net_amount: Option<f64>,
     /// Options for scheduled bills.
     #[serde(rename = "scheduledOptions")]
@@ -65,6 +69,8 @@ pub struct BillOutData {
     /// Total amount of the bill.
     #[serde(rename = "totalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// The vendor associated with the bill. Although you can create a vendor in a create bill request, Payabli recommends creating a vendor separately and passing a valid `vendorNumber` here. At minimum, the `vendorNumber` is required.
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -4,7 +4,7 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct UpdateMethodRequest {
     #[serde(rename = "achValidation")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub ach_validation: Option<AchValidation>,
     #[serde(default)]
     pub body: RequestTokenStorage,

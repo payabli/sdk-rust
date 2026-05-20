@@ -90,8 +90,8 @@ async fn test_token_storage_get_method_with_wiremock() {
         "GET",
         "/TokenStorage/32-8877drt00045632-678",
         Some(HashMap::from([
-            ("cardExpirationFormat".to_string(), "1".to_string()),
-            ("includeTemporary".to_string(), "false".to_string()),
+            ("cardExpirationFormat".to_string(), json!("1")),
+            ("includeTemporary".to_string(), json!("false")),
         ])),
         1,
     )

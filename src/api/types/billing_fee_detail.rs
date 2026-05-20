@@ -19,18 +19,26 @@ pub struct BillingFeeDetail {
     /// Fixed price component of the fee
     #[serde(rename = "fixPrice")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub fix_price: Option<f64>,
     /// Percentage component of the fee
     #[serde(rename = "floatPrice")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub float_price: Option<f64>,
     /// Amount eligible for the fee
     #[serde(rename = "billableAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub billable_amount: Option<f64>,
     /// Total fee amount charged
     #[serde(rename = "billAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub bill_amount: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub frequency: Option<String>,

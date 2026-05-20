@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct GeneralEvents {
     /// Event description.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -14,7 +14,7 @@ pub struct GeneralEvents {
     /// Extra data.
     #[serde(rename = "extraData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub extra_data: Option<HashMap<String, serde_json::Value>>,
+    pub extra_data: Option<String>,
     /// Reference data.
     #[serde(rename = "refData")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -35,7 +35,7 @@ impl GeneralEvents {
 pub struct GeneralEventsBuilder {
     description: Option<String>,
     event_time: Option<DateTime<Utc>>,
-    extra_data: Option<HashMap<String, serde_json::Value>>,
+    extra_data: Option<String>,
     ref_data: Option<String>,
     source: Option<Source>,
 }
@@ -51,8 +51,8 @@ impl GeneralEventsBuilder {
         self
     }
 
-    pub fn extra_data(mut self, value: HashMap<String, serde_json::Value>) -> Self {
-        self.extra_data = Some(value);
+    pub fn extra_data(mut self, value: impl Into<String>) -> Self {
+        self.extra_data = Some(value.into());
         self
     }
 

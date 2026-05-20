@@ -42,6 +42,7 @@ pub struct V2TransactionDetails {
     /// Total amount in the batch.
     #[serde(rename = "batchAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub batch_amount: f64,
     #[serde(rename = "payorId")]
     #[serde(default)]
@@ -58,10 +59,12 @@ pub struct V2TransactionDetails {
     /// Total transaction amount including fees.
     #[serde(rename = "totalAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
     /// Net transaction amount excluding fees.
     #[serde(rename = "netAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub net_amount: f64,
     #[serde(rename = "feeAmount")]
     #[serde(default)]

@@ -8,6 +8,8 @@ pub struct RequestRefund {
     ///
     /// An amount equal to zero will refund the total amount authorized minus any service fee.
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub amount: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ipaddress: Option<IpAddress>,

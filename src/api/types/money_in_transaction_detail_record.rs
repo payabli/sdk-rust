@@ -36,6 +36,7 @@ pub struct TransactionDetailRecord {
     pub batch_number: BatchNumber,
     #[serde(rename = "batchAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub batch_amount: f64,
     #[serde(rename = "payorId")]
     #[serde(default)]
@@ -51,9 +52,11 @@ pub struct TransactionDetailRecord {
     pub paypoint_id: PaypointId,
     #[serde(rename = "totalAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
     #[serde(rename = "netAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub net_amount: f64,
     #[serde(rename = "feeAmount")]
     #[serde(default)]

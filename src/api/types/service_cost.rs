@@ -8,6 +8,8 @@ pub struct ServiceCost {
     pub enabled: Option<Enabled>,
     #[serde(rename = "monthlyCost")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub monthly_cost: Option<f64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
@@ -15,12 +17,18 @@ pub struct ServiceCost {
     pub reseller: Option<bool>,
     #[serde(rename = "setupCost")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub setup_cost: Option<f64>,
     #[serde(rename = "txCost")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub tx_cost: Option<f64>,
     #[serde(rename = "txPercentCost")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub tx_percent_cost: Option<f64>,
 }
 

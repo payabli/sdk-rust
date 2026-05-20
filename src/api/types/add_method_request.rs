@@ -4,15 +4,15 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct AddMethodRequest {
     #[serde(rename = "achValidation")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub ach_validation: Option<AchValidation>,
     #[serde(rename = "createAnonymous")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub create_anonymous: Option<CreateAnonymous>,
     #[serde(rename = "forceCustomerCreation")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub force_customer_creation: Option<ForceCustomerCreation>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub temporary: Option<Temporary>,
     #[serde(default)]
     pub body: RequestTokenStorage,

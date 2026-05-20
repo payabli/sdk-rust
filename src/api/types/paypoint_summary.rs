@@ -4,9 +4,13 @@ pub use crate::prelude::*;
 pub struct PaypointSummary {
     #[serde(rename = "amountSubs")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub amount_subs: Option<f64>,
     #[serde(rename = "amountTx")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub amount_tx: Option<f64>,
     #[serde(rename = "countSubs")]
     #[serde(skip_serializing_if = "Option::is_none")]

@@ -28,33 +28,49 @@ pub struct QueryBatchesResponseRecordsItem {
     /// The amount of the batch.
     #[serde(rename = "BatchAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_amount: Option<f64>,
     /// The total of fees in the batch.
     #[serde(rename = "BatchFeesAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_fees_amount: Option<f64>,
     #[serde(rename = "BatchAuthAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_auth_amount: Option<f64>,
     /// Previously held funds that have been released after a risk review.
     #[serde(rename = "BatchReleasedAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_released_amount: Option<f64>,
     /// The total amount of the batch that's being held for fraud or risk concerns.
     #[serde(rename = "BatchHoldAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_hold_amount: Option<f64>,
     /// Total amount of ACH returns deducted from batch.
     #[serde(rename = "BatchReturnedAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_returned_amount: Option<f64>,
     /// The total amount of refunds deducted from batch.
     #[serde(rename = "BatchRefundAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_refund_amount: Option<f64>,
     /// Total of split transactions that included split funding instructions at the time of authorization.
     #[serde(rename = "BatchSplitAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub batch_split_amount: Option<f64>,
     /// The batch status. See [Batch Status](/developers/references/money-in-statuses#batch-status) for more.
     #[serde(rename = "BatchStatus")]

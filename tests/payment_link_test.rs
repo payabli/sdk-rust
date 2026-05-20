@@ -153,7 +153,7 @@ async fn test_payment_link_add_pay_link_from_invoice_with_wiremock() {
         "/PaymentLink/23548884",
         Some(HashMap::from([(
             "mail2".to_string(),
-            "jo@example.com; ceo@example.com".to_string(),
+            json!("jo@example.com; ceo@example.com"),
         )])),
         1,
     )
@@ -264,7 +264,7 @@ async fn test_payment_link_add_pay_link_from_bill_with_wiremock() {
         "/PaymentLink/bill/23548884",
         Some(HashMap::from([(
             "mail2".to_string(),
-            "jo@example.com; ceo@example.com".to_string(),
+            json!("jo@example.com; ceo@example.com"),
         )])),
         1,
     )
@@ -418,7 +418,7 @@ async fn test_payment_link_send_pay_link_from_id_with_wiremock() {
         "/PaymentLink/send/payLinkId",
         Some(HashMap::from([(
             "mail2".to_string(),
-            "jo@example.com; ceo@example.com".to_string(),
+            json!("jo@example.com; ceo@example.com"),
         )])),
         1,
     )
@@ -575,13 +575,13 @@ async fn test_payment_link_add_pay_link_from_bill_lot_number_with_wiremock() {
         "POST",
         "/PaymentLink/bill/lotNumber/LOT-2024-001",
         Some(HashMap::from([
-            ("entryPoint".to_string(), "billing".to_string()),
-            ("vendorNumber".to_string(), "VENDOR-123".to_string()),
+            ("entryPoint".to_string(), json!("billing")),
+            ("vendorNumber".to_string(), json!("VENDOR-123")),
             (
                 "mail2".to_string(),
-                "customer@example.com; billing@example.com".to_string(),
+                json!("customer@example.com; billing@example.com"),
             ),
-            ("amountFixed".to_string(), "true".to_string()),
+            ("amountFixed".to_string(), json!("true")),
         ])),
         1,
     )

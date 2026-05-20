@@ -12,6 +12,7 @@ pub struct StatisticsVendorQueryRecord {
     /// Volume of active transactions
     #[serde(rename = "activeVolume")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub active_volume: f64,
     /// Number of transactions sent to approval
     #[serde(rename = "sentToApproval")]
@@ -20,6 +21,7 @@ pub struct StatisticsVendorQueryRecord {
     /// Volume of transactions sent to approval
     #[serde(rename = "sentToApprovalVolume")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub sent_to_approval_volume: f64,
     /// Number of transactions to approval
     #[serde(rename = "toApproval")]
@@ -28,6 +30,7 @@ pub struct StatisticsVendorQueryRecord {
     /// Volume of transactions to approval
     #[serde(rename = "toApprovalVolume")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub to_approval_volume: f64,
     /// Number of approved transactions
     #[serde(default)]
@@ -35,6 +38,7 @@ pub struct StatisticsVendorQueryRecord {
     /// Volume of approved transactions
     #[serde(rename = "approvedVolume")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub approved_volume: f64,
     /// Number of disapproved transactions
     #[serde(default)]
@@ -42,6 +46,7 @@ pub struct StatisticsVendorQueryRecord {
     /// Volume of disapproved transactions
     #[serde(rename = "disapprovedVolume")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub disapproved_volume: f64,
     /// Number of cancelled transactions
     #[serde(default)]
@@ -49,6 +54,7 @@ pub struct StatisticsVendorQueryRecord {
     /// Volume of cancelled transactions
     #[serde(rename = "cancelledVolume")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub cancelled_volume: f64,
     /// Number of transactions in transit
     #[serde(rename = "inTransit")]
@@ -57,6 +63,7 @@ pub struct StatisticsVendorQueryRecord {
     /// Volume of transactions in transit
     #[serde(rename = "inTransitVolume")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub in_transit_volume: f64,
     /// Number of paid transactions
     #[serde(default)]
@@ -64,6 +71,7 @@ pub struct StatisticsVendorQueryRecord {
     /// Volume of paid transactions
     #[serde(rename = "paidVolume")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub paid_volume: f64,
 }
 

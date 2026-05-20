@@ -5,7 +5,7 @@ pub use crate::prelude::*;
 pub struct SendToApprovalBillRequest {
     /// Automatically create the target user for approval if they don't exist.
     #[serde(rename = "autocreateUser")]
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing)]
     pub autocreate_user: Option<bool>,
     #[serde(default)]
     pub body: Vec<String>,

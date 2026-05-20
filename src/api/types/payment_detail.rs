@@ -21,6 +21,8 @@ pub struct PaymentDetail {
     /// Service fee to be deducted from the total amount. This amount must be a number, percentages aren't accepted. If you are using a percentage-based fee schedule, you must calculate the value manually.
     #[serde(rename = "serviceFee")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub service_fee: Option<f64>,
     /// Split funding instructions for the transaction. See [Split a Transaction](/developers/developer-guides/money-in-split-funding) for more.
     #[serde(rename = "splitFunding")]
@@ -33,6 +35,7 @@ pub struct PaymentDetail {
     /// Total amount to be charged. If a service fee is sent, then this amount should include the service fee."
     #[serde(rename = "totalAmount")]
     #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
     pub total_amount: f64,
 }
 

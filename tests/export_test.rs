@@ -38,10 +38,10 @@ async fn test_export_export_applications_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -85,10 +85,10 @@ async fn test_export_export_batch_details_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -132,10 +132,10 @@ async fn test_export_export_batch_details_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -179,10 +179,10 @@ async fn test_export_export_batches_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -226,10 +226,10 @@ async fn test_export_export_batches_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -273,10 +273,10 @@ async fn test_export_export_batches_out_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -320,10 +320,10 @@ async fn test_export_export_batches_out_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -367,10 +367,10 @@ async fn test_export_export_bills_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -414,10 +414,10 @@ async fn test_export_export_bills_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -461,10 +461,10 @@ async fn test_export_export_chargebacks_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -508,10 +508,10 @@ async fn test_export_export_chargebacks_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -555,10 +555,10 @@ async fn test_export_export_customers_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -602,10 +602,10 @@ async fn test_export_export_customers_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -649,10 +649,10 @@ async fn test_export_export_invoices_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -696,10 +696,10 @@ async fn test_export_export_invoices_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -743,10 +743,10 @@ async fn test_export_export_organizations_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -790,10 +790,10 @@ async fn test_export_export_payout_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -837,10 +837,10 @@ async fn test_export_export_payout_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -884,10 +884,10 @@ async fn test_export_export_paypoints_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -931,10 +931,10 @@ async fn test_export_export_settlements_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -978,10 +978,10 @@ async fn test_export_export_settlements_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -1025,10 +1025,10 @@ async fn test_export_export_subscriptions_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -1072,10 +1072,10 @@ async fn test_export_export_subscriptions_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -1119,10 +1119,10 @@ async fn test_export_export_transactions_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -1166,10 +1166,10 @@ async fn test_export_export_transactions_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -1215,11 +1215,11 @@ async fn test_export_export_transfer_details_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1263,11 +1263,11 @@ async fn test_export_export_transfers_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -1311,10 +1311,10 @@ async fn test_export_export_vendors_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )
@@ -1358,10 +1358,10 @@ async fn test_export_export_vendors_org_with_wiremock() {
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),
-                "BatchDate:Batch_Date,PaypointName:Legal_name".to_string(),
+                json!("BatchDate:Batch_Date,PaypointName:Legal_name"),
             ),
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "1000".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("1000")),
         ])),
         1,
     )

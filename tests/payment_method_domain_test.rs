@@ -164,8 +164,8 @@ async fn test_payment_method_domain_list_payment_method_domains_with_wiremock() 
         "GET",
         "/PaymentMethodDomain/list",
         Some(HashMap::from([
-            ("entityId".to_string(), "1147".to_string()),
-            ("entityType".to_string(), "paypoint".to_string()),
+            ("entityId".to_string(), json!("1147")),
+            ("entityType".to_string(), json!("paypoint")),
         ])),
         1,
     )

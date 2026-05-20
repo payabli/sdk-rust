@@ -375,10 +375,7 @@ async fn test_money_out_reissue_out_with_wiremock() {
     wire_test_utils::verify_request_count(
         "POST",
         "/MoneyOut/reissue",
-        Some(HashMap::from([(
-            "transId".to_string(),
-            "129-219".to_string(),
-        )])),
+        Some(HashMap::from([("transId".to_string(), json!("129-219"))])),
         1,
     )
     .await

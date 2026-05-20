@@ -299,9 +299,9 @@ async fn test_invoice_list_invoices_with_wiremock() {
         "GET",
         "/Query/invoices/8cfec329267",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -342,9 +342,9 @@ async fn test_invoice_list_invoices_org_with_wiremock() {
         "GET",
         "/Query/invoices/org/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -384,8 +384,8 @@ async fn test_invoice_send_invoice_with_wiremock() {
         "GET",
         "/Invoice/send/23548884",
         Some(HashMap::from([
-            ("attachfile".to_string(), "true".to_string()),
-            ("mail2".to_string(), "tamara@example.com".to_string()),
+            ("attachfile".to_string(), json!("true")),
+            ("mail2".to_string(), json!("tamara@example.com")),
         ])),
         1,
     )

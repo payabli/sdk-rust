@@ -407,9 +407,9 @@ async fn test_boarding_list_applications_with_wiremock() {
         "GET",
         "/Query/boarding/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )
@@ -450,9 +450,9 @@ async fn test_boarding_list_boarding_links_with_wiremock() {
         "GET",
         "/Query/boardinglinks/123",
         Some(HashMap::from([
-            ("fromRecord".to_string(), "251".to_string()),
-            ("limitRecord".to_string(), "0".to_string()),
-            ("sortBy".to_string(), "desc(field_name)".to_string()),
+            ("fromRecord".to_string(), json!("251")),
+            ("limitRecord".to_string(), json!("0")),
+            ("sortBy".to_string(), json!("desc(field_name)")),
         ])),
         1,
     )

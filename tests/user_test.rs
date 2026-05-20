@@ -259,10 +259,7 @@ async fn test_user_get_user_with_wiremock() {
     wire_test_utils::verify_request_count(
         "GET",
         "/User/1000000",
-        Some(HashMap::from([(
-            "entry".to_string(),
-            "478ae1234".to_string(),
-        )])),
+        Some(HashMap::from([("entry".to_string(), json!("478ae1234"))])),
         1,
     )
     .await

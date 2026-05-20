@@ -37,8 +37,8 @@ async fn test_statistic_basic_stats_with_wiremock() {
         "GET",
         "/Statistic/basic/ytd/m/1/1000000",
         Some(HashMap::from([
-            ("endDate".to_string(), "2025-11-01".to_string()),
-            ("startDate".to_string(), "2025-11-30".to_string()),
+            ("endDate".to_string(), json!("2025-11-01")),
+            ("startDate".to_string(), json!("2025-11-30")),
         ])),
         1,
     )

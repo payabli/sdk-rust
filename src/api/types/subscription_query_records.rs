@@ -24,6 +24,8 @@ pub struct SubscriptionQueryRecords {
     /// Fee applied to the subscription.
     #[serde(rename = "FeeAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub fee_amount: Option<f64>,
     /// The subscription's frequency.
     #[serde(rename = "Frequency")]
@@ -121,6 +123,8 @@ pub struct SubscriptionQueryRecords {
     /// The subscription amount, including any fees.
     #[serde(rename = "TotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
     /// The total number of cycles the subscription is set to run.
     #[serde(rename = "TotalCycles")]
