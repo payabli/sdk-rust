@@ -103,7 +103,6 @@ pub struct SubscriptionQueryRecords {
     /// The full stored payment method record linked to the subscription
     /// and charged on each billing cycle. Returned as `null` for legacy
     /// subscriptions that don't have a linked stored method.
-    ///
     /// The shape is the same across payment vehicles (card, ACH, check).
     /// Only the populated fields differ. For example, `ABA` is populated
     /// for ACH, while `ExpDate` and `binData` are populated for card.
@@ -120,6 +119,10 @@ pub struct SubscriptionQueryRecords {
     #[serde(rename = "SubStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sub_status: Option<i64>,
+    /// Subscription type or category. Returns `null` when no type is assigned.
+    #[serde(rename = "SubscriptionType")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub subscription_type: Option<SubscriptionType>,
     /// The subscription amount, including any fees.
     #[serde(rename = "TotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -172,6 +175,7 @@ pub struct SubscriptionQueryRecordsBuilder {
     stored_method: Option<VendorResponseStoredMethod>,
     sub_events: Option<Vec<GeneralEvents>>,
     sub_status: Option<i64>,
+    subscription_type: Option<SubscriptionType>,
     total_amount: Option<f64>,
     total_cycles: Option<i64>,
     until_cancelled: Option<bool>,
@@ -313,6 +317,11 @@ impl SubscriptionQueryRecordsBuilder {
         self
     }
 
+    pub fn subscription_type(mut self, value: SubscriptionType) -> Self {
+        self.subscription_type = Some(value);
+        self
+    }
+
     pub fn total_amount(mut self, value: f64) -> Self {
         self.total_amount = Some(value);
         self
@@ -358,6 +367,7 @@ impl SubscriptionQueryRecordsBuilder {
             stored_method: self.stored_method,
             sub_events: self.sub_events,
             sub_status: self.sub_status,
+            subscription_type: self.subscription_type,
             total_amount: self.total_amount,
             total_cycles: self.total_cycles,
             until_cancelled: self.until_cancelled,

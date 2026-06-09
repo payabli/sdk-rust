@@ -49,7 +49,7 @@ pub struct PayabliCredentialsPascal {
     /// The default currency for the paypoint, either `USD` or `CAD`.
     #[serde(rename = "Currency")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub currency: Option<String>,
+    pub currency: Option<Vec<String>>,
     #[serde(rename = "GreaterValueAllowed")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub greater_value_allowed: Option<GreaterValueAllowed>,
@@ -81,7 +81,7 @@ pub struct PayabliCredentialsPascalBuilder {
     account_id: Option<AccountId>,
     reference_id: Option<i64>,
     accept_same_day_ach: Option<bool>,
-    currency: Option<String>,
+    currency: Option<Vec<String>>,
     greater_value_allowed: Option<GreaterValueAllowed>,
     absorb_difference: Option<AbsorbDifference>,
     allow_override: Option<AllowOverride>,
@@ -143,8 +143,8 @@ impl PayabliCredentialsPascalBuilder {
         self
     }
 
-    pub fn currency(mut self, value: impl Into<String>) -> Self {
-        self.currency = Some(value.into());
+    pub fn currency(mut self, value: Vec<String>) -> Self {
+        self.currency = Some(value);
         self
     }
 

@@ -39,31 +39,28 @@ impl SubscriptionClient {
             .await
     }
 
-    /// Creates a subscription or scheduled payment to run at a specified time and frequency.
+    /// Updates a subscription's details.
     ///
     /// # Arguments
     ///
+    /// * `sub_id` - The subscription ID.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn new_subscription(
+    pub async fn update_subscription(
         &self,
-        request: &NewSubscriptionRequest,
+        sub_id: i64,
+        request: &RequestUpdateSchedule,
         options: Option<RequestOptions>,
-    ) -> Result<AddSubscriptionResponse, ApiError> {
+    ) -> Result<UpdateSubscriptionResponse, ApiError> {
         self.http_client
             .execute_request(
-                Method::POST,
-                "Subscription/add",
-                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
-                QueryBuilder::new()
-                    .serialize(
-                        "forceCustomerCreation",
-                        request.force_customer_creation.clone(),
-                    )
-                    .build(),
+                Method::PUT,
+                &format!("Subscription/{}", sub_id),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
                 options,
             )
             .await
@@ -95,28 +92,32 @@ impl SubscriptionClient {
             .await
     }
 
-    /// Updates a subscription's details.
+    /// Creates a subscription or scheduled payment to run at a specified time and frequency. You can use stored payment method tokens for card, ACH, and digital wallets by passing them into the `paymentMethod.storedMethodId` field.
     ///
     /// # Arguments
     ///
-    /// * `sub_id` - The subscription ID.
+    /// * `force_customer_creation` - When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn update_subscription(
+    pub async fn new_subscription(
         &self,
-        sub_id: i64,
-        request: &RequestUpdateSchedule,
+        request: &RequestSchedule,
         options: Option<RequestOptions>,
-    ) -> Result<UpdateSubscriptionResponse, ApiError> {
+    ) -> Result<AddSubscriptionResponse, ApiError> {
         self.http_client
             .execute_request(
-                Method::PUT,
-                &format!("Subscription/{}", sub_id),
+                Method::POST,
+                "Subscription/add",
                 Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
-                None,
+                QueryBuilder::new()
+                    .serialize(
+                        "forceCustomerCreation",
+                        request.force_customer_creation.clone(),
+                    )
+                    .build(),
                 options,
             )
             .await

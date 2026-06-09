@@ -3,7 +3,6 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct PayabliApiResponseNotifications {
     /// If `isSuccess` = true, `responseData` contains the notification identifier.
-    ///
     /// If `isSuccess` = false, `responseData` contains the reason for the error.
     #[serde(rename = "isSuccess")]
     #[serde(skip_serializing_if = "Option::is_none")]

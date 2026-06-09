@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-/// Describes when customers are charged for goods or services. Accepted values:
+/// Describes when customers are charged for goods or services.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Whencharged {

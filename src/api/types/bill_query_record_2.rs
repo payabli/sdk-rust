@@ -11,7 +11,7 @@ pub struct BillQueryRecord2 {
     /// Additional data associated with the bill.
     #[serde(rename = "AdditionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<HashMap<String, String>>,
+    pub additional_data: Option<HashMap<String, Option<String>>>,
     /// Batch number associated with the bill.
     #[serde(rename = "BatchNumber")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -163,7 +163,7 @@ impl BillQueryRecord2 {
 pub struct BillQueryRecord2Builder {
     accounting_field_1: Option<AccountingField>,
     accounting_field_2: Option<AccountingField>,
-    additional_data: Option<HashMap<String, String>>,
+    additional_data: Option<HashMap<String, Option<String>>>,
     batch_number: Option<String>,
     bill_approvals: Option<Vec<BillQueryRecord2BillApprovalsItem>>,
     bill_date: Option<NaiveDate>,
@@ -211,7 +211,7 @@ impl BillQueryRecord2Builder {
         self
     }
 
-    pub fn additional_data(mut self, value: HashMap<String, String>) -> Self {
+    pub fn additional_data(mut self, value: HashMap<String, Option<String>>) -> Self {
         self.additional_data = Some(value);
         self
     }

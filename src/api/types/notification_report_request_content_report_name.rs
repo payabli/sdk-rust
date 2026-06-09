@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-/// The kind report to generate.
+/// The kind of report to generate.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum NotificationReportRequestContentReportName {

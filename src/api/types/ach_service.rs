@@ -26,7 +26,8 @@ pub struct AchService {
     #[serde(rename = "achPassThrough")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ach_pass_through: Option<AchPassThroughSection>,
-    /// Controls how to present the `batchCutoffTime` field on the application. If this field isn't sent, batch cut off time defaults to 5 ET.
+    /// Controls how to present the `batchCutoffTime` field on the application.
+    /// If this field isn't sent, batch cutoff time defaults to 5 ET.
     #[serde(rename = "batchCutoffTime")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_cutoff_time: Option<TemplateElement>,

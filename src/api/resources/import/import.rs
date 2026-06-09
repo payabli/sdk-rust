@@ -44,6 +44,7 @@ impl ImportClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entrypoint identifier.
     /// * `replace_existing` - Flag indicating to replace existing customer with a new record. Possible values: 0 (do not replace), 1 (replace). Default is 0
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
@@ -73,6 +74,7 @@ impl ImportClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entrypoint identifier.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns

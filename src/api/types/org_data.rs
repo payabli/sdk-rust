@@ -15,9 +15,7 @@ pub struct OrgData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_name: Option<Orgname>,
     /// The paypoint's status.
-    ///
     /// Active - `1`
-    ///
     /// Inactive - 0
     #[serde(rename = "orgStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]

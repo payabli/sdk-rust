@@ -25,7 +25,7 @@ async fn test_money_in_authorize_with_wiremock() {
                         customer_id: Some(CustomerId(4440)),
                         ..Default::default()
                     }),
-                    entry_point: Some(Entrypointfield("f743aed24a".to_string())),
+                    entry_point: Some(Entrypointfield("8cfec329267".to_string())),
                     invoice_data: None,
                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
                     order_description: None,
@@ -42,7 +42,7 @@ async fn test_money_in_authorize_with_wiremock() {
                         cardnumber: Cardnumber("4111111111111111".to_string()),
                         cardzip: Some(Cardzip("12345".to_string())),
                         initiator: Some(Initiator("payor".to_string())),
-                        method: "card".to_string(),
+                        method: PayMethodCreditMethod::Card,
                         save_if_success: None,
                     }),
                     source: None,
@@ -158,10 +158,10 @@ async fn test_money_in_credit_with_wiremock() {
                     billing_address_1: Some(BillingAddressNullable(
                         "5127 Linkwood ave".to_string(),
                     )),
-                    customer_number: Some(CustomerNumberNullable("100".to_string())),
+                    customer_number: Some(CustomerNumberNullable("C-90010".to_string())),
                     ..Default::default()
                 },
-                entrypoint: Some(Entrypointfield("my-entrypoint".to_string())),
+                entrypoint: Some(Entrypointfield("8cfec329267".to_string())),
                 payment_details: PaymentDetailCredit {
                     service_fee: Some(0.0),
                     total_amount: 1.0,
@@ -173,7 +173,7 @@ async fn test_money_in_credit_with_wiremock() {
                     ach_code: None,
                     ach_holder: Some(AchHolder("John Smith".to_string())),
                     ach_routing: Some(Achrouting("021000021".to_string())),
-                    method: "ach".to_string(),
+                    method: RequestCreditPaymentMethodMethod::Ach,
                 },
                 force_customer_creation: None,
                 account_id: None,
@@ -249,7 +249,7 @@ async fn test_money_in_getpaid_with_wiremock() {
                         customer_id: Some(CustomerId(4440)),
                         ..Default::default()
                     }),
-                    entry_point: Some(Entrypointfield("f743aed24a".to_string())),
+                    entry_point: Some(Entrypointfield("8cfec329267".to_string())),
                     invoice_data: None,
                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
                     order_description: None,
@@ -266,7 +266,7 @@ async fn test_money_in_getpaid_with_wiremock() {
                         cardnumber: Cardnumber("4111111111111111".to_string()),
                         cardzip: Some(Cardzip("12345".to_string())),
                         initiator: Some(Initiator("payor".to_string())),
-                        method: "card".to_string(),
+                        method: PayMethodCreditMethod::Card,
                         save_if_success: None,
                     }),
                     source: None,
@@ -506,7 +506,7 @@ async fn test_money_in_validate_with_wiremock() {
         .money_in
         .validate(
             &RequestPaymentValidate {
-                entry_point: Entrypointfield("entry132".to_string()),
+                entry_point: Entrypointfield("8cfec329267".to_string()),
                 payment_method: RequestPaymentValidatePaymentMethod {
                     method: RequestPaymentValidatePaymentMethodMethod::Card,
                     cardnumber: Cardnumber("4360000001000005".to_string()),
@@ -585,7 +585,7 @@ async fn test_money_in_getpaidv_2_with_wiremock() {
                         customer_id: Some(CustomerId(4440)),
                         ..Default::default()
                     }),
-                    entry_point: Some(Entrypointfield("f743aed24a".to_string())),
+                    entry_point: Some(Entrypointfield("8cfec329267".to_string())),
                     invoice_data: None,
                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
                     order_description: None,
@@ -602,7 +602,7 @@ async fn test_money_in_getpaidv_2_with_wiremock() {
                         cardnumber: Cardnumber("4111111111111111".to_string()),
                         cardzip: Some(Cardzip("12345".to_string())),
                         initiator: Some(Initiator("payor".to_string())),
-                        method: "card".to_string(),
+                        method: PayMethodCreditMethod::Card,
                         save_if_success: None,
                     }),
                     source: None,
@@ -646,7 +646,7 @@ async fn test_money_in_authorizev_2_with_wiremock() {
                         customer_id: Some(CustomerId(4440)),
                         ..Default::default()
                     }),
-                    entry_point: Some(Entrypointfield("f743aed24a".to_string())),
+                    entry_point: Some(Entrypointfield("8cfec329267".to_string())),
                     invoice_data: None,
                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
                     order_description: None,
@@ -663,7 +663,7 @@ async fn test_money_in_authorizev_2_with_wiremock() {
                         cardnumber: Cardnumber("4111111111111111".to_string()),
                         cardzip: Some(Cardzip("12345".to_string())),
                         initiator: Some(Initiator("payor".to_string())),
-                        method: "card".to_string(),
+                        method: PayMethodCreditMethod::Card,
                         save_if_success: None,
                     }),
                     source: None,

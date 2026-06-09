@@ -80,7 +80,7 @@ pub struct CustomerData {
     /// Additional Custom fields in format "key":"value".
     #[serde(rename = "additionalFields")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<HashMap<String, Option<String>>>,
+    pub additional_fields: Option<HashMap<String, String>>,
     #[serde(rename = "identifierFields")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub identifier_fields: Option<Identifierfields>,
@@ -121,7 +121,7 @@ pub struct CustomerDataBuilder {
     shipping_country: Option<Shippingcountry>,
     balance: Option<f64>,
     time_zone: Option<Timezone>,
-    additional_fields: Option<HashMap<String, Option<String>>>,
+    additional_fields: Option<HashMap<String, String>>,
     identifier_fields: Option<Identifierfields>,
     created_at: Option<CreatedAt>,
 }
@@ -242,7 +242,7 @@ impl CustomerDataBuilder {
         self
     }
 
-    pub fn additional_fields(mut self, value: HashMap<String, Option<String>>) -> Self {
+    pub fn additional_fields(mut self, value: HashMap<String, String>) -> Self {
         self.additional_fields = Some(value);
         self
     }

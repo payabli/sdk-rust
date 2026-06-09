@@ -21,6 +21,7 @@ impl GhostCardClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -47,6 +48,7 @@ impl GhostCardClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns

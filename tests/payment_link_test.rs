@@ -15,9 +15,8 @@ async fn test_payment_link_add_pay_link_from_invoice_with_wiremock() {
     config.base_url = wiremock_base_url.to_string();
     let client = ApiClient::new(config).expect("Failed to build client");
 
-    let result = client.payment_link.add_pay_link_from_invoice(23548884, &AddPayLinkFromInvoiceRequest {
+    let result = client.payment_link.add_pay_link_from_invoice(23548884, &PayLinkDataInvoice {
         mail_2: Some("jo@example.com; ceo@example.com".to_string()),
-        body: PaymentPageRequestBody {
         contact_us: Some(ContactElement {
         email_label: Some("Email".to_string()),
         enabled: Some(Enabled(true)),
@@ -142,8 +141,6 @@ async fn test_payment_link_add_pay_link_from_invoice_with_wiremock() {
         ..Default::default()
         }),
         ..Default::default()
-        },
-        amount_fixed: None
         }, None).await;
 
     assert!(result.is_ok(), "Client method call should succeed");
@@ -177,7 +174,7 @@ async fn test_payment_link_add_pay_link_from_bill_with_wiremock() {
     let result = client
         .payment_link
         .add_pay_link_from_bill(
-            23548884,
+            54323,
             &AddPayLinkFromBillRequest {
                 mail_2: Some("jo@example.com; ceo@example.com".to_string()),
                 body: PaymentPageRequestBodyOut {
@@ -261,7 +258,7 @@ async fn test_payment_link_add_pay_link_from_bill_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "POST",
-        "/PaymentLink/bill/23548884",
+        "/PaymentLink/bill/54323",
         Some(HashMap::from([(
             "mail2".to_string(),
             json!("jo@example.com; ceo@example.com"),
@@ -320,14 +317,22 @@ async fn test_payment_link_get_pay_link_from_id_with_wiremock() {
 
     let result = client
         .payment_link
-        .get_pay_link_from_id(&"paylinkId".to_string(), None)
+        .get_pay_link_from_id(
+            &"2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234".to_string(),
+            None,
+        )
         .await;
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("GET", "/PaymentLink/load/paylinkId", None, 1)
-        .await
-        .unwrap();
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/PaymentLink/load/2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
 }
 
 #[tokio::test]
@@ -345,14 +350,23 @@ async fn test_payment_link_push_pay_link_from_id_with_wiremock() {
 
     let result = client
         .payment_link
-        .push_pay_link_from_id(&"payLinkId".to_string(), &PushPayLinkRequest::sms(), None)
+        .push_pay_link_from_id(
+            &"2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234".to_string(),
+            &PushPayLinkRequest::sms(),
+            None,
+        )
         .await;
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("POST", "/PaymentLink/push/payLinkId", None, 1)
-        .await
-        .unwrap();
+    wire_test_utils::verify_request_count(
+        "POST",
+        "/PaymentLink/push/2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
 }
 
 #[tokio::test]
@@ -371,7 +385,7 @@ async fn test_payment_link_refresh_pay_link_from_id_with_wiremock() {
     let result = client
         .payment_link
         .refresh_pay_link_from_id(
-            &"payLinkId".to_string(),
+            &"2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234".to_string(),
             &RefreshPayLinkFromIdQueryRequest {
                 ..Default::default()
             },
@@ -381,9 +395,14 @@ async fn test_payment_link_refresh_pay_link_from_id_with_wiremock() {
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("GET", "/PaymentLink/refresh/payLinkId", None, 1)
-        .await
-        .unwrap();
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/PaymentLink/refresh/2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
 }
 
 #[tokio::test]
@@ -402,7 +421,7 @@ async fn test_payment_link_send_pay_link_from_id_with_wiremock() {
     let result = client
         .payment_link
         .send_pay_link_from_id(
-            &"payLinkId".to_string(),
+            &"2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234".to_string(),
             &SendPayLinkFromIdQueryRequest {
                 mail_2: Some("jo@example.com; ceo@example.com".to_string()),
                 ..Default::default()
@@ -415,7 +434,7 @@ async fn test_payment_link_send_pay_link_from_id_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "GET",
-        "/PaymentLink/send/payLinkId",
+        "/PaymentLink/send/2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234",
         Some(HashMap::from([(
             "mail2".to_string(),
             json!("jo@example.com; ceo@example.com"),
@@ -442,7 +461,7 @@ async fn test_payment_link_update_pay_link_from_id_with_wiremock() {
     let result = client
         .payment_link
         .update_pay_link_from_id(
-            &"332-c277b704-1301".to_string(),
+            &"2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234".to_string(),
             &PayLinkUpdateData {
                 notes: Some(NoteElement {
                     enabled: Some(Enabled(true)),
@@ -466,9 +485,14 @@ async fn test_payment_link_update_pay_link_from_id_with_wiremock() {
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("PUT", "/PaymentLink/update/332-c277b704-1301", None, 1)
-        .await
-        .unwrap();
+    wire_test_utils::verify_request_count(
+        "PUT",
+        "/PaymentLink/update/2325-XXXXXXX-90b1-4598-b6c7-44cdcbf495d7-1234",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
 }
 
 #[tokio::test]
@@ -489,8 +513,8 @@ async fn test_payment_link_add_pay_link_from_bill_lot_number_with_wiremock() {
         .add_pay_link_from_bill_lot_number(
             &"LOT-2024-001".to_string(),
             &AddPayLinkFromBillLotNumberRequest {
-                entry_point: Entry("billing".to_string()),
-                vendor_number: "VENDOR-123".to_string(),
+                entry_point: Entry("8cfec329267".to_string()),
+                vendor_number: "VEN-123".to_string(),
                 mail_2: Some("customer@example.com; billing@example.com".to_string()),
                 amount_fixed: Some("true".to_string()),
                 body: PaymentPageRequestBodyOut {
@@ -575,8 +599,8 @@ async fn test_payment_link_add_pay_link_from_bill_lot_number_with_wiremock() {
         "POST",
         "/PaymentLink/bill/lotNumber/LOT-2024-001",
         Some(HashMap::from([
-            ("entryPoint".to_string(), json!("billing")),
-            ("vendorNumber".to_string(), json!("VENDOR-123")),
+            ("entryPoint".to_string(), json!("8cfec329267")),
+            ("vendorNumber".to_string(), json!("VEN-123")),
             (
                 "mail2".to_string(),
                 json!("customer@example.com; billing@example.com"),

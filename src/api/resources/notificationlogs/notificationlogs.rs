@@ -1,7 +1,6 @@
 use crate::api::*;
 use crate::{ApiError, ClientConfig, HttpClient, QueryBuilder, RequestOptions};
 use reqwest::Method;
-use uuid::Uuid;
 
 pub struct NotificationlogsClient {
     pub http_client: HttpClient,
@@ -22,6 +21,7 @@ impl NotificationlogsClient {
     ///
     /// # Arguments
     ///
+    /// * `page_size` - Number of records on each response page.
     /// * `page` - The page number to retrieve. Defaults to 1 if not provided.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
@@ -36,8 +36,8 @@ impl NotificationlogsClient {
         self.http_client
             .execute_request(
                 Method::POST,
-                "/v2/notificationlogs",
-                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
+                "v2/notificationlogs",
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .serialize("PageSize", request.page_size.clone())
                     .int("Page", request.page.clone())
@@ -60,13 +60,13 @@ impl NotificationlogsClient {
     /// JSON response from the API
     pub async fn get_notification_log(
         &self,
-        uuid: &Uuid,
+        uuid: &str,
         options: Option<RequestOptions>,
     ) -> Result<NotificationLogDetail, ApiError> {
         self.http_client
             .execute_request(
                 Method::GET,
-                &format!("/v2/notificationlogs/{}", uuid),
+                &format!("v2/notificationlogs/{}", uuid),
                 None,
                 None,
                 options,
@@ -88,13 +88,13 @@ impl NotificationlogsClient {
     /// JSON response from the API
     pub async fn retry_notification_log(
         &self,
-        uuid: &Uuid,
+        uuid: &str,
         options: Option<RequestOptions>,
     ) -> Result<NotificationLogDetail, ApiError> {
         self.http_client
             .execute_request(
                 Method::GET,
-                &format!("/v2/notificationlogs/{}/retry", uuid),
+                &format!("v2/notificationlogs/{}/retry", uuid),
                 None,
                 None,
                 options,
@@ -122,7 +122,7 @@ impl NotificationlogsClient {
         self.http_client
             .execute_request(
                 Method::POST,
-                "/v2/notificationlogs/retry",
+                "v2/notificationlogs/retry",
                 Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,

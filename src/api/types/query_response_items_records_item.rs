@@ -16,7 +16,7 @@ pub struct QueryResponseItemsRecordsItem {
     #[serde(rename = "PaypointEntryname")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub paypoint_entryname: Option<Entrypointfield>,
-    /// the Paypoint's legal name.
+    /// The paypoint's legal name.
     #[serde(rename = "PaypointLegalname")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub paypoint_legalname: Option<Legalname>,

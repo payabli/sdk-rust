@@ -44,7 +44,7 @@ impl ChargeBacksClient {
     ///
     /// # Arguments
     ///
-    /// * `id` - ID of the chargeback or return record. This is returned as `chargebackId` in the [RecievedChargeback](/developers/developer-guides/webhook-payloads#receivedChargeback) and [ReceivedAchReturn](/developers/developer-guides/webhook-payloads#receivedachreturn) webhook notifications.
+    /// * `id` - ID of the chargeback or return record. This is returned as `chargebackID` in the [ReceivedChargeBack](/guides/pay-ops-webhooks-payloads#receivedchargeback) and [ReceivedAchReturn](/guides/pay-ops-webhooks-payloads#receivedachreturn) webhook notifications.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -76,7 +76,7 @@ impl ChargeBacksClient {
     ///
     /// # Returns
     ///
-    /// Text response
+    /// JSON response from the API
     pub async fn get_chargeback_attachment(
         &self,
         id: i64,

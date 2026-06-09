@@ -31,14 +31,14 @@ impl MoneyOutClient {
     /// JSON response from the API
     pub async fn authorize_out(
         &self,
-        request: &AuthorizeOutRequest,
+        request: &RequestOutAuthorize,
         options: Option<RequestOptions>,
     ) -> Result<AuthCapturePayoutResponse, ApiError> {
         self.http_client
             .execute_request(
                 Method::POST,
                 "MoneyOut/authorize",
-                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .bool(
                         "allowDuplicatedBills",
@@ -56,7 +56,6 @@ impl MoneyOutClient {
     ///
     /// # Arguments
     ///
-    /// * `request` - Array of identifiers of payout transactions to cancel.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -134,7 +133,6 @@ impl MoneyOutClient {
     ///
     /// # Arguments
     ///
-    /// * `request` - Array of identifiers of payout transactions to capture.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -358,7 +356,7 @@ impl MoneyOutClient {
             .execute_request(
                 Method::POST,
                 "MoneyOut/reissue",
-                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .string("transId", request.trans_id.clone())
                     .build(),

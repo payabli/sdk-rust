@@ -1,6 +1,12 @@
 pub use crate::prelude::*;
 
-/// Get near-instant notifications via email, SMS, or webhooks for important events like new payment disputes, merchant activations, fraud alerts, approved transactions, settlement history, vendor payouts, and more. Use webhooks with notifications to get real-time updates and automate operations based on key those key events. See [Notifications](/developers/developer-guides/notifications-and-webhooks-overview#notifications) for more.
+/// Get near-instant notifications via email, SMS, or webhooks for important
+/// events like new payment disputes, merchant activations, fraud alerts,
+/// approved transactions, settlement history, vendor payouts, and more. Use
+/// webhooks with notifications to get real-time updates and automate
+/// operations based on those key events. See
+/// [Notifications](/developers/developer-guides/notifications-and-webhooks-overview#notifications)
+/// for more.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum NotificationStandardRequestMethod {

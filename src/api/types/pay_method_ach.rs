@@ -25,7 +25,7 @@ pub struct PayMethodAch {
     pub ach_routing: Achrouting,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub device: Option<Device>,
-    pub method: String,
+    pub method: PayMethodAchMethod,
 }
 
 impl PayMethodAch {
@@ -44,7 +44,7 @@ pub struct PayMethodAchBuilder {
     ach_holder_type: Option<AchHolderType>,
     ach_routing: Option<Achrouting>,
     device: Option<Device>,
-    method: Option<String>,
+    method: Option<PayMethodAchMethod>,
 }
 
 impl PayMethodAchBuilder {
@@ -83,8 +83,8 @@ impl PayMethodAchBuilder {
         self
     }
 
-    pub fn method(mut self, value: impl Into<String>) -> Self {
-        self.method = Some(value.into());
+    pub fn method(mut self, value: PayMethodAchMethod) -> Self {
+        self.method = Some(value);
         self
     }
 

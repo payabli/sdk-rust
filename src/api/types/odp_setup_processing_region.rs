@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-/// Region where payment processing occurs
+/// Region where payment processing occurs.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum OdpSetupProcessingRegion {

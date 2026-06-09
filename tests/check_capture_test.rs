@@ -19,7 +19,7 @@ async fn test_check_capture_check_processing_with_wiremock() {
         .check_capture
         .check_processing(
             &CheckCaptureRequestBody {
-                entry_point: Entry("47abcfea12".to_string()),
+                entry_point: Entry("8cfec329267".to_string()),
                 front_image: "/9j/4AAQSkZJRgABAQEASABIAAD...".to_string(),
                 rear_image: "/9j/4AAQSkZJRgABAQEASABIAAD...".to_string(),
                 check_amount: 12550,

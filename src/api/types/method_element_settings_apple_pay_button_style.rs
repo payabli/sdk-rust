@@ -1,6 +1,8 @@
 pub use crate::prelude::*;
 
-/// The Apple Pay button style. See [Apple Pay Button Style](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-style) for more information.
+/// The Apple Pay button style. See
+/// [Apple Pay Button Style](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-style)
+/// for more information.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum MethodElementSettingsApplePayButtonStyle {

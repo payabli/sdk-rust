@@ -65,6 +65,84 @@ impl PaypointClient {
             .await
     }
 
+    /// Updates a paypoint logo.
+    ///
+    /// # Arguments
+    ///
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn save_logo(
+        &self,
+        entry: &str,
+        request: &FileContent,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::PUT,
+                &format!("Paypoint/logo/{}", entry),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Migrates a paypoint to a new parent organization.
+    ///
+    /// # Arguments
+    ///
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn migrate(
+        &self,
+        request: &PaypointMoveRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<MigratePaypointResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                "Paypoint/migrate",
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Retrieves a paypoint's basic settings like custom fields, identifiers, and invoicing settings.
+    ///
+    /// # Arguments
+    ///
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn settings_page(
+        &self,
+        entry: &str,
+        options: Option<RequestOptions>,
+    ) -> Result<SettingsQueryRecord, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Paypoint/settings/{}", entry),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
     /// Gets the details for a single paypoint.
     ///
     /// # Arguments
@@ -94,12 +172,12 @@ impl PaypointClient {
             .await
     }
 
-    /// Gets the details for single payment page for a paypoint.
+    /// Gets the details for a single payment page for a paypoint.
     ///
     /// # Arguments
     ///
     /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
-    /// * `subdomain` - Payment page identifier. The subdomain value is the last portion of the payment page URL. For example, in`https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`.
+    /// * `subdomain` - Payment page identifier. The subdomain value is the last portion of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -127,7 +205,7 @@ impl PaypointClient {
     /// # Arguments
     ///
     /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
-    /// * `subdomain` - Payment page identifier. The subdomain value is the last portion of the payment page URL. For example, in`https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`.
+    /// * `subdomain` - Payment page identifier. The subdomain value is the last portion of the payment page URL. For example, in `https://paypages-sandbox.payabli.com/513823dc10/pay-your-fees-1`, the subdomain is `pay-your-fees-1`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -144,84 +222,6 @@ impl PaypointClient {
                 Method::DELETE,
                 &format!("Paypoint/{}/{}", entry, subdomain),
                 None,
-                None,
-                options,
-            )
-            .await
-    }
-
-    /// Updates a paypoint logo.
-    ///
-    /// # Arguments
-    ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn save_logo(
-        &self,
-        entry: &str,
-        request: &FileContent,
-        options: Option<RequestOptions>,
-    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::PUT,
-                &format!("Paypoint/logo/{}", entry),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
-                None,
-                options,
-            )
-            .await
-    }
-
-    /// Retrieves an paypoint's basic settings like custom fields, identifiers, and invoicing settings.
-    ///
-    /// # Arguments
-    ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn settings_page(
-        &self,
-        entry: &str,
-        options: Option<RequestOptions>,
-    ) -> Result<SettingsQueryRecord, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::GET,
-                &format!("Paypoint/settings/{}", entry),
-                None,
-                None,
-                options,
-            )
-            .await
-    }
-
-    /// Migrates a paypoint to a new parent organization.
-    ///
-    /// # Arguments
-    ///
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn migrate(
-        &self,
-        request: &PaypointMoveRequest,
-        options: Option<RequestOptions>,
-    ) -> Result<MigratePaypointResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::POST,
-                "Paypoint/migrate",
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

@@ -18,8 +18,8 @@ async fn test_payout_subscription_create_payout_subscription_with_wiremock() {
     let result = client
         .payout_subscription
         .create_payout_subscription(
-            &PayoutSubscriptionRequestBody {
-                entry_point: Entrypointfield("d193cf9a46".to_string()),
+            &RequestPayoutSchedule {
+                entry_point: Entrypointfield("8cfec329267".to_string()),
                 payment_method: AuthorizePaymentMethod {
                     method: "ach".to_string(),
                     ach_holder: Some("Herman Coatings".to_string()),
@@ -35,7 +35,7 @@ async fn test_payout_subscription_create_payout_subscription_with_wiremock() {
                     ..Default::default()
                 }),
                 vendor_data: RequestOutAuthorizeVendorData {
-                    vendor_id: Some(Vendorid(1501)),
+                    vendor_id: Some(Vendorid(456)),
                     ..Default::default()
                 },
                 bill_data: Some(vec![BillPayOutDataRequest {
@@ -43,17 +43,20 @@ async fn test_payout_subscription_create_payout_subscription_with_wiremock() {
                     invoice_date: Some(
                         NaiveDate::parse_from_str("2025-08-01", "%Y-%m-%d").unwrap(),
                     ),
-                    invoice_number: Some(InvoiceNumber("INV-5001".to_string())),
+                    invoice_number: Some(InvoiceNumber("INV-2345".to_string())),
                     net_amount: Some(NetAmountstring("500".to_string())),
                     ..Default::default()
                 }]),
                 schedule_details: Some(PayoutScheduleDetail {
-                    start_date: Some("09/01/2025".to_string()),
+                    start_date: Some("09/01/2027".to_string()),
                     end_date: Some("09/01/2026".to_string()),
                     frequency: Some(Frequency::Monthly),
                     ..Default::default()
                 }),
-                ..Default::default()
+                subdomain: None,
+                account_id: None,
+                source: None,
+                set_pause: None,
             },
             None,
         )

@@ -38,32 +38,6 @@ impl OrganizationClient {
             .await
     }
 
-    /// Delete an organization by ID.
-    ///
-    /// # Arguments
-    ///
-    /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn delete_organization(
-        &self,
-        org_id: i64,
-        options: Option<RequestOptions>,
-    ) -> Result<DeleteOrganizationResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::DELETE,
-                &format!("Organization/{}", org_id),
-                None,
-                None,
-                options,
-            )
-            .await
-    }
-
     /// Updates an organization's details by ID.
     ///
     /// # Arguments
@@ -85,6 +59,32 @@ impl OrganizationClient {
                 Method::PUT,
                 &format!("Organization/{}", org_id),
                 Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Delete an organization by ID.
+    ///
+    /// # Arguments
+    ///
+    /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn delete_organization(
+        &self,
+        org_id: i64,
+        options: Option<RequestOptions>,
+    ) -> Result<DeleteOrganizationResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::DELETE,
+                &format!("Organization/{}", org_id),
+                None,
                 None,
                 options,
             )
@@ -117,7 +117,7 @@ impl OrganizationClient {
             .await
     }
 
-    /// Gets an organizations basic details by org ID.
+    /// Gets an organization's basic details by org ID.
     ///
     /// # Arguments
     ///

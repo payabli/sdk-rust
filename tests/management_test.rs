@@ -18,7 +18,7 @@ async fn test_management_verify_account_details_with_wiremock() {
     let result = client
         .management
         .verify_account_details(
-            &"entry752".to_string(),
+            &"8cfec329267".to_string(),
             &VerifyAccountDetailsRequest {
                 routing_number: "122105278".to_string(),
                 account_number: "0000000016".to_string(),
@@ -35,7 +35,7 @@ async fn test_management_verify_account_details_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "POST",
-        "/Management/verifyAccountDetails/entry752",
+        "/Management/verifyAccountDetails/8cfec329267",
         None,
         1,
     )

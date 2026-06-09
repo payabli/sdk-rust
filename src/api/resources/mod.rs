@@ -2,40 +2,37 @@
 //!
 //! This module contains client implementations for:
 //!
-//! - **MoneyOutTypes**
-//! - **QueryTypes**
-//! - **V2MoneyInTypes**
 //! - **Bill**
-//! - **Boarding**
-//! - **ChargeBacks**
-//! - **CheckCapture**
-//! - **Cloud**
 //! - **Customer**
-//! - **Export**
-//! - **GhostCard**
-//! - **HostedPaymentPages**
-//! - **Import**
-//! - **Invoice**
-//! - **LineItem**
-//! - **Management**
+//! - **CheckCapture**
 //! - **MoneyIn**
-//! - **MoneyOut**
-//! - **Notification**
-//! - **Notificationlogs**
-//! - **Ocr**
-//! - **Organization**
-//! - **PaymentLink**
-//! - **PaymentMethodDomain**
-//! - **PayoutSubscription**
-//! - **Paypoint**
-//! - **Query**
-//! - **Statistic**
 //! - **Subscription**
-//! - **Templates**
+//! - **Invoice**
+//! - **PaymentLink**
 //! - **TokenStorage**
+//! - **Paypoint**
+//! - **HostedPaymentPages**
+//! - **PaymentMethodDomain**
+//! - **Import**
+//! - **Query**
+//! - **Ocr**
+//! - **Notificationlogs**
+//! - **Cloud**
+//! - **LineItem**
+//! - **Boarding**
+//! - **Templates**
+//! - **Export**
+//! - **Organization**
+//! - **Management**
+//! - **Statistic**
+//! - **Notification**
 //! - **User**
 //! - **Vendor**
+//! - **GhostCard**
+//! - **MoneyOut**
 //! - **Wallet**
+//! - **PayoutSubscription**
+//! - **ChargeBacks**
 
 use crate::{ApiError, ClientConfig};
 
@@ -54,7 +51,6 @@ pub mod line_item;
 pub mod management;
 pub mod money_in;
 pub mod money_out;
-pub mod money_out_types;
 pub mod notification;
 pub mod notificationlogs;
 pub mod ocr;
@@ -64,48 +60,46 @@ pub mod payment_method_domain;
 pub mod payout_subscription;
 pub mod paypoint;
 pub mod query;
-pub mod query_types;
 pub mod statistic;
 pub mod subscription;
 pub mod templates;
 pub mod token_storage;
 pub mod user;
-pub mod v_2_money_in_types;
 pub mod vendor;
 pub mod wallet;
 pub struct ApiClient {
     pub config: ClientConfig,
     pub bill: BillClient,
-    pub boarding: BoardingClient,
-    pub charge_backs: ChargeBacksClient,
-    pub check_capture: CheckCaptureClient,
-    pub cloud: CloudClient,
     pub customer: CustomerClient,
-    pub export: ExportClient,
-    pub ghost_card: GhostCardClient,
-    pub hosted_payment_pages: HostedPaymentPagesClient,
-    pub import: ImportClient,
-    pub invoice: InvoiceClient,
-    pub line_item: LineItemClient,
-    pub management: ManagementClient,
+    pub check_capture: CheckCaptureClient,
     pub money_in: MoneyInClient,
-    pub money_out: MoneyOutClient,
-    pub notification: NotificationClient,
-    pub notificationlogs: NotificationlogsClient,
-    pub ocr: OcrClient,
-    pub organization: OrganizationClient,
-    pub payment_link: PaymentLinkClient,
-    pub payment_method_domain: PaymentMethodDomainClient,
-    pub payout_subscription: PayoutSubscriptionClient,
-    pub paypoint: PaypointClient,
-    pub query: QueryClient,
-    pub statistic: StatisticClient,
     pub subscription: SubscriptionClient,
-    pub templates: TemplatesClient,
+    pub invoice: InvoiceClient,
+    pub payment_link: PaymentLinkClient,
     pub token_storage: TokenStorageClient,
+    pub paypoint: PaypointClient,
+    pub hosted_payment_pages: HostedPaymentPagesClient,
+    pub payment_method_domain: PaymentMethodDomainClient,
+    pub import: ImportClient,
+    pub query: QueryClient,
+    pub ocr: OcrClient,
+    pub notificationlogs: NotificationlogsClient,
+    pub cloud: CloudClient,
+    pub line_item: LineItemClient,
+    pub boarding: BoardingClient,
+    pub templates: TemplatesClient,
+    pub export: ExportClient,
+    pub organization: OrganizationClient,
+    pub management: ManagementClient,
+    pub statistic: StatisticClient,
+    pub notification: NotificationClient,
     pub user: UserClient,
     pub vendor: VendorClient,
+    pub ghost_card: GhostCardClient,
+    pub money_out: MoneyOutClient,
     pub wallet: WalletClient,
+    pub payout_subscription: PayoutSubscriptionClient,
+    pub charge_backs: ChargeBacksClient,
 }
 
 impl ApiClient {
@@ -113,36 +107,36 @@ impl ApiClient {
         Ok(Self {
             config: config.clone(),
             bill: BillClient::new(config.clone())?,
-            boarding: BoardingClient::new(config.clone())?,
-            charge_backs: ChargeBacksClient::new(config.clone())?,
-            check_capture: CheckCaptureClient::new(config.clone())?,
-            cloud: CloudClient::new(config.clone())?,
             customer: CustomerClient::new(config.clone())?,
-            export: ExportClient::new(config.clone())?,
-            ghost_card: GhostCardClient::new(config.clone())?,
-            hosted_payment_pages: HostedPaymentPagesClient::new(config.clone())?,
-            import: ImportClient::new(config.clone())?,
-            invoice: InvoiceClient::new(config.clone())?,
-            line_item: LineItemClient::new(config.clone())?,
-            management: ManagementClient::new(config.clone())?,
+            check_capture: CheckCaptureClient::new(config.clone())?,
             money_in: MoneyInClient::new(config.clone())?,
-            money_out: MoneyOutClient::new(config.clone())?,
-            notification: NotificationClient::new(config.clone())?,
-            notificationlogs: NotificationlogsClient::new(config.clone())?,
-            ocr: OcrClient::new(config.clone())?,
-            organization: OrganizationClient::new(config.clone())?,
-            payment_link: PaymentLinkClient::new(config.clone())?,
-            payment_method_domain: PaymentMethodDomainClient::new(config.clone())?,
-            payout_subscription: PayoutSubscriptionClient::new(config.clone())?,
-            paypoint: PaypointClient::new(config.clone())?,
-            query: QueryClient::new(config.clone())?,
-            statistic: StatisticClient::new(config.clone())?,
             subscription: SubscriptionClient::new(config.clone())?,
-            templates: TemplatesClient::new(config.clone())?,
+            invoice: InvoiceClient::new(config.clone())?,
+            payment_link: PaymentLinkClient::new(config.clone())?,
             token_storage: TokenStorageClient::new(config.clone())?,
+            paypoint: PaypointClient::new(config.clone())?,
+            hosted_payment_pages: HostedPaymentPagesClient::new(config.clone())?,
+            payment_method_domain: PaymentMethodDomainClient::new(config.clone())?,
+            import: ImportClient::new(config.clone())?,
+            query: QueryClient::new(config.clone())?,
+            ocr: OcrClient::new(config.clone())?,
+            notificationlogs: NotificationlogsClient::new(config.clone())?,
+            cloud: CloudClient::new(config.clone())?,
+            line_item: LineItemClient::new(config.clone())?,
+            boarding: BoardingClient::new(config.clone())?,
+            templates: TemplatesClient::new(config.clone())?,
+            export: ExportClient::new(config.clone())?,
+            organization: OrganizationClient::new(config.clone())?,
+            management: ManagementClient::new(config.clone())?,
+            statistic: StatisticClient::new(config.clone())?,
+            notification: NotificationClient::new(config.clone())?,
             user: UserClient::new(config.clone())?,
             vendor: VendorClient::new(config.clone())?,
+            ghost_card: GhostCardClient::new(config.clone())?,
+            money_out: MoneyOutClient::new(config.clone())?,
             wallet: WalletClient::new(config.clone())?,
+            payout_subscription: PayoutSubscriptionClient::new(config.clone())?,
+            charge_backs: ChargeBacksClient::new(config.clone())?,
         })
     }
 }
@@ -162,7 +156,6 @@ pub use line_item::LineItemClient;
 pub use management::ManagementClient;
 pub use money_in::MoneyInClient;
 pub use money_out::MoneyOutClient;
-pub use money_out_types::MoneyOutTypesClient;
 pub use notification::NotificationClient;
 pub use notificationlogs::NotificationlogsClient;
 pub use ocr::OcrClient;
@@ -172,12 +165,10 @@ pub use payment_method_domain::PaymentMethodDomainClient;
 pub use payout_subscription::PayoutSubscriptionClient;
 pub use paypoint::PaypointClient;
 pub use query::QueryClient;
-pub use query_types::QueryTypesClient;
 pub use statistic::StatisticClient;
 pub use subscription::SubscriptionClient;
 pub use templates::TemplatesClient;
 pub use token_storage::TokenStorageClient;
 pub use user::UserClient;
-pub use v_2_money_in_types::V2MoneyInTypesClient;
 pub use vendor::VendorClient;
 pub use wallet::WalletClient;

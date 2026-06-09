@@ -5,7 +5,7 @@ pub struct PayMethodCloud {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub device: Option<Device>,
     /// Method to use for the transaction. For cloud device transactions, the method is `cloud`.
-    pub method: String,
+    pub method: PayMethodCloudMethod,
     #[serde(rename = "saveIfSuccess")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub save_if_success: Option<SaveIfSuccess>,
@@ -21,7 +21,7 @@ impl PayMethodCloud {
 #[non_exhaustive]
 pub struct PayMethodCloudBuilder {
     device: Option<Device>,
-    method: Option<String>,
+    method: Option<PayMethodCloudMethod>,
     save_if_success: Option<SaveIfSuccess>,
 }
 
@@ -31,8 +31,8 @@ impl PayMethodCloudBuilder {
         self
     }
 
-    pub fn method(mut self, value: impl Into<String>) -> Self {
-        self.method = Some(value.into());
+    pub fn method(mut self, value: PayMethodCloudMethod) -> Self {
+        self.method = Some(value);
         self
     }
 

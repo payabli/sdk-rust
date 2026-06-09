@@ -491,7 +491,7 @@ async fn test_query_list_devices_org_with_wiremock() {
     let result = client
         .query
         .list_devices_org(
-            100,
+            123,
             &ListDevicesOrgQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
@@ -506,7 +506,7 @@ async fn test_query_list_devices_org_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "GET",
-        "/Query/devices/org/100",
+        "/Query/devices/org/123",
         Some(HashMap::from([
             ("fromRecord".to_string(), json!("0")),
             ("limitRecord".to_string(), json!("20")),
@@ -1222,8 +1222,8 @@ async fn test_query_list_transfer_details_with_wiremock() {
     let result = client
         .query
         .list_transfer_details(
-            &Entry("47862acd".to_string()),
-            123456,
+            &Entry("8cfec329267".to_string()),
+            4521,
             &ListTransferDetailsQueryRequest {
                 ..Default::default()
             },
@@ -1233,9 +1233,14 @@ async fn test_query_list_transfer_details_with_wiremock() {
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("GET", "/Query/transferDetails/47862acd/123456", None, 1)
-        .await
-        .unwrap();
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Query/transferDetails/8cfec329267/4521",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
 }
 
 #[tokio::test]
@@ -1254,7 +1259,7 @@ async fn test_query_list_transfers_with_wiremock() {
     let result = client
         .query
         .list_transfers(
-            &Entry("47862acd".to_string()),
+            &Entry("8cfec329267".to_string()),
             &ListTransfersQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
@@ -1268,7 +1273,7 @@ async fn test_query_list_transfers_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "GET",
-        "/Query/transfers/47862acd",
+        "/Query/transfers/8cfec329267",
         Some(HashMap::from([
             ("fromRecord".to_string(), json!("0")),
             ("limitRecord".to_string(), json!("20")),
@@ -1336,7 +1341,7 @@ async fn test_query_list_transfers_out_org_with_wiremock() {
     let result = client
         .query
         .list_transfers_out_org(
-            77,
+            123,
             &ListTransfersOutOrgQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
@@ -1350,7 +1355,7 @@ async fn test_query_list_transfers_out_org_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "GET",
-        "/Query/transfersOut/org/77",
+        "/Query/transfersOut/org/123",
         Some(HashMap::from([
             ("fromRecord".to_string(), json!("0")),
             ("limitRecord".to_string(), json!("20")),
@@ -1377,7 +1382,7 @@ async fn test_query_list_transfers_out_paypoint_with_wiremock() {
     let result = client
         .query
         .list_transfers_out_paypoint(
-            &Entry("47cade237".to_string()),
+            &Entry("8cfec329267".to_string()),
             &ListTransfersOutPaypointQueryRequest {
                 from_record: Some(0),
                 limit_record: Some(20),
@@ -1391,7 +1396,7 @@ async fn test_query_list_transfers_out_paypoint_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "GET",
-        "/Query/transfersOut/47cade237",
+        "/Query/transfersOut/8cfec329267",
         Some(HashMap::from([
             ("fromRecord".to_string(), json!("0")),
             ("limitRecord".to_string(), json!("20")),
@@ -1418,7 +1423,7 @@ async fn test_query_list_transfer_details_out_with_wiremock() {
     let result = client
         .query
         .list_transfer_details_out(
-            &Entry("47ace2b25".to_string()),
+            &Entry("8cfec329267".to_string()),
             4521,
             &ListTransferDetailsOutQueryRequest {
                 from_record: Some(0),
@@ -1433,7 +1438,7 @@ async fn test_query_list_transfer_details_out_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "GET",
-        "/Query/transferDetailsOut/47ace2b25/4521",
+        "/Query/transferDetailsOut/8cfec329267/4521",
         Some(HashMap::from([
             ("fromRecord".to_string(), json!("0")),
             ("limitRecord".to_string(), json!("20")),

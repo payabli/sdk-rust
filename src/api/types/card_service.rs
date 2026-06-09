@@ -2,7 +2,7 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct CardService {
-    /// Controls how to present the `batchCutoffTime` field on the application. If this field isn't sent, batch cut off time defaults to 5 ET.
+    /// Controls how to present the `batchCutoffTime` field on the application. If this field isn't sent, batch cutoff time defaults to 5 ET.
     #[serde(rename = "batchCutoffTime")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_cutoff_time: Option<TemplateElement>,

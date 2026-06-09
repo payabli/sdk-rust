@@ -20,22 +20,16 @@ async fn test_boarding_add_application_with_wiremock() {
         .add_application(
             &AddApplicationRequest::ApplicationDataPayIn(ApplicationDataPayIn {
                 services: ApplicationDataPayInServices {
-                    ach: ApplicationDataPayInServicesAch {
-                        ach_setup_fields: AchSetup {
-                            ..Default::default()
-                        },
+                    ach: ApplicationDataPayInServicesAch(AchSetup {
                         ..Default::default()
-                    },
-                    card: ApplicationDataPayInServicesCard {
-                        card_setup_fields: CardSetup {
-                            accept_amex: Some(true),
-                            accept_discover: Some(true),
-                            accept_mastercard: Some(true),
-                            accept_visa: Some(true),
-                            ..Default::default()
-                        },
+                    }),
+                    card: ApplicationDataPayInServicesCard(CardSetup {
+                        accept_amex: Some(true),
+                        accept_discover: Some(true),
+                        accept_mastercard: Some(true),
+                        accept_visa: Some(true),
                         ..Default::default()
-                    },
+                    }),
                     ..Default::default()
                 },
                 annual_revenue: Some(Annualrevenue(1000.0)),
@@ -48,9 +42,9 @@ async fn test_boarding_add_application_with_wiremock() {
                     Bank {
                         account_id: Some(AccountId("123-456".to_string())),
                         nickname: Some(BankNickname("Withdrawal Account".to_string())),
-                        bank_name: Some(BankName("Test Bank".to_string())),
+                        bank_name: Some(BankName("Test Bank 1".to_string())),
                         routing_account: Some(RoutingAccount("123123123".to_string())),
-                        account_number: Some(AccountNumber("123123123".to_string())),
+                        account_number: Some(AccountNumber("123123100".to_string())),
                         type_account: Some(TypeAccount::Checking),
                         bank_account_holder_name: Some(BankAccountHolderName(
                             "Gruzya Adventure Outfitters LLC".to_string(),
@@ -60,11 +54,11 @@ async fn test_boarding_add_application_with_wiremock() {
                         ..Default::default()
                     },
                     Bank {
-                        account_id: Some(AccountId("123-456".to_string())),
+                        account_id: Some(AccountId("123-789".to_string())),
                         nickname: Some(BankNickname("Deposit Account".to_string())),
-                        bank_name: Some(BankName("Test Bank".to_string())),
-                        routing_account: Some(RoutingAccount("123123123".to_string())),
-                        account_number: Some(AccountNumber("123123123".to_string())),
+                        bank_name: Some(BankName("Test Bank 2".to_string())),
+                        routing_account: Some(RoutingAccount("321321321".to_string())),
+                        account_number: Some(AccountNumber("123123200".to_string())),
                         type_account: Some(TypeAccount::Checking),
                         bank_account_holder_name: Some(BankAccountHolderName(
                             "Gruzya Adventure Outfitters LLC".to_string(),
@@ -86,16 +80,13 @@ async fn test_boarding_add_application_with_wiremock() {
                 )),
                 btype: Some(OwnType::LimitedLiabilityCompany),
                 bzip: Some(Bzip("33000".to_string())),
-                contacts: Some(vec![ApplicationDataPayInContactsItem {
-                    contacts_fields: Contacts {
-                        contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
-                        contact_name: Some("Herman Martinez".to_string()),
-                        contact_phone: Some("3055550000".to_string()),
-                        contact_title: Some("Owner".to_string()),
-                        ..Default::default()
-                    },
+                contacts: Some(vec![ApplicationDataPayInContactsItem(Contacts {
+                    contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
+                    contact_name: Some("Herman Martinez".to_string()),
+                    contact_phone: Some("3055550000".to_string()),
+                    contact_title: Some("Owner".to_string()),
                     ..Default::default()
-                }]),
+                })]),
                 credit_limit: Some("creditLimit".to_string()),
                 dba_name: Some(Dbaname("Sunshine Gutters".to_string())),
                 ein: Some(Ein("123456789".to_string())),
@@ -113,27 +104,24 @@ async fn test_boarding_add_application_with_wiremock() {
                 mstate: Some(Mstate("TN".to_string())),
                 mzip: Some(Mzip("37615".to_string())),
                 org_id: Some(Orgid(123)),
-                ownership: Some(vec![ApplicationDataPayInOwnershipItem {
-                    owners_fields: Owners {
-                        ownername: Some("John Smith".to_string()),
-                        ownertitle: Some("CEO".to_string()),
-                        ownerpercent: Some(100),
-                        ownerssn: Some("123456789".to_string()),
-                        ownerdob: Some("01/01/1990".to_string()),
-                        ownerphone_1: Some("555888111".to_string()),
-                        ownerphone_2: Some("555888111".to_string()),
-                        owneremail: Some(Email("test@email.com".to_string())),
-                        ownerdriver: Some("CA6677778".to_string()),
-                        oaddress: Some("33 North St".to_string()),
-                        ocity: Some("Any City".to_string()),
-                        ocountry: Some("US".to_string()),
-                        odriverstate: Some("CA".to_string()),
-                        ostate: Some("CA".to_string()),
-                        ozip: Some("55555".to_string()),
-                        ..Default::default()
-                    },
+                ownership: Some(vec![ApplicationDataPayInOwnershipItem(Owners {
+                    ownername: Some("John Smith".to_string()),
+                    ownertitle: Some("CEO".to_string()),
+                    ownerpercent: Some(100),
+                    ownerssn: Some("123456789".to_string()),
+                    ownerdob: Some("01/01/1990".to_string()),
+                    ownerphone_1: Some("555888111".to_string()),
+                    ownerphone_2: Some("555888111".to_string()),
+                    owneremail: Some(Email("test@email.com".to_string())),
+                    ownerdriver: Some("CA6677778".to_string()),
+                    oaddress: Some("33 North St".to_string()),
+                    ocity: Some("Any City".to_string()),
+                    ocountry: Some("US".to_string()),
+                    odriverstate: Some("CA".to_string()),
+                    ostate: Some("CA".to_string()),
+                    ozip: Some("55555".to_string()),
                     ..Default::default()
-                }]),
+                })]),
                 phonenumber: PhoneNumber("1234567890".to_string()),
                 processing_region: "US".to_string(),
                 recipient_email: Some(Email("josephray@example.com".to_string())),
@@ -189,6 +177,37 @@ async fn test_boarding_add_application_with_wiremock() {
     assert!(result.is_ok(), "Client method call should succeed");
 
     wire_test_utils::verify_request_count("POST", "/Boarding/app", None, 1)
+        .await
+        .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_boarding_update_application_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .boarding
+        .update_application(
+            352,
+            &ApplicationData {
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("PUT", "/Boarding/app/352", None, 1)
         .await
         .unwrap();
 }
@@ -256,7 +275,7 @@ async fn test_boarding_get_application_by_auth_with_wiremock() {
             &"17E".to_string(),
             &RequestAppByAuth {
                 email: Some(Email("admin@email.com".to_string())),
-                reference_id: Some("n6UCd1f1ygG7".to_string()),
+                reference_id: Some("129-219".to_string()),
                 ..Default::default()
             },
             None,
@@ -462,37 +481,6 @@ async fn test_boarding_list_boarding_links_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
-async fn test_boarding_update_application_with_wiremock() {
-    wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
-
-    let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
-        ..Default::default()
-    };
-    config.base_url = wiremock_base_url.to_string();
-    let client = ApiClient::new(config).expect("Failed to build client");
-
-    let result = client
-        .boarding
-        .update_application(
-            352,
-            &ApplicationData {
-                ..Default::default()
-            },
-            None,
-        )
-        .await;
-
-    assert!(result.is_ok(), "Client method call should succeed");
-
-    wire_test_utils::verify_request_count("PUT", "/Boarding/app/352", None, 1)
-        .await
-        .unwrap();
-}
-
-#[tokio::test]
-#[allow(unused_variables, unreachable_code)]
 async fn test_boarding_add_service_to_paypoint_from_app_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
@@ -508,12 +496,11 @@ async fn test_boarding_add_service_to_paypoint_from_app_with_wiremock() {
         .boarding
         .add_service_to_paypoint_from_app(
             &CreateApplicationFromPaypointRequest {
-                paypoint_id: 123,
+                paypoint_id: 3040,
                 template_id: 456,
                 recipient_email: "merchant@example.com".to_string(),
                 return_boarding_access_info_in_line: Some(true),
                 on_create: Some(vec!["submitApplication".to_string()]),
-                ..Default::default()
             },
             None,
         )
@@ -541,12 +528,12 @@ async fn test_boarding_get_applications_by_paypoint_id_with_wiremock() {
 
     let result = client
         .boarding
-        .get_applications_by_paypoint_id(12345, None)
+        .get_applications_by_paypoint_id(3040, None)
         .await;
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("GET", "/Boarding/applications/12345", None, 1)
+    wire_test_utils::verify_request_count("GET", "/Boarding/applications/3040", None, 1)
         .await
         .unwrap();
 }

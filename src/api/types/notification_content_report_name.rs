@@ -1,6 +1,8 @@
 pub use crate::prelude::*;
 
-/// The kind report to generate. For [automated reports](/developers/developer-guides/notifications-and-webhooks-overview#automated-reports) only.
+/// The kind of report to generate. For
+/// [automated reports](/developers/developer-guides/notifications-and-webhooks-overview#automated-reports)
+/// only.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum NotificationContentReportName {

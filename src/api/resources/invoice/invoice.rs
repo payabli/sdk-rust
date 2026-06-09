@@ -18,6 +18,7 @@ impl InvoiceClient {
     /// # Arguments
     ///
     /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `force_customer_creation` - When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -45,22 +46,51 @@ impl InvoiceClient {
             .await
     }
 
-    /// Deletes an invoice that's attached to a file.
+    /// Retrieves a file attached to an invoice.
     ///
     /// # Arguments
     ///
     /// * `id_invoice` - Invoice ID
-    /// * `filename` - The filename in Payabli. Filename is `zipName` in response to a request to `/api/Invoice/{idInvoice}`. Here, the filename is `0_Bill.pdf``.
-    /// "DocumentsRef": {
-    /// "zipfile": "inva_269.zip",
-    /// "filelist": [
-    /// {
-    /// "originalName": "Bill.pdf",
-    /// "zipName": "0_Bill.pdf",
-    /// "descriptor": null
-    /// }
-    /// ]
-    /// }
+    /// * `filename` - The filename in Payabli. Get this from the `zipName` field
+    /// in the `DocumentsRef.filelist` array returned by
+    /// `/api/Invoice/{idInvoice}`. Example: `0_Bill.pdf`.
+    /// * `return_object` - When `true`, the request returns the file content as a Base64-encoded string.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn get_attached_file_from_invoice(
+        &self,
+        id_invoice: i64,
+        filename: &str,
+        request: &GetAttachedFileFromInvoiceQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<FileContent, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!(
+                    "Invoice/attachedFileFromInvoice/{}/{}",
+                    id_invoice, filename
+                ),
+                None,
+                QueryBuilder::new()
+                    .bool("returnObject", request.return_object.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
+    /// Deletes a file attached to an invoice.
+    ///
+    /// # Arguments
+    ///
+    /// * `id_invoice` - Invoice ID
+    /// * `filename` - The filename in Payabli. Get this from the `zipName` field
+    /// in the `DocumentsRef.filelist` array returned by
+    /// `/api/Invoice/{idInvoice}`. Example: `0_Bill.pdf`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -86,7 +116,7 @@ impl InvoiceClient {
             .await
     }
 
-    /// Deletes a single invoice from an entrypoint.
+    /// Retrieves a single invoice by ID.
     ///
     /// # Arguments
     ///
@@ -96,14 +126,14 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn delete_invoice(
+    pub async fn get_invoice(
         &self,
         id_invoice: i64,
         options: Option<RequestOptions>,
-    ) -> Result<InvoiceResponseWithoutData, ApiError> {
+    ) -> Result<GetInvoiceRecord, ApiError> {
         self.http_client
             .execute_request(
-                Method::DELETE,
+                Method::GET,
                 &format!("Invoice/{}", id_invoice),
                 None,
                 None,
@@ -145,54 +175,7 @@ impl InvoiceClient {
             .await
     }
 
-    /// Retrieves a file attached to an invoice.
-    ///
-    /// # Arguments
-    ///
-    /// * `id_invoice` - Invoice ID
-    /// * `filename` - The filename in Payabli. Filename is `zipName` in the response to a request to `/api/Invoice/{idInvoice}`. Here, the filename is `0_Bill.pdf``.
-    /// ```
-    /// "DocumentsRef": {
-    /// "zipfile": "inva_269.zip",
-    /// "filelist": [
-    /// {
-    /// "originalName": "Bill.pdf",
-    /// "zipName": "0_Bill.pdf",
-    /// "descriptor": null
-    /// }
-    /// ]
-    /// }
-    /// ```
-    /// * `return_object` - When `true`, the request returns the file content as a Base64-encoded string.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn get_attached_file_from_invoice(
-        &self,
-        id_invoice: i64,
-        filename: &str,
-        request: &GetAttachedFileFromInvoiceQueryRequest,
-        options: Option<RequestOptions>,
-    ) -> Result<FileContent, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::GET,
-                &format!(
-                    "Invoice/attachedFileFromInvoice/{}/{}",
-                    id_invoice, filename
-                ),
-                None,
-                QueryBuilder::new()
-                    .bool("returnObject", request.return_object.clone())
-                    .build(),
-                options,
-            )
-            .await
-    }
-
-    /// Retrieves a single invoice by ID.
+    /// Deletes a single invoice from an entrypoint.
     ///
     /// # Arguments
     ///
@@ -202,14 +185,14 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn get_invoice(
+    pub async fn delete_invoice(
         &self,
         id_invoice: i64,
         options: Option<RequestOptions>,
-    ) -> Result<GetInvoiceRecord, ApiError> {
+    ) -> Result<InvoiceResponseWithoutData, ApiError> {
         self.http_client
             .execute_request(
-                Method::GET,
+                Method::DELETE,
                 &format!("Invoice/{}", id_invoice),
                 None,
                 None,
@@ -249,6 +232,7 @@ impl InvoiceClient {
     /// # Arguments
     ///
     /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -348,6 +332,7 @@ impl InvoiceClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query

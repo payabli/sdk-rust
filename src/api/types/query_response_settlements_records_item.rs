@@ -40,9 +40,7 @@ pub struct QueryResponseSettlementsRecordsItem {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub invoice_data: Option<BillData>,
     /// Describes whether the transaction is being held or not.
-    ///
     /// 1 - Transaction is held
-    ///
     /// 0 - Transaction isn't being held
     #[serde(rename = "isHold")]
     #[serde(skip_serializing_if = "Option::is_none")]

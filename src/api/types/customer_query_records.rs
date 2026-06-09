@@ -93,13 +93,9 @@ pub struct CustomerQueryRecords {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mfa_mode: Option<MfaMode>,
     /// Social network linked to customer. Possible values:
-    ///
     /// - `facebook`
-    ///
     /// - `google`
-    ///
     /// - `twitter`
-    ///
     /// - `microsoft`
     #[serde(rename = "snProvider")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -127,7 +123,7 @@ pub struct CustomerQueryRecords {
     /// List of additional custom fields in format key:value.
     #[serde(rename = "AdditionalFields")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<HashMap<String, Option<String>>>,
+    pub additional_fields: Option<HashMap<String, String>>,
     #[serde(rename = "IdentifierFields")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub identifier_fields: Option<Identifierfields>,
@@ -167,6 +163,9 @@ pub struct CustomerQueryRecords {
     #[serde(rename = "customerConsent")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub customer_consent: Option<CustomerQueryRecordsCustomerConsent>,
+    #[serde(rename = "customerPortal")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub customer_portal: Option<String>,
 }
 
 impl CustomerQueryRecords {
@@ -208,7 +207,7 @@ pub struct CustomerQueryRecordsBuilder {
     sn_data: Option<String>,
     last_updated: Option<DateTime<Utc>>,
     created: Option<DateTime<Utc>>,
-    additional_fields: Option<HashMap<String, Option<String>>>,
+    additional_fields: Option<HashMap<String, String>>,
     identifier_fields: Option<Identifierfields>,
     subscriptions: Option<Vec<SubscriptionQueryRecords>>,
     stored_methods: Option<Vec<MethodQueryRecords>>,
@@ -221,6 +220,7 @@ pub struct CustomerQueryRecordsBuilder {
     pageidentifier: Option<PageIdentifier>,
     external_paypoint_id: Option<ExternalPaypointId>,
     customer_consent: Option<CustomerQueryRecordsCustomerConsent>,
+    customer_portal: Option<String>,
 }
 
 impl CustomerQueryRecordsBuilder {
@@ -374,7 +374,7 @@ impl CustomerQueryRecordsBuilder {
         self
     }
 
-    pub fn additional_fields(mut self, value: HashMap<String, Option<String>>) -> Self {
+    pub fn additional_fields(mut self, value: HashMap<String, String>) -> Self {
         self.additional_fields = Some(value);
         self
     }
@@ -439,6 +439,11 @@ impl CustomerQueryRecordsBuilder {
         self
     }
 
+    pub fn customer_portal(mut self, value: impl Into<String>) -> Self {
+        self.customer_portal = Some(value.into());
+        self
+    }
+
     /// Consumes the builder and constructs a [`CustomerQueryRecords`].
     pub fn build(self) -> Result<CustomerQueryRecords, BuildError> {
         Ok(CustomerQueryRecords {
@@ -485,6 +490,7 @@ impl CustomerQueryRecordsBuilder {
             pageidentifier: self.pageidentifier,
             external_paypoint_id: self.external_paypoint_id,
             customer_consent: self.customer_consent,
+            customer_portal: self.customer_portal,
         })
     }
 }

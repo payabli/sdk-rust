@@ -12,7 +12,7 @@ pub struct LineItemQueryRecord {
     /// Array of tags classifying item or product.
     #[serde(rename = "itemCategories")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub item_categories: Option<Vec<Option<String>>>,
+    pub item_categories: Option<Vec<String>>,
     #[serde(rename = "itemCommodityCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub item_commodity_code: Option<ItemCommodityCode>,
@@ -76,7 +76,7 @@ impl LineItemQueryRecord {
 pub struct LineItemQueryRecordBuilder {
     created_at: Option<CreatedAt>,
     id: Option<i64>,
-    item_categories: Option<Vec<Option<String>>>,
+    item_categories: Option<Vec<String>>,
     item_commodity_code: Option<ItemCommodityCode>,
     item_cost: Option<f64>,
     item_description: Option<ItemDescription>,
@@ -104,7 +104,7 @@ impl LineItemQueryRecordBuilder {
         self
     }
 
-    pub fn item_categories(mut self, value: Vec<Option<String>>) -> Self {
+    pub fn item_categories(mut self, value: Vec<String>) -> Self {
         self.item_categories = Some(value);
         self
     }

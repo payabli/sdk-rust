@@ -3,6 +3,7 @@ pub use crate::prelude::*;
 /// Query parameters for ListSubscriptions
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ListSubscriptionsQueryRequest {
+    /// Export format for file downloads. When specified, returns data as a file instead of JSON.
     #[serde(rename = "exportFormat")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub export_format: Option<ExportFormat>,
@@ -42,6 +43,7 @@ pub struct ListSubscriptionsQueryRequest {
     /// - `feeAmount` (gt, ge, lt, le, eq, ne)
     /// - `status` (in, nin, eq, ne)
     /// - `untilcancelled` (eq, ne)
+    /// - `subscriptionType` (eq, ne, in, nin). Filters by subscription type. Accepts `Regular` or `BalanceDriven`. Case-insensitive. Example: `subscriptionType(in)=Regular|BalanceDriven`.
     /// - `payaccountLastfour` (nct, ct)
     /// - `payaccountType` (ne, eq, in, nin)
     /// - `payaccountCurrency` (ne, eq, in, nin)

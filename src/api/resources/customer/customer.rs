@@ -18,6 +18,7 @@ impl CustomerClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entrypoint identifier.
     /// * `force_customer_creation` - When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer.
     /// * `replace_existing` - Flag indicating to replace existing customer with a new record. Possible values: 0 (don't replace), 1 (replace). Default is `0`.
     /// * `options` - Additional request options such as headers, timeout, etc.
@@ -43,32 +44,6 @@ impl CustomerClient {
                     )
                     .int("replaceExisting", request.replace_existing.clone())
                     .build(),
-                options,
-            )
-            .await
-    }
-
-    /// Delete a customer record.
-    ///
-    /// # Arguments
-    ///
-    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn delete_customer(
-        &self,
-        customer_id: i64,
-        options: Option<RequestOptions>,
-    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::DELETE,
-                &format!("Customer/{}", customer_id),
-                None,
-                None,
                 options,
             )
             .await
@@ -100,27 +75,52 @@ impl CustomerClient {
             .await
     }
 
-    /// Links a customer to a transaction by ID.
+    /// Update a customer record. Include only the fields you want to change.
     ///
     /// # Arguments
     ///
     /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
-    /// * `trans_id` - ReferenceId for the transaction (PaymentId).
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn link_customer_transaction(
+    pub async fn update_customer(
         &self,
         customer_id: i64,
-        trans_id: &str,
+        request: &CustomerData,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
         self.http_client
             .execute_request(
-                Method::GET,
-                &format!("Customer/link/{}/{}", customer_id, trans_id),
+                Method::PUT,
+                &format!("Customer/{}", customer_id),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Delete a customer record.
+    ///
+    /// # Arguments
+    ///
+    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn delete_customer(
+        &self,
+        customer_id: i64,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::DELETE,
+                &format!("Customer/{}", customer_id),
                 None,
                 None,
                 options,
@@ -154,27 +154,28 @@ impl CustomerClient {
             .await
     }
 
-    /// Update a customer record. Include only the fields you want to change.
+    /// Links a customer to a transaction by ID.
     ///
     /// # Arguments
     ///
     /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+    /// * `trans_id` - ReferenceId for the transaction (PaymentId).
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn update_customer(
+    pub async fn link_customer_transaction(
         &self,
         customer_id: i64,
-        request: &CustomerData,
+        trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
         self.http_client
             .execute_request(
-                Method::PUT,
-                &format!("Customer/{}", customer_id),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                Method::GET,
+                &format!("Customer/link/{}/{}", customer_id, trans_id),
+                None,
                 None,
                 options,
             )

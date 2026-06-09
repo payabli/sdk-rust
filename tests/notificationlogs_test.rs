@@ -20,19 +20,17 @@ async fn test_notificationlogs_search_notification_logs_with_wiremock() {
         .search_notification_logs(
             &SearchNotificationLogsRequest {
                 page_size: Some(Pagesize(20)),
-                body: NotificationLogSearchRequest {
-                    start_date: DateTime::parse_from_rfc3339("2024-01-01T00:00:00Z")
-                        .unwrap()
-                        .with_timezone(&Utc),
-                    end_date: DateTime::parse_from_rfc3339("2024-01-31T23:59:59Z")
-                        .unwrap()
-                        .with_timezone(&Utc),
-                    notification_event: Some("ActivatedMerchant".to_string()),
-                    succeeded: Some(true),
-                    org_id: Some(12345),
-                    ..Default::default()
-                },
+                start_date: DateTime::parse_from_rfc3339("2024-01-01T00:00:00Z")
+                    .unwrap()
+                    .with_timezone(&Utc),
+                end_date: DateTime::parse_from_rfc3339("2024-01-31T23:59:59Z")
+                    .unwrap()
+                    .with_timezone(&Utc),
+                notification_event: Some("ActivatedMerchant".to_string()),
+                succeeded: Some(true),
+                org_id: Some(123),
                 page: None,
+                paypoint_id: None,
             },
             None,
         )
@@ -65,10 +63,7 @@ async fn test_notificationlogs_get_notification_log_with_wiremock() {
 
     let result = client
         .notificationlogs
-        .get_notification_log(
-            &Uuid::parse_str("550e8400-e29b-41d4-a716-446655440000").unwrap(),
-            None,
-        )
+        .get_notification_log(&"550e8400-e29b-41d4-a716-446655440000".to_string(), None)
         .await;
 
     assert!(result.is_ok(), "Client method call should succeed");
@@ -98,10 +93,7 @@ async fn test_notificationlogs_retry_notification_log_with_wiremock() {
 
     let result = client
         .notificationlogs
-        .retry_notification_log(
-            &Uuid::parse_str("550e8400-e29b-41d4-a716-446655440000").unwrap(),
-            None,
-        )
+        .retry_notification_log(&"550e8400-e29b-41d4-a716-446655440000".to_string(), None)
         .await;
 
     assert!(result.is_ok(), "Client method call should succeed");
@@ -133,9 +125,9 @@ async fn test_notificationlogs_bulk_retry_notification_logs_with_wiremock() {
         .notificationlogs
         .bulk_retry_notification_logs(
             &BulkRetryRequest(vec![
-                Uuid::parse_str("550e8400-e29b-41d4-a716-446655440000").unwrap(),
-                Uuid::parse_str("550e8400-e29b-41d4-a716-446655440001").unwrap(),
-                Uuid::parse_str("550e8400-e29b-41d4-a716-446655440002").unwrap(),
+                "550e8400-e29b-41d4-a716-446655440000".to_string(),
+                "550e8400-e29b-41d4-a716-446655440001".to_string(),
+                "550e8400-e29b-41d4-a716-446655440002".to_string(),
             ]),
             None,
         )

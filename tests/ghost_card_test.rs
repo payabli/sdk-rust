@@ -18,9 +18,9 @@ async fn test_ghost_card_create_ghost_card_with_wiremock() {
     let result = client
         .ghost_card
         .create_ghost_card(
-            &Entry("8cfec2e0fa".to_string()),
+            &Entry("8cfec329267".to_string()),
             &CreateGhostCardRequestBody {
-                vendor_id: 42,
+                vendor_id: 456,
                 expense_limit: 500.0,
                 amount: 500.0,
                 max_number_of_uses: 3,
@@ -43,7 +43,7 @@ async fn test_ghost_card_create_ghost_card_with_wiremock() {
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("POST", "/MoneyOutCard/GhostCard/8cfec2e0fa", None, 1)
+    wire_test_utils::verify_request_count("POST", "/MoneyOutCard/GhostCard/8cfec329267", None, 1)
         .await
         .unwrap();
 }
@@ -64,7 +64,7 @@ async fn test_ghost_card_update_card_with_wiremock() {
     let result = client
         .ghost_card
         .update_card(
-            &Entry("8cfec2e0fa".to_string()),
+            &Entry("8cfec329267".to_string()),
             &UpdateCardRequestBody {
                 card_token: "gc_abc123def456".to_string(),
                 status: Some(CardStatus::Cancelled),
@@ -75,7 +75,7 @@ async fn test_ghost_card_update_card_with_wiremock() {
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("PATCH", "/MoneyOutCard/card/8cfec2e0fa", None, 1)
+    wire_test_utils::verify_request_count("PATCH", "/MoneyOutCard/card/8cfec329267", None, 1)
         .await
         .unwrap();
 }

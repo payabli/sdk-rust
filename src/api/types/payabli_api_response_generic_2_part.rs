@@ -1,5 +1,7 @@
 pub use crate::prelude::*;
 
+/// Minimal response wrapper used by approval-style endpoints that don't carry
+/// the standard response envelope.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct PayabliApiResponseGeneric2Part {
     #[serde(rename = "isSuccess")]

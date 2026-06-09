@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-/// The MIME type of the file (if content is provided)
+/// The MIME type of the file (if content is provided).
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum FileContentFtype {

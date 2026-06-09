@@ -45,11 +45,16 @@ pub struct VendorResponseStoredMethod {
     #[serde(rename = "MethodType")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub method_type: Option<String>,
+    /// Digital wallet type if applicable.
+    #[serde(rename = "WalletType")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub wallet_type: Option<String>,
     #[serde(rename = "LastUpdated")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
     #[serde(with = "crate::core::flexible_datetime::utc::option")]
     pub last_updated: Option<DateTime<Utc>>,
+    /// Date and time the card was last updated.
     #[serde(rename = "CardUpdatedOn")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
@@ -80,6 +85,7 @@ pub struct VendorResponseStoredMethodBuilder {
     aba: Option<String>,
     postal_code: Option<String>,
     method_type: Option<String>,
+    wallet_type: Option<String>,
     last_updated: Option<DateTime<Utc>>,
     card_updated_on: Option<DateTime<Utc>>,
 }
@@ -155,6 +161,11 @@ impl VendorResponseStoredMethodBuilder {
         self
     }
 
+    pub fn wallet_type(mut self, value: impl Into<String>) -> Self {
+        self.wallet_type = Some(value.into());
+        self
+    }
+
     pub fn last_updated(mut self, value: DateTime<Utc>) -> Self {
         self.last_updated = Some(value);
         self
@@ -182,6 +193,7 @@ impl VendorResponseStoredMethodBuilder {
             aba: self.aba,
             postal_code: self.postal_code,
             method_type: self.method_type,
+            wallet_type: self.wallet_type,
             last_updated: self.last_updated,
             card_updated_on: self.card_updated_on,
         })

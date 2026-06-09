@@ -1,19 +1,6 @@
 pub use crate::prelude::*;
 
-/// Frequency for notification.
-/// For notifications using the *email* ,*sms*, or *web* `method`, the allowed values are:
-/// - `untilcancelled`
-/// - `one-time`
-///
-/// For notifications using the *report-email* or *report-web* `method`, the allowed values are:
-/// - `one-time`
-/// - `daily`
-/// - `weekly`
-/// - `biweekly`
-/// - `monthly`
-/// - `quarterly`
-/// - `semiannually`
-/// - `annually`
+/// Frequency for notifications.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Frequencynotification {

@@ -1,6 +1,8 @@
 pub use crate::prelude::*;
 
-/// The text on Apple Pay button. See [Apple Pay Button Type](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-type) for more information.
+/// The text on Apple Pay button. See
+/// [Apple Pay Button Type](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-button-type)
+/// for more information.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum MethodElementSettingsApplePayButtonType {

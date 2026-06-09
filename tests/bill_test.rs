@@ -29,9 +29,9 @@ async fn test_bill_add_bill_with_wiremock() {
                 }])),
                 bill_date: Some(NaiveDate::parse_from_str("2024-07-01", "%Y-%m-%d").unwrap()),
                 bill_items: Some(Billitems(vec![BillItem {
-                    item_categories: Some(vec![Some("deposits".to_string())]),
+                    item_categories: Some(vec!["deposits".to_string()]),
                     item_commodity_code: Some(ItemCommodityCode("010".to_string())),
-                    item_cost: 5.0,
+                    item_cost: Some(5.0),
                     item_description: Some(ItemDescription("Deposit for materials".to_string())),
                     item_mode: Some(0),
                     item_product_code: Some(ItemProductCode("M-DEPOSIT".to_string())),
@@ -50,10 +50,10 @@ async fn test_bill_add_bill_with_wiremock() {
                 frequency: Some(Frequency::Monthly),
                 mode: Some(0),
                 net_amount: Some(3762.87),
-                status: Some(Billstatus(-99)),
-                terms: Some(Terms("NET30".to_string())),
-                vendor: Some(VendorData {
-                    vendor_number: Some(VendorNumber("1234-A".to_string())),
+                status: Some(Billstatus(1)),
+                terms: Some(Terms::Net30),
+                vendor: Some(BillOutDataVendor {
+                    vendor_number: Some(VendorNumber("VEN-123".to_string())),
                     ..Default::default()
                 }),
                 ..Default::default()
@@ -71,7 +71,7 @@ async fn test_bill_add_bill_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
-async fn test_bill_delete_attached_from_bill_with_wiremock() {
+async fn test_bill_get_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
@@ -82,48 +82,11 @@ async fn test_bill_delete_attached_from_bill_with_wiremock() {
     config.base_url = wiremock_base_url.to_string();
     let client = ApiClient::new(config).expect("Failed to build client");
 
-    let result = client
-        .bill
-        .delete_attached_from_bill(
-            285,
-            &"0_Bill.pdf".to_string(),
-            &DeleteAttachedFromBillQueryRequest {
-                ..Default::default()
-            },
-            None,
-        )
-        .await;
+    let result = client.bill.get_bill(285, None).await;
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count(
-        "DELETE",
-        "/Bill/attachedFileFromBill/285/0_Bill.pdf",
-        None,
-        1,
-    )
-    .await
-    .unwrap();
-}
-
-#[tokio::test]
-#[allow(unused_variables, unreachable_code)]
-async fn test_bill_delete_bill_with_wiremock() {
-    wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
-
-    let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
-        ..Default::default()
-    };
-    config.base_url = wiremock_base_url.to_string();
-    let client = ApiClient::new(config).expect("Failed to build client");
-
-    let result = client.bill.delete_bill(285, None).await;
-
-    assert!(result.is_ok(), "Client method call should succeed");
-
-    wire_test_utils::verify_request_count("DELETE", "/Bill/285", None, 1)
+    wire_test_utils::verify_request_count("GET", "/Bill/285", None, 1)
         .await
         .unwrap();
 }
@@ -157,6 +120,28 @@ async fn test_bill_edit_bill_with_wiremock() {
     assert!(result.is_ok(), "Client method call should succeed");
 
     wire_test_utils::verify_request_count("PUT", "/Bill/285", None, 1)
+        .await
+        .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_bill_delete_bill_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client.bill.delete_bill(285, None).await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("DELETE", "/Bill/285", None, 1)
         .await
         .unwrap();
 }
@@ -201,7 +186,7 @@ async fn test_bill_get_attached_from_bill_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
-async fn test_bill_get_bill_with_wiremock() {
+async fn test_bill_delete_attached_from_bill_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
@@ -212,11 +197,125 @@ async fn test_bill_get_bill_with_wiremock() {
     config.base_url = wiremock_base_url.to_string();
     let client = ApiClient::new(config).expect("Failed to build client");
 
-    let result = client.bill.get_bill(285, None).await;
+    let result = client
+        .bill
+        .delete_attached_from_bill(
+            285,
+            &"0_Bill.pdf".to_string(),
+            &DeleteAttachedFromBillQueryRequest {
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("GET", "/Bill/285", None, 1)
+    wire_test_utils::verify_request_count(
+        "DELETE",
+        "/Bill/attachedFileFromBill/285/0_Bill.pdf",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_bill_send_to_approval_bill_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .bill
+        .send_to_approval_bill(
+            285,
+            &SendToApprovalBillRequest {
+                body: vec!["approver@example.com".to_string()],
+                autocreate_user: None,
+            },
+            Some(
+                RequestOptions::new()
+                    .additional_header("idempotencyKey", "6B29FC40-CA47-1067-B31D-00DD010662DA"),
+            ),
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("POST", "/Bill/approval/285", None, 1)
+        .await
+        .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_bill_modify_approval_bill_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .bill
+        .modify_approval_bill(
+            285,
+            &vec![
+                "approver1@example.com".to_string(),
+                "approver2@example.com".to_string(),
+            ],
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("PUT", "/Bill/approval/285", None, 1)
+        .await
+        .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_bill_set_approved_bill_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .bill
+        .set_approved_bill(
+            285,
+            &"true".to_string(),
+            &SetApprovedBillQueryRequest {
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("GET", "/Bill/approval/285/true", None, 1)
         .await
         .unwrap();
 }
@@ -305,96 +404,4 @@ async fn test_bill_list_bills_org_with_wiremock() {
     )
     .await
     .unwrap();
-}
-
-#[tokio::test]
-#[allow(unused_variables, unreachable_code)]
-async fn test_bill_modify_approval_bill_with_wiremock() {
-    wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
-
-    let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
-        ..Default::default()
-    };
-    config.base_url = wiremock_base_url.to_string();
-    let client = ApiClient::new(config).expect("Failed to build client");
-
-    let result = client
-        .bill
-        .modify_approval_bill(285, &vec!["string".to_string()], None)
-        .await;
-
-    assert!(result.is_ok(), "Client method call should succeed");
-
-    wire_test_utils::verify_request_count("PUT", "/Bill/approval/285", None, 1)
-        .await
-        .unwrap();
-}
-
-#[tokio::test]
-#[allow(unused_variables, unreachable_code)]
-async fn test_bill_send_to_approval_bill_with_wiremock() {
-    wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
-
-    let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
-        ..Default::default()
-    };
-    config.base_url = wiremock_base_url.to_string();
-    let client = ApiClient::new(config).expect("Failed to build client");
-
-    let result = client
-        .bill
-        .send_to_approval_bill(
-            285,
-            &SendToApprovalBillRequest {
-                body: vec!["string".to_string()],
-                autocreate_user: None,
-            },
-            Some(
-                RequestOptions::new()
-                    .additional_header("idempotencyKey", "6B29FC40-CA47-1067-B31D-00DD010662DA"),
-            ),
-        )
-        .await;
-
-    assert!(result.is_ok(), "Client method call should succeed");
-
-    wire_test_utils::verify_request_count("POST", "/Bill/approval/285", None, 1)
-        .await
-        .unwrap();
-}
-
-#[tokio::test]
-#[allow(unused_variables, unreachable_code)]
-async fn test_bill_set_approved_bill_with_wiremock() {
-    wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
-
-    let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
-        ..Default::default()
-    };
-    config.base_url = wiremock_base_url.to_string();
-    let client = ApiClient::new(config).expect("Failed to build client");
-
-    let result = client
-        .bill
-        .set_approved_bill(
-            285,
-            &"true".to_string(),
-            &SetApprovedBillQueryRequest {
-                ..Default::default()
-            },
-            None,
-        )
-        .await;
-
-    assert!(result.is_ok(), "Client method call should succeed");
-
-    wire_test_utils::verify_request_count("GET", "/Bill/approval/285/true", None, 1)
-        .await
-        .unwrap();
 }

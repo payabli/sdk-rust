@@ -40,32 +40,6 @@ impl LineItemClient {
             .await
     }
 
-    /// Deletes an item.
-    ///
-    /// # Arguments
-    ///
-    /// * `line_item_id` - ID for the line item (also known as a product, service, or item).
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn delete_item(
-        &self,
-        line_item_id: i64,
-        options: Option<RequestOptions>,
-    ) -> Result<DeleteItemResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::DELETE,
-                &format!("LineItem/{}", line_item_id),
-                None,
-                None,
-                options,
-            )
-            .await
-    }
-
     /// Gets an item by ID.
     ///
     /// # Arguments
@@ -84,6 +58,59 @@ impl LineItemClient {
         self.http_client
             .execute_request(
                 Method::GET,
+                &format!("LineItem/{}", line_item_id),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Updates an item.
+    ///
+    /// # Arguments
+    ///
+    /// * `line_item_id` - ID for the line item (also known as a product, service, or item).
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn update_item(
+        &self,
+        line_item_id: i64,
+        request: &LineItem,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse6, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::PUT,
+                &format!("LineItem/{}", line_item_id),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Deletes an item.
+    ///
+    /// # Arguments
+    ///
+    /// * `line_item_id` - ID for the line item (also known as a product, service, or item).
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn delete_item(
+        &self,
+        line_item_id: i64,
+        options: Option<RequestOptions>,
+    ) -> Result<DeleteItemResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::DELETE,
                 &format!("LineItem/{}", line_item_id),
                 None,
                 None,
@@ -176,33 +203,6 @@ impl LineItemClient {
                     .serialize("parameters", request.parameters.clone())
                     .string("sortBy", request.sort_by.clone())
                     .build(),
-                options,
-            )
-            .await
-    }
-
-    /// Updates an item.
-    ///
-    /// # Arguments
-    ///
-    /// * `line_item_id` - ID for the line item (also known as a product, service, or item).
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn update_item(
-        &self,
-        line_item_id: i64,
-        request: &LineItem,
-        options: Option<RequestOptions>,
-    ) -> Result<PayabliApiResponse6, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::PUT,
-                &format!("LineItem/{}", line_item_id),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
-                None,
                 options,
             )
             .await

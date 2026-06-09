@@ -7,7 +7,7 @@ pub struct ApplePayPaypointRegistrationData {
     #[serde(rename = "isEnabled")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub is_enabled: Option<IsEnabled>,
-    /// The wallet type. In this context it will always be `applePay`.
+    /// The wallet type. In this context it will always be `applepay`.
     #[serde(rename = "walletType")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub wallet_type: Option<String>,

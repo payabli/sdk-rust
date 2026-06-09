@@ -2,10 +2,10 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct Finishtype {
-    /// Flag to enable 'calendar' option
+    /// Flag to enable the 'calendar' option.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub calendar: Option<bool>,
-    /// Flag to enable 'untilCancelled' option
+    /// Flag to enable the 'untilCancelled' option.
     #[serde(rename = "untilCancelled")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub until_cancelled: Option<bool>,

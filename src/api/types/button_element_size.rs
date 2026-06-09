@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-/// Specify size of custom payment button
+/// Specify the size of the custom payment button.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum ButtonElementSize {

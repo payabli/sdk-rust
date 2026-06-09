@@ -1,12 +1,13 @@
 pub use crate::prelude::*;
 
-/// Export format for file downloads. When specified, returns data as a file instead of JSON.
+/// Export format for file downloads. When specified, returns data as a file
+/// instead of JSON.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum ExportFormat {
-    /// Comma-separated values file
+    /// Comma-separated values file.
     Csv,
-    /// Excel spreadsheet file
+    /// Excel spreadsheet file.
     Xlsx,
     /// This variant is used for forward compatibility.
     /// If the server sends a value not recognized by the current SDK version,

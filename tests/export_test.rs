@@ -1195,7 +1195,7 @@ async fn test_export_export_transfer_details_with_wiremock() {
         .export_transfer_details(
             &ExportFormat1::Csv,
             &"8cfec329267".to_string(),
-            1000000,
+            4521,
             &ExportTransferDetailsQueryRequest {
                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
                 from_record: Some(251),
@@ -1211,7 +1211,7 @@ async fn test_export_export_transfer_details_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "GET",
-        "/Export/transferDetails/csv/8cfec329267/1000000",
+        "/Export/transferDetails/csv/8cfec329267/4521",
         Some(HashMap::from([
             (
                 "columnsExport".to_string(),

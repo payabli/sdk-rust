@@ -16,7 +16,7 @@ pub struct PayMethodCredit {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub initiator: Option<Initiator>,
     /// Method to use for the transaction. For transactions with a credit or debit card, or a tokenized card, use `card`.
-    pub method: String,
+    pub method: PayMethodCreditMethod,
     #[serde(rename = "saveIfSuccess")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub save_if_success: Option<SaveIfSuccess>,
@@ -37,7 +37,7 @@ pub struct PayMethodCreditBuilder {
     cardnumber: Option<Cardnumber>,
     cardzip: Option<Cardzip>,
     initiator: Option<Initiator>,
-    method: Option<String>,
+    method: Option<PayMethodCreditMethod>,
     save_if_success: Option<SaveIfSuccess>,
 }
 
@@ -72,8 +72,8 @@ impl PayMethodCreditBuilder {
         self
     }
 
-    pub fn method(mut self, value: impl Into<String>) -> Self {
-        self.method = Some(value.into());
+    pub fn method(mut self, value: PayMethodCreditMethod) -> Self {
+        self.method = Some(value);
         self
     }
 

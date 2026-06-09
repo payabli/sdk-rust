@@ -1,10 +1,9 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
-#[serde(transparent)]
 pub struct Cash {
     /// Method to use for the transaction. For cash transactions, use `cash`.
-    pub method: String,
+    pub method: CashMethod,
 }
 
 impl Cash {
@@ -16,12 +15,12 @@ impl Cash {
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
 pub struct CashBuilder {
-    method: Option<String>,
+    method: Option<CashMethod>,
 }
 
 impl CashBuilder {
-    pub fn method(mut self, value: impl Into<String>) -> Self {
-        self.method = Some(value.into());
+    pub fn method(mut self, value: CashMethod) -> Self {
+        self.method = Some(value);
         self
     }
 

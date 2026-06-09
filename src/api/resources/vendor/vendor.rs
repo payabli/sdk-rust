@@ -40,7 +40,7 @@ impl VendorClient {
             .await
     }
 
-    /// Delete a vendor.
+    /// Retrieves a vendor's details, including enrichment status and payment acceptance info when available.
     ///
     /// # Arguments
     ///
@@ -50,14 +50,14 @@ impl VendorClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn delete_vendor(
+    pub async fn get_vendor(
         &self,
         id_vendor: i64,
         options: Option<RequestOptions>,
-    ) -> Result<PayabliApiResponseVendors, ApiError> {
+    ) -> Result<VendorQueryRecord, ApiError> {
         self.http_client
             .execute_request(
-                Method::DELETE,
+                Method::GET,
                 &format!("Vendor/{}", id_vendor),
                 None,
                 None,
@@ -93,7 +93,7 @@ impl VendorClient {
             .await
     }
 
-    /// Retrieves a vendor's details, including enrichment status and payment acceptance info when available.
+    /// Delete a vendor.
     ///
     /// # Arguments
     ///
@@ -103,14 +103,14 @@ impl VendorClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn get_vendor(
+    pub async fn delete_vendor(
         &self,
         id_vendor: i64,
         options: Option<RequestOptions>,
-    ) -> Result<VendorQueryRecord, ApiError> {
+    ) -> Result<PayabliApiResponseVendors, ApiError> {
         self.http_client
             .execute_request(
-                Method::GET,
+                Method::DELETE,
                 &format!("Vendor/{}", id_vendor),
                 None,
                 None,

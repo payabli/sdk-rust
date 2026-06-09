@@ -1,6 +1,8 @@
 pub use crate::prelude::*;
 
-/// The Apple Pay button locale. See [Apple Pay Button Language](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-language) for more information.
+/// The Apple Pay button locale. See
+/// [Apple Pay Button Language](/developers/developer-guides/hosted-payment-page-apple-pay#param-applepay-language)
+/// for more information.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum MethodElementSettingsApplePayLanguage {

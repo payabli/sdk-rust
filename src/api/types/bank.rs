@@ -3,6 +3,10 @@ pub use crate::prelude::*;
 /// Object that contains bank account details.
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct Bank {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub default: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub country: Option<String>,
     /// The Payabli-assigned internal identifier for the bank account.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub id: Option<i64>,
@@ -53,6 +57,8 @@ impl Bank {
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
 pub struct BankBuilder {
+    default: Option<bool>,
+    country: Option<String>,
     id: Option<i64>,
     account_id: Option<AccountId>,
     nickname: Option<BankNickname>,
@@ -69,6 +75,16 @@ pub struct BankBuilder {
 }
 
 impl BankBuilder {
+    pub fn default(mut self, value: bool) -> Self {
+        self.default = Some(value);
+        self
+    }
+
+    pub fn country(mut self, value: impl Into<String>) -> Self {
+        self.country = Some(value.into());
+        self
+    }
+
     pub fn id(mut self, value: i64) -> Self {
         self.id = Some(value);
         self
@@ -137,6 +153,8 @@ impl BankBuilder {
     /// Consumes the builder and constructs a [`Bank`].
     pub fn build(self) -> Result<Bank, BuildError> {
         Ok(Bank {
+            default: self.default,
+            country: self.country,
             id: self.id,
             account_id: self.account_id,
             nickname: self.nickname,

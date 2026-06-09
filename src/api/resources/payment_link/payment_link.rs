@@ -28,14 +28,14 @@ impl PaymentLinkClient {
     pub async fn add_pay_link_from_invoice(
         &self,
         id_invoice: i64,
-        request: &AddPayLinkFromInvoiceRequest,
+        request: &PayLinkDataInvoice,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponsePaymentLinks, ApiError> {
         self.http_client
             .execute_request(
                 Method::POST,
                 &format!("PaymentLink/{}", id_invoice),
-                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .bool("amountFixed", request.amount_fixed.clone())
                     .string("mail2", request.mail_2.clone())
@@ -250,6 +250,7 @@ impl PaymentLinkClient {
     /// # Arguments
     ///
     /// * `lot_number` - Lot number of the bills to pay. All bills with this lot number will be included.
+    /// * `entry_point` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `vendor_number` - The vendor number for the vendor being paid with this payment link.
     /// * `mail_2` - List of recipient email addresses. When there is more than one, separate them by a semicolon (;).
     /// * `amount_fixed` - Indicates whether customer can modify the payment amount. A value of `true` means the amount isn't modifiable, a value `false` means the payor can modify the amount to pay.

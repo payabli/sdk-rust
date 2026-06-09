@@ -3,6 +3,7 @@ pub use crate::prelude::*;
 /// Query parameters for ListTransferDetails
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ListTransferDetailsQueryRequest {
+    /// Export format for file downloads. When specified, returns data as a file instead of JSON.
     #[serde(rename = "exportFormat")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub export_format: Option<ExportFormat>,
@@ -10,6 +11,7 @@ pub struct ListTransferDetailsQueryRequest {
     #[serde(rename = "fromRecord")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub from_record: Option<i64>,
+    /// Max number of records to return for the query. Use `0` or negative value to return all records. Defaults to 20.
     #[serde(rename = "limitRecord")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub limit_record: Option<LimitRecord>,

@@ -64,6 +64,32 @@ impl PaymentMethodDomainClient {
             .await
     }
 
+    /// Get the details for a payment method domain.
+    ///
+    /// # Arguments
+    ///
+    /// * `domain_id` - The payment method domain's ID in Payabli.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn get_payment_method_domain(
+        &self,
+        domain_id: &str,
+        options: Option<RequestOptions>,
+    ) -> Result<PaymentMethodDomainApiResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("PaymentMethodDomain/{}", domain_id),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
     /// Delete a payment method domain. You can't delete an inherited domain, you must delete a domain at the organization level.
     ///
     /// # Arguments
@@ -90,7 +116,7 @@ impl PaymentMethodDomainClient {
             .await
     }
 
-    /// Get the details for a payment method domain.
+    /// Update a payment method domain's configuration values.
     ///
     /// # Arguments
     ///
@@ -100,16 +126,17 @@ impl PaymentMethodDomainClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn get_payment_method_domain(
+    pub async fn update_payment_method_domain(
         &self,
         domain_id: &str,
+        request: &UpdatePaymentMethodDomainRequest,
         options: Option<RequestOptions>,
-    ) -> Result<PaymentMethodDomainApiResponse, ApiError> {
+    ) -> Result<PaymentMethodDomainGeneralResponse, ApiError> {
         self.http_client
             .execute_request(
-                Method::GET,
+                Method::PATCH,
                 &format!("PaymentMethodDomain/{}", domain_id),
-                None,
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )
@@ -149,33 +176,6 @@ impl PaymentMethodDomainClient {
                     .int("fromRecord", request.from_record.clone())
                     .int("limitRecord", request.limit_record.clone())
                     .build(),
-                options,
-            )
-            .await
-    }
-
-    /// Update a payment method domain's configuration values.
-    ///
-    /// # Arguments
-    ///
-    /// * `domain_id` - The payment method domain's ID in Payabli.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn update_payment_method_domain(
-        &self,
-        domain_id: &str,
-        request: &UpdatePaymentMethodDomainRequest,
-        options: Option<RequestOptions>,
-    ) -> Result<PaymentMethodDomainGeneralResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::PATCH,
-                &format!("PaymentMethodDomain/{}", domain_id),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
-                None,
                 options,
             )
             .await

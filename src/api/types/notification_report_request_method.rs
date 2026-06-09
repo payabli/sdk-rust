@@ -1,6 +1,11 @@
 pub use crate::prelude::*;
 
-/// Automated reporting lets you gather critical reports without manually filtering and exporting the data. Get automated daily, weekly, and monthly report for daily sales, ACH returns, settlements, and more. You can send these reports via email or via webhook. See [Automated Reports](/developers/developer-guides/notifications-and-webhooks-overview#automated-reports) for more.
+/// Automated reporting lets you gather critical reports without manually
+/// filtering and exporting the data. Get automated daily, weekly, and
+/// monthly reports for daily sales, ACH returns, settlements, and more. You
+/// can send these reports via email or via webhook. See
+/// [Automated Reports](/developers/developer-guides/notifications-and-webhooks-overview#automated-reports)
+/// for more.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum NotificationReportRequestMethod {

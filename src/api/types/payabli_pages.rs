@@ -6,33 +6,35 @@ pub struct PayabliPages {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub additional_data: Option<AdditionalData>,
     /// Array of credential objects with active services for the page
+    #[serde(rename = "Credentials")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub credentials: Option<Vec<PayabliCredentials>>,
     /// Timestamp of last access to page structure
-    #[serde(rename = "lastAccess")]
+    #[serde(rename = "LastAccess")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
     #[serde(with = "crate::core::flexible_datetime::utc::option")]
     pub last_access: Option<DateTime<Utc>>,
     /// Sections of page
-    #[serde(rename = "pageContent")]
+    #[serde(rename = "PageContent")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub page_content: Option<PageContent>,
     #[serde(rename = "pageIdentifier")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub page_identifier: Option<PageIdentifier>,
     /// Settings of page
-    #[serde(rename = "pageSettings")]
+    #[serde(rename = "PageSettings")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub page_settings: Option<PageSetting>,
     /// Flag indicating if page is active to accept payments. `0` for false, `1` for true.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub published: Option<i64>,
     /// Sections of payment receipt
-    #[serde(rename = "receiptContent")]
+    #[serde(rename = "ReceiptContent")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub receipt_content: Option<ReceiptContent>,
     /// Page identifier. Must be unique in platform.
+    #[serde(rename = "Subdomain")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub subdomain: Option<Subdomain>,
     /// Total amount to pay in this page

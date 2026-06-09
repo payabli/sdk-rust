@@ -21,7 +21,7 @@ async fn test_customer_add_customer_with_wiremock() {
             &Entrypointfield("8cfec329267".to_string()),
             &AddCustomerRequest {
                 body: CustomerData {
-                    customer_number: Some(CustomerNumberNullable("12356ACB".to_string())),
+                    customer_number: Some(CustomerNumberNullable("C-90010".to_string())),
                     firstname: Some("Irene".to_string()),
                     lastname: Some("Canizales".to_string()),
                     email: Some(Email("irene@canizalesconcrete.com".to_string())),
@@ -31,7 +31,7 @@ async fn test_customer_add_customer_with_wiremock() {
                     zip: Some("37612".to_string()),
                     country: Some("US".to_string()),
                     time_zone: Some(Timezone(-5)),
-                    identifier_fields: Some(Identifierfields(vec![Some("email".to_string())])),
+                    identifier_fields: Some(Identifierfields(vec!["email".to_string()])),
                     ..Default::default()
                 },
                 force_customer_creation: None,
@@ -50,28 +50,6 @@ async fn test_customer_add_customer_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
-async fn test_customer_delete_customer_with_wiremock() {
-    wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
-
-    let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
-        ..Default::default()
-    };
-    config.base_url = wiremock_base_url.to_string();
-    let client = ApiClient::new(config).expect("Failed to build client");
-
-    let result = client.customer.delete_customer(998, None).await;
-
-    assert!(result.is_ok(), "Client method call should succeed");
-
-    wire_test_utils::verify_request_count("DELETE", "/Customer/998", None, 1)
-        .await
-        .unwrap();
-}
-
-#[tokio::test]
-#[allow(unused_variables, unreachable_code)]
 async fn test_customer_get_customer_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
@@ -83,63 +61,11 @@ async fn test_customer_get_customer_with_wiremock() {
     config.base_url = wiremock_base_url.to_string();
     let client = ApiClient::new(config).expect("Failed to build client");
 
-    let result = client.customer.get_customer(998, None).await;
+    let result = client.customer.get_customer(4440, None).await;
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("GET", "/Customer/998", None, 1)
-        .await
-        .unwrap();
-}
-
-#[tokio::test]
-#[allow(unused_variables, unreachable_code)]
-async fn test_customer_link_customer_transaction_with_wiremock() {
-    wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
-
-    let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
-        ..Default::default()
-    };
-    config.base_url = wiremock_base_url.to_string();
-    let client = ApiClient::new(config).expect("Failed to build client");
-
-    let result = client
-        .customer
-        .link_customer_transaction(998, &"45-as456777hhhhhhhhhh77777777-324".to_string(), None)
-        .await;
-
-    assert!(result.is_ok(), "Client method call should succeed");
-
-    wire_test_utils::verify_request_count(
-        "GET",
-        "/Customer/link/998/45-as456777hhhhhhhhhh77777777-324",
-        None,
-        1,
-    )
-    .await
-    .unwrap();
-}
-
-#[tokio::test]
-#[allow(unused_variables, unreachable_code)]
-async fn test_customer_request_consent_with_wiremock() {
-    wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
-
-    let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
-        ..Default::default()
-    };
-    config.base_url = wiremock_base_url.to_string();
-    let client = ApiClient::new(config).expect("Failed to build client");
-
-    let result = client.customer.request_consent(998, None).await;
-
-    assert!(result.is_ok(), "Client method call should succeed");
-
-    wire_test_utils::verify_request_count("POST", "/Customer/998/consent", None, 1)
+    wire_test_utils::verify_request_count("GET", "/Customer/4440", None, 1)
         .await
         .unwrap();
 }
@@ -160,7 +86,7 @@ async fn test_customer_update_customer_with_wiremock() {
     let result = client
         .customer
         .update_customer(
-            998,
+            4440,
             &CustomerData {
                 firstname: Some("Irene".to_string()),
                 lastname: Some("Canizales".to_string()),
@@ -177,7 +103,81 @@ async fn test_customer_update_customer_with_wiremock() {
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("PUT", "/Customer/998", None, 1)
+    wire_test_utils::verify_request_count("PUT", "/Customer/4440", None, 1)
         .await
         .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_customer_delete_customer_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client.customer.delete_customer(4440, None).await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("DELETE", "/Customer/4440", None, 1)
+        .await
+        .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_customer_request_consent_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client.customer.request_consent(4440, None).await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("POST", "/Customer/4440/consent", None, 1)
+        .await
+        .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_customer_link_customer_transaction_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .customer
+        .link_customer_transaction(4440, &"45-as456777hhhhhhhhhh77777777-324".to_string(), None)
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/Customer/link/4440/45-as456777hhhhhhhhhh77777777-324",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
 }

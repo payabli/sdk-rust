@@ -1,4 +1,4 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-pub struct Identifierfields(pub Vec<Option<String>>);
+pub struct Identifierfields(pub Vec<String>);

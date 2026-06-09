@@ -5,19 +5,22 @@ pub struct BillItem {
     /// Array of tags classifying item or product.
     #[serde(rename = "itemCategories")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub item_categories: Option<Vec<Option<String>>>,
+    pub item_categories: Option<Vec<String>>,
     #[serde(rename = "itemCommodityCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub item_commodity_code: Option<ItemCommodityCode>,
     /// Item or product price per unit.
     #[serde(rename = "itemCost")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
-    #[serde(with = "crate::core::number_serializers")]
-    pub item_cost: f64,
+    #[serde(with = "crate::core::number_serializers::option")]
+    pub item_cost: Option<f64>,
     #[serde(rename = "itemDescription")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub item_description: Option<ItemDescription>,
-    /// Internal class of item or product: value '0' is only for invoices , '1' for bills and, '2' common for both.
+    /// Internal class of item or product: value `0` is only for invoices,
+    /// `1` for bills, and `2` is common for both. Required on invoice line
+    /// items — invoice creation fails with `Invalid item data` if it's omitted.
     #[serde(rename = "itemMode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub item_mode: Option<i64>,
@@ -43,7 +46,8 @@ pub struct BillItem {
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers::option")]
     pub item_tax_rate: Option<f64>,
-    /// Total amount in item or product.
+    /// Per-line total for this item (unit cost times quantity). Distinct from
+    /// the invoice's overall total, `invoiceAmount`. Required on invoice line items.
     #[serde(rename = "itemTotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
@@ -63,7 +67,7 @@ impl BillItem {
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
 pub struct BillItemBuilder {
-    item_categories: Option<Vec<Option<String>>>,
+    item_categories: Option<Vec<String>>,
     item_commodity_code: Option<ItemCommodityCode>,
     item_cost: Option<f64>,
     item_description: Option<ItemDescription>,
@@ -78,7 +82,7 @@ pub struct BillItemBuilder {
 }
 
 impl BillItemBuilder {
-    pub fn item_categories(mut self, value: Vec<Option<String>>) -> Self {
+    pub fn item_categories(mut self, value: Vec<String>) -> Self {
         self.item_categories = Some(value);
         self
     }
@@ -139,15 +143,11 @@ impl BillItemBuilder {
     }
 
     /// Consumes the builder and constructs a [`BillItem`].
-    /// This method will fail if any of the following fields are not set:
-    /// - [`item_cost`](BillItemBuilder::item_cost)
     pub fn build(self) -> Result<BillItem, BuildError> {
         Ok(BillItem {
             item_categories: self.item_categories,
             item_commodity_code: self.item_commodity_code,
-            item_cost: self
-                .item_cost
-                .ok_or_else(|| BuildError::missing_field("item_cost"))?,
+            item_cost: self.item_cost,
             item_description: self.item_description,
             item_mode: self.item_mode,
             item_product_code: self.item_product_code,

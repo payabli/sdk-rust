@@ -40,6 +40,34 @@ impl CloudClient {
             .await
     }
 
+    /// Remove a cloud device from an entrypoint.
+    ///
+    /// # Arguments
+    ///
+    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `device_id` - ID of the cloud device.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn remove_device(
+        &self,
+        entry: &str,
+        device_id: &str,
+        options: Option<RequestOptions>,
+    ) -> Result<RemoveDeviceResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::DELETE,
+                &format!("Cloud/register/{}/{}", entry, device_id),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
     /// Retrieve the registration history for a device.
     ///
     /// # Arguments
@@ -95,34 +123,6 @@ impl CloudClient {
                 QueryBuilder::new()
                     .bool("forceRefresh", request.force_refresh.clone())
                     .build(),
-                options,
-            )
-            .await
-    }
-
-    /// Remove a cloud device from an entrypoint.
-    ///
-    /// # Arguments
-    ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
-    /// * `device_id` - ID of the cloud device.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn remove_device(
-        &self,
-        entry: &str,
-        device_id: &str,
-        options: Option<RequestOptions>,
-    ) -> Result<RemoveDeviceResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::DELETE,
-                &format!("Cloud/register/{}/{}", entry, device_id),
-                None,
-                None,
                 options,
             )
             .await

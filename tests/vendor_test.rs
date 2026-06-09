@@ -20,7 +20,7 @@ async fn test_vendor_add_vendor_with_wiremock() {
         .add_vendor(
             &"8cfec329267".to_string(),
             &VendorData {
-                vendor_number: Some(VendorNumber("1234".to_string())),
+                vendor_number: Some(VendorNumber("VEN-123".to_string())),
                 address_1: Some(AddressNullable("123 Ocean Drive".to_string())),
                 address_2: Some(AddressAddtlNullable("Suite 400".to_string())),
                 billing_data: Some(BillingData {
@@ -81,7 +81,7 @@ async fn test_vendor_add_vendor_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
-async fn test_vendor_delete_vendor_with_wiremock() {
+async fn test_vendor_get_vendor_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
@@ -92,11 +92,11 @@ async fn test_vendor_delete_vendor_with_wiremock() {
     config.base_url = wiremock_base_url.to_string();
     let client = ApiClient::new(config).expect("Failed to build client");
 
-    let result = client.vendor.delete_vendor(1, None).await;
+    let result = client.vendor.get_vendor(1, None).await;
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("DELETE", "/Vendor/1", None, 1)
+    wire_test_utils::verify_request_count("GET", "/Vendor/1", None, 1)
         .await
         .unwrap();
 }
@@ -135,7 +135,7 @@ async fn test_vendor_edit_vendor_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
-async fn test_vendor_get_vendor_with_wiremock() {
+async fn test_vendor_delete_vendor_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
@@ -146,11 +146,11 @@ async fn test_vendor_get_vendor_with_wiremock() {
     config.base_url = wiremock_base_url.to_string();
     let client = ApiClient::new(config).expect("Failed to build client");
 
-    let result = client.vendor.get_vendor(1, None).await;
+    let result = client.vendor.delete_vendor(1, None).await;
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("GET", "/Vendor/1", None, 1)
+    wire_test_utils::verify_request_count("DELETE", "/Vendor/1", None, 1)
         .await
         .unwrap();
 }
@@ -173,7 +173,7 @@ async fn test_vendor_enrich_vendor_with_wiremock() {
         .enrich_vendor(
             &"8cfec329267".to_string(),
             &VendorEnrichRequest {
-                vendor_id: 3890,
+                vendor_id: 456,
                 scope: Some(vec!["invoice_scan".to_string()]),
                 apply_enrichment_data: Some(false),
                 invoice_file: Some(FileContent {
@@ -183,7 +183,8 @@ async fn test_vendor_enrich_vendor_with_wiremock() {
                     ..Default::default()
                 }),
                 fallback_method: Some("check".to_string()),
-                ..Default::default()
+                schedule_call_if_needed: None,
+                bill_id: None,
             },
             None,
         )

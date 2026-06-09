@@ -1,9 +1,14 @@
 pub use crate::prelude::*;
 
 /// This field controls which method is used to handle risk orchestration.
-/// - `automatic`: Sends the application through the automatic underwriting workflow using the provided `policyId`.
-/// - `manual`: Puts the application into the pending review status. An analyst must manually change it's final status to approved or declined.
-/// - `bypass`: The application won't go through Payabli's review, and proceeds directly to boarding products and services.
+///
+/// - `automatic`: Sends the application through the automatic
+/// underwriting workflow using the provided `policyId`.
+/// - `manual`: Puts the application into the pending review status. An
+/// analyst must manually change its final status to approved or
+/// declined.
+/// - `bypass`: The application won't go through Payabli's review, and
+/// proceeds directly to boarding products and services.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum UnderWritingMethod {

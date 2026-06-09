@@ -24,7 +24,7 @@ impl PayoutSubscriptionClient {
     /// JSON response from the API
     pub async fn create_payout_subscription(
         &self,
-        request: &PayoutSubscriptionRequestBody,
+        request: &RequestPayoutSchedule,
         options: Option<RequestOptions>,
     ) -> Result<AddPayoutSubscriptionResponse, ApiError> {
         self.http_client

@@ -17,7 +17,7 @@ impl OcrClient {
     ///
     /// # Arguments
     ///
-    /// * `request` - The image file to OCR. Accepted formats include PDF, JPG, JPEG, PNG, GIF.
+    /// * `type_result` - The type of object to create in Payabli. Accepted values are `bill` and `invoice`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -32,7 +32,7 @@ impl OcrClient {
         self.http_client
             .execute_request(
                 Method::POST,
-                &format!("/Import/ocrDocumentForm/{}", type_result.0),
+                &format!("Import/ocrDocumentForm/{}", type_result.0),
                 Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
@@ -44,7 +44,7 @@ impl OcrClient {
     ///
     /// # Arguments
     ///
-    /// * `request` - Base64-encoded file content for OCR processing
+    /// * `type_result` - The type of object to create in Payabli. Accepted values are `bill` and `invoice`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -59,7 +59,7 @@ impl OcrClient {
         self.http_client
             .execute_request(
                 Method::POST,
-                &format!("/Import/ocrDocumentJson/{}", type_result.0),
+                &format!("Import/ocrDocumentJson/{}", type_result.0),
                 Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,

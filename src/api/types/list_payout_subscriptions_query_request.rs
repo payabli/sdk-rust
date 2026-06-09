@@ -3,6 +3,7 @@ pub use crate::prelude::*;
 /// Query parameters for ListPayoutSubscriptions
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct ListPayoutSubscriptionsQueryRequest {
+    /// Export format for file downloads. When specified, returns data as a file instead of JSON.
     #[serde(rename = "exportFormat")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub export_format: Option<ExportFormat>,

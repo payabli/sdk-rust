@@ -75,36 +75,6 @@ async fn test_payment_method_domain_cascade_payment_method_domain_with_wiremock(
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
-async fn test_payment_method_domain_delete_payment_method_domain_with_wiremock() {
-    wire_test_utils::reset_wiremock_requests().await.unwrap();
-    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
-
-    let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
-        ..Default::default()
-    };
-    config.base_url = wiremock_base_url.to_string();
-    let client = ApiClient::new(config).expect("Failed to build client");
-
-    let result = client
-        .payment_method_domain
-        .delete_payment_method_domain(&"pmd_b8237fa45c964d8a9ef27160cd42b8c5".to_string(), None)
-        .await;
-
-    assert!(result.is_ok(), "Client method call should succeed");
-
-    wire_test_utils::verify_request_count(
-        "DELETE",
-        "/PaymentMethodDomain/pmd_b8237fa45c964d8a9ef27160cd42b8c5",
-        None,
-        1,
-    )
-    .await
-    .unwrap();
-}
-
-#[tokio::test]
-#[allow(unused_variables, unreachable_code)]
 async fn test_payment_method_domain_get_payment_method_domain_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
@@ -135,7 +105,7 @@ async fn test_payment_method_domain_get_payment_method_domain_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
-async fn test_payment_method_domain_list_payment_method_domains_with_wiremock() {
+async fn test_payment_method_domain_delete_payment_method_domain_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
@@ -148,25 +118,15 @@ async fn test_payment_method_domain_list_payment_method_domains_with_wiremock() 
 
     let result = client
         .payment_method_domain
-        .list_payment_method_domains(
-            &ListPaymentMethodDomainsQueryRequest {
-                entity_id: Some(1147),
-                entity_type: Some("paypoint".to_string()),
-                ..Default::default()
-            },
-            None,
-        )
+        .delete_payment_method_domain(&"pmd_b8237fa45c964d8a9ef27160cd42b8c5".to_string(), None)
         .await;
 
     assert!(result.is_ok(), "Client method call should succeed");
 
     wire_test_utils::verify_request_count(
-        "GET",
-        "/PaymentMethodDomain/list",
-        Some(HashMap::from([
-            ("entityId".to_string(), json!("1147")),
-            ("entityType".to_string(), json!("paypoint")),
-        ])),
+        "DELETE",
+        "/PaymentMethodDomain/pmd_b8237fa45c964d8a9ef27160cd42b8c5",
+        None,
         1,
     )
     .await
@@ -211,6 +171,46 @@ async fn test_payment_method_domain_update_payment_method_domain_with_wiremock()
         "PATCH",
         "/PaymentMethodDomain/pmd_b8237fa45c964d8a9ef27160cd42b8c5",
         None,
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_payment_method_domain_list_payment_method_domains_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .payment_method_domain
+        .list_payment_method_domains(
+            &ListPaymentMethodDomainsQueryRequest {
+                entity_id: Some(1147),
+                entity_type: Some("paypoint".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/PaymentMethodDomain/list",
+        Some(HashMap::from([
+            ("entityId".to_string(), json!("1147")),
+            ("entityType".to_string(), json!("paypoint")),
+        ])),
         1,
     )
     .await

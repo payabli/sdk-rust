@@ -110,7 +110,6 @@ pub struct VendorData {
     /// When this feature is enabled and you include an attachment, the invoice is scanned and extracted vendor information is merged into the request.
     /// Fields in the request body take precedence over extracted data.
     /// If the scan fails, vendor creation proceeds with the original request data.
-    ///
     /// See the [vendor enrichment guide](/guides/pay-out-vendor-enrichment-overview) for details.
     /// Contact Payabli to enable this feature.
     #[serde(skip_serializing_if = "Option::is_none")]

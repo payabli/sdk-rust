@@ -18,33 +18,35 @@ async fn test_money_out_authorize_out_with_wiremock() {
     let result = client
         .money_out
         .authorize_out(
-            &AuthorizeOutRequest {
-                body: AuthorizePayoutBody {
-                    entry_point: Entrypointfield("48acde49".to_string()),
-                    order_description: Some(Orderdescription("Window Painting".to_string())),
-                    payment_method: AuthorizePaymentMethod {
-                        method: "managed".to_string(),
-                        ..Default::default()
-                    },
-                    payment_details: RequestOutAuthorizePaymentDetails {
-                        total_amount: Some(47.0),
-                        unbundled: Some(false),
-                        ..Default::default()
-                    },
-                    vendor_data: RequestOutAuthorizeVendorData {
-                        vendor_number: Some(VendorNumber("7895433".to_string())),
-                        ..Default::default()
-                    },
-                    invoice_data: vec![RequestOutAuthorizeInvoiceData {
-                        bill_id: Some(BillId(54323)),
-                        ..Default::default()
-                    }],
-                    auto_capture: Some(AutoCapture(true)),
+            &RequestOutAuthorize {
+                entry_point: Entrypointfield("8cfec329267".to_string()),
+                order_description: Some(Orderdescription("Window Painting".to_string())),
+                payment_method: AuthorizePaymentMethod {
+                    method: "managed".to_string(),
                     ..Default::default()
                 },
+                payment_details: RequestOutAuthorizePaymentDetails {
+                    total_amount: Some(47.0),
+                    unbundled: Some(false),
+                    ..Default::default()
+                },
+                vendor_data: RequestOutAuthorizeVendorData {
+                    vendor_number: Some(VendorNumber("VEN-123".to_string())),
+                    ..Default::default()
+                },
+                invoice_data: vec![RequestOutAuthorizeInvoiceData {
+                    bill_id: Some(BillId(54323)),
+                    ..Default::default()
+                }],
+                auto_capture: Some(AutoCapture(true)),
                 allow_duplicated_bills: None,
                 do_not_create_bills: None,
                 force_vendor_creation: None,
+                source: None,
+                order_id: None,
+                account_id: None,
+                subdomain: None,
+                subscription_id: None,
             },
             None,
         )
@@ -353,16 +355,13 @@ async fn test_money_out_reissue_out_with_wiremock() {
         .reissue_out(
             &ReissueOutRequest {
                 trans_id: "129-219".to_string(),
-                body: ReissuePayoutBody {
-                    payment_method: ReissuePaymentMethod {
-                        method: "ach".to_string(),
-                        ach_holder: Some("Acme Corp".to_string()),
-                        ach_routing: Some("021000021".to_string()),
-                        ach_account: Some("9876543210".to_string()),
-                        ach_account_type: Some("savings".to_string()),
-                        ach_holder_type: Some(AchHolderType::Business),
-                        ..Default::default()
-                    },
+                payment_method: ReissuePaymentMethod {
+                    method: "ach".to_string(),
+                    ach_holder: Some("Acme Corp".to_string()),
+                    ach_routing: Some("021000021".to_string()),
+                    ach_account: Some("9876543210".to_string()),
+                    ach_account_type: Some("savings".to_string()),
+                    ach_holder_type: Some(AchHolderType::Business),
                     ..Default::default()
                 },
             },

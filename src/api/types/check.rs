@@ -7,7 +7,7 @@ pub struct Check {
     #[serde(default)]
     pub ach_holder: AchHolder,
     /// Method to use for the transaction. Use `check` for a paper check transaction. When the method is `check`, then `paymentDetails.checkNumber` is required.
-    pub method: String,
+    pub method: CheckMethod,
 }
 
 impl Check {
@@ -20,7 +20,7 @@ impl Check {
 #[non_exhaustive]
 pub struct CheckBuilder {
     ach_holder: Option<AchHolder>,
-    method: Option<String>,
+    method: Option<CheckMethod>,
 }
 
 impl CheckBuilder {
@@ -29,8 +29,8 @@ impl CheckBuilder {
         self
     }
 
-    pub fn method(mut self, value: impl Into<String>) -> Self {
-        self.method = Some(value.into());
+    pub fn method(mut self, value: CheckMethod) -> Self {
+        self.method = Some(value);
         self
     }
 

@@ -38,6 +38,33 @@ impl BoardingClient {
             .await
     }
 
+    /// Updates a boarding application by ID. This endpoint requires an application API token.
+    ///
+    /// # Arguments
+    ///
+    /// * `app_id` - Boarding application ID.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn update_application(
+        &self,
+        app_id: i64,
+        request: &ApplicationData,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::PUT,
+                &format!("Boarding/app/{}", app_id),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
     /// Deletes a boarding application by ID.
     ///
     /// # Arguments
@@ -232,6 +259,7 @@ impl BoardingClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -359,33 +387,6 @@ impl BoardingClient {
                     .serialize("parameters", request.parameters.clone())
                     .string("sortBy", request.sort_by.clone())
                     .build(),
-                options,
-            )
-            .await
-    }
-
-    /// Updates a boarding application by ID. This endpoint requires an application API token.
-    ///
-    /// # Arguments
-    ///
-    /// * `app_id` - Boarding application ID.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn update_application(
-        &self,
-        app_id: i64,
-        request: &ApplicationData,
-        options: Option<RequestOptions>,
-    ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::PUT,
-                &format!("Boarding/app/{}", app_id),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
-                None,
                 options,
             )
             .await

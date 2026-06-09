@@ -3,6 +3,7 @@ pub use crate::prelude::*;
 /// Request for AddPayLinkFromBillLotNumber (body + query parameters)
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct AddPayLinkFromBillLotNumberRequest {
+    /// The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     #[serde(rename = "entryPoint")]
     #[serde(skip_serializing)]
     #[serde(default)]

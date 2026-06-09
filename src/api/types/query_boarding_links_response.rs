@@ -1,6 +1,5 @@
 pub use crate::prelude::*;
 
-///
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct QueryBoardingLinksResponse {
     #[serde(rename = "Records")]

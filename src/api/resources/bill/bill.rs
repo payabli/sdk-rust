@@ -40,54 +40,7 @@ impl BillClient {
             .await
     }
 
-    /// Delete a file attached to a bill.
-    ///
-    /// # Arguments
-    ///
-    /// * `id_bill` - Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
-    /// * `filename` - The filename in Payabli. Filename is `zipName` in response to a
-    /// request to `/api/Invoice/{idInvoice}`. Here, the filename is
-    /// `0_Bill.pdf`.
-    ///
-    /// ```json
-    /// "DocumentsRef": {
-    /// "zipfile": "inva_269.zip",
-    /// "filelist": [
-    /// {
-    /// "originalName": "Bill.pdf",
-    /// "zipName": "0_Bill.pdf",
-    /// "descriptor": null
-    /// }
-    /// ]
-    /// }
-    /// ```
-    /// * `return_object` - When `true`, the request returns the file content as a Base64-encoded string.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn delete_attached_from_bill(
-        &self,
-        id_bill: i64,
-        filename: &str,
-        request: &DeleteAttachedFromBillQueryRequest,
-        options: Option<RequestOptions>,
-    ) -> Result<BillResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::DELETE,
-                &format!("Bill/attachedFileFromBill/{}/{}", id_bill, filename),
-                None,
-                QueryBuilder::new()
-                    .bool("returnObject", request.return_object.clone())
-                    .build(),
-                options,
-            )
-            .await
-    }
-
-    /// Deletes a bill by ID.
+    /// Retrieves a bill by ID from an entrypoint.
     ///
     /// # Arguments
     ///
@@ -97,14 +50,14 @@ impl BillClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn delete_bill(
+    pub async fn get_bill(
         &self,
         id_bill: i64,
         options: Option<RequestOptions>,
-    ) -> Result<BillResponse, ApiError> {
+    ) -> Result<GetBillResponse, ApiError> {
         self.http_client
             .execute_request(
-                Method::DELETE,
+                Method::GET,
                 &format!("Bill/{}", id_bill),
                 None,
                 None,
@@ -140,22 +93,40 @@ impl BillClient {
             .await
     }
 
+    /// Deletes a bill by ID.
+    ///
+    /// # Arguments
+    ///
+    /// * `id_bill` - Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn delete_bill(
+        &self,
+        id_bill: i64,
+        options: Option<RequestOptions>,
+    ) -> Result<BillResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::DELETE,
+                &format!("Bill/{}", id_bill),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
     /// Retrieves a file attached to a bill, either as a binary file or as a Base64-encoded string.
     ///
     /// # Arguments
     ///
     /// * `id_bill` - Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
-    /// * `filename` - The filename in Payabli. Filename is `zipName` in response to a request to `/api/Invoice/{idInvoice}`. Here, the filename is `0_Bill.pdf``.
-    /// "DocumentsRef": {
-    /// "zipfile": "inva_269.zip",
-    /// "filelist": [
-    /// {
-    /// "originalName": "Bill.pdf",
-    /// "zipName": "0_Bill.pdf",
-    /// "descriptor": null
-    /// }
-    /// ]
-    /// }
+    /// * `filename` - The filename in Payabli. Get this from the `zipName` field
+    /// in the `DocumentsRef.filelist` array returned by
+    /// `/api/Bill/{idBill}`. Example: `0_Bill.pdf`.
     /// * `return_object` - When `true`, the request returns the file content as a Base64-encoded string.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
@@ -182,7 +153,71 @@ impl BillClient {
             .await
     }
 
-    /// Retrieves a bill by ID from an entrypoint.
+    /// Delete a file attached to a bill.
+    ///
+    /// # Arguments
+    ///
+    /// * `id_bill` - Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+    /// * `filename` - The filename in Payabli. Get this from the `zipName` field
+    /// in the `DocumentsRef.filelist` array returned by
+    /// `/api/Bill/{idBill}`. Example: `0_Bill.pdf`.
+    /// * `return_object` - When `true`, the response includes the full bill object.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn delete_attached_from_bill(
+        &self,
+        id_bill: i64,
+        filename: &str,
+        request: &DeleteAttachedFromBillQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<BillResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::DELETE,
+                &format!("Bill/attachedFileFromBill/{}/{}", id_bill, filename),
+                None,
+                QueryBuilder::new()
+                    .bool("returnObject", request.return_object.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
+    /// Send a bill to a user or list of users to approve.
+    ///
+    /// # Arguments
+    ///
+    /// * `id_bill` - Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+    /// * `autocreate_user` - Automatically create the target user for approval if they don't exist.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn send_to_approval_bill(
+        &self,
+        id_bill: i64,
+        request: &SendToApprovalBillRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<BillResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                &format!("Bill/approval/{}", id_bill),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
+                QueryBuilder::new()
+                    .bool("autocreateUser", request.autocreate_user.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
+    /// Modify the list of users the bill is sent to for approval.
     ///
     /// # Arguments
     ///
@@ -192,17 +227,50 @@ impl BillClient {
     /// # Returns
     ///
     /// JSON response from the API
-    pub async fn get_bill(
+    pub async fn modify_approval_bill(
         &self,
         id_bill: i64,
+        request: &Vec<String>,
         options: Option<RequestOptions>,
-    ) -> Result<GetBillResponse, ApiError> {
+    ) -> Result<ModifyApprovalBillResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::PUT,
+                &format!("Bill/approval/{}", id_bill),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Approve or disapprove a bill by ID.
+    ///
+    /// # Arguments
+    ///
+    /// * `id_bill` - Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
+    /// * `approved` - String representing the approved status. Accepted values: 'true' or 'false'.
+    /// * `email` - Email or username of user modifying approval status.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn set_approved_bill(
+        &self,
+        id_bill: i64,
+        approved: &str,
+        request: &SetApprovedBillQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<SetApprovedBillResponse, ApiError> {
         self.http_client
             .execute_request(
                 Method::GET,
-                &format!("Bill/{}", id_bill),
+                &format!("Bill/approval/{}/{}", id_bill, approved),
                 None,
-                None,
+                QueryBuilder::new()
+                    .string("email", request.email.clone())
+                    .build(),
                 options,
             )
             .await
@@ -213,6 +281,7 @@ impl BillClient {
     /// # Arguments
     ///
     /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -292,6 +361,7 @@ impl BillClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -360,95 +430,6 @@ impl BillClient {
                     .int("limitRecord", request.limit_record.clone())
                     .serialize("parameters", request.parameters.clone())
                     .string("sortBy", request.sort_by.clone())
-                    .build(),
-                options,
-            )
-            .await
-    }
-
-    /// Modify the list of users the bill is sent to for approval.
-    ///
-    /// # Arguments
-    ///
-    /// * `id_bill` - Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn modify_approval_bill(
-        &self,
-        id_bill: i64,
-        request: &Vec<String>,
-        options: Option<RequestOptions>,
-    ) -> Result<ModifyApprovalBillResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::PUT,
-                &format!("Bill/approval/{}", id_bill),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
-                None,
-                options,
-            )
-            .await
-    }
-
-    /// Send a bill to a user or list of users to approve.
-    ///
-    /// # Arguments
-    ///
-    /// * `id_bill` - Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
-    /// * `autocreate_user` - Automatically create the target user for approval if they don't exist.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn send_to_approval_bill(
-        &self,
-        id_bill: i64,
-        request: &SendToApprovalBillRequest,
-        options: Option<RequestOptions>,
-    ) -> Result<BillResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::POST,
-                &format!("Bill/approval/{}", id_bill),
-                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
-                QueryBuilder::new()
-                    .bool("autocreateUser", request.autocreate_user.clone())
-                    .build(),
-                options,
-            )
-            .await
-    }
-
-    /// Approve or disapprove a bill by ID.
-    ///
-    /// # Arguments
-    ///
-    /// * `id_bill` - Payabli ID for the bill. Get this ID by querying `/api/Query/bills/` for the entrypoint or the organization.
-    /// * `approved` - String representing the approved status. Accepted values: 'true' or 'false'.
-    /// * `email` - Email or username of user modifying approval status.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn set_approved_bill(
-        &self,
-        id_bill: i64,
-        approved: &str,
-        request: &SetApprovedBillQueryRequest,
-        options: Option<RequestOptions>,
-    ) -> Result<SetApprovedBillResponse, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::GET,
-                &format!("Bill/approval/{}/{}", id_bill, approved),
-                None,
-                QueryBuilder::new()
-                    .string("email", request.email.clone())
                     .build(),
                 options,
             )

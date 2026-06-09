@@ -18,6 +18,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -129,6 +131,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -216,7 +219,7 @@ impl QueryClient {
         org_id: i64,
         request: &ListBatchDetailsOrgQueryRequest,
         options: Option<RequestOptions>,
-    ) -> Result<QueryResponseSettlements, ApiError> {
+    ) -> Result<QueryBatchesDetailResponse, ApiError> {
         self.http_client
             .execute_request(
                 Method::GET,
@@ -238,6 +241,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -328,6 +333,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -417,6 +423,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -468,6 +476,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -533,6 +542,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -640,6 +651,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -748,6 +760,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -849,6 +863,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -949,6 +964,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter
@@ -1077,6 +1094,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter
@@ -1204,6 +1222,7 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -1347,6 +1366,7 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -1497,6 +1517,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -1584,6 +1605,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -1699,6 +1722,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -1813,6 +1837,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -1905,6 +1930,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -2016,6 +2043,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -2126,6 +2154,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -2156,6 +2186,7 @@ impl QueryClient {
     /// - `feeAmount` (gt, ge, lt, le, eq, ne)
     /// - `status` (in, nin, eq, ne)
     /// - `untilcancelled` (eq, ne)
+    /// - `subscriptionType` (eq, ne, in, nin). Filters by subscription type. Accepts `Regular` or `BalanceDriven`. Case-insensitive. Example: `subscriptionType(in)=Regular|BalanceDriven`.
     /// - `payaccountLastfour` (nct, ct)
     /// - `payaccountType` (ne, eq, in, nin)
     /// - `payaccountCurrency` (ne, eq, in, nin)
@@ -2238,6 +2269,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -2268,6 +2300,7 @@ impl QueryClient {
     /// - `feeAmount` (gt, ge, lt, le, eq, ne)
     /// - `status` (in, nin, eq, ne)
     /// - `untilcancelled` (eq, ne)
+    /// - `subscriptionType` (eq, ne, in, nin). Filters by subscription type. Accepts `Regular` or `BalanceDriven`. Case-insensitive. Example: `subscriptionType(in)=Regular|BalanceDriven`.
     /// - `payaccountLastfour` (nct, ct)
     /// - `payaccountType` (ne, eq, in, nin)
     /// - `payaccountCurrency` (ne, eq, in, nin)
@@ -2349,6 +2382,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -2448,6 +2483,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -2543,15 +2579,20 @@ impl QueryClient {
     }
 
     /// Retrieve a list of transactions for a paypoint. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
-    /// By default, this endpoint returns only transactions from the last 60 days. To query transactions outside of this period, include `transactionDate` filters.
-    /// For example, this request parameters filter for transactions between April 01, 2024 and April 09, 2024.
-    /// ``` curl -X GET https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59\
-    /// -H 'requestToken: <API TOKEN>'
     ///
+    /// By default, this endpoint returns only transactions from the last 60 days. To query transactions outside of this period, include `transactionDate` filters.
+    ///
+    /// These request parameters filter for transactions between April 1, 2024 and April 9, 2024.
+    ///
+    /// ```bash
+    /// curl -X GET https://api-sandbox.payabli.com/api/Query/transactions/8cfec329267?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59 \
+    /// -H 'requestToken: <API TOKEN>'
     /// ```
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -2667,23 +2708,21 @@ impl QueryClient {
             .await
     }
 
-    /// Retrieve a list of transactions for an organization. Use filters to
-    /// limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
-    ///
+    /// Retrieve a list of transactions for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
     ///
     /// By default, this endpoint returns only transactions from the last 60 days. To query transactions outside of this period, include `transactionDate` filters.
     ///
-    /// For example, this request parameters filter for transactions between April 01, 2024 and April 09, 2024.
+    /// These request parameters filter for transactions between April 1, 2024 and April 9, 2024.
     ///
-    /// ```
-    /// curl -X GET "https://sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59"\
+    /// ```bash
+    /// curl -X GET "https://api-sandbox.payabli.com/api/Query/transactions/org/1?limitRecord=20&fromRecord=0&transactionDate(ge)=2024-04-01T00:00:00&transactionDate(le)=2024-04-09T23:59:59" \
     /// -H 'requestToken: <API TOKEN>'
-    ///
     /// ```
     ///
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -2802,8 +2841,11 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `transfer_id` - The numeric identifier for the transfer, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
+    /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records. Defaults to 20.
     /// * `parameters` - Collection of field names, conditions, and values used to filter
     /// the query.
     ///
@@ -2875,6 +2917,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -2945,6 +2989,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `org_id` - Organization ID. Unique identifier assigned to an org by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -3075,6 +3121,7 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query. See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -3137,6 +3184,7 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `transfer_id` - The numeric identifier for the transfer, assigned by Payabli.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
@@ -3355,6 +3403,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -3446,6 +3495,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query
@@ -3536,6 +3586,8 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -3620,6 +3672,7 @@ impl QueryClient {
     ///
     /// # Arguments
     ///
+    /// * `entry` - The entity's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.
@@ -3796,6 +3849,7 @@ impl QueryClient {
     /// # Arguments
     ///
     /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `export_format` - Export format for file downloads. When specified, returns data as a file instead of JSON.
     /// * `from_record` - The number of records to skip before starting to collect the result set.
     /// * `limit_record` - Max number of records to return for the query. Use `0` or negative value to return all records.
     /// * `parameters` - Collection of field names, conditions, and values used to filter the query.

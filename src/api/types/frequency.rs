@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-/// Frequency for operation.
+/// Frequency for operation. The `firstofmonth`, `fifteenthofmonth`, and `endofmonth` values are only valid on subscriptions — they aren't accepted by other endpoints (such as invoice scheduling) that use this enum.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Frequency {
@@ -11,6 +11,9 @@ pub enum Frequency {
     Monthly,
     Every3Months,
     Annually,
+    FirstOfMonth,
+    FifteenthOfMonth,
+    EndOfMonth,
     /// This variant is used for forward compatibility.
     /// If the server sends a value not recognized by the current SDK version,
     /// it will be captured here with the raw string value.
@@ -26,6 +29,9 @@ impl Serialize for Frequency {
             Self::Monthly => serializer.serialize_str("monthly"),
             Self::Every3Months => serializer.serialize_str("every3months"),
             Self::Annually => serializer.serialize_str("annually"),
+            Self::FirstOfMonth => serializer.serialize_str("firstofmonth"),
+            Self::FifteenthOfMonth => serializer.serialize_str("fifteenthofmonth"),
+            Self::EndOfMonth => serializer.serialize_str("endofmonth"),
             Self::__Unknown(val) => serializer.serialize_str(val),
         }
     }
@@ -42,6 +48,9 @@ impl<'de> Deserialize<'de> for Frequency {
             "monthly" => Ok(Self::Monthly),
             "every3months" => Ok(Self::Every3Months),
             "annually" => Ok(Self::Annually),
+            "firstofmonth" => Ok(Self::FirstOfMonth),
+            "fifteenthofmonth" => Ok(Self::FifteenthOfMonth),
+            "endofmonth" => Ok(Self::EndOfMonth),
             _ => Ok(Self::__Unknown(value)),
         }
     }
@@ -57,6 +66,9 @@ impl fmt::Display for Frequency {
             Self::Monthly => write!(f, "monthly"),
             Self::Every3Months => write!(f, "every3months"),
             Self::Annually => write!(f, "annually"),
+            Self::FirstOfMonth => write!(f, "firstofmonth"),
+            Self::FifteenthOfMonth => write!(f, "fifteenthofmonth"),
+            Self::EndOfMonth => write!(f, "endofmonth"),
             Self::__Unknown(val) => write!(f, "{}", val),
         }
     }

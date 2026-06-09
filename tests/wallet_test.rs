@@ -21,7 +21,7 @@ async fn test_wallet_configure_apple_pay_organization_with_wiremock() {
             &ConfigureOrganizationRequestApplePay {
                 cascade: Some(Cascade(true)),
                 is_enabled: Some(IsEnabled(true)),
-                org_id: Some(OrganizationId(901)),
+                org_id: Some(OrganizationId(123)),
                 ..Default::default()
             },
             None,
@@ -91,7 +91,7 @@ async fn test_wallet_configure_google_pay_organization_with_wiremock() {
             &ConfigureOrganizationRequestGooglePay {
                 cascade: Some(Cascade(true)),
                 is_enabled: Some(IsEnabled(true)),
-                org_id: Some(OrganizationId(901)),
+                org_id: Some(OrganizationId(123)),
                 ..Default::default()
             },
             None,

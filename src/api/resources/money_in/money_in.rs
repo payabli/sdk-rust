@@ -21,6 +21,7 @@ impl MoneyInClient {
     ///
     /// # Arguments
     ///
+    /// * `force_customer_creation` - When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -119,6 +120,7 @@ impl MoneyInClient {
     ///
     /// # Arguments
     ///
+    /// * `force_customer_creation` - When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -179,6 +181,8 @@ impl MoneyInClient {
     ///
     /// # Arguments
     ///
+    /// * `ach_validation` - When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.
+    /// * `force_customer_creation` - When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     /// * `include_details` - When `true`, transactionDetails object is returned in the response. See a full example of the `transactionDetails` object in the [Transaction integration guide](/developers/developer-guides/money-in-transaction-add#includedetailstrue-response).
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
@@ -420,6 +424,8 @@ impl MoneyInClient {
     ///
     /// # Arguments
     ///
+    /// * `ach_validation` - When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.
+    /// * `force_customer_creation` - When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -453,6 +459,7 @@ impl MoneyInClient {
     ///
     /// # Arguments
     ///
+    /// * `force_customer_creation` - When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns

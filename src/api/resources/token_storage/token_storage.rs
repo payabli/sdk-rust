@@ -17,6 +17,10 @@ impl TokenStorageClient {
     ///
     /// # Arguments
     ///
+    /// * `ach_validation` - When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.
+    /// * `create_anonymous` - When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.
+    /// * `force_customer_creation` - When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
+    /// * `temporary` - Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -89,6 +93,36 @@ impl TokenStorageClient {
             .await
     }
 
+    /// Updates a saved payment method.
+    ///
+    /// # Arguments
+    ///
+    /// * `method_id` - The saved payment method ID.
+    /// * `ach_validation` - When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn update_method(
+        &self,
+        method_id: &str,
+        request: &UpdateMethodRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<PayabliApiResponsePaymethodDelete, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::PUT,
+                &format!("TokenStorage/{}", method_id),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
+                QueryBuilder::new()
+                    .serialize("achValidation", request.ach_validation.clone())
+                    .build(),
+                options,
+            )
+            .await
+    }
+
     /// Deletes a saved payment method.
     ///
     /// # Arguments
@@ -110,35 +144,6 @@ impl TokenStorageClient {
                 &format!("TokenStorage/{}", method_id),
                 None,
                 None,
-                options,
-            )
-            .await
-    }
-
-    /// Updates a saved payment method.
-    ///
-    /// # Arguments
-    ///
-    /// * `method_id` - The saved payment method ID.
-    /// * `options` - Additional request options such as headers, timeout, etc.
-    ///
-    /// # Returns
-    ///
-    /// JSON response from the API
-    pub async fn update_method(
-        &self,
-        method_id: &str,
-        request: &UpdateMethodRequest,
-        options: Option<RequestOptions>,
-    ) -> Result<PayabliApiResponsePaymethodDelete, ApiError> {
-        self.http_client
-            .execute_request(
-                Method::PUT,
-                &format!("TokenStorage/{}", method_id),
-                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
-                QueryBuilder::new()
-                    .serialize("achValidation", request.ach_validation.clone())
-                    .build(),
                 options,
             )
             .await

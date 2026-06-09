@@ -18,13 +18,13 @@ async fn test_statistic_basic_stats_with_wiremock() {
     let result = client
         .statistic
         .basic_stats(
-            &"ytd".to_string(),
+            &"custom".to_string(),
             &"m".to_string(),
-            1,
+            2,
             1000000,
             &BasicStatsQueryRequest {
-                end_date: Some("2025-11-01".to_string()),
-                start_date: Some("2025-11-30".to_string()),
+                start_date: Some("2025-11-01".to_string()),
+                end_date: Some("2025-11-30".to_string()),
                 ..Default::default()
             },
             None,
@@ -35,10 +35,10 @@ async fn test_statistic_basic_stats_with_wiremock() {
 
     wire_test_utils::verify_request_count(
         "GET",
-        "/Statistic/basic/ytd/m/1/1000000",
+        "/Statistic/basic/custom/m/2/1000000",
         Some(HashMap::from([
-            ("endDate".to_string(), json!("2025-11-01")),
-            ("startDate".to_string(), json!("2025-11-30")),
+            ("startDate".to_string(), json!("2025-11-01")),
+            ("endDate".to_string(), json!("2025-11-30")),
         ])),
         1,
     )
@@ -64,7 +64,7 @@ async fn test_statistic_customer_basic_stats_with_wiremock() {
         .customer_basic_stats(
             &"ytd".to_string(),
             &"m".to_string(),
-            998,
+            4440,
             &CustomerBasicStatsQueryRequest {
                 ..Default::default()
             },
@@ -74,7 +74,7 @@ async fn test_statistic_customer_basic_stats_with_wiremock() {
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("GET", "/Statistic/customerbasic/ytd/m/998", None, 1)
+    wire_test_utils::verify_request_count("GET", "/Statistic/customerbasic/ytd/m/4440", None, 1)
         .await
         .unwrap();
 }
@@ -96,7 +96,7 @@ async fn test_statistic_sub_stats_with_wiremock() {
         .statistic
         .sub_stats(
             &"30".to_string(),
-            1,
+            2,
             1000000,
             &SubStatsQueryRequest {
                 ..Default::default()
@@ -107,7 +107,7 @@ async fn test_statistic_sub_stats_with_wiremock() {
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("GET", "/Statistic/subscriptions/30/1/1000000", None, 1)
+    wire_test_utils::verify_request_count("GET", "/Statistic/subscriptions/30/2/1000000", None, 1)
         .await
         .unwrap();
 }

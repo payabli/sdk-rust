@@ -33,7 +33,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-payabli_api = "1.0.18"
+payabli_api = "2.0.0"
 ```
 
 Or install via cargo:
@@ -80,7 +80,7 @@ async fn main() {
                         customer_id: Some(CustomerId(4440)),
                         ..Default::default()
                     }),
-                    entry_point: Some(Entrypointfield("f743aed24a".to_string())),
+                    entry_point: Some(Entrypointfield("8cfec329267".to_string())),
                     invoice_data: None,
                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
                     order_description: None,
@@ -97,7 +97,7 @@ async fn main() {
                         cardnumber: Cardnumber("4111111111111111".to_string()),
                         cardzip: Some(Cardzip("12345".to_string())),
                         initiator: Some(Initiator("payor".to_string())),
-                        method: "card".to_string(),
+                        method: PayMethodCreditMethod::Card,
                         save_if_success: None,
                     }),
                     source: None,
@@ -152,7 +152,7 @@ The SDK exports all request types as Rust structs. Simply import them from the c
 ```rust
 use payabli_api::prelude::{*};
 
-let request = RequestAppByAuth {
+let request = CheckCaptureRequestBody {
     ...
 };
 ```

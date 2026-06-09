@@ -27,6 +27,7 @@ pub struct RequestCredit {
     pub source: Option<Source>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub subdomain: Option<Subdomain>,
+    /// When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     #[serde(rename = "forceCustomerCreation")]
     #[serde(skip_serializing)]
     pub force_customer_creation: Option<ForceCustomerCreation>,

@@ -9,7 +9,7 @@ pub struct PayabliApiResponse6 {
     #[serde(rename = "pageIdentifier")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub page_identifier: Option<PageIdentifier>,
-    /// If `isSuccess` = true, this contains the line item identifier. If `isSuccess` = false, this contains the reason of the error.
+    /// If `isSuccess` = true, this contains the line item identifier. If `isSuccess` = false, this contains the reason for the error.
     #[serde(rename = "responseData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub response_data: Option<Responsedatanonobject>,
