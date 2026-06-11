@@ -117,7 +117,9 @@ pub struct BillDetailResponse {
     /// Identifier for the batch in which this transaction was processed. Used to track and reconcile batch-level operations.
     #[serde(rename = "BatchId")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub batch_id: Option<String>,
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
+    pub batch_id: Option<f64>,
     #[serde(rename = "HasVcardTransactions")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub has_vcard_transactions: Option<HasVcardTransactions>,
@@ -129,7 +131,10 @@ pub struct BillDetailResponse {
     pub schedule_id: Option<ScheduleId>,
     #[serde(rename = "SettlementStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub settlement_status: Option<SettlementStatus>,
+    pub settlement_status: Option<SettlementStatusPayout>,
+    #[serde(rename = "SettlementStatusName")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub settlement_status_name: Option<SettlementStatusName>,
     #[serde(rename = "RiskFlagged")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub risk_flagged: Option<RiskFlagged>,
@@ -148,6 +153,9 @@ pub struct BillDetailResponse {
     #[serde(rename = "RiskActionCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub risk_action_code: Option<RiskActionCode>,
+    #[serde(rename = "EntityId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub entity_id: Option<EntityIdString>,
 }
 
 impl BillDetailResponse {
@@ -187,17 +195,19 @@ pub struct BillDetailResponseBuilder {
     vendor: Option<VendorQueryRecord>,
     external_paypoint_id: Option<ExternalPaypointId>,
     entry_name: Option<Entry>,
-    batch_id: Option<String>,
+    batch_id: Option<f64>,
     has_vcard_transactions: Option<HasVcardTransactions>,
     is_same_day_ach: Option<IsSameDayAch>,
     schedule_id: Option<ScheduleId>,
-    settlement_status: Option<SettlementStatus>,
+    settlement_status: Option<SettlementStatusPayout>,
+    settlement_status_name: Option<SettlementStatusName>,
     risk_flagged: Option<RiskFlagged>,
     risk_flagged_on: Option<RiskFlaggedOn>,
     risk_status: Option<RiskStatus>,
     risk_reason: Option<RiskReason>,
     risk_action: Option<RiskAction>,
     risk_action_code: Option<RiskActionCode>,
+    entity_id: Option<EntityIdString>,
 }
 
 impl BillDetailResponseBuilder {
@@ -341,8 +351,8 @@ impl BillDetailResponseBuilder {
         self
     }
 
-    pub fn batch_id(mut self, value: impl Into<String>) -> Self {
-        self.batch_id = Some(value.into());
+    pub fn batch_id(mut self, value: f64) -> Self {
+        self.batch_id = Some(value);
         self
     }
 
@@ -361,8 +371,13 @@ impl BillDetailResponseBuilder {
         self
     }
 
-    pub fn settlement_status(mut self, value: SettlementStatus) -> Self {
+    pub fn settlement_status(mut self, value: SettlementStatusPayout) -> Self {
         self.settlement_status = Some(value);
+        self
+    }
+
+    pub fn settlement_status_name(mut self, value: SettlementStatusName) -> Self {
+        self.settlement_status_name = Some(value);
         self
     }
 
@@ -393,6 +408,11 @@ impl BillDetailResponseBuilder {
 
     pub fn risk_action_code(mut self, value: RiskActionCode) -> Self {
         self.risk_action_code = Some(value);
+        self
+    }
+
+    pub fn entity_id(mut self, value: EntityIdString) -> Self {
+        self.entity_id = Some(value);
         self
     }
 
@@ -432,12 +452,14 @@ impl BillDetailResponseBuilder {
             is_same_day_ach: self.is_same_day_ach,
             schedule_id: self.schedule_id,
             settlement_status: self.settlement_status,
+            settlement_status_name: self.settlement_status_name,
             risk_flagged: self.risk_flagged,
             risk_flagged_on: self.risk_flagged_on,
             risk_status: self.risk_status,
             risk_reason: self.risk_reason,
             risk_action: self.risk_action,
             risk_action_code: self.risk_action_code,
+            entity_id: self.entity_id,
         })
     }
 }

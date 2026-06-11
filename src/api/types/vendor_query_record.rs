@@ -17,9 +17,10 @@ pub struct VendorQueryRecord {
     #[serde(rename = "City")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub city: Option<CityNullable>,
+    /// Array of objects describing the vendor's contacts.
     #[serde(rename = "Contacts")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub contacts: Option<ContactsResponse>,
+    pub contacts: Option<Vec<ContactsResponse>>,
     #[serde(rename = "Country")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub country: Option<String>,
@@ -180,7 +181,7 @@ pub struct VendorQueryRecordBuilder {
     address_2: Option<AddressAddtlNullable>,
     billing_data: Option<BillingDataResponse>,
     city: Option<CityNullable>,
-    contacts: Option<ContactsResponse>,
+    contacts: Option<Vec<ContactsResponse>>,
     country: Option<String>,
     created_date: Option<CreatedAt>,
     customer_vendor_account: Option<String>,
@@ -254,7 +255,7 @@ impl VendorQueryRecordBuilder {
         self
     }
 
-    pub fn contacts(mut self, value: ContactsResponse) -> Self {
+    pub fn contacts(mut self, value: Vec<ContactsResponse>) -> Self {
         self.contacts = Some(value);
         self
     }

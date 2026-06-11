@@ -26,7 +26,7 @@ pub struct CustomerData {
     /// Customer last name
     #[serde(skip_serializing_if = "Option::is_none")]
     pub lastname: Option<String>,
-    /// Customer phone number
+    /// Customer phone number. Payabli normalizes this value when it's stored. For example, `(555) 555-0100` is stored as `+15555550100`.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub phone: Option<String>,
     /// Customer email address.

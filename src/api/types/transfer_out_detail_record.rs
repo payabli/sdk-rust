@@ -234,10 +234,9 @@ pub struct TransferOutDetailRecord {
     #[serde(rename = "SettlementStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub settlement_status: Option<String>,
-    /// Name of the settlement status.
     #[serde(rename = "SettlementStatusName")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub settlement_status_name: Option<String>,
+    pub settlement_status_name: Option<SettlementStatusName>,
     /// Date of settlement.
     #[serde(rename = "SettlementDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -338,7 +337,7 @@ pub struct TransferOutDetailRecordBuilder {
     is_same_day_ach: Option<bool>,
     schedule_id: Option<i64>,
     settlement_status: Option<String>,
-    settlement_status_name: Option<String>,
+    settlement_status_name: Option<SettlementStatusName>,
     settlement_date: Option<String>,
     risk_flagged: Option<bool>,
     risk_flagged_on: Option<String>,
@@ -616,8 +615,8 @@ impl TransferOutDetailRecordBuilder {
         self
     }
 
-    pub fn settlement_status_name(mut self, value: impl Into<String>) -> Self {
-        self.settlement_status_name = Some(value.into());
+    pub fn settlement_status_name(mut self, value: SettlementStatusName) -> Self {
+        self.settlement_status_name = Some(value);
         self
     }
 
