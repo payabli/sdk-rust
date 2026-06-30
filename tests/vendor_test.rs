@@ -196,3 +196,68 @@ async fn test_vendor_enrich_vendor_with_wiremock() {
         .await
         .unwrap();
 }
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_vendor_schedule_enrichment_call_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .vendor
+        .schedule_enrichment_call(
+            &"8cfec329267".to_string(),
+            &ScheduleEnrichmentCallRequest {
+                vendor_id: 456,
+                phone: Some("5555550200".to_string()),
+                enrichment_id: Some("enrich-3890-a1b2c3d4".to_string()),
+                bill_id: Some(54323),
+                fallback_method: Some("check".to_string()),
+                max_retries: Some(3),
+                timezone: Some("America/New_York".to_string()),
+                send_now: None,
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "POST",
+        "/Vendor/enrich/schedule_call/8cfec329267",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_vendor_get_enrichment_call_status_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client.vendor.get_enrichment_call_status(456, None).await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count("GET", "/Vendor/456/enrichment/call-status", None, 1)
+        .await
+        .unwrap();
+}

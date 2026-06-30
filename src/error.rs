@@ -22,6 +22,18 @@ pub enum ApiError {
     ServiceUnavailableError { message: String },
     #[error("PaymentRequiredError: {{message}}")]
     PaymentRequiredError { message: String },
+    #[error("TooManyRequestsError: Rate limit exceeded - {{message}}")]
+    TooManyRequestsError {
+        message: String,
+        retry_after_seconds: Option<u64>,
+        limit_type: Option<String>,
+    },
+    #[error("UnprocessableEntityError: Unprocessable entity - {{message}}")]
+    UnprocessableEntityError {
+        message: String,
+        field: Option<String>,
+        validation_error: Option<String>,
+    },
     #[error("ForbiddenError: Access forbidden - {{message}}")]
     ForbiddenError {
         message: String,
@@ -150,6 +162,56 @@ impl ApiError {
                 }
                 return Self::PaymentRequiredError {
                     message: body.unwrap_or("Unknown error").to_string(),
+                };
+            }
+            429 => {
+                // Parse error body for TooManyRequestsError;
+                if let Some(body_str) = body {
+                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
+                        return Self::TooManyRequestsError {
+                            message: parsed
+                                .get("message")
+                                .and_then(|v| v.as_str())
+                                .unwrap_or("Unknown error")
+                                .to_string(),
+                            retry_after_seconds: parsed
+                                .get("retry_after_seconds")
+                                .and_then(|v| v.as_u64()),
+                            limit_type: parsed
+                                .get("limit_type")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                        };
+                    }
+                }
+                return Self::TooManyRequestsError {
+                    message: body.unwrap_or("Unknown error").to_string(),
+                    retry_after_seconds: None,
+                    limit_type: None,
+                };
+            }
+            422 => {
+                // Parse error body for UnprocessableEntityError;
+                if let Some(body_str) = body {
+                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
+                        return Self::UnprocessableEntityError {
+                            message: parsed
+                                .get("message")
+                                .and_then(|v| v.as_str())
+                                .unwrap_or("Unknown error")
+                                .to_string(),
+                            field: parsed
+                                .get("field")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            validation_error: parsed
+                                .get("validation_error")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                        };
+                    }
+                }
+                return Self::UnprocessableEntityError {
+                    message: body.unwrap_or("Unknown error").to_string(),
+                    field: None,
+                    validation_error: None,
                 };
             }
             403 => {

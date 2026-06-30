@@ -161,6 +161,12 @@ pub struct TransferOutRecord {
     /// List of messages associated with the transfer.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub messages: Option<Vec<TransferOutMessage>>,
+    /// The transfer type. One of `debit`, `credit`, or `billing`.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<String>,
+    /// The payment method for the transfer, such as `ach`, `vcard`, or `check`.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub method: Option<String>,
 }
 
 impl TransferOutRecord {
@@ -206,6 +212,8 @@ pub struct TransferOutRecordBuilder {
     split_amount: Option<f64>,
     events_data: Option<Vec<TransferOutEventData>>,
     messages: Option<Vec<TransferOutMessage>>,
+    r#type: Option<String>,
+    method: Option<String>,
 }
 
 impl TransferOutRecordBuilder {
@@ -379,6 +387,16 @@ impl TransferOutRecordBuilder {
         self
     }
 
+    pub fn r#type(mut self, value: impl Into<String>) -> Self {
+        self.r#type = Some(value.into());
+        self
+    }
+
+    pub fn method(mut self, value: impl Into<String>) -> Self {
+        self.method = Some(value.into());
+        self
+    }
+
     /// Consumes the builder and constructs a [`TransferOutRecord`].
     pub fn build(self) -> Result<TransferOutRecord, BuildError> {
         Ok(TransferOutRecord {
@@ -416,6 +434,8 @@ impl TransferOutRecordBuilder {
             split_amount: self.split_amount,
             events_data: self.events_data,
             messages: self.messages,
+            r#type: self.r#type,
+            method: self.method,
         })
     }
 }

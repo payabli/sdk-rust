@@ -1,10 +1,12 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
-pub struct AuthCapturePayoutResponseData {
+pub struct RenewVCardResponseData {
+    /// Not used for virtual card renewal; always returns `null`.
     #[serde(rename = "authCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub auth_code: Option<Authcode>,
+    /// Reference identifier for the renewed virtual card returned by the card processor.
     #[serde(rename = "referenceId")]
     #[serde(default)]
     pub reference_id: Referenceidtrans,
@@ -14,34 +16,37 @@ pub struct AuthCapturePayoutResponseData {
     #[serde(rename = "resultText")]
     #[serde(default)]
     pub result_text: Resulttext,
+    /// Not used for virtual card renewal; always returns `null`.
     #[serde(rename = "avsResponseText")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub avs_response_text: Option<AvsResponseText>,
+    /// Not used for virtual card renewal; always returns `null`.
     #[serde(rename = "cvvResponseText")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub cvv_response_text: Option<CvvResponseText>,
-    /// Payabli-generated unique ID of the vendor on the payout. Returns the same value as `vendorId`, or `0` when no vendor is associated.
+    /// Not used for virtual card renewal; always returns `null`.
     #[serde(rename = "customerId")]
-    #[serde(default)]
-    pub customer_id: Vendoridtrans,
-    /// Payabli-generated unique ID of the vendor on the payout. Returns the same value as `customerId`, or `0` when no vendor is associated.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub customer_id: Option<Vendoridtrans>,
+    /// Not used for virtual card renewal; always returns `null`.
     #[serde(rename = "vendorId")]
-    #[serde(default)]
-    pub vendor_id: Vendoridtrans,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub vendor_id: Option<Vendoridtrans>,
+    /// Not used for virtual card renewal; always returns `null`.
     #[serde(rename = "methodReferenceId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub method_reference_id: Option<MethodReferenceId>,
 }
 
-impl AuthCapturePayoutResponseData {
-    pub fn builder() -> AuthCapturePayoutResponseDataBuilder {
-        <AuthCapturePayoutResponseDataBuilder as Default>::default()
+impl RenewVCardResponseData {
+    pub fn builder() -> RenewVCardResponseDataBuilder {
+        <RenewVCardResponseDataBuilder as Default>::default()
     }
 }
 
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
-pub struct AuthCapturePayoutResponseDataBuilder {
+pub struct RenewVCardResponseDataBuilder {
     auth_code: Option<Authcode>,
     reference_id: Option<Referenceidtrans>,
     result_code: Option<ResultCode>,
@@ -53,7 +58,7 @@ pub struct AuthCapturePayoutResponseDataBuilder {
     method_reference_id: Option<MethodReferenceId>,
 }
 
-impl AuthCapturePayoutResponseDataBuilder {
+impl RenewVCardResponseDataBuilder {
     pub fn auth_code(mut self, value: Authcode) -> Self {
         self.auth_code = Some(value);
         self
@@ -99,15 +104,13 @@ impl AuthCapturePayoutResponseDataBuilder {
         self
     }
 
-    /// Consumes the builder and constructs a [`AuthCapturePayoutResponseData`].
+    /// Consumes the builder and constructs a [`RenewVCardResponseData`].
     /// This method will fail if any of the following fields are not set:
-    /// - [`reference_id`](AuthCapturePayoutResponseDataBuilder::reference_id)
-    /// - [`result_code`](AuthCapturePayoutResponseDataBuilder::result_code)
-    /// - [`result_text`](AuthCapturePayoutResponseDataBuilder::result_text)
-    /// - [`customer_id`](AuthCapturePayoutResponseDataBuilder::customer_id)
-    /// - [`vendor_id`](AuthCapturePayoutResponseDataBuilder::vendor_id)
-    pub fn build(self) -> Result<AuthCapturePayoutResponseData, BuildError> {
-        Ok(AuthCapturePayoutResponseData {
+    /// - [`reference_id`](RenewVCardResponseDataBuilder::reference_id)
+    /// - [`result_code`](RenewVCardResponseDataBuilder::result_code)
+    /// - [`result_text`](RenewVCardResponseDataBuilder::result_text)
+    pub fn build(self) -> Result<RenewVCardResponseData, BuildError> {
+        Ok(RenewVCardResponseData {
             auth_code: self.auth_code,
             reference_id: self
                 .reference_id
@@ -120,12 +123,8 @@ impl AuthCapturePayoutResponseDataBuilder {
                 .ok_or_else(|| BuildError::missing_field("result_text"))?,
             avs_response_text: self.avs_response_text,
             cvv_response_text: self.cvv_response_text,
-            customer_id: self
-                .customer_id
-                .ok_or_else(|| BuildError::missing_field("customer_id"))?,
-            vendor_id: self
-                .vendor_id
-                .ok_or_else(|| BuildError::missing_field("vendor_id"))?,
+            customer_id: self.customer_id,
+            vendor_id: self.vendor_id,
             method_reference_id: self.method_reference_id,
         })
     }

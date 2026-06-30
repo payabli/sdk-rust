@@ -17,7 +17,7 @@ pub struct PayabliApiResponse0000 {
     pub response_code: Option<Responsecode>,
     #[serde(rename = "responseData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub response_data: Option<PayabliApiResponse0ResponseData>,
+    pub response_data: Option<CancelPayoutResponseData>,
 }
 
 impl PayabliApiResponse0000 {
@@ -33,7 +33,7 @@ pub struct PayabliApiResponse0000Builder {
     response_text: Option<ResponseText>,
     page_identifier: Option<PageIdentifier>,
     response_code: Option<Responsecode>,
-    response_data: Option<PayabliApiResponse0ResponseData>,
+    response_data: Option<CancelPayoutResponseData>,
 }
 
 impl PayabliApiResponse0000Builder {
@@ -57,7 +57,7 @@ impl PayabliApiResponse0000Builder {
         self
     }
 
-    pub fn response_data(mut self, value: PayabliApiResponse0ResponseData) -> Self {
+    pub fn response_data(mut self, value: CancelPayoutResponseData) -> Self {
         self.response_data = Some(value);
         self
     }

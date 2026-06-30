@@ -19,6 +19,8 @@ impl MoneyOutClient {
     ///
     /// When `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transaction_approvedcaptured`](/developers/webhooks/payout-transaction-approved-captured) webhook event.
     ///
+    /// If a velocity fraud alert is triggered, the endpoint returns a `202` response with `responseCode` `9051`, and the authorization is held for risk review rather than rejected. If a risk policy blocks the transaction, the endpoint returns a `422` response with `responseCode` `9005`, a terminal rejection.
+    ///
     /// # Arguments
     ///
     /// * `allow_duplicated_bills` - When `true`, the authorization bypasses the requirement for unique bills, identified by vendor invoice number. This allows you to make more than one payout authorization for a bill, like a split payment.
@@ -154,7 +156,9 @@ impl MoneyOutClient {
             .await
     }
 
-    /// Captures a single authorized payout transaction by ID. If the transaction was authorized with `autoCapture` set to `true`,  you don't need to call this endpoint to capture the transaction for processing.
+    /// Captures a single authorized payout transaction by ID. If the transaction was authorized with `autoCapture` set to `true`, you don't need to call this endpoint to capture the transaction for processing.
+    ///
+    /// If a velocity fraud alert is triggered, the endpoint returns a `202` response with `responseCode` `9051`, and the capture is held for risk review rather than rejected. If a risk policy blocks the transaction, the endpoint returns a `422` response with `responseCode` `9005`, a terminal rejection.
     ///
     /// # Arguments
     ///
@@ -226,6 +230,37 @@ impl MoneyOutClient {
                 Method::GET,
                 &format!("MoneyOut/vcard/{}", card_token),
                 None,
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Renews an expired or expiring virtual card by extending its expiration date to a future month.
+    ///
+    /// The card must be a virtual card that hasn't been fully used. The new expiration date must be in `MM-YYYY` or `MM/YYYY` format and no more than 2 years and 363 days in the future. The card expires on the last day of the month you specify.
+    ///
+    /// On success, `referenceId` holds the renewed card's token (the card processor may issue a new token). The response reuses the standard payout result object, so the payment-transaction fields it carries don't apply to renewal and always return `null`.
+    ///
+    /// # Arguments
+    ///
+    /// * `card_token` - ID for the virtual card to renew.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn renew_v_card(
+        &self,
+        card_token: &str,
+        request: &RenewVCardRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<RenewVCardResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::PUT,
+                &format!("MoneyOutCard/vcard/{}/renew", card_token),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

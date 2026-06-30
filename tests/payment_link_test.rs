@@ -26,7 +26,7 @@ async fn test_payment_link_add_pay_link_from_invoice_with_wiremock() {
         phone_label: Some("Phone".to_string()),
         ..Default::default()
         }),
-        invoices: Some(InvoiceElement {
+        invoices: InvoiceElement {
         enabled: Some(Enabled(true)),
         invoice_link: Some(LabelElement {
         enabled: Some(Enabled(true)),
@@ -42,7 +42,7 @@ async fn test_payment_link_add_pay_link_from_invoice_with_wiremock() {
         ..Default::default()
         }),
         ..Default::default()
-        }),
+        },
         logo: Some(Element {
         enabled: Some(Enabled(true)),
         order: Some(Order(0)),
@@ -140,7 +140,7 @@ async fn test_payment_link_add_pay_link_from_invoice_with_wiremock() {
         redirect_after_approve_url: Some("https://example.com/success".to_string()),
         ..Default::default()
         }),
-        ..Default::default()
+        amount_fixed: None
         }, None).await;
 
     assert!(result.is_ok(), "Client method call should succeed");

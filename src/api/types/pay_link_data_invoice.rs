@@ -2,41 +2,41 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct PayLinkDataInvoice {
-    /// ContactUs section of payment link page
+    /// Contact us section of payment link page. If omitted, this block is enabled at display order 11.
     #[serde(rename = "contactUs")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub contact_us: Option<ContactElement>,
-    /// Invoices section of payment link page
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub invoices: Option<InvoiceElement>,
-    /// Logo section of payment link page
+    /// Invoices section of payment link page. Required. Omitting it returns a `400` error with code `7045`.
+    #[serde(default)]
+    pub invoices: InvoiceElement,
+    /// Logo section of payment link page. If omitted, this block is enabled at display order 1, and the logo image is resolved from the paypoint's entry logo.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub logo: Option<Element>,
-    /// Message section of payment link page
+    /// Message section of payment link page. If omitted, this block is enabled at display order 5.
     #[serde(rename = "messageBeforePaying")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub message_before_paying: Option<LabelElement>,
-    /// Notes section of payment link page
+    /// Notes section of payment link page. If omitted, this block is enabled at display order 10.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notes: Option<NoteElement>,
-    /// Page header section of payment link page
+    /// Page header section of payment link page. If omitted, this block is enabled at display order 2.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub page: Option<PageElement>,
-    /// Payment button section of payment link page
+    /// Payment button section of payment link page. If omitted, this block is enabled at display order 6, with the label "Pay Now".
     #[serde(rename = "paymentButton")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_button: Option<LabelElement>,
-    /// Payment methods section of payment link page
+    /// Payment methods section of payment link page. If omitted, this block is enabled at display order 3, with all payment methods enabled except RDC.
     #[serde(rename = "paymentMethods")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_methods: Option<MethodElement>,
     /// Customer/Payor section of payment link page
     #[serde(skip_serializing_if = "Option::is_none")]
     pub payor: Option<PayorElement>,
-    /// Review section of payment link page
+    /// Review section of payment link page. If omitted, this block is enabled at display order 4.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub review: Option<HeaderElement>,
-    /// Settings section of payment link page
+    /// Settings section of payment link page. If omitted, defaults are applied, including page color `#10a0e3` and language `en`.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub settings: Option<PagelinkSetting>,
     /// Indicates whether customer can modify the payment amount. A value of `true` means the amount isn't modifiable, a value `false` means the payor can modify the amount to pay.
@@ -140,10 +140,14 @@ impl PayLinkDataInvoiceBuilder {
     }
 
     /// Consumes the builder and constructs a [`PayLinkDataInvoice`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`invoices`](PayLinkDataInvoiceBuilder::invoices)
     pub fn build(self) -> Result<PayLinkDataInvoice, BuildError> {
         Ok(PayLinkDataInvoice {
             contact_us: self.contact_us,
-            invoices: self.invoices,
+            invoices: self
+                .invoices
+                .ok_or_else(|| BuildError::missing_field("invoices"))?,
             logo: self.logo,
             message_before_paying: self.message_before_paying,
             notes: self.notes,

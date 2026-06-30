@@ -42,6 +42,24 @@ pub struct StatBasicExtendedQueryRecord {
     #[serde(rename = "outPendingMethodTransactions")]
     #[serde(default)]
     pub out_pending_method_transactions: i64,
+    /// Outbound (payout) RTP transactions count.
+    #[serde(rename = "outRTPTransactions")]
+    #[serde(default)]
+    pub out_rtp_transactions: i64,
+    /// Outbound (payout) RTP transactions volume.
+    #[serde(rename = "outRTPVolume")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
+    pub out_rtp_volume: f64,
+    /// Outbound (payout) wire transactions count.
+    #[serde(rename = "outWireTransactions")]
+    #[serde(default)]
+    pub out_wire_transactions: i64,
+    /// Outbound (payout) wire transactions volume.
+    #[serde(rename = "outWireVolume")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
+    pub out_wire_volume: f64,
     /// Outbound (payout) volume.
     #[serde(rename = "outTransactionsVolume")]
     #[serde(default)]
@@ -187,6 +205,10 @@ pub struct StatBasicExtendedQueryRecordBuilder {
     out_ach_transactions: Option<i64>,
     out_check_transactions: Option<i64>,
     out_pending_method_transactions: Option<i64>,
+    out_rtp_transactions: Option<i64>,
+    out_rtp_volume: Option<f64>,
+    out_wire_transactions: Option<i64>,
+    out_wire_volume: Option<f64>,
     out_transactions_volume: Option<f64>,
     out_subscriptions_paid_volume: Option<f64>,
     out_card_volume: Option<f64>,
@@ -264,6 +286,26 @@ impl StatBasicExtendedQueryRecordBuilder {
 
     pub fn out_pending_method_transactions(mut self, value: i64) -> Self {
         self.out_pending_method_transactions = Some(value);
+        self
+    }
+
+    pub fn out_rtp_transactions(mut self, value: i64) -> Self {
+        self.out_rtp_transactions = Some(value);
+        self
+    }
+
+    pub fn out_rtp_volume(mut self, value: f64) -> Self {
+        self.out_rtp_volume = Some(value);
+        self
+    }
+
+    pub fn out_wire_transactions(mut self, value: i64) -> Self {
+        self.out_wire_transactions = Some(value);
+        self
+    }
+
+    pub fn out_wire_volume(mut self, value: f64) -> Self {
+        self.out_wire_volume = Some(value);
         self
     }
 
@@ -414,6 +456,10 @@ impl StatBasicExtendedQueryRecordBuilder {
     /// - [`out_ach_transactions`](StatBasicExtendedQueryRecordBuilder::out_ach_transactions)
     /// - [`out_check_transactions`](StatBasicExtendedQueryRecordBuilder::out_check_transactions)
     /// - [`out_pending_method_transactions`](StatBasicExtendedQueryRecordBuilder::out_pending_method_transactions)
+    /// - [`out_rtp_transactions`](StatBasicExtendedQueryRecordBuilder::out_rtp_transactions)
+    /// - [`out_rtp_volume`](StatBasicExtendedQueryRecordBuilder::out_rtp_volume)
+    /// - [`out_wire_transactions`](StatBasicExtendedQueryRecordBuilder::out_wire_transactions)
+    /// - [`out_wire_volume`](StatBasicExtendedQueryRecordBuilder::out_wire_volume)
     /// - [`out_transactions_volume`](StatBasicExtendedQueryRecordBuilder::out_transactions_volume)
     /// - [`out_subscriptions_paid_volume`](StatBasicExtendedQueryRecordBuilder::out_subscriptions_paid_volume)
     /// - [`out_card_volume`](StatBasicExtendedQueryRecordBuilder::out_card_volume)
@@ -473,6 +519,18 @@ impl StatBasicExtendedQueryRecordBuilder {
             out_pending_method_transactions: self
                 .out_pending_method_transactions
                 .ok_or_else(|| BuildError::missing_field("out_pending_method_transactions"))?,
+            out_rtp_transactions: self
+                .out_rtp_transactions
+                .ok_or_else(|| BuildError::missing_field("out_rtp_transactions"))?,
+            out_rtp_volume: self
+                .out_rtp_volume
+                .ok_or_else(|| BuildError::missing_field("out_rtp_volume"))?,
+            out_wire_transactions: self
+                .out_wire_transactions
+                .ok_or_else(|| BuildError::missing_field("out_wire_transactions"))?,
+            out_wire_volume: self
+                .out_wire_volume
+                .ok_or_else(|| BuildError::missing_field("out_wire_volume"))?,
             out_transactions_volume: self
                 .out_transactions_volume
                 .ok_or_else(|| BuildError::missing_field("out_transactions_volume"))?,

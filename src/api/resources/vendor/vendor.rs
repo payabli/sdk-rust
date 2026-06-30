@@ -145,4 +145,57 @@ impl VendorClient {
             )
             .await
     }
+
+    /// Schedules an AI outreach call to a vendor to collect their preferred payment method and contact email. This is the third enrichment stage. Calls are scheduled for the next business day at around 9 AM in the vendor's timezone, with retries on no-answer and a fallback payment method applied when retries are exhausted. This feature is opt-in at the org level. Contact your Payabli representative to enable it, provision a phone number, and discuss pricing.
+    ///
+    /// # Arguments
+    ///
+    /// * `entry` - Entrypoint identifier.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn schedule_enrichment_call(
+        &self,
+        entry: &str,
+        request: &ScheduleEnrichmentCallRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<VendorScheduleCallResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::POST,
+                &format!("Vendor/enrich/schedule_call/{}", entry),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// Returns the latest AI outreach call activity for a vendor. The response is a composite object with a `state` discriminator (`none`, `scheduled`, `successful`, or `failed`); the block that matches the current state is populated. When the vendor has no call activity, `state` is `none` and the response returns HTTP 200.
+    ///
+    /// # Arguments
+    ///
+    /// * `id_vendor` - ID of the vendor to read call status for.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    pub async fn get_enrichment_call_status(
+        &self,
+        id_vendor: i64,
+        options: Option<RequestOptions>,
+    ) -> Result<VendorCallStatusResponse, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("Vendor/{}/enrichment/call-status", id_vendor),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
 }

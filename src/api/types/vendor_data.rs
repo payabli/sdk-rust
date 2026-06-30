@@ -7,7 +7,7 @@ pub struct VendorData {
     pub vendor_number: Option<VendorNumber>,
     #[serde(rename = "AdditionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalData>,
+    pub additional_data: Option<AdditionalDataMap>,
     /// Vendor's street address. If any address field is provided, this field is required along with `city`, `state`, and `zip`. Allowed characters are letters, numbers, spaces, and `. ,
     #[serde(rename = "address1")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -126,7 +126,7 @@ impl VendorData {
 #[non_exhaustive]
 pub struct VendorDataBuilder {
     vendor_number: Option<VendorNumber>,
-    additional_data: Option<AdditionalData>,
+    additional_data: Option<AdditionalDataMap>,
     address_1: Option<AddressNullable>,
     address_2: Option<AddressAddtlNullable>,
     billing_data: Option<BillingData>,
@@ -167,7 +167,7 @@ impl VendorDataBuilder {
         self
     }
 
-    pub fn additional_data(mut self, value: AdditionalData) -> Self {
+    pub fn additional_data(mut self, value: AdditionalDataMap) -> Self {
         self.additional_data = Some(value);
         self
     }

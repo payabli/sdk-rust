@@ -26,6 +26,15 @@ pub struct MethodsList {
     /// When `true`, Visa is accepted.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub visa: Option<bool>,
+    /// When `true`, Diners Club is accepted.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub diners: Option<bool>,
+    /// When `true`, JCB is accepted.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub jcb: Option<bool>,
+    /// When `true`, Remote Deposit Capture (RDC) is accepted.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub rdc: Option<bool>,
 }
 
 impl MethodsList {
@@ -44,6 +53,9 @@ pub struct MethodsListBuilder {
     e_check: Option<bool>,
     mastercard: Option<bool>,
     visa: Option<bool>,
+    diners: Option<bool>,
+    jcb: Option<bool>,
+    rdc: Option<bool>,
 }
 
 impl MethodsListBuilder {
@@ -82,6 +94,21 @@ impl MethodsListBuilder {
         self
     }
 
+    pub fn diners(mut self, value: bool) -> Self {
+        self.diners = Some(value);
+        self
+    }
+
+    pub fn jcb(mut self, value: bool) -> Self {
+        self.jcb = Some(value);
+        self
+    }
+
+    pub fn rdc(mut self, value: bool) -> Self {
+        self.rdc = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`MethodsList`].
     pub fn build(self) -> Result<MethodsList, BuildError> {
         Ok(MethodsList {
@@ -92,6 +119,9 @@ impl MethodsListBuilder {
             e_check: self.e_check,
             mastercard: self.mastercard,
             visa: self.visa,
+            diners: self.diners,
+            jcb: self.jcb,
+            rdc: self.rdc,
         })
     }
 }

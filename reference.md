@@ -1636,11 +1636,14 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  This endpoint is deprecated. New integrations should use the [Authorize endpoint](/developers/api-reference/moneyinV2/authorize-a-transaction), then capture, void, or refund the resulting transaction with the corresponding endpoints. Transactions created with this legacy endpoint must be managed with the legacy lifecycle endpoints — they aren't interchangeable with the current ones.
+</Warning>
+
+
 Authorize a card transaction. This returns an authorization code and reserves funds for the merchant. Authorized transactions aren't flagged for settlement until [captured](/developers/api-reference/moneyin/capture-an-authorized-transaction).
+
 Only card transactions can be authorized. This endpoint can't be used for ACH transactions.
-<Tip>
-  Consider migrating to the [v2 Authorize endpoint](/developers/api-reference/moneyinV2/authorize-a-transaction) to take advantage of unified response codes and improved response consistency.
-</Tip>
 </dd>
 </dl>
 </dd>
@@ -1743,7 +1746,7 @@ async fn main() {
 <dd>
 
 <Warning>
-  This endpoint is deprecated and will be sunset on November 24, 2025. Migrate to [POST `/capture/{transId}`](/developers/api-reference/moneyin/capture-an-authorized-transaction)`.
+  This endpoint is deprecated. Use [POST `/capture/{transId}`](/developers/api-reference/moneyin/capture-an-authorized-transaction) instead, which supports partial captures and service fee adjustments.
 </Warning>
 
   Capture an [authorized
@@ -1826,13 +1829,13 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  This endpoint is deprecated. Use it only to capture transactions originally authorized with the legacy [Authorize endpoint](/developers/api-reference/moneyin/authorize-a-transaction). New integrations should use the [Capture endpoint](/developers/api-reference/moneyinV2/capture-an-authorized-transaction), which only works on transactions authorized with the current [Authorize endpoint](/developers/api-reference/moneyinV2/authorize-a-transaction).
+</Warning>
+
 Capture an [authorized transaction](/developers/api-reference/moneyin/authorize-a-transaction) to complete the transaction and move funds from the customer to merchant account.
 
 You can use this endpoint to capture both full and partial amounts of the original authorized transaction. See [Capture an authorized transaction](/developers/developer-guides/pay-in-auth-and-capture) for more information about this endpoint.
-
-<Tip>
-Consider migrating to the [v2 Capture endpoint](/developers/api-reference/moneyinV2/capture-an-authorized-transaction) to take advantage of unified response codes and improved response consistency.
-</Tip>
 </dd>
 </dl>
 </dd>
@@ -2152,11 +2155,11 @@ async fn main() {
 <dl>
 <dd>
 
-Make a single transaction. This method authorizes and captures a payment in one step.
+<Warning>
+  This endpoint is deprecated. New integrations should use the [Make a transaction endpoint](/developers/api-reference/moneyinV2/make-a-transaction) and manage the resulting transaction with the corresponding void or refund endpoints. Transactions created with this legacy endpoint must be managed with the legacy lifecycle endpoints — they aren't interchangeable with the current ones.
+</Warning>
 
-  <Tip>
-  Consider migrating to the [v2 Make a transaction endpoint](/developers/api-reference/moneyinV2/make-a-transaction) to take advantage of unified response codes and improved response consistency.
-  </Tip>
+Make a single transaction. This method authorizes and captures a payment in one step.
 </dd>
 </dl>
 </dd>
@@ -2276,7 +2279,11 @@ async fn main() {
 <dl>
 <dd>
 
-A reversal either refunds or voids a transaction independent of the transaction's settlement status. Send a reversal request for a transaction, and Payabli automatically determines whether it's a refund or void. You don't need to know whether the transaction is settled or not. This endpoint only works on transactions made with the v1 API. For v2 transactions, check the transaction's settlement status and call v2 void or v2 refund based on the result.
+<Warning>
+  This endpoint is deprecated and only works on transactions created with the legacy endpoints. There's no equivalent in the current endpoints. For transactions created with [Make a transaction](/developers/api-reference/moneyinV2/make-a-transaction) or [Authorize](/developers/api-reference/moneyinV2/authorize-a-transaction), check the transaction's settlement status and call [Void](/developers/api-reference/moneyinV2/void-a-transaction) or [Refund](/developers/api-reference/moneyinV2/refund-a-settled-transaction) based on the result.
+</Warning>
+
+A reversal either refunds or voids a transaction independent of the transaction's settlement status. Send a reversal request for a transaction, and Payabli automatically determines whether it's a refund or void. You don't need to know whether the transaction is settled or not. This endpoint only works on transactions made with the legacy endpoints. For transactions made with the current endpoints, check the transaction's settlement status and call void or refund based on the result.
 </dd>
 </dl>
 </dd>
@@ -2361,11 +2368,11 @@ An amount equal to zero will refunds the total amount authorized minus any servi
 <dl>
 <dd>
 
-Refund a transaction that has settled and send money back to the account holder. If a transaction hasn't been settled, void it instead.
+<Warning>
+  This endpoint is deprecated. Use it only to refund transactions originally created with the legacy endpoints. New integrations should use the [Refund endpoint](/developers/api-reference/moneyinV2/refund-a-settled-transaction), which only works on transactions created with [Make a transaction](/developers/api-reference/moneyinV2/make-a-transaction) or [Authorize](/developers/api-reference/moneyinV2/authorize-a-transaction).
+</Warning>
 
-  <Tip>
-  Consider migrating to the [v2 Refund endpoint](/developers/api-reference/moneyinV2/refund-a-settled-transaction) to take advantage of unified response codes and improved response consistency.
-  </Tip>
+Refund a transaction that has settled and send money back to the account holder. If a transaction hasn't been settled, void it instead.
 </dd>
 </dl>
 </dd>
@@ -2449,6 +2456,10 @@ An amount equal to zero will refund the total amount authorized minus any servic
 
 <dl>
 <dd>
+
+<Warning>
+  This endpoint is deprecated. Use it only to refund transactions originally created with the legacy endpoints. To refund a split-funded transaction created with [Make a transaction](/developers/api-reference/moneyinV2/make-a-transaction) or [Authorize](/developers/api-reference/moneyinV2/authorize-a-transaction), use the [Refund endpoint](/developers/api-reference/moneyinV2/refund-a-settled-transaction) with split instructions in the request body.
+</Warning>
 
 Refunds a settled transaction with split instructions.
 </dd>
@@ -2874,11 +2885,11 @@ async fn main() {
 <dl>
 <dd>
 
-Cancel a transaction that hasn't been settled yet. Voiding non-captured authorizations prevents future captures. If a transaction has been settled, refund it instead.
+<Warning>
+  This endpoint is deprecated. Use it only to void transactions originally created with the legacy endpoints. New integrations should use the [Void endpoint](/developers/api-reference/moneyinV2/void-a-transaction), which only works on transactions created with [Make a transaction](/developers/api-reference/moneyinV2/make-a-transaction) or [Authorize](/developers/api-reference/moneyinV2/authorize-a-transaction).
+</Warning>
 
-  <Tip>
-  Consider migrating to the [v2 Void endpoint](/developers/api-reference/moneyinV2/void-a-transaction) to take advantage of unified response codes and improved response consistency.
-  </Tip>
+Cancel a transaction that hasn't been settled yet. Voiding non-captured authorizations prevents future captures. If a transaction has been settled, refund it instead.
 </dd>
 </dl>
 </dd>
@@ -3226,7 +3237,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2</a>(trans_id: String) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2</a>(trans_id: String, request: RefundV2Request) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3238,9 +3249,13 @@ async fn main() {
 <dl>
 <dd>
 
-Give a full refund for a transaction that has settled and send money back to the account holder. To perform a partial refund, see [Partially refund a transaction](developers/api-reference/moneyinV2/partial-refund-a-settled-transaction).
+Give a full refund for a transaction that has settled and send money back to the account holder. To perform a partial refund, see [Partially refund a transaction](/developers/api-reference/moneyinV2/partial-refund-a-settled-transaction).
 
 This is the v2 version of the refund endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
+
+<Note>
+  To refund a split-funded transaction, include split instructions in the request body. Omit the body for a standard refund.
+</Note>
 </dd>
 </dl>
 </dd>
@@ -3266,7 +3281,13 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .money_in
-        .refundv_2(&"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(), None)
+        .refundv_2(
+            &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
+            &RefundV2Request {
+                ..Default::default()
+            },
+            None,
+        )
         .await;
 }
 ```
@@ -3295,7 +3316,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2_amount</a>(trans_id: String, amount: f64) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2_amount</a>(trans_id: String, amount: f64, request: RefundV2Request) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3307,9 +3328,13 @@ async fn main() {
 <dl>
 <dd>
 
-Refund a transaction that has settled and send money back to the account holder. If `amount` is omitted or set to 0, performs a full refund. When a non-zero `amount` is provided, this endpoint performs a partial refund.
+Refund a transaction that has settled and send money back to the account holder. If `amount` is set to 0, performs a full refund. When a non-zero `amount` is provided, this endpoint performs a partial refund.
 
 This is the v2 version of the refund endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
+
+<Note>
+  To refund a split-funded transaction, include split instructions in the request body. Omit the body for a standard refund.
+</Note>
 </dd>
 </dl>
 </dd>
@@ -3338,6 +3363,9 @@ async fn main() {
         .refundv_2_amount(
             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
             0.0,
+            &RefundV2Request {
+                ..Default::default()
+            },
             None,
         )
         .await;
@@ -3364,7 +3392,7 @@ async fn main() {
 <dl>
 <dd>
 
-**amount:** `f64` — Amount to refund from original transaction, minus any service fees charged on the original transaction. If omitted or set to 0, performs a full refund.
+**amount:** `f64` — Amount to refund from original transaction, minus any service fees charged on the original transaction. If set to 0, performs a full refund.
     
 </dd>
 </dl>
@@ -4978,6 +5006,8 @@ async fn main() {
 <dd>
 
 Generates a payment link for an invoice from the invoice ID.
+
+The payment page configuration blocks (`logo`, `page`, `paymentMethods`, `review`, `messageBeforePaying`, `paymentButton`, `notes`, `contactUs`, and `settings`) are optional. When you omit a block, Payabli applies a default rather than hiding it. The block is enabled at a fixed display order, so the generated page stays complete and branded. To hide a section, send the block explicitly with `enabled` set to `false`. An explicit value is always honored and is never replaced by a default. For each block's default, see its description in the request body.
 </dd>
 </dl>
 </dd>
@@ -5012,7 +5042,7 @@ async fn main() {
             phone_label: Some("Phone".to_string()),
             ..Default::default()
         }),
-        invoices: Some(InvoiceElement {
+        invoices: InvoiceElement {
             enabled: Some(Enabled(true)),
             invoice_link: Some(LabelElement {
                 enabled: Some(Enabled(true)),
@@ -5028,7 +5058,7 @@ async fn main() {
                 ..Default::default()
             }),
             ..Default::default()
-        }),
+        },
         logo: Some(Element {
             enabled: Some(Enabled(true)),
             order: Some(Order(0)),
@@ -5126,7 +5156,7 @@ async fn main() {
             redirect_after_approve_url: Some("https://example.com/success".to_string()),
             ..Default::default()
         }),
-        ..Default::default()
+        amount_fixed: None
     }, None).await;
 }
 ```
@@ -5151,7 +5181,7 @@ async fn main() {
 <dl>
 <dd>
 
-**contact_us:** `Option<ContactElement>` — ContactUs section of payment link page
+**contact_us:** `Option<ContactElement>` — Contact us section of payment link page. If omitted, this block is enabled at display order 11.
     
 </dd>
 </dl>
@@ -5159,7 +5189,7 @@ async fn main() {
 <dl>
 <dd>
 
-**invoices:** `Option<InvoiceElement>` — Invoices section of payment link page
+**invoices:** `InvoiceElement` — Invoices section of payment link page. Required. Omitting it returns a `400` error with code `7045`.
     
 </dd>
 </dl>
@@ -5167,7 +5197,7 @@ async fn main() {
 <dl>
 <dd>
 
-**logo:** `Option<Element>` — Logo section of payment link page
+**logo:** `Option<Element>` — Logo section of payment link page. If omitted, this block is enabled at display order 1, and the logo image is resolved from the paypoint's entry logo.
     
 </dd>
 </dl>
@@ -5175,7 +5205,7 @@ async fn main() {
 <dl>
 <dd>
 
-**message_before_paying:** `Option<LabelElement>` — Message section of payment link page
+**message_before_paying:** `Option<LabelElement>` — Message section of payment link page. If omitted, this block is enabled at display order 5.
     
 </dd>
 </dl>
@@ -5183,7 +5213,7 @@ async fn main() {
 <dl>
 <dd>
 
-**notes:** `Option<NoteElement>` — Notes section of payment link page
+**notes:** `Option<NoteElement>` — Notes section of payment link page. If omitted, this block is enabled at display order 10.
     
 </dd>
 </dl>
@@ -5191,7 +5221,7 @@ async fn main() {
 <dl>
 <dd>
 
-**page:** `Option<PageElement>` — Page header section of payment link page
+**page:** `Option<PageElement>` — Page header section of payment link page. If omitted, this block is enabled at display order 2.
     
 </dd>
 </dl>
@@ -5199,7 +5229,7 @@ async fn main() {
 <dl>
 <dd>
 
-**payment_button:** `Option<LabelElement>` — Payment button section of payment link page
+**payment_button:** `Option<LabelElement>` — Payment button section of payment link page. If omitted, this block is enabled at display order 6, with the label "Pay Now".
     
 </dd>
 </dl>
@@ -5207,7 +5237,7 @@ async fn main() {
 <dl>
 <dd>
 
-**payment_methods:** `Option<MethodElement>` — Payment methods section of payment link page
+**payment_methods:** `Option<MethodElement>` — Payment methods section of payment link page. If omitted, this block is enabled at display order 3, with all payment methods enabled except RDC.
     
 </dd>
 </dl>
@@ -5223,7 +5253,7 @@ async fn main() {
 <dl>
 <dd>
 
-**review:** `Option<HeaderElement>` — Review section of payment link page
+**review:** `Option<HeaderElement>` — Review section of payment link page. If omitted, this block is enabled at display order 4.
     
 </dd>
 </dl>
@@ -5231,7 +5261,7 @@ async fn main() {
 <dl>
 <dd>
 
-**settings:** `Option<PagelinkSetting>` — Settings section of payment link page
+**settings:** `Option<PagelinkSetting>` — Settings section of payment link page. If omitted, defaults are applied, including page color `#10a0e3` and language `en`.
     
 </dd>
 </dl>
@@ -14056,6 +14086,8 @@ List of field names accepted:
   - `paypointDbaName` (ne, eq, ct, nct)
   - `batchNumber` (ne, eq, ct, nct)
   - `batchId` (ne, eq, in, nin)
+  - `detailType` (eq, ne, in, nin, ct, nct)
+  - `detailMethod` (eq, ne, in, nin, ct, nct)
     
 </dd>
 </dl>
@@ -14192,6 +14224,8 @@ List of field names accepted:
   - `paypointDbaName` (ne, eq, ct, nct)
   - `batchNumber` (ne, eq, ct, nct)
   - `batchId` (ne, eq, in, nin)
+  - `detailType` (eq, ne, in, nin, ct, nct)
+  - `detailMethod` (eq, ne, in, nin, ct, nct)
     
 </dd>
 </dl>
@@ -26967,7 +27001,7 @@ async fn main() {
 <dl>
 <dd>
 
-**schedule_call_if_needed:** `Option<bool>` — When `true`, triggers an AI outreach call if enrichment stages return insufficient payment acceptance info. This feature is currently in development.
+**schedule_call_if_needed:** `Option<bool>` — When `true`, Payabli schedules an AI outreach call to the vendor if the enrichment stages return insufficient payment acceptance info. The call collects the vendor's preferred payment method and contact email. This is the third enrichment stage and is opt-in at the org level. See the schedule outreach call endpoint for behavior and requirements.
     
 </dd>
 </dl>
@@ -26992,6 +27026,214 @@ async fn main() {
 <dd>
 
 **fallback_method:** `Option<String>` — Payment method to apply if enrichment can't find payment details. Values are `check`, `ach`, or `card`.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">schedule_enrichment_call</a>(entry: String, request: ScheduleEnrichmentCallRequest) -> Result&lt;VendorScheduleCallResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Schedules an AI outreach call to a vendor to collect their preferred payment method and contact email. This is the third enrichment stage. Calls are scheduled for the next business day at around 9 AM in the vendor's timezone, with retries on no-answer and a fallback payment method applied when retries are exhausted. This feature is opt-in at the org level. Contact your Payabli representative to enable it, provision a phone number, and discuss pricing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .vendor
+        .schedule_enrichment_call(
+            &"8cfec329267".to_string(),
+            &ScheduleEnrichmentCallRequest {
+                vendor_id: 456,
+                phone: Some("5555550200".to_string()),
+                enrichment_id: Some("enrich-3890-a1b2c3d4".to_string()),
+                bill_id: Some(54323),
+                fallback_method: Some("check".to_string()),
+                max_retries: Some(3),
+                timezone: Some("America/New_York".to_string()),
+                send_now: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `String` — Entrypoint identifier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vendor_id:** `String` — ID of the vendor to call. Must be active and belong to the entrypoint in the path.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**phone:** `Option<String>` — Vendor phone number to call, digits only. Optional. When omitted, Payabli uses the phone number on the vendor's record. If the vendor has no phone on record, the request returns an error.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enrichment_id:** `Option<String>` — ID of the originating enrichment run to associate with this call. Optional. When omitted, Payabli generates a standalone call schedule and skips the enrichment lookup. The bill due-date check only runs when both `enrichmentId` and `billId` are supplied.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bill_id:** `Option<String>` — Bill ID used for the due-date check. When the bill is due in fewer than three days, the call is skipped and the fallback method is applied. Only evaluated when `enrichmentId` is also supplied.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fallback_method:** `Option<String>` — Payment method to apply to the vendor record if the call can't determine a preference or all retries are exhausted. Values are `check` (the default) or `managed`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_retries:** `Option<i64>` — Number of times to retry the call if the vendor doesn't answer. Defaults to 3. Maximum is 5. The get outreach call status response reports this value as `maxAttempts`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timezone:** `Option<String>` — IANA timezone identifier used to schedule the call in the vendor's local time. Defaults to `America/New_York`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**send_now:** `Option<bool>` — When `true`, dispatches the call immediately and bypasses the business-hours window and the bill due-date check. Defaults to `false`.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.vendor.<a href="/src/api/resources/vendor/client.rs">get_enrichment_call_status</a>(id_vendor: String) -> Result&lt;VendorCallStatusResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the latest AI outreach call activity for a vendor. The response is a composite object with a `state` discriminator (`none`, `scheduled`, `successful`, or `failed`); the block that matches the current state is populated. When the vendor has no call activity, `state` is `none` and the response returns HTTP 200.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client.vendor.get_enrichment_call_status(456, None).await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id_vendor:** `String` — ID of the vendor to read call status for.
     
 </dd>
 </dl>
@@ -27332,6 +27574,8 @@ Authorizes a transaction for payout.
 If you don't pass `autoCapture` with a value of `true`, authorized transactions aren't flagged for settlement until captured. Use the `referenceId` returned in the response to capture the transaction.
 
 When `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transaction_approvedcaptured`](/developers/webhooks/payout-transaction-approved-captured) webhook event.
+
+If a velocity fraud alert is triggered, the endpoint returns a `202` response with `responseCode` `9051`, and the authorization is held for risk review rather than rejected. If a risk policy blocks the transaction, the endpoint returns a `422` response with `responseCode` `9005`, a terminal rejection.
 </dd>
 </dl>
 </dd>
@@ -27786,7 +28030,9 @@ async fn main() {
 <dl>
 <dd>
 
-Captures a single authorized payout transaction by ID. If the transaction was authorized with `autoCapture` set to `true`,  you don't need to call this endpoint to capture the transaction for processing.
+Captures a single authorized payout transaction by ID. If the transaction was authorized with `autoCapture` set to `true`, you don't need to call this endpoint to capture the transaction for processing.
+
+If a velocity fraud alert is triggered, the endpoint returns a `202` response with `responseCode` `9051`, and the capture is held for risk review rather than rejected. If a risk policy blocks the transaction, the endpoint returns a `422` response with `responseCode` `9005`, a terminal rejection.
 </dd>
 </dl>
 </dd>
@@ -27964,6 +28210,91 @@ async fn main() {
 <dd>
 
 **card_token:** `String` — ID for a virtual card.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">renew_v_card</a>(card_token: String, request: RenewVCardRequest) -> Result&lt;RenewVCardResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Renews an expired or expiring virtual card by extending its expiration date to a future month.
+
+The card must be a virtual card that hasn't been fully used. The new expiration date must be in `MM-YYYY` or `MM/YYYY` format and no more than 2 years and 363 days in the future. The card expires on the last day of the month you specify.
+
+On success, `referenceId` holds the renewed card's token (the card processor may issue a new token). The response reuses the standard payout result object, so the payment-transaction fields it carries don't apply to renewal and always return `null`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .money_out
+        .renew_v_card(
+            &"20231206142225226104".to_string(),
+            &RenewVCardRequest {
+                expiration_date: "12-2027".to_string(),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**card_token:** `String` — ID for the virtual card to renew.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiration_date:** `String` — The new expiration date for the virtual card, in `MM-YYYY` or `MM/YYYY` format. The card expires on the last day of the month you specify. The date can't be more than 2 years and 363 days in the future.
     
 </dd>
 </dl>
@@ -28302,6 +28633,115 @@ async fn main() {
 <dd>
 
 **trans_id:** `String` — The transaction ID of the payout to reissue.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Funding
+<details><summary><code>client.funding.<a href="/src/api/resources/funding/client.rs">deposit_funds</a>(request: DepositFundsRequest) -> Result&lt;DepositFundsResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deposits funds into a paypoint's available payout balance. Deposited funds enter a pending state and aren't available for instant payouts until confirmed through FBO reconciliation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .funding
+        .deposit_funds(
+            &DepositFundsRequest {
+                amount: 10.0,
+                entrypoint: Entrypointfield("48acde49".to_string()),
+                account_id: "333".to_string(),
+                paypoint_id: None,
+                same_day_ach: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**amount:** `f64` — The amount to deposit, in dollars. Must be greater than zero.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**entrypoint:** `Entrypointfield` — The entry point identifier for the paypoint receiving the deposit.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_id:** `String` — The remittance account ID to withdraw funds from.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**paypoint_id:** `Option<PaypointId>` — The paypoint ID. Optional if the entry point uniquely identifies the paypoint.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**same_day_ach:** `Option<bool>` — When `true` and the request is submitted before 2 PM ET, the deposit processes as same-day ACH. If the request is submitted after 2 PM ET, it processes as standard ACH regardless of this flag.
     
 </dd>
 </dl>

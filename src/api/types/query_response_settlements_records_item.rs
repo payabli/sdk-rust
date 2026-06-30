@@ -110,6 +110,10 @@ pub struct QueryResponseSettlementsRecordsItem {
     #[serde(rename = "Source")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
+    /// Split funding instructions for the settled transaction, each enriched with the batch and transfer that paid out the split. Null when the transaction has no splits.
+    #[serde(rename = "splitFundingInstructions")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub split_funding_instructions: Option<Vec<SettlementSplitFundingDetail>>,
     #[serde(rename = "Status")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<SettlementStatus>,
@@ -168,6 +172,7 @@ pub struct QueryResponseSettlementsRecordsItemBuilder {
     settled_amount: Option<f64>,
     settlement_date: Option<DateTime<Utc>>,
     source: Option<Source>,
+    split_funding_instructions: Option<Vec<SettlementSplitFundingDetail>>,
     status: Option<SettlementStatus>,
     transaction_events: Option<Vec<QueryTransactionEvents>>,
     transaction_time: Option<TransactionTime>,
@@ -321,6 +326,11 @@ impl QueryResponseSettlementsRecordsItemBuilder {
         self
     }
 
+    pub fn split_funding_instructions(mut self, value: Vec<SettlementSplitFundingDetail>) -> Self {
+        self.split_funding_instructions = Some(value);
+        self
+    }
+
     pub fn status(mut self, value: SettlementStatus) -> Self {
         self.status = Some(value);
         self
@@ -378,6 +388,7 @@ impl QueryResponseSettlementsRecordsItemBuilder {
             settled_amount: self.settled_amount,
             settlement_date: self.settlement_date,
             source: self.source,
+            split_funding_instructions: self.split_funding_instructions,
             status: self.status,
             transaction_events: self.transaction_events,
             transaction_time: self.transaction_time,

@@ -13,8 +13,8 @@ pub mod types;
 
 pub use resources::{
     ApiClient, BillClient, BoardingClient, ChargeBacksClient, CheckCaptureClient, CloudClient,
-    CustomerClient, ExportClient, GhostCardClient, HostedPaymentPagesClient, ImportClient,
-    InvoiceClient, LineItemClient, ManagementClient, MoneyInClient, MoneyOutClient,
+    CustomerClient, ExportClient, FundingClient, GhostCardClient, HostedPaymentPagesClient,
+    ImportClient, InvoiceClient, LineItemClient, ManagementClient, MoneyInClient, MoneyOutClient,
     NotificationClient, NotificationlogsClient, OcrClient, OrganizationClient, PaymentLinkClient,
     PaymentMethodDomainClient, PayoutSubscriptionClient, PaypointClient, QueryClient,
     StatisticClient, SubscriptionClient, TemplatesClient, TokenStorageClient, UserClient,

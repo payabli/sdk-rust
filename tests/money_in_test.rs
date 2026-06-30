@@ -739,7 +739,13 @@ async fn test_money_in_refundv_2_with_wiremock() {
 
     let result = client
         .money_in
-        .refundv_2(&"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(), None)
+        .refundv_2(
+            &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
+            &RefundV2Request {
+                ..Default::default()
+            },
+            None,
+        )
         .await;
 
     assert!(result.is_ok(), "Client method call should succeed");
@@ -772,6 +778,9 @@ async fn test_money_in_refundv_2_amount_with_wiremock() {
         .refundv_2_amount(
             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
             0.0,
+            &RefundV2Request {
+                ..Default::default()
+            },
             None,
         )
         .await;

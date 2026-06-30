@@ -247,6 +247,42 @@ async fn test_money_out_v_card_get_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
+async fn test_money_out_renew_v_card_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        api_key: Some("<value>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = ApiClient::new(config).expect("Failed to build client");
+
+    let result = client
+        .money_out
+        .renew_v_card(
+            &"20231206142225226104".to_string(),
+            &RenewVCardRequest {
+                expiration_date: "12-2027".to_string(),
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "PUT",
+        "/MoneyOutCard/vcard/20231206142225226104/renew",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
 async fn test_money_out_send_v_card_link_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();

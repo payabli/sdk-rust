@@ -30,6 +30,7 @@
 //! - **Vendor**
 //! - **GhostCard**
 //! - **MoneyOut**
+//! - **Funding**
 //! - **Wallet**
 //! - **PayoutSubscription**
 //! - **ChargeBacks**
@@ -43,6 +44,7 @@ pub mod check_capture;
 pub mod cloud;
 pub mod customer;
 pub mod export;
+pub mod funding;
 pub mod ghost_card;
 pub mod hosted_payment_pages;
 pub mod import;
@@ -97,6 +99,7 @@ pub struct ApiClient {
     pub vendor: VendorClient,
     pub ghost_card: GhostCardClient,
     pub money_out: MoneyOutClient,
+    pub funding: FundingClient,
     pub wallet: WalletClient,
     pub payout_subscription: PayoutSubscriptionClient,
     pub charge_backs: ChargeBacksClient,
@@ -134,6 +137,7 @@ impl ApiClient {
             vendor: VendorClient::new(config.clone())?,
             ghost_card: GhostCardClient::new(config.clone())?,
             money_out: MoneyOutClient::new(config.clone())?,
+            funding: FundingClient::new(config.clone())?,
             wallet: WalletClient::new(config.clone())?,
             payout_subscription: PayoutSubscriptionClient::new(config.clone())?,
             charge_backs: ChargeBacksClient::new(config.clone())?,
@@ -148,6 +152,7 @@ pub use check_capture::CheckCaptureClient;
 pub use cloud::CloudClient;
 pub use customer::CustomerClient;
 pub use export::ExportClient;
+pub use funding::FundingClient;
 pub use ghost_card::GhostCardClient;
 pub use hosted_payment_pages::HostedPaymentPagesClient;
 pub use import::ImportClient;
