@@ -33,7 +33,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-payabli_api = "2.0.2"
+payabli_api = "2.0.3"
 ```
 
 Or install via cargo:
@@ -66,7 +66,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");

@@ -9,7 +9,6 @@ async fn test_query_list_batch_details_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -52,7 +51,6 @@ async fn test_query_list_batch_details_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -95,7 +93,6 @@ async fn test_query_list_batches_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -138,7 +135,6 @@ async fn test_query_list_batches_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -181,7 +177,6 @@ async fn test_query_list_batches_out_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -224,7 +219,6 @@ async fn test_query_list_batches_out_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -267,7 +261,6 @@ async fn test_query_list_chargebacks_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -310,7 +303,6 @@ async fn test_query_list_chargebacks_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -353,7 +345,6 @@ async fn test_query_list_customers_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -396,7 +387,6 @@ async fn test_query_list_customers_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -439,7 +429,6 @@ async fn test_query_list_devices_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -482,7 +471,6 @@ async fn test_query_list_devices_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -525,7 +513,6 @@ async fn test_query_list_notification_reports_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -568,7 +555,6 @@ async fn test_query_list_notification_reports_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -611,7 +597,6 @@ async fn test_query_list_notifications_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -654,7 +639,6 @@ async fn test_query_list_notifications_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -697,7 +681,6 @@ async fn test_query_list_organizations_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -740,7 +723,6 @@ async fn test_query_list_payout_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -783,7 +765,6 @@ async fn test_query_list_payout_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -826,7 +807,6 @@ async fn test_query_list_paypoints_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -869,7 +849,6 @@ async fn test_query_list_settlements_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -912,7 +891,6 @@ async fn test_query_list_settlements_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -955,7 +933,6 @@ async fn test_query_list_subscriptions_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -998,7 +975,6 @@ async fn test_query_list_subscriptions_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1041,7 +1017,6 @@ async fn test_query_list_payout_subscriptions_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1084,7 +1059,6 @@ async fn test_query_list_payout_subscriptions_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1127,7 +1101,6 @@ async fn test_query_list_transactions_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1170,7 +1143,6 @@ async fn test_query_list_transactions_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1213,7 +1185,6 @@ async fn test_query_list_transfer_details_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1250,7 +1221,6 @@ async fn test_query_list_transfers_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1291,7 +1261,6 @@ async fn test_query_list_transfers_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1332,7 +1301,6 @@ async fn test_query_list_transfers_out_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1373,7 +1341,6 @@ async fn test_query_list_transfers_out_paypoint_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1414,7 +1381,6 @@ async fn test_query_list_transfer_details_out_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1456,7 +1422,6 @@ async fn test_query_list_users_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1499,7 +1464,6 @@ async fn test_query_list_users_paypoint_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1542,7 +1506,6 @@ async fn test_query_list_vendors_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1585,7 +1548,6 @@ async fn test_query_list_vendors_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1628,7 +1590,6 @@ async fn test_query_list_vcards_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1671,7 +1632,6 @@ async fn test_query_list_vcards_transactions_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1714,7 +1674,6 @@ async fn test_query_list_vcards_transactions_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -1757,7 +1716,6 @@ async fn test_query_list_vcards_org_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();

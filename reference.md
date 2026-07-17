@@ -32,7 +32,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -141,7 +140,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -205,7 +203,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -280,7 +277,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -344,7 +340,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -439,7 +434,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -533,7 +527,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -618,7 +611,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -692,7 +684,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -782,7 +773,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -942,7 +932,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1083,7 +1072,7 @@ Example: totalAmount(gt)=20 return all records with totalAmount greater than 20.
 <dl>
 <dd>
 
-Creates a customer in an entrypoint. An identifier is required to create customer records. Change your identifier settings in Settings > Custom Fields in PartnerHub.
+Creates a customer in an entrypoint. An identifier is required to create customer records. Change your identifier settings in Settings > Custom Fields in the Payabli Portal.
 If you don't include an identifier, the record is rejected.
 </dd>
 </dl>
@@ -1104,7 +1093,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1208,7 +1196,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1228,7 +1215,7 @@ async fn main() {
 <dl>
 <dd>
 
-**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     
 </dd>
 </dl>
@@ -1272,7 +1259,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1308,7 +1294,7 @@ async fn main() {
 <dl>
 <dd>
 
-**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     
 </dd>
 </dl>
@@ -1352,7 +1338,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1372,7 +1357,7 @@ async fn main() {
 <dl>
 <dd>
 
-**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     
 </dd>
 </dl>
@@ -1416,7 +1401,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1436,7 +1420,7 @@ async fn main() {
 <dl>
 <dd>
 
-**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     
 </dd>
 </dl>
@@ -1480,7 +1464,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1503,7 +1486,7 @@ async fn main() {
 <dl>
 <dd>
 
-**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     
 </dd>
 </dl>
@@ -1556,7 +1539,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1663,7 +1645,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1770,7 +1751,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1855,7 +1835,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -1935,7 +1914,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2108,7 +2086,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2179,7 +2156,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2303,7 +2279,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2392,7 +2367,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2481,7 +2455,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2635,7 +2608,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2702,7 +2674,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2788,7 +2759,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2909,7 +2879,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -2976,7 +2945,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3089,7 +3057,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3191,7 +3158,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3275,7 +3241,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3354,7 +3319,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3436,7 +3400,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3460,6 +3423,105 @@ async fn main() {
 <dd>
 
 **trans_id:** `String` — ReferenceId for the transaction (PaymentId).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Token
+<details><summary><code>client.token.<a href="/src/api/resources/token/client.rs">create_server_side_token</a>(request: CreateServerSideTokenRequest) -> Result&lt;PayabliAccessTokenResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Exchanges a client ID and client secret for a short-lived Bearer access token using the OAuth2 client-credentials flow. Designed for server-to-server use: the credentials and the returned token stay on your backend. Send the returned `access_token` in the `Authorization` header as `Bearer <access_token>` on subsequent API calls. See the [OAuth authentication guide](/developers/oauth-authentication) for the full flow.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .token
+        .create_server_side_token(
+            &CreateServerSideTokenRequest {
+                client_id: "YOUR_CLIENT_ID".to_string(),
+                client_secret: "YOUR_CLIENT_SECRET".to_string(),
+                state: None,
+                permissions: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**client_id:** `String` — The client ID issued for your integration when credentials are provisioned in the Payabli Portal.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_secret:** `String` — The client secret issued alongside the client ID. Keep it on your backend and never expose it in client-side code.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `Option<Option<String>>` — An optional opaque value echoed back in the response. Use it to correlate the request with its response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**permissions:** `Option<Option<Vec<String>>>` — An optional array of permission IDs that scopes the token to a subset of the credential's granted permissions. When omitted, the token carries all permissions granted to the credential.
     
 </dd>
 </dl>
@@ -3504,7 +3566,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3568,7 +3629,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3666,7 +3726,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3730,7 +3789,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -3751,7 +3809,7 @@ async fn main() {
                 payment_method: Some(RequestSchedulePaymentMethod::PayMethodCredit(
                     PayMethodCredit {
                         cardcvv: Some(Cardcvv("123".to_string())),
-                        cardexp: Cardexp("02/25".to_string()),
+                        cardexp: Cardexp("12/29".to_string()),
                         card_holder: Some(Cardholder("John Cassian".to_string())),
                         cardnumber: Cardnumber("4111111111111111".to_string()),
                         cardzip: Some(Cardzip("37615".to_string())),
@@ -3912,7 +3970,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4040,7 +4097,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4134,7 +4190,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4213,7 +4268,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4277,7 +4331,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4378,7 +4431,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4442,7 +4494,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4509,7 +4560,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4689,7 +4739,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4869,7 +4918,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -4960,7 +5008,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -5027,7 +5074,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -5321,7 +5367,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -5482,7 +5527,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -5552,7 +5596,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -5622,7 +5665,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -5693,7 +5735,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -5774,7 +5815,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -5864,7 +5904,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6023,7 +6062,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6202,7 +6240,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6301,7 +6338,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6443,7 +6479,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6464,7 +6499,7 @@ async fn main() {
                         TokenizeCard {
                             method: "card".to_string(),
                             cardcvv: Some(Cardcvv("123".to_string())),
-                            cardexp: Cardexp("02/25".to_string()),
+                            cardexp: Cardexp("12/29".to_string()),
                             card_holder: Cardholder("John Doe".to_string()),
                             cardnumber: Cardnumber("4111111111111111".to_string()),
                             cardzip: Some(Cardzip("12345".to_string())),
@@ -6565,7 +6600,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6666,7 +6700,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6686,7 +6719,7 @@ async fn main() {
                         TokenizeCard {
                             method: "card".to_string(),
                             cardcvv: Some(Cardcvv("123".to_string())),
-                            cardexp: Cardexp("02/25".to_string()),
+                            cardexp: Cardexp("12/29".to_string()),
                             card_holder: Cardholder("John Doe".to_string()),
                             cardnumber: Cardnumber("4111111111111111".to_string()),
                             cardzip: Some(Cardzip("12345".to_string())),
@@ -6767,7 +6800,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6835,7 +6867,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6902,7 +6933,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -6969,7 +6999,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7042,7 +7071,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7140,7 +7168,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7207,7 +7234,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7288,7 +7314,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7367,7 +7392,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7447,7 +7471,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7527,7 +7550,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7603,7 +7625,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7686,7 +7707,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7801,7 +7821,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7868,7 +7887,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -7935,7 +7953,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -8002,7 +8019,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -8099,7 +8115,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -8205,7 +8220,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -8273,7 +8287,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -8346,7 +8359,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -8428,7 +8440,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -8503,7 +8514,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -8695,7 +8705,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -8886,7 +8895,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -9057,7 +9065,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -9228,7 +9235,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -9360,7 +9366,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -9507,7 +9512,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -9695,7 +9699,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -9885,7 +9888,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -10067,7 +10069,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -10249,7 +10250,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -10458,7 +10458,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -10667,7 +10666,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -10814,7 +10812,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -10959,7 +10956,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -11108,7 +11104,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -11257,7 +11252,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -11426,7 +11420,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -11622,7 +11615,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -11817,7 +11809,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -11991,7 +11982,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -12183,7 +12173,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -12375,7 +12364,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -12569,7 +12557,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -12763,7 +12750,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -12943,7 +12929,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -13132,7 +13117,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -13247,6 +13231,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 - `payaccountLastfour` (nct, ct)
 - `payaccountType` (ne, eq, in, nin)
 - `payaccountCurrency` (ne, eq, in, nin)
+- `binCardType` (eq, ne, in, nin). Filters by card type for card transactions. Accepts `CREDIT`, `DEBIT`, or `PREPAID`. Case-insensitive.
 - `customerFirstname` (ct, nct, eq, ne)
 - `customerLastname` (ct, nct, eq, ne)
 - `customerName` (ct, nct)
@@ -13342,7 +13327,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -13456,6 +13440,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 - `payaccountLastfour` (nct, ct)
 - `payaccountType` (ne, eq, in, nin)
 - `payaccountCurrency` (ne, eq, in, nin)
+- `binCardType` (eq, ne, in, nin). Filters by card type for card transactions. Accepts `CREDIT`, `DEBIT`, or `PREPAID`. Case-insensitive.
 - `customerFirstname` (ct, nct, eq, ne)
 - `customerLastname` (ct, nct, eq, ne)
 - `customerName` (ct, nct)
@@ -13542,7 +13527,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -13702,7 +13686,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -13853,7 +13836,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -14001,7 +13983,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -14139,7 +14120,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -14277,7 +14257,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -14421,7 +14400,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -14572,7 +14550,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -14723,7 +14700,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -14895,7 +14871,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -15067,7 +15042,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -15233,7 +15207,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -15395,7 +15368,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -15557,7 +15529,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -15724,7 +15695,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -15797,7 +15767,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -15875,7 +15844,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16015,7 +15983,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16084,7 +16051,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16154,7 +16120,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16214,7 +16179,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16311,7 +16275,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16390,7 +16353,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16471,7 +16433,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16553,7 +16514,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16634,7 +16594,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16698,7 +16657,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16773,7 +16731,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -16837,7 +16794,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17001,7 +16957,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17207,7 +17162,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17280,7 +17234,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17344,7 +17297,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17408,7 +17360,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17499,7 +17450,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17563,7 +17513,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17586,7 +17535,7 @@ async fn main() {
 <dl>
 <dd>
 
-**template_id:** `f64` — The boarding template ID. You can find this at the end of the boarding template URL in PartnerHub. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
+**template_id:** `f64` — The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
     
 </dd>
 </dl>
@@ -17630,7 +17579,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17720,7 +17668,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17787,7 +17734,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -17939,7 +17885,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -18079,7 +18024,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -18187,7 +18131,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -18255,7 +18198,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -18275,7 +18217,7 @@ async fn main() {
 <dl>
 <dd>
 
-**template_id:** `f64` — The boarding template ID. You can find this at the end of the boarding template URL in PartnerHub. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
+**template_id:** `f64` — The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
     
 </dd>
 </dl>
@@ -18319,7 +18261,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -18339,7 +18280,7 @@ async fn main() {
 <dl>
 <dd>
 
-**template_id:** `f64` — The boarding template ID. You can find this at the end of the boarding template URL in PartnerHub. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
+**template_id:** `f64` — The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
     
 </dd>
 </dl>
@@ -18391,7 +18332,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -18411,7 +18351,7 @@ async fn main() {
 <dl>
 <dd>
 
-**template_id:** `f64` — The boarding template ID. You can find this at the end of the boarding template URL in PartnerHub. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
+**template_id:** `f64` — The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
     
 </dd>
 </dl>
@@ -18455,7 +18395,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -18612,7 +18551,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -18786,7 +18724,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -18971,7 +18908,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -19156,7 +19092,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -19331,7 +19266,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -19504,7 +19438,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -19659,7 +19592,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -19814,7 +19746,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -19987,7 +19918,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -20160,7 +20090,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -20354,7 +20283,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -20548,7 +20476,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -20735,7 +20662,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -20922,7 +20848,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -21119,7 +21044,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -21316,7 +21240,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -21488,7 +21411,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -21659,7 +21581,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -21830,7 +21751,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -22003,7 +21923,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -22196,7 +22115,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -22389,7 +22307,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -22584,7 +22501,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -22779,7 +22695,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -22978,7 +22893,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -23177,7 +23091,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -23358,7 +23271,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -23522,7 +23434,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -23699,7 +23610,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -23873,7 +23783,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -24131,7 +24040,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -24374,7 +24282,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -24438,7 +24345,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -24505,7 +24411,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -24572,7 +24477,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -24636,7 +24540,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -24708,7 +24611,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -24835,7 +24737,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25003,7 +24904,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25073,7 +24973,7 @@ For example, `w` groups the results by week.
 <dl>
 <dd>
 
-**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+**customer_id:** `i64` — Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     
 </dd>
 </dl>
@@ -25125,7 +25025,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25236,7 +25135,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25359,7 +25257,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25427,7 +25324,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25494,7 +25390,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25576,7 +25471,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25643,7 +25537,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25708,7 +25601,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25765,7 +25657,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25855,7 +25746,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25928,7 +25818,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -25992,7 +25881,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26113,7 +26001,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26162,7 +26049,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26250,7 +26136,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26322,7 +26207,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26371,7 +26255,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26451,7 +26334,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26524,7 +26406,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26608,7 +26489,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26727,7 +26607,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26791,7 +26670,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26865,7 +26743,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -26929,7 +26806,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -27069,7 +26945,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -27213,7 +27088,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -27282,7 +27156,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -27498,7 +27371,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -27573,9 +27445,11 @@ Authorizes a transaction for payout.
 
 If you don't pass `autoCapture` with a value of `true`, authorized transactions aren't flagged for settlement until captured. Use the `referenceId` returned in the response to capture the transaction.
 
-When `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transaction_approvedcaptured`](/developers/webhooks/payout-transaction-approved-captured) webhook event.
+When `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transaction_approvedcaptured`](/developers/api-reference/webhooks-overview/payout-transaction-approved-captured) webhook event.
 
 If a velocity fraud alert is triggered, the endpoint returns a `202` response with `responseCode` `9051`, and the authorization is held for risk review rather than rejected. If a risk policy blocks the transaction, the endpoint returns a `422` response with `responseCode` `9005`, a terminal rejection.
+
+For check payouts, Payabli validates the remit (mailing) address at authorization. If the address fails deliverability validation, the endpoint returns a `422` response and doesn't charge the paypoint. Correct the address and re-authorize. Other payout rails (ACH, RTP, virtual card, wire, and managed payables) aren't affected.
 </dd>
 </dl>
 </dd>
@@ -27595,7 +27469,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -27806,7 +27679,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -27861,7 +27733,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -27928,7 +27799,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -27995,7 +27865,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28052,7 +27921,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28119,7 +27987,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28186,7 +28053,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28257,7 +28123,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28338,7 +28203,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28412,7 +28276,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28504,7 +28367,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28587,7 +28449,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28677,7 +28538,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28786,7 +28646,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28877,7 +28736,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -28959,7 +28817,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -29050,7 +28907,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -29133,7 +28989,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -29314,7 +29169,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -29381,7 +29235,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -29487,7 +29340,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -29555,7 +29407,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -29663,7 +29514,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
@@ -29727,7 +29577,6 @@ use payabli_api::prelude::*;
 #[tokio::main]
 async fn main() {
     let config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");

@@ -5,7 +5,7 @@ pub use crate::prelude::*;
 pub struct UpdateMethodRequest {
     /// When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.
     #[serde(rename = "achValidation")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub ach_validation: Option<AchValidation>,
     #[serde(default)]
     pub body: RequestTokenStorage,

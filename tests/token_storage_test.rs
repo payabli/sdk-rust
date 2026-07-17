@@ -9,7 +9,6 @@ async fn test_token_storage_add_method_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -32,7 +31,7 @@ async fn test_token_storage_add_method_with_wiremock() {
                         TokenizeCard {
                             method: "card".to_string(),
                             cardcvv: Some(Cardcvv("123".to_string())),
-                            cardexp: Cardexp("02/25".to_string()),
+                            cardexp: Cardexp("12/29".to_string()),
                             card_holder: Cardholder("John Doe".to_string()),
                             cardnumber: Cardnumber("4111111111111111".to_string()),
                             cardzip: Some(Cardzip("12345".to_string())),
@@ -65,7 +64,6 @@ async fn test_token_storage_get_method_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -106,7 +104,6 @@ async fn test_token_storage_update_method_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -128,7 +125,7 @@ async fn test_token_storage_update_method_with_wiremock() {
                         TokenizeCard {
                             method: "card".to_string(),
                             cardcvv: Some(Cardcvv("123".to_string())),
-                            cardexp: Cardexp("02/25".to_string()),
+                            cardexp: Cardexp("12/29".to_string()),
                             card_holder: Cardholder("John Doe".to_string()),
                             cardnumber: Cardnumber("4111111111111111".to_string()),
                             cardzip: Some(Cardzip("12345".to_string())),
@@ -157,7 +154,6 @@ async fn test_token_storage_remove_method_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();

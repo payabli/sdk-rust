@@ -6,6 +6,7 @@
 //! - **Customer**
 //! - **CheckCapture**
 //! - **MoneyIn**
+//! - **Token**
 //! - **Subscription**
 //! - **Invoice**
 //! - **PaymentLink**
@@ -65,6 +66,7 @@ pub mod query;
 pub mod statistic;
 pub mod subscription;
 pub mod templates;
+pub mod token;
 pub mod token_storage;
 pub mod user;
 pub mod vendor;
@@ -75,6 +77,7 @@ pub struct ApiClient {
     pub customer: CustomerClient,
     pub check_capture: CheckCaptureClient,
     pub money_in: MoneyInClient,
+    pub token: TokenClient,
     pub subscription: SubscriptionClient,
     pub invoice: InvoiceClient,
     pub payment_link: PaymentLinkClient,
@@ -113,6 +116,7 @@ impl ApiClient {
             customer: CustomerClient::new(config.clone())?,
             check_capture: CheckCaptureClient::new(config.clone())?,
             money_in: MoneyInClient::new(config.clone())?,
+            token: TokenClient::new(config.clone())?,
             subscription: SubscriptionClient::new(config.clone())?,
             invoice: InvoiceClient::new(config.clone())?,
             payment_link: PaymentLinkClient::new(config.clone())?,
@@ -173,6 +177,7 @@ pub use query::QueryClient;
 pub use statistic::StatisticClient;
 pub use subscription::SubscriptionClient;
 pub use templates::TemplatesClient;
+pub use token::TokenClient;
 pub use token_storage::TokenStorageClient;
 pub use user::UserClient;
 pub use vendor::VendorClient;

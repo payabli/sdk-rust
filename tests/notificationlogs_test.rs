@@ -9,7 +9,6 @@ async fn test_notificationlogs_search_notification_logs_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -55,7 +54,6 @@ async fn test_notificationlogs_get_notification_log_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -85,7 +83,6 @@ async fn test_notificationlogs_retry_notification_log_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -115,7 +112,6 @@ async fn test_notificationlogs_bulk_retry_notification_logs_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();

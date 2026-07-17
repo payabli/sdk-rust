@@ -9,7 +9,6 @@ async fn test_wallet_configure_apple_pay_organization_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -47,7 +46,6 @@ async fn test_wallet_configure_apple_pay_paypoint_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -79,7 +77,6 @@ async fn test_wallet_configure_google_pay_organization_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -117,7 +114,6 @@ async fn test_wallet_configure_google_pay_paypoint_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();

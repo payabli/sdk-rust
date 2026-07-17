@@ -1,7 +1,7 @@
 {
   "cliVersion": "5.56.0",
   "generatorName": "fernapi/fern-rust-sdk",
-  "generatorVersion": "0.36.8",
+  "generatorVersion": "0.42.0",
   "generatorConfig": {
     "packageLicenseFile": "LICENSE.md",
     "enableWireTests": true,
@@ -17,10 +17,10 @@
       }
     }
   },
-  "originGitCommit": "1aeb9b5f59cac476a429df4671f575ed07ab5731",
+  "originGitCommit": "fbf628bcea22b886022a9bd709dca9daaf0bd3ca",
   "originGitCommitIsDirty": true,
   "invokedBy": "ci",
-  "requestedVersion": "2.0.2",
+  "requestedVersion": "2.0.3",
   "ciProvider": "github",
-  "sdkVersion": "2.0.2"
+  "sdkVersion": "2.0.3"
 }

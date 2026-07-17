@@ -9,7 +9,6 @@ async fn test_subscription_get_subscription_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -31,7 +30,6 @@ async fn test_subscription_update_subscription_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -63,7 +61,6 @@ async fn test_subscription_remove_subscription_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -85,7 +82,6 @@ async fn test_subscription_new_subscription_with_wiremock() {
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
     let mut config = ClientConfig {
-        api_key: Some("<value>".to_string()),
         ..Default::default()
     };
     config.base_url = wiremock_base_url.to_string();
@@ -108,7 +104,7 @@ async fn test_subscription_new_subscription_with_wiremock() {
                 payment_method: Some(RequestSchedulePaymentMethod::PayMethodCredit(
                     PayMethodCredit {
                         cardcvv: Some(Cardcvv("123".to_string())),
-                        cardexp: Cardexp("02/25".to_string()),
+                        cardexp: Cardexp("12/29".to_string()),
                         card_holder: Some(Cardholder("John Cassian".to_string())),
                         cardnumber: Cardnumber("4111111111111111".to_string()),
                         cardzip: Some(Cardzip("37615".to_string())),

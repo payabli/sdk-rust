@@ -156,11 +156,11 @@
           }
         },
         "pathParameters": {
-          "filename": {
-            "equalTo": "0_Bill.pdf"
-          },
           "idBill": {
             "equalTo": "285"
+          },
+          "filename": {
+            "equalTo": "0_Bill.pdf"
           }
         },
         "queryParameters": {
@@ -200,11 +200,11 @@
           }
         },
         "pathParameters": {
-          "filename": {
-            "equalTo": "0_Bill.pdf"
-          },
           "idBill": {
             "equalTo": "285"
+          },
+          "filename": {
+            "equalTo": "0_Bill.pdf"
           }
         }
       },
@@ -311,11 +311,11 @@
           }
         },
         "pathParameters": {
-          "approved": {
-            "equalTo": "true"
-          },
           "idBill": {
             "equalTo": "285"
+          },
+          "approved": {
+            "equalTo": "true"
           }
         }
       },
@@ -898,11 +898,11 @@
           }
         },
         "pathParameters": {
-          "amount": {
-            "equalTo": "0"
-          },
           "transId": {
             "equalTo": "10-3ffa27df-b171-44e0-b251-e95fbfc7a723"
+          },
+          "amount": {
+            "equalTo": "0"
           }
         }
       },
@@ -937,11 +937,11 @@
           }
         },
         "pathParameters": {
-          "amount": {
-            "equalTo": "0"
-          },
           "transId": {
             "equalTo": "10-3ffa27df-b171-44e0-b251-e95fbfc7a723"
+          },
+          "amount": {
+            "equalTo": "0"
           }
         }
       },
@@ -1354,6 +1354,32 @@
       }
     },
     {
+      "id": "a4007d1f-69ea-4271-9fa4-fe9140a96213",
+      "name": "Get an access token (server-side) - CreateServerSideToken",
+      "request": {
+        "urlPathTemplate": "/v2/Token/serverside",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"token_type\": \"Bearer\",\n  \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example.token\",\n  \"expires_in\": 3600\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "a4007d1f-69ea-4271-9fa4-fe9140a96213",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "f28fe162-d920-47d2-acc2-71d90da4a5fd",
       "name": "Get a subscription - GetSubscription",
       "request": {
@@ -1579,11 +1605,11 @@
           }
         },
         "pathParameters": {
-          "filename": {
-            "equalTo": "0_Bill.pdf"
-          },
           "idInvoice": {
             "equalTo": "23548884"
+          },
+          "filename": {
+            "equalTo": "0_Bill.pdf"
           }
         }
       },
@@ -4087,7 +4113,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"Records\": [\n    {\n      \"BatchNumber\": \"BT-2024321\",\n      \"Bills\": [\n        {}\n      ],\n      \"CardToken\": \"CardToken\",\n      \"CheckNumber\": \"12345\",\n      \"Comments\": \"Deposit for materials\",\n      \"CreatedAt\": \"2022-07-01T15:00:01Z\",\n      \"EntryName\": \"d193cf9a46\",\n      \"Events\": [\n        {}\n      ],\n      \"externalPaypointID\": \"Paypoint-100\",\n      \"FeeAmount\": 10.25,\n      \"Gateway\": \"TSYS\",\n      \"IdOut\": 236,\n      \"LastUpdated\": \"2022-07-01T15:00:01Z\",\n      \"NetAmount\": 3762.87,\n      \"ParentOrgName\": \"PropertyManager Pro\",\n      \"PaymentData\": {\n        \"paymentDetails\": {\n          \"totalAmount\": 100\n        }\n      },\n      \"PaymentId\": \"12345678910\",\n      \"PaymentMethod\": \"ach\",\n      \"PaymentStatus\": \"Processed\",\n      \"PaypointDbaname\": \"Sunshine Gutters\",\n      \"PaypointLegalname\": \"Sunshine Services, LLC\",\n      \"Source\": \"api\",\n      \"Status\": 1,\n      \"TotalAmount\": 110.25,\n      \"Vendor\": {\n        \"additionalData\": {\n          \"key1\": {\n            \"key\": \"value\"\n          },\n          \"key2\": {\n            \"key\": \"value\"\n          },\n          \"key3\": {\n            \"key\": \"value\"\n          }\n        },\n        \"CreatedDate\": \"2022-07-01T15:00:01Z\"\n      }\n    }\n  ],\n  \"Summary\": {\n    \"totalPages\": 391,\n    \"totalRecords\": 7803,\n    \"totalAmount\": 21435.95,\n    \"totalNetAmount\": 21435.95,\n    \"totalPaid\": 1,\n    \"totalPaidAmount\": 4,\n    \"totalCanceled\": 1743,\n    \"totalCanceledAmount\": 4515,\n    \"totalCaptured\": 138,\n    \"totalCapturedAmount\": 542,\n    \"totalAuthorized\": 4139,\n    \"totalAuthorizedAmount\": 11712.35,\n    \"totalProcessing\": 1780,\n    \"totalProcessingAmount\": 4660.6,\n    \"totalOpen\": 2,\n    \"totalOpenAmount\": 2,\n    \"totalOnHold\": 0,\n    \"totalOnHoldAmount\": 0,\n    \"pageSize\": 20\n  }\n}",
+        "body": "{\n  \"Records\": [\n    {\n      \"IdOut\": 236,\n      \"CreatedAt\": \"2024-01-15T15:00:01Z\",\n      \"Comments\": \"Deposit for materials\",\n      \"Vendor\": {\n        \"VendorNumber\": \"VEN-123\",\n        \"Name1\": \"Riverside Plumbing\",\n        \"Name2\": null,\n        \"EIN\": null,\n        \"Phone\": \"(555) 555-1234\",\n        \"Email\": \"vendor@example.com\",\n        \"RemitEmail\": null,\n        \"Address1\": \"100 Main Street\",\n        \"Address2\": null,\n        \"City\": \"Miami\",\n        \"State\": \"FL\",\n        \"Zip\": \"33131\",\n        \"Country\": \"US\",\n        \"Mcc\": null,\n        \"LocationCode\": null,\n        \"Contacts\": [\n          {\n            \"ContactName\": \"Alex Doe\",\n            \"ContactEmail\": \"contact@example.com\",\n            \"ContactTitle\": \"Accounts Receivable\",\n            \"ContactPhone\": \"(555) 555-5678\"\n          }\n        ],\n        \"BillingData\": null,\n        \"PaymentMethod\": \"ach\",\n        \"VendorStatus\": 1,\n        \"VendorId\": 456,\n        \"EnrollmentStatus\": null,\n        \"Summary\": null,\n        \"PaypointLegalname\": \"Sunshine Services, LLC\",\n        \"PaypointId\": 3040,\n        \"PaypointDbaname\": \"Sunshine Gutters\",\n        \"PaypointEntryname\": \"8cfec329267\",\n        \"ParentOrgName\": \"PropertyManager Pro\",\n        \"ParentOrgId\": 123,\n        \"CreatedDate\": \"2024-01-10T15:00:01Z\",\n        \"LastUpdated\": \"2024-01-12T15:00:01Z\",\n        \"remitAddress1\": \"100 Main Street\",\n        \"remitAddress2\": null,\n        \"remitCity\": \"Miami\",\n        \"remitState\": \"FL\",\n        \"remitZip\": \"33131\",\n        \"remitCountry\": \"US\",\n        \"payeeName1\": null,\n        \"payeeName2\": null,\n        \"customField1\": null,\n        \"customField2\": null,\n        \"customerVendorAccount\": null,\n        \"InternalReferenceId\": 12345,\n        \"PaymentPortalUrl\": null,\n        \"CardAccepted\": \"yes\",\n        \"AchAccepted\": \"yes\",\n        \"CheckAccepted\": \"no\",\n        \"EnrichmentStatus\": \"fully_enriched\",\n        \"EnrichedBy\": \"web_search\",\n        \"EnrichedAt\": \"2024-01-12T15:00:01Z\",\n        \"EnrichmentId\": null,\n        \"additionalData\": null,\n        \"externalPaypointID\": \"\",\n        \"StoredMethods\": null\n      },\n      \"PaypointDbaname\": \"Sunshine Gutters\",\n      \"PaypointLegalname\": \"Sunshine Services, LLC\",\n      \"PaypointId\": 3040,\n      \"Status\": 1,\n      \"PaymentId\": \"01J0ABCDEF2WQ4VS323V5WKZP3\",\n      \"TransId\": null,\n      \"TransStatus\": null,\n      \"TransStatusDetail\": null,\n      \"TransStatusName\": null,\n      \"TransStatusCategory\": null,\n      \"LastUpdated\": \"2024-01-15T15:00:01Z\",\n      \"TotalAmount\": 110.25,\n      \"NetAmount\": 100,\n      \"FeeAmount\": 10.25,\n      \"Source\": \"api\",\n      \"ParentOrgName\": \"PropertyManager Pro\",\n      \"ParentOrgId\": 123,\n      \"BatchNumber\": \"BT-2024321\",\n      \"PaymentStatus\": \"Processed\",\n      \"PaymentMethod\": \"ach\",\n      \"CardToken\": null,\n      \"CheckNumber\": \"12345\",\n      \"CheckData\": null,\n      \"PaymentData\": {\n        \"MaskedAccount\": \"1XXXXXX3123\",\n        \"AccountType\": \"checking\",\n        \"AccountExp\": \"\",\n        \"AccountZip\": \"\",\n        \"HolderName\": null,\n        \"StoredId\": \"1ec55af9-7b5a-4ff0-81ed-c12d2f95e135-456\",\n        \"Initiator\": null,\n        \"StoredMethodUsageType\": null,\n        \"Sequence\": null,\n        \"orderDescription\": null,\n        \"cloudSignatureData\": null,\n        \"cloudSignatureFormat\": null,\n        \"paymentDetails\": null,\n        \"payorData\": null,\n        \"accountId\": \"\",\n        \"bankAccount\": null,\n        \"gatewayConnector\": null,\n        \"binData\": null\n      },\n      \"Bills\": [\n        {\n          \"billId\": 54323,\n          \"LotNumber\": null,\n          \"AccountingField1\": null,\n          \"AccountingField2\": null,\n          \"Terms\": null,\n          \"AdditionalData\": null,\n          \"attachments\": null,\n          \"invoiceNumber\": \"INV-2345\",\n          \"netAmount\": \"100\",\n          \"invoiceDate\": \"2024-01-10\",\n          \"dueDate\": \"2024-01-20\",\n          \"comments\": \"\",\n          \"identifier\": null,\n          \"discount\": \"0\",\n          \"totalAmount\": \"100\"\n        }\n      ],\n      \"Events\": [\n        {\n          \"TransEvent\": \"Risk Validated: PASSED\",\n          \"EventData\": \"blockedCard, blockedIP, blockedPaypoint, blockedPayor\",\n          \"EventTime\": \"2024-01-15T15:00:01Z\"\n        },\n        {\n          \"TransEvent\": \"Created\",\n          \"EventData\": \"0HNMNN3L95DJB:00000001\",\n          \"EventTime\": \"2024-01-15T15:00:02Z\"\n        },\n        {\n          \"TransEvent\": \"Authorized\",\n          \"EventData\": \"0HNMNN3L95DJB:00000001\",\n          \"EventTime\": \"2024-01-15T15:00:03Z\"\n        }\n      ],\n      \"externalPaypointID\": \"\",\n      \"EntryName\": \"8cfec329267\",\n      \"Gateway\": \"BK\",\n      \"BatchId\": 0,\n      \"HasVcardTransactions\": false,\n      \"IsSameDayACH\": false,\n      \"ScheduleId\": 0,\n      \"SettlementStatus\": \"None\",\n      \"SettlementStatusName\": \"\",\n      \"SettlementDate\": null,\n      \"RiskFlagged\": false,\n      \"RiskFlaggedOn\": \"2024-01-15T15:00:01Z\",\n      \"RiskStatus\": \"PASSED\",\n      \"RiskReason\": \"\",\n      \"RiskAction\": \"\",\n      \"RiskActionCode\": 0,\n      \"PayoutProgram\": \"ODP\",\n      \"AchTraceNumber\": null,\n      \"EntityId\": \"01J0ABCDEF9FWATVWMBWGE6MPP\"\n    }\n  ],\n  \"Summary\": {\n    \"totalPaid\": 1,\n    \"totalPaidAmount\": 4,\n    \"totalCanceled\": 1743,\n    \"totalCanceledAmount\": 4515,\n    \"totalCaptured\": 138,\n    \"totalCapturedAmount\": 542,\n    \"totalAuthorized\": 4139,\n    \"totalAuthorizedAmount\": 11712.35,\n    \"totalProcessing\": 1780,\n    \"totalProcessingAmount\": 4660.6,\n    \"totalOpen\": 2,\n    \"totalOpenAmount\": 2,\n    \"totalOnHold\": 0,\n    \"totalOnHoldAmount\": 0,\n    \"totalRecords\": 7803,\n    \"totalAmount\": 21435.95,\n    \"totalNetAmount\": 21435.95,\n    \"totalPages\": 391,\n    \"pageSize\": 20,\n    \"pageidentifier\": null\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4134,7 +4160,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"Records\": [\n    {\n      \"BatchNumber\": \"BT-2024321\",\n      \"Bills\": [\n        {}\n      ],\n      \"CardToken\": \"CardToken\",\n      \"CheckNumber\": \"12345\",\n      \"Comments\": \"Deposit for materials\",\n      \"CreatedAt\": \"2022-07-01T15:00:01Z\",\n      \"EntryName\": \"d193cf9a46\",\n      \"Events\": [\n        {}\n      ],\n      \"externalPaypointID\": \"Paypoint-100\",\n      \"FeeAmount\": 10.25,\n      \"Gateway\": \"TSYS\",\n      \"IdOut\": 236,\n      \"LastUpdated\": \"2022-07-01T15:00:01Z\",\n      \"NetAmount\": 3762.87,\n      \"ParentOrgName\": \"PropertyManager Pro\",\n      \"PaymentData\": {\n        \"paymentDetails\": {\n          \"totalAmount\": 100\n        }\n      },\n      \"PaymentId\": \"12345678910\",\n      \"PaymentMethod\": \"ach\",\n      \"PaymentStatus\": \"Processed\",\n      \"PaypointDbaname\": \"Sunshine Gutters\",\n      \"PaypointLegalname\": \"Sunshine Services, LLC\",\n      \"Source\": \"api\",\n      \"Status\": 1,\n      \"TotalAmount\": 110.25,\n      \"Vendor\": {\n        \"additionalData\": {\n          \"key1\": {\n            \"key\": \"value\"\n          },\n          \"key2\": {\n            \"key\": \"value\"\n          },\n          \"key3\": {\n            \"key\": \"value\"\n          }\n        },\n        \"CreatedDate\": \"2022-07-01T15:00:01Z\"\n      }\n    }\n  ],\n  \"Summary\": {\n    \"totalPages\": 391,\n    \"totalRecords\": 7803,\n    \"totalAmount\": 21435.95,\n    \"totalNetAmount\": 21435.95,\n    \"totalPaid\": 1,\n    \"totalPaidAmount\": 4,\n    \"totalCanceled\": 1743,\n    \"totalCanceledAmount\": 4515,\n    \"totalCaptured\": 138,\n    \"totalCapturedAmount\": 542,\n    \"totalAuthorized\": 4139,\n    \"totalAuthorizedAmount\": 11712.35,\n    \"totalProcessing\": 1780,\n    \"totalProcessingAmount\": 4660.6,\n    \"totalOpen\": 2,\n    \"totalOpenAmount\": 2,\n    \"totalOnHold\": 0,\n    \"totalOnHoldAmount\": 0,\n    \"pageSize\": 20\n  }\n}",
+        "body": "{\n  \"Records\": [\n    {\n      \"IdOut\": 236,\n      \"CreatedAt\": \"2024-01-15T15:00:01Z\",\n      \"Comments\": \"Deposit for materials\",\n      \"Vendor\": {\n        \"VendorNumber\": \"VEN-123\",\n        \"Name1\": \"Riverside Plumbing\",\n        \"Name2\": null,\n        \"EIN\": null,\n        \"Phone\": \"(555) 555-1234\",\n        \"Email\": \"vendor@example.com\",\n        \"RemitEmail\": null,\n        \"Address1\": \"100 Main Street\",\n        \"Address2\": null,\n        \"City\": \"Miami\",\n        \"State\": \"FL\",\n        \"Zip\": \"33131\",\n        \"Country\": \"US\",\n        \"Mcc\": null,\n        \"LocationCode\": null,\n        \"Contacts\": [\n          {\n            \"ContactName\": \"Alex Doe\",\n            \"ContactEmail\": \"contact@example.com\",\n            \"ContactTitle\": \"Accounts Receivable\",\n            \"ContactPhone\": \"(555) 555-5678\"\n          }\n        ],\n        \"BillingData\": null,\n        \"PaymentMethod\": \"ach\",\n        \"VendorStatus\": 1,\n        \"VendorId\": 456,\n        \"EnrollmentStatus\": null,\n        \"Summary\": null,\n        \"PaypointLegalname\": \"Sunshine Services, LLC\",\n        \"PaypointId\": 3040,\n        \"PaypointDbaname\": \"Sunshine Gutters\",\n        \"PaypointEntryname\": \"8cfec329267\",\n        \"ParentOrgName\": \"PropertyManager Pro\",\n        \"ParentOrgId\": 123,\n        \"CreatedDate\": \"2024-01-10T15:00:01Z\",\n        \"LastUpdated\": \"2024-01-12T15:00:01Z\",\n        \"remitAddress1\": \"100 Main Street\",\n        \"remitAddress2\": null,\n        \"remitCity\": \"Miami\",\n        \"remitState\": \"FL\",\n        \"remitZip\": \"33131\",\n        \"remitCountry\": \"US\",\n        \"payeeName1\": null,\n        \"payeeName2\": null,\n        \"customField1\": null,\n        \"customField2\": null,\n        \"customerVendorAccount\": null,\n        \"InternalReferenceId\": 12345,\n        \"PaymentPortalUrl\": null,\n        \"CardAccepted\": \"yes\",\n        \"AchAccepted\": \"yes\",\n        \"CheckAccepted\": \"no\",\n        \"EnrichmentStatus\": \"fully_enriched\",\n        \"EnrichedBy\": \"web_search\",\n        \"EnrichedAt\": \"2024-01-12T15:00:01Z\",\n        \"EnrichmentId\": null,\n        \"additionalData\": null,\n        \"externalPaypointID\": \"\",\n        \"StoredMethods\": null\n      },\n      \"PaypointDbaname\": \"Sunshine Gutters\",\n      \"PaypointLegalname\": \"Sunshine Services, LLC\",\n      \"PaypointId\": 3040,\n      \"Status\": 1,\n      \"PaymentId\": \"01J0ABCDEF2WQ4VS323V5WKZP3\",\n      \"TransId\": null,\n      \"TransStatus\": null,\n      \"TransStatusDetail\": null,\n      \"TransStatusName\": null,\n      \"TransStatusCategory\": null,\n      \"LastUpdated\": \"2024-01-15T15:00:01Z\",\n      \"TotalAmount\": 110.25,\n      \"NetAmount\": 100,\n      \"FeeAmount\": 10.25,\n      \"Source\": \"api\",\n      \"ParentOrgName\": \"PropertyManager Pro\",\n      \"ParentOrgId\": 123,\n      \"BatchNumber\": \"BT-2024321\",\n      \"PaymentStatus\": \"Processed\",\n      \"PaymentMethod\": \"ach\",\n      \"CardToken\": null,\n      \"CheckNumber\": \"12345\",\n      \"CheckData\": null,\n      \"PaymentData\": {\n        \"MaskedAccount\": \"1XXXXXX3123\",\n        \"AccountType\": \"checking\",\n        \"AccountExp\": \"\",\n        \"AccountZip\": \"\",\n        \"HolderName\": null,\n        \"StoredId\": \"1ec55af9-7b5a-4ff0-81ed-c12d2f95e135-456\",\n        \"Initiator\": null,\n        \"StoredMethodUsageType\": null,\n        \"Sequence\": null,\n        \"orderDescription\": null,\n        \"cloudSignatureData\": null,\n        \"cloudSignatureFormat\": null,\n        \"paymentDetails\": null,\n        \"payorData\": null,\n        \"accountId\": \"\",\n        \"bankAccount\": null,\n        \"gatewayConnector\": null,\n        \"binData\": null\n      },\n      \"Bills\": [\n        {\n          \"billId\": 54323,\n          \"LotNumber\": null,\n          \"AccountingField1\": null,\n          \"AccountingField2\": null,\n          \"Terms\": null,\n          \"AdditionalData\": null,\n          \"attachments\": null,\n          \"invoiceNumber\": \"INV-2345\",\n          \"netAmount\": \"100\",\n          \"invoiceDate\": \"2024-01-10\",\n          \"dueDate\": \"2024-01-20\",\n          \"comments\": \"\",\n          \"identifier\": null,\n          \"discount\": \"0\",\n          \"totalAmount\": \"100\"\n        }\n      ],\n      \"Events\": [\n        {\n          \"TransEvent\": \"Risk Validated: PASSED\",\n          \"EventData\": \"blockedCard, blockedIP, blockedPaypoint, blockedPayor\",\n          \"EventTime\": \"2024-01-15T15:00:01Z\"\n        },\n        {\n          \"TransEvent\": \"Created\",\n          \"EventData\": \"0HNMNN3L95DJB:00000001\",\n          \"EventTime\": \"2024-01-15T15:00:02Z\"\n        },\n        {\n          \"TransEvent\": \"Authorized\",\n          \"EventData\": \"0HNMNN3L95DJB:00000001\",\n          \"EventTime\": \"2024-01-15T15:00:03Z\"\n        }\n      ],\n      \"externalPaypointID\": \"\",\n      \"EntryName\": \"8cfec329267\",\n      \"Gateway\": \"BK\",\n      \"BatchId\": 0,\n      \"HasVcardTransactions\": false,\n      \"IsSameDayACH\": false,\n      \"ScheduleId\": 0,\n      \"SettlementStatus\": \"None\",\n      \"SettlementStatusName\": \"\",\n      \"SettlementDate\": null,\n      \"RiskFlagged\": false,\n      \"RiskFlaggedOn\": \"2024-01-15T15:00:01Z\",\n      \"RiskStatus\": \"PASSED\",\n      \"RiskReason\": \"\",\n      \"RiskAction\": \"\",\n      \"RiskActionCode\": 0,\n      \"PayoutProgram\": \"ODP\",\n      \"AchTraceNumber\": null,\n      \"EntityId\": \"01J0ABCDEF9FWATVWMBWGE6MPP\"\n    }\n  ],\n  \"Summary\": {\n    \"totalPaid\": 1,\n    \"totalPaidAmount\": 4,\n    \"totalCanceled\": 1743,\n    \"totalCanceledAmount\": 4515,\n    \"totalCaptured\": 138,\n    \"totalCapturedAmount\": 542,\n    \"totalAuthorized\": 4139,\n    \"totalAuthorizedAmount\": 11712.35,\n    \"totalProcessing\": 1780,\n    \"totalProcessingAmount\": 4660.6,\n    \"totalOpen\": 2,\n    \"totalOpenAmount\": 2,\n    \"totalOnHold\": 0,\n    \"totalOnHoldAmount\": 0,\n    \"totalRecords\": 7803,\n    \"totalAmount\": 21435.95,\n    \"totalNetAmount\": 21435.95,\n    \"totalPages\": 391,\n    \"pageSize\": 20,\n    \"pageidentifier\": null\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -6295,11 +6321,11 @@
           }
         },
         "pathParameters": {
-          "ignoreEmpty": {
-            "equalTo": "true"
-          },
           "templateId": {
             "equalTo": "80"
+          },
+          "ignoreEmpty": {
+            "equalTo": "true"
           }
         }
       },
@@ -6467,11 +6493,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -6567,11 +6593,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -6667,11 +6693,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -6767,11 +6793,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -6867,11 +6893,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -6967,11 +6993,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -7067,11 +7093,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -7217,11 +7243,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -7367,11 +7393,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -7467,11 +7493,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -7567,11 +7593,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -7667,11 +7693,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           },
           "transferId": {
             "equalTo": "4521"
@@ -7773,11 +7799,11 @@
           }
         },
         "pathParameters": {
-          "entry": {
-            "equalTo": "8cfec329267"
-          },
           "format": {
             "equalTo": "csv"
+          },
+          "entry": {
+            "equalTo": "8cfec329267"
           }
         },
         "queryParameters": {
@@ -8156,8 +8182,8 @@
           }
         },
         "pathParameters": {
-          "entryId": {
-            "equalTo": "1000000"
+          "mode": {
+            "equalTo": "custom"
           },
           "freq": {
             "equalTo": "m"
@@ -8165,8 +8191,8 @@
           "level": {
             "equalTo": "2"
           },
-          "mode": {
-            "equalTo": "custom"
+          "entryId": {
+            "equalTo": "1000000"
           }
         },
         "queryParameters": {
@@ -8209,14 +8235,14 @@
           }
         },
         "pathParameters": {
-          "customerId": {
-            "equalTo": "4440"
+          "mode": {
+            "equalTo": "ytd"
           },
           "freq": {
             "equalTo": "m"
           },
-          "mode": {
-            "equalTo": "ytd"
+          "customerId": {
+            "equalTo": "4440"
           }
         }
       },
@@ -8251,14 +8277,14 @@
           }
         },
         "pathParameters": {
-          "entryId": {
-            "equalTo": "1000000"
-          },
           "interval": {
             "equalTo": "30"
           },
           "level": {
             "equalTo": "2"
+          },
+          "entryId": {
+            "equalTo": "1000000"
           }
         }
       },
@@ -8293,14 +8319,14 @@
           }
         },
         "pathParameters": {
+          "mode": {
+            "equalTo": "ytd"
+          },
           "freq": {
             "equalTo": "m"
           },
           "idVendor": {
             "equalTo": "1"
-          },
-          "mode": {
-            "equalTo": "ytd"
           }
         }
       },
@@ -8882,14 +8908,14 @@
           }
         },
         "pathParameters": {
+          "usrname": {
+            "equalTo": "usrname"
+          },
           "Entry": {
             "equalTo": "8cfec329267"
           },
           "EntryType": {
             "equalTo": "1"
-          },
-          "usrname": {
-            "equalTo": "usrname"
           }
         }
       },
@@ -10094,6 +10120,6 @@
     }
   ],
   "meta": {
-    "total": 254
+    "total": 255
   }
 }

@@ -4,7 +4,7 @@ mod wire_test_utils;
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
-async fn test_funding_deposit_funds_with_wiremock() {
+async fn test_token_create_server_side_token_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
 
@@ -15,14 +15,13 @@ async fn test_funding_deposit_funds_with_wiremock() {
     let client = ApiClient::new(config).expect("Failed to build client");
 
     let result = client
-        .funding
-        .deposit_funds(
-            &DepositFundsRequest {
-                amount: 10.0,
-                entrypoint: Entrypointfield("48acde49".to_string()),
-                account_id: "333".to_string(),
-                paypoint_id: None,
-                same_day_ach: None,
+        .token
+        .create_server_side_token(
+            &CreateServerSideTokenRequest {
+                client_id: "YOUR_CLIENT_ID".to_string(),
+                client_secret: "YOUR_CLIENT_SECRET".to_string(),
+                state: None,
+                permissions: None,
             },
             None,
         )
@@ -30,7 +29,7 @@ async fn test_funding_deposit_funds_with_wiremock() {
 
     assert!(result.is_ok(), "Client method call should succeed");
 
-    wire_test_utils::verify_request_count("POST", "/Funding/depositFunds", None, 1)
+    wire_test_utils::verify_request_count("POST", "/v2/Token/serverside", None, 1)
         .await
         .unwrap();
 }

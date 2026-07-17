@@ -5,18 +5,18 @@ pub use crate::prelude::*;
 pub struct AddMethodRequest {
     /// When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.
     #[serde(rename = "achValidation")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub ach_validation: Option<AchValidation>,
     /// When `true`, creates a saved method with no associated customer information. The token will be associated with customer information the first time it's used to make a payment. Defaults to `false`.
     #[serde(rename = "createAnonymous")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub create_anonymous: Option<CreateAnonymous>,
     /// When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     #[serde(rename = "forceCustomerCreation")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub force_customer_creation: Option<ForceCustomerCreation>,
     /// Creates a temporary, one-time-use token for the payment method that expires in 12 hours. Defaults to `false`.
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub temporary: Option<Temporary>,
     #[serde(default)]
     pub body: RequestTokenStorage,

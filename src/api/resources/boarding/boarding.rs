@@ -174,7 +174,7 @@ impl BoardingClient {
     ///
     /// # Arguments
     ///
-    /// * `template_id` - The boarding template ID. You can find this at the end of the boarding template URL in PartnerHub. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
+    /// * `template_id` - The boarding template ID. You can find this at the end of the boarding template URL in the Payabli Portal. Example: `https://partner-sandbox.payabli.com/myorganization/boarding/edittemplate/80`. Here, the template ID is `80`.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns

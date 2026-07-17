@@ -1,49 +1,75 @@
+use crate::prelude::*;
 use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum ApiError {
-    #[error("BadRequestError: Bad request - {{message}}")]
+    #[error("BadRequestError: Bad request - {message}")]
     BadRequestError {
         message: String,
         field: Option<String>,
         details: Option<String>,
     },
-    #[error("UnauthorizedError: Authentication failed - {{message}}")]
+    #[error("UnauthorizedError: Authentication failed - {message}")]
     UnauthorizedError {
         message: String,
-        auth_type: Option<String>,
+        is_success: Option<bool>,
+        response_code: Option<i64>,
+        response_text: Option<String>,
+        response_data: Option<PayabliErrorBodyResponseData>,
     },
-    #[error("InternalServerError: Internal server error - {{message}}")]
+    #[error("InternalServerError: Internal server error - {message}")]
     InternalServerError {
         message: String,
         error_id: Option<String>,
     },
-    #[error("ServiceUnavailableError: {{message}}")]
-    ServiceUnavailableError { message: String },
-    #[error("PaymentRequiredError: {{message}}")]
-    PaymentRequiredError { message: String },
-    #[error("TooManyRequestsError: Rate limit exceeded - {{message}}")]
+    #[error("ServiceUnavailableError: {message}")]
+    ServiceUnavailableError {
+        message: String,
+        is_success: Option<bool>,
+        response_code: Option<i64>,
+        response_text: Option<String>,
+        response_data: Option<PayabliErrorBodyResponseData>,
+    },
+    #[error("PaymentRequiredError: {message}")]
+    PaymentRequiredError {
+        message: String,
+        code: Option<V2ResponseCode>,
+        reason: Option<V2ResponseReason>,
+        explanation: Option<V2ResponseExplanation>,
+        action: Option<V2ResponseAction>,
+        data: Option<V2TransactionDetails>,
+        token: Option<String>,
+    },
+    #[error("TooManyRequestsError: Rate limit exceeded - {message}")]
     TooManyRequestsError {
         message: String,
-        retry_after_seconds: Option<u64>,
-        limit_type: Option<String>,
+        is_success: Option<bool>,
+        response_code: Option<i64>,
+        response_text: Option<String>,
+        response_data: Option<PayabliErrorBodyResponseData>,
     },
-    #[error("UnprocessableEntityError: Unprocessable entity - {{message}}")]
+    #[error("UnprocessableEntityError: Unprocessable entity - {message}")]
     UnprocessableEntityError {
         message: String,
-        field: Option<String>,
-        validation_error: Option<String>,
+        is_success: Option<bool>,
+        response_code: Option<i64>,
+        response_text: Option<String>,
+        response_data: Option<PayabliErrorBodyResponseData>,
     },
-    #[error("ForbiddenError: Access forbidden - {{message}}")]
+    #[error("ForbiddenError: Access forbidden - {message}")]
     ForbiddenError {
         message: String,
-        resource: Option<String>,
-        required_permission: Option<String>,
+        is_success: Option<bool>,
+        response_code: Option<i64>,
+        response_text: Option<String>,
+        response_data: Option<PayabliErrorBodyResponseData>,
     },
     #[error("HTTP error {status}: {message}")]
     Http { status: u16, message: String },
     #[error("Network error: {0}")]
     Network(reqwest::Error),
+    #[error("Request executor error: {0}")]
+    Executor(Box<dyn std::error::Error + Send + Sync>),
     #[error("Serialization error: {0}")]
     Serialization(serde_json::Error),
     #[error("Configuration error: {0}")]
@@ -98,15 +124,28 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
-                            auth_type: parsed
-                                .get("auth_type")
+                            is_success: parsed
+                                .get("isSuccess")
+                                .and_then(|v| serde_json::from_value::<bool>(v.clone()).ok()),
+                            response_code: parsed
+                                .get("responseCode")
+                                .and_then(|v| serde_json::from_value::<i64>(v.clone()).ok()),
+                            response_text: parsed
+                                .get("responseText")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            response_data: parsed.get("responseData").and_then(|v| {
+                                serde_json::from_value::<PayabliErrorBodyResponseData>(v.clone())
+                                    .ok()
+                            }),
                         };
                     }
                 }
                 return Self::UnauthorizedError {
                     message: body.unwrap_or("Unknown error").to_string(),
-                    auth_type: None,
+                    is_success: None,
+                    response_code: None,
+                    response_text: None,
+                    response_data: None,
                 };
             }
             500 => {
@@ -120,7 +159,7 @@ impl ApiError {
                                 .unwrap_or("Unknown error")
                                 .to_string(),
                             error_id: parsed
-                                .get("error_id")
+                                .get("errorId")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
                         };
                     }
@@ -140,11 +179,28 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
+                            is_success: parsed
+                                .get("isSuccess")
+                                .and_then(|v| serde_json::from_value::<bool>(v.clone()).ok()),
+                            response_code: parsed
+                                .get("responseCode")
+                                .and_then(|v| serde_json::from_value::<i64>(v.clone()).ok()),
+                            response_text: parsed
+                                .get("responseText")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            response_data: parsed.get("responseData").and_then(|v| {
+                                serde_json::from_value::<PayabliErrorBodyResponseData>(v.clone())
+                                    .ok()
+                            }),
                         };
                     }
                 }
                 return Self::ServiceUnavailableError {
                     message: body.unwrap_or("Unknown error").to_string(),
+                    is_success: None,
+                    response_code: None,
+                    response_text: None,
+                    response_data: None,
                 };
             }
             402 => {
@@ -157,11 +213,35 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
+                            code: parsed.get("code").and_then(|v| {
+                                serde_json::from_value::<V2ResponseCode>(v.clone()).ok()
+                            }),
+                            reason: parsed.get("reason").and_then(|v| {
+                                serde_json::from_value::<V2ResponseReason>(v.clone()).ok()
+                            }),
+                            explanation: parsed.get("explanation").and_then(|v| {
+                                serde_json::from_value::<V2ResponseExplanation>(v.clone()).ok()
+                            }),
+                            action: parsed.get("action").and_then(|v| {
+                                serde_json::from_value::<V2ResponseAction>(v.clone()).ok()
+                            }),
+                            data: parsed.get("data").and_then(|v| {
+                                serde_json::from_value::<V2TransactionDetails>(v.clone()).ok()
+                            }),
+                            token: parsed
+                                .get("token")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
                         };
                     }
                 }
                 return Self::PaymentRequiredError {
                     message: body.unwrap_or("Unknown error").to_string(),
+                    code: None,
+                    reason: None,
+                    explanation: None,
+                    action: None,
+                    data: None,
+                    token: None,
                 };
             }
             429 => {
@@ -174,19 +254,28 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
-                            retry_after_seconds: parsed
-                                .get("retry_after_seconds")
-                                .and_then(|v| v.as_u64()),
-                            limit_type: parsed
-                                .get("limit_type")
+                            is_success: parsed
+                                .get("isSuccess")
+                                .and_then(|v| serde_json::from_value::<bool>(v.clone()).ok()),
+                            response_code: parsed
+                                .get("responseCode")
+                                .and_then(|v| serde_json::from_value::<i64>(v.clone()).ok()),
+                            response_text: parsed
+                                .get("responseText")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            response_data: parsed.get("responseData").and_then(|v| {
+                                serde_json::from_value::<PayabliErrorBodyResponseData>(v.clone())
+                                    .ok()
+                            }),
                         };
                     }
                 }
                 return Self::TooManyRequestsError {
                     message: body.unwrap_or("Unknown error").to_string(),
-                    retry_after_seconds: None,
-                    limit_type: None,
+                    is_success: None,
+                    response_code: None,
+                    response_text: None,
+                    response_data: None,
                 };
             }
             422 => {
@@ -199,19 +288,28 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
-                            field: parsed
-                                .get("field")
+                            is_success: parsed
+                                .get("isSuccess")
+                                .and_then(|v| serde_json::from_value::<bool>(v.clone()).ok()),
+                            response_code: parsed
+                                .get("responseCode")
+                                .and_then(|v| serde_json::from_value::<i64>(v.clone()).ok()),
+                            response_text: parsed
+                                .get("responseText")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
-                            validation_error: parsed
-                                .get("validation_error")
-                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            response_data: parsed.get("responseData").and_then(|v| {
+                                serde_json::from_value::<PayabliErrorBodyResponseData>(v.clone())
+                                    .ok()
+                            }),
                         };
                     }
                 }
                 return Self::UnprocessableEntityError {
                     message: body.unwrap_or("Unknown error").to_string(),
-                    field: None,
-                    validation_error: None,
+                    is_success: None,
+                    response_code: None,
+                    response_text: None,
+                    response_data: None,
                 };
             }
             403 => {
@@ -224,19 +322,28 @@ impl ApiError {
                                 .and_then(|v| v.as_str())
                                 .unwrap_or("Unknown error")
                                 .to_string(),
-                            resource: parsed
-                                .get("resource")
+                            is_success: parsed
+                                .get("isSuccess")
+                                .and_then(|v| serde_json::from_value::<bool>(v.clone()).ok()),
+                            response_code: parsed
+                                .get("responseCode")
+                                .and_then(|v| serde_json::from_value::<i64>(v.clone()).ok()),
+                            response_text: parsed
+                                .get("responseText")
                                 .and_then(|v| v.as_str().map(|s| s.to_string())),
-                            required_permission: parsed
-                                .get("required_permission")
-                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            response_data: parsed.get("responseData").and_then(|v| {
+                                serde_json::from_value::<PayabliErrorBodyResponseData>(v.clone())
+                                    .ok()
+                            }),
                         };
                     }
                 }
                 return Self::ForbiddenError {
                     message: body.unwrap_or("Unknown error").to_string(),
-                    resource: None,
-                    required_permission: None,
+                    is_success: None,
+                    response_code: None,
+                    response_text: None,
+                    response_data: None,
                 };
             }
             _ => Self::Http {

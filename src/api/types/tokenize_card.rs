@@ -16,6 +16,8 @@ pub struct TokenizeCard {
     pub cardnumber: Cardnumber,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub cardzip: Option<Cardzip>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub device: Option<Device>,
 }
 
 impl TokenizeCard {
@@ -33,6 +35,7 @@ pub struct TokenizeCardBuilder {
     card_holder: Option<Cardholder>,
     cardnumber: Option<Cardnumber>,
     cardzip: Option<Cardzip>,
+    device: Option<Device>,
 }
 
 impl TokenizeCardBuilder {
@@ -66,6 +69,11 @@ impl TokenizeCardBuilder {
         self
     }
 
+    pub fn device(mut self, value: Device) -> Self {
+        self.device = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`TokenizeCard`].
     /// This method will fail if any of the following fields are not set:
     /// - [`method`](TokenizeCardBuilder::method)
@@ -88,6 +96,7 @@ impl TokenizeCardBuilder {
                 .cardnumber
                 .ok_or_else(|| BuildError::missing_field("cardnumber"))?,
             cardzip: self.cardzip,
+            device: self.device,
         })
     }
 }

@@ -6,7 +6,7 @@ pub struct ImportCustomerRequest {
     #[serde(with = "crate::core::base64_bytes")]
     pub file: Vec<u8>,
     #[serde(rename = "replaceExisting")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub replace_existing: Option<i64>,
 }
 impl ImportCustomerRequest {

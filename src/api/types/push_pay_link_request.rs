@@ -1,7 +1,8 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(tag = "channel")]
+#[non_exhaustive]
 pub enum PushPayLinkRequest {
     #[serde(rename = "email")]
     #[non_exhaustive]
@@ -17,6 +18,12 @@ pub enum PushPayLinkRequest {
     #[serde(rename = "sms")]
     #[non_exhaustive]
     Sms {},
+
+    /// Catch-all variant for unrecognized discriminant values.
+    /// If the server sends a discriminant not recognized by the current SDK
+    /// version, the raw payload is captured here so callers can still inspect it.
+    #[serde(untagged)]
+    __Unknown(serde_json::Value),
 }
 
 impl PushPayLinkRequest {
@@ -49,5 +56,9 @@ impl PushPayLinkRequest {
             additional_emails,
             attach_file: Some(attach_file),
         }
+    }
+
+    pub fn unknown(value: serde_json::Value) -> Self {
+        Self::__Unknown(value)
     }
 }

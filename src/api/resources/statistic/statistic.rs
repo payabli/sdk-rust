@@ -110,7 +110,7 @@ impl StatisticClient {
     /// - `h` - hourly
     ///
     /// For example, `w` groups the results by week.
-    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     /// * `parameters` - List of parameters.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///

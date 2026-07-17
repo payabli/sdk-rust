@@ -23,8 +23,6 @@ pub struct TokenizeAch {
     #[serde(rename = "achRouting")]
     #[serde(default)]
     pub ach_routing: Achrouting,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub device: Option<Device>,
 }
 
 impl TokenizeAch {
@@ -43,7 +41,6 @@ pub struct TokenizeAchBuilder {
     ach_holder: Option<String>,
     ach_holder_type: Option<AchHolderType>,
     ach_routing: Option<Achrouting>,
-    device: Option<Device>,
 }
 
 impl TokenizeAchBuilder {
@@ -82,11 +79,6 @@ impl TokenizeAchBuilder {
         self
     }
 
-    pub fn device(mut self, value: Device) -> Self {
-        self.device = Some(value);
-        self
-    }
-
     /// Consumes the builder and constructs a [`TokenizeAch`].
     /// This method will fail if any of the following fields are not set:
     /// - [`method`](TokenizeAchBuilder::method)
@@ -113,7 +105,6 @@ impl TokenizeAchBuilder {
             ach_routing: self
                 .ach_routing
                 .ok_or_else(|| BuildError::missing_field("ach_routing"))?,
-            device: self.device,
         })
     }
 }

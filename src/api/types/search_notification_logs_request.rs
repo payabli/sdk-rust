@@ -29,11 +29,11 @@ pub struct SearchNotificationLogsRequest {
     pub paypoint_id: Option<i64>,
     /// Number of records on each response page.
     #[serde(rename = "PageSize")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub page_size: Option<Pagesize>,
     /// The page number to retrieve. Defaults to 1 if not provided.
     #[serde(rename = "Page")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub page: Option<i64>,
 }
 

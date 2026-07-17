@@ -5,11 +5,11 @@ pub use crate::prelude::*;
 pub struct Getpaidv2Request {
     /// When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.
     #[serde(rename = "achValidation")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub ach_validation: Option<AchValidation>,
     /// When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     #[serde(rename = "forceCustomerCreation")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub force_customer_creation: Option<ForceCustomerCreation>,
     pub body: TransRequestBody,
 }

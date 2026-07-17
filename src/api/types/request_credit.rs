@@ -29,7 +29,7 @@ pub struct RequestCredit {
     pub subdomain: Option<Subdomain>,
     /// When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     #[serde(rename = "forceCustomerCreation")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub force_customer_creation: Option<ForceCustomerCreation>,
 }
 

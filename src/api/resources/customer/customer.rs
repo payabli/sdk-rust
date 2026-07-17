@@ -13,7 +13,7 @@ impl CustomerClient {
         })
     }
 
-    /// Creates a customer in an entrypoint. An identifier is required to create customer records. Change your identifier settings in Settings > Custom Fields in PartnerHub.
+    /// Creates a customer in an entrypoint. An identifier is required to create customer records. Change your identifier settings in Settings > Custom Fields in the Payabli Portal.
     /// If you don't include an identifier, the record is rejected.
     ///
     /// # Arguments
@@ -53,7 +53,7 @@ impl CustomerClient {
     ///
     /// # Arguments
     ///
-    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -79,7 +79,7 @@ impl CustomerClient {
     ///
     /// # Arguments
     ///
-    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -106,7 +106,7 @@ impl CustomerClient {
     ///
     /// # Arguments
     ///
-    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -132,7 +132,7 @@ impl CustomerClient {
     ///
     /// # Arguments
     ///
-    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -158,7 +158,7 @@ impl CustomerClient {
     ///
     /// # Arguments
     ///
-    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in PartnerHub.
+    /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
     /// * `trans_id` - ReferenceId for the transaction (PaymentId).
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///

@@ -7,7 +7,7 @@ pub struct ReissueOutRequest {
     pub payment_method: ReissuePaymentMethod,
     /// The transaction ID of the payout to reissue.
     #[serde(rename = "transId")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     #[serde(default)]
     pub trans_id: String,
 }

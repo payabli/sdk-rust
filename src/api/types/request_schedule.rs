@@ -38,7 +38,7 @@ pub struct RequestSchedule {
     pub subscription_type: Option<SubscriptionType>,
     /// When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     #[serde(rename = "forceCustomerCreation")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub force_customer_creation: Option<ForceCustomerCreation>,
 }
 

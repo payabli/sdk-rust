@@ -5,15 +5,15 @@ pub use crate::prelude::*;
 pub struct GetpaidRequest {
     /// When `true`, enables real-time validation of ACH account and routing numbers. This is an add-on feature, contact Payabli for more information.
     #[serde(rename = "achValidation")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub ach_validation: Option<AchValidation>,
     /// When `true`, the request creates a new customer record, regardless of whether customer identifiers match an existing customer. Defaults to `false`.
     #[serde(rename = "forceCustomerCreation")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub force_customer_creation: Option<ForceCustomerCreation>,
     /// When `true`, transactionDetails object is returned in the response. See a full example of the `transactionDetails` object in the [Transaction integration guide](/developers/developer-guides/money-in-transaction-add#includedetailstrue-response).
     #[serde(rename = "includeDetails")]
-    #[serde(skip_serializing)]
+    #[serde(skip)]
     pub include_details: Option<bool>,
     pub body: TransRequestBody,
 }
