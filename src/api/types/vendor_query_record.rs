@@ -166,7 +166,7 @@ pub struct VendorQueryRecord {
     pub enrichment_id: Option<String>,
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalData>,
+    pub additional_data: Option<AdditionalDataMap>,
     #[serde(rename = "externalPaypointID")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub external_paypoint_id: Option<ExternalPaypointId>,
@@ -234,7 +234,7 @@ pub struct VendorQueryRecordBuilder {
     enriched_by: Option<String>,
     enriched_at: Option<DateTime<Utc>>,
     enrichment_id: Option<String>,
-    additional_data: Option<AdditionalData>,
+    additional_data: Option<AdditionalDataMap>,
     external_paypoint_id: Option<ExternalPaypointId>,
     stored_methods: Option<Vec<VendorResponseStoredMethod>>,
 }
@@ -490,7 +490,7 @@ impl VendorQueryRecordBuilder {
         self
     }
 
-    pub fn additional_data(mut self, value: AdditionalData) -> Self {
+    pub fn additional_data(mut self, value: AdditionalDataMap) -> Self {
         self.additional_data = Some(value);
         self
     }
