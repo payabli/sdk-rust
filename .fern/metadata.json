@@ -4,7 +4,7 @@
   "generatorVersion": "0.42.0",
   "generatorConfig": {
     "packageLicenseFile": "LICENSE.md",
-    "enableWireTests": true,
+    "enableWireTests": false,
     "dateTimeType": "utc",
     "packageRepository": "https://github.com/payabli/sdk-rust",
     "extraDependencies": {
@@ -17,10 +17,10 @@
       }
     }
   },
-  "originGitCommit": "fbf628bcea22b886022a9bd709dca9daaf0bd3ca",
+  "originGitCommit": "25e022418e827b968d19012dbd06ec6ee7e96b52",
   "originGitCommitIsDirty": true,
   "invokedBy": "ci",
-  "requestedVersion": "2.0.3",
+  "requestedVersion": "2.0.4",
   "ciProvider": "github",
-  "sdkVersion": "2.0.3"
+  "sdkVersion": "2.0.4"
 }
