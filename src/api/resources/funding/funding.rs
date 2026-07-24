@@ -22,11 +22,52 @@ impl FundingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .funding
+    ///         .deposit_funds(
+    ///             &DepositFundsRequest {
+    ///                 amount: 10.0,
+    ///                 entrypoint: Entrypointfield("48acde49".to_string()),
+    ///                 account_id: "333".to_string(),
+    ///                 paypoint_id: None,
+    ///                 same_day_ach: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn deposit_funds(
         &self,
         request: &DepositFundsRequest,
         options: Option<RequestOptions>,
     ) -> Result<DepositFundsResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,

@@ -33,11 +33,75 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .authorize_out(
+    ///             &RequestOutAuthorize {
+    ///                 entry_point: Entrypointfield("8cfec329267".to_string()),
+    ///                 order_description: Some(Orderdescription("Window Painting".to_string())),
+    ///                 payment_method: AuthorizePaymentMethod {
+    ///                     method: "managed".to_string(),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 payment_details: RequestOutAuthorizePaymentDetails {
+    ///                     total_amount: Some(47.0),
+    ///                     unbundled: Some(false),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 vendor_data: RequestOutAuthorizeVendorData {
+    ///                     vendor_number: Some(VendorNumber("VEN-123".to_string())),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 invoice_data: vec![RequestOutAuthorizeInvoiceData {
+    ///                     bill_id: Some(BillId(54323)),
+    ///                     ..Default::default()
+    ///                 }],
+    ///                 auto_capture: Some(AutoCapture(true)),
+    ///                 allow_duplicated_bills: None,
+    ///                 do_not_create_bills: None,
+    ///                 force_vendor_creation: None,
+    ///                 source: None,
+    ///                 order_id: None,
+    ///                 account_id: None,
+    ///                 subdomain: None,
+    ///                 subscription_id: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn authorize_out(
         &self,
         request: &RequestOutAuthorize,
         options: Option<RequestOptions>,
     ) -> Result<AuthCapturePayoutResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -65,11 +129,46 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .cancel_all_out(
+    ///             &vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn cancel_all_out(
         &self,
         request: &Vec<String>,
         options: Option<RequestOptions>,
     ) -> Result<CaptureAllOutResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -91,11 +190,43 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .cancel_out_get(&"129-219".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn cancel_out_get(
         &self,
         reference_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse0000, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -117,11 +248,43 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .cancel_out_delete(&"129-219".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn cancel_out_delete(
         &self,
         reference_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse0000, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,
@@ -142,11 +305,46 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .capture_all_out(
+    ///             &vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn capture_all_out(
         &self,
         request: &Vec<String>,
         options: Option<RequestOptions>,
     ) -> Result<CaptureAllOutResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -170,11 +368,43 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .capture_out(&"129-219".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn capture_out(
         &self,
         reference_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<AuthCapturePayoutResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -196,11 +426,43 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .payout_details(&"45-as456777hhhhhhhhhh77777777-324".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn payout_details(
         &self,
         trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<BillDetailResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -222,11 +484,43 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .v_card_get(&"20230403315245421165".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn v_card_get(
         &self,
         card_token: &str,
         options: Option<RequestOptions>,
     ) -> Result<VCardGetResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -252,12 +546,50 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .renew_v_card(
+    ///             &"20231206142225226104".to_string(),
+    ///             &RenewVCardRequest {
+    ///                 expiration_date: "12-2027".to_string(),
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn renew_v_card(
         &self,
         card_token: &str,
         request: &RenewVCardRequest,
         options: Option<RequestOptions>,
     ) -> Result<RenewVCardResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PUT,
@@ -278,11 +610,48 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .send_v_card_link(
+    ///             &SendVCardLinkRequest {
+    ///                 trans_id: "01K33Z6YQZ6GD5QVKZ856MJBSC".to_string(),
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn send_v_card_link(
         &self,
         request: &SendVCardLinkRequest,
         options: Option<RequestOptions>,
     ) -> Result<OperationResult, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -315,11 +684,46 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .get_check_image(
+    ///             &"check133832686289732320_01JKBNZ5P32JPTZY8XXXX000000.pdf".to_string(),
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_check_image(
         &self,
         asset_name: &str,
         options: Option<RequestOptions>,
     ) -> Result<String, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -353,12 +757,48 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .update_check_payment_status(
+    ///             &"TRANS123456".to_string(),
+    ///             &AllowedCheckPaymentStatus::Paid,
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn update_check_payment_status(
         &self,
         trans_id: &str,
         check_payment_status: &AllowedCheckPaymentStatus,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PATCH,
@@ -384,11 +824,57 @@ impl MoneyOutClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .reissue_out(
+    ///             &ReissueOutRequest {
+    ///                 trans_id: "129-219".to_string(),
+    ///                 payment_method: ReissuePaymentMethod {
+    ///                     method: "ach".to_string(),
+    ///                     ach_holder: Some("Acme Corp".to_string()),
+    ///                     ach_routing: Some("021000021".to_string()),
+    ///                     ach_account: Some("9876543210".to_string()),
+    ///                     ach_account_type: Some("savings".to_string()),
+    ///                     ach_holder_type: Some(AchHolderType::Business),
+    ///                     ..Default::default()
+    ///                 },
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn reissue_out(
         &self,
         request: &ReissueOutRequest,
         options: Option<RequestOptions>,
     ) -> Result<ReissuePayoutResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,

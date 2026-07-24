@@ -22,6 +22,32 @@ impl TokenClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .token
+    ///         .create_server_side_token(
+    ///             &CreateServerSideTokenRequest {
+    ///                 client_id: "YOUR_CLIENT_ID".to_string(),
+    ///                 client_secret: "YOUR_CLIENT_SECRET".to_string(),
+    ///                 state: None,
+    ///                 permissions: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn create_server_side_token(
         &self,
         request: &CreateServerSideTokenRequest,

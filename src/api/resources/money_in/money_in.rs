@@ -30,11 +30,78 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .authorize(
+    ///             &AuthorizeRequest {
+    ///                 body: TransRequestBody {
+    ///                     account_id: None,
+    ///                     customer_data: Some(PayorDataRequest {
+    ///                         customer_id: Some(CustomerId(4440)),
+    ///                         ..Default::default()
+    ///                     }),
+    ///                     entry_point: Some(Entrypointfield("8cfec329267".to_string())),
+    ///                     invoice_data: None,
+    ///                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
+    ///                     order_description: None,
+    ///                     order_id: None,
+    ///                     payment_details: PaymentDetail {
+    ///                         service_fee: Some(0.0),
+    ///                         total_amount: 100.0,
+    ///                         ..Default::default()
+    ///                     },
+    ///                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
+    ///                         cardcvv: Some(Cardcvv("999".to_string())),
+    ///                         cardexp: Cardexp("02/27".to_string()),
+    ///                         card_holder: Some(Cardholder("John Cassian".to_string())),
+    ///                         cardnumber: Cardnumber("4111111111111111".to_string()),
+    ///                         cardzip: Some(Cardzip("12345".to_string())),
+    ///                         initiator: Some(Initiator("payor".to_string())),
+    ///                         method: PayMethodCreditMethod::Card,
+    ///                         save_if_success: None,
+    ///                     }),
+    ///                     source: None,
+    ///                     subdomain: None,
+    ///                     subscription_id: None,
+    ///                 },
+    ///                 force_customer_creation: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn authorize(
         &self,
         request: &AuthorizeRequest,
         options: Option<RequestOptions>,
     ) -> Result<AuthResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -67,12 +134,48 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .capture(
+    ///             &"10-7d9cd67d-2d5d-4cd7-a1b7-72b8b201ec13".to_string(),
+    ///             0.0,
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn capture(
         &self,
         trans_id: &str,
         amount: f64,
         options: Option<RequestOptions>,
     ) -> Result<CaptureResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -100,12 +203,55 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .capture_auth(
+    ///             &"10-7d9cd67d-2d5d-4cd7-a1b7-72b8b201ec13".to_string(),
+    ///             &CaptureRequest {
+    ///                 payment_details: CapturePaymentDetails {
+    ///                     total_amount: 105.0,
+    ///                     service_fee: Some(5.0),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn capture_auth(
         &self,
         trans_id: &str,
         request: &CaptureRequest,
         options: Option<RequestOptions>,
     ) -> Result<CaptureResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -129,11 +275,77 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .credit(
+    ///             &RequestCredit {
+    ///                 customer_data: PayorDataRequest {
+    ///                     billing_address_1: Some(BillingAddressNullable(
+    ///                         "5127 Linkwood ave".to_string(),
+    ///                     )),
+    ///                     customer_number: Some(CustomerNumberNullable("C-90010".to_string())),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 entrypoint: Some(Entrypointfield("8cfec329267".to_string())),
+    ///                 payment_details: PaymentDetailCredit {
+    ///                     service_fee: Some(0.0),
+    ///                     total_amount: 1.0,
+    ///                     ..Default::default()
+    ///                 },
+    ///                 payment_method: RequestCreditPaymentMethod {
+    ///                     ach_account: Some(Achaccount("88354454".to_string())),
+    ///                     ach_account_type: Some(Achaccounttype::Checking),
+    ///                     ach_code: None,
+    ///                     ach_holder: Some(AchHolder("John Smith".to_string())),
+    ///                     ach_routing: Some(Achrouting("021000021".to_string())),
+    ///                     method: RequestCreditPaymentMethodMethod::Ach,
+    ///                 },
+    ///                 force_customer_creation: None,
+    ///                 account_id: None,
+    ///                 order_description: None,
+    ///                 order_id: None,
+    ///                 source: None,
+    ///                 subdomain: None,
+    ///             },
+    ///             Some(
+    ///                 RequestOptions::new()
+    ///                     .additional_header("idempotencyKey", "6B29FC40-CA47-1067-B31D-00DD010662DA"),
+    ///             ),
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn credit(
         &self,
         request: &RequestCredit,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse0, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -160,11 +372,43 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .details(&"45-as456777hhhhhhhhhh77777777-324".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn details(
         &self,
         trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<TransactionQueryRecordsCustomer, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -192,11 +436,80 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .getpaid(
+    ///             &GetpaidRequest {
+    ///                 body: TransRequestBody {
+    ///                     account_id: None,
+    ///                     customer_data: Some(PayorDataRequest {
+    ///                         customer_id: Some(CustomerId(4440)),
+    ///                         ..Default::default()
+    ///                     }),
+    ///                     entry_point: Some(Entrypointfield("8cfec329267".to_string())),
+    ///                     invoice_data: None,
+    ///                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
+    ///                     order_description: None,
+    ///                     order_id: None,
+    ///                     payment_details: PaymentDetail {
+    ///                         service_fee: Some(0.0),
+    ///                         total_amount: 100.0,
+    ///                         ..Default::default()
+    ///                     },
+    ///                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
+    ///                         cardcvv: Some(Cardcvv("999".to_string())),
+    ///                         cardexp: Cardexp("02/27".to_string()),
+    ///                         card_holder: Some(Cardholder("John Cassian".to_string())),
+    ///                         cardnumber: Cardnumber("4111111111111111".to_string()),
+    ///                         cardzip: Some(Cardzip("12345".to_string())),
+    ///                         initiator: Some(Initiator("payor".to_string())),
+    ///                         method: PayMethodCreditMethod::Card,
+    ///                         save_if_success: None,
+    ///                     }),
+    ///                     source: None,
+    ///                     subdomain: None,
+    ///                     subscription_id: None,
+    ///                 },
+    ///                 ach_validation: None,
+    ///                 force_customer_creation: None,
+    ///                 include_details: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn getpaid(
         &self,
         request: &GetpaidRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseGetPaid, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -234,12 +547,48 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .reverse(
+    ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
+    ///             0.0,
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn reverse(
         &self,
         trans_id: &str,
         amount: f64,
         options: Option<RequestOptions>,
     ) -> Result<ReverseResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -270,12 +619,48 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .refund(
+    ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
+    ///             0.0,
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn refund(
         &self,
         trans_id: &str,
         amount: f64,
         options: Option<RequestOptions>,
     ) -> Result<RefundResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -301,12 +686,77 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .refund_with_instructions(
+    ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
+    ///             &RequestRefund {
+    ///                 amount: Some(100.0),
+    ///                 order_description: Some(Orderdescription("Materials deposit".to_string())),
+    ///                 refund_details: Some(RefundDetail {
+    ///                     split_refunding: Some(vec![
+    ///                         SplitFundingRefundContent {
+    ///                             account_id: Some("187-342".to_string()),
+    ///                             amount: Some(60.0),
+    ///                             description: Some("Refunding undelivered materials".to_string()),
+    ///                             origination_entry_point: Some("7f1a381696".to_string()),
+    ///                             ..Default::default()
+    ///                         },
+    ///                         SplitFundingRefundContent {
+    ///                             account_id: Some("187-343".to_string()),
+    ///                             amount: Some(40.0),
+    ///                             description: Some(
+    ///                                 "Refunding deposit for undelivered materials".to_string(),
+    ///                             ),
+    ///                             origination_entry_point: Some("7f1a381696".to_string()),
+    ///                             ..Default::default()
+    ///                         },
+    ///                     ]),
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 source: Some(Source("api".to_string())),
+    ///                 ..Default::default()
+    ///             },
+    ///             Some(
+    ///                 RequestOptions::new()
+    ///                     .additional_header("idempotencyKey", "8A29FC40-CA47-1067-B31D-00DD010662DB"),
+    ///             ),
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn refund_with_instructions(
         &self,
         trans_id: &str,
         request: &RequestRefund,
         options: Option<RequestOptions>,
     ) -> Result<RefundWithInstructionsResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -328,11 +778,43 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .reverse_credit(&"45-as456777hhhhhhhhhh77777777-324".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn reverse_credit(
         &self,
         trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -357,12 +839,51 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .send_receipt_2_trans(
+    ///             &"45-as456777hhhhhhhhhh77777777-324".to_string(),
+    ///             &SendReceipt2TransQueryRequest {
+    ///                 email: Some("example@email.com".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn send_receipt_2_trans(
         &self,
         trans_id: &str,
         request: &SendReceipt2TransQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<ReceiptResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -385,11 +906,61 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .validate(
+    ///             &RequestPaymentValidate {
+    ///                 entry_point: Entrypointfield("8cfec329267".to_string()),
+    ///                 payment_method: RequestPaymentValidatePaymentMethod {
+    ///                     method: RequestPaymentValidatePaymentMethodMethod::Card,
+    ///                     cardnumber: Cardnumber("4360000001000005".to_string()),
+    ///                     cardexp: Cardexp("12/29".to_string()),
+    ///                     cardzip: Cardzip("14602-8328".to_string()),
+    ///                     card_holder: Cardholder("Dianne Becker-Smith".to_string()),
+    ///                 },
+    ///                 account_id: None,
+    ///                 order_description: None,
+    ///                 order_id: None,
+    ///             },
+    ///             Some(
+    ///                 RequestOptions::new()
+    ///                     .additional_header("idempotencyKey", "6B29FC40-CA47-1067-B31D-00DD010662DA"),
+    ///             ),
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn validate(
         &self,
         request: &RequestPaymentValidate,
         options: Option<RequestOptions>,
     ) -> Result<ValidateResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -415,11 +986,43 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .void(&"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn void(
         &self,
         trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<VoidResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -442,11 +1045,79 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .getpaidv_2(
+    ///             &Getpaidv2Request {
+    ///                 body: TransRequestBody {
+    ///                     account_id: None,
+    ///                     customer_data: Some(PayorDataRequest {
+    ///                         customer_id: Some(CustomerId(4440)),
+    ///                         ..Default::default()
+    ///                     }),
+    ///                     entry_point: Some(Entrypointfield("8cfec329267".to_string())),
+    ///                     invoice_data: None,
+    ///                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
+    ///                     order_description: None,
+    ///                     order_id: None,
+    ///                     payment_details: PaymentDetail {
+    ///                         service_fee: Some(0.0),
+    ///                         total_amount: 100.0,
+    ///                         ..Default::default()
+    ///                     },
+    ///                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
+    ///                         cardcvv: Some(Cardcvv("999".to_string())),
+    ///                         cardexp: Cardexp("02/27".to_string()),
+    ///                         card_holder: Some(Cardholder("John Cassian".to_string())),
+    ///                         cardnumber: Cardnumber("4111111111111111".to_string()),
+    ///                         cardzip: Some(Cardzip("12345".to_string())),
+    ///                         initiator: Some(Initiator("payor".to_string())),
+    ///                         method: PayMethodCreditMethod::Card,
+    ///                         save_if_success: None,
+    ///                     }),
+    ///                     source: None,
+    ///                     subdomain: None,
+    ///                     subscription_id: None,
+    ///                 },
+    ///                 ach_validation: None,
+    ///                 force_customer_creation: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn getpaidv_2(
         &self,
         request: &Getpaidv2Request,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -476,11 +1147,78 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .authorizev_2(
+    ///             &Authorizev2Request {
+    ///                 body: TransRequestBody {
+    ///                     account_id: None,
+    ///                     customer_data: Some(PayorDataRequest {
+    ///                         customer_id: Some(CustomerId(4440)),
+    ///                         ..Default::default()
+    ///                     }),
+    ///                     entry_point: Some(Entrypointfield("8cfec329267".to_string())),
+    ///                     invoice_data: None,
+    ///                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
+    ///                     order_description: None,
+    ///                     order_id: None,
+    ///                     payment_details: PaymentDetail {
+    ///                         service_fee: Some(0.0),
+    ///                         total_amount: 100.0,
+    ///                         ..Default::default()
+    ///                     },
+    ///                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
+    ///                         cardcvv: Some(Cardcvv("999".to_string())),
+    ///                         cardexp: Cardexp("02/27".to_string()),
+    ///                         card_holder: Some(Cardholder("John Cassian".to_string())),
+    ///                         cardnumber: Cardnumber("4111111111111111".to_string()),
+    ///                         cardzip: Some(Cardzip("12345".to_string())),
+    ///                         initiator: Some(Initiator("payor".to_string())),
+    ///                         method: PayMethodCreditMethod::Card,
+    ///                         save_if_success: None,
+    ///                     }),
+    ///                     source: None,
+    ///                     subdomain: None,
+    ///                     subscription_id: None,
+    ///                 },
+    ///                 force_customer_creation: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn authorizev_2(
         &self,
         request: &Authorizev2Request,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -507,12 +1245,55 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .capturev_2(
+    ///             &"10-7d9cd67d-2d5d-4cd7-a1b7-72b8b201ec13".to_string(),
+    ///             &CaptureRequest {
+    ///                 payment_details: CapturePaymentDetails {
+    ///                     total_amount: 105.0,
+    ///                     service_fee: Some(5.0),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn capturev_2(
         &self,
         trans_id: &str,
         request: &CaptureRequest,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -540,12 +1321,50 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .refundv_2(
+    ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
+    ///             &RefundV2Request {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn refundv_2(
         &self,
         trans_id: &str,
         request: &RefundV2Request,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -574,6 +1393,31 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .refundv_2_amount(
+    ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
+    ///             0.0,
+    ///             &RefundV2Request {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn refundv_2_amount(
         &self,
         trans_id: &str,
@@ -581,6 +1425,20 @@ impl MoneyInClient {
         request: &RefundV2Request,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -602,11 +1460,43 @@ impl MoneyInClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_in
+    ///         .voidv_2(&"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn voidv_2(
         &self,
         trans_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,

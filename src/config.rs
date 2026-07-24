@@ -28,14 +28,20 @@ impl Default for ClientConfig {
             password: None,
             client_id: None,
             client_secret: None,
-            oauth_token_endpoint: None,
-            oauth_token_exchange: None,
+            oauth_token_endpoint: Some("/v2/Token/serverside".to_string()),
+            oauth_token_exchange: Some(crate::OAuthTokenExchangeConfig {
+                client_id_property: "clientId".to_string(),
+                client_secret_property: "clientSecret".to_string(),
+                extra_request_properties: HashMap::new(),
+                access_token_property: "access_token".to_string(),
+                expires_in_property: "expires_in".to_string(),
+            }),
             timeout: Duration::from_secs(60),
             max_retries: 3,
             custom_headers: HashMap::from([
                 ("X-Fern-Language".to_string(), "Rust".to_string()),
                 ("X-Fern-SDK-Name".to_string(), "payabli_api".to_string()),
-                ("X-Fern-SDK-Version".to_string(), "2.0.6".to_string()),
+                ("X-Fern-SDK-Version".to_string(), "2.0.7".to_string()),
             ]),
             user_agent: "Api Rust SDK".to_string(),
         }

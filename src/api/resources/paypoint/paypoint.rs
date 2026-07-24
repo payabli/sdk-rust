@@ -23,11 +23,43 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .paypoint
+    ///         .get_basic_entry(&"8cfec329267".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_basic_entry(
         &self,
         entry: &str,
         options: Option<RequestOptions>,
     ) -> Result<GetBasicEntryResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -49,11 +81,43 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .paypoint
+    ///         .get_basic_entry_by_id(&"198".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_basic_entry_by_id(
         &self,
         id_paypoint: &str,
         options: Option<RequestOptions>,
     ) -> Result<GetBasicEntryByIdResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -75,12 +139,50 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .paypoint
+    ///         .save_logo(
+    ///             &"8cfec329267".to_string(),
+    ///             &FileContent {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn save_logo(
         &self,
         entry: &str,
         request: &FileContent,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PUT,
@@ -101,11 +203,58 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .paypoint
+    ///         .migrate(
+    ///             &PaypointMoveRequest {
+    ///                 entry_point: Entrypointfield("8cfec329267".to_string()),
+    ///                 new_parent_organization_id: 123,
+    ///                 notification_request: Some(NotificationRequest {
+    ///                     notification_url: "https://webhook-test.yoursie.com".to_string(),
+    ///                     web_header_parameters: Some(vec![WebHeaderParameter {
+    ///                         key: "testheader".to_string(),
+    ///                         value: "1234567890".to_string(),
+    ///                         ..Default::default()
+    ///                     }]),
+    ///                     ..Default::default()
+    ///                 }),
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn migrate(
         &self,
         request: &PaypointMoveRequest,
         options: Option<RequestOptions>,
     ) -> Result<MigratePaypointResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -127,11 +276,43 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .paypoint
+    ///         .settings_page(&"8cfec329267".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn settings_page(
         &self,
         entry: &str,
         options: Option<RequestOptions>,
     ) -> Result<SettingsQueryRecord, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -153,12 +334,50 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .paypoint
+    ///         .get_entry_config(
+    ///             &"8cfec329267".to_string(),
+    ///             &GetEntryConfigQueryRequest {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_entry_config(
         &self,
         entry: &str,
         request: &GetEntryConfigQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<GetEntryConfigResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -183,12 +402,48 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .paypoint
+    ///         .get_page(
+    ///             &"8cfec329267".to_string(),
+    ///             &"pay-your-fees-1".to_string(),
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_page(
         &self,
         entry: &str,
         subdomain: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliPages, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -211,12 +466,48 @@ impl PaypointClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .paypoint
+    ///         .remove_page(
+    ///             &"8cfec329267".to_string(),
+    ///             &"pay-your-fees-1".to_string(),
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn remove_page(
         &self,
         entry: &str,
         subdomain: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseGeneric2Part, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,

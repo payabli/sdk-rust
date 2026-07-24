@@ -61,6 +61,35 @@ impl StatisticClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .statistic
+    ///         .basic_stats(
+    ///             &"custom".to_string(),
+    ///             &"m".to_string(),
+    ///             2,
+    ///             1000000,
+    ///             &BasicStatsQueryRequest {
+    ///                 start_date: Some("2025-11-01".to_string()),
+    ///                 end_date: Some("2025-11-30".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn basic_stats(
         &self,
         mode: &str,
@@ -70,6 +99,20 @@ impl StatisticClient {
         request: &BasicStatsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<Vec<StatBasicExtendedQueryRecord>, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -117,6 +160,32 @@ impl StatisticClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .statistic
+    ///         .customer_basic_stats(
+    ///             &"ytd".to_string(),
+    ///             &"m".to_string(),
+    ///             4440,
+    ///             &CustomerBasicStatsQueryRequest {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn customer_basic_stats(
         &self,
         mode: &str,
@@ -125,6 +194,20 @@ impl StatisticClient {
         request: &CustomerBasicStatsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<Vec<SubscriptionStatsQueryRecord>, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -159,6 +242,32 @@ impl StatisticClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .statistic
+    ///         .sub_stats(
+    ///             &"30".to_string(),
+    ///             2,
+    ///             1000000,
+    ///             &SubStatsQueryRequest {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn sub_stats(
         &self,
         interval: &str,
@@ -167,6 +276,20 @@ impl StatisticClient {
         request: &SubStatsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<Vec<StatBasicQueryRecord>, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -215,6 +338,32 @@ impl StatisticClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .statistic
+    ///         .vendor_basic_stats(
+    ///             &"ytd".to_string(),
+    ///             &"m".to_string(),
+    ///             1,
+    ///             &VendorBasicStatsQueryRequest {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn vendor_basic_stats(
         &self,
         mode: &str,
@@ -223,6 +372,20 @@ impl StatisticClient {
         request: &VendorBasicStatsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<Vec<StatisticsVendorQueryRecord>, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,

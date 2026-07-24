@@ -24,12 +24,48 @@ impl HostedPaymentPagesClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .hosted_payment_pages
+    ///         .load_page(
+    ///             &"8cfec329267".to_string(),
+    ///             &"pay-your-fees-1".to_string(),
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn load_page(
         &self,
         entry: &str,
         subdomain: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliPages, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -52,12 +88,53 @@ impl HostedPaymentPagesClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .hosted_payment_pages
+    ///         .new_page(
+    ///             &"8cfec329267".to_string(),
+    ///             &PayabliPages {
+    ///                 ..Default::default()
+    ///             },
+    ///             Some(
+    ///                 RequestOptions::new()
+    ///                     .additional_header("idempotencyKey", "6B29FC40-CA47-1067-B31D-00DD010662DA"),
+    ///             ),
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn new_page(
         &self,
         entry: &str,
         request: &PayabliPages,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -80,6 +157,31 @@ impl HostedPaymentPagesClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .hosted_payment_pages
+    ///         .save_page(
+    ///             &"8cfec329267".to_string(),
+    ///             &"pay-your-fees-1".to_string(),
+    ///             &PayabliPages {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn save_page(
         &self,
         entry: &str,
@@ -87,6 +189,20 @@ impl HostedPaymentPagesClient {
         request: &PayabliPages,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PUT,

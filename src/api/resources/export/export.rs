@@ -82,6 +82,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_applications(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportApplicationsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_applications(
         &self,
         format: &ExportFormat1,
@@ -89,6 +117,20 @@ impl ExportClient {
         request: &ExportApplicationsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -185,6 +227,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_batch_details(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportBatchDetailsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_batch_details(
         &self,
         format: &ExportFormat1,
@@ -192,6 +262,20 @@ impl ExportClient {
         request: &ExportBatchDetailsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -288,6 +372,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_batch_details_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportBatchDetailsOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_batch_details_org(
         &self,
         format: &ExportFormat1,
@@ -295,6 +407,20 @@ impl ExportClient {
         request: &ExportBatchDetailsOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -381,6 +507,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_batches(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportBatchesQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_batches(
         &self,
         format: &ExportFormat1,
@@ -388,6 +542,20 @@ impl ExportClient {
         request: &ExportBatchesQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -472,6 +640,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_batches_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportBatchesOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_batches_org(
         &self,
         format: &ExportFormat1,
@@ -479,6 +675,20 @@ impl ExportClient {
         request: &ExportBatchesOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -545,6 +755,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_batches_out(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportBatchesOutQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_batches_out(
         &self,
         format: &ExportFormat1,
@@ -552,6 +790,20 @@ impl ExportClient {
         request: &ExportBatchesOutQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -618,6 +870,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_batches_out_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportBatchesOutOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_batches_out_org(
         &self,
         format: &ExportFormat1,
@@ -625,6 +905,20 @@ impl ExportClient {
         request: &ExportBatchesOutOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -709,6 +1003,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_bills(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportBillsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_bills(
         &self,
         format: &ExportFormat1,
@@ -716,6 +1038,20 @@ impl ExportClient {
         request: &ExportBillsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -800,6 +1136,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_bills_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportBillsOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_bills_org(
         &self,
         format: &ExportFormat1,
@@ -807,6 +1171,20 @@ impl ExportClient {
         request: &ExportBillsOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -912,6 +1290,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_chargebacks(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportChargebacksQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_chargebacks(
         &self,
         format: &ExportFormat1,
@@ -919,6 +1325,20 @@ impl ExportClient {
         request: &ExportChargebacksQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1024,6 +1444,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_chargebacks_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportChargebacksOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_chargebacks_org(
         &self,
         format: &ExportFormat1,
@@ -1031,6 +1479,20 @@ impl ExportClient {
         request: &ExportChargebacksOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1129,6 +1591,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_customers(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportCustomersQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_customers(
         &self,
         format: &ExportFormat1,
@@ -1136,6 +1626,20 @@ impl ExportClient {
         request: &ExportCustomersQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1234,6 +1738,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_customers_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportCustomersOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_customers_org(
         &self,
         format: &ExportFormat1,
@@ -1241,6 +1773,20 @@ impl ExportClient {
         request: &ExportCustomersOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1349,6 +1895,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_invoices(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportInvoicesQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_invoices(
         &self,
         format: &ExportFormat1,
@@ -1356,6 +1930,20 @@ impl ExportClient {
         request: &ExportInvoicesQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1464,6 +2052,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_invoices_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportInvoicesOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_invoices_org(
         &self,
         format: &ExportFormat1,
@@ -1471,6 +2087,20 @@ impl ExportClient {
         request: &ExportInvoicesOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1554,6 +2184,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_organizations(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportOrganizationsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_organizations(
         &self,
         format: &ExportFormat1,
@@ -1561,6 +2219,20 @@ impl ExportClient {
         request: &ExportOrganizationsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1643,6 +2315,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_payout(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportPayoutQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_payout(
         &self,
         format: &ExportFormat1,
@@ -1650,6 +2350,20 @@ impl ExportClient {
         request: &ExportPayoutQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1732,6 +2446,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_payout_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportPayoutOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_payout_org(
         &self,
         format: &ExportFormat1,
@@ -1739,6 +2481,20 @@ impl ExportClient {
         request: &ExportPayoutOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1823,6 +2579,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_paypoints(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportPaypointsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_paypoints(
         &self,
         format: &ExportFormat1,
@@ -1830,6 +2614,20 @@ impl ExportClient {
         request: &ExportPaypointsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -1934,6 +2732,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_settlements(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportSettlementsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_settlements(
         &self,
         format: &ExportFormat1,
@@ -1941,6 +2767,20 @@ impl ExportClient {
         request: &ExportSettlementsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -2045,6 +2885,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_settlements_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportSettlementsOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_settlements_org(
         &self,
         format: &ExportFormat1,
@@ -2052,6 +2920,20 @@ impl ExportClient {
         request: &ExportSettlementsOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -2158,6 +3040,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_subscriptions(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportSubscriptionsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_subscriptions(
         &self,
         format: &ExportFormat1,
@@ -2165,6 +3075,20 @@ impl ExportClient {
         request: &ExportSubscriptionsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -2271,6 +3195,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_subscriptions_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportSubscriptionsOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_subscriptions_org(
         &self,
         format: &ExportFormat1,
@@ -2278,6 +3230,20 @@ impl ExportClient {
         request: &ExportSubscriptionsOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -2388,6 +3354,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_transactions(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportTransactionsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_transactions(
         &self,
         format: &ExportFormat1,
@@ -2395,6 +3389,20 @@ impl ExportClient {
         request: &ExportTransactionsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -2505,6 +3513,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_transactions_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportTransactionsOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_transactions_org(
         &self,
         format: &ExportFormat1,
@@ -2512,6 +3548,20 @@ impl ExportClient {
         request: &ExportTransactionsOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -2588,6 +3638,36 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_transfer_details(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             4521,
+    ///             &ExportTransferDetailsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 sort_by: Some("desc(field_name)".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_transfer_details(
         &self,
         format: &ExportFormat1,
@@ -2596,6 +3676,20 @@ impl ExportClient {
         request: &ExportTransferDetailsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -2675,12 +3769,54 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_transfers(
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportTransfersQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 sort_by: Some("desc(field_name)".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_transfers(
         &self,
         entry: &str,
         request: &ExportTransfersQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -2770,6 +3906,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_vendors(
+    ///             &ExportFormat1::Csv,
+    ///             &"8cfec329267".to_string(),
+    ///             &ExportVendorsQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_vendors(
         &self,
         format: &ExportFormat1,
@@ -2777,6 +3941,20 @@ impl ExportClient {
         request: &ExportVendorsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -2865,6 +4043,34 @@ impl ExportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .export
+    ///         .export_vendors_org(
+    ///             &ExportFormat1::Csv,
+    ///             123,
+    ///             &ExportVendorsOrgQueryRequest {
+    ///                 columns_export: Some("BatchDate:Batch_Date,PaypointName:Legal_name".to_string()),
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(1000),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn export_vendors_org(
         &self,
         format: &ExportFormat1,
@@ -2872,6 +4078,20 @@ impl ExportClient {
         request: &ExportVendorsOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,

@@ -22,11 +22,197 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .add_application(
+    ///             &AddApplicationRequest::ApplicationDataPayIn(ApplicationDataPayIn {
+    ///                 services: ApplicationDataPayInServices {
+    ///                     ach: ApplicationDataPayInServicesAch(AchSetup {
+    ///                         ..Default::default()
+    ///                     }),
+    ///                     card: ApplicationDataPayInServicesCard(CardSetup {
+    ///                         accept_amex: Some(true),
+    ///                         accept_discover: Some(true),
+    ///                         accept_mastercard: Some(true),
+    ///                         accept_visa: Some(true),
+    ///                         ..Default::default()
+    ///                     }),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 annual_revenue: Some(Annualrevenue(1000.0)),
+    ///                 average_bill_size: Some(BoardingAverageBillSize("500".to_string())),
+    ///                 average_monthly_bill: Some(BoardingAvgMonthlyBill("5650".to_string())),
+    ///                 avgmonthly: Some(Avgmonthly(1000.0)),
+    ///                 baddress: Some(Baddress1("123 Walnut Street".to_string())),
+    ///                 baddress_1: Some(Baddress2("Suite 103".to_string())),
+    ///                 bank_data: BankData(vec![
+    ///                     Bank {
+    ///                         account_id: Some(AccountId("123-456".to_string())),
+    ///                         nickname: Some(BankNickname("Withdrawal Account".to_string())),
+    ///                         bank_name: Some(BankName("Test Bank 1".to_string())),
+    ///                         routing_account: Some(RoutingAccount("123123123".to_string())),
+    ///                         account_number: Some(AccountNumber("123123100".to_string())),
+    ///                         type_account: Some(TypeAccount::Checking),
+    ///                         bank_account_holder_name: Some(BankAccountHolderName(
+    ///                             "Gruzya Adventure Outfitters LLC".to_string(),
+    ///                         )),
+    ///                         bank_account_holder_type: Some(BankAccountHolderType::Business),
+    ///                         bank_account_function: Some(BankAccountFunction(1)),
+    ///                         ..Default::default()
+    ///                     },
+    ///                     Bank {
+    ///                         account_id: Some(AccountId("123-789".to_string())),
+    ///                         nickname: Some(BankNickname("Deposit Account".to_string())),
+    ///                         bank_name: Some(BankName("Test Bank 2".to_string())),
+    ///                         routing_account: Some(RoutingAccount("321321321".to_string())),
+    ///                         account_number: Some(AccountNumber("123123200".to_string())),
+    ///                         type_account: Some(TypeAccount::Checking),
+    ///                         bank_account_holder_name: Some(BankAccountHolderName(
+    ///                             "Gruzya Adventure Outfitters LLC".to_string(),
+    ///                         )),
+    ///                         bank_account_holder_type: Some(BankAccountHolderType::Business),
+    ///                         bank_account_function: Some(BankAccountFunction(0)),
+    ///                         ..Default::default()
+    ///                     },
+    ///                 ]),
+    ///                 bcity: Some(Bcity("New Vegas".to_string())),
+    ///                 bcountry: Some(Bcountry("US".to_string())),
+    ///                 binperson: Some(Binperson(60)),
+    ///                 binphone: Some(Binphone(20)),
+    ///                 binweb: Some(Binweb(20)),
+    ///                 boarding_link_id: None,
+    ///                 bstate: Some(Bstate("FL".to_string())),
+    ///                 bsummary: Some(Bsummary(
+    ///                     "Brick and mortar store that sells office supplies".to_string(),
+    ///                 )),
+    ///                 btype: Some(OwnType::LimitedLiabilityCompany),
+    ///                 bzip: Some(Bzip("33000".to_string())),
+    ///                 contacts: Some(vec![ApplicationDataPayInContactsItem(Contacts {
+    ///                     contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
+    ///                     contact_name: Some("Herman Martinez".to_string()),
+    ///                     contact_phone: Some("3055550000".to_string()),
+    ///                     contact_title: Some("Owner".to_string()),
+    ///                     ..Default::default()
+    ///                 })]),
+    ///                 credit_limit: Some("creditLimit".to_string()),
+    ///                 dba_name: Some(Dbaname("Sunshine Gutters".to_string())),
+    ///                 ein: Some(Ein("123456789".to_string())),
+    ///                 externalpaypoint_id: None,
+    ///                 faxnumber: Some(FaxNumber("1234567890".to_string())),
+    ///                 highticketamt: Some(Highticketamt(1000.0)),
+    ///                 legal_name: Some(Legalname("Sunshine Services, LLC".to_string())),
+    ///                 license: Some(License("2222222FFG".to_string())),
+    ///                 licstate: Some(Licensestate("CA".to_string())),
+    ///                 maddress: Some(Maddress("123 Walnut Street".to_string())),
+    ///                 maddress_1: Some(Maddress1("STE 900".to_string())),
+    ///                 mcc: Some(Mcc("7777".to_string())),
+    ///                 mcity: Some(Mcity("Johnson City".to_string())),
+    ///                 mcountry: Some(Mcountry("US".to_string())),
+    ///                 mstate: Some(Mstate("TN".to_string())),
+    ///                 mzip: Some(Mzip("37615".to_string())),
+    ///                 org_id: Some(Orgid(123)),
+    ///                 ownership: Some(vec![ApplicationDataPayInOwnershipItem(Owners {
+    ///                     ownername: Some("John Smith".to_string()),
+    ///                     ownertitle: Some("CEO".to_string()),
+    ///                     ownerpercent: Some(100),
+    ///                     ownerssn: Some("123456789".to_string()),
+    ///                     ownerdob: Some("01/01/1990".to_string()),
+    ///                     ownerphone_1: Some("555888111".to_string()),
+    ///                     ownerphone_2: Some("555888111".to_string()),
+    ///                     owneremail: Some(Email("test@email.com".to_string())),
+    ///                     ownerdriver: Some("CA6677778".to_string()),
+    ///                     oaddress: Some("33 North St".to_string()),
+    ///                     ocity: Some("Any City".to_string()),
+    ///                     ocountry: Some("US".to_string()),
+    ///                     odriverstate: Some("CA".to_string()),
+    ///                     ostate: Some("CA".to_string()),
+    ///                     ozip: Some("55555".to_string()),
+    ///                     ..Default::default()
+    ///                 })]),
+    ///                 phonenumber: PhoneNumber("1234567890".to_string()),
+    ///                 processing_region: "US".to_string(),
+    ///                 recipient_email: Some(Email("josephray@example.com".to_string())),
+    ///                 recipient_email_notification: Some(RecipientEmailNotification(true)),
+    ///                 resumable: Some(Resumable(true)),
+    ///                 signer: SignerDataRequest {
+    ///                     name: Some(SignerName("John Smith".to_string())),
+    ///                     ssn: Some(SignerSsn("123456789".to_string())),
+    ///                     dob: Some(SignerDob("01/01/1976".to_string())),
+    ///                     phone: Some(SignerPhone("555888111".to_string())),
+    ///                     email: Some(Email("test@email.com".to_string())),
+    ///                     address: Some(Signeraddress("33 North St".to_string())),
+    ///                     address_1: Some(SignerAddress1("STE 900".to_string())),
+    ///                     city: Some(SignerCity("Bristol".to_string())),
+    ///                     country: Some(SignerCountry("US".to_string())),
+    ///                     state: Some(SignerState("TN".to_string())),
+    ///                     zip: Some(SignerZip("55555".to_string())),
+    ///                     signed_document_reference: Some(SignedDocumentReference(
+    ///                         "https://example.com/signed-document.pdf".to_string(),
+    ///                     )),
+    ///                     pci_attestation: Some(PciAttestation(true)),
+    ///                     attestation_date: Some(AttestationDate("04/20/2025".to_string())),
+    ///                     additional_data: Some(AdditionalDataMap(HashMap::from([
+    ///                         (
+    ///                             "deviceId".to_string(),
+    ///                             "499585-389fj484-3jcj8hj3".to_string(),
+    ///                         ),
+    ///                         ("session".to_string(), "fifji4-fiu443-fn4843".to_string()),
+    ///                         ("timeWithCompany".to_string(), "6 Years".to_string()),
+    ///                     ]))),
+    ///                     sign_date: Some(SignDate("04/20/2025".to_string())),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 startdate: Some(Busstartdate("01/01/1990".to_string())),
+    ///                 tax_fill_name: Some(Taxfillname("Sunshine LLC".to_string())),
+    ///                 template_id: Some(TemplateId(22)),
+    ///                 ticketamt: Some(Ticketamt(1000.0)),
+    ///                 website: Some(Website("www.example.com".to_string())),
+    ///                 when_charged: Whencharged::WhenServiceProvided,
+    ///                 when_delivered: Whendelivered::Over30Days,
+    ///                 when_provided: Whenprovided::ThirtyDaysOrLess,
+    ///                 when_refunded: Whenrefunded::ThirtyDaysOrLess,
+    ///                 additional_data: None,
+    ///                 rep_code: None,
+    ///                 rep_name: None,
+    ///                 rep_office: None,
+    ///                 on_create: None,
+    ///             }),
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn add_application(
         &self,
         request: &AddApplicationRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -48,12 +234,50 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .update_application(
+    ///             352,
+    ///             &ApplicationData {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn update_application(
         &self,
         app_id: i64,
         request: &ApplicationData,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PUT,
@@ -75,11 +299,40 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client.boarding.delete_application(352, None).await;
+    /// }
+    /// ```
     pub async fn delete_application(
         &self,
         app_id: i64,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00Responsedatanonobject, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,
@@ -101,11 +354,40 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client.boarding.get_application(352, None).await;
+    /// }
+    /// ```
     pub async fn get_application(
         &self,
         app_id: i64,
         options: Option<RequestOptions>,
     ) -> Result<ApplicationDetailsRecord, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -127,12 +409,52 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .get_application_by_auth(
+    ///             &"17E".to_string(),
+    ///             &RequestAppByAuth {
+    ///                 email: Some(Email("admin@email.com".to_string())),
+    ///                 reference_id: Some("129-219".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_application_by_auth(
         &self,
         x_id: &str,
         request: &RequestAppByAuth,
         options: Option<RequestOptions>,
     ) -> Result<ApplicationQueryRecord, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -154,11 +476,40 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client.boarding.get_by_id_link_application(91, None).await;
+    /// }
+    /// ```
     pub async fn get_by_id_link_application(
         &self,
         boarding_link_id: i64,
         options: Option<RequestOptions>,
     ) -> Result<BoardingLinkQueryRecord, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -180,11 +531,43 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .get_by_template_id_link_application(80.0, None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_by_template_id_link_application(
         &self,
         template_id: f64,
         options: Option<RequestOptions>,
     ) -> Result<BoardingLinkQueryRecord, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -208,6 +591,31 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .get_external_application(
+    ///             352,
+    ///             &"mail2".to_string(),
+    ///             &GetExternalApplicationQueryRequest {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_external_application(
         &self,
         app_id: i64,
@@ -215,6 +623,20 @@ impl BoardingClient {
         request: &GetExternalApplicationQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponse00, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PUT,
@@ -238,11 +660,43 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .get_link_application(&"myorgaccountname-00091".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_link_application(
         &self,
         boarding_link_reference: &str,
         options: Option<RequestOptions>,
     ) -> Result<BoardingLinkQueryRecord, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -303,12 +757,53 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .list_applications(
+    ///             123,
+    ///             &ListApplicationsQueryRequest {
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(0),
+    ///                 sort_by: Some("desc(field_name)".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn list_applications(
         &self,
         org_id: i64,
         request: &ListApplicationsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<QueryBoardingAppsListResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -370,12 +865,53 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .list_boarding_links(
+    ///             123,
+    ///             &ListBoardingLinksQueryRequest {
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(0),
+    ///                 sort_by: Some("desc(field_name)".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn list_boarding_links(
         &self,
         org_id: i64,
         request: &ListBoardingLinksQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<QueryBoardingLinksResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -401,11 +937,52 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .add_service_to_paypoint_from_app(
+    ///             &CreateApplicationFromPaypointRequest {
+    ///                 paypoint_id: 3040,
+    ///                 template_id: 456,
+    ///                 recipient_email: "merchant@example.com".to_string(),
+    ///                 return_boarding_access_info_in_line: Some(true),
+    ///                 on_create: Some(vec!["submitApplication".to_string()]),
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn add_service_to_paypoint_from_app(
         &self,
         request: &CreateApplicationFromPaypointRequest,
         options: Option<RequestOptions>,
     ) -> Result<CreateApplicationFromPaypointResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -427,11 +1004,43 @@ impl BoardingClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .boarding
+    ///         .get_applications_by_paypoint_id(3040, None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_applications_by_paypoint_id(
         &self,
         paypoint_id: i64,
         options: Option<RequestOptions>,
     ) -> Result<QueryBoardingAppsListResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,

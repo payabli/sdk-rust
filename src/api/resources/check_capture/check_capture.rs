@@ -22,11 +22,51 @@ impl CheckCaptureClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .check_capture
+    ///         .check_processing(
+    ///             &CheckCaptureRequestBody {
+    ///                 entry_point: Entry("8cfec329267".to_string()),
+    ///                 front_image: "/9j/4AAQSkZJRgABAQEASABIAAD...".to_string(),
+    ///                 rear_image: "/9j/4AAQSkZJRgABAQEASABIAAD...".to_string(),
+    ///                 check_amount: 12550,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn check_processing(
         &self,
         request: &CheckCaptureRequestBody,
         options: Option<RequestOptions>,
     ) -> Result<CheckCaptureResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,

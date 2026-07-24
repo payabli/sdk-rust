@@ -24,12 +24,97 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .invoice
+    ///         .add_invoice(
+    ///             &"8cfec329267".to_string(),
+    ///             &AddInvoiceRequest {
+    ///                 body: InvoiceDataRequest {
+    ///                     customer_data: Some(PayorDataRequest {
+    ///                         customer_number: Some(CustomerNumberNullable("C-90010".to_string())),
+    ///                         first_name: Some("Tamara".to_string()),
+    ///                         last_name: Some("Bagratoni".to_string()),
+    ///                         ..Default::default()
+    ///                     }),
+    ///                     invoice_data: Some(BillData {
+    ///                         discount: Some(Discount(10.0)),
+    ///                         frequency: Some(Frequency::OneTime),
+    ///                         invoice_amount: Some(InvoiceAmount(1082.37)),
+    ///                         invoice_date: Some(
+    ///                             NaiveDate::parse_from_str("2025-10-19", "%Y-%m-%d").unwrap(),
+    ///                         ),
+    ///                         invoice_number: Some(InvoiceNumber("INV-2345".to_string())),
+    ///                         invoice_status: Some(Invoicestatus(1)),
+    ///                         invoice_type: Some(InvoiceType(0)),
+    ///                         items: Some(vec![
+    ///                             BillItem {
+    ///                                 item_cost: Some(100.0),
+    ///                                 item_description: Some(ItemDescription(
+    ///                                     "Consultation for Georgian tours".to_string(),
+    ///                                 )),
+    ///                                 item_mode: Some(2),
+    ///                                 item_product_name: Some(ItemProductName(
+    ///                                     "Adventure Consult".to_string(),
+    ///                                 )),
+    ///                                 item_qty: Some(2),
+    ///                                 item_total_amount: Some(200.0),
+    ///                                 ..Default::default()
+    ///                             },
+    ///                             BillItem {
+    ///                                 item_cost: Some(882.37),
+    ///                                 item_description: Some(ItemDescription(
+    ///                                     "Deposit for trip planning".to_string(),
+    ///                                 )),
+    ///                                 item_mode: Some(2),
+    ///                                 item_product_name: Some(ItemProductName("Deposit ".to_string())),
+    ///                                 item_qty: Some(1),
+    ///                                 item_total_amount: Some(882.37),
+    ///                                 ..Default::default()
+    ///                             },
+    ///                         ]),
+    ///                         ..Default::default()
+    ///                     }),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 force_customer_creation: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn add_invoice(
         &self,
         entry: &str,
         request: &AddInvoiceRequest,
         options: Option<RequestOptions>,
     ) -> Result<InvoiceResponseWithoutData, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -60,6 +145,31 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .invoice
+    ///         .get_attached_file_from_invoice(
+    ///             1,
+    ///             &"filename".to_string(),
+    ///             &GetAttachedFileFromInvoiceQueryRequest {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_attached_file_from_invoice(
         &self,
         id_invoice: i64,
@@ -67,6 +177,20 @@ impl InvoiceClient {
         request: &GetAttachedFileFromInvoiceQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<FileContent, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -96,12 +220,44 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .invoice
+    ///         .delete_attached_from_invoice(23548884, &"0_Bill.pdf".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn delete_attached_from_invoice(
         &self,
         id_invoice: i64,
         filename: &str,
         options: Option<RequestOptions>,
     ) -> Result<InvoiceResponseWithoutData, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,
@@ -126,11 +282,40 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client.invoice.get_invoice(23548884, None).await;
+    /// }
+    /// ```
     pub async fn get_invoice(
         &self,
         id_invoice: i64,
         options: Option<RequestOptions>,
     ) -> Result<GetInvoiceRecord, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -153,12 +338,70 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .invoice
+    ///         .edit_invoice(
+    ///             23548884,
+    ///             &EditInvoiceRequest {
+    ///                 body: InvoiceDataRequest {
+    ///                     invoice_data: Some(BillData {
+    ///                         invoice_amount: Some(InvoiceAmount(982.37)),
+    ///                         invoice_date: Some(
+    ///                             NaiveDate::parse_from_str("2025-10-19", "%Y-%m-%d").unwrap(),
+    ///                         ),
+    ///                         invoice_number: Some(InvoiceNumber("INV-2345".to_string())),
+    ///                         items: Some(vec![BillItem {
+    ///                             item_cost: Some(882.37),
+    ///                             item_description: Some(ItemDescription(
+    ///                                 "Deposit for trip planning".to_string(),
+    ///                             )),
+    ///                             item_product_name: Some(ItemProductName("Deposit".to_string())),
+    ///                             item_qty: Some(1),
+    ///                             ..Default::default()
+    ///                         }]),
+    ///                         ..Default::default()
+    ///                     }),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 force_customer_creation: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn edit_invoice(
         &self,
         id_invoice: i64,
         request: &EditInvoiceRequest,
         options: Option<RequestOptions>,
     ) -> Result<InvoiceResponseWithoutData, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PUT,
@@ -185,11 +428,40 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client.invoice.delete_invoice(23548884, None).await;
+    /// }
+    /// ```
     pub async fn delete_invoice(
         &self,
         id_invoice: i64,
         options: Option<RequestOptions>,
     ) -> Result<InvoiceResponseWithoutData, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,
@@ -211,11 +483,43 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .invoice
+    ///         .get_invoice_number(&"8cfec329267".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_invoice_number(
         &self,
         entry: &str,
         options: Option<RequestOptions>,
     ) -> Result<InvoiceNumberResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -304,12 +608,53 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .invoice
+    ///         .list_invoices(
+    ///             &"8cfec329267".to_string(),
+    ///             &ListInvoicesQueryRequest {
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(0),
+    ///                 sort_by: Some("desc(field_name)".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn list_invoices(
         &self,
         entry: &str,
         request: &ListInvoicesQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<QueryInvoiceResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -404,12 +749,53 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .invoice
+    ///         .list_invoices_org(
+    ///             123,
+    ///             &ListInvoicesOrgQueryRequest {
+    ///                 from_record: Some(251),
+    ///                 limit_record: Some(0),
+    ///                 sort_by: Some("desc(field_name)".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn list_invoices_org(
         &self,
         org_id: i64,
         request: &ListInvoicesOrgQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<QueryInvoiceResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -439,12 +825,52 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .invoice
+    ///         .send_invoice(
+    ///             23548884,
+    ///             &SendInvoiceQueryRequest {
+    ///                 attachfile: Some(true),
+    ///                 mail_2: Some("tamara@example.com".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn send_invoice(
         &self,
         id_invoice: i64,
         request: &SendInvoiceQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<SendInvoiceResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -469,11 +895,40 @@ impl InvoiceClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client.invoice.get_invoice_pdf(23548884, None).await;
+    /// }
+    /// ```
     pub async fn get_invoice_pdf(
         &self,
         id_invoice: i64,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,

@@ -22,11 +22,59 @@ impl NotificationClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .notification
+    ///         .add_notification(
+    ///             &AddNotificationRequest::NotificationStandardRequest(NotificationStandardRequest {
+    ///                 content: Some(NotificationStandardRequestContent {
+    ///                     event_type: Some(
+    ///                         NotificationStandardRequestContentEventType::CreatedApplication,
+    ///                     ),
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
+    ///                 method: NotificationStandardRequestMethod::Web,
+    ///                 owner_id: Some(Ownerid(236)),
+    ///                 owner_type: Ownertype(0),
+    ///                 status: Some(Statusnotification(1)),
+    ///                 target: "https://webhook.site/2871b8f8-edc7-441a-b376-98d8c8e33275".to_string(),
+    ///             }),
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn add_notification(
         &self,
         request: &AddNotificationRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseNotifications, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -48,11 +96,43 @@ impl NotificationClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .notification
+    ///         .get_notification(&"1717".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_notification(
         &self,
         n_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<NotificationQueryRecord, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -74,12 +154,59 @@ impl NotificationClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .notification
+    ///         .update_notification(
+    ///             &"1717".to_string(),
+    ///             &UpdateNotificationRequest::NotificationStandardRequest(NotificationStandardRequest {
+    ///                 content: Some(NotificationStandardRequestContent {
+    ///                     event_type: Some(NotificationStandardRequestContentEventType::ApprovedPayment),
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
+    ///                 method: NotificationStandardRequestMethod::Email,
+    ///                 owner_id: Some(Ownerid(136)),
+    ///                 owner_type: Ownertype(0),
+    ///                 status: Some(Statusnotification(1)),
+    ///                 target: "newemail@email.com".to_string(),
+    ///             }),
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn update_notification(
         &self,
         n_id: &str,
         request: &UpdateNotificationRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseNotifications, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PUT,
@@ -101,11 +228,43 @@ impl NotificationClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .notification
+    ///         .delete_notification(&"1717".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn delete_notification(
         &self,
         n_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseNotifications, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,
@@ -127,11 +286,40 @@ impl NotificationClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client.notification.get_report_file(1000000, None).await;
+    /// }
+    /// ```
     pub async fn get_report_file(
         &self,
         id: i64,
         options: Option<RequestOptions>,
     ) -> Result<File, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,

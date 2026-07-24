@@ -23,11 +23,40 @@ impl SubscriptionClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client.subscription.get_subscription(231, None).await;
+    /// }
+    /// ```
     pub async fn get_subscription(
         &self,
         sub_id: i64,
         options: Option<RequestOptions>,
     ) -> Result<SubscriptionQueryRecords, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -49,12 +78,51 @@ impl SubscriptionClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .subscription
+    ///         .update_subscription(
+    ///             231,
+    ///             &RequestUpdateSchedule {
+    ///                 set_pause: Some(SetPause(true)),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn update_subscription(
         &self,
         sub_id: i64,
         request: &RequestUpdateSchedule,
         options: Option<RequestOptions>,
     ) -> Result<UpdateSubscriptionResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PUT,
@@ -76,11 +144,40 @@ impl SubscriptionClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client.subscription.remove_subscription(231, None).await;
+    /// }
+    /// ```
     pub async fn remove_subscription(
         &self,
         sub_id: i64,
         options: Option<RequestOptions>,
     ) -> Result<RemoveSubscriptionResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,
@@ -102,11 +199,77 @@ impl SubscriptionClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .subscription
+    ///         .new_subscription(
+    ///             &RequestSchedule {
+    ///                 customer_data: Some(PayorDataRequest {
+    ///                     customer_id: Some(CustomerId(4440)),
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 entry_point: Some(Entrypointfield("8cfec329267".to_string())),
+    ///                 payment_details: Some(PaymentDetail {
+    ///                     service_fee: Some(0.0),
+    ///                     total_amount: 100.0,
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 payment_method: Some(RequestSchedulePaymentMethod::PayMethodCredit(
+    ///                     PayMethodCredit {
+    ///                         cardcvv: Some(Cardcvv("123".to_string())),
+    ///                         cardexp: Cardexp("12/29".to_string()),
+    ///                         card_holder: Some(Cardholder("John Cassian".to_string())),
+    ///                         cardnumber: Cardnumber("4111111111111111".to_string()),
+    ///                         cardzip: Some(Cardzip("37615".to_string())),
+    ///                         initiator: Some(Initiator("payor".to_string())),
+    ///                         method: PayMethodCreditMethod::Card,
+    ///                         save_if_success: None,
+    ///                     },
+    ///                 )),
+    ///                 schedule_details: Some(ScheduleDetail {
+    ///                     end_date: Some("2025-03-20".to_string()),
+    ///                     frequency: Some(Frequency::Weekly),
+    ///                     plan_id: Some(1),
+    ///                     start_date: Some("2024-09-20".to_string()),
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn new_subscription(
         &self,
         request: &RequestSchedule,
         options: Option<RequestOptions>,
     ) -> Result<AddSubscriptionResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,

@@ -23,12 +23,50 @@ impl ImportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .import
+    ///         .import_bills(
+    ///             &"8cfec329267".to_string(),
+    ///             &ImportBillsRequest {
+    ///                 file: b"test file content".to_vec(),
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn import_bills(
         &self,
         entry: &str,
         request: &ImportBillsRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseImport, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_multipart_request(
                 Method::POST,
@@ -51,12 +89,51 @@ impl ImportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .import
+    ///         .import_customer(
+    ///             &Entrypointfield("8cfec329267".to_string()),
+    ///             &ImportCustomerRequest {
+    ///                 file: b"test file content".to_vec(),
+    ///                 replace_existing: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn import_customer(
         &self,
         entry: &Entrypointfield,
         request: &ImportCustomerRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseImport, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_multipart_request(
                 Method::POST,
@@ -80,12 +157,50 @@ impl ImportClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .import
+    ///         .import_vendor(
+    ///             &Entrypointfield("8cfec329267".to_string()),
+    ///             &ImportVendorRequest {
+    ///                 file: b"test file content".to_vec(),
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn import_vendor(
         &self,
         entry: &Entrypointfield,
         request: &ImportVendorRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseImport, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_multipart_request(
                 Method::POST,

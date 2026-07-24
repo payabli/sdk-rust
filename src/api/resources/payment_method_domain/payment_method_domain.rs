@@ -22,11 +22,59 @@ impl PaymentMethodDomainClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .payment_method_domain
+    ///         .add_payment_method_domain(
+    ///             &AddPaymentMethodDomainRequest {
+    ///                 apple_pay: Some(AddPaymentMethodDomainRequestApplePay {
+    ///                     is_enabled: Some(IsEnabled(true)),
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 google_pay: Some(AddPaymentMethodDomainRequestGooglePay {
+    ///                     is_enabled: Some(IsEnabled(true)),
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 domain_name: Some(DomainName("checkout.example.com".to_string())),
+    ///                 entity_id: Some(EntityId(109)),
+    ///                 entity_type: Some(EntityType("paypoint".to_string())),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn add_payment_method_domain(
         &self,
         request: &AddPaymentMethodDomainRequest,
         options: Option<RequestOptions>,
     ) -> Result<AddPaymentMethodDomainApiResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -48,11 +96,43 @@ impl PaymentMethodDomainClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .payment_method_domain
+    ///         .cascade_payment_method_domain(&"pmd_b8237fa45c964d8a9ef27160cd42b8c5".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn cascade_payment_method_domain(
         &self,
         domain_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PaymentMethodDomainGeneralResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -74,11 +154,43 @@ impl PaymentMethodDomainClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .payment_method_domain
+    ///         .get_payment_method_domain(&"pmd_b8237fa45c964d8a9ef27160cd42b8c5".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn get_payment_method_domain(
         &self,
         domain_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PaymentMethodDomainApiResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -100,11 +212,43 @@ impl PaymentMethodDomainClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .payment_method_domain
+    ///         .delete_payment_method_domain(&"pmd_b8237fa45c964d8a9ef27160cd42b8c5".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn delete_payment_method_domain(
         &self,
         domain_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<DeletePaymentMethodDomainResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,
@@ -126,12 +270,58 @@ impl PaymentMethodDomainClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .payment_method_domain
+    ///         .update_payment_method_domain(
+    ///             &"pmd_b8237fa45c964d8a9ef27160cd42b8c5".to_string(),
+    ///             &UpdatePaymentMethodDomainRequest {
+    ///                 apple_pay: Some(UpdatePaymentMethodDomainRequestWallet {
+    ///                     is_enabled: Some(IsEnabled(false)),
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 google_pay: Some(UpdatePaymentMethodDomainRequestWallet {
+    ///                     is_enabled: Some(IsEnabled(false)),
+    ///                     ..Default::default()
+    ///                 }),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn update_payment_method_domain(
         &self,
         domain_id: &str,
         request: &UpdatePaymentMethodDomainRequest,
         options: Option<RequestOptions>,
     ) -> Result<PaymentMethodDomainGeneralResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PATCH,
@@ -160,11 +350,50 @@ impl PaymentMethodDomainClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .payment_method_domain
+    ///         .list_payment_method_domains(
+    ///             &ListPaymentMethodDomainsQueryRequest {
+    ///                 entity_id: Some(1147),
+    ///                 entity_type: Some("paypoint".to_string()),
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
     pub async fn list_payment_method_domains(
         &self,
         request: &ListPaymentMethodDomainsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<ListPaymentMethodDomainsResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::GET,
@@ -191,11 +420,43 @@ impl PaymentMethodDomainClient {
     /// # Returns
     ///
     /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .payment_method_domain
+    ///         .verify_payment_method_domain(&"pmd_b8237fa45c964d8a9ef27160cd42b8c5".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
     pub async fn verify_payment_method_domain(
         &self,
         domain_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<PaymentMethodDomainGeneralResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
