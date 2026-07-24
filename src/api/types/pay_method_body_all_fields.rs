@@ -34,7 +34,7 @@ pub struct PayMethodBodyAllFields {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub device: Option<Device>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub initator: Option<Initiator>,
+    pub initiator: Option<Initiator>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub method: Option<Methodall>,
     #[serde(rename = "saveIfSuccess")]
@@ -68,7 +68,7 @@ pub struct PayMethodBodyAllFieldsBuilder {
     cardnumber: Option<Cardnumber>,
     cardzip: Option<Cardzip>,
     device: Option<Device>,
-    initator: Option<Initiator>,
+    initiator: Option<Initiator>,
     method: Option<Methodall>,
     save_if_success: Option<SaveIfSuccess>,
     stored_method_id: Option<Storedmethodid>,
@@ -131,8 +131,8 @@ impl PayMethodBodyAllFieldsBuilder {
         self
     }
 
-    pub fn initator(mut self, value: Initiator) -> Self {
-        self.initator = Some(value);
+    pub fn initiator(mut self, value: Initiator) -> Self {
+        self.initiator = Some(value);
         self
     }
 
@@ -180,7 +180,7 @@ impl PayMethodBodyAllFieldsBuilder {
             cardnumber: self.cardnumber,
             cardzip: self.cardzip,
             device: self.device,
-            initator: self.initator,
+            initiator: self.initiator,
             method: self.method,
             save_if_success: self.save_if_success,
             stored_method_id: self.stored_method_id,
