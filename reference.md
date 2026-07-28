@@ -25266,7 +25266,7 @@ async fn main() {
             &AddNotificationRequest::NotificationStandardRequest(NotificationStandardRequest {
                 content: Some(NotificationStandardRequestContent {
                     event_type: Some(
-                        NotificationStandardRequestContentEventType::CreatedApplication,
+                        NotificationStandardRequestContentEventType::Createdapplication,
                     ),
                     ..Default::default()
                 }),
@@ -25399,7 +25399,7 @@ async fn main() {
             &"1717".to_string(),
             &UpdateNotificationRequest::NotificationStandardRequest(NotificationStandardRequest {
                 content: Some(NotificationStandardRequestContent {
-                    event_type: Some(NotificationStandardRequestContentEventType::ApprovedPayment),
+                    event_type: Some(NotificationStandardRequestContentEventType::Approvedpayment),
                     ..Default::default()
                 }),
                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
@@ -27429,7 +27429,7 @@ async fn main() {
 </details>
 
 ## MoneyOut
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">authorize_out</a>(request: RequestOutAuthorize, allow_duplicated_bills: Option&lt;Option&lt;bool&gt;&gt;, do_not_create_bills: Option&lt;Option&lt;bool&gt;&gt;, force_vendor_creation: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">authorize_out</a>(request: RequestOutAuthorize, allow_duplicated_bills: Option&lt;Option&lt;bool&gt;&gt;, do_not_create_bills: Option&lt;Option&lt;bool&gt;&gt;, force_vendor_creation: Option&lt;Option&lt;bool&gt;&gt;, same_day_ach: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -27445,7 +27445,7 @@ Authorizes a transaction for payout.
 
 If you don't pass `autoCapture` with a value of `true`, authorized transactions aren't flagged for settlement until captured. Use the `referenceId` returned in the response to capture the transaction.
 
-When `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transaction_approvedcaptured`](/developers/api-reference/webhooks-overview/payout-transaction-approved-captured) webhook event.
+When `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transaction_approvedcaptured`](/developers/webhooks/payout-transaction-approved-captured) webhook event.
 
 If a velocity fraud alert is triggered, the endpoint returns a `202` response with `responseCode` `9051`, and the authorization is held for risk review rather than rejected. If a risk policy blocks the transaction, the endpoint returns a `422` response with `responseCode` `9005`, a terminal rejection.
 
@@ -27499,6 +27499,7 @@ async fn main() {
                 allow_duplicated_bills: None,
                 do_not_create_bills: None,
                 force_vendor_creation: None,
+                same_day_ach: None,
                 source: None,
                 order_id: None,
                 account_id: None,
@@ -27636,6 +27637,18 @@ async fn main() {
 <dd>
 
 **force_vendor_creation:** `Option<bool>` — When `true`, the request creates a new vendor record, regardless of whether the vendor already exists.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**same_day_ach:** `Option<bool>` 
+
+When `true`, Payabli authorizes the payout for same-day ACH processing instead of standard ACH. Same-day ACH must be enabled for the paypoint, otherwise the authorization fails with a `400` response and `responseCode` `3492`. Only ACH payouts honor this flag. Wire and RTP payouts ignore it.
+
+Same-day ACH has a daily cutoff. Capture the transaction before the cutoff, or pass `autoConvertSameDayAch` with a value of `true` when you capture it.
     
 </dd>
 </dl>
@@ -27833,7 +27846,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">capture_all_out</a>(request: Vec&lt;String&gt;) -> Result&lt;CaptureAllOutResponse, ApiError&gt;</code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">capture_all_out</a>(request: Vec&lt;String&gt;, auto_convert_same_day_ach: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;CaptureAllOutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -27871,7 +27884,10 @@ async fn main() {
     client
         .money_out
         .capture_all_out(
-            &vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
+            &CaptureAllOutRequest {
+                body: vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
+                auto_convert_same_day_ach: None,
+            },
             None,
         )
         .await;
@@ -27882,12 +27898,31 @@ async fn main() {
 </dd>
 </dl>
 
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**auto_convert_same_day_ach:** `Option<bool>` 
+
+Controls what happens to a payout authorized with `sameDayACH` set to `true` when you capture it after the same-day ACH cutoff. When `true`, Payabli converts the payout to a standard ACH payment and captures it. When `false`, the capture is declined.
+
+This parameter has no effect on payouts that weren't authorized for same-day ACH.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
 
 </dd>
 </dl>
 </details>
 
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">capture_out</a>(reference_id: String) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">capture_out</a>(reference_id: String, auto_convert_same_day_ach: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -27926,7 +27961,13 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .money_out
-        .capture_out(&"129-219".to_string(), None)
+        .capture_out(
+            &"129-219".to_string(),
+            &CaptureOutQueryRequest {
+                ..Default::default()
+            },
+            None,
+        )
         .await;
 }
 ```
@@ -27944,6 +27985,18 @@ async fn main() {
 <dd>
 
 **reference_id:** `String` — The ID for the payout transaction.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auto_convert_same_day_ach:** `Option<bool>` 
+
+Controls what happens to a payout authorized with `sameDayACH` set to `true` when you capture it after the same-day ACH cutoff. When `true`, Payabli converts the payout to a standard ACH payment and captures it. When `false`, the capture is declined.
+
+This parameter has no effect on payouts that weren't authorized for same-day ACH.
     
 </dd>
 </dl>
@@ -29533,7 +29586,7 @@ async fn main() {
 <dl>
 <dd>
 
-**id:** `String` — ID of the chargeback or return record. This is returned as `chargebackID` in the [ReceivedChargeBack](/guides/pay-ops-webhooks-payloads#receivedchargeback) and [ReceivedAchReturn](/guides/pay-ops-webhooks-payloads#receivedachreturn) webhook notifications.
+**id:** `String` — ID of the chargeback or return record. This is returned as `chargebackID` in the [ReceivedChargeBack](/developers/webhooks/payops-chargeback-received) and [ReceivedAchReturn](/developers/webhooks/payops-ach-return-received) webhook notifications.
     
 </dd>
 </dl>
@@ -29608,6 +29661,1229 @@ async fn main() {
 <dd>
 
 **file_name:** `String` — The chargeback attachment's file name.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Case Management
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">validate_bank_account_change</a>(paypoint_id: String, request: ValidateBankAccountChangeRequest) -> Result&lt;PreCreationValidationResult, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Validates a bank account change for a paypoint without creating a case.
+Runs the same checks the create endpoint runs, and returns blocking
+conditions and warnings. Blocking conditions prevent creation; warnings
+don't.
+
+Available to both Platform and Enterprise Partners.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .validate_bank_account_change(
+            3040,
+            &ValidateBankAccountChangeRequest {
+                routing_number: "123456789".to_string(),
+                account_number: "987654321".to_string(),
+                account_type: "checking".to_string(),
+                bank_account_holder_type: "business".to_string(),
+                bank_account_function: CaseManagementBankAccountFunction::Deposits,
+                services: BankAccountServices {
+                    money_in: Some(vec![MoneyInService::Ach]),
+                    money_out: Some(vec![MoneyOutService::Ach]),
+                    ..Default::default()
+                },
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**paypoint_id:** `String` — The paypoint's numeric identifier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**routing_number:** `String` — The 9-digit bank routing number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_number:** `String` — The bank account number (4 to 17 digits).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_type:** `String` — The account type. Must be `checking` or `savings`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bank_account_holder_type:** `String` — The account holder type. Must be `personal` or `business`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bank_account_function:** `CaseManagementBankAccountFunction` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**services:** `BankAccountServices` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">create_bank_account_change</a>(paypoint_id: String, request: CreateBankAccountChangeCaseRequest) -> Result&lt;CaseResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a bank-account-change case for a paypoint. The account and
+routing numbers are validated and tokenized before the case is saved —
+the raw numbers are never stored or returned. The account holder name is
+taken from the paypoint's legal name. On success the case is created in
+`Submitted` and asynchronous verification starts.
+
+Available to both Platform and Enterprise Partners.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .create_bank_account_change(
+            3040,
+            &CreateBankAccountChangeCaseRequest {
+                nickname: "Main Settlement Account".to_string(),
+                bank_name: "First National Bank".to_string(),
+                routing_number: "123456789".to_string(),
+                account_number: "987654321".to_string(),
+                account_type: "checking".to_string(),
+                bank_account_holder_type: "business".to_string(),
+                bank_account_function: CaseManagementBankAccountFunction::Deposits,
+                services: BankAccountServices {
+                    money_in: Some(vec![MoneyInService::Ach]),
+                    money_out: Some(vec![MoneyOutService::Ach]),
+                    ..Default::default()
+                },
+                default: true,
+                schedule_for: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**paypoint_id:** `String` — The paypoint's numeric identifier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**nickname:** `String` — A label for the account.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bank_name:** `String` — The name of the bank.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**routing_number:** `String` — The 9-digit bank routing number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_number:** `String` — The bank account number (4 to 17 digits).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_type:** `String` — The account type. Must be `checking` or `savings`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bank_account_holder_type:** `String` — The account holder type. Must be `personal` or `business`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bank_account_function:** `CaseManagementBankAccountFunction` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**services:** `BankAccountServices` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**default:** `bool` — Whether this is the default account for the selected services.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**schedule_for:** `Option<String>` 
+
+When to run the change, as a UTC timestamp (trailing `Z`). Must be at
+least 1 hour and at most 30 days in the future. Omit to run as soon as
+the case is approved.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">get_case</a>(uuid: String) -> Result&lt;CaseResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a case by its UUID, including its current state, parameters,
+state history, verification metadata, and attachments.
+
+Available to both Platform and Enterprise Partners.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .get_case(&"9c2b7e14-3a5f-4d21-b8e0-1f6a4c9d2e70".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">list_cases</a>(organization_id: String, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;CaseListResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists cases for an organization, climbing the platform org hierarchy.
+Supports pagination and sorting through query parameters, and filtering
+through repeatable `parameters[field(op)]=value` query parameters (for
+example `parameters[state(in)]=Assigned|PendingReview`). Filterable
+fields include `state`, `caseType`, `paypointId`, `createdAt`,
+`updatedAt`, `scheduleFor`, and `createdBy`.
+
+Available to both Platform and Enterprise Partners.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .list_cases(
+            123,
+            &ListCasesQueryRequest {
+                from_record: Some(0),
+                limit_record: Some(20),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**organization_id:** `String` — The organization's numeric identifier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from_record:** `Option<i64>` — The zero-based index of the first record to return.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit_record:** `Option<i64>` — The maximum number of records to return (1 to 200).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `Option<String>` — Sort expression, such as `desc(createdAt)` or `asc(state)`. Defaults to `desc(createdAt)`.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">list_messages</a>(case_uuid: String, limit: Option&lt;Option&lt;i64&gt;&gt;, cursor: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;MessagePage, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the notes on a case, ordered oldest to newest. Cursor-paginated.
+
+Available to both Platform and Enterprise Partners.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .list_messages(
+            &"9c2b7e14-3a5f-4d21-b8e0-1f6a4c9d2e70".to_string(),
+            &ListMessagesQueryRequest {
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**case_uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Option<i64>` — The maximum number of notes to return (default 50, max 200).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cursor:** `Option<String>` — An opaque cursor for the next page.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">post_message</a>(case_uuid: String, request: PostCaseMessageRequest) -> Result&lt;PostedMessage, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Adds a note to a case.
+
+Available to both Platform and Enterprise Partners.
+
+This endpoint is in development and not yet available for API use. To
+add a note for now, use Case Management in the
+[Payabli Portal](/guides/pay-ops-portal-bank-account-changes-manage).
+To read existing notes on a case, use
+[List case notes](/developers/api-reference/caseManagement/list-case-notes).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .post_message(
+            &"9c2b7e14-3a5f-4d21-b8e0-1f6a4c9d2e70".to_string(),
+            &PostCaseMessageRequest {
+                content: "Reviewed supporting documents; account ownership confirmed.".to_string(),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**case_uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**content:** `String` — The note text (1 to 4000 characters).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">list_transitions</a>(uuid: String) -> Result&lt;AvailableTransitionsResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the review actions currently available on a case. The list is
+empty when no user action is available (for example while the case is
+mid-automation).
+
+Available to both Platform and Enterprise Partners, though only
+Enterprise Partners can fire the returned actions.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .list_transitions(&"9c2b7e14-3a5f-4d21-b8e0-1f6a4c9d2e70".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">transition</a>(uuid: String, request: TransitionCaseRequest) -> Result&lt;CaseResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fires a review action on a case, such as `Approve`, `Deny`, `Escalate`,
+or `RequestReview`. Assigning a case uses the dedicated assign endpoint,
+not this one. Firing an action that isn't valid for the case's current
+state returns `409`.
+
+Available to Enterprise Partners only.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .transition(
+            &"9c2b7e14-3a5f-4d21-b8e0-1f6a4c9d2e70".to_string(),
+            &TransitionCaseRequest {
+                trigger: CaseTrigger::Approve,
+                reason: "Account ownership confirmed with the merchant by phone.".to_string(),
+                decline_reason: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**trigger:** `CaseTrigger` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `String` — The reason for the action.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**decline_reason:** `Option<Option<BankReviewDecisionReason>>` — The decline reason. Required when the trigger is `Deny`, and must be omitted otherwise.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">assign_case</a>(uuid: String, request: AssignCaseRequest) -> Result&lt;CaseResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Assigns a case to a reviewer.
+
+Available to Enterprise Partners only.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .assign_case(
+            &"9c2b7e14-3a5f-4d21-b8e0-1f6a4c9d2e70".to_string(),
+            &AssignCaseRequest {
+                assignee_id: 4238,
+                reason: Some("Routing to the risk team for review.".to_string()),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**assignee_id:** `String` — The numeric id of the reviewer to assign the case to.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `Option<String>` — An optional reason for the assignment.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">list_attachments</a>(case_uuid: String) -> Result&lt;Vec&lt;AttachmentResponse&gt;, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the files attached to a case.
+
+Available to both Platform and Enterprise Partners.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .list_attachments(&"9c2b7e14-3a5f-4d21-b8e0-1f6a4c9d2e70".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**case_uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">upload_attachment</a>(case_uuid: String) -> Result&lt;AttachmentResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Uploads a file to a case as multipart form data. The maximum size is
+25 MiB, and the content type must be an allowed type such as PDF, PNG,
+JPEG, CSV, XLSX, DOCX, or plain text.
+
+Available to both Platform and Enterprise Partners.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .upload_attachment(
+            &"caseUuid".to_string(),
+            &UploadAttachmentRequest {
+                file: b"test file content".to_vec(),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**case_uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">get_attachment</a>(case_uuid: String, attachment_id: String) -> Result&lt;Vec&lt;u8&gt;, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Streams the file content of an attachment.
+
+Available to both Platform and Enterprise Partners.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .get_attachment(&"caseUuid".to_string(), &"attachmentId".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**case_uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` — The attachment's UUID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.case_management.<a href="/src/api/resources/case_management/client.rs">delete_attachment</a>(case_uuid: String, attachment_id: String) -> Result&lt;(), ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes an attachment from a case.
+
+Available to both Platform and Enterprise Partners.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .case_management
+        .delete_attachment(&"caseUuid".to_string(), &"attachmentId".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**case_uuid:** `String` — The case's UUID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` — The attachment's UUID.
     
 </dd>
 </dl>

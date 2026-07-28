@@ -64,6 +64,17 @@ pub enum ApiError {
         response_text: Option<String>,
         response_data: Option<PayabliErrorBodyResponseData>,
     },
+    #[error("NotFoundError: Resource not found - {message}")]
+    NotFoundError {
+        message: String,
+        resource_id: Option<String>,
+        resource_type: Option<String>,
+    },
+    #[error("ConflictError: Conflict - {message}")]
+    ConflictError {
+        message: String,
+        conflict_type: Option<String>,
+    },
     #[error("HTTP error {status}: {message}")]
     Http { status: u16, message: String },
     #[error("Network error: {0}")]
@@ -344,6 +355,52 @@ impl ApiError {
                     response_code: None,
                     response_text: None,
                     response_data: None,
+                };
+            }
+            404 => {
+                // Parse error body for NotFoundError;
+                if let Some(body_str) = body {
+                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
+                        return Self::NotFoundError {
+                            message: parsed
+                                .get("message")
+                                .and_then(|v| v.as_str())
+                                .unwrap_or("Unknown error")
+                                .to_string(),
+                            resource_id: parsed
+                                .get("resourceId")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            resource_type: parsed
+                                .get("resourceType")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                        };
+                    }
+                }
+                return Self::NotFoundError {
+                    message: body.unwrap_or("Unknown error").to_string(),
+                    resource_id: None,
+                    resource_type: None,
+                };
+            }
+            409 => {
+                // Parse error body for ConflictError;
+                if let Some(body_str) = body {
+                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
+                        return Self::ConflictError {
+                            message: parsed
+                                .get("message")
+                                .and_then(|v| v.as_str())
+                                .unwrap_or("Unknown error")
+                                .to_string(),
+                            conflict_type: parsed
+                                .get("conflictType")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                        };
+                    }
+                }
+                return Self::ConflictError {
+                    message: body.unwrap_or("Unknown error").to_string(),
+                    conflict_type: None,
                 };
             }
             _ => Self::Http {

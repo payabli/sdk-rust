@@ -40,7 +40,7 @@ impl NotificationClient {
     ///             &AddNotificationRequest::NotificationStandardRequest(NotificationStandardRequest {
     ///                 content: Some(NotificationStandardRequestContent {
     ///                     event_type: Some(
-    ///                         NotificationStandardRequestContentEventType::CreatedApplication,
+    ///                         NotificationStandardRequestContentEventType::Createdapplication,
     ///                     ),
     ///                     ..Default::default()
     ///                 }),
@@ -172,7 +172,7 @@ impl NotificationClient {
     ///             &"1717".to_string(),
     ///             &UpdateNotificationRequest::NotificationStandardRequest(NotificationStandardRequest {
     ///                 content: Some(NotificationStandardRequestContent {
-    ///                     event_type: Some(NotificationStandardRequestContentEventType::ApprovedPayment),
+    ///                     event_type: Some(NotificationStandardRequestContentEventType::Approvedpayment),
     ///                     ..Default::default()
     ///                 }),
     ///                 frequency: NotificationStandardRequestFrequency::Untilcancelled,

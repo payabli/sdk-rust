@@ -17,7 +17,7 @@ impl MoneyOutClient {
     ///
     /// If you don't pass `autoCapture` with a value of `true`, authorized transactions aren't flagged for settlement until captured. Use the `referenceId` returned in the response to capture the transaction.
     ///
-    /// When `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transaction_approvedcaptured`](/developers/api-reference/webhooks-overview/payout-transaction-approved-captured) webhook event.
+    /// When `autoCapture` is `true`, Payabli captures the transaction asynchronously after authorization. The response confirms only that the transaction was authorized; it doesn't confirm that capture succeeded. To confirm capture, listen for the [`payout_transaction_approvedcaptured`](/developers/webhooks/payout-transaction-approved-captured) webhook event.
     ///
     /// If a velocity fraud alert is triggered, the endpoint returns a `202` response with `responseCode` `9051`, and the authorization is held for risk review rather than rejected. If a risk policy blocks the transaction, the endpoint returns a `422` response with `responseCode` `9005`, a terminal rejection.
     ///
@@ -28,6 +28,9 @@ impl MoneyOutClient {
     /// * `allow_duplicated_bills` - When `true`, the authorization bypasses the requirement for unique bills, identified by vendor invoice number. This allows you to make more than one payout authorization for a bill, like a split payment.
     /// * `do_not_create_bills` - When `true`, Payabli won't automatically create a bill for this payout transaction.
     /// * `force_vendor_creation` - When `true`, the request creates a new vendor record, regardless of whether the vendor already exists.
+    /// * `same_day_ach` - When `true`, Payabli authorizes the payout for same-day ACH processing instead of standard ACH. Same-day ACH must be enabled for the paypoint, otherwise the authorization fails with a `400` response and `responseCode` `3492`. Only ACH payouts honor this flag. Wire and RTP payouts ignore it.
+    ///
+    /// Same-day ACH has a daily cutoff. Capture the transaction before the cutoff, or pass `autoConvertSameDayAch` with a value of `true` when you capture it.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -72,6 +75,7 @@ impl MoneyOutClient {
     ///                 allow_duplicated_bills: None,
     ///                 do_not_create_bills: None,
     ///                 force_vendor_creation: None,
+    ///                 same_day_ach: None,
     ///                 source: None,
     ///                 order_id: None,
     ///                 account_id: None,
@@ -114,6 +118,7 @@ impl MoneyOutClient {
                     )
                     .bool("doNotCreateBills", request.do_not_create_bills.clone())
                     .bool("forceVendorCreation", request.force_vendor_creation.clone())
+                    .bool("sameDayACH", request.same_day_ach.clone())
                     .build(),
                 options,
             )
@@ -300,6 +305,9 @@ impl MoneyOutClient {
     ///
     /// # Arguments
     ///
+    /// * `auto_convert_same_day_ach` - Controls what happens to a payout authorized with `sameDayACH` set to `true` when you capture it after the same-day ACH cutoff. When `true`, Payabli converts the payout to a standard ACH payment and captures it. When `false`, the capture is declined.
+    ///
+    /// This parameter has no effect on payouts that weren't authorized for same-day ACH.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -320,7 +328,10 @@ impl MoneyOutClient {
     ///     client
     ///         .money_out
     ///         .capture_all_out(
-    ///             &vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
+    ///             &CaptureAllOutRequest {
+    ///                 body: vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
+    ///                 auto_convert_same_day_ach: None,
+    ///             },
     ///             None,
     ///         )
     ///         .await;
@@ -328,7 +339,7 @@ impl MoneyOutClient {
     /// ```
     pub async fn capture_all_out(
         &self,
-        request: &Vec<String>,
+        request: &CaptureAllOutRequest,
         options: Option<RequestOptions>,
     ) -> Result<CaptureAllOutResponse, ApiError> {
         let endpoint_auth_headers = self
@@ -349,8 +360,13 @@ impl MoneyOutClient {
             .execute_request(
                 Method::POST,
                 "MoneyOut/captureAll",
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
-                None,
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
+                QueryBuilder::new()
+                    .bool(
+                        "autoConvertSameDayAch",
+                        request.auto_convert_same_day_ach.clone(),
+                    )
+                    .build(),
                 options,
             )
             .await
@@ -363,6 +379,9 @@ impl MoneyOutClient {
     /// # Arguments
     ///
     /// * `reference_id` - The ID for the payout transaction.
+    /// * `auto_convert_same_day_ach` - Controls what happens to a payout authorized with `sameDayACH` set to `true` when you capture it after the same-day ACH cutoff. When `true`, Payabli converts the payout to a standard ACH payment and captures it. When `false`, the capture is declined.
+    ///
+    /// This parameter has no effect on payouts that weren't authorized for same-day ACH.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -382,13 +401,20 @@ impl MoneyOutClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .money_out
-    ///         .capture_out(&"129-219".to_string(), None)
+    ///         .capture_out(
+    ///             &"129-219".to_string(),
+    ///             &CaptureOutQueryRequest {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
     ///         .await;
     /// }
     /// ```
     pub async fn capture_out(
         &self,
         reference_id: &str,
+        request: &CaptureOutQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<AuthCapturePayoutResponse, ApiError> {
         let endpoint_auth_headers = self
@@ -410,7 +436,12 @@ impl MoneyOutClient {
                 Method::GET,
                 &format!("MoneyOut/capture/{}", reference_id),
                 None,
-                None,
+                QueryBuilder::new()
+                    .bool(
+                        "autoConvertSameDayAch",
+                        request.auto_convert_same_day_ach.clone(),
+                    )
+                    .build(),
                 options,
             )
             .await

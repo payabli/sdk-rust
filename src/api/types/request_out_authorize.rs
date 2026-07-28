@@ -51,6 +51,12 @@ pub struct RequestOutAuthorize {
     #[serde(rename = "forceVendorCreation")]
     #[serde(skip)]
     pub force_vendor_creation: Option<bool>,
+    /// When `true`, Payabli authorizes the payout for same-day ACH processing instead of standard ACH. Same-day ACH must be enabled for the paypoint, otherwise the authorization fails with a `400` response and `responseCode` `3492`. Only ACH payouts honor this flag. Wire and RTP payouts ignore it.
+    ///
+    /// Same-day ACH has a daily cutoff. Capture the transaction before the cutoff, or pass `autoConvertSameDayAch` with a value of `true` when you capture it.
+    #[serde(rename = "sameDayACH")]
+    #[serde(skip)]
+    pub same_day_ach: Option<bool>,
 }
 
 impl RequestOutAuthorize {
@@ -77,6 +83,7 @@ pub struct RequestOutAuthorizeBuilder {
     allow_duplicated_bills: Option<bool>,
     do_not_create_bills: Option<bool>,
     force_vendor_creation: Option<bool>,
+    same_day_ach: Option<bool>,
 }
 
 impl RequestOutAuthorizeBuilder {
@@ -155,6 +162,11 @@ impl RequestOutAuthorizeBuilder {
         self
     }
 
+    pub fn same_day_ach(mut self, value: bool) -> Self {
+        self.same_day_ach = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`RequestOutAuthorize`].
     /// This method will fail if any of the following fields are not set:
     /// - [`entry_point`](RequestOutAuthorizeBuilder::entry_point)
@@ -189,6 +201,7 @@ impl RequestOutAuthorizeBuilder {
             allow_duplicated_bills: self.allow_duplicated_bills,
             do_not_create_bills: self.do_not_create_bills,
             force_vendor_creation: self.force_vendor_creation,
+            same_day_ach: self.same_day_ach,
         })
     }
 }
