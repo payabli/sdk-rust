@@ -36,10 +36,12 @@
 //! - **PayoutSubscription**
 //! - **ChargeBacks**
 //! - **Case Management**
+//! - **Billing**
 
 use crate::{ApiError, ClientConfig};
 
 pub mod bill;
+pub mod billing;
 pub mod boarding;
 pub mod case_management;
 pub mod charge_backs;
@@ -109,6 +111,7 @@ pub struct ApiClient {
     pub payout_subscription: PayoutSubscriptionClient,
     pub charge_backs: ChargeBacksClient,
     pub case_management: CaseManagementClient,
+    pub billing: BillingClient,
 }
 
 impl ApiClient {
@@ -149,11 +152,13 @@ impl ApiClient {
             payout_subscription: PayoutSubscriptionClient::new(config.clone())?,
             charge_backs: ChargeBacksClient::new(config.clone())?,
             case_management: CaseManagementClient::new(config.clone())?,
+            billing: BillingClient::new(config.clone())?,
         })
     }
 }
 
 pub use bill::BillClient;
+pub use billing::BillingClient;
 pub use boarding::BoardingClient;
 pub use case_management::CaseManagementClient;
 pub use charge_backs::ChargeBacksClient;

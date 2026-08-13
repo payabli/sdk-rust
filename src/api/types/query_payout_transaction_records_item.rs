@@ -175,6 +175,10 @@ pub struct QueryPayoutTransactionRecordsItem {
     #[serde(rename = "EntityId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub entity_id: Option<String>,
+    /// Operations currently permitted for this payout, derived from its status. Always present; empty for terminal statuses such as paid or canceled. Read this array directly rather than inferring available actions from `PaymentStatus`.
+    #[serde(rename = "allowedActions")]
+    #[serde(default)]
+    pub allowed_actions: Vec<QueryPayoutTransactionRecordsItemAllowedActionsItem>,
 }
 
 impl QueryPayoutTransactionRecordsItem {
@@ -235,6 +239,7 @@ pub struct QueryPayoutTransactionRecordsItemBuilder {
     payout_program: Option<PayoutProgram>,
     ach_trace_number: Option<String>,
     entity_id: Option<String>,
+    allowed_actions: Option<Vec<QueryPayoutTransactionRecordsItemAllowedActionsItem>>,
 }
 
 impl QueryPayoutTransactionRecordsItemBuilder {
@@ -483,7 +488,17 @@ impl QueryPayoutTransactionRecordsItemBuilder {
         self
     }
 
+    pub fn allowed_actions(
+        mut self,
+        value: Vec<QueryPayoutTransactionRecordsItemAllowedActionsItem>,
+    ) -> Self {
+        self.allowed_actions = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`QueryPayoutTransactionRecordsItem`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`allowed_actions`](QueryPayoutTransactionRecordsItemBuilder::allowed_actions)
     pub fn build(self) -> Result<QueryPayoutTransactionRecordsItem, BuildError> {
         Ok(QueryPayoutTransactionRecordsItem {
             id_out: self.id_out,
@@ -535,6 +550,9 @@ impl QueryPayoutTransactionRecordsItemBuilder {
             payout_program: self.payout_program,
             ach_trace_number: self.ach_trace_number,
             entity_id: self.entity_id,
+            allowed_actions: self
+                .allowed_actions
+                .ok_or_else(|| BuildError::missing_field("allowed_actions"))?,
         })
     }
 }

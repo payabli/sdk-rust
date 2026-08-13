@@ -44,7 +44,7 @@ pub struct VendorDataResponse {
     #[serde(rename = "State")]
     #[serde(default)]
     pub state: String,
-    /// Vendor's zip code.
+    /// Vendor's ZIP code.
     #[serde(rename = "Zip")]
     #[serde(default)]
     pub zip: String,

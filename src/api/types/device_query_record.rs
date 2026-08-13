@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct DeviceQueryRecord {
     /// Unique identifier for the cloud device.
     #[serde(rename = "deviceId")]
@@ -83,6 +83,10 @@ pub struct DeviceQueryRecord {
     #[serde(rename = "paypointEntry")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub paypoint_entry: Option<String>,
+    /// URL of the paypoint's logo, when available.
+    #[serde(rename = "paypointLogo")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub paypoint_logo: Option<String>,
     /// External identifier for the paypoint.
     #[serde(rename = "externalPaypointId")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -95,6 +99,19 @@ pub struct DeviceQueryRecord {
     #[serde(rename = "parentOrgName")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub parent_org_name: Option<String>,
+    /// URL of the parent organization's logo, when available.
+    #[serde(rename = "parentOrgLogo")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub parent_org_logo: Option<String>,
+    /// Total number of transactions processed by this device.
+    #[serde(rename = "transactionCount")]
+    #[serde(default)]
+    pub transaction_count: i64,
+    /// Total volume processed by this device, as the sum of net transaction amounts.
+    #[serde(rename = "volumeProcessed")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers")]
+    pub volume_processed: f64,
 }
 
 impl DeviceQueryRecord {
@@ -127,9 +144,13 @@ pub struct DeviceQueryRecordBuilder {
     paypoint_dba: Option<String>,
     paypoint_legal: Option<String>,
     paypoint_entry: Option<String>,
+    paypoint_logo: Option<String>,
     external_paypoint_id: Option<String>,
     parent_org_id: Option<i64>,
     parent_org_name: Option<String>,
+    parent_org_logo: Option<String>,
+    transaction_count: Option<i64>,
+    volume_processed: Option<f64>,
 }
 
 impl DeviceQueryRecordBuilder {
@@ -238,6 +259,11 @@ impl DeviceQueryRecordBuilder {
         self
     }
 
+    pub fn paypoint_logo(mut self, value: impl Into<String>) -> Self {
+        self.paypoint_logo = Some(value.into());
+        self
+    }
+
     pub fn external_paypoint_id(mut self, value: impl Into<String>) -> Self {
         self.external_paypoint_id = Some(value.into());
         self
@@ -253,7 +279,25 @@ impl DeviceQueryRecordBuilder {
         self
     }
 
+    pub fn parent_org_logo(mut self, value: impl Into<String>) -> Self {
+        self.parent_org_logo = Some(value.into());
+        self
+    }
+
+    pub fn transaction_count(mut self, value: i64) -> Self {
+        self.transaction_count = Some(value);
+        self
+    }
+
+    pub fn volume_processed(mut self, value: f64) -> Self {
+        self.volume_processed = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`DeviceQueryRecord`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`transaction_count`](DeviceQueryRecordBuilder::transaction_count)
+    /// - [`volume_processed`](DeviceQueryRecordBuilder::volume_processed)
     pub fn build(self) -> Result<DeviceQueryRecord, BuildError> {
         Ok(DeviceQueryRecord {
             device_id: self.device_id,
@@ -277,9 +321,17 @@ impl DeviceQueryRecordBuilder {
             paypoint_dba: self.paypoint_dba,
             paypoint_legal: self.paypoint_legal,
             paypoint_entry: self.paypoint_entry,
+            paypoint_logo: self.paypoint_logo,
             external_paypoint_id: self.external_paypoint_id,
             parent_org_id: self.parent_org_id,
             parent_org_name: self.parent_org_name,
+            parent_org_logo: self.parent_org_logo,
+            transaction_count: self
+                .transaction_count
+                .ok_or_else(|| BuildError::missing_field("transaction_count"))?,
+            volume_processed: self
+                .volume_processed
+                .ok_or_else(|| BuildError::missing_field("volume_processed"))?,
         })
     }
 }

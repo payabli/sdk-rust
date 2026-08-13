@@ -5,9 +5,10 @@ pub struct AuthCapturePayoutResponseData {
     #[serde(rename = "authCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub auth_code: Option<Authcode>,
+    /// The transaction reference ID, used to capture the transaction. Returns `null` when no transaction is created, such as a declined authorization.
     #[serde(rename = "referenceId")]
-    #[serde(default)]
-    pub reference_id: Referenceidtrans,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub reference_id: Option<Referenceidtrans>,
     #[serde(rename = "resultCode")]
     #[serde(default)]
     pub result_code: ResultCode,
@@ -101,7 +102,6 @@ impl AuthCapturePayoutResponseDataBuilder {
 
     /// Consumes the builder and constructs a [`AuthCapturePayoutResponseData`].
     /// This method will fail if any of the following fields are not set:
-    /// - [`reference_id`](AuthCapturePayoutResponseDataBuilder::reference_id)
     /// - [`result_code`](AuthCapturePayoutResponseDataBuilder::result_code)
     /// - [`result_text`](AuthCapturePayoutResponseDataBuilder::result_text)
     /// - [`customer_id`](AuthCapturePayoutResponseDataBuilder::customer_id)
@@ -109,9 +109,7 @@ impl AuthCapturePayoutResponseDataBuilder {
     pub fn build(self) -> Result<AuthCapturePayoutResponseData, BuildError> {
         Ok(AuthCapturePayoutResponseData {
             auth_code: self.auth_code,
-            reference_id: self
-                .reference_id
-                .ok_or_else(|| BuildError::missing_field("reference_id"))?,
+            reference_id: self.reference_id,
             result_code: self
                 .result_code
                 .ok_or_else(|| BuildError::missing_field("result_code"))?,

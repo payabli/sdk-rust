@@ -21,9 +21,7 @@ pub struct ListDevicesQueryRequest {
     /// <Info>
     /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
     ///
-    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
-    ///
-    /// For example:
+    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
     /// --url https://api-sandbox.payabli.com/api/Query/devices/8cfec329267?parameters=status=1&limitRecord=20
     ///
@@ -36,7 +34,7 @@ pub struct ListDevicesQueryRequest {
     /// Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference)
     /// for more information.
     ///
-    /// **List of field names accepted:**
+    /// **Accepted field names:**
     ///
     ///
     /// - `deviceId` (eq, ne, ct, nct)
@@ -85,8 +83,16 @@ pub struct ListDevicesQueryRequest {
     ///
     /// - `parentOrgName` (eq, ne, ct, nct)
     ///
+    /// - `paypointLogo` (eq, ne, ct, nct)
     ///
-    /// **List of comparison operators accepted:**
+    /// - `parentOrgLogo` (eq, ne, ct, nct)
+    ///
+    /// - `transactionCount` (eq, ne, gt, ge, lt, le)
+    ///
+    /// - `volumeProcessed` (eq, ne, gt, ge, lt, le)
+    ///
+    ///
+    /// **Accepted comparison operators:**
     ///
     /// - `eq` or empty => equal
     ///

@@ -54,7 +54,7 @@ pub struct QueryTransferSummary {
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers::option")]
     pub split_amount: Option<f64>,
-    /// Service fees are any pass-through fees charged to the customer at the time of payment.  These aren't transferred to the merchant when the batch is transferred and funded.
+    /// Service fees are any pass-through fees charged to the customer at the time of payment. These aren't transferred to the merchant when the batch is transferred and funded.
     #[serde(rename = "serviceFees")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
@@ -67,7 +67,7 @@ pub struct QueryTransferSummary {
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers::option")]
     pub net_batch_amount: Option<f64>,
-    /// The transfer amount is the net batch amount plus or minus any returns, refunds,  billing and fees items, chargebacks, adjustments, and third party payments.  This is the amount from the batch that is transferred to the merchant bank account.
+    /// The transfer amount is the net batch amount plus or minus any returns, refunds, billing and fees items, chargebacks, adjustments, and third party payments. This is the amount from the batch that is transferred to the merchant bank account.
     #[serde(rename = "transferAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]

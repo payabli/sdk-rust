@@ -29,7 +29,7 @@ pub struct OrganizationData {
     pub org_entry_name: Option<Orgentryname>,
     #[serde(rename = "orgId")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub organization_data_org_id: Option<Orgidstring>,
+    pub org_id: Option<Orgidstring>,
     #[serde(rename = "orgLogo")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_logo: Option<FileContent>,
@@ -77,7 +77,7 @@ pub struct OrganizationDataBuilder {
     org_city: Option<Orgcity>,
     org_country: Option<Orgcountry>,
     org_entry_name: Option<Orgentryname>,
-    organization_data_org_id: Option<Orgidstring>,
+    org_id: Option<Orgidstring>,
     org_logo: Option<FileContent>,
     org_name: Option<Orgname>,
     org_parent_id: Option<OrgParentId>,
@@ -135,8 +135,8 @@ impl OrganizationDataBuilder {
         self
     }
 
-    pub fn organization_data_org_id(mut self, value: Orgidstring) -> Self {
-        self.organization_data_org_id = Some(value);
+    pub fn org_id(mut self, value: Orgidstring) -> Self {
+        self.org_id = Some(value);
         self
     }
 
@@ -197,7 +197,7 @@ impl OrganizationDataBuilder {
             org_city: self.org_city,
             org_country: self.org_country,
             org_entry_name: self.org_entry_name,
-            organization_data_org_id: self.organization_data_org_id,
+            org_id: self.org_id,
             org_logo: self.org_logo,
             org_name: self.org_name,
             org_parent_id: self.org_parent_id,

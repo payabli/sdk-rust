@@ -121,7 +121,7 @@ impl OrganizationClient {
     ///
     /// # Arguments
     ///
-    /// * `org_id` - The numeric identifier for organization, assigned by Payabli.
+    /// * `org_id_path_param` - The numeric identifier for organization, assigned by Payabli.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -155,7 +155,7 @@ impl OrganizationClient {
     ///                 org_city: Some(Orgcity("Johnson City".to_string())),
     ///                 org_country: Some(Orgcountry("US".to_string())),
     ///                 org_entry_name: Some(Orgentryname("pilgrim-planner".to_string())),
-    ///                 organization_data_org_id: Some(Orgidstring("123".to_string())),
+    ///                 org_id: Some(Orgidstring("123".to_string())),
     ///                 org_name: Some(Orgname("Pilgrim Planner".to_string())),
     ///                 org_state: Some(Orgstate("TN".to_string())),
     ///                 org_timezone: Some(Orgtimezone(-5)),
@@ -171,7 +171,7 @@ impl OrganizationClient {
     /// ```
     pub async fn edit_organization(
         &self,
-        org_id: i64,
+        org_id_path_param: i64,
         request: &OrganizationData,
         options: Option<RequestOptions>,
     ) -> Result<EditOrganizationResponse, ApiError> {
@@ -192,7 +192,7 @@ impl OrganizationClient {
         self.http_client
             .execute_request(
                 Method::PUT,
-                &format!("Organization/{}", org_id),
+                &format!("Organization/{}", org_id_path_param),
                 Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,

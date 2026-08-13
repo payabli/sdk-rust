@@ -2,7 +2,7 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct SubscriptionQueryRecords {
-    /// Timestamp of when the subscription ws created, in UTC.
+    /// Timestamp of when the subscription was created, in UTC.
     #[serde(rename = "CreatedAt")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub created_at: Option<CreatedAt>,

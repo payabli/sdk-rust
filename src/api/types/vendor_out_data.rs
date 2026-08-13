@@ -6,10 +6,14 @@ pub struct VendorOutData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub additional_data: Option<AdditionalData>,
     /// Vendor's street address. Allowed characters are letters, numbers, spaces, and `. ,
+    ///
+    /// For a PO Box address, this field holds only the PO Box, for example `PO Box 29652`, and the rest of the address, such as a department number, is in `Address2`.
     #[serde(rename = "Address1")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub address_1: Option<AddressNullable>,
     /// Additional line for vendor's address, such as a suite or unit number.
+    ///
+    /// For a PO Box address, this field holds the part of the address that follows the PO Box, for example `Dept# 880662`.
     #[serde(rename = "Address2")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub address_2: Option<AddressAddtlNullable>,

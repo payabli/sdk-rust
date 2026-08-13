@@ -18,6 +18,9 @@ pub struct RequestOutAuthorizeVendorData {
     pub phone: Option<VendorPhone>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub email: Option<Email>,
+    /// Vendor's address
+    ///
+    /// For a PO Box address, include only the PO Box in this field, for example `PO Box 29652`. Put the rest of the address, such as a department number, in `address2`.
     #[serde(rename = "address1")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub address_1: Option<AddressNullable>,
@@ -69,6 +72,9 @@ pub struct RequestOutAuthorizeVendorData {
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub additional_data: Option<AdditionalData>,
+    /// Additional line for vendor's address.
+    ///
+    /// For a PO Box address, this field holds the part of the address that follows the PO Box, for example `Dept# 880662`.
     #[serde(rename = "address2")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub address_2: Option<AddressAddtlNullable>,

@@ -1337,9 +1337,7 @@ impl MoneyInClient {
     ///         .money_in
     ///         .refundv_2(
     ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
-    ///             &RefundV2Request {
-    ///                 ..Default::default()
-    ///             },
+    ///             &Default::default(),
     ///             None,
     ///         )
     ///         .await;
@@ -1381,7 +1379,7 @@ impl MoneyInClient {
     /// This is the v2 version of the refund endpoint, and returns the unified response format. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
     ///
     /// <Note>
-    /// To refund a split-funded transaction, include split instructions in the request body. Omit the body for a standard refund.
+    /// For a standard refund, whether full (`amount` set to 0) or partial, send no request body. Include a request body only to refund a split-funded transaction, with split instructions in `refundDetails`.
     /// </Note>
     ///
     /// # Arguments
@@ -1410,9 +1408,7 @@ impl MoneyInClient {
     ///         .refundv_2_amount(
     ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
     ///             0.0,
-    ///             &RefundV2Request {
-    ///                 ..Default::default()
-    ///             },
+    ///             &Default::default(),
     ///             None,
     ///         )
     ///         .await;

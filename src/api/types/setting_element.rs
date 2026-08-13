@@ -4,7 +4,7 @@ pub use crate::prelude::*;
 pub struct SettingElement {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub enabled: Option<Enabled>,
-    /// Fields to display on the reciept.
+    /// Fields to display on the receipt.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fields: Option<Vec<DisplayProperty>>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -13,7 +13,7 @@ pub struct SettingElement {
     #[serde(rename = "sendAuto")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub send_auto: Option<bool>,
-    /// When `true`, you must send the reciept to the payor manually using the [/MoneyIn/sendreceipt/\{transId\}](/developers/api-reference/moneyin/send-receipt-for-transaction) endpoint.
+    /// When `true`, you must send the receipt to the payor manually using the [/MoneyIn/sendreceipt/\{transId\}](/developers/api-reference/moneyin/send-receipt-for-transaction) endpoint.
     #[serde(rename = "sendManual")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub send_manual: Option<bool>,

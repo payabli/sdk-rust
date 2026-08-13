@@ -9,10 +9,14 @@ pub struct VendorData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub additional_data: Option<AdditionalDataMap>,
     /// Vendor's street address. If any address field is provided, this field is required along with `city`, `state`, and `zip`. Allowed characters are letters, numbers, spaces, and `. ,
+    ///
+    /// For a PO Box address, include only the PO Box in this field, for example `PO Box 29652`. Put the rest of the address, such as a department number, in `address2`.
     #[serde(rename = "address1")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub address_1: Option<AddressNullable>,
     /// Additional line for vendor's address, such as a suite or unit number. Always optional.
+    ///
+    /// For a PO Box address, this field holds the part of the address that follows the PO Box, for example `Dept# 880662`.
     #[serde(rename = "address2")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub address_2: Option<AddressAddtlNullable>,

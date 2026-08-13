@@ -21,7 +21,7 @@ pub struct V2BadRequestError {
     /// Payabli's unified response code for validation errors. Starts with 'E'. See [Pay In unified response codes reference](/guides/pay-in-unified-response-codes-reference) for more information.
     #[serde(default)]
     pub code: String,
-    /// Dictionary of field-specific validation errors. Keys are field paths (e.g., "paymentMethod.cardnumber") and values are arrays of error details.
+    /// Dictionary of field-specific validation errors. Keys are field paths (for example, "paymentMethod.cardnumber") and values are arrays of error details.
     #[serde(default)]
     pub errors: HashMap<String, Vec<V2BadRequestErrorDetail>>,
     /// Pagination token (equivalent to pageIdentifier in v1 APIs). Usually null for errors.
