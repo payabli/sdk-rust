@@ -28472,7 +28472,7 @@ async fn main() {
         .funding
         .deposit_funds(
             &DepositFundsRequest {
-                amount: 10.0,
+                amount: 1500.0,
                 entrypoint: Entrypointfield("48acde49".to_string()),
                 account_id: "333".to_string(),
                 paypoint_id: None,
