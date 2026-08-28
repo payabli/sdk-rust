@@ -124,7 +124,7 @@ pub struct QueryResponseSettlementsRecordsItem {
     #[serde(rename = "TransactionTime")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transaction_time: Option<TransactionTime>,
-    /// Payment method used: card or ach.
+    /// The payment method used for the transaction, for example card, ach, or device.
     #[serde(rename = "TransMethod")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub trans_method: Option<String>,

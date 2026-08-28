@@ -11,6 +11,8 @@ pub enum PaymentMethod {
 
     PayMethodCloud(PayMethodCloud),
 
+    PayMethodDevice(PayMethodDevice),
+
     Check(Check),
 
     Cash(Cash),
@@ -33,6 +35,10 @@ impl PaymentMethod {
 
     pub fn is_pay_method_cloud(&self) -> bool {
         matches!(self, Self::PayMethodCloud(_))
+    }
+
+    pub fn is_pay_method_device(&self) -> bool {
+        matches!(self, Self::PayMethodDevice(_))
     }
 
     pub fn is_check(&self) -> bool {
@@ -103,6 +109,20 @@ impl PaymentMethod {
         }
     }
 
+    pub fn as_pay_method_device(&self) -> Option<&PayMethodDevice> {
+        match self {
+            Self::PayMethodDevice(value) => Some(value),
+            _ => None,
+        }
+    }
+
+    pub fn into_pay_method_device(self) -> Option<PayMethodDevice> {
+        match self {
+            Self::PayMethodDevice(value) => Some(value),
+            _ => None,
+        }
+    }
+
     pub fn as_check(&self) -> Option<&Check> {
         match self {
             Self::Check(value) => Some(value),
@@ -165,6 +185,11 @@ impl fmt::Display for PaymentMethod {
                 serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
             ),
             Self::PayMethodCloud(value) => write!(
+                f,
+                "{}",
+                serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))
+            ),
+            Self::PayMethodDevice(value) => write!(
                 f,
                 "{}",
                 serde_json::to_string(value).unwrap_or_else(|_| format!("{:?}", value))

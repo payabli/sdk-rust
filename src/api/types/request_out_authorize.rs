@@ -24,10 +24,10 @@ pub struct RequestOutAuthorize {
     #[serde(rename = "vendorData")]
     #[serde(default)]
     pub vendor_data: RequestOutAuthorizeVendorData,
-    /// Array of bills associated to the transaction
+    /// Bills to pay with this payout, each referenced by `billId`.
     #[serde(rename = "invoiceData")]
-    #[serde(default)]
-    pub invoice_data: Vec<RequestOutAuthorizeInvoiceData>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub invoice_data: Option<Vec<RequestOutAuthorizeInvoiceData>>,
     #[serde(rename = "accountId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub account_id: Option<AccountId>,
@@ -47,10 +47,6 @@ pub struct RequestOutAuthorize {
     #[serde(rename = "doNotCreateBills")]
     #[serde(skip)]
     pub do_not_create_bills: Option<bool>,
-    /// When `true`, the request creates a new vendor record, regardless of whether the vendor already exists.
-    #[serde(rename = "forceVendorCreation")]
-    #[serde(skip)]
-    pub force_vendor_creation: Option<bool>,
     /// When `true`, Payabli authorizes the payout for same-day ACH processing instead of standard ACH. Same-day ACH must be enabled for the paypoint, otherwise the authorization fails with a `400` response and `responseCode` `3492`. Only ACH payouts honor this flag. Wire and RTP payouts ignore it.
     ///
     /// Same-day ACH has a daily cutoff. Capture the transaction before the cutoff, or pass `autoConvertSameDayAch` with a value of `true` when you capture it.
@@ -82,7 +78,6 @@ pub struct RequestOutAuthorizeBuilder {
     auto_capture: Option<AutoCapture>,
     allow_duplicated_bills: Option<bool>,
     do_not_create_bills: Option<bool>,
-    force_vendor_creation: Option<bool>,
     same_day_ach: Option<bool>,
 }
 
@@ -157,11 +152,6 @@ impl RequestOutAuthorizeBuilder {
         self
     }
 
-    pub fn force_vendor_creation(mut self, value: bool) -> Self {
-        self.force_vendor_creation = Some(value);
-        self
-    }
-
     pub fn same_day_ach(mut self, value: bool) -> Self {
         self.same_day_ach = Some(value);
         self
@@ -173,7 +163,6 @@ impl RequestOutAuthorizeBuilder {
     /// - [`payment_method`](RequestOutAuthorizeBuilder::payment_method)
     /// - [`payment_details`](RequestOutAuthorizeBuilder::payment_details)
     /// - [`vendor_data`](RequestOutAuthorizeBuilder::vendor_data)
-    /// - [`invoice_data`](RequestOutAuthorizeBuilder::invoice_data)
     pub fn build(self) -> Result<RequestOutAuthorize, BuildError> {
         Ok(RequestOutAuthorize {
             entry_point: self
@@ -191,16 +180,13 @@ impl RequestOutAuthorizeBuilder {
             vendor_data: self
                 .vendor_data
                 .ok_or_else(|| BuildError::missing_field("vendor_data"))?,
-            invoice_data: self
-                .invoice_data
-                .ok_or_else(|| BuildError::missing_field("invoice_data"))?,
+            invoice_data: self.invoice_data,
             account_id: self.account_id,
             subdomain: self.subdomain,
             subscription_id: self.subscription_id,
             auto_capture: self.auto_capture,
             allow_duplicated_bills: self.allow_duplicated_bills,
             do_not_create_bills: self.do_not_create_bills,
-            force_vendor_creation: self.force_vendor_creation,
             same_day_ach: self.same_day_ach,
         })
     }

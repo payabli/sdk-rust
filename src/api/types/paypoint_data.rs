@@ -57,6 +57,11 @@ pub struct PaypointData {
     #[serde(rename = "State")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub state: Option<StateNullable>,
+    /// This business description is captured during boarding. It differs from `summary`, which
+    /// reports counts of customers, transactions, and subscriptions attached to the paypoint.
+    #[serde(rename = "Summary")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub business_summary: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub summary: Option<PaypointSummary>,
     #[serde(rename = "TimeZone")]
@@ -101,6 +106,7 @@ pub struct PaypointDataBuilder {
     phone: Option<PhoneNumber>,
     service_data: Option<Services>,
     state: Option<StateNullable>,
+    business_summary: Option<String>,
     summary: Option<PaypointSummary>,
     time_zone: Option<Timezone>,
     website_address: Option<Website>,
@@ -199,6 +205,11 @@ impl PaypointDataBuilder {
         self
     }
 
+    pub fn business_summary(mut self, value: impl Into<String>) -> Self {
+        self.business_summary = Some(value.into());
+        self
+    }
+
     pub fn summary(mut self, value: PaypointSummary) -> Self {
         self.summary = Some(value);
         self
@@ -245,6 +256,7 @@ impl PaypointDataBuilder {
             phone: self.phone,
             service_data: self.service_data,
             state: self.state,
+            business_summary: self.business_summary,
             summary: self.summary,
             time_zone: self.time_zone,
             website_address: self.website_address,

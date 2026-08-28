@@ -18,6 +18,7 @@
 //! - **Query**
 //! - **Ocr**
 //! - **Notificationlogs**
+//! - **Device**
 //! - **Cloud**
 //! - **LineItem**
 //! - **Boarding**
@@ -48,6 +49,7 @@ pub mod charge_backs;
 pub mod check_capture;
 pub mod cloud;
 pub mod customer;
+pub mod device;
 pub mod export;
 pub mod funding;
 pub mod ghost_card;
@@ -93,6 +95,7 @@ pub struct ApiClient {
     pub query: QueryClient,
     pub ocr: OcrClient,
     pub notificationlogs: NotificationlogsClient,
+    pub device: DeviceClient,
     pub cloud: CloudClient,
     pub line_item: LineItemClient,
     pub boarding: BoardingClient,
@@ -134,6 +137,7 @@ impl ApiClient {
             query: QueryClient::new(config.clone())?,
             ocr: OcrClient::new(config.clone())?,
             notificationlogs: NotificationlogsClient::new(config.clone())?,
+            device: DeviceClient::new(config.clone())?,
             cloud: CloudClient::new(config.clone())?,
             line_item: LineItemClient::new(config.clone())?,
             boarding: BoardingClient::new(config.clone())?,
@@ -165,6 +169,7 @@ pub use charge_backs::ChargeBacksClient;
 pub use check_capture::CheckCaptureClient;
 pub use cloud::CloudClient;
 pub use customer::CustomerClient;
+pub use device::DeviceClient;
 pub use export::ExportClient;
 pub use funding::FundingClient;
 pub use ghost_card::GhostCardClient;

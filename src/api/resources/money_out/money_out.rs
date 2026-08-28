@@ -27,7 +27,6 @@ impl MoneyOutClient {
     ///
     /// * `allow_duplicated_bills` - When `true`, the authorization bypasses the requirement for unique bills, identified by vendor invoice number. This allows you to make more than one payout authorization for a bill, like a split payment.
     /// * `do_not_create_bills` - When `true`, Payabli won't automatically create a bill for this payout transaction.
-    /// * `force_vendor_creation` - When `true`, the request creates a new vendor record, regardless of whether the vendor already exists.
     /// * `same_day_ach` - When `true`, Payabli authorizes the payout for same-day ACH processing instead of standard ACH. Same-day ACH must be enabled for the paypoint, otherwise the authorization fails with a `400` response and `responseCode` `3492`. Only ACH payouts honor this flag. Wire and RTP payouts ignore it.
     ///
     /// Same-day ACH has a daily cutoff. Capture the transaction before the cutoff, or pass `autoConvertSameDayAch` with a value of `true` when you capture it.
@@ -67,14 +66,13 @@ impl MoneyOutClient {
     ///                     vendor_number: Some(VendorNumber("VEN-123".to_string())),
     ///                     ..Default::default()
     ///                 },
-    ///                 invoice_data: vec![RequestOutAuthorizeInvoiceData {
-    ///                     bill_id: Some(BillId(54323)),
+    ///                 invoice_data: Some(vec![RequestOutAuthorizeInvoiceData {
+    ///                     bill_id: BillId(54323),
     ///                     ..Default::default()
-    ///                 }],
+    ///                 }]),
     ///                 auto_capture: Some(AutoCapture(true)),
     ///                 allow_duplicated_bills: None,
     ///                 do_not_create_bills: None,
-    ///                 force_vendor_creation: None,
     ///                 same_day_ach: None,
     ///                 source: None,
     ///                 order_id: None,
@@ -117,7 +115,6 @@ impl MoneyOutClient {
                         request.allow_duplicated_bills.clone(),
                     )
                     .bool("doNotCreateBills", request.do_not_create_bills.clone())
-                    .bool("forceVendorCreation", request.force_vendor_creation.clone())
                     .bool("sameDayACH", request.same_day_ach.clone())
                     .build(),
                 options,
@@ -686,7 +683,7 @@ impl MoneyOutClient {
         self.http_client
             .execute_request(
                 Method::POST,
-                "vcard/send-card-link",
+                "MoneyOut/vcard/send-card-link",
                 Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,

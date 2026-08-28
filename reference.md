@@ -1650,27 +1650,23 @@ async fn main() {
             &AuthorizeRequest {
                 body: TransRequestBody {
                     account_id: None,
-                    customer_data: Some(PayorDataRequest {
-                        customer_id: Some(CustomerId(4440)),
-                        ..Default::default()
-                    }),
-                    entry_point: Some(Entrypointfield("8cfec329267".to_string())),
+                    customer_data: None,
+                    entry_point: None,
                     invoice_data: None,
-                    ipaddress: Some(IpAddress("255.255.255.255".to_string())),
+                    ipaddress: None,
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        service_fee: Some(0.0),
-                        total_amount: 100.0,
+                        total_amount: 1.1,
                         ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
-                        cardcvv: Some(Cardcvv("999".to_string())),
-                        cardexp: Cardexp("02/27".to_string()),
-                        card_holder: Some(Cardholder("John Cassian".to_string())),
-                        cardnumber: Cardnumber("4111111111111111".to_string()),
-                        cardzip: Some(Cardzip("12345".to_string())),
-                        initiator: Some(Initiator("payor".to_string())),
+                        cardcvv: None,
+                        cardexp: Cardexp("cardexp".to_string()),
+                        card_holder: None,
+                        cardnumber: Cardnumber("cardnumber".to_string()),
+                        cardzip: None,
+                        initiator: None,
                         method: PayMethodCreditMethod::Card,
                         save_if_success: None,
                     }),
@@ -1752,11 +1748,7 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .money_in
-        .capture(
-            &"10-7d9cd67d-2d5d-4cd7-a1b7-72b8b201ec13".to_string(),
-            0.0,
-            None,
-        )
+        .capture(&"transId".to_string(), 1.1, None)
         .await;
 }
 ```
@@ -1837,11 +1829,10 @@ async fn main() {
     client
         .money_in
         .capture_auth(
-            &"10-7d9cd67d-2d5d-4cd7-a1b7-72b8b201ec13".to_string(),
+            &"transId".to_string(),
             &CaptureRequest {
                 payment_details: CapturePaymentDetails {
-                    total_amount: 105.0,
-                    service_fee: Some(5.0),
+                    total_amount: 1.1,
                     ..Default::default()
                 },
                 ..Default::default()
@@ -2161,27 +2152,23 @@ async fn main() {
             &GetpaidRequest {
                 body: TransRequestBody {
                     account_id: None,
-                    customer_data: Some(PayorDataRequest {
-                        customer_id: Some(CustomerId(4440)),
-                        ..Default::default()
-                    }),
-                    entry_point: Some(Entrypointfield("8cfec329267".to_string())),
+                    customer_data: None,
+                    entry_point: None,
                     invoice_data: None,
-                    ipaddress: Some(IpAddress("255.255.255.255".to_string())),
+                    ipaddress: None,
                     order_description: None,
                     order_id: None,
                     payment_details: PaymentDetail {
-                        service_fee: Some(0.0),
-                        total_amount: 100.0,
+                        total_amount: 1.1,
                         ..Default::default()
                     },
                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
-                        cardcvv: Some(Cardcvv("999".to_string())),
-                        cardexp: Cardexp("02/27".to_string()),
-                        card_holder: Some(Cardholder("John Cassian".to_string())),
-                        cardnumber: Cardnumber("4111111111111111".to_string()),
-                        cardzip: Some(Cardzip("12345".to_string())),
-                        initiator: Some(Initiator("payor".to_string())),
+                        cardcvv: None,
+                        cardexp: Cardexp("cardexp".to_string()),
+                        card_holder: None,
+                        cardnumber: Cardnumber("cardnumber".to_string()),
+                        cardzip: None,
+                        initiator: None,
                         method: PayMethodCreditMethod::Card,
                         save_if_success: None,
                     }),
@@ -2280,11 +2267,7 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .money_in
-        .reverse(
-            &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
-            0.0,
-            None,
-        )
+        .reverse(&"transId".to_string(), 1.1, None)
         .await;
 }
 ```
@@ -2368,11 +2351,7 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .money_in
-        .refund(
-            &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
-            0.0,
-            None,
-        )
+        .refund(&"transId".to_string(), 1.1, None)
         .await;
 }
 ```
@@ -2457,38 +2436,11 @@ async fn main() {
     client
         .money_in
         .refund_with_instructions(
-            &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
+            &"transId".to_string(),
             &RequestRefund {
-                amount: Some(100.0),
-                order_description: Some(Orderdescription("Materials deposit".to_string())),
-                refund_details: Some(RefundDetail {
-                    split_refunding: Some(vec![
-                        SplitFundingRefundContent {
-                            account_id: Some("187-342".to_string()),
-                            amount: Some(60.0),
-                            description: Some("Refunding undelivered materials".to_string()),
-                            origination_entry_point: Some("7f1a381696".to_string()),
-                            ..Default::default()
-                        },
-                        SplitFundingRefundContent {
-                            account_id: Some("187-343".to_string()),
-                            amount: Some(40.0),
-                            description: Some(
-                                "Refunding deposit for undelivered materials".to_string(),
-                            ),
-                            origination_entry_point: Some("7f1a381696".to_string()),
-                            ..Default::default()
-                        },
-                    ]),
-                    ..Default::default()
-                }),
-                source: Some(Source("api".to_string())),
                 ..Default::default()
             },
-            Some(
-                RequestOptions::new()
-                    .additional_header("idempotencyKey", "8A29FC40-CA47-1067-B31D-00DD010662DB"),
-            ),
+            None,
         )
         .await;
 }
@@ -2878,10 +2830,7 @@ async fn main() {
         ..Default::default()
     };
     let client = ApiClient::new(config).expect("Failed to build client");
-    client
-        .money_in
-        .void(&"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(), None)
-        .await;
+    client.money_in.void(&"transId".to_string(), None).await;
 }
 ```
 </dd>
@@ -16082,6 +16031,82 @@ async fn main() {
 </dl>
 </details>
 
+## Device
+<details><summary><code>client.device.<a href="/src/api/resources/device/client.rs">challenge</a>(entry: String) -> Result&lt;DeviceChallengeResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generates a one-time, 6-digit verification code for activating a
+semi-integrated card-present device in a paypoint. After calling this endpoint, an operator enters the returned code
+on the device's terminal, along with a device name, to register the
+device to the paypoint resolved from `{entry}`.
+
+A code expires 5 minutes after it's issued. A paypoint can have several
+codes active at once — for example, when activating a batch of devices —
+and a code binds to whichever device enters it first.
+
+Authenticate with an OAuth2 Bearer token that has the `device_registry` scope.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .device
+        .challenge(&"8cfec329267".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Cloud
 <details><summary><code>client.cloud.<a href="/src/api/resources/cloud/client.rs">add_device</a>(entry: String, request: DeviceEntry) -> Result&lt;AddDeviceResponse, ApiError&gt;</code></summary>
 <dl>
@@ -16347,7 +16372,7 @@ async fn main() {
 <dl>
 <dd>
 
-Use [List devices by paypoint](/developers/api-reference/cloud/get-list-of-devices-for-a-paypoint) instead, which supports filters, sorting, and pagination.
+Use [List devices by paypoint](/developers/api-reference/get-list-of-devices-for-a-paypoint) instead, which supports filters, sorting, and pagination.
 
 Get a list of cloud devices registered to an entrypoint.
 </dd>
@@ -27303,7 +27328,7 @@ async fn main() {
 </details>
 
 ## MoneyOut
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">authorize_out</a>(request: RequestOutAuthorize, allow_duplicated_bills: Option&lt;Option&lt;bool&gt;&gt;, do_not_create_bills: Option&lt;Option&lt;bool&gt;&gt;, force_vendor_creation: Option&lt;Option&lt;bool&gt;&gt;, same_day_ach: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">authorize_out</a>(request: RequestOutAuthorize, allow_duplicated_bills: Option&lt;Option&lt;bool&gt;&gt;, do_not_create_bills: Option&lt;Option&lt;bool&gt;&gt;, same_day_ach: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -27365,14 +27390,13 @@ async fn main() {
                     vendor_number: Some(VendorNumber("VEN-123".to_string())),
                     ..Default::default()
                 },
-                invoice_data: vec![RequestOutAuthorizeInvoiceData {
-                    bill_id: Some(BillId(54323)),
+                invoice_data: Some(vec![RequestOutAuthorizeInvoiceData {
+                    bill_id: BillId(54323),
                     ..Default::default()
-                }],
+                }]),
                 auto_capture: Some(AutoCapture(true)),
                 allow_duplicated_bills: None,
                 do_not_create_bills: None,
-                force_vendor_creation: None,
                 same_day_ach: None,
                 source: None,
                 order_id: None,
@@ -27454,7 +27478,7 @@ async fn main() {
 <dl>
 <dd>
 
-**invoice_data:** `Vec<RequestOutAuthorizeInvoiceData>` — Array of bills associated to the transaction
+**invoice_data:** `Option<Vec<RequestOutAuthorizeInvoiceData>>` — Bills to pay with this payout, each referenced by `billId`.
     
 </dd>
 </dl>
@@ -27503,14 +27527,6 @@ async fn main() {
 <dd>
 
 **do_not_create_bills:** `Option<bool>` — When `true`, Payabli won't automatically create a bill for this payout transaction.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**force_vendor_creation:** `Option<bool>` — When `true`, the request creates a new vendor record, regardless of whether the vendor already exists.
     
 </dd>
 </dl>

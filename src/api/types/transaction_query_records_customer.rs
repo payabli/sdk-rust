@@ -47,7 +47,7 @@ pub struct TransactionQueryRecordsCustomer {
     #[serde(rename = "invoiceData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub invoice_data: Option<BillData>,
-    /// Payment method used: card, ach, or wallet.
+    /// The payment method used for the transaction, for example card, ach, or device.
     #[serde(rename = "Method")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub method: Option<String>,

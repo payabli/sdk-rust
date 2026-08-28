@@ -16,8 +16,8 @@ pub struct V2TransactionDetailResponseData {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub authcode: Option<Authcode>,
     /// Unique identifier for the transaction assigned by the payment processor.
-    #[serde(default)]
-    pub transactionid: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub transactionid: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub avsresponse: Option<AvsResponse>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -155,7 +155,6 @@ impl V2TransactionDetailResponseDataBuilder {
     /// - [`result_code`](V2TransactionDetailResponseDataBuilder::result_code)
     /// - [`result_code_text`](V2TransactionDetailResponseDataBuilder::result_code_text)
     /// - [`responsetext`](V2TransactionDetailResponseDataBuilder::responsetext)
-    /// - [`transactionid`](V2TransactionDetailResponseDataBuilder::transactionid)
     /// - [`response_code`](V2TransactionDetailResponseDataBuilder::response_code)
     /// - [`response_code_text`](V2TransactionDetailResponseDataBuilder::response_code_text)
     pub fn build(self) -> Result<V2TransactionDetailResponseData, BuildError> {
@@ -171,9 +170,7 @@ impl V2TransactionDetailResponseDataBuilder {
                 .responsetext
                 .ok_or_else(|| BuildError::missing_field("responsetext"))?,
             authcode: self.authcode,
-            transactionid: self
-                .transactionid
-                .ok_or_else(|| BuildError::missing_field("transactionid"))?,
+            transactionid: self.transactionid,
             avsresponse: self.avsresponse,
             avsresponse_text: self.avsresponse_text,
             cvvresponse: self.cvvresponse,

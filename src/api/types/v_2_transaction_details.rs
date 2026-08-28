@@ -28,8 +28,8 @@ pub struct V2TransactionDetails {
     pub external_processor_information: ExternalProcessorInformation,
     /// Gateway transaction identifier.
     #[serde(rename = "gatewayTransId")]
-    #[serde(default)]
-    pub gateway_trans_id: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub gateway_trans_id: Option<String>,
     #[serde(rename = "orderId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub order_id: Option<OrderId>,
@@ -505,7 +505,6 @@ impl V2TransactionDetailsBuilder {
     /// - [`payment_trans_id`](V2TransactionDetailsBuilder::payment_trans_id)
     /// - [`connector_name`](V2TransactionDetailsBuilder::connector_name)
     /// - [`external_processor_information`](V2TransactionDetailsBuilder::external_processor_information)
-    /// - [`gateway_trans_id`](V2TransactionDetailsBuilder::gateway_trans_id)
     /// - [`method`](V2TransactionDetailsBuilder::method)
     /// - [`batch_number`](V2TransactionDetailsBuilder::batch_number)
     /// - [`batch_amount`](V2TransactionDetailsBuilder::batch_amount)
@@ -563,9 +562,7 @@ impl V2TransactionDetailsBuilder {
             external_processor_information: self
                 .external_processor_information
                 .ok_or_else(|| BuildError::missing_field("external_processor_information"))?,
-            gateway_trans_id: self
-                .gateway_trans_id
-                .ok_or_else(|| BuildError::missing_field("gateway_trans_id"))?,
+            gateway_trans_id: self.gateway_trans_id,
             order_id: self.order_id,
             method: self
                 .method

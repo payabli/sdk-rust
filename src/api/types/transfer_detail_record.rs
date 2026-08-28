@@ -130,7 +130,7 @@ pub struct TransferDetailRecord {
     #[serde(rename = "OrderId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub order_id: Option<OrderId>,
-    /// Payment method used: card, ach, or wallet
+    /// The payment method used for the transaction, for example card, ach, or device.
     #[serde(rename = "Method")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub method: Option<String>,

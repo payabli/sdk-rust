@@ -24,7 +24,7 @@ pub struct PaymentDetail {
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers::option")]
     pub service_fee: Option<f64>,
-    /// Split funding instructions for the transaction. See [Split a Transaction](/developers/developer-guides/money-in-split-funding) for more.
+    /// Split funding instructions for the transaction. See [Split a Transaction](/guides/pay-in-developer-routing-split-funds) for more.
     #[serde(rename = "splitFunding")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub split_funding: Option<SplitFunding>,

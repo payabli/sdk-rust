@@ -4,11 +4,11 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct TransactionDetailPaymentData {
     #[serde(rename = "maskedAccount")]
-    #[serde(default)]
-    pub masked_account: Maskedaccount,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub masked_account: Option<Maskedaccount>,
     #[serde(rename = "accountType")]
-    #[serde(default)]
-    pub account_type: Accounttype,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub account_type: Option<Accounttype>,
     #[serde(rename = "accountExp")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub account_exp: Option<Accountexp>,
@@ -134,18 +134,12 @@ impl TransactionDetailPaymentDataBuilder {
 
     /// Consumes the builder and constructs a [`TransactionDetailPaymentData`].
     /// This method will fail if any of the following fields are not set:
-    /// - [`masked_account`](TransactionDetailPaymentDataBuilder::masked_account)
-    /// - [`account_type`](TransactionDetailPaymentDataBuilder::account_type)
     /// - [`holder_name`](TransactionDetailPaymentDataBuilder::holder_name)
     /// - [`payment_details`](TransactionDetailPaymentDataBuilder::payment_details)
     pub fn build(self) -> Result<TransactionDetailPaymentData, BuildError> {
         Ok(TransactionDetailPaymentData {
-            masked_account: self
-                .masked_account
-                .ok_or_else(|| BuildError::missing_field("masked_account"))?,
-            account_type: self
-                .account_type
-                .ok_or_else(|| BuildError::missing_field("account_type"))?,
+            masked_account: self.masked_account,
+            account_type: self.account_type,
             account_exp: self.account_exp,
             holder_name: self
                 .holder_name

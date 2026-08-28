@@ -48,27 +48,23 @@ impl MoneyInClient {
     ///             &AuthorizeRequest {
     ///                 body: TransRequestBody {
     ///                     account_id: None,
-    ///                     customer_data: Some(PayorDataRequest {
-    ///                         customer_id: Some(CustomerId(4440)),
-    ///                         ..Default::default()
-    ///                     }),
-    ///                     entry_point: Some(Entrypointfield("8cfec329267".to_string())),
+    ///                     customer_data: None,
+    ///                     entry_point: None,
     ///                     invoice_data: None,
-    ///                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
+    ///                     ipaddress: None,
     ///                     order_description: None,
     ///                     order_id: None,
     ///                     payment_details: PaymentDetail {
-    ///                         service_fee: Some(0.0),
-    ///                         total_amount: 100.0,
+    ///                         total_amount: 1.1,
     ///                         ..Default::default()
     ///                     },
     ///                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
-    ///                         cardcvv: Some(Cardcvv("999".to_string())),
-    ///                         cardexp: Cardexp("02/27".to_string()),
-    ///                         card_holder: Some(Cardholder("John Cassian".to_string())),
-    ///                         cardnumber: Cardnumber("4111111111111111".to_string()),
-    ///                         cardzip: Some(Cardzip("12345".to_string())),
-    ///                         initiator: Some(Initiator("payor".to_string())),
+    ///                         cardcvv: None,
+    ///                         cardexp: Cardexp("cardexp".to_string()),
+    ///                         card_holder: None,
+    ///                         cardnumber: Cardnumber("cardnumber".to_string()),
+    ///                         cardzip: None,
+    ///                         initiator: None,
     ///                         method: PayMethodCreditMethod::Card,
     ///                         save_if_success: None,
     ///                     }),
@@ -148,11 +144,7 @@ impl MoneyInClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .money_in
-    ///         .capture(
-    ///             &"10-7d9cd67d-2d5d-4cd7-a1b7-72b8b201ec13".to_string(),
-    ///             0.0,
-    ///             None,
-    ///         )
+    ///         .capture(&"transId".to_string(), 1.1, None)
     ///         .await;
     /// }
     /// ```
@@ -218,11 +210,10 @@ impl MoneyInClient {
     ///     client
     ///         .money_in
     ///         .capture_auth(
-    ///             &"10-7d9cd67d-2d5d-4cd7-a1b7-72b8b201ec13".to_string(),
+    ///             &"transId".to_string(),
     ///             &CaptureRequest {
     ///                 payment_details: CapturePaymentDetails {
-    ///                     total_amount: 105.0,
-    ///                     service_fee: Some(5.0),
+    ///                     total_amount: 1.1,
     ///                     ..Default::default()
     ///                 },
     ///                 ..Default::default()
@@ -454,27 +445,23 @@ impl MoneyInClient {
     ///             &GetpaidRequest {
     ///                 body: TransRequestBody {
     ///                     account_id: None,
-    ///                     customer_data: Some(PayorDataRequest {
-    ///                         customer_id: Some(CustomerId(4440)),
-    ///                         ..Default::default()
-    ///                     }),
-    ///                     entry_point: Some(Entrypointfield("8cfec329267".to_string())),
+    ///                     customer_data: None,
+    ///                     entry_point: None,
     ///                     invoice_data: None,
-    ///                     ipaddress: Some(IpAddress("255.255.255.255".to_string())),
+    ///                     ipaddress: None,
     ///                     order_description: None,
     ///                     order_id: None,
     ///                     payment_details: PaymentDetail {
-    ///                         service_fee: Some(0.0),
-    ///                         total_amount: 100.0,
+    ///                         total_amount: 1.1,
     ///                         ..Default::default()
     ///                     },
     ///                     payment_method: PaymentMethod::PayMethodCredit(PayMethodCredit {
-    ///                         cardcvv: Some(Cardcvv("999".to_string())),
-    ///                         cardexp: Cardexp("02/27".to_string()),
-    ///                         card_holder: Some(Cardholder("John Cassian".to_string())),
-    ///                         cardnumber: Cardnumber("4111111111111111".to_string()),
-    ///                         cardzip: Some(Cardzip("12345".to_string())),
-    ///                         initiator: Some(Initiator("payor".to_string())),
+    ///                         cardcvv: None,
+    ///                         cardexp: Cardexp("cardexp".to_string()),
+    ///                         card_holder: None,
+    ///                         cardnumber: Cardnumber("cardnumber".to_string()),
+    ///                         cardzip: None,
+    ///                         initiator: None,
     ///                         method: PayMethodCreditMethod::Card,
     ///                         save_if_success: None,
     ///                     }),
@@ -561,11 +548,7 @@ impl MoneyInClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .money_in
-    ///         .reverse(
-    ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
-    ///             0.0,
-    ///             None,
-    ///         )
+    ///         .reverse(&"transId".to_string(), 1.1, None)
     ///         .await;
     /// }
     /// ```
@@ -633,11 +616,7 @@ impl MoneyInClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .money_in
-    ///         .refund(
-    ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
-    ///             0.0,
-    ///             None,
-    ///         )
+    ///         .refund(&"transId".to_string(), 1.1, None)
     ///         .await;
     /// }
     /// ```
@@ -701,38 +680,11 @@ impl MoneyInClient {
     ///     client
     ///         .money_in
     ///         .refund_with_instructions(
-    ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
+    ///             &"transId".to_string(),
     ///             &RequestRefund {
-    ///                 amount: Some(100.0),
-    ///                 order_description: Some(Orderdescription("Materials deposit".to_string())),
-    ///                 refund_details: Some(RefundDetail {
-    ///                     split_refunding: Some(vec![
-    ///                         SplitFundingRefundContent {
-    ///                             account_id: Some("187-342".to_string()),
-    ///                             amount: Some(60.0),
-    ///                             description: Some("Refunding undelivered materials".to_string()),
-    ///                             origination_entry_point: Some("7f1a381696".to_string()),
-    ///                             ..Default::default()
-    ///                         },
-    ///                         SplitFundingRefundContent {
-    ///                             account_id: Some("187-343".to_string()),
-    ///                             amount: Some(40.0),
-    ///                             description: Some(
-    ///                                 "Refunding deposit for undelivered materials".to_string(),
-    ///                             ),
-    ///                             origination_entry_point: Some("7f1a381696".to_string()),
-    ///                             ..Default::default()
-    ///                         },
-    ///                     ]),
-    ///                     ..Default::default()
-    ///                 }),
-    ///                 source: Some(Source("api".to_string())),
     ///                 ..Default::default()
     ///             },
-    ///             Some(
-    ///                 RequestOptions::new()
-    ///                     .additional_header("idempotencyKey", "8A29FC40-CA47-1067-B31D-00DD010662DB"),
-    ///             ),
+    ///             None,
     ///         )
     ///         .await;
     /// }
@@ -998,10 +950,7 @@ impl MoneyInClient {
     ///         ..Default::default()
     ///     };
     ///     let client = ApiClient::new(config).expect("Failed to build client");
-    ///     client
-    ///         .money_in
-    ///         .void(&"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(), None)
-    ///         .await;
+    ///     client.money_in.void(&"transId".to_string(), None).await;
     /// }
     /// ```
     pub async fn void(
