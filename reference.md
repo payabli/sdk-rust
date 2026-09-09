@@ -3148,7 +3148,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2</a>(trans_id: String, request: RefundV2Request) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2</a>(trans_id: String, request: Option&lt;RefundV2Request&gt;) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3193,7 +3193,7 @@ async fn main() {
         .money_in
         .refundv_2(
             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
-            &Default::default(),
+            None,
             None,
         )
         .await;
@@ -3224,7 +3224,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2_amount</a>(trans_id: String, amount: f64, request: RefundV2Request) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
+<details><summary><code>client.money_in.<a href="/src/api/resources/money_in/client.rs">refundv_2_amount</a>(trans_id: String, amount: f64, request: Option&lt;RefundV2Request&gt;) -> Result&lt;V2TransactionResponseWrapper, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -3270,7 +3270,7 @@ async fn main() {
         .refundv_2_amount(
             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
             0.0,
-            &Default::default(),
+            None,
             None,
         )
         .await;
@@ -9526,10 +9526,13 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 - `chargebackDate` (gt, ge, lt, le, eq, ne)
 - `transId`  (ne, eq, ct, nct)
 - `method`   (in, nin, eq, ne)
+- `amount`  (gt, ge, lt, le, eq, ne): the chargeback or return's own amount (the top-level `netAmount` in the response), unlike `netAmount`, which matches the original transaction's net
+- `totalAmount`  (gt, ge, lt, le, eq, ne): the original transaction's gross amount, including service and pending fees (`transaction.totalAmount` in the response)
 - `netAmount`  (gt, ge, lt, le, eq, ne)
 - `reasonCode`   (in, nin, eq, ne)
 - `reason`  (ct, nct, eq, ne)
 - `replyDate` (gt, ge, lt, le, eq, ne)
+- `replyBy` (gt, ge, lt, le, eq, ne): alias of `replyDate`, matching the `replyBy` field in the response
 - `caseNumber`  (ct, nct, eq, ne)
 - `status`   (in, nin, eq, ne)
 - `accountType`   (in, nin, eq, ne)
@@ -9584,7 +9587,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 <dl>
 <dd>
 
-**sort_by:** `Option<String>` — The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+**sort_by:** `Option<String>` — The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`. For this endpoint, you can also sort by `amount` and `totalAmount`.
     
 </dd>
 </dl>
@@ -9712,10 +9715,13 @@ Collection of field names, conditions, and values used to filter the query.
 - `chargebackDate` (gt, ge, lt, le, eq, ne)
 - `transId`  (ne, eq, ct, nct)
 - `method`   (in, nin, eq, ne)
+- `amount`  (gt, ge, lt, le, eq, ne): the chargeback or return's own amount (the top-level `netAmount` in the response), unlike `netAmount`, which matches the original transaction's net
+- `totalAmount`  (gt, ge, lt, le, eq, ne): the original transaction's gross amount, including service and pending fees (`transaction.totalAmount` in the response)
 - `netAmount`  (gt, ge, lt, le, eq, ne)
 - `reasonCode`   (in, nin, eq, ne)
 - `reason`  (ct, nct, eq, ne)
 - `replyDate` (gt, ge, lt, le, eq, ne)
+- `replyBy` (gt, ge, lt, le, eq, ne): alias of `replyDate`, matching the `replyBy` field in the response
 - `caseNumber`  (ct, nct, eq, ne)
 - `status`   (in, nin, eq, ne)
 - `accountType`   (in, nin, eq, ne)
@@ -9771,7 +9777,7 @@ Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 
 <dl>
 <dd>
 
-**sort_by:** `Option<String>` — The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+**sort_by:** `Option<String>` — The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`. For this endpoint, you can also sort by `amount` and `totalAmount`.
     
 </dd>
 </dl>
@@ -11432,6 +11438,7 @@ Accepted field names:
   - `vendorName` (ct, nct, eq, ne)
   - `paymentMethod` (ct, nct, eq, ne, in, nin)
   - `paymentId` (ct, nct, eq, ne)
+  - `orderId` (ne, eq)
   - `parentOrgId` (ne, eq, nin, in)
   - `batchNumber` (ct, nct, eq, ne)
   - `totalAmount` (gt, ge, lt, le, eq, ne)
@@ -11625,6 +11632,7 @@ Accepted field names:
   - `parentOrgId` (ne, eq, nin, in)
   - `paymentMethod` (ct, nct, eq, ne, in, nin)
   - `paymentId` (ct, nct, eq, ne)
+  - `orderId` (ne, eq)
   - `batchNumber` (ct, nct, eq, ne)
   - `totalAmount` (gt, ge, lt, le, eq, ne)
   - `paypointLegal` (ne, eq, ct, nct)
@@ -15548,7 +15556,7 @@ Accepted comparison operators - enclosed between parentheses:
 </details>
 
 ## Ocr
-<details><summary><code>client.ocr.<a href="/src/api/resources/ocr/client.rs">ocr_document_form</a>(type_result: TypeResult, request: FileContentImageOnly) -> Result&lt;PayabliApiResponseOcr, ApiError&gt;</code></summary>
+<details><summary><code>client.ocr.<a href="/src/api/resources/ocr/client.rs">ocr_document_form</a>(type_result: TypeResult) -> Result&lt;PayabliApiResponseOcr, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15560,7 +15568,7 @@ Accepted comparison operators - enclosed between parentheses:
 <dl>
 <dd>
 
-Use this endpoint to upload an image file for OCR processing. The accepted file formats include PDF, JPG, JPEG, PNG, and GIF. Specify the desired type of result (either 'bill' or 'invoice') in the path parameter `typeResult`. The response will contain the OCR processing results, including extracted data such as bill number, vendor information, bill items, and more.
+Use this endpoint to upload a document file for OCR processing as `multipart/form-data`, with the file in a field named `file`. The accepted file formats include PDF, JPG, JPEG, PNG, and GIF. Specify the desired type of result (either 'bill' or 'invoice') in the path parameter `typeResult`. The response will contain the OCR processing results, including extracted data such as bill number, vendor information, bill items, and more. To send the file as a Base64-encoded string in a JSON body instead, use `ocrDocumentJson`.
 </dd>
 </dl>
 </dd>
@@ -15587,8 +15595,8 @@ async fn main() {
         .ocr
         .ocr_document_form(
             &TypeResult("typeResult".to_string()),
-            &FileContentImageOnly {
-                ..Default::default()
+            &OcrDocumentFormRequest {
+                file: b"test file content".to_vec(),
             },
             None,
         )
@@ -15620,7 +15628,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.ocr.<a href="/src/api/resources/ocr/client.rs">ocr_document_json</a>(type_result: TypeResult, request: FileContentImageOnly) -> Result&lt;PayabliApiResponseOcr, ApiError&gt;</code></summary>
+<details><summary><code>client.ocr.<a href="/src/api/resources/ocr/client.rs">ocr_document_json</a>(type_result: TypeResult, request: OcrDocumentJsonRequest) -> Result&lt;PayabliApiResponseOcr, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -15659,7 +15667,7 @@ async fn main() {
         .ocr
         .ocr_document_json(
             &TypeResult("typeResult".to_string()),
-            &FileContentImageOnly {
+            &OcrDocumentJsonRequest {
                 ..Default::default()
             },
             None,
@@ -15681,6 +15689,38 @@ async fn main() {
 <dd>
 
 **type_result:** `TypeResult` — The type of object to create in Payabli. Accepted values are `bill` and `invoice`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ftype:** `Option<FileContentFtype>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filename:** `Option<String>` — The name of the file to be uploaded
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**furl:** `Option<String>` — Optional URL link to the file
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**f_content:** `Option<String>` — Base64-encoded file content
     
 </dd>
 </dl>
@@ -27328,7 +27368,7 @@ async fn main() {
 </details>
 
 ## MoneyOut
-<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">authorize_out</a>(request: RequestOutAuthorize, allow_duplicated_bills: Option&lt;Option&lt;bool&gt;&gt;, do_not_create_bills: Option&lt;Option&lt;bool&gt;&gt;, same_day_ach: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">authorize_out</a>(request: AuthorizePayoutBody, allow_duplicated_bills: Option&lt;Option&lt;bool&gt;&gt;, do_not_create_bills: Option&lt;Option&lt;bool&gt;&gt;, same_day_ach: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -27374,35 +27414,33 @@ async fn main() {
     client
         .money_out
         .authorize_out(
-            &RequestOutAuthorize {
-                entry_point: Entrypointfield("8cfec329267".to_string()),
-                order_description: Some(Orderdescription("Window Painting".to_string())),
-                payment_method: AuthorizePaymentMethod {
-                    method: "managed".to_string(),
+            &AuthorizeOutRequest {
+                body: AuthorizePayoutBody {
+                    entry_point: Entrypointfield("8cfec329267".to_string()),
+                    order_description: Some(Orderdescription("Window Painting".to_string())),
+                    payment_method: AuthorizePaymentMethod {
+                        method: "managed".to_string(),
+                        ..Default::default()
+                    },
+                    payment_details: RequestOutAuthorizePaymentDetails {
+                        total_amount: Some(47.0),
+                        unbundled: Some(false),
+                        ..Default::default()
+                    },
+                    vendor_data: RequestOutAuthorizeVendorData {
+                        vendor_number: Some(VendorNumber("VEN-123".to_string())),
+                        ..Default::default()
+                    },
+                    invoice_data: Some(vec![RequestOutAuthorizeInvoiceData {
+                        bill_id: BillId(54323),
+                        ..Default::default()
+                    }]),
+                    auto_capture: Some(AutoCapture(true)),
                     ..Default::default()
                 },
-                payment_details: RequestOutAuthorizePaymentDetails {
-                    total_amount: Some(47.0),
-                    unbundled: Some(false),
-                    ..Default::default()
-                },
-                vendor_data: RequestOutAuthorizeVendorData {
-                    vendor_number: Some(VendorNumber("VEN-123".to_string())),
-                    ..Default::default()
-                },
-                invoice_data: Some(vec![RequestOutAuthorizeInvoiceData {
-                    bill_id: BillId(54323),
-                    ..Default::default()
-                }]),
-                auto_capture: Some(AutoCapture(true)),
                 allow_duplicated_bills: None,
                 do_not_create_bills: None,
                 same_day_ach: None,
-                source: None,
-                order_id: None,
-                account_id: None,
-                subdomain: None,
-                subscription_id: None,
             },
             None,
         )
@@ -27418,102 +27456,6 @@ async fn main() {
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**entry_point:** `Entrypointfield` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**source:** `Option<Source>` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**order_id:** `Option<OrderId>` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**order_description:** `Option<Orderdescription>` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**payment_method:** `AuthorizePaymentMethod` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**payment_details:** `RequestOutAuthorizePaymentDetails` — Object containing payment details.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**vendor_data:** `RequestOutAuthorizeVendorData` — Object containing vendor data.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**invoice_data:** `Option<Vec<RequestOutAuthorizeInvoiceData>>` — Bills to pay with this payout, each referenced by `billId`.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**account_id:** `Option<AccountId>` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**subdomain:** `Option<Subdomain>` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**subscription_id:** `Option<Subscriptionid>` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**auto_capture:** `Option<AutoCapture>` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -27885,6 +27827,148 @@ async fn main() {
 **auto_convert_same_day_ach:** `Option<bool>` 
 
 Controls what happens to a payout authorized with `sameDayACH` set to `true` when you capture it after the same-day ACH cutoff. When `true`, Payabli converts the payout to a standard ACH payment and captures it. When `false`, the capture is declined.
+
+This parameter has no effect on payouts that weren't authorized for same-day ACH.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">payout</a>(request: AuthorizePayoutBody, same_day_ach: Option&lt;Option&lt;bool&gt;&gt;, do_not_create_bills: Option&lt;Option&lt;bool&gt;&gt;, allow_duplicated_bills: Option&lt;Option&lt;bool&gt;&gt;, update_vendor_payment_method: Option&lt;Option&lt;bool&gt;&gt;, auto_convert_same_day_ach: Option&lt;Option&lt;bool&gt;&gt;) -> Result&lt;AuthCapturePayoutResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Authorizes a payout and captures it in the same request, returning the capture result. Use this endpoint when you need the capture outcome synchronously: it does the same work as calling `POST /MoneyOut/authorize` followed by `GET /MoneyOut/capture/{referenceId}`, in a single call.
+
+Risk and fraud review runs at both the authorize and capture stages, exactly as it does for the two-call flow.
+
+Payabli ignores the `autoCapture` field in the request body, since this endpoint always captures inline.
+
+If the capture fails, the payout stays authorized. Retry the capture with `GET /MoneyOut/capture/{referenceId}` using the `referenceId` from the error response rather than resubmitting, which would create a second payout. See the [Manage payouts guide](/guides/pay-out-developer-payouts-manage#authorize-and-capture-in-one-call) for details.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .money_out
+        .payout(
+            &PayoutRequest {
+                body: AuthorizePayoutBody {
+                    entry_point: Entrypointfield("8cfec329267".to_string()),
+                    order_description: Some(Orderdescription("Window Painting".to_string())),
+                    payment_method: AuthorizePaymentMethod {
+                        method: "managed".to_string(),
+                        ..Default::default()
+                    },
+                    payment_details: RequestOutAuthorizePaymentDetails {
+                        total_amount: Some(47.0),
+                        ..Default::default()
+                    },
+                    vendor_data: RequestOutAuthorizeVendorData {
+                        vendor_number: Some(VendorNumber("VEN-123".to_string())),
+                        ..Default::default()
+                    },
+                    invoice_data: Some(vec![RequestOutAuthorizeInvoiceData {
+                        bill_id: BillId(54323),
+                        ..Default::default()
+                    }]),
+                    ..Default::default()
+                },
+                same_day_ach: None,
+                do_not_create_bills: None,
+                allow_duplicated_bills: None,
+                update_vendor_payment_method: None,
+                auto_convert_same_day_ach: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**same_day_ach:** `Option<bool>` 
+
+When `true`, Payabli authorizes the payout for same-day ACH processing instead of standard ACH. Same-day ACH must be enabled for the paypoint, otherwise the authorization fails with a `400` response and `responseCode` `3492`. Only ACH payouts honor this flag. Wire and RTP payouts ignore it.
+
+Because this endpoint captures immediately, pass `autoConvertSameDayAch` with a value of `true` to fall back to standard ACH if the capture runs after the same-day ACH cutoff.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**do_not_create_bills:** `Option<bool>` — When `true`, Payabli won't automatically create a bill for this payout transaction.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**allow_duplicated_bills:** `Option<bool>` — When `true`, the payout bypasses the requirement for unique bills, identified by vendor invoice number. This allows you to make more than one payout for a bill, like a split payment.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**update_vendor_payment_method:** `Option<bool>` — When `true`, Payabli updates the vendor's stored default payment method to the method used in this payout.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auto_convert_same_day_ach:** `Option<bool>` 
+
+Controls what happens to a payout authorized with `sameDayACH` set to `true` when the capture runs after the same-day ACH cutoff. When `true`, Payabli converts the payout to a standard ACH payment and captures it. When `false`, the capture is declined.
 
 This parameter has no effect on payouts that weren't authorized for same-day ACH.
     

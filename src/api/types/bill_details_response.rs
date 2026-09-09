@@ -18,6 +18,14 @@ pub struct BillDetailsResponse {
     #[serde(rename = "netAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub net_amount: Option<NetAmountstring>,
+    /// The amount paid toward the bill so far.
+    #[serde(rename = "paidAmount")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub paid_amount: Option<String>,
+    /// The amount still owed on the bill, calculated as `netAmount` minus `paidAmount`.
+    #[serde(rename = "outstandingBalance")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub outstanding_balance: Option<String>,
     /// Bill discount amount.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub discount: Option<String>,
@@ -47,6 +55,8 @@ pub struct BillDetailsResponseBuilder {
     lot_number: Option<String>,
     invoice_number: Option<InvoiceNumber>,
     net_amount: Option<NetAmountstring>,
+    paid_amount: Option<String>,
+    outstanding_balance: Option<String>,
     discount: Option<String>,
     due_date: Option<NaiveDate>,
     invoice_date: Option<NaiveDate>,
@@ -71,6 +81,16 @@ impl BillDetailsResponseBuilder {
 
     pub fn net_amount(mut self, value: NetAmountstring) -> Self {
         self.net_amount = Some(value);
+        self
+    }
+
+    pub fn paid_amount(mut self, value: impl Into<String>) -> Self {
+        self.paid_amount = Some(value.into());
+        self
+    }
+
+    pub fn outstanding_balance(mut self, value: impl Into<String>) -> Self {
+        self.outstanding_balance = Some(value.into());
         self
     }
 
@@ -101,6 +121,8 @@ impl BillDetailsResponseBuilder {
             lot_number: self.lot_number,
             invoice_number: self.invoice_number,
             net_amount: self.net_amount,
+            paid_amount: self.paid_amount,
+            outstanding_balance: self.outstanding_balance,
             discount: self.discount,
             due_date: self.due_date,
             invoice_date: self.invoice_date,

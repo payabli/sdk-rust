@@ -13,7 +13,7 @@ impl OcrClient {
         })
     }
 
-    /// Use this endpoint to upload an image file for OCR processing. The accepted file formats include PDF, JPG, JPEG, PNG, and GIF. Specify the desired type of result (either 'bill' or 'invoice') in the path parameter `typeResult`. The response will contain the OCR processing results, including extracted data such as bill number, vendor information, bill items, and more.
+    /// Use this endpoint to upload a document file for OCR processing as `multipart/form-data`, with the file in a field named `file`. The accepted file formats include PDF, JPG, JPEG, PNG, and GIF. Specify the desired type of result (either 'bill' or 'invoice') in the path parameter `typeResult`. The response will contain the OCR processing results, including extracted data such as bill number, vendor information, bill items, and more. To send the file as a Base64-encoded string in a JSON body instead, use `ocrDocumentJson`.
     ///
     /// # Arguments
     ///
@@ -39,8 +39,8 @@ impl OcrClient {
     ///         .ocr
     ///         .ocr_document_form(
     ///             &TypeResult("typeResult".to_string()),
-    ///             &FileContentImageOnly {
-    ///                 ..Default::default()
+    ///             &OcrDocumentFormRequest {
+    ///                 file: b"test file content".to_vec(),
     ///             },
     ///             None,
     ///         )
@@ -50,7 +50,7 @@ impl OcrClient {
     pub async fn ocr_document_form(
         &self,
         type_result: &TypeResult,
-        request: &FileContentImageOnly,
+        request: &OcrDocumentFormRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseOcr, ApiError> {
         let endpoint_auth_headers = self
@@ -68,10 +68,10 @@ impl OcrClient {
             Some(o)
         };
         self.http_client
-            .execute_request(
+            .execute_multipart_request(
                 Method::POST,
                 &format!("Import/ocrDocumentForm/{}", type_result.0),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                request.clone().to_multipart(),
                 None,
                 options,
             )
@@ -104,7 +104,7 @@ impl OcrClient {
     ///         .ocr
     ///         .ocr_document_json(
     ///             &TypeResult("typeResult".to_string()),
-    ///             &FileContentImageOnly {
+    ///             &OcrDocumentJsonRequest {
     ///                 ..Default::default()
     ///             },
     ///             None,
@@ -115,7 +115,7 @@ impl OcrClient {
     pub async fn ocr_document_json(
         &self,
         type_result: &TypeResult,
-        request: &FileContentImageOnly,
+        request: &OcrDocumentJsonRequest,
         options: Option<RequestOptions>,
     ) -> Result<PayabliApiResponseOcr, ApiError> {
         let endpoint_auth_headers = self

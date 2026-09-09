@@ -34,10 +34,13 @@ pub struct ListChargebacksOrgQueryRequest {
     /// - `chargebackDate` (gt, ge, lt, le, eq, ne)
     /// - `transId`  (ne, eq, ct, nct)
     /// - `method`   (in, nin, eq, ne)
+    /// - `amount`  (gt, ge, lt, le, eq, ne): the chargeback or return's own amount (the top-level `netAmount` in the response), unlike `netAmount`, which matches the original transaction's net
+    /// - `totalAmount`  (gt, ge, lt, le, eq, ne): the original transaction's gross amount, including service and pending fees (`transaction.totalAmount` in the response)
     /// - `netAmount`  (gt, ge, lt, le, eq, ne)
     /// - `reasonCode`   (in, nin, eq, ne)
     /// - `reason`  (ct, nct, eq, ne)
     /// - `replyDate` (gt, ge, lt, le, eq, ne)
+    /// - `replyBy` (gt, ge, lt, le, eq, ne): alias of `replyDate`, matching the `replyBy` field in the response
     /// - `caseNumber`  (ct, nct, eq, ne)
     /// - `status`   (in, nin, eq, ne)
     /// - `accountType`   (in, nin, eq, ne)
@@ -88,7 +91,7 @@ pub struct ListChargebacksOrgQueryRequest {
     /// Example: `netAmount(gt)=20` returns all records with a `netAmount` greater than 20.00
     #[serde(skip_serializing_if = "Option::is_none")]
     pub parameters: Option<HashMap<String, Option<String>>>,
-    /// The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
+    /// The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`. For this endpoint, you can also sort by `amount` and `totalAmount`.
     #[serde(rename = "sortBy")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sort_by: Option<String>,

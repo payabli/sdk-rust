@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
-pub struct FileContentImageOnly {
+pub struct OcrDocumentJsonRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ftype: Option<FileContentFtype>,
     /// The name of the file to be uploaded
@@ -16,22 +16,22 @@ pub struct FileContentImageOnly {
     pub f_content: Option<String>,
 }
 
-impl FileContentImageOnly {
-    pub fn builder() -> FileContentImageOnlyBuilder {
-        <FileContentImageOnlyBuilder as Default>::default()
+impl OcrDocumentJsonRequest {
+    pub fn builder() -> OcrDocumentJsonRequestBuilder {
+        <OcrDocumentJsonRequestBuilder as Default>::default()
     }
 }
 
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
-pub struct FileContentImageOnlyBuilder {
+pub struct OcrDocumentJsonRequestBuilder {
     ftype: Option<FileContentFtype>,
     filename: Option<String>,
     furl: Option<String>,
     f_content: Option<String>,
 }
 
-impl FileContentImageOnlyBuilder {
+impl OcrDocumentJsonRequestBuilder {
     pub fn ftype(mut self, value: FileContentFtype) -> Self {
         self.ftype = Some(value);
         self
@@ -52,9 +52,9 @@ impl FileContentImageOnlyBuilder {
         self
     }
 
-    /// Consumes the builder and constructs a [`FileContentImageOnly`].
-    pub fn build(self) -> Result<FileContentImageOnly, BuildError> {
-        Ok(FileContentImageOnly {
+    /// Consumes the builder and constructs a [`OcrDocumentJsonRequest`].
+    pub fn build(self) -> Result<OcrDocumentJsonRequest, BuildError> {
+        Ok(OcrDocumentJsonRequest {
             ftype: self.ftype,
             filename: self.filename,
             furl: self.furl,

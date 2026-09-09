@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
-pub struct RequestOutAuthorize {
+pub struct AuthorizePayoutBody {
     #[serde(rename = "entryPoint")]
     #[serde(default)]
     pub entry_point: Entrypointfield,
@@ -39,31 +39,17 @@ pub struct RequestOutAuthorize {
     #[serde(rename = "autoCapture")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub auto_capture: Option<AutoCapture>,
-    /// When `true`, the authorization bypasses the requirement for unique bills, identified by vendor invoice number. This allows you to make more than one payout authorization for a bill, like a split payment.
-    #[serde(rename = "allowDuplicatedBills")]
-    #[serde(skip)]
-    pub allow_duplicated_bills: Option<bool>,
-    /// When `true`, Payabli won't automatically create a bill for this payout transaction.
-    #[serde(rename = "doNotCreateBills")]
-    #[serde(skip)]
-    pub do_not_create_bills: Option<bool>,
-    /// When `true`, Payabli authorizes the payout for same-day ACH processing instead of standard ACH. Same-day ACH must be enabled for the paypoint, otherwise the authorization fails with a `400` response and `responseCode` `3492`. Only ACH payouts honor this flag. Wire and RTP payouts ignore it.
-    ///
-    /// Same-day ACH has a daily cutoff. Capture the transaction before the cutoff, or pass `autoConvertSameDayAch` with a value of `true` when you capture it.
-    #[serde(rename = "sameDayACH")]
-    #[serde(skip)]
-    pub same_day_ach: Option<bool>,
 }
 
-impl RequestOutAuthorize {
-    pub fn builder() -> RequestOutAuthorizeBuilder {
-        <RequestOutAuthorizeBuilder as Default>::default()
+impl AuthorizePayoutBody {
+    pub fn builder() -> AuthorizePayoutBodyBuilder {
+        <AuthorizePayoutBodyBuilder as Default>::default()
     }
 }
 
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
-pub struct RequestOutAuthorizeBuilder {
+pub struct AuthorizePayoutBodyBuilder {
     entry_point: Option<Entrypointfield>,
     source: Option<Source>,
     order_id: Option<OrderId>,
@@ -76,12 +62,9 @@ pub struct RequestOutAuthorizeBuilder {
     subdomain: Option<Subdomain>,
     subscription_id: Option<Subscriptionid>,
     auto_capture: Option<AutoCapture>,
-    allow_duplicated_bills: Option<bool>,
-    do_not_create_bills: Option<bool>,
-    same_day_ach: Option<bool>,
 }
 
-impl RequestOutAuthorizeBuilder {
+impl AuthorizePayoutBodyBuilder {
     pub fn entry_point(mut self, value: Entrypointfield) -> Self {
         self.entry_point = Some(value);
         self
@@ -142,29 +125,14 @@ impl RequestOutAuthorizeBuilder {
         self
     }
 
-    pub fn allow_duplicated_bills(mut self, value: bool) -> Self {
-        self.allow_duplicated_bills = Some(value);
-        self
-    }
-
-    pub fn do_not_create_bills(mut self, value: bool) -> Self {
-        self.do_not_create_bills = Some(value);
-        self
-    }
-
-    pub fn same_day_ach(mut self, value: bool) -> Self {
-        self.same_day_ach = Some(value);
-        self
-    }
-
-    /// Consumes the builder and constructs a [`RequestOutAuthorize`].
+    /// Consumes the builder and constructs a [`AuthorizePayoutBody`].
     /// This method will fail if any of the following fields are not set:
-    /// - [`entry_point`](RequestOutAuthorizeBuilder::entry_point)
-    /// - [`payment_method`](RequestOutAuthorizeBuilder::payment_method)
-    /// - [`payment_details`](RequestOutAuthorizeBuilder::payment_details)
-    /// - [`vendor_data`](RequestOutAuthorizeBuilder::vendor_data)
-    pub fn build(self) -> Result<RequestOutAuthorize, BuildError> {
-        Ok(RequestOutAuthorize {
+    /// - [`entry_point`](AuthorizePayoutBodyBuilder::entry_point)
+    /// - [`payment_method`](AuthorizePayoutBodyBuilder::payment_method)
+    /// - [`payment_details`](AuthorizePayoutBodyBuilder::payment_details)
+    /// - [`vendor_data`](AuthorizePayoutBodyBuilder::vendor_data)
+    pub fn build(self) -> Result<AuthorizePayoutBody, BuildError> {
+        Ok(AuthorizePayoutBody {
             entry_point: self
                 .entry_point
                 .ok_or_else(|| BuildError::missing_field("entry_point"))?,
@@ -185,9 +153,6 @@ impl RequestOutAuthorizeBuilder {
             subdomain: self.subdomain,
             subscription_id: self.subscription_id,
             auto_capture: self.auto_capture,
-            allow_duplicated_bills: self.allow_duplicated_bills,
-            do_not_create_bills: self.do_not_create_bills,
-            same_day_ach: self.same_day_ach,
         })
     }
 }

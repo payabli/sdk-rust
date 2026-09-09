@@ -17,6 +17,11 @@ pub struct ClientConfig {
     pub max_retries: u32,
     pub custom_headers: HashMap<String, String>,
     pub user_agent: String,
+    /// Optional custom `reqwest` client, used as-is for every request.
+    /// When set, it owns all transport-level configuration (TLS, proxies, timeout,
+    /// user agent); when `None` the SDK builds its own client from `timeout` and
+    /// `user_agent`.
+    pub reqwest_client: Option<reqwest::Client>,
 }
 impl Default for ClientConfig {
     fn default() -> Self {
@@ -35,15 +40,17 @@ impl Default for ClientConfig {
                 extra_request_properties: HashMap::new(),
                 access_token_property: "access_token".to_string(),
                 expires_in_property: "expires_in".to_string(),
+                form_encoded: false,
             }),
             timeout: Duration::from_secs(60),
             max_retries: 3,
             custom_headers: HashMap::from([
                 ("X-Fern-Language".to_string(), "Rust".to_string()),
                 ("X-Fern-SDK-Name".to_string(), "payabli_api".to_string()),
-                ("X-Fern-SDK-Version".to_string(), "2.0.12".to_string()),
+                ("X-Fern-SDK-Version".to_string(), "2.0.13".to_string()),
             ]),
             user_agent: "Api Rust SDK".to_string(),
+            reqwest_client: None,
         }
     }
 }

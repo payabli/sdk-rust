@@ -35,6 +35,9 @@ pub struct QueryPayoutTransactionRecordsItem {
     #[serde(rename = "PaymentId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_id: Option<PaymentIdString>,
+    #[serde(rename = "orderId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub order_id: Option<OrderId>,
     /// ID of the transaction linked to this payout, when applicable.
     #[serde(rename = "TransId")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -199,6 +202,7 @@ pub struct QueryPayoutTransactionRecordsItemBuilder {
     paypoint_id: Option<PaypointId>,
     status: Option<i64>,
     payment_id: Option<PaymentIdString>,
+    order_id: Option<OrderId>,
     trans_id: Option<String>,
     trans_status: Option<i64>,
     trans_status_detail: Option<String>,
@@ -285,6 +289,11 @@ impl QueryPayoutTransactionRecordsItemBuilder {
 
     pub fn payment_id(mut self, value: PaymentIdString) -> Self {
         self.payment_id = Some(value);
+        self
+    }
+
+    pub fn order_id(mut self, value: OrderId) -> Self {
+        self.order_id = Some(value);
         self
     }
 
@@ -510,6 +519,7 @@ impl QueryPayoutTransactionRecordsItemBuilder {
             paypoint_id: self.paypoint_id,
             status: self.status,
             payment_id: self.payment_id,
+            order_id: self.order_id,
             trans_id: self.trans_id,
             trans_status: self.trans_status,
             trans_status_detail: self.trans_status_detail,

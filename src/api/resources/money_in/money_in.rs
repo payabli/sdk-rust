@@ -1286,7 +1286,7 @@ impl MoneyInClient {
     ///         .money_in
     ///         .refundv_2(
     ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
-    ///             &Default::default(),
+    ///             None,
     ///             None,
     ///         )
     ///         .await;
@@ -1295,7 +1295,7 @@ impl MoneyInClient {
     pub async fn refundv_2(
         &self,
         trans_id: &str,
-        request: &RefundV2Request,
+        request: Option<&RefundV2Request>,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
         let endpoint_auth_headers = self
@@ -1316,7 +1316,10 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 &format!("v2/MoneyIn/refund/{}", trans_id),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                request
+                    .map(serde_json::to_value)
+                    .transpose()
+                    .map_err(ApiError::Serialization)?,
                 None,
                 options,
             )
@@ -1357,7 +1360,7 @@ impl MoneyInClient {
     ///         .refundv_2_amount(
     ///             &"10-3ffa27df-b171-44e0-b251-e95fbfc7a723".to_string(),
     ///             0.0,
-    ///             &Default::default(),
+    ///             None,
     ///             None,
     ///         )
     ///         .await;
@@ -1367,7 +1370,7 @@ impl MoneyInClient {
         &self,
         trans_id: &str,
         amount: f64,
-        request: &RefundV2Request,
+        request: Option<&RefundV2Request>,
         options: Option<RequestOptions>,
     ) -> Result<V2TransactionResponseWrapper, ApiError> {
         let endpoint_auth_headers = self
@@ -1388,7 +1391,10 @@ impl MoneyInClient {
             .execute_request(
                 Method::POST,
                 &format!("v2/MoneyIn/refund/{}/{}", trans_id, amount),
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                request
+                    .map(serde_json::to_value)
+                    .transpose()
+                    .map_err(ApiError::Serialization)?,
                 None,
                 options,
             )

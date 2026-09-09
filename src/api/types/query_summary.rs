@@ -2,7 +2,8 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct QuerySummary {
-    #[serde(rename = "pageIdentifier")]
+    /// Pagination token for retrieving the next page of results. Returns `null` when there's no additional page.
+    #[serde(rename = "pageidentifier")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub page_identifier: Option<PageIdentifier>,
     #[serde(rename = "pageSize")]

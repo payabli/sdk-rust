@@ -143,6 +143,18 @@ pub struct BillQueryRecord2 {
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers::option")]
     pub total_amount: Option<f64>,
+    /// The amount paid toward the bill so far.
+    #[serde(rename = "PaidAmount")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
+    pub paid_amount: Option<f64>,
+    /// The amount still owed on the bill, calculated as `NetAmount` minus `PaidAmount`.
+    #[serde(rename = "OutstandingBalance")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
+    pub outstanding_balance: Option<f64>,
     /// MoneyOut transaction associated to the bill.
     #[serde(rename = "Transaction")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -196,6 +208,8 @@ pub struct BillQueryRecord2Builder {
     status: Option<Billstatus>,
     terms: Option<Terms>,
     total_amount: Option<f64>,
+    paid_amount: Option<f64>,
+    outstanding_balance: Option<f64>,
     transaction: Option<TransactionOutQueryRecord>,
     vendor: Option<VendorOutData>,
 }
@@ -376,6 +390,16 @@ impl BillQueryRecord2Builder {
         self
     }
 
+    pub fn paid_amount(mut self, value: f64) -> Self {
+        self.paid_amount = Some(value);
+        self
+    }
+
+    pub fn outstanding_balance(mut self, value: f64) -> Self {
+        self.outstanding_balance = Some(value);
+        self
+    }
+
     pub fn transaction(mut self, value: TransactionOutQueryRecord) -> Self {
         self.transaction = Some(value);
         self
@@ -424,6 +448,8 @@ impl BillQueryRecord2Builder {
             status: self.status,
             terms: self.terms,
             total_amount: self.total_amount,
+            paid_amount: self.paid_amount,
+            outstanding_balance: self.outstanding_balance,
             transaction: self.transaction,
             vendor: self.vendor,
         })

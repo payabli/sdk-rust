@@ -50,35 +50,33 @@ impl MoneyOutClient {
     ///     client
     ///         .money_out
     ///         .authorize_out(
-    ///             &RequestOutAuthorize {
-    ///                 entry_point: Entrypointfield("8cfec329267".to_string()),
-    ///                 order_description: Some(Orderdescription("Window Painting".to_string())),
-    ///                 payment_method: AuthorizePaymentMethod {
-    ///                     method: "managed".to_string(),
+    ///             &AuthorizeOutRequest {
+    ///                 body: AuthorizePayoutBody {
+    ///                     entry_point: Entrypointfield("8cfec329267".to_string()),
+    ///                     order_description: Some(Orderdescription("Window Painting".to_string())),
+    ///                     payment_method: AuthorizePaymentMethod {
+    ///                         method: "managed".to_string(),
+    ///                         ..Default::default()
+    ///                     },
+    ///                     payment_details: RequestOutAuthorizePaymentDetails {
+    ///                         total_amount: Some(47.0),
+    ///                         unbundled: Some(false),
+    ///                         ..Default::default()
+    ///                     },
+    ///                     vendor_data: RequestOutAuthorizeVendorData {
+    ///                         vendor_number: Some(VendorNumber("VEN-123".to_string())),
+    ///                         ..Default::default()
+    ///                     },
+    ///                     invoice_data: Some(vec![RequestOutAuthorizeInvoiceData {
+    ///                         bill_id: BillId(54323),
+    ///                         ..Default::default()
+    ///                     }]),
+    ///                     auto_capture: Some(AutoCapture(true)),
     ///                     ..Default::default()
     ///                 },
-    ///                 payment_details: RequestOutAuthorizePaymentDetails {
-    ///                     total_amount: Some(47.0),
-    ///                     unbundled: Some(false),
-    ///                     ..Default::default()
-    ///                 },
-    ///                 vendor_data: RequestOutAuthorizeVendorData {
-    ///                     vendor_number: Some(VendorNumber("VEN-123".to_string())),
-    ///                     ..Default::default()
-    ///                 },
-    ///                 invoice_data: Some(vec![RequestOutAuthorizeInvoiceData {
-    ///                     bill_id: BillId(54323),
-    ///                     ..Default::default()
-    ///                 }]),
-    ///                 auto_capture: Some(AutoCapture(true)),
     ///                 allow_duplicated_bills: None,
     ///                 do_not_create_bills: None,
     ///                 same_day_ach: None,
-    ///                 source: None,
-    ///                 order_id: None,
-    ///                 account_id: None,
-    ///                 subdomain: None,
-    ///                 subscription_id: None,
     ///             },
     ///             None,
     ///         )
@@ -87,7 +85,7 @@ impl MoneyOutClient {
     /// ```
     pub async fn authorize_out(
         &self,
-        request: &RequestOutAuthorize,
+        request: &AuthorizeOutRequest,
         options: Option<RequestOptions>,
     ) -> Result<AuthCapturePayoutResponse, ApiError> {
         let endpoint_auth_headers = self
@@ -108,7 +106,7 @@ impl MoneyOutClient {
             .execute_request(
                 Method::POST,
                 "MoneyOut/authorize",
-                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
                 QueryBuilder::new()
                     .bool(
                         "allowDuplicatedBills",
@@ -434,6 +432,123 @@ impl MoneyOutClient {
                 &format!("MoneyOut/capture/{}", reference_id),
                 None,
                 QueryBuilder::new()
+                    .bool(
+                        "autoConvertSameDayAch",
+                        request.auto_convert_same_day_ach.clone(),
+                    )
+                    .build(),
+                options,
+            )
+            .await
+    }
+
+    /// Authorizes a payout and captures it in the same request, returning the capture result. Use this endpoint when you need the capture outcome synchronously: it does the same work as calling `POST /MoneyOut/authorize` followed by `GET /MoneyOut/capture/{referenceId}`, in a single call.
+    ///
+    /// Risk and fraud review runs at both the authorize and capture stages, exactly as it does for the two-call flow.
+    ///
+    /// Payabli ignores the `autoCapture` field in the request body, since this endpoint always captures inline.
+    ///
+    /// If the capture fails, the payout stays authorized. Retry the capture with `GET /MoneyOut/capture/{referenceId}` using the `referenceId` from the error response rather than resubmitting, which would create a second payout. See the [Manage payouts guide](/guides/pay-out-developer-payouts-manage#authorize-and-capture-in-one-call) for details.
+    ///
+    /// # Arguments
+    ///
+    /// * `same_day_ach` - When `true`, Payabli authorizes the payout for same-day ACH processing instead of standard ACH. Same-day ACH must be enabled for the paypoint, otherwise the authorization fails with a `400` response and `responseCode` `3492`. Only ACH payouts honor this flag. Wire and RTP payouts ignore it.
+    ///
+    /// Because this endpoint captures immediately, pass `autoConvertSameDayAch` with a value of `true` to fall back to standard ACH if the capture runs after the same-day ACH cutoff.
+    /// * `do_not_create_bills` - When `true`, Payabli won't automatically create a bill for this payout transaction.
+    /// * `allow_duplicated_bills` - When `true`, the payout bypasses the requirement for unique bills, identified by vendor invoice number. This allows you to make more than one payout for a bill, like a split payment.
+    /// * `update_vendor_payment_method` - When `true`, Payabli updates the vendor's stored default payment method to the method used in this payout.
+    /// * `auto_convert_same_day_ach` - Controls what happens to a payout authorized with `sameDayACH` set to `true` when the capture runs after the same-day ACH cutoff. When `true`, Payabli converts the payout to a standard ACH payment and captures it. When `false`, the capture is declined.
+    ///
+    /// This parameter has no effect on payouts that weren't authorized for same-day ACH.
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .payout(
+    ///             &PayoutRequest {
+    ///                 body: AuthorizePayoutBody {
+    ///                     entry_point: Entrypointfield("8cfec329267".to_string()),
+    ///                     order_description: Some(Orderdescription("Window Painting".to_string())),
+    ///                     payment_method: AuthorizePaymentMethod {
+    ///                         method: "managed".to_string(),
+    ///                         ..Default::default()
+    ///                     },
+    ///                     payment_details: RequestOutAuthorizePaymentDetails {
+    ///                         total_amount: Some(47.0),
+    ///                         ..Default::default()
+    ///                     },
+    ///                     vendor_data: RequestOutAuthorizeVendorData {
+    ///                         vendor_number: Some(VendorNumber("VEN-123".to_string())),
+    ///                         ..Default::default()
+    ///                     },
+    ///                     invoice_data: Some(vec![RequestOutAuthorizeInvoiceData {
+    ///                         bill_id: BillId(54323),
+    ///                         ..Default::default()
+    ///                     }]),
+    ///                     ..Default::default()
+    ///                 },
+    ///                 same_day_ach: None,
+    ///                 do_not_create_bills: None,
+    ///                 allow_duplicated_bills: None,
+    ///                 update_vendor_payment_method: None,
+    ///                 auto_convert_same_day_ach: None,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn payout(
+        &self,
+        request: &PayoutRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<AuthCapturePayoutResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
+        self.http_client
+            .execute_request(
+                Method::POST,
+                "MoneyOut/payout",
+                Some(serde_json::to_value(&request.body).map_err(ApiError::Serialization)?),
+                QueryBuilder::new()
+                    .bool("sameDayACH", request.same_day_ach.clone())
+                    .bool("doNotCreateBills", request.do_not_create_bills.clone())
+                    .bool(
+                        "allowDuplicatedBills",
+                        request.allow_duplicated_bills.clone(),
+                    )
+                    .bool(
+                        "updateVendorPaymentMethod",
+                        request.update_vendor_payment_method.clone(),
+                    )
                     .bool(
                         "autoConvertSameDayAch",
                         request.auto_convert_same_day_ach.clone(),
