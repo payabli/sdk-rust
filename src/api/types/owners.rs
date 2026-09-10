@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct Owners {
     /// Person who is registered as the beneficial owner of the business. This is a combination of first and last name.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -51,7 +51,7 @@ pub struct Owners {
     pub ozip: Option<String>,
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
 }
 
 impl Owners {
@@ -78,7 +78,7 @@ pub struct OwnersBuilder {
     odriverstate: Option<String>,
     ostate: Option<String>,
     ozip: Option<String>,
-    additional_data: Option<AdditionalDataString>,
+    additional_data: Option<AdditionalDataMap>,
 }
 
 impl OwnersBuilder {
@@ -157,7 +157,7 @@ impl OwnersBuilder {
         self
     }
 
-    pub fn additional_data(mut self, value: AdditionalDataString) -> Self {
+    pub fn additional_data(mut self, value: AdditionalDataMap) -> Self {
         self.additional_data = Some(value);
         self
     }

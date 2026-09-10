@@ -47,7 +47,7 @@ impl Default for ClientConfig {
             custom_headers: HashMap::from([
                 ("X-Fern-Language".to_string(), "Rust".to_string()),
                 ("X-Fern-SDK-Name".to_string(), "payabli_api".to_string()),
-                ("X-Fern-SDK-Version".to_string(), "2.0.13".to_string()),
+                ("X-Fern-SDK-Version".to_string(), "2.0.14".to_string()),
             ]),
             user_agent: "Api Rust SDK".to_string(),
             reqwest_client: None,
