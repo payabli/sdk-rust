@@ -2,33 +2,33 @@ use crate::api::*;
 use crate::{ApiError, ClientConfig, HttpClient, RequestOptions};
 use reqwest::Method;
 
-pub struct DeviceClient {
+pub struct TaptopayClient {
     pub http_client: HttpClient,
 }
 
-impl DeviceClient {
+impl TaptopayClient {
     pub fn new(config: ClientConfig) -> Result<Self, ApiError> {
         Ok(Self {
             http_client: HttpClient::new(config.clone())?,
         })
     }
 
-    /// Generates a one-time, 6-digit verification code for activating a
-    /// semi-integrated card-present device in a paypoint. This endpoint is
-    /// for AXIUM devices only. After calling this endpoint, an operator
-    /// enters the returned code on the device's terminal, along with a
-    /// device name, to register the device to the paypoint resolved from
-    /// `{entry}`.
+    /// Issues a short-lived activation code for a Tap to Pay device in the
+    /// `Pending` state. This endpoint is for Tap to Pay devices only.
+    /// Deliver the code to the device to complete activation.
     ///
-    /// A code expires 5 minutes after it's issued. A paypoint can have several
-    /// codes active at once — for example, when activating a batch of devices —
-    /// and a code binds to whichever device enters it first.
+    /// A code is valid for 30 minutes after it's issued. Calling this
+    /// endpoint again for the same device before the code expires returns
+    /// the same code, with `alreadyIssued` set to `true`, instead of
+    /// generating a new one. A new code is only generated when no valid
+    /// code exists.
     ///
-    /// Authenticate with an OAuth2 bearer token that has the `device_registry` scope.
+    /// Authenticate with an OAuth2 bearer token that has the `pos_create`
+    /// permission. See [Accept Tap to Pay payments](/guides/pay-in-developer-tap-to-pay)
+    /// for the full integration guide.
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -47,16 +47,22 @@ impl DeviceClient {
     ///     };
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
-    ///         .device
-    ///         .challenge(&"8cfec329267".to_string(), None)
+    ///         .taptopay
+    ///         .activation_challenge(
+    ///             &TapToPayActivationChallengeRequest {
+    ///                 entry: Entry("8cfec329267".to_string()),
+    ///                 device_id: "499585-389fj484-3jcj8hj3".to_string(),
+    ///             },
+    ///             None,
+    ///         )
     ///         .await;
     /// }
     /// ```
-    pub async fn challenge(
+    pub async fn activation_challenge(
         &self,
-        entry: &str,
+        request: &TapToPayActivationChallengeRequest,
         options: Option<RequestOptions>,
-    ) -> Result<DeviceChallengeResponse, ApiError> {
+    ) -> Result<TapToPayActivationChallengeResponse, ApiError> {
         let endpoint_auth_headers = self
             .http_client
             .resolve_endpoint_auth_headers(&options, &[&["BearerAuth"] as &[&str]])
@@ -71,8 +77,8 @@ impl DeviceClient {
         self.http_client
             .execute_request(
                 Method::POST,
-                &format!("Device/challenge/{}", entry),
-                None,
+                "v2/device/taptopay/activate/challenge",
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
                 options,
             )

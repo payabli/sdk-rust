@@ -19,6 +19,7 @@
 //! - **Ocr**
 //! - **Notificationlogs**
 //! - **Device**
+//! - **TapToPay**
 //! - **Cloud**
 //! - **LineItem**
 //! - **Boarding**
@@ -71,6 +72,7 @@ pub mod paypoint;
 pub mod query;
 pub mod statistic;
 pub mod subscription;
+pub mod taptopay;
 pub mod templates;
 pub mod token;
 pub mod token_storage;
@@ -96,6 +98,7 @@ pub struct ApiClient {
     pub ocr: OcrClient,
     pub notificationlogs: NotificationlogsClient,
     pub device: DeviceClient,
+    pub taptopay: TaptopayClient,
     pub cloud: CloudClient,
     pub line_item: LineItemClient,
     pub boarding: BoardingClient,
@@ -138,6 +141,7 @@ impl ApiClient {
             ocr: OcrClient::new(config.clone())?,
             notificationlogs: NotificationlogsClient::new(config.clone())?,
             device: DeviceClient::new(config.clone())?,
+            taptopay: TaptopayClient::new(config.clone())?,
             cloud: CloudClient::new(config.clone())?,
             line_item: LineItemClient::new(config.clone())?,
             boarding: BoardingClient::new(config.clone())?,
@@ -191,6 +195,7 @@ pub use paypoint::PaypointClient;
 pub use query::QueryClient;
 pub use statistic::StatisticClient;
 pub use subscription::SubscriptionClient;
+pub use taptopay::TaptopayClient;
 pub use templates::TemplatesClient;
 pub use token::TokenClient;
 pub use token_storage::TokenStorageClient;

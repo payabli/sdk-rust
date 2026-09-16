@@ -8,7 +8,7 @@ pub struct DeviceChallengeData {
     /// a string.
     #[serde(default)]
     pub code: String,
-    /// UTC time when the code expires, in ISO-8601 round-trip format. A code is
+    /// UTC time when the code expires, in ISO 8601 round-trip format. A code is
     /// valid for 5 minutes after it's issued.
     #[serde(rename = "expiresAt")]
     #[serde(default)]

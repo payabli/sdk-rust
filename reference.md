@@ -3760,10 +3760,10 @@ async fn main() {
                     },
                 )),
                 schedule_details: Some(ScheduleDetail {
-                    end_date: Some("2025-03-20".to_string()),
+                    end_date: Some("2027-12-31".to_string()),
                     frequency: Some(Frequency::Weekly),
                     plan_id: Some(1),
-                    start_date: Some("2024-09-20".to_string()),
+                    start_date: Some("2027-01-01".to_string()),
                     ..Default::default()
                 }),
                 ..Default::default()
@@ -16085,15 +16085,17 @@ async fn main() {
 <dd>
 
 Generates a one-time, 6-digit verification code for activating a
-semi-integrated card-present device in a paypoint. After calling this endpoint, an operator enters the returned code
-on the device's terminal, along with a device name, to register the
-device to the paypoint resolved from `{entry}`.
+semi-integrated card-present device in a paypoint. This endpoint is
+for AXIUM devices only. After calling this endpoint, an operator
+enters the returned code on the device's terminal, along with a
+device name, to register the device to the paypoint resolved from
+`{entry}`.
 
 A code expires 5 minutes after it's issued. A paypoint can have several
 codes active at once — for example, when activating a batch of devices —
 and a code binds to whichever device enters it first.
 
-Authenticate with an OAuth2 Bearer token that has the `device_registry` scope.
+Authenticate with an OAuth2 bearer token that has the `device_registry` scope.
 </dd>
 </dl>
 </dd>
@@ -16136,6 +16138,99 @@ async fn main() {
 <dd>
 
 **entry:** `String` — The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## TapToPay
+<details><summary><code>client.taptopay.<a href="/src/api/resources/taptopay/client.rs">activation_challenge</a>(request: TapToPayActivationChallengeRequest) -> Result&lt;TapToPayActivationChallengeResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Issues a short-lived activation code for a Tap to Pay device in the
+`Pending` state. This endpoint is for Tap to Pay devices only.
+Deliver the code to the device to complete activation.
+
+A code is valid for 30 minutes after it's issued. Calling this
+endpoint again for the same device before the code expires returns
+the same code, with `alreadyIssued` set to `true`, instead of
+generating a new one. A new code is only generated when no valid
+code exists.
+
+Authenticate with an OAuth2 bearer token that has the `pos_create`
+permission. See [Accept Tap to Pay payments](/guides/pay-in-developer-tap-to-pay)
+for the full integration guide.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .taptopay
+        .activation_challenge(
+            &TapToPayActivationChallengeRequest {
+                entry: Entry("8cfec329267".to_string()),
+                device_id: "499585-389fj484-3jcj8hj3".to_string(),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `Entry` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**device_id:** `String` — The device identifier (`poiId`) returned when the device was registered.
     
 </dd>
 </dl>
@@ -24644,7 +24739,7 @@ async fn main() {
 </details>
 
 ## Statistic
-<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">basic_stats</a>(mode: String, freq: String, level: i64, entry_id: String, end_date: Option&lt;Option&lt;String&gt;&gt;, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;, start_date: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;Vec&lt;StatBasicExtendedQueryRecord&gt;, ApiError&gt;</code></summary>
+<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">basic_stats</a>(mode: String, freq: String, level: i64, entry_id: String, end_date: Option&lt;Option&lt;String&gt;&gt;, start_date: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;Vec&lt;StatBasicExtendedQueryRecord&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24656,7 +24751,7 @@ async fn main() {
 <dl>
 <dd>
 
-Retrieves the basic statistics for an organization or a paypoint, for a given time period, grouped by a particular frequency.
+Retrieves the basic statistics for an organization or a paypoint over a date range, grouped by a frequency. The response returns one row per time bucket. Counts and volumes cover approved transactions only and leave out declines. Volumes are net of fees.
 </dd>
 </dl>
 </dd>
@@ -24784,14 +24879,6 @@ Valid formats:
 <dl>
 <dd>
 
-**parameters:** `Option<std::collections::HashMap<String, Option<String>>>` — List of parameters.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **start_date:** `Option<String>` 
 
 Used with `custom` mode. The start date for the range.
@@ -24811,7 +24898,7 @@ Valid formats:
 </dl>
 </details>
 
-<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">customer_basic_stats</a>(mode: String, freq: String, customer_id: i64, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;Vec&lt;SubscriptionStatsQueryRecord&gt;, ApiError&gt;</code></summary>
+<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">customer_basic_stats</a>(mode: String, freq: String, customer_id: i64) -> Result&lt;Vec&lt;StatCustomerBasicQueryRecord&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24823,7 +24910,7 @@ Valid formats:
 <dl>
 <dd>
 
-Retrieves the basic statistics for a customer for a specific time period, grouped by a selected frequency.
+Retrieves the basic statistics for a customer over a date range, grouped by a frequency. This is a Pay In view: it counts the customer's approved transactions and returns one row per time bucket. Volume here is the gross amount, before fees.
 </dd>
 </dl>
 </dd>
@@ -24848,15 +24935,7 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .statistic
-        .customer_basic_stats(
-            &"ytd".to_string(),
-            &"m".to_string(),
-            4440,
-            &CustomerBasicStatsQueryRequest {
-                ..Default::default()
-            },
-            None,
-        )
+        .customer_basic_stats(&"m12".to_string(), &"m".to_string(), 4440, None)
         .await;
 }
 ```
@@ -24916,14 +24995,6 @@ For example, `w` groups the results by week.
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**parameters:** `Option<std::collections::HashMap<String, Option<String>>>` — List of parameters.
-    
-</dd>
-</dl>
 </dd>
 </dl>
 
@@ -24932,7 +25003,7 @@ For example, `w` groups the results by week.
 </dl>
 </details>
 
-<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">sub_stats</a>(interval: String, level: i64, entry_id: String, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;Vec&lt;StatBasicQueryRecord&gt;, ApiError&gt;</code></summary>
+<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">sub_stats</a>(interval: String, level: i64, entry_id: String) -> Result&lt;Vec&lt;SubscriptionStatsQueryRecord&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -24944,7 +25015,7 @@ For example, `w` groups the results by week.
 <dl>
 <dd>
 
-Retrieves the subscription statistics for a given interval for a paypoint or organization.
+Retrieves subscription statistics for a paypoint or organization, bucketed by how soon active subscriptions are due to renew. This is a forward-looking forecast of upcoming renewals, not charges already taken. Request a single window with `interval`, or `all` to return every window in one call.
 </dd>
 </dl>
 </dd>
@@ -24969,15 +25040,7 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .statistic
-        .sub_stats(
-            &"30".to_string(),
-            2,
-            1000000,
-            &SubStatsQueryRequest {
-                ..Default::default()
-            },
-            None,
-        )
+        .sub_stats(&"all".to_string(), 2, 1000000, None)
         .await;
 }
 ```
@@ -25026,14 +25089,6 @@ The entry level for the request:
     
 </dd>
 </dl>
-
-<dl>
-<dd>
-
-**parameters:** `Option<std::collections::HashMap<String, Option<String>>>` — List of parameters
-    
-</dd>
-</dl>
 </dd>
 </dl>
 
@@ -25042,7 +25097,7 @@ The entry level for the request:
 </dl>
 </details>
 
-<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">vendor_basic_stats</a>(mode: String, freq: String, id_vendor: i64, parameters: Option&lt;Option&lt;std::collections::HashMap&lt;String, Option&lt;String&gt;&gt;&gt;&gt;) -> Result&lt;Vec&lt;StatisticsVendorQueryRecord&gt;, ApiError&gt;</code></summary>
+<details><summary><code>client.statistic.<a href="/src/api/resources/statistic/client.rs">vendor_basic_stats</a>(mode: String, freq: String, id_vendor: i64) -> Result&lt;Vec&lt;StatisticsVendorQueryRecord&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -25054,7 +25109,7 @@ The entry level for the request:
 <dl>
 <dd>
 
-Retrieve the basic statistics about a vendor for a given time period, grouped by frequency.
+Retrieve the basic statistics about a vendor over a date range, grouped by frequency. The response returns one row per time bucket, breaking the vendor's bills down by bill state (active, sent to approval, approved, in transit, paid, and so on). Volumes are net of fees.
 </dd>
 </dl>
 </dd>
@@ -25079,15 +25134,7 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .statistic
-        .vendor_basic_stats(
-            &"ytd".to_string(),
-            &"m".to_string(),
-            1,
-            &VendorBasicStatsQueryRequest {
-                ..Default::default()
-            },
-            None,
-        )
+        .vendor_basic_stats(&"ytd".to_string(), &"m".to_string(), 1, None)
         .await;
 }
 ```
@@ -25144,14 +25191,6 @@ For example, `w` groups the results by week.
 <dd>
 
 **id_vendor:** `i64` — Vendor ID.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**parameters:** `Option<std::collections::HashMap<String, Option<String>>>` — List of parameters
     
 </dd>
 </dl>
@@ -26468,9 +26507,9 @@ async fn main() {
                 location_code: Some(LocationCode("MIA123".to_string())),
                 mcc: Some(Mcc("7777".to_string())),
                 name_1: Some(VendorName1("Herman's Coatings and Masonry".to_string())),
-                name_2: Some(VendorName2("<string>".to_string())),
-                payee_name_1: Some(PayeeName("<string>".to_string())),
-                payee_name_2: Some(PayeeName("<string>".to_string())),
+                name_2: Some(VendorName2("HCM Services".to_string())),
+                payee_name_1: Some(PayeeName("Herman Martinez".to_string())),
+                payee_name_2: Some(PayeeName("Herman Coatings".to_string())),
                 payment_method: Some(VendorPaymentMethodString("managed".to_string())),
                 phone: Some(VendorPhone("5555555555".to_string())),
                 remit_address_1: Some(Remitaddress1("123 Walnut Street".to_string())),
@@ -27529,10 +27568,7 @@ async fn main() {
     let client = ApiClient::new(config).expect("Failed to build client");
     client
         .money_out
-        .cancel_all_out(
-            &vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
-            None,
-        )
+        .cancel_all_out(&vec!["129-230".to_string(), "129-219".to_string()], None)
         .await;
 }
 ```
@@ -27717,7 +27753,7 @@ async fn main() {
         .money_out
         .capture_all_out(
             &CaptureAllOutRequest {
-                body: vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
+                body: vec!["129-230".to_string(), "129-219".to_string()],
                 auto_convert_same_day_ach: None,
             },
             None,
@@ -29043,17 +29079,17 @@ async fn main() {
                     ..Default::default()
                 },
                 bill_data: Some(vec![BillPayOutDataRequest {
-                    due_date: Some(NaiveDate::parse_from_str("2025-08-15", "%Y-%m-%d").unwrap()),
+                    due_date: Some(NaiveDate::parse_from_str("2027-08-15", "%Y-%m-%d").unwrap()),
                     invoice_date: Some(
-                        NaiveDate::parse_from_str("2025-08-01", "%Y-%m-%d").unwrap(),
+                        NaiveDate::parse_from_str("2027-08-01", "%Y-%m-%d").unwrap(),
                     ),
                     invoice_number: Some(InvoiceNumber("INV-2345".to_string())),
                     net_amount: Some(NetAmountstring("500".to_string())),
                     ..Default::default()
                 }]),
                 schedule_details: Some(PayoutScheduleDetail {
-                    start_date: Some("09/01/2027".to_string()),
-                    end_date: Some("09/01/2026".to_string()),
+                    start_date: Some("01/01/2027".to_string()),
+                    end_date: Some("12/31/2027".to_string()),
                     frequency: Some(Frequency::Monthly),
                     ..Default::default()
                 }),

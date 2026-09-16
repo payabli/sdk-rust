@@ -18,6 +18,7 @@ pub use resources::{
     ManagementClient, MoneyInClient, MoneyOutClient, NotificationClient, NotificationlogsClient,
     OcrClient, OrganizationClient, PaymentLinkClient, PaymentMethodDomainClient,
     PayoutSubscriptionClient, PaypointClient, QueryClient, StatisticClient, SubscriptionClient,
-    TemplatesClient, TokenClient, TokenStorageClient, UserClient, VendorClient, WalletClient,
+    TaptopayClient, TemplatesClient, TokenClient, TokenStorageClient, UserClient, VendorClient,
+    WalletClient,
 };
 pub use types::*;

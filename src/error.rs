@@ -40,6 +40,18 @@ pub enum ApiError {
         data: Option<V2TransactionDetails>,
         token: Option<String>,
     },
+    #[error("ForbiddenError: Access forbidden - {message}")]
+    ForbiddenError {
+        message: String,
+        resource: Option<String>,
+        required_permission: Option<String>,
+    },
+    #[error("NotFoundError: Resource not found - {message}")]
+    NotFoundError {
+        message: String,
+        resource_id: Option<String>,
+        resource_type: Option<String>,
+    },
     #[error("TooManyRequestsError: Rate limit exceeded - {message}")]
     TooManyRequestsError {
         message: String,
@@ -60,20 +72,6 @@ pub enum ApiError {
     ConflictError {
         message: String,
         conflict_type: Option<String>,
-    },
-    #[error("ForbiddenError: Access forbidden - {message}")]
-    ForbiddenError {
-        message: String,
-        is_success: Option<bool>,
-        response_code: Option<i64>,
-        response_text: Option<String>,
-        response_data: Option<PayabliErrorBodyResponseData>,
-    },
-    #[error("NotFoundError: Resource not found - {message}")]
-    NotFoundError {
-        message: String,
-        resource_id: Option<String>,
-        resource_type: Option<String>,
     },
     #[error("HTTP error {status}: {message}")]
     Http { status: u16, message: String },
@@ -255,6 +253,56 @@ impl ApiError {
                     token: None,
                 };
             }
+            403 => {
+                // Parse error body for ForbiddenError;
+                if let Some(body_str) = body {
+                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
+                        return Self::ForbiddenError {
+                            message: parsed
+                                .get("message")
+                                .and_then(|v| v.as_str())
+                                .unwrap_or("Unknown error")
+                                .to_string(),
+                            resource: parsed
+                                .get("resource")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            required_permission: parsed
+                                .get("requiredPermission")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                        };
+                    }
+                }
+                return Self::ForbiddenError {
+                    message: body.unwrap_or("Unknown error").to_string(),
+                    resource: None,
+                    required_permission: None,
+                };
+            }
+            404 => {
+                // Parse error body for NotFoundError;
+                if let Some(body_str) = body {
+                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
+                        return Self::NotFoundError {
+                            message: parsed
+                                .get("message")
+                                .and_then(|v| v.as_str())
+                                .unwrap_or("Unknown error")
+                                .to_string(),
+                            resource_id: parsed
+                                .get("resourceId")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            resource_type: parsed
+                                .get("resourceType")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                        };
+                    }
+                }
+                return Self::NotFoundError {
+                    message: body.unwrap_or("Unknown error").to_string(),
+                    resource_id: None,
+                    resource_type: None,
+                };
+            }
             429 => {
                 // Parse error body for TooManyRequestsError;
                 if let Some(body_str) = body {
@@ -342,65 +390,6 @@ impl ApiError {
                 return Self::ConflictError {
                     message: body.unwrap_or("Unknown error").to_string(),
                     conflict_type: None,
-                };
-            }
-            403 => {
-                // Parse error body for ForbiddenError;
-                if let Some(body_str) = body {
-                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
-                        return Self::ForbiddenError {
-                            message: parsed
-                                .get("message")
-                                .and_then(|v| v.as_str())
-                                .unwrap_or("Unknown error")
-                                .to_string(),
-                            is_success: parsed
-                                .get("isSuccess")
-                                .and_then(|v| serde_json::from_value::<bool>(v.clone()).ok()),
-                            response_code: parsed
-                                .get("responseCode")
-                                .and_then(|v| serde_json::from_value::<i64>(v.clone()).ok()),
-                            response_text: parsed
-                                .get("responseText")
-                                .and_then(|v| v.as_str().map(|s| s.to_string())),
-                            response_data: parsed.get("responseData").and_then(|v| {
-                                serde_json::from_value::<PayabliErrorBodyResponseData>(v.clone())
-                                    .ok()
-                            }),
-                        };
-                    }
-                }
-                return Self::ForbiddenError {
-                    message: body.unwrap_or("Unknown error").to_string(),
-                    is_success: None,
-                    response_code: None,
-                    response_text: None,
-                    response_data: None,
-                };
-            }
-            404 => {
-                // Parse error body for NotFoundError;
-                if let Some(body_str) = body {
-                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
-                        return Self::NotFoundError {
-                            message: parsed
-                                .get("message")
-                                .and_then(|v| v.as_str())
-                                .unwrap_or("Unknown error")
-                                .to_string(),
-                            resource_id: parsed
-                                .get("resourceId")
-                                .and_then(|v| v.as_str().map(|s| s.to_string())),
-                            resource_type: parsed
-                                .get("resourceType")
-                                .and_then(|v| v.as_str().map(|s| s.to_string())),
-                        };
-                    }
-                }
-                return Self::NotFoundError {
-                    message: body.unwrap_or("Unknown error").to_string(),
-                    resource_id: None,
-                    resource_type: None,
                 };
             }
             _ => Self::Http {

@@ -58,17 +58,17 @@ impl PayoutSubscriptionClient {
     ///                     ..Default::default()
     ///                 },
     ///                 bill_data: Some(vec![BillPayOutDataRequest {
-    ///                     due_date: Some(NaiveDate::parse_from_str("2025-08-15", "%Y-%m-%d").unwrap()),
+    ///                     due_date: Some(NaiveDate::parse_from_str("2027-08-15", "%Y-%m-%d").unwrap()),
     ///                     invoice_date: Some(
-    ///                         NaiveDate::parse_from_str("2025-08-01", "%Y-%m-%d").unwrap(),
+    ///                         NaiveDate::parse_from_str("2027-08-01", "%Y-%m-%d").unwrap(),
     ///                     ),
     ///                     invoice_number: Some(InvoiceNumber("INV-2345".to_string())),
     ///                     net_amount: Some(NetAmountstring("500".to_string())),
     ///                     ..Default::default()
     ///                 }]),
     ///                 schedule_details: Some(PayoutScheduleDetail {
-    ///                     start_date: Some("09/01/2027".to_string()),
-    ///                     end_date: Some("09/01/2026".to_string()),
+    ///                     start_date: Some("01/01/2027".to_string()),
+    ///                     end_date: Some("12/31/2027".to_string()),
     ///                     frequency: Some(Frequency::Monthly),
     ///                     ..Default::default()
     ///                 }),

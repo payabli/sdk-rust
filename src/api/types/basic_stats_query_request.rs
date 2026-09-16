@@ -1,7 +1,7 @@
 pub use crate::prelude::*;
 
 /// Query parameters for BasicStats
-#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct BasicStatsQueryRequest {
     /// Used with `custom` mode. The end date for the range.
     /// Valid formats:
@@ -12,9 +12,6 @@ pub struct BasicStatsQueryRequest {
     #[serde(rename = "endDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub end_date: Option<String>,
-    /// List of parameters.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub parameters: Option<HashMap<String, Option<String>>>,
     /// Used with `custom` mode. The start date for the range.
     /// Valid formats:
     /// - YYYY-mm-dd
@@ -36,18 +33,12 @@ impl BasicStatsQueryRequest {
 #[non_exhaustive]
 pub struct BasicStatsQueryRequestBuilder {
     end_date: Option<String>,
-    parameters: Option<HashMap<String, Option<String>>>,
     start_date: Option<String>,
 }
 
 impl BasicStatsQueryRequestBuilder {
     pub fn end_date(mut self, value: impl Into<String>) -> Self {
         self.end_date = Some(value.into());
-        self
-    }
-
-    pub fn parameters(mut self, value: HashMap<String, Option<String>>) -> Self {
-        self.parameters = Some(value);
         self
     }
 
@@ -60,7 +51,6 @@ impl BasicStatsQueryRequestBuilder {
     pub fn build(self) -> Result<BasicStatsQueryRequest, BuildError> {
         Ok(BasicStatsQueryRequest {
             end_date: self.end_date,
-            parameters: self.parameters,
             start_date: self.start_date,
         })
     }

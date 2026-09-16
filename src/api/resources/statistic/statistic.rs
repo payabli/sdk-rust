@@ -13,7 +13,7 @@ impl StatisticClient {
         })
     }
 
-    /// Retrieves the basic statistics for an organization or a paypoint, for a given time period, grouped by a particular frequency.
+    /// Retrieves the basic statistics for an organization or a paypoint over a date range, grouped by a frequency. The response returns one row per time bucket. Counts and volumes cover approved transactions only and leave out declines. Volumes are net of fees.
     ///
     /// # Arguments
     ///
@@ -49,7 +49,6 @@ impl StatisticClient {
     /// - YYYY/mm/dd
     /// - mm-dd-YYYY
     /// - mm/dd/YYYY
-    /// * `parameters` - List of parameters.
     /// * `start_date` - Used with `custom` mode. The start date for the range.
     /// Valid formats:
     /// - YYYY-mm-dd
@@ -120,7 +119,6 @@ impl StatisticClient {
                 None,
                 QueryBuilder::new()
                     .string("endDate", request.end_date.clone())
-                    .serialize("parameters", request.parameters.clone())
                     .string("startDate", request.start_date.clone())
                     .build(),
                 options,
@@ -128,7 +126,7 @@ impl StatisticClient {
             .await
     }
 
-    /// Retrieves the basic statistics for a customer for a specific time period, grouped by a selected frequency.
+    /// Retrieves the basic statistics for a customer over a date range, grouped by a frequency. This is a Pay In view: it counts the customer's approved transactions and returns one row per time bucket. Volume here is the gross amount, before fees.
     ///
     /// # Arguments
     ///
@@ -154,7 +152,6 @@ impl StatisticClient {
     ///
     /// For example, `w` groups the results by week.
     /// * `customer_id` - Payabli-generated customer ID. Maps to "Customer ID" column in the Payabli Portal.
-    /// * `parameters` - List of parameters.
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -174,15 +171,7 @@ impl StatisticClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .statistic
-    ///         .customer_basic_stats(
-    ///             &"ytd".to_string(),
-    ///             &"m".to_string(),
-    ///             4440,
-    ///             &CustomerBasicStatsQueryRequest {
-    ///                 ..Default::default()
-    ///             },
-    ///             None,
-    ///         )
+    ///         .customer_basic_stats(&"m12".to_string(), &"m".to_string(), 4440, None)
     ///         .await;
     /// }
     /// ```
@@ -191,9 +180,8 @@ impl StatisticClient {
         mode: &str,
         freq: &str,
         customer_id: i64,
-        request: &CustomerBasicStatsQueryRequest,
         options: Option<RequestOptions>,
-    ) -> Result<Vec<SubscriptionStatsQueryRecord>, ApiError> {
+    ) -> Result<Vec<StatCustomerBasicQueryRecord>, ApiError> {
         let endpoint_auth_headers = self
             .http_client
             .resolve_endpoint_auth_headers(
@@ -213,15 +201,13 @@ impl StatisticClient {
                 Method::GET,
                 &format!("Statistic/customerbasic/{}/{}/{}", mode, freq, customer_id),
                 None,
-                QueryBuilder::new()
-                    .serialize("parameters", request.parameters.clone())
-                    .build(),
+                None,
                 options,
             )
             .await
     }
 
-    /// Retrieves the subscription statistics for a given interval for a paypoint or organization.
+    /// Retrieves subscription statistics for a paypoint or organization, bucketed by how soon active subscriptions are due to renew. This is a forward-looking forecast of upcoming renewals, not charges already taken. Request a single window with `interval`, or `all` to return every window in one call.
     ///
     /// # Arguments
     ///
@@ -236,7 +222,6 @@ impl StatisticClient {
     /// - 0 for Organization
     /// - 2 for Paypoint
     /// * `entry_id` - Identifier in Payabli for the entity.
-    /// * `parameters` - List of parameters
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -256,15 +241,7 @@ impl StatisticClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .statistic
-    ///         .sub_stats(
-    ///             &"30".to_string(),
-    ///             2,
-    ///             1000000,
-    ///             &SubStatsQueryRequest {
-    ///                 ..Default::default()
-    ///             },
-    ///             None,
-    ///         )
+    ///         .sub_stats(&"all".to_string(), 2, 1000000, None)
     ///         .await;
     /// }
     /// ```
@@ -273,9 +250,8 @@ impl StatisticClient {
         interval: &str,
         level: i64,
         entry_id: i64,
-        request: &SubStatsQueryRequest,
         options: Option<RequestOptions>,
-    ) -> Result<Vec<StatBasicQueryRecord>, ApiError> {
+    ) -> Result<Vec<SubscriptionStatsQueryRecord>, ApiError> {
         let endpoint_auth_headers = self
             .http_client
             .resolve_endpoint_auth_headers(
@@ -298,15 +274,13 @@ impl StatisticClient {
                     interval, level, entry_id
                 ),
                 None,
-                QueryBuilder::new()
-                    .serialize("parameters", request.parameters.clone())
-                    .build(),
+                None,
                 options,
             )
             .await
     }
 
-    /// Retrieve the basic statistics about a vendor for a given time period, grouped by frequency.
+    /// Retrieve the basic statistics about a vendor over a date range, grouped by frequency. The response returns one row per time bucket, breaking the vendor's bills down by bill state (active, sent to approval, approved, in transit, paid, and so on). Volumes are net of fees.
     ///
     /// # Arguments
     ///
@@ -332,7 +306,6 @@ impl StatisticClient {
     ///
     /// For example, `w` groups the results by week.
     /// * `id_vendor` - Vendor ID.
-    /// * `parameters` - List of parameters
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -352,15 +325,7 @@ impl StatisticClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .statistic
-    ///         .vendor_basic_stats(
-    ///             &"ytd".to_string(),
-    ///             &"m".to_string(),
-    ///             1,
-    ///             &VendorBasicStatsQueryRequest {
-    ///                 ..Default::default()
-    ///             },
-    ///             None,
-    ///         )
+    ///         .vendor_basic_stats(&"ytd".to_string(), &"m".to_string(), 1, None)
     ///         .await;
     /// }
     /// ```
@@ -369,7 +334,6 @@ impl StatisticClient {
         mode: &str,
         freq: &str,
         id_vendor: i64,
-        request: &VendorBasicStatsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<Vec<StatisticsVendorQueryRecord>, ApiError> {
         let endpoint_auth_headers = self
@@ -391,9 +355,7 @@ impl StatisticClient {
                 Method::GET,
                 &format!("Statistic/vendorbasic/{}/{}/{}", mode, freq, id_vendor),
                 None,
-                QueryBuilder::new()
-                    .serialize("parameters", request.parameters.clone())
-                    .build(),
+                None,
                 options,
             )
             .await

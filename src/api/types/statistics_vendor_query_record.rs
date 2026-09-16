@@ -2,73 +2,73 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct StatisticsVendorQueryRecord {
-    /// Statistical grouping identifier
+    /// The time bucket for this row, formatted according to the query's `freq` (for example, `2025-11` for a monthly bucket). Each bill falls in the bucket of its most recent update. The counts below break the vendor's bills down by bill state.
     #[serde(rename = "statX")]
     #[serde(default)]
     pub stat_x: String,
-    /// Number of active transactions
+    /// Number of the vendor's bills in the active state (created, not yet submitted for approval).
     #[serde(default)]
     pub active: i64,
-    /// Volume of active transactions
+    /// Total value of the vendor's active bills, net of fees.
     #[serde(rename = "activeVolume")]
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers")]
     pub active_volume: f64,
-    /// Number of transactions sent to approval
+    /// Number of the vendor's bills submitted into an approval workflow.
     #[serde(rename = "sentToApproval")]
     #[serde(default)]
     pub sent_to_approval: i64,
-    /// Volume of transactions sent to approval
+    /// Total value of the vendor's bills sent to approval, net of fees.
     #[serde(rename = "sentToApprovalVolume")]
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers")]
     pub sent_to_approval_volume: f64,
-    /// Number of transactions to approval
+    /// Number of the vendor's bills awaiting an approver's decision.
     #[serde(rename = "toApproval")]
     #[serde(default)]
     pub to_approval: i64,
-    /// Volume of transactions to approval
+    /// Total value of the vendor's bills awaiting approval, net of fees.
     #[serde(rename = "toApprovalVolume")]
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers")]
     pub to_approval_volume: f64,
-    /// Number of approved transactions
+    /// Number of the vendor's bills approved for payment.
     #[serde(default)]
     pub approved: i64,
-    /// Volume of approved transactions
+    /// Total value of the vendor's approved bills, net of fees.
     #[serde(rename = "approvedVolume")]
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers")]
     pub approved_volume: f64,
-    /// Number of disapproved transactions
+    /// Number of the vendor's bills rejected during approval.
     #[serde(default)]
     pub disapproved: i64,
-    /// Volume of disapproved transactions
+    /// Total value of the vendor's disapproved bills, net of fees.
     #[serde(rename = "disapprovedVolume")]
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers")]
     pub disapproved_volume: f64,
-    /// Number of cancelled transactions
+    /// Number of the vendor's cancelled bills.
     #[serde(default)]
     pub cancelled: i64,
-    /// Volume of cancelled transactions
+    /// Total value of the vendor's cancelled bills, net of fees.
     #[serde(rename = "cancelledVolume")]
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers")]
     pub cancelled_volume: f64,
-    /// Number of transactions in transit
+    /// Number of the vendor's bills whose payment is in transit.
     #[serde(rename = "inTransit")]
     #[serde(default)]
     pub in_transit: i64,
-    /// Volume of transactions in transit
+    /// Total value of the vendor's in-transit bills, net of fees.
     #[serde(rename = "inTransitVolume")]
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers")]
     pub in_transit_volume: f64,
-    /// Number of paid transactions
+    /// Number of the vendor's bills marked paid. Paid means the payout has settled, not merely that Payabli issued it.
     #[serde(default)]
     pub paid: i64,
-    /// Volume of paid transactions
+    /// Total value of the vendor's paid bills, net of fees.
     #[serde(rename = "paidVolume")]
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers")]

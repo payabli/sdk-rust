@@ -238,10 +238,10 @@ impl SubscriptionClient {
     ///                     },
     ///                 )),
     ///                 schedule_details: Some(ScheduleDetail {
-    ///                     end_date: Some("2025-03-20".to_string()),
+    ///                     end_date: Some("2027-12-31".to_string()),
     ///                     frequency: Some(Frequency::Weekly),
     ///                     plan_id: Some(1),
-    ///                     start_date: Some("2024-09-20".to_string()),
+    ///                     start_date: Some("2027-01-01".to_string()),
     ///                     ..Default::default()
     ///                 }),
     ///                 ..Default::default()

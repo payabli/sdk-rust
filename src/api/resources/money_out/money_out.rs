@@ -143,10 +143,7 @@ impl MoneyOutClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .money_out
-    ///         .cancel_all_out(
-    ///             &vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
-    ///             None,
-    ///         )
+    ///         .cancel_all_out(&vec!["129-230".to_string(), "129-219".to_string()], None)
     ///         .await;
     /// }
     /// ```
@@ -324,7 +321,7 @@ impl MoneyOutClient {
     ///         .money_out
     ///         .capture_all_out(
     ///             &CaptureAllOutRequest {
-    ///                 body: vec!["2-29".to_string(), "2-28".to_string(), "2-27".to_string()],
+    ///                 body: vec!["129-230".to_string(), "129-219".to_string()],
     ///                 auto_convert_same_day_ach: None,
     ///             },
     ///             None,
