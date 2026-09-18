@@ -11,7 +11,7 @@ pub struct BillOutData {
     pub accounting_field_2: Option<AccountingField>,
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
     /// An array of bill images. Attachments aren't required, but we strongly
     /// recommend including them. Including a bill image can make payouts
     /// smoother and prevent delays. You can include either the Base64-encoded
@@ -102,7 +102,7 @@ impl BillOutData {
 pub struct BillOutDataBuilder {
     accounting_field_1: Option<AccountingField>,
     accounting_field_2: Option<AccountingField>,
-    additional_data: Option<AdditionalDataString>,
+    additional_data: Option<AdditionalDataMap>,
     attachments: Option<Attachments>,
     bill_date: Option<NaiveDate>,
     bill_items: Option<Billitems>,
@@ -133,7 +133,7 @@ impl BillOutDataBuilder {
         self
     }
 
-    pub fn additional_data(mut self, value: AdditionalDataString) -> Self {
+    pub fn additional_data(mut self, value: AdditionalDataMap) -> Self {
         self.additional_data = Some(value);
         self
     }

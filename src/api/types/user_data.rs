@@ -6,7 +6,7 @@ pub struct UserData {
     pub access: Option<Vec<UsrAccess>>,
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalData>,
+    pub additional_data: Option<AdditionalDataMap>,
     /// The user's email address.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub email: Option<Email>,
@@ -42,7 +42,7 @@ impl UserData {
 #[non_exhaustive]
 pub struct UserDataBuilder {
     access: Option<Vec<UsrAccess>>,
-    additional_data: Option<AdditionalData>,
+    additional_data: Option<AdditionalDataMap>,
     email: Option<Email>,
     language: Option<Language>,
     mfa_data: Option<MfaData>,
@@ -60,7 +60,7 @@ impl UserDataBuilder {
         self
     }
 
-    pub fn additional_data(mut self, value: AdditionalData) -> Self {
+    pub fn additional_data(mut self, value: AdditionalDataMap) -> Self {
         self.additional_data = Some(value);
         self
     }

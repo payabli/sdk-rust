@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct BillPayOutData {
     /// Bill ID in Payabli.
     #[serde(rename = "billId")]
@@ -22,7 +22,7 @@ pub struct BillPayOutData {
     pub terms: Option<Terms>,
     #[serde(rename = "AdditionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
     /// Bill image attachment. Send the bill image as Base64-encoded string, or as a publicly accessible link. For full details on using this field with a payout authorization, see [the documentation](/developers/developer-guides/pay-out-manage-payouts).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub attachments: Option<Attachments>,
@@ -71,7 +71,7 @@ pub struct BillPayOutDataBuilder {
     accounting_field_1: Option<AccountingField>,
     accounting_field_2: Option<AccountingField>,
     terms: Option<Terms>,
-    additional_data: Option<AdditionalDataString>,
+    additional_data: Option<AdditionalDataMap>,
     attachments: Option<Attachments>,
     invoice_number: Option<InvoiceNumber>,
     net_amount: Option<NetAmountstring>,
@@ -109,7 +109,7 @@ impl BillPayOutDataBuilder {
         self
     }
 
-    pub fn additional_data(mut self, value: AdditionalDataString) -> Self {
+    pub fn additional_data(mut self, value: AdditionalDataMap) -> Self {
         self.additional_data = Some(value);
         self
     }

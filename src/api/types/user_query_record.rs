@@ -1,13 +1,13 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct UserQueryRecord {
     #[serde(rename = "Access")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub access: Option<Vec<UsrAccess>>,
     #[serde(rename = "AdditionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
     /// The timestamp for the user's creation, in UTC.
     #[serde(rename = "createdAt")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -74,7 +74,7 @@ impl UserQueryRecord {
 #[non_exhaustive]
 pub struct UserQueryRecordBuilder {
     access: Option<Vec<UsrAccess>>,
-    additional_data: Option<AdditionalDataString>,
+    additional_data: Option<AdditionalDataMap>,
     created_at: Option<CreatedAt>,
     email: Option<Email>,
     language: Option<Language>,
@@ -98,7 +98,7 @@ impl UserQueryRecordBuilder {
         self
     }
 
-    pub fn additional_data(mut self, value: AdditionalDataString) -> Self {
+    pub fn additional_data(mut self, value: AdditionalDataMap) -> Self {
         self.additional_data = Some(value);
         self
     }

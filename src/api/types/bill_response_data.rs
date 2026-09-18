@@ -39,14 +39,18 @@ pub struct BillResponseData {
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers::option")]
     pub outstanding_balance: Option<f64>,
-    /// Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY
+    /// Date of bill, returned as a timestamp.
     #[serde(rename = "BillDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bill_date: Option<NaiveDate>,
-    /// Due Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub bill_date: Option<DateTime<Utc>>,
+    /// Due date of bill, returned as a timestamp.
     #[serde(rename = "DueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<NaiveDate>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub due_date: Option<DateTime<Utc>>,
     /// Comments associated with the bill. For managed payables, the character limit is 200. For on demand payouts, the characters limit is 250.
     #[serde(rename = "Comments")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -86,7 +90,7 @@ pub struct BillResponseData {
     pub source: Option<String>,
     #[serde(rename = "AdditionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<AdditionalDataString>,
+    pub additional_data: Option<AdditionalDataMap>,
     #[serde(rename = "Vendor")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vendor: Option<VendorDataResponse>,
@@ -167,8 +171,8 @@ pub struct BillResponseDataBuilder {
     total_amount: Option<f64>,
     paid_amount: Option<f64>,
     outstanding_balance: Option<f64>,
-    bill_date: Option<NaiveDate>,
-    due_date: Option<NaiveDate>,
+    bill_date: Option<DateTime<Utc>>,
+    due_date: Option<DateTime<Utc>>,
     comments: Option<String>,
     batch_number: Option<String>,
     bill_items: Option<Billitems>,
@@ -179,7 +183,7 @@ pub struct BillResponseDataBuilder {
     accounting_field_2: Option<AccountingField>,
     terms: Option<Terms>,
     source: Option<String>,
-    additional_data: Option<AdditionalDataString>,
+    additional_data: Option<AdditionalDataMap>,
     vendor: Option<VendorDataResponse>,
     status: Option<Billstatus>,
     created_at: Option<CreatedAt>,
@@ -237,12 +241,12 @@ impl BillResponseDataBuilder {
         self
     }
 
-    pub fn bill_date(mut self, value: NaiveDate) -> Self {
+    pub fn bill_date(mut self, value: DateTime<Utc>) -> Self {
         self.bill_date = Some(value);
         self
     }
 
-    pub fn due_date(mut self, value: NaiveDate) -> Self {
+    pub fn due_date(mut self, value: DateTime<Utc>) -> Self {
         self.due_date = Some(value);
         self
     }
@@ -297,7 +301,7 @@ impl BillResponseDataBuilder {
         self
     }
 
-    pub fn additional_data(mut self, value: AdditionalDataString) -> Self {
+    pub fn additional_data(mut self, value: AdditionalDataMap) -> Self {
         self.additional_data = Some(value);
         self
     }

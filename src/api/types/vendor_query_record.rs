@@ -3,11 +3,11 @@ pub use crate::prelude::*;
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct VendorQueryRecord {
     #[serde(rename = "VendorNumber")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub vendor_number: Option<VendorNumber>,
+    #[serde(default)]
+    pub vendor_number: VendorNumber,
     #[serde(rename = "Name1")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub name_1: Option<String>,
+    #[serde(default)]
+    pub name_1: String,
     #[serde(rename = "Name2")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_2: Option<String>,
@@ -23,18 +23,22 @@ pub struct VendorQueryRecord {
     #[serde(rename = "RemitEmail")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub remit_email: Option<RemitEmail>,
+    /// The address.
     #[serde(rename = "Address1")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub address_1: Option<AddressNullable>,
+    pub address_1: Option<String>,
+    /// Additional line for the address.
     #[serde(rename = "Address2")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub address_2: Option<AddressAddtlNullable>,
+    pub address_2: Option<String>,
+    /// The city.
     #[serde(rename = "City")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub city: Option<CityNullable>,
+    pub city: Option<String>,
+    /// The state or province.
     #[serde(rename = "State")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub state: Option<StateNullable>,
+    pub state: Option<String>,
     #[serde(rename = "Zip")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub zip: Option<Zip>,
@@ -58,11 +62,11 @@ pub struct VendorQueryRecord {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_method: Option<VendorPaymentMethodString>,
     #[serde(rename = "VendorStatus")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub vendor_status: Option<Vendorstatus>,
+    #[serde(default)]
+    pub vendor_status: Vendorstatus,
     #[serde(rename = "VendorId")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub vendor_id: Option<Vendorid>,
+    #[serde(default)]
+    pub vendor_id: Vendorid,
     #[serde(rename = "EnrollmentStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub enrollment_status: Option<EnrollmentStatus>,
@@ -70,30 +74,30 @@ pub struct VendorQueryRecord {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub summary: Option<VendorSummary>,
     #[serde(rename = "PaypointLegalname")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub paypoint_legalname: Option<Legalname>,
+    #[serde(default)]
+    pub paypoint_legalname: Legalname,
     /// The paypoint's ID. This is different from the entryname.
     #[serde(rename = "PaypointId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub paypoint_id: Option<i64>,
     #[serde(rename = "PaypointDbaname")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub paypoint_dbaname: Option<Dbaname>,
+    #[serde(default)]
+    pub paypoint_dbaname: Dbaname,
     #[serde(rename = "PaypointEntryname")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub paypoint_entryname: Option<Entrypointfield>,
+    #[serde(default)]
+    pub paypoint_entryname: Entrypointfield,
     #[serde(rename = "ParentOrgName")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub parent_org_name: Option<OrgParentName>,
+    #[serde(default)]
+    pub parent_org_name: OrgParentName,
     #[serde(rename = "ParentOrgId")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub parent_org_id: Option<OrgParentId>,
+    #[serde(default)]
+    pub parent_org_id: OrgParentId,
     #[serde(rename = "CreatedDate")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub created_date: Option<CreatedAt>,
+    #[serde(default)]
+    pub created_date: CreatedAt,
     #[serde(rename = "LastUpdated")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub last_updated: Option<LastModified>,
+    #[serde(default)]
+    pub last_updated: LastModified,
     #[serde(rename = "remitAddress1")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub remit_address_1: Option<Remitaddress1>,
@@ -128,8 +132,8 @@ pub struct VendorQueryRecord {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub customer_vendor_account: Option<String>,
     #[serde(rename = "InternalReferenceId")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub internal_reference_id: Option<InternalReferenceId>,
+    #[serde(default)]
+    pub internal_reference_id: InternalReferenceId,
     /// URL for the vendor's online payment portal, if known. Populated by the vendor enrichment pipeline.
     #[serde(rename = "PaymentPortalUrl")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -148,8 +152,8 @@ pub struct VendorQueryRecord {
     pub check_accepted: Option<String>,
     /// Current enrichment state of the vendor. Values are `not_enriched`, `partially_enriched`, `fully_enriched`, or `fallback_applied`.
     #[serde(rename = "EnrichmentStatus")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub enrichment_status: Option<String>,
+    #[serde(default)]
+    pub enrichment_status: String,
     /// Which enrichment method resolved the vendor's payment acceptance info. Values are `invoice_scan`, `web_search`, `vendor_network`, or `manual`.
     #[serde(rename = "EnrichedBy")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -191,10 +195,10 @@ pub struct VendorQueryRecordBuilder {
     phone: Option<String>,
     email: Option<Email>,
     remit_email: Option<RemitEmail>,
-    address_1: Option<AddressNullable>,
-    address_2: Option<AddressAddtlNullable>,
-    city: Option<CityNullable>,
-    state: Option<StateNullable>,
+    address_1: Option<String>,
+    address_2: Option<String>,
+    city: Option<String>,
+    state: Option<String>,
     zip: Option<Zip>,
     country: Option<String>,
     mcc: Option<Mcc>,
@@ -275,23 +279,23 @@ impl VendorQueryRecordBuilder {
         self
     }
 
-    pub fn address_1(mut self, value: AddressNullable) -> Self {
-        self.address_1 = Some(value);
+    pub fn address_1(mut self, value: impl Into<String>) -> Self {
+        self.address_1 = Some(value.into());
         self
     }
 
-    pub fn address_2(mut self, value: AddressAddtlNullable) -> Self {
-        self.address_2 = Some(value);
+    pub fn address_2(mut self, value: impl Into<String>) -> Self {
+        self.address_2 = Some(value.into());
         self
     }
 
-    pub fn city(mut self, value: CityNullable) -> Self {
-        self.city = Some(value);
+    pub fn city(mut self, value: impl Into<String>) -> Self {
+        self.city = Some(value.into());
         self
     }
 
-    pub fn state(mut self, value: StateNullable) -> Self {
-        self.state = Some(value);
+    pub fn state(mut self, value: impl Into<String>) -> Self {
+        self.state = Some(value.into());
         self
     }
 
@@ -506,10 +510,28 @@ impl VendorQueryRecordBuilder {
     }
 
     /// Consumes the builder and constructs a [`VendorQueryRecord`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`vendor_number`](VendorQueryRecordBuilder::vendor_number)
+    /// - [`name_1`](VendorQueryRecordBuilder::name_1)
+    /// - [`vendor_status`](VendorQueryRecordBuilder::vendor_status)
+    /// - [`vendor_id`](VendorQueryRecordBuilder::vendor_id)
+    /// - [`paypoint_legalname`](VendorQueryRecordBuilder::paypoint_legalname)
+    /// - [`paypoint_dbaname`](VendorQueryRecordBuilder::paypoint_dbaname)
+    /// - [`paypoint_entryname`](VendorQueryRecordBuilder::paypoint_entryname)
+    /// - [`parent_org_name`](VendorQueryRecordBuilder::parent_org_name)
+    /// - [`parent_org_id`](VendorQueryRecordBuilder::parent_org_id)
+    /// - [`created_date`](VendorQueryRecordBuilder::created_date)
+    /// - [`last_updated`](VendorQueryRecordBuilder::last_updated)
+    /// - [`internal_reference_id`](VendorQueryRecordBuilder::internal_reference_id)
+    /// - [`enrichment_status`](VendorQueryRecordBuilder::enrichment_status)
     pub fn build(self) -> Result<VendorQueryRecord, BuildError> {
         Ok(VendorQueryRecord {
-            vendor_number: self.vendor_number,
-            name_1: self.name_1,
+            vendor_number: self
+                .vendor_number
+                .ok_or_else(|| BuildError::missing_field("vendor_number"))?,
+            name_1: self
+                .name_1
+                .ok_or_else(|| BuildError::missing_field("name_1"))?,
             name_2: self.name_2,
             ein: self.ein,
             phone: self.phone,
@@ -526,18 +548,36 @@ impl VendorQueryRecordBuilder {
             contacts: self.contacts,
             billing_data: self.billing_data,
             payment_method: self.payment_method,
-            vendor_status: self.vendor_status,
-            vendor_id: self.vendor_id,
+            vendor_status: self
+                .vendor_status
+                .ok_or_else(|| BuildError::missing_field("vendor_status"))?,
+            vendor_id: self
+                .vendor_id
+                .ok_or_else(|| BuildError::missing_field("vendor_id"))?,
             enrollment_status: self.enrollment_status,
             summary: self.summary,
-            paypoint_legalname: self.paypoint_legalname,
+            paypoint_legalname: self
+                .paypoint_legalname
+                .ok_or_else(|| BuildError::missing_field("paypoint_legalname"))?,
             paypoint_id: self.paypoint_id,
-            paypoint_dbaname: self.paypoint_dbaname,
-            paypoint_entryname: self.paypoint_entryname,
-            parent_org_name: self.parent_org_name,
-            parent_org_id: self.parent_org_id,
-            created_date: self.created_date,
-            last_updated: self.last_updated,
+            paypoint_dbaname: self
+                .paypoint_dbaname
+                .ok_or_else(|| BuildError::missing_field("paypoint_dbaname"))?,
+            paypoint_entryname: self
+                .paypoint_entryname
+                .ok_or_else(|| BuildError::missing_field("paypoint_entryname"))?,
+            parent_org_name: self
+                .parent_org_name
+                .ok_or_else(|| BuildError::missing_field("parent_org_name"))?,
+            parent_org_id: self
+                .parent_org_id
+                .ok_or_else(|| BuildError::missing_field("parent_org_id"))?,
+            created_date: self
+                .created_date
+                .ok_or_else(|| BuildError::missing_field("created_date"))?,
+            last_updated: self
+                .last_updated
+                .ok_or_else(|| BuildError::missing_field("last_updated"))?,
             remit_address_1: self.remit_address_1,
             remit_address_2: self.remit_address_2,
             remit_city: self.remit_city,
@@ -549,12 +589,16 @@ impl VendorQueryRecordBuilder {
             custom_field_1: self.custom_field_1,
             custom_field_2: self.custom_field_2,
             customer_vendor_account: self.customer_vendor_account,
-            internal_reference_id: self.internal_reference_id,
+            internal_reference_id: self
+                .internal_reference_id
+                .ok_or_else(|| BuildError::missing_field("internal_reference_id"))?,
             payment_portal_url: self.payment_portal_url,
             card_accepted: self.card_accepted,
             ach_accepted: self.ach_accepted,
             check_accepted: self.check_accepted,
-            enrichment_status: self.enrichment_status,
+            enrichment_status: self
+                .enrichment_status
+                .ok_or_else(|| BuildError::missing_field("enrichment_status"))?,
             enriched_by: self.enriched_by,
             enriched_at: self.enriched_at,
             enrichment_id: self.enrichment_id,

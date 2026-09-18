@@ -19,10 +19,12 @@ pub struct BillQueryRecord2 {
     #[serde(rename = "billApprovals")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bill_approvals: Option<Vec<BillQueryRecord2BillApprovalsItem>>,
-    /// Bill creation date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.
+    /// Bill creation date, returned as a timestamp.
     #[serde(rename = "BillDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bill_date: Option<NaiveDate>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub bill_date: Option<DateTime<Utc>>,
     /// Events associated with the bill.
     #[serde(rename = "billEvents")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -53,10 +55,12 @@ pub struct BillQueryRecord2 {
     #[serde(rename = "DocumentsRef")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub documents_ref: Option<String>,
-    /// Bill due date in one of the accepted formats: YYYY-MM-DD, MM/DD/YYYY.
+    /// Bill due date, returned as a timestamp.
     #[serde(rename = "DueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<NaiveDate>,
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub due_date: Option<DateTime<Utc>>,
     /// End date for the bill.
     #[serde(rename = "EndDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -178,7 +182,7 @@ pub struct BillQueryRecord2Builder {
     additional_data: Option<HashMap<String, Option<String>>>,
     batch_number: Option<String>,
     bill_approvals: Option<Vec<BillQueryRecord2BillApprovalsItem>>,
-    bill_date: Option<NaiveDate>,
+    bill_date: Option<DateTime<Utc>>,
     bill_events: Option<Vec<GeneralEvents>>,
     bill_items: Option<Vec<BillItem>>,
     bill_number: Option<String>,
@@ -186,7 +190,7 @@ pub struct BillQueryRecord2Builder {
     created_at: Option<CreatedAt>,
     discount: Option<f64>,
     documents_ref: Option<String>,
-    due_date: Option<NaiveDate>,
+    due_date: Option<DateTime<Utc>>,
     end_date: Option<NaiveDate>,
     entity_id: Option<String>,
     external_paypoint_id: Option<ExternalPaypointId>,
@@ -240,7 +244,7 @@ impl BillQueryRecord2Builder {
         self
     }
 
-    pub fn bill_date(mut self, value: NaiveDate) -> Self {
+    pub fn bill_date(mut self, value: DateTime<Utc>) -> Self {
         self.bill_date = Some(value);
         self
     }
@@ -280,7 +284,7 @@ impl BillQueryRecord2Builder {
         self
     }
 
-    pub fn due_date(mut self, value: NaiveDate) -> Self {
+    pub fn due_date(mut self, value: DateTime<Utc>) -> Self {
         self.due_date = Some(value);
         self
     }

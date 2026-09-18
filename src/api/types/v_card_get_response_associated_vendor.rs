@@ -159,10 +159,9 @@ pub struct VCardGetResponseAssociatedVendor {
     #[serde(rename = "InternalReferenceId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub internal_reference_id: Option<i64>,
-    /// Field for additional data, if any.
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub additional_data: Option<String>,
+    pub additional_data: Option<AdditionalDataMap>,
     #[serde(rename = "externalPaypointID")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub external_paypoint_id: Option<ExternalPaypointId>,
@@ -222,7 +221,7 @@ pub struct VCardGetResponseAssociatedVendorBuilder {
     custom_field_2: Option<String>,
     customer_vendor_account: Option<String>,
     internal_reference_id: Option<i64>,
-    additional_data: Option<String>,
+    additional_data: Option<AdditionalDataMap>,
     external_paypoint_id: Option<ExternalPaypointId>,
     stored_methods: Option<String>,
 }
@@ -433,8 +432,8 @@ impl VCardGetResponseAssociatedVendorBuilder {
         self
     }
 
-    pub fn additional_data(mut self, value: impl Into<String>) -> Self {
-        self.additional_data = Some(value.into());
+    pub fn additional_data(mut self, value: AdditionalDataMap) -> Self {
+        self.additional_data = Some(value);
         self
     }
 
