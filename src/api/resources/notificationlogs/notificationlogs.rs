@@ -51,7 +51,7 @@ impl NotificationlogsClient {
     ///                 end_date: DateTime::parse_from_rfc3339("2024-01-31T23:59:59Z")
     ///                     .unwrap()
     ///                     .with_timezone(&Utc),
-    ///                 notification_event: Some("ActivatedMerchant".to_string()),
+    ///                 notification_event: Some("approvedpayment".to_string()),
     ///                 succeeded: Some(true),
     ///                 org_id: Some(123),
     ///                 page: None,
@@ -188,7 +188,7 @@ impl NotificationlogsClient {
         &self,
         uuid: &str,
         options: Option<RequestOptions>,
-    ) -> Result<NotificationLogDetail, ApiError> {
+    ) -> Result<NotificationRetryResponse, ApiError> {
         let endpoint_auth_headers = self
             .http_client
             .resolve_endpoint_auth_headers(
@@ -225,7 +225,7 @@ impl NotificationlogsClient {
     ///
     /// # Returns
     ///
-    /// Empty response
+    /// Text response
     ///
     /// # Examples
     ///
@@ -241,11 +241,7 @@ impl NotificationlogsClient {
     ///     client
     ///         .notificationlogs
     ///         .bulk_retry_notification_logs(
-    ///             &BulkRetryRequest(vec![
-    ///                 "550e8400-e29b-41d4-a716-446655440000".to_string(),
-    ///                 "550e8400-e29b-41d4-a716-446655440001".to_string(),
-    ///                 "550e8400-e29b-41d4-a716-446655440002".to_string(),
-    ///             ]),
+    ///             &BulkRetryRequest(vec!["string".to_string(), "string".to_string()]),
     ///             None,
     ///         )
     ///         .await;
@@ -255,7 +251,7 @@ impl NotificationlogsClient {
         &self,
         request: &BulkRetryRequest,
         options: Option<RequestOptions>,
-    ) -> Result<(), ApiError> {
+    ) -> Result<String, ApiError> {
         let endpoint_auth_headers = self
             .http_client
             .resolve_endpoint_auth_headers(

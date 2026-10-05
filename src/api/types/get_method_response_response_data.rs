@@ -65,6 +65,10 @@ pub struct GetMethodResponseResponseData {
     pub postal_code: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vendors: Option<Vec<GetMethodResponseResponseDataVendorsItem>>,
+    /// Digital wallet type if applicable.
+    #[serde(rename = "walletType")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub wallet_type: Option<String>,
 }
 
 impl GetMethodResponseResponseData {
@@ -94,6 +98,7 @@ pub struct GetMethodResponseResponseDataBuilder {
     method_type: Option<String>,
     postal_code: Option<String>,
     vendors: Option<Vec<GetMethodResponseResponseDataVendorsItem>>,
+    wallet_type: Option<String>,
 }
 
 impl GetMethodResponseResponseDataBuilder {
@@ -187,6 +192,11 @@ impl GetMethodResponseResponseDataBuilder {
         self
     }
 
+    pub fn wallet_type(mut self, value: impl Into<String>) -> Self {
+        self.wallet_type = Some(value.into());
+        self
+    }
+
     /// Consumes the builder and constructs a [`GetMethodResponseResponseData`].
     pub fn build(self) -> Result<GetMethodResponseResponseData, BuildError> {
         Ok(GetMethodResponseResponseData {
@@ -208,6 +218,7 @@ impl GetMethodResponseResponseDataBuilder {
             method_type: self.method_type,
             postal_code: self.postal_code,
             vendors: self.vendors,
+            wallet_type: self.wallet_type,
         })
     }
 }

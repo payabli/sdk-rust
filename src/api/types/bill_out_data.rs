@@ -28,7 +28,7 @@ pub struct BillOutData {
     /// for details. Contact Payabli to enable this feature.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub attachments: Option<Attachments>,
-    /// Date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY.
+    /// Date of bill. Send the date in YYYY-MM-DD format. The API also accepts ISO 8601 date-time values but keeps only the date.
     #[serde(rename = "billDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bill_date: Option<NaiveDate>,
@@ -46,7 +46,7 @@ pub struct BillOutData {
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers::option")]
     pub discount: Option<f64>,
-    /// Due date of bill. Accepted formats: YYYY-MM-DD, MM/DD/YYYY.
+    /// Due date of bill. Send the date in YYYY-MM-DD format. The API also accepts ISO 8601 date-time values but keeps only the date.
     #[serde(rename = "dueDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub due_date: Option<NaiveDate>,

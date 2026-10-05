@@ -2,28 +2,28 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct SearchNotificationLogsRequest {
-    /// The start date for the search.
+    /// The start date for the search. Can't be more than 30 days before `endDate`.
     #[serde(rename = "startDate")]
     #[serde(default)]
     #[serde(with = "crate::core::flexible_datetime::utc")]
     pub start_date: DateTime<Utc>,
-    /// The end date for the search.
+    /// The end date for the search. Can't be more than 30 days after `startDate`.
     #[serde(rename = "endDate")]
     #[serde(default)]
     #[serde(with = "crate::core::flexible_datetime::utc")]
     pub end_date: DateTime<Utc>,
-    /// The type of notification event to filter by.
+    /// The event to filter by, such as `approvedpayment`. Case-insensitive.
     #[serde(rename = "notificationEvent")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notification_event: Option<String>,
-    /// Indicates whether the notification was successful.
+    /// Filter by delivery outcome. Set to `false` to return only failed notifications.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub succeeded: Option<bool>,
-    /// The ID of the organization to filter by.
+    /// The ID of the organization to filter by. Either `orgId` or `paypointId` is required.
     #[serde(rename = "orgId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_id: Option<i64>,
-    /// The ID of the paypoint to filter by.
+    /// The ID of the paypoint to filter by. Either `orgId` or `paypointId` is required.
     #[serde(rename = "paypointId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub paypoint_id: Option<i64>,

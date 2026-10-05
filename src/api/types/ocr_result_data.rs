@@ -5,11 +5,25 @@ pub struct OcrResultData {
     #[serde(rename = "billNumber")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bill_number: Option<String>,
+    /// Subtotal of the document's line items, before tax.
+    ///
+    /// This isn't the amount due. When you create a bill from this result,
+    /// set the bill's `netAmount` from `totalAmount`.
     #[serde(rename = "netAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
     #[serde(with = "crate::core::number_serializers::option")]
     pub net_amount: Option<f64>,
+    /// Discount on the document. This is often `null` even when the
+    /// document shows a discount. `totalAmount` already reflects any discount.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub discount: Option<f64>,
+    /// Total amount due on the document, after any discount and including tax.
+    #[serde(rename = "totalAmount")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::number_serializers::option")]
+    pub total_amount: Option<f64>,
     #[serde(rename = "billDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
@@ -67,6 +81,8 @@ impl OcrResultData {
 pub struct OcrResultDataBuilder {
     bill_number: Option<String>,
     net_amount: Option<f64>,
+    discount: Option<f64>,
+    total_amount: Option<f64>,
     bill_date: Option<DateTime<Utc>>,
     due_date: Option<DateTime<Utc>>,
     comments: Option<String>,
@@ -92,6 +108,16 @@ impl OcrResultDataBuilder {
 
     pub fn net_amount(mut self, value: f64) -> Self {
         self.net_amount = Some(value);
+        self
+    }
+
+    pub fn discount(mut self, value: f64) -> Self {
+        self.discount = Some(value);
+        self
+    }
+
+    pub fn total_amount(mut self, value: f64) -> Self {
+        self.total_amount = Some(value);
         self
     }
 
@@ -175,6 +201,8 @@ impl OcrResultDataBuilder {
         Ok(OcrResultData {
             bill_number: self.bill_number,
             net_amount: self.net_amount,
+            discount: self.discount,
+            total_amount: self.total_amount,
             bill_date: self.bill_date,
             due_date: self.due_date,
             comments: self.comments,

@@ -18,6 +18,26 @@ pub struct AddMethodResponseResponseData {
     #[serde(rename = "customerId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub customer_id: Option<CustomerId>,
+    /// Only returned when the request is declined.
+    #[serde(rename = "authCode")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub auth_code: Option<Authcode>,
+    /// Only returned when the request is declined.
+    #[serde(rename = "avsResponseText")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub avs_response_text: Option<AvsResponseText>,
+    /// Only returned when the request is declined.
+    #[serde(rename = "cvvResponseText")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cvv_response_text: Option<CvvResponseText>,
+    /// Only returned when the request is declined.
+    #[serde(rename = "vendorId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub vendor_id: Option<Vendorid>,
+    /// Stored method identifier in Payabli platform. Returns the same value as
+    /// `referenceId`. This field isn't returned when you convert a temporary
+    /// token to a permanent token, so use `referenceId` to get the stored
+    /// method ID.
     #[serde(rename = "methodReferenceId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub method_reference_id: Option<MethodReferenceId>,
@@ -36,6 +56,10 @@ pub struct AddMethodResponseResponseDataBuilder {
     result_code: Option<ResultCode>,
     result_text: Option<Resulttext>,
     customer_id: Option<CustomerId>,
+    auth_code: Option<Authcode>,
+    avs_response_text: Option<AvsResponseText>,
+    cvv_response_text: Option<CvvResponseText>,
+    vendor_id: Option<Vendorid>,
     method_reference_id: Option<MethodReferenceId>,
 }
 
@@ -60,6 +84,26 @@ impl AddMethodResponseResponseDataBuilder {
         self
     }
 
+    pub fn auth_code(mut self, value: Authcode) -> Self {
+        self.auth_code = Some(value);
+        self
+    }
+
+    pub fn avs_response_text(mut self, value: AvsResponseText) -> Self {
+        self.avs_response_text = Some(value);
+        self
+    }
+
+    pub fn cvv_response_text(mut self, value: CvvResponseText) -> Self {
+        self.cvv_response_text = Some(value);
+        self
+    }
+
+    pub fn vendor_id(mut self, value: Vendorid) -> Self {
+        self.vendor_id = Some(value);
+        self
+    }
+
     pub fn method_reference_id(mut self, value: MethodReferenceId) -> Self {
         self.method_reference_id = Some(value);
         self
@@ -72,6 +116,10 @@ impl AddMethodResponseResponseDataBuilder {
             result_code: self.result_code,
             result_text: self.result_text,
             customer_id: self.customer_id,
+            auth_code: self.auth_code,
+            avs_response_text: self.avs_response_text,
+            cvv_response_text: self.cvv_response_text,
+            vendor_id: self.vendor_id,
             method_reference_id: self.method_reference_id,
         })
     }
