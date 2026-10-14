@@ -15,14 +15,30 @@ pub struct PayoutSubscriptionQueryRecord {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub events: Option<Vec<GeneralEvents>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub vendor: Option<VendorQueryRecord>,
+    pub vendor: Option<PayoutSubscriptionVendor>,
     /// Bills associated with the payout subscription.
     #[serde(rename = "billData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub bill_data: Option<Vec<BillPayOutData>>,
+    pub bill_data: Option<Vec<PayoutSubscriptionBill>>,
     #[serde(rename = "externalPaypointID")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub external_paypoint_id: Option<ExternalPaypointId>,
+    /// When `true`, the payout subscription's payouts are processed as same-day ACH instead of standard ACH. Same-day ACH must be enabled for the paypoint. Only ACH payouts honor this setting.
+    #[serde(rename = "sameDayAch")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub same_day_ach: Option<bool>,
+    /// When `true`, Payabli doesn't automatically create a bill for the payout subscription's payouts.
+    #[serde(rename = "doNotCreateBills")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub do_not_create_bills: Option<bool>,
+    /// When `true`, the payout subscription bypasses the requirement for unique bills, identified by vendor invoice number.
+    #[serde(rename = "allowDuplicatedBills")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub allow_duplicated_bills: Option<bool>,
+    /// When `true`, a same-day ACH payout captured after the same-day ACH cutoff is converted to a standard ACH payment. When `false`, the capture is declined. Has no effect when `sameDayAch` is `false`.
+    #[serde(rename = "autoConvertSameDayAch")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub auto_convert_same_day_ach: Option<bool>,
     /// The payout subscription's payment method.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub method: Option<String>,
@@ -47,7 +63,7 @@ pub struct PayoutSubscriptionQueryRecord {
     pub fee_amount: Option<f64>,
     #[serde(rename = "paymentData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub payment_data: Option<QueryPaymentData>,
+    pub payment_data: Option<PayoutSubscriptionPaymentData>,
     /// The payout subscription start date.
     #[serde(rename = "startDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -118,6 +134,10 @@ pub struct PayoutSubscriptionQueryRecord {
     pub parent_org_id: Option<OrgParentId>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
+    /// Subscription type. Always `null` for payout subscriptions.
+    #[serde(rename = "subscriptionType")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub subscription_type: Option<String>,
 }
 
 impl PayoutSubscriptionQueryRecord {
@@ -132,15 +152,19 @@ pub struct PayoutSubscriptionQueryRecordBuilder {
     id_out_subscription: Option<i64>,
     status: Option<i64>,
     events: Option<Vec<GeneralEvents>>,
-    vendor: Option<VendorQueryRecord>,
-    bill_data: Option<Vec<BillPayOutData>>,
+    vendor: Option<PayoutSubscriptionVendor>,
+    bill_data: Option<Vec<PayoutSubscriptionBill>>,
     external_paypoint_id: Option<ExternalPaypointId>,
+    same_day_ach: Option<bool>,
+    do_not_create_bills: Option<bool>,
+    allow_duplicated_bills: Option<bool>,
+    auto_convert_same_day_ach: Option<bool>,
     method: Option<String>,
     paypoint_id: Option<PaypointId>,
     total_amount: Option<f64>,
     net_amount: Option<Netamountnullable>,
     fee_amount: Option<f64>,
-    payment_data: Option<QueryPaymentData>,
+    payment_data: Option<PayoutSubscriptionPaymentData>,
     start_date: Option<DateTime<Utc>>,
     end_date: Option<DateTime<Utc>>,
     next_date: Option<DateTime<Utc>>,
@@ -158,6 +182,7 @@ pub struct PayoutSubscriptionQueryRecordBuilder {
     parent_org_name: Option<OrgParentName>,
     parent_org_id: Option<OrgParentId>,
     source: Option<Source>,
+    subscription_type: Option<String>,
 }
 
 impl PayoutSubscriptionQueryRecordBuilder {
@@ -176,18 +201,38 @@ impl PayoutSubscriptionQueryRecordBuilder {
         self
     }
 
-    pub fn vendor(mut self, value: VendorQueryRecord) -> Self {
+    pub fn vendor(mut self, value: PayoutSubscriptionVendor) -> Self {
         self.vendor = Some(value);
         self
     }
 
-    pub fn bill_data(mut self, value: Vec<BillPayOutData>) -> Self {
+    pub fn bill_data(mut self, value: Vec<PayoutSubscriptionBill>) -> Self {
         self.bill_data = Some(value);
         self
     }
 
     pub fn external_paypoint_id(mut self, value: ExternalPaypointId) -> Self {
         self.external_paypoint_id = Some(value);
+        self
+    }
+
+    pub fn same_day_ach(mut self, value: bool) -> Self {
+        self.same_day_ach = Some(value);
+        self
+    }
+
+    pub fn do_not_create_bills(mut self, value: bool) -> Self {
+        self.do_not_create_bills = Some(value);
+        self
+    }
+
+    pub fn allow_duplicated_bills(mut self, value: bool) -> Self {
+        self.allow_duplicated_bills = Some(value);
+        self
+    }
+
+    pub fn auto_convert_same_day_ach(mut self, value: bool) -> Self {
+        self.auto_convert_same_day_ach = Some(value);
         self
     }
 
@@ -216,7 +261,7 @@ impl PayoutSubscriptionQueryRecordBuilder {
         self
     }
 
-    pub fn payment_data(mut self, value: QueryPaymentData) -> Self {
+    pub fn payment_data(mut self, value: PayoutSubscriptionPaymentData) -> Self {
         self.payment_data = Some(value);
         self
     }
@@ -306,6 +351,11 @@ impl PayoutSubscriptionQueryRecordBuilder {
         self
     }
 
+    pub fn subscription_type(mut self, value: impl Into<String>) -> Self {
+        self.subscription_type = Some(value.into());
+        self
+    }
+
     /// Consumes the builder and constructs a [`PayoutSubscriptionQueryRecord`].
     pub fn build(self) -> Result<PayoutSubscriptionQueryRecord, BuildError> {
         Ok(PayoutSubscriptionQueryRecord {
@@ -315,6 +365,10 @@ impl PayoutSubscriptionQueryRecordBuilder {
             vendor: self.vendor,
             bill_data: self.bill_data,
             external_paypoint_id: self.external_paypoint_id,
+            same_day_ach: self.same_day_ach,
+            do_not_create_bills: self.do_not_create_bills,
+            allow_duplicated_bills: self.allow_duplicated_bills,
+            auto_convert_same_day_ach: self.auto_convert_same_day_ach,
             method: self.method,
             paypoint_id: self.paypoint_id,
             total_amount: self.total_amount,
@@ -338,6 +392,7 @@ impl PayoutSubscriptionQueryRecordBuilder {
             parent_org_name: self.parent_org_name,
             parent_org_id: self.parent_org_id,
             source: self.source,
+            subscription_type: self.subscription_type,
         })
     }
 }

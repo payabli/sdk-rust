@@ -26,6 +26,22 @@ pub struct PayoutSubscriptionQueryRecordPascal {
     #[serde(rename = "ExternalPaypointID")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub external_paypoint_id: Option<ExternalPaypointId>,
+    /// When `true`, the payout subscription's payouts are processed as same-day ACH instead of standard ACH. Same-day ACH must be enabled for the paypoint. Only ACH payouts honor this setting.
+    #[serde(rename = "SameDayAch")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub same_day_ach: Option<bool>,
+    /// When `true`, Payabli doesn't automatically create a bill for the payout subscription's payouts.
+    #[serde(rename = "DoNotCreateBills")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub do_not_create_bills: Option<bool>,
+    /// When `true`, the payout subscription bypasses the requirement for unique bills, identified by vendor invoice number.
+    #[serde(rename = "AllowDuplicatedBills")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub allow_duplicated_bills: Option<bool>,
+    /// When `true`, a same-day ACH payout captured after the same-day ACH cutoff is converted to a standard ACH payment. When `false`, the capture is declined. Has no effect when `SameDayAch` is `false`.
+    #[serde(rename = "AutoConvertSameDayAch")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub auto_convert_same_day_ach: Option<bool>,
     /// The payout subscription's payment method.
     #[serde(rename = "Method")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -51,7 +67,7 @@ pub struct PayoutSubscriptionQueryRecordPascal {
     pub fee_amount: Option<f64>,
     #[serde(rename = "PaymentData")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub payment_data: Option<QueryPaymentData>,
+    pub payment_data: Option<PayoutSubscriptionPaymentDataPascal>,
     /// The payout subscription start date.
     #[serde(rename = "StartDate")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -124,6 +140,10 @@ pub struct PayoutSubscriptionQueryRecordPascal {
     #[serde(rename = "Source")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub source: Option<Source>,
+    /// Subscription type. Always `null` for payout subscriptions.
+    #[serde(rename = "SubscriptionType")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub subscription_type: Option<String>,
 }
 
 impl PayoutSubscriptionQueryRecordPascal {
@@ -141,12 +161,16 @@ pub struct PayoutSubscriptionQueryRecordPascalBuilder {
     vendor: Option<VendorQueryRecord>,
     bill_data: Option<Vec<BillPayOutData>>,
     external_paypoint_id: Option<ExternalPaypointId>,
+    same_day_ach: Option<bool>,
+    do_not_create_bills: Option<bool>,
+    allow_duplicated_bills: Option<bool>,
+    auto_convert_same_day_ach: Option<bool>,
     method: Option<String>,
     paypoint_id: Option<PaypointId>,
     total_amount: Option<f64>,
     net_amount: Option<Netamountnullable>,
     fee_amount: Option<f64>,
-    payment_data: Option<QueryPaymentData>,
+    payment_data: Option<PayoutSubscriptionPaymentDataPascal>,
     start_date: Option<DateTime<Utc>>,
     end_date: Option<DateTime<Utc>>,
     next_date: Option<DateTime<Utc>>,
@@ -164,6 +188,7 @@ pub struct PayoutSubscriptionQueryRecordPascalBuilder {
     parent_org_name: Option<OrgParentName>,
     parent_org_id: Option<OrgParentId>,
     source: Option<Source>,
+    subscription_type: Option<String>,
 }
 
 impl PayoutSubscriptionQueryRecordPascalBuilder {
@@ -197,6 +222,26 @@ impl PayoutSubscriptionQueryRecordPascalBuilder {
         self
     }
 
+    pub fn same_day_ach(mut self, value: bool) -> Self {
+        self.same_day_ach = Some(value);
+        self
+    }
+
+    pub fn do_not_create_bills(mut self, value: bool) -> Self {
+        self.do_not_create_bills = Some(value);
+        self
+    }
+
+    pub fn allow_duplicated_bills(mut self, value: bool) -> Self {
+        self.allow_duplicated_bills = Some(value);
+        self
+    }
+
+    pub fn auto_convert_same_day_ach(mut self, value: bool) -> Self {
+        self.auto_convert_same_day_ach = Some(value);
+        self
+    }
+
     pub fn method(mut self, value: impl Into<String>) -> Self {
         self.method = Some(value.into());
         self
@@ -222,7 +267,7 @@ impl PayoutSubscriptionQueryRecordPascalBuilder {
         self
     }
 
-    pub fn payment_data(mut self, value: QueryPaymentData) -> Self {
+    pub fn payment_data(mut self, value: PayoutSubscriptionPaymentDataPascal) -> Self {
         self.payment_data = Some(value);
         self
     }
@@ -312,6 +357,11 @@ impl PayoutSubscriptionQueryRecordPascalBuilder {
         self
     }
 
+    pub fn subscription_type(mut self, value: impl Into<String>) -> Self {
+        self.subscription_type = Some(value.into());
+        self
+    }
+
     /// Consumes the builder and constructs a [`PayoutSubscriptionQueryRecordPascal`].
     pub fn build(self) -> Result<PayoutSubscriptionQueryRecordPascal, BuildError> {
         Ok(PayoutSubscriptionQueryRecordPascal {
@@ -321,6 +371,10 @@ impl PayoutSubscriptionQueryRecordPascalBuilder {
             vendor: self.vendor,
             bill_data: self.bill_data,
             external_paypoint_id: self.external_paypoint_id,
+            same_day_ach: self.same_day_ach,
+            do_not_create_bills: self.do_not_create_bills,
+            allow_duplicated_bills: self.allow_duplicated_bills,
+            auto_convert_same_day_ach: self.auto_convert_same_day_ach,
             method: self.method,
             paypoint_id: self.paypoint_id,
             total_amount: self.total_amount,
@@ -344,6 +398,7 @@ impl PayoutSubscriptionQueryRecordPascalBuilder {
             parent_org_name: self.parent_org_name,
             parent_org_id: self.parent_org_id,
             source: self.source,
+            subscription_type: self.subscription_type,
         })
     }
 }

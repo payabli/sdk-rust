@@ -42,6 +42,9 @@ pub struct BillingDataResponse {
     pub services: Vec<serde_json::Value>,
     #[serde(default)]
     pub default: bool,
+    /// Country code of the bank account, in ISO 3166-1 alpha-2 format (for example, `US` or `CA`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub country: Option<String>,
 }
 
 impl BillingDataResponse {
@@ -67,6 +70,7 @@ pub struct BillingDataResponseBuilder {
     status: Option<i64>,
     services: Option<Vec<serde_json::Value>>,
     default: Option<bool>,
+    country: Option<String>,
 }
 
 impl BillingDataResponseBuilder {
@@ -140,6 +144,11 @@ impl BillingDataResponseBuilder {
         self
     }
 
+    pub fn country(mut self, value: impl Into<String>) -> Self {
+        self.country = Some(value.into());
+        self
+    }
+
     /// Consumes the builder and constructs a [`BillingDataResponse`].
     /// This method will fail if any of the following fields are not set:
     /// - [`id`](BillingDataResponseBuilder::id)
@@ -195,6 +204,7 @@ impl BillingDataResponseBuilder {
             default: self
                 .default
                 .ok_or_else(|| BuildError::missing_field("default"))?,
+            country: self.country,
         })
     }
 }

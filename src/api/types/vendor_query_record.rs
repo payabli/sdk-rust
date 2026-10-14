@@ -176,7 +176,10 @@ pub struct VendorQueryRecord {
     pub external_paypoint_id: Option<ExternalPaypointId>,
     #[serde(rename = "StoredMethods")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub stored_methods: Option<Vec<VendorResponseStoredMethod>>,
+    pub stored_methods: Option<Vec<VendorStoredMethod>>,
+    #[serde(rename = "VendorPortal")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub vendor_portal: Option<VendorPortalAccess>,
 }
 
 impl VendorQueryRecord {
@@ -240,7 +243,8 @@ pub struct VendorQueryRecordBuilder {
     enrichment_id: Option<String>,
     additional_data: Option<AdditionalDataMap>,
     external_paypoint_id: Option<ExternalPaypointId>,
-    stored_methods: Option<Vec<VendorResponseStoredMethod>>,
+    stored_methods: Option<Vec<VendorStoredMethod>>,
+    vendor_portal: Option<VendorPortalAccess>,
 }
 
 impl VendorQueryRecordBuilder {
@@ -504,8 +508,13 @@ impl VendorQueryRecordBuilder {
         self
     }
 
-    pub fn stored_methods(mut self, value: Vec<VendorResponseStoredMethod>) -> Self {
+    pub fn stored_methods(mut self, value: Vec<VendorStoredMethod>) -> Self {
         self.stored_methods = Some(value);
+        self
+    }
+
+    pub fn vendor_portal(mut self, value: VendorPortalAccess) -> Self {
+        self.vendor_portal = Some(value);
         self
     }
 
@@ -605,6 +614,7 @@ impl VendorQueryRecordBuilder {
             additional_data: self.additional_data,
             external_paypoint_id: self.external_paypoint_id,
             stored_methods: self.stored_methods,
+            vendor_portal: self.vendor_portal,
         })
     }
 }
