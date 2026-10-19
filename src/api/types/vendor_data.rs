@@ -103,6 +103,13 @@ pub struct VendorData {
     #[serde(rename = "vendorStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vendor_status: Option<Vendorstatus>,
+    /// When `true`, a 1099 tax form is issued to this vendor. When you
+    /// create a vendor and omit this field, it defaults to `false`. When
+    /// you update a vendor and omit this field, the vendor keeps its
+    /// current value.
+    #[serde(rename = "issue1099")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub issue_1099: Option<bool>,
     /// Vendor's ZIP or postal code. Required if any address field is provided. For US addresses, use five digits (`12345`) or ZIP+4 format (`12345-6789`).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub zip: Option<String>,
@@ -160,6 +167,7 @@ pub struct VendorDataBuilder {
     remit_zip: Option<Remitzip>,
     state: Option<String>,
     vendor_status: Option<Vendorstatus>,
+    issue_1099: Option<bool>,
     zip: Option<String>,
     default_method_id: Option<String>,
     attachment: Option<FileContent>,
@@ -321,6 +329,11 @@ impl VendorDataBuilder {
         self
     }
 
+    pub fn issue_1099(mut self, value: bool) -> Self {
+        self.issue_1099 = Some(value);
+        self
+    }
+
     pub fn zip(mut self, value: impl Into<String>) -> Self {
         self.zip = Some(value.into());
         self
@@ -370,6 +383,7 @@ impl VendorDataBuilder {
             remit_zip: self.remit_zip,
             state: self.state,
             vendor_status: self.vendor_status,
+            issue_1099: self.issue_1099,
             zip: self.zip,
             default_method_id: self.default_method_id,
             attachment: self.attachment,

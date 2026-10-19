@@ -31,6 +31,15 @@ pub struct TransactionQueryRecordsCustomer {
     #[serde(rename = "DeviceId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub device_id: Option<Device>,
+    #[serde(rename = "DeviceData")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub device_data: Option<QueryDeviceData>,
+    #[serde(rename = "DeviceEntryMode")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub device_entry_mode: Option<DeviceEntryMode>,
+    #[serde(rename = "EmvAuthData")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub emv_auth_data: Option<EmvAuthData>,
     #[serde(rename = "EntrypageId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub entrypage_id: Option<EntrypageId>,
@@ -165,6 +174,9 @@ pub struct TransactionQueryRecordsCustomerBuilder {
     connector_name: Option<String>,
     customer: Option<QueryTransactionPayorDataCustomer>,
     device_id: Option<Device>,
+    device_data: Option<QueryDeviceData>,
+    device_entry_mode: Option<DeviceEntryMode>,
+    emv_auth_data: Option<EmvAuthData>,
     entrypage_id: Option<EntrypageId>,
     external_processor_information: Option<ExternalProcessorInformation>,
     fee_amount: Option<FeeAmount>,
@@ -237,6 +249,21 @@ impl TransactionQueryRecordsCustomerBuilder {
 
     pub fn device_id(mut self, value: Device) -> Self {
         self.device_id = Some(value);
+        self
+    }
+
+    pub fn device_data(mut self, value: QueryDeviceData) -> Self {
+        self.device_data = Some(value);
+        self
+    }
+
+    pub fn device_entry_mode(mut self, value: DeviceEntryMode) -> Self {
+        self.device_entry_mode = Some(value);
+        self
+    }
+
+    pub fn emv_auth_data(mut self, value: EmvAuthData) -> Self {
+        self.emv_auth_data = Some(value);
         self
     }
 
@@ -413,6 +440,9 @@ impl TransactionQueryRecordsCustomerBuilder {
             connector_name: self.connector_name,
             customer: self.customer,
             device_id: self.device_id,
+            device_data: self.device_data,
+            device_entry_mode: self.device_entry_mode,
+            emv_auth_data: self.emv_auth_data,
             entrypage_id: self.entrypage_id,
             external_processor_information: self.external_processor_information,
             fee_amount: self.fee_amount,

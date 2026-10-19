@@ -51,6 +51,9 @@ pub struct VendorQueryRecord {
     #[serde(rename = "LocationCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<String>,
+    #[serde(rename = "Issue1099")]
+    #[serde(default)]
+    pub issue_1099: Issue1099,
     /// Array of objects describing the vendor's contacts.
     #[serde(rename = "Contacts")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -206,6 +209,7 @@ pub struct VendorQueryRecordBuilder {
     country: Option<String>,
     mcc: Option<Mcc>,
     location_code: Option<String>,
+    issue_1099: Option<Issue1099>,
     contacts: Option<Vec<ContactsResponse>>,
     billing_data: Option<BillingDataResponse>,
     payment_method: Option<VendorPaymentMethodString>,
@@ -320,6 +324,11 @@ impl VendorQueryRecordBuilder {
 
     pub fn location_code(mut self, value: impl Into<String>) -> Self {
         self.location_code = Some(value.into());
+        self
+    }
+
+    pub fn issue_1099(mut self, value: Issue1099) -> Self {
+        self.issue_1099 = Some(value);
         self
     }
 
@@ -522,6 +531,7 @@ impl VendorQueryRecordBuilder {
     /// This method will fail if any of the following fields are not set:
     /// - [`vendor_number`](VendorQueryRecordBuilder::vendor_number)
     /// - [`name_1`](VendorQueryRecordBuilder::name_1)
+    /// - [`issue_1099`](VendorQueryRecordBuilder::issue_1099)
     /// - [`vendor_status`](VendorQueryRecordBuilder::vendor_status)
     /// - [`vendor_id`](VendorQueryRecordBuilder::vendor_id)
     /// - [`paypoint_legalname`](VendorQueryRecordBuilder::paypoint_legalname)
@@ -554,6 +564,9 @@ impl VendorQueryRecordBuilder {
             country: self.country,
             mcc: self.mcc,
             location_code: self.location_code,
+            issue_1099: self
+                .issue_1099
+                .ok_or_else(|| BuildError::missing_field("issue_1099"))?,
             contacts: self.contacts,
             billing_data: self.billing_data,
             payment_method: self.payment_method,

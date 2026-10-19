@@ -34,7 +34,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-payabli_api = "2.0.18"
+payabli_api = "2.0.19"
 ```
 
 Or install via cargo:

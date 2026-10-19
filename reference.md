@@ -3607,6 +3607,14 @@ async fn main() {
 <dl>
 <dd>
 
+**invoice_data:** `Option<Option<BillData>>` — Object describing an invoice linked to the subscription. Replaces the subscription's existing invoice data entirely. Send `null` to remove it, or leave it out to keep the current invoice data. See [Update a subscription](/guides/pay-in-developer-subscriptions-manage#update-a-subscription) for details.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **payment_details:** `Option<PaymentDetail>` — Object describing details of the payment. For Regular subscriptions, skip a payment by setting `totalAmount` to 0; payments pause until you update it to a non-zero value, and `serviceFee` must also be 0 when `totalAmount` is 0. For BalanceDriven subscriptions, any `totalAmount` you send is accepted but ignored at run time. Each run charges the payor's live balance, and a zero balance is skipped.
     
 </dd>
@@ -13164,6 +13172,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 - `customerShippingState` (ct, nct, eq, ne)
 - `customerShippingCountry` (ct, nct, eq, ne)
 - `deviceId` (ct, nct, in, nin, eq, ne)
+- `DeviceEntryMode` (eq, ne, in, nin). Filters by how the device read the card: `Chip`, `Contactless`, `Swipe`, `Manual`, `Fallback`, or `None`. Case-insensitive. Separate multiple values with `|`, for example `DeviceEntryMode(in)=Chip|Contactless`. `ne` and `nin` also return transactions with no entry mode, such as non-device transactions. An unrecognized value is ignored, so the filter isn't applied.
 - `AchSecCode` ( ct, nct, in, nin, eq, ne)
 - `AchHolderType` (ct, nct, in, nin, eq, and ne)
 - `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name related to customer data
@@ -13371,6 +13380,7 @@ See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-repo
 - `customerShippingState` (ct, nct, eq, ne)
 - `customerShippingCountry` (ct, nct, eq, ne)
 - `deviceId` (ct, nct, in, nin, eq, ne)
+- `DeviceEntryMode` (eq, ne, in, nin). Filters by how the device read the card: `Chip`, `Contactless`, `Swipe`, `Manual`, `Fallback`, or `None`. Case-insensitive. Separate multiple values with `|`, for example `DeviceEntryMode(in)=Chip|Contactless`. `ne` and `nin` also return transactions with no entry mode, such as non-device transactions. An unrecognized value is ignored, so the filter isn't applied.
 - `AchSecCode` ( ct, nct, in, nin, eq, ne)
 - `AchHolderType`` (ct, nct, in, nin, eq, and ne)
 - `additional-xxx` (ne, eq, ct, nct) where xxx is the additional field name related to customer data
@@ -13978,6 +13988,7 @@ Accepted field names:
   - `batchId` (ne, eq, in, nin)
   - `detailType` (eq, ne, in, nin, ct, nct)
   - `detailMethod` (eq, ne, in, nin, ct, nct)
+  - `paymentId` (ne, eq, in, nin): The payout's payment ID. Returns every transfer linked to that payout: the payout transfer, any refund and stale check refund transfers, and the billing fee transfer.
     
 </dd>
 </dl>
@@ -14115,6 +14126,7 @@ Accepted field names:
   - `batchId` (ne, eq, in, nin)
   - `detailType` (eq, ne, in, nin, ct, nct)
   - `detailMethod` (eq, ne, in, nin, ct, nct)
+  - `paymentId` (ne, eq, in, nin): The payout's payment ID. Returns every transfer linked to that payout: the payout transfer, any refund and stale check refund transfers, and the billing fee transfer.
     
 </dd>
 </dl>
@@ -26516,6 +26528,7 @@ async fn main() {
                 remit_zip: Some(Remitzip("31113".to_string())),
                 state: Some("FL".to_string()),
                 vendor_status: Some(Vendorstatus(1)),
+                issue_1099: Some(true),
                 zip: Some("33139".to_string()),
                 ..Default::default()
             },
@@ -27110,7 +27123,7 @@ Creates a ghost card, a multi-use virtual debit card issued to a vendor for recu
 
 Unlike single-use virtual cards issued as part of a payout transaction, ghost cards aren't tied to a specific payout. They're issued directly to a vendor and can be reused up to a configurable number of times within the card's spending limits.
 
-Only one ghost card can exist per vendor per paypoint. To issue a new card to the same vendor, cancel the existing card first.
+Only one active ghost card can exist per vendor per paypoint. If the vendor already has one, the request fails with error `7067`. To issue a new card to the same vendor, cancel the existing card first. Canceled and expired cards don't count toward this limit. See [Cancel ghost card](/developers/api-reference/cards/cancel-ghost-card).
 </dd>
 </dl>
 </dd>
@@ -27302,6 +27315,76 @@ async fn main() {
 <dd>
 
 **misc_2:** `Option<String>` — Custom metadata field. Stored on the card record.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ghost_card.<a href="/src/api/resources/ghost_card/client.rs">delete_ghost_card</a>(card_token: String) -> Result&lt;DeleteGhostCardResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancels a ghost card. This is always a soft delete: Payabli keeps the card record, including its transaction history.
+
+Canceling a ghost card frees the vendor's slot, so you can issue a new ghost card to the same vendor. A card canceled with this endpoint can't be used, reactivated, or canceled again.
+
+Requires the `vcard_delete` permission.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .ghost_card
+        .delete_ghost_card(&"gc_abc123def456".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**card_token:** `String` — Token that identifies the ghost card to cancel. This is the `ReferenceId` returned when the card was created.
     
 </dd>
 </dl>
@@ -28472,6 +28555,86 @@ async fn main() {
 </dl>
 </details>
 
+<details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">get_next_check_number</a>(paypoint_id: String, account_id: String) -> Result&lt;NextCheckNumberResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a suggested check number for the next check payout from a paypoint's funding account. Payabli suggests the highest check number on the account's check payouts plus one, or `1` if the account has no check history. Canceled check payouts don't count toward the highest number.
+
+
+Use the suggested value with the `checkNumber` field when you reissue a check, or when you create a new check payout.
+
+
+Errors return HTTP `400`: `3005` when the paypoint ID is invalid or inactive, and `3758` when the account ID isn't valid for the paypoint.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .money_out
+        .get_next_check_number(3040, &"123-456".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**paypoint_id:** `String` — The ID of the paypoint that owns the funding account.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_id:** `String` — The `accountId` of the bank account linked to the paypoint's check service, such as `123-456`. Find it in the paypoint's bank account details (`BankData`).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.money_out.<a href="/src/api/resources/money_out/client.rs">reissue_out</a>(request: ReissueOutRequest, trans_id: Option&lt;String&gt;) -> Result&lt;ReissuePayoutResponse, ApiError&gt;</code></summary>
 <dl>
 <dd>
@@ -28486,7 +28649,7 @@ async fn main() {
 
 Reissues a payout transaction with a new payment method. This creates a new transaction linked to the original and marks the original transaction as reissued.
 
-The original transaction must be in **Processing** or **Processed** status. The payment method in the request body is used directly. The endpoint doesn't fall back to vendor-managed payment methods.
+The original transaction must be in **Processing** or **Processed** status. An ACH payout with a **Returned** status can also be reissued. The payment method in the request body is used directly. The endpoint doesn't fall back to vendor-managed payment methods.
 
 The new transaction goes through the standard authorize-and-capture flow automatically. Both the original and new transactions are linked through their event histories for audit purposes.
 
@@ -28527,6 +28690,7 @@ async fn main() {
                     ach_holder_type: Some(AchHolderType::Business),
                     ..Default::default()
                 },
+                check_number: None,
             },
             None,
         )
@@ -28547,6 +28711,14 @@ async fn main() {
 <dd>
 
 **payment_method:** `ReissuePaymentMethod` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**check_number:** `Option<VendorCheckNumber>` 
     
 </dd>
 </dl>

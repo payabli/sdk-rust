@@ -63,6 +63,9 @@ pub struct TransferOutDetailVendor {
     #[serde(rename = "LocationCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<String>,
+    #[serde(rename = "Issue1099")]
+    #[serde(default)]
+    pub issue_1099: Issue1099,
     /// List of contacts for the vendor.
     #[serde(rename = "Contacts")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -209,6 +212,7 @@ pub struct TransferOutDetailVendorBuilder {
     country: Option<String>,
     mcc: Option<String>,
     location_code: Option<String>,
+    issue_1099: Option<Issue1099>,
     contacts: Option<Vec<ContactsResponse>>,
     billing_data: Option<TransferOutDetailVendorBillingData>,
     payment_method: Option<String>,
@@ -314,6 +318,11 @@ impl TransferOutDetailVendorBuilder {
 
     pub fn location_code(mut self, value: impl Into<String>) -> Self {
         self.location_code = Some(value.into());
+        self
+    }
+
+    pub fn issue_1099(mut self, value: Issue1099) -> Self {
+        self.issue_1099 = Some(value);
         self
     }
 
@@ -468,6 +477,8 @@ impl TransferOutDetailVendorBuilder {
     }
 
     /// Consumes the builder and constructs a [`TransferOutDetailVendor`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`issue_1099`](TransferOutDetailVendorBuilder::issue_1099)
     pub fn build(self) -> Result<TransferOutDetailVendor, BuildError> {
         Ok(TransferOutDetailVendor {
             vendor_number: self.vendor_number,
@@ -485,6 +496,9 @@ impl TransferOutDetailVendorBuilder {
             country: self.country,
             mcc: self.mcc,
             location_code: self.location_code,
+            issue_1099: self
+                .issue_1099
+                .ok_or_else(|| BuildError::missing_field("issue_1099"))?,
             contacts: self.contacts,
             billing_data: self.billing_data,
             payment_method: self.payment_method,

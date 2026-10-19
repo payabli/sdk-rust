@@ -950,9 +950,75 @@ impl MoneyOutClient {
             .await
     }
 
+    /// Returns a suggested check number for the next check payout from a paypoint's funding account. Payabli suggests the highest check number on the account's check payouts plus one, or `1` if the account has no check history. Canceled check payouts don't count toward the highest number.
+    ///
+    ///
+    /// Use the suggested value with the `checkNumber` field when you reissue a check, or when you create a new check payout.
+    ///
+    ///
+    /// Errors return HTTP `400`: `3005` when the paypoint ID is invalid or inactive, and `3758` when the account ID isn't valid for the paypoint.
+    ///
+    /// # Arguments
+    ///
+    /// * `paypoint_id` - The ID of the paypoint that owns the funding account.
+    /// * `account_id` - The `accountId` of the bank account linked to the paypoint's check service, such as `123-456`. Find it in the paypoint's bank account details (`BankData`).
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use payabli_api::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         ..Default::default()
+    ///     };
+    ///     let client = ApiClient::new(config).expect("Failed to build client");
+    ///     client
+    ///         .money_out
+    ///         .get_next_check_number(3040, &"123-456".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn get_next_check_number(
+        &self,
+        paypoint_id: i64,
+        account_id: &str,
+        options: Option<RequestOptions>,
+    ) -> Result<NextCheckNumberResponse, ApiError> {
+        let endpoint_auth_headers = self
+            .http_client
+            .resolve_endpoint_auth_headers(
+                &options,
+                &[&["BearerAuth"] as &[&str], &["APIKeyAuth"] as &[&str]],
+            )
+            .await?;
+        let options = {
+            let mut o = options.unwrap_or_default();
+            for (header_key, header_value) in endpoint_auth_headers {
+                o.additional_headers.insert(header_key, header_value);
+            }
+            Some(o)
+        };
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!("MoneyOut/nextCheckNumber/{}/{}", paypoint_id, account_id),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
     /// Reissues a payout transaction with a new payment method. This creates a new transaction linked to the original and marks the original transaction as reissued.
     ///
-    /// The original transaction must be in **Processing** or **Processed** status. The payment method in the request body is used directly. The endpoint doesn't fall back to vendor-managed payment methods.
+    /// The original transaction must be in **Processing** or **Processed** status. An ACH payout with a **Returned** status can also be reissued. The payment method in the request body is used directly. The endpoint doesn't fall back to vendor-managed payment methods.
     ///
     /// The new transaction goes through the standard authorize-and-capture flow automatically. Both the original and new transactions are linked through their event histories for audit purposes.
     ///
@@ -992,6 +1058,7 @@ impl MoneyOutClient {
     ///                     ach_holder_type: Some(AchHolderType::Business),
     ///                     ..Default::default()
     ///                 },
+    ///                 check_number: None,
     ///             },
     ///             None,
     ///         )

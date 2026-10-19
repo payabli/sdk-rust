@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct DeviceQueryRecord {
     /// Unique identifier for the cloud device.
     #[serde(rename = "deviceId")]
@@ -27,14 +27,40 @@ pub struct DeviceQueryRecord {
     /// Model name of the device.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub model: Option<String>,
+    /// Version of the Payabli app running on the device.
+    #[serde(rename = "appVersion")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub app_version: Option<String>,
+    /// Version of Android running on the device.
+    #[serde(rename = "osVersion")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub os_version: Option<String>,
     /// Type of device.
     #[serde(rename = "deviceType")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub device_type: Option<i64>,
-    /// Current status of the device.
+    /// Lifecycle status of the device, as an integer. A value of `1` means the
+    /// device is active. This field doesn't show whether the device is running
+    /// a command. To check whether the device can accept a transaction now,
+    /// use `operationalStatus`.
     #[serde(rename = "deviceStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub device_status: Option<i64>,
+    /// Shows whether the device can accept a transaction now. The value
+    /// reflects the device's state when you send the query.
+    ///
+    /// - `online`: The device is active and isn't running a command. It can
+    /// accept a transaction.
+    /// - `busy`: The device is running a command that's pending, dispatched,
+    /// or processing, and the command hasn't expired. A new transaction sent
+    /// to the device fails with error `E7069` (Device busy). Wait for the
+    /// command to finish or expire, then query the device again.
+    /// - `offline`: The device isn't active, so it can't accept transactions.
+    /// Its lifecycle status (`deviceStatus`) isn't active.
+    ///
+    /// Check this field before you send a transaction to a device.
+    #[serde(rename = "operationalStatus")]
+    pub operational_status: DeviceQueryRecordOperationalStatus,
     /// Operating system of the device.
     #[serde(rename = "deviceOs")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -130,8 +156,11 @@ pub struct DeviceQueryRecordBuilder {
     friendly_name: Option<String>,
     make: Option<String>,
     model: Option<String>,
+    app_version: Option<String>,
+    os_version: Option<String>,
     device_type: Option<i64>,
     device_status: Option<i64>,
+    operational_status: Option<DeviceQueryRecordOperationalStatus>,
     device_os: Option<i64>,
     mac_address: Option<String>,
     last_health_check: Option<String>,
@@ -189,6 +218,16 @@ impl DeviceQueryRecordBuilder {
         self
     }
 
+    pub fn app_version(mut self, value: impl Into<String>) -> Self {
+        self.app_version = Some(value.into());
+        self
+    }
+
+    pub fn os_version(mut self, value: impl Into<String>) -> Self {
+        self.os_version = Some(value.into());
+        self
+    }
+
     pub fn device_type(mut self, value: i64) -> Self {
         self.device_type = Some(value);
         self
@@ -196,6 +235,11 @@ impl DeviceQueryRecordBuilder {
 
     pub fn device_status(mut self, value: i64) -> Self {
         self.device_status = Some(value);
+        self
+    }
+
+    pub fn operational_status(mut self, value: DeviceQueryRecordOperationalStatus) -> Self {
+        self.operational_status = Some(value);
         self
     }
 
@@ -296,6 +340,7 @@ impl DeviceQueryRecordBuilder {
 
     /// Consumes the builder and constructs a [`DeviceQueryRecord`].
     /// This method will fail if any of the following fields are not set:
+    /// - [`operational_status`](DeviceQueryRecordBuilder::operational_status)
     /// - [`transaction_count`](DeviceQueryRecordBuilder::transaction_count)
     /// - [`volume_processed`](DeviceQueryRecordBuilder::volume_processed)
     pub fn build(self) -> Result<DeviceQueryRecord, BuildError> {
@@ -307,8 +352,13 @@ impl DeviceQueryRecordBuilder {
             friendly_name: self.friendly_name,
             make: self.make,
             model: self.model,
+            app_version: self.app_version,
+            os_version: self.os_version,
             device_type: self.device_type,
             device_status: self.device_status,
+            operational_status: self
+                .operational_status
+                .ok_or_else(|| BuildError::missing_field("operational_status"))?,
             device_os: self.device_os,
             mac_address: self.mac_address,
             last_health_check: self.last_health_check,

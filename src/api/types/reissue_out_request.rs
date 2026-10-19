@@ -5,6 +5,9 @@ pub struct ReissueOutRequest {
     #[serde(rename = "paymentMethod")]
     #[serde(default)]
     pub payment_method: ReissuePaymentMethod,
+    #[serde(rename = "checkNumber")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub check_number: Option<VendorCheckNumber>,
     /// The transaction ID of the payout to reissue.
     #[serde(rename = "transId")]
     #[serde(skip)]
@@ -22,12 +25,18 @@ impl ReissueOutRequest {
 #[non_exhaustive]
 pub struct ReissueOutRequestBuilder {
     payment_method: Option<ReissuePaymentMethod>,
+    check_number: Option<VendorCheckNumber>,
     trans_id: Option<String>,
 }
 
 impl ReissueOutRequestBuilder {
     pub fn payment_method(mut self, value: ReissuePaymentMethod) -> Self {
         self.payment_method = Some(value);
+        self
+    }
+
+    pub fn check_number(mut self, value: VendorCheckNumber) -> Self {
+        self.check_number = Some(value);
         self
     }
 
@@ -45,6 +54,7 @@ impl ReissueOutRequestBuilder {
             payment_method: self
                 .payment_method
                 .ok_or_else(|| BuildError::missing_field("payment_method"))?,
+            check_number: self.check_number,
             trans_id: self
                 .trans_id
                 .ok_or_else(|| BuildError::missing_field("trans_id"))?,

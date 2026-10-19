@@ -85,6 +85,7 @@ impl VendorClient {
     ///                 remit_zip: Some(Remitzip("31113".to_string())),
     ///                 state: Some("FL".to_string()),
     ///                 vendor_status: Some(Vendorstatus(1)),
+    ///                 issue_1099: Some(true),
     ///                 zip: Some("33139".to_string()),
     ///                 ..Default::default()
     ///             },

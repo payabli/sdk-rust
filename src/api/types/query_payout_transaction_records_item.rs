@@ -178,7 +178,7 @@ pub struct QueryPayoutTransactionRecordsItem {
     #[serde(rename = "EntityId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub entity_id: Option<String>,
-    /// Operations currently permitted for this payout, derived from its status. Always present; empty for terminal statuses such as paid or canceled. Read this array directly rather than inferring available actions from `PaymentStatus`.
+    /// Operations currently permitted for this payout, derived from its status and other payout details such as payment method. For example, a returned ACH payout can include `cancel` and `reissue`. Always present; empty for terminal statuses such as paid or canceled. Read this array directly rather than inferring available actions from `PaymentStatus`.
     #[serde(rename = "allowedActions")]
     #[serde(default)]
     pub allowed_actions: Vec<QueryPayoutTransactionRecordsItemAllowedActionsItem>,

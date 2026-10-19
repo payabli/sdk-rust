@@ -163,6 +163,11 @@ pub struct BillQueryRecord2 {
     #[serde(rename = "Transaction")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transaction: Option<TransactionOutQueryRecord>,
+    /// All payout transactions that paid the bill, with one entry for each payout. When a bill is paid by several [partial payouts](/guides/pay-out-developer-bills-manage#partially-pay-a-bill), each one has an entry and `Transaction` holds the most recent. Canceled payouts aren't included.
+    ///
+    /// The value is `null` when the bill has no payouts, and an empty array when every payout on the bill has been canceled. For details, see `transactions` in [Get bill](/developers/api-reference/bill/get-bill).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub transactions: Option<Vec<BillTransactionReference>>,
     #[serde(rename = "Vendor")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vendor: Option<VendorOutData>,
@@ -215,6 +220,7 @@ pub struct BillQueryRecord2Builder {
     paid_amount: Option<f64>,
     outstanding_balance: Option<f64>,
     transaction: Option<TransactionOutQueryRecord>,
+    transactions: Option<Vec<BillTransactionReference>>,
     vendor: Option<VendorOutData>,
 }
 
@@ -409,6 +415,11 @@ impl BillQueryRecord2Builder {
         self
     }
 
+    pub fn transactions(mut self, value: Vec<BillTransactionReference>) -> Self {
+        self.transactions = Some(value);
+        self
+    }
+
     pub fn vendor(mut self, value: VendorOutData) -> Self {
         self.vendor = Some(value);
         self
@@ -455,6 +466,7 @@ impl BillQueryRecord2Builder {
             paid_amount: self.paid_amount,
             outstanding_balance: self.outstanding_balance,
             transaction: self.transaction,
+            transactions: self.transactions,
             vendor: self.vendor,
         })
     }

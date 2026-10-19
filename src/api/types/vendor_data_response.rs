@@ -58,6 +58,9 @@ pub struct VendorDataResponse {
     #[serde(rename = "LocationCode")]
     #[serde(default)]
     pub location_code: LocationCode,
+    #[serde(rename = "Issue1099")]
+    #[serde(default)]
+    pub issue_1099: Issue1099,
     /// Array of objects describing the vendor's contacts.
     #[serde(rename = "Contacts")]
     #[serde(default)]
@@ -189,6 +192,7 @@ pub struct VendorDataResponseBuilder {
     country: Option<String>,
     mcc: Option<Mcc>,
     location_code: Option<LocationCode>,
+    issue_1099: Option<Issue1099>,
     contacts: Option<Vec<ContactsResponse>>,
     billing_data: Option<VendorResponseBillingData>,
     payment_method: Option<VendorDataResponsePaymentMethod>,
@@ -293,6 +297,11 @@ impl VendorDataResponseBuilder {
 
     pub fn location_code(mut self, value: LocationCode) -> Self {
         self.location_code = Some(value);
+        self
+    }
+
+    pub fn issue_1099(mut self, value: Issue1099) -> Self {
+        self.issue_1099 = Some(value);
         self
     }
 
@@ -457,6 +466,7 @@ impl VendorDataResponseBuilder {
     /// - [`country`](VendorDataResponseBuilder::country)
     /// - [`mcc`](VendorDataResponseBuilder::mcc)
     /// - [`location_code`](VendorDataResponseBuilder::location_code)
+    /// - [`issue_1099`](VendorDataResponseBuilder::issue_1099)
     /// - [`contacts`](VendorDataResponseBuilder::contacts)
     /// - [`billing_data`](VendorDataResponseBuilder::billing_data)
     /// - [`payment_method`](VendorDataResponseBuilder::payment_method)
@@ -521,6 +531,9 @@ impl VendorDataResponseBuilder {
             location_code: self
                 .location_code
                 .ok_or_else(|| BuildError::missing_field("location_code"))?,
+            issue_1099: self
+                .issue_1099
+                .ok_or_else(|| BuildError::missing_field("issue_1099"))?,
             contacts: self
                 .contacts
                 .ok_or_else(|| BuildError::missing_field("contacts"))?,

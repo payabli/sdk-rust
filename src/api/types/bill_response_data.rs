@@ -115,6 +115,15 @@ pub struct BillResponseData {
     #[serde(rename = "Transaction")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transaction: Option<TransactionOutQueryRecord>,
+    /// All payout transactions that paid the bill, with one entry for each payout. When a bill is paid by several [partial payouts](/guides/pay-out-developer-bills-manage#partially-pay-a-bill), each one has an entry and `Transaction` holds the most recent. A bill paid by a single payout has one entry, and its `idOut` and `paymentId` match those on `Transaction`.
+    ///
+    /// Canceled payouts aren't included.
+    ///
+    /// The value is `null` when the bill has no payouts. When every payout on the bill has been canceled, the value is an empty array. If partial payments aren't enabled, a bill whose only payout was canceled returns `null` instead.
+    ///
+    /// Each entry has identifiers only. For a transaction's details, see [Get payout details](/developers/api-reference/moneyout/get-details-for-a-processed-payout-transaction).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub transactions: Option<Vec<BillTransactionReference>>,
     #[serde(rename = "billEvents")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub bill_events: Option<BillEvents>,
@@ -191,6 +200,7 @@ pub struct BillResponseDataBuilder {
     last_updated: Option<LastModified>,
     frequency: Option<Frequency>,
     transaction: Option<TransactionOutQueryRecord>,
+    transactions: Option<Vec<BillTransactionReference>>,
     bill_events: Option<BillEvents>,
     bill_approvals: Option<BillApprovals>,
     paypoint_legalname: Option<Legalname>,
@@ -341,6 +351,11 @@ impl BillResponseDataBuilder {
         self
     }
 
+    pub fn transactions(mut self, value: Vec<BillTransactionReference>) -> Self {
+        self.transactions = Some(value);
+        self
+    }
+
     pub fn bill_events(mut self, value: BillEvents) -> Self {
         self.bill_events = Some(value);
         self
@@ -431,6 +446,7 @@ impl BillResponseDataBuilder {
             last_updated: self.last_updated,
             frequency: self.frequency,
             transaction: self.transaction,
+            transactions: self.transactions,
             bill_events: self.bill_events,
             bill_approvals: self.bill_approvals,
             paypoint_legalname: self.paypoint_legalname,

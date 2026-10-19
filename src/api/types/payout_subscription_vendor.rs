@@ -44,6 +44,9 @@ pub struct PayoutSubscriptionVendor {
     #[serde(rename = "locationCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<String>,
+    #[serde(rename = "issue1099")]
+    #[serde(default)]
+    pub issue_1099: Issue1099,
     /// Array of objects describing the vendor's contacts.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub contacts: Option<Vec<PayoutSubscriptionVendorContact>>,
@@ -200,6 +203,7 @@ pub struct PayoutSubscriptionVendorBuilder {
     country: Option<String>,
     mcc: Option<Mcc>,
     location_code: Option<String>,
+    issue_1099: Option<Issue1099>,
     contacts: Option<Vec<PayoutSubscriptionVendorContact>>,
     billing_data: Option<BillingDataResponse>,
     payment_method: Option<VendorPaymentMethodString>,
@@ -314,6 +318,11 @@ impl PayoutSubscriptionVendorBuilder {
 
     pub fn location_code(mut self, value: impl Into<String>) -> Self {
         self.location_code = Some(value.into());
+        self
+    }
+
+    pub fn issue_1099(mut self, value: Issue1099) -> Self {
+        self.issue_1099 = Some(value);
         self
     }
 
@@ -516,6 +525,7 @@ impl PayoutSubscriptionVendorBuilder {
     /// This method will fail if any of the following fields are not set:
     /// - [`vendor_number`](PayoutSubscriptionVendorBuilder::vendor_number)
     /// - [`name_1`](PayoutSubscriptionVendorBuilder::name_1)
+    /// - [`issue_1099`](PayoutSubscriptionVendorBuilder::issue_1099)
     /// - [`vendor_status`](PayoutSubscriptionVendorBuilder::vendor_status)
     /// - [`vendor_id`](PayoutSubscriptionVendorBuilder::vendor_id)
     /// - [`paypoint_legalname`](PayoutSubscriptionVendorBuilder::paypoint_legalname)
@@ -548,6 +558,9 @@ impl PayoutSubscriptionVendorBuilder {
             country: self.country,
             mcc: self.mcc,
             location_code: self.location_code,
+            issue_1099: self
+                .issue_1099
+                .ok_or_else(|| BuildError::missing_field("issue_1099"))?,
             contacts: self.contacts,
             billing_data: self.billing_data,
             payment_method: self.payment_method,

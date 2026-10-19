@@ -73,6 +73,9 @@ pub struct GetMethodResponseResponseDataVendorsItem {
     #[serde(rename = "locationCode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub location_code: Option<LocationCode>,
+    #[serde(rename = "issue1099")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub issue_1099: Option<Issue1099>,
     /// Merchant category code
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mcc: Option<Mcc>,
@@ -205,6 +208,7 @@ pub struct GetMethodResponseResponseDataVendorsItemBuilder {
     internal_reference_id: Option<InternalReferenceId>,
     last_updated: Option<DateTime<Utc>>,
     location_code: Option<LocationCode>,
+    issue_1099: Option<Issue1099>,
     mcc: Option<Mcc>,
     name_1: Option<String>,
     name_2: Option<String>,
@@ -322,6 +326,11 @@ impl GetMethodResponseResponseDataVendorsItemBuilder {
 
     pub fn location_code(mut self, value: LocationCode) -> Self {
         self.location_code = Some(value);
+        self
+    }
+
+    pub fn issue_1099(mut self, value: Issue1099) -> Self {
+        self.issue_1099 = Some(value);
         self
     }
 
@@ -481,6 +490,7 @@ impl GetMethodResponseResponseDataVendorsItemBuilder {
             internal_reference_id: self.internal_reference_id,
             last_updated: self.last_updated,
             location_code: self.location_code,
+            issue_1099: self.issue_1099,
             mcc: self.mcc,
             name_1: self.name_1,
             name_2: self.name_2,
