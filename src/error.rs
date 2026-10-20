@@ -52,6 +52,17 @@ pub enum ApiError {
         resource_id: Option<String>,
         resource_type: Option<String>,
     },
+    #[error("ConflictError: Conflict - {message}")]
+    ConflictError {
+        message: String,
+        conflict_type: Option<String>,
+    },
+    #[error("UnprocessableEntityError: Unprocessable entity - {message}")]
+    UnprocessableEntityError {
+        message: String,
+        field: Option<String>,
+        validation_error: Option<String>,
+    },
     #[error("TooManyRequestsError: Rate limit exceeded - {message}")]
     TooManyRequestsError {
         message: String,
@@ -59,19 +70,6 @@ pub enum ApiError {
         response_code: Option<i64>,
         response_text: Option<String>,
         response_data: Option<PayabliErrorBodyResponseData>,
-    },
-    #[error("UnprocessableEntityError: Unprocessable entity - {message}")]
-    UnprocessableEntityError {
-        message: String,
-        is_success: Option<bool>,
-        response_code: Option<i64>,
-        response_text: Option<String>,
-        response_data: Option<PayabliErrorBodyResponseData>,
-    },
-    #[error("ConflictError: Conflict - {message}")]
-    ConflictError {
-        message: String,
-        conflict_type: Option<String>,
     },
     #[error("HTTP error {status}: {message}")]
     Http { status: u16, message: String },
@@ -303,6 +301,52 @@ impl ApiError {
                     resource_type: None,
                 };
             }
+            409 => {
+                // Parse error body for ConflictError;
+                if let Some(body_str) = body {
+                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
+                        return Self::ConflictError {
+                            message: parsed
+                                .get("message")
+                                .and_then(|v| v.as_str())
+                                .unwrap_or("Unknown error")
+                                .to_string(),
+                            conflict_type: parsed
+                                .get("conflictType")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                        };
+                    }
+                }
+                return Self::ConflictError {
+                    message: body.unwrap_or("Unknown error").to_string(),
+                    conflict_type: None,
+                };
+            }
+            422 => {
+                // Parse error body for UnprocessableEntityError;
+                if let Some(body_str) = body {
+                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
+                        return Self::UnprocessableEntityError {
+                            message: parsed
+                                .get("message")
+                                .and_then(|v| v.as_str())
+                                .unwrap_or("Unknown error")
+                                .to_string(),
+                            field: parsed
+                                .get("field")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                            validation_error: parsed
+                                .get("validationError")
+                                .and_then(|v| v.as_str().map(|s| s.to_string())),
+                        };
+                    }
+                }
+                return Self::UnprocessableEntityError {
+                    message: body.unwrap_or("Unknown error").to_string(),
+                    field: None,
+                    validation_error: None,
+                };
+            }
             429 => {
                 // Parse error body for TooManyRequestsError;
                 if let Some(body_str) = body {
@@ -335,61 +379,6 @@ impl ApiError {
                     response_code: None,
                     response_text: None,
                     response_data: None,
-                };
-            }
-            422 => {
-                // Parse error body for UnprocessableEntityError;
-                if let Some(body_str) = body {
-                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
-                        return Self::UnprocessableEntityError {
-                            message: parsed
-                                .get("message")
-                                .and_then(|v| v.as_str())
-                                .unwrap_or("Unknown error")
-                                .to_string(),
-                            is_success: parsed
-                                .get("isSuccess")
-                                .and_then(|v| serde_json::from_value::<bool>(v.clone()).ok()),
-                            response_code: parsed
-                                .get("responseCode")
-                                .and_then(|v| serde_json::from_value::<i64>(v.clone()).ok()),
-                            response_text: parsed
-                                .get("responseText")
-                                .and_then(|v| v.as_str().map(|s| s.to_string())),
-                            response_data: parsed.get("responseData").and_then(|v| {
-                                serde_json::from_value::<PayabliErrorBodyResponseData>(v.clone())
-                                    .ok()
-                            }),
-                        };
-                    }
-                }
-                return Self::UnprocessableEntityError {
-                    message: body.unwrap_or("Unknown error").to_string(),
-                    is_success: None,
-                    response_code: None,
-                    response_text: None,
-                    response_data: None,
-                };
-            }
-            409 => {
-                // Parse error body for ConflictError;
-                if let Some(body_str) = body {
-                    if let Ok(parsed) = serde_json::from_str::<serde_json::Value>(body_str) {
-                        return Self::ConflictError {
-                            message: parsed
-                                .get("message")
-                                .and_then(|v| v.as_str())
-                                .unwrap_or("Unknown error")
-                                .to_string(),
-                            conflict_type: parsed
-                                .get("conflictType")
-                                .and_then(|v| v.as_str().map(|s| s.to_string())),
-                        };
-                    }
-                }
-                return Self::ConflictError {
-                    message: body.unwrap_or("Unknown error").to_string(),
-                    conflict_type: None,
                 };
             }
             _ => Self::Http {

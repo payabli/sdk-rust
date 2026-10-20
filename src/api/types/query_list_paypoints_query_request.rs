@@ -2,7 +2,7 @@ pub use crate::prelude::*;
 
 /// Query parameters for ListPaypoints
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
-pub struct ListPaypointsQueryRequest {
+pub struct QueryListPaypointsQueryRequest {
     /// Export format for file downloads. When specified, returns data as a file instead of JSON.
     #[serde(rename = "exportFormat")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -78,15 +78,15 @@ pub struct ListPaypointsQueryRequest {
     pub sort_by: Option<String>,
 }
 
-impl ListPaypointsQueryRequest {
-    pub fn builder() -> ListPaypointsQueryRequestBuilder {
-        <ListPaypointsQueryRequestBuilder as Default>::default()
+impl QueryListPaypointsQueryRequest {
+    pub fn builder() -> QueryListPaypointsQueryRequestBuilder {
+        <QueryListPaypointsQueryRequestBuilder as Default>::default()
     }
 }
 
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
-pub struct ListPaypointsQueryRequestBuilder {
+pub struct QueryListPaypointsQueryRequestBuilder {
     export_format: Option<ExportFormat>,
     from_record: Option<i64>,
     limit_record: Option<i64>,
@@ -94,7 +94,7 @@ pub struct ListPaypointsQueryRequestBuilder {
     sort_by: Option<String>,
 }
 
-impl ListPaypointsQueryRequestBuilder {
+impl QueryListPaypointsQueryRequestBuilder {
     pub fn export_format(mut self, value: ExportFormat) -> Self {
         self.export_format = Some(value);
         self
@@ -120,9 +120,9 @@ impl ListPaypointsQueryRequestBuilder {
         self
     }
 
-    /// Consumes the builder and constructs a [`ListPaypointsQueryRequest`].
-    pub fn build(self) -> Result<ListPaypointsQueryRequest, BuildError> {
-        Ok(ListPaypointsQueryRequest {
+    /// Consumes the builder and constructs a [`QueryListPaypointsQueryRequest`].
+    pub fn build(self) -> Result<QueryListPaypointsQueryRequest, BuildError> {
+        Ok(QueryListPaypointsQueryRequest {
             export_format: self.export_format,
             from_record: self.from_record,
             limit_record: self.limit_record,

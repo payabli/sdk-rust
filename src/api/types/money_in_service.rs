@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-/// A Pay In service the bank account is used for.
+/// A Pay In service an application can request.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum MoneyInService {

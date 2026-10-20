@@ -22,6 +22,12 @@
 //! - **TapToPay**
 //! - **Cloud**
 //! - **LineItem**
+//! - **Businesses**
+//! - **People**
+//! - **Paypoints**
+//! - **Payment methods**
+//! - **Boarding templates**
+//! - **Applications**
 //! - **Boarding**
 //! - **Templates**
 //! - **Export**
@@ -42,9 +48,12 @@
 
 use crate::{ApiError, ClientConfig};
 
+pub mod applications;
 pub mod bill;
 pub mod billing;
 pub mod boarding;
+pub mod boarding_templates;
+pub mod businesses;
 pub mod case_management;
 pub mod charge_backs;
 pub mod check_capture;
@@ -67,8 +76,11 @@ pub mod ocr;
 pub mod organization;
 pub mod payment_link;
 pub mod payment_method_domain;
+pub mod payment_methods;
 pub mod payout_subscription;
 pub mod paypoint;
+pub mod paypoints;
+pub mod people;
 pub mod query;
 pub mod statistic;
 pub mod subscription;
@@ -101,6 +113,12 @@ pub struct ApiClient {
     pub taptopay: TaptopayClient,
     pub cloud: CloudClient,
     pub line_item: LineItemClient,
+    pub businesses: BusinessesClient,
+    pub people: PeopleClient,
+    pub paypoints: PaypointsClient,
+    pub payment_methods: PaymentMethodsClient,
+    pub boarding_templates: BoardingTemplatesClient,
+    pub applications: ApplicationsClient,
     pub boarding: BoardingClient,
     pub templates: TemplatesClient,
     pub export: ExportClient,
@@ -144,6 +162,12 @@ impl ApiClient {
             taptopay: TaptopayClient::new(config.clone())?,
             cloud: CloudClient::new(config.clone())?,
             line_item: LineItemClient::new(config.clone())?,
+            businesses: BusinessesClient::new(config.clone())?,
+            people: PeopleClient::new(config.clone())?,
+            paypoints: PaypointsClient::new(config.clone())?,
+            payment_methods: PaymentMethodsClient::new(config.clone())?,
+            boarding_templates: BoardingTemplatesClient::new(config.clone())?,
+            applications: ApplicationsClient::new(config.clone())?,
             boarding: BoardingClient::new(config.clone())?,
             templates: TemplatesClient::new(config.clone())?,
             export: ExportClient::new(config.clone())?,
@@ -165,9 +189,12 @@ impl ApiClient {
     }
 }
 
+pub use applications::ApplicationsClient;
 pub use bill::BillClient;
 pub use billing::BillingClient;
 pub use boarding::BoardingClient;
+pub use boarding_templates::BoardingTemplatesClient;
+pub use businesses::BusinessesClient;
 pub use case_management::CaseManagementClient;
 pub use charge_backs::ChargeBacksClient;
 pub use check_capture::CheckCaptureClient;
@@ -190,8 +217,11 @@ pub use ocr::OcrClient;
 pub use organization::OrganizationClient;
 pub use payment_link::PaymentLinkClient;
 pub use payment_method_domain::PaymentMethodDomainClient;
+pub use payment_methods::PaymentMethodsClient;
 pub use payout_subscription::PayoutSubscriptionClient;
 pub use paypoint::PaypointClient;
+pub use paypoints::PaypointsClient;
+pub use people::PeopleClient;
 pub use query::QueryClient;
 pub use statistic::StatisticClient;
 pub use subscription::SubscriptionClient;

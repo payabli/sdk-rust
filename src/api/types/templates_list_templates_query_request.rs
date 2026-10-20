@@ -1,12 +1,8 @@
 pub use crate::prelude::*;
 
-/// Query parameters for ListApplications
+/// Query parameters for ListTemplates
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
-pub struct ListApplicationsQueryRequest {
-    /// Export format for file downloads. When specified, returns data as a file instead of JSON.
-    #[serde(rename = "exportFormat")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub export_format: Option<ExportFormat>,
+pub struct TemplatesListTemplatesQueryRequest {
     /// The number of records to skip before starting to collect the result set.
     #[serde(rename = "fromRecord")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -15,30 +11,30 @@ pub struct ListApplicationsQueryRequest {
     #[serde(rename = "limitRecord")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub limit_record: Option<i64>,
-    /// Collection of field names, conditions, and values used to filter the query
+    /// Collection of field names, conditions, and values used to filter the query.
+    ///
+    /// <Info>
+    /// **You must remove `parameters=` from the request before you send it, otherwise Payabli will ignore the filters.**
+    ///
+    /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    ///
+    /// should become:
+    ///
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// </Info>
+    ///
     ///
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
-    /// Accepted field names:
+    /// **Accepted field names:**
     /// - `createdAt` (gt, ge, lt, le, eq, ne)
-    /// - `startDate` (gt, ge, lt, le, eq, ne)
-    /// - `dbaname` (ct, nct)
-    /// - `legalname` (ct, nct)
-    /// - `ein` (ct, nct)
-    /// - `address` (ct, nct)
-    /// - `city` (ct, nct)
-    /// - `state` (ct, nct)
-    /// - `phone` (ct, nct)
-    /// - `mcc` (ct, nct)
-    /// - `owntype` (ct, nct)
-    /// - `ownerName` (ct, nct)
-    /// - `contactName` (ct, nct)
-    /// - `status` (in, nin, eq,ne)
+    /// - `title` (ct, nct)
+    /// - `description` (ct, nct)
+    /// - `code` (ct, nct)
     /// - `orgParentname` (ct, nct)
-    /// - `externalpaypointID` (ct, nct, eq, ne)
-    /// - `repCode` (ct, nct, eq, ne)
-    /// - `repName` (ct, nct, eq, ne)
-    /// - `repOffice` (ct, nct, eq, ne)
+    ///
     /// Accepted comparison operators - enclosed between parentheses:
     /// - eq or empty => equal
     /// - gt => greater than
@@ -50,6 +46,12 @@ pub struct ListApplicationsQueryRequest {
     /// - nct => not contains
     /// - in => inside array
     /// - nin => not inside array
+    ///
+    /// Accepted parameters:
+    /// - limitRecord : max number of records for query (default="20", "0" or negative value for all)
+    /// - fromRecord : initial record in query
+    ///
+    /// Example: title(ct)=hoa return all records with title containing "hoa"
     #[serde(skip_serializing_if = "Option::is_none")]
     pub parameters: Option<HashMap<String, Option<String>>>,
     /// The field name to use for sorting results. Use `desc(field_name)` to sort descending by `field_name`, and use `asc(field_name)` to sort ascending by `field_name`.
@@ -58,28 +60,22 @@ pub struct ListApplicationsQueryRequest {
     pub sort_by: Option<String>,
 }
 
-impl ListApplicationsQueryRequest {
-    pub fn builder() -> ListApplicationsQueryRequestBuilder {
-        <ListApplicationsQueryRequestBuilder as Default>::default()
+impl TemplatesListTemplatesQueryRequest {
+    pub fn builder() -> TemplatesListTemplatesQueryRequestBuilder {
+        <TemplatesListTemplatesQueryRequestBuilder as Default>::default()
     }
 }
 
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
-pub struct ListApplicationsQueryRequestBuilder {
-    export_format: Option<ExportFormat>,
+pub struct TemplatesListTemplatesQueryRequestBuilder {
     from_record: Option<i64>,
     limit_record: Option<i64>,
     parameters: Option<HashMap<String, Option<String>>>,
     sort_by: Option<String>,
 }
 
-impl ListApplicationsQueryRequestBuilder {
-    pub fn export_format(mut self, value: ExportFormat) -> Self {
-        self.export_format = Some(value);
-        self
-    }
-
+impl TemplatesListTemplatesQueryRequestBuilder {
     pub fn from_record(mut self, value: i64) -> Self {
         self.from_record = Some(value);
         self
@@ -100,10 +96,9 @@ impl ListApplicationsQueryRequestBuilder {
         self
     }
 
-    /// Consumes the builder and constructs a [`ListApplicationsQueryRequest`].
-    pub fn build(self) -> Result<ListApplicationsQueryRequest, BuildError> {
-        Ok(ListApplicationsQueryRequest {
-            export_format: self.export_format,
+    /// Consumes the builder and constructs a [`TemplatesListTemplatesQueryRequest`].
+    pub fn build(self) -> Result<TemplatesListTemplatesQueryRequest, BuildError> {
+        Ok(TemplatesListTemplatesQueryRequest {
             from_record: self.from_record,
             limit_record: self.limit_record,
             parameters: self.parameters,

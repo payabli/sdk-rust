@@ -1,6 +1,6 @@
 pub use crate::prelude::*;
 
-/// A Pay Out service the bank account is used for.
+/// A Pay Out service an application can request.
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum MoneyOutService {

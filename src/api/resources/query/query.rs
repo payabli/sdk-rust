@@ -2684,7 +2684,7 @@ impl QueryClient {
     ///         .query
     ///         .list_paypoints(
     ///             123,
-    ///             &ListPaypointsQueryRequest {
+    ///             &QueryListPaypointsQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
     ///                 sort_by: Some("desc(field_name)".to_string()),
@@ -2698,7 +2698,7 @@ impl QueryClient {
     pub async fn list_paypoints(
         &self,
         org_id: i64,
-        request: &ListPaypointsQueryRequest,
+        request: &QueryListPaypointsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<QueryEntrypointResponse, ApiError> {
         let endpoint_auth_headers = self

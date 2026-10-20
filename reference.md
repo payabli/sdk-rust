@@ -11753,7 +11753,7 @@ async fn main() {
         .query
         .list_paypoints(
             123,
-            &ListPaypointsQueryRequest {
+            &QueryListPaypointsQueryRequest {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
@@ -17026,6 +17026,5283 @@ Example: name(ct)=john return all records with name containing john
 </dl>
 </details>
 
+## Businesses
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">list_businesses</a>(status: Option&lt;Option&lt;String&gt;&gt;, name: Option&lt;Option&lt;String&gt;&gt;, merchant_cat_code: Option&lt;Option&lt;String&gt;&gt;, legal_structure: Option&lt;Option&lt;String&gt;&gt;, limit: Option&lt;Option&lt;i64&gt;&gt;, page: Option&lt;Option&lt;i64&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;, sort_order: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;ListBusinessesEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists businesses with optional filtering and pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .list_businesses(
+            &ListBusinessesQueryRequest {
+                limit: Some(1),
+                page: Some(1),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**status:** `Option<String>` — Filter by business status.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `Option<String>` — Filter by legal name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_cat_code:** `Option<String>` — Filter by merchant category code.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**legal_structure:** `Option<String>` — Filter by legal structure.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Option<i64>` — Number of results per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `Option<i64>` — Page number to return.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `Option<String>` — Field to sort by.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_order:** `Option<String>` — Sort direction.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">create_business</a>(request: CreateBusinessRequest) -> Result&lt;BusinessCreatedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a business, the legal entity behind a paypoint. New businesses
+start in `Draft`. Set `parentReference` to the organization 
+the business belongs to, or omit it to use the organization your
+credential belongs to.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .create_business(
+            &CreateBusinessRequest {
+                external_id: Some("rg-001".to_string()),
+                legal_name: "Rose Gardens LLC".to_string(),
+                legal_structure: Some(CreateBusinessRequestLegalStructure::Llc),
+                website: Some("https://example.com".to_string()),
+                merchant_cat_code: Some("5814".to_string()),
+                phone: Some(vec!["3055551212".to_string()]),
+                emails: Some(vec!["ops@example.com".to_string()]),
+                payment_methods: Some(vec![
+                    BusinessPaymentMethod {
+                        r#type: Some("bank_account".to_string()),
+                        name: Some("Operating account".to_string()),
+                        financial_institution: Some("Bank of Example".to_string()),
+                        owner_type: Some("business".to_string()),
+                        account_type: Some("checking".to_string()),
+                        account_number: Some("123456789".to_string()),
+                        routing_number: Some("021000021".to_string()),
+                        usage: Some(vec!["deposits".to_string(), "billing".to_string()]),
+                        is_default: Some(true),
+                        ..Default::default()
+                    },
+                    BusinessPaymentMethod {
+                        r#type: Some("bank_account".to_string()),
+                        name: Some("Payout account".to_string()),
+                        financial_institution: Some("Bank of Example".to_string()),
+                        owner_type: Some("business".to_string()),
+                        account_type: Some("checking".to_string()),
+                        account_number: Some("987654321".to_string()),
+                        routing_number: Some("021000021".to_string()),
+                        usage: Some(vec!["payOutFunding".to_string()]),
+                        is_default: Some(false),
+                        ..Default::default()
+                    },
+                ]),
+                tax_reference: Some("477498993".to_string()),
+                parent_reference: Some("8cfec329267".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">get_business</a>(business_reference: String) -> Result&lt;BusinessDetailEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a business by reference. Sensitive fields such as `taxReference` are masked.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .get_business(&"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">deactivate_business</a>(business_reference: String, request: DeactivateBusinessRequest) -> Result&lt;BusinessDeactivatedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deactivates a business. This is a soft delete: the business moves to
+`Deactivated` and the record is kept.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .deactivate_business(
+            &"019fed33-615d-77b6-afaa-46e7ac9bf36e".to_string(),
+            &DeactivateBusinessRequest {
+                reason: Some("Duplicate record".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `Option<String>` — Optional reason for deactivation (max 500 characters).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">update_business</a>(business_reference: String, request: UpdateBusinessRequest) -> Result&lt;BusinessUpdatedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Applies a partial update to a business. Send only the fields you want to change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .update_business(
+            &"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+            &UpdateBusinessRequest {
+                website: Some("https://example.org".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_id:** `Option<String>` — Your own identifier for the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**legal_name:** `Option<String>` — The registered legal name of the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `Option<String>` — A free-text description of the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**legal_structure:** `Option<UpdateBusinessRequestLegalStructure>` — The business's legal structure. Accepts the same values as create, and normalizes to a canonical value on read.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**stock_symbol:** `Option<String>` — The stock ticker symbol, if the business is publicly traded.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**incorporation_state:** `Option<String>` — The state where the business is incorporated.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tax_id_country:** `Option<String>` — The country that issued the business's tax identifier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**established_date:** `Option<String>` — The date the business was established.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**number_of_employees:** `Option<i64>` — The number of employees.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annual_revenue:** `Option<f64>` — The business's annual revenue.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**website:** `Option<String>` — The business's website URL.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**merchant_cat_code:** `Option<String>` — The merchant category code (MCC) that classifies the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timezone:** `Option<String>` — The business's time zone.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**phone:** `Option<Vec<String>>` — Phone numbers for the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**emails:** `Option<Vec<String>>` — Email addresses for the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**operating_seasons:** `Option<Vec<UpdateBusinessRequestOperatingSeasonsItem>>` — The seasons the business operates in. Values are case-insensitive on input and returned capitalized.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**address_details:** `Option<Vec<BusinessAddress>>` 
+
+A non-empty `addressDetails` is rejected on update. Manage a business's
+addresses through the `/v2/businesses/{businessReference}/addresses`
+endpoints instead. An omitted field or an empty array is accepted as
+"no address change requested."
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payment_methods:** `Option<Vec<BusinessPaymentMethod>>` — The bank accounts and cards attached to the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_data:** `Option<std::collections::HashMap<String, serde_json::Value>>` 
+
+Key-value data to merge into the business's stored `customData`.
+Payabli stores the applicant's answers to a boarding template's
+custom questions under the `templateAnswers` key.
+
+When you update a business, Payabli merges `customData` into the
+stored value, following JSON Merge Patch (RFC 7396). Keys you
+don't send are kept at every depth, and nested objects merge key
+by key. Strings, numbers, Boolean values, and arrays replace the
+stored value, and arrays aren't merged. Send a key as `null` to
+delete it, such as `{"crmId": null}`. A `customData` that isn't
+an object, such as an array, replaces the stored value whole.
+Leave out `customData` to keep it as is.
+
+The `customData` you send can be up to 65,536 bytes serialized.
+The limit applies to the request, not to the merged result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_foreign_owned:** `Option<bool>` — Whether the business is foreign-owned.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_tax_exempt:** `Option<bool>` — Whether the business is tax-exempt.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tax_exempt_classification:** `Option<String>` — The business's tax-exempt classification, such as `501(c)(3)`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**processing_metrics:** `Option<ProcessingMetrics>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payout_metrics:** `Option<PayoutMetrics>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**license:** `Option<String>` — The business's license number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**license_state:** `Option<String>` — The state that issued the business's license.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">get_business_unmasked</a>(business_reference: String) -> Result&lt;BusinessDetailEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a business by reference with sensitive fields unmasked.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .get_business_unmasked(&"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">list_business_addresses</a>(business_reference: String) -> Result&lt;BusinessAddressListEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the addresses on a business. Each address is identified by its `businessAddressReference`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .list_business_addresses(&"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">create_business_address</a>(business_reference: String, request: CreateBusinessAddressRequest) -> Result&lt;BusinessAddressEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Adds an address to a business. Returns the new address and its `businessAddressReference`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .create_business_address(
+            &"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+            &CreateBusinessAddressRequest {
+                r#type: AddressType::Mailing,
+                location: Some(BusinessAddressLocation::Warehouse),
+                address_line_1: "202 Warehouse Ln".to_string(),
+                city_locality: "Austin".to_string(),
+                state_province: "TX".to_string(),
+                postal_code: "73302".to_string(),
+                country: "US".to_string(),
+                address_line_2: None,
+                floor: None,
+                suite_apart_number: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type_:** `AddressType` — The address role.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**location:** `Option<BusinessAddressLocation>` — The physical use of the address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**address_line_1:** `String` — The first line of the street address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**address_line_2:** `Option<String>` — The second line of the street address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**city_locality:** `String` — The city or locality.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state_province:** `String` — The state or province.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**postal_code:** `String` — The postal or ZIP code.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country:** `String` — The two-character ISO country code.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**floor:** `Option<String>` — The floor, if applicable.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**suite_apart_number:** `Option<String>` — The suite or apartment number, if applicable.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">get_business_address</a>(business_reference: String, business_address_reference: String) -> Result&lt;BusinessAddressEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a single business address by its `businessAddressReference`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .get_business_address(
+            &"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+            &"019fed1a-84a6-7043-a6c0-e8aa2d4bec36".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**business_address_reference:** `String` — The business address reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">delete_business_address</a>(business_reference: String, business_address_reference: String) -> Result&lt;BusinessAddressDeletedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes an address from a business.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .delete_business_address(
+            &"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+            &"019fed1a-67d6-768a-b4cc-29d4299e21d9".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**business_address_reference:** `String` — The business address reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">update_business_address</a>(business_reference: String, business_address_reference: String, request: UpdateBusinessAddressRequest) -> Result&lt;BusinessAddressEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Applies a partial update to a business address. Send only the fields you want to change; omitted fields are kept.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .update_business_address(
+            &"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+            &"019fed1a-67d6-768a-b4cc-29d4299e21d9".to_string(),
+            &UpdateBusinessAddressRequest {
+                r#type: Some(AddressType::Billing),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**business_address_reference:** `String` — The business address reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type_:** `Option<AddressType>` — The address role.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**location:** `Option<BusinessAddressLocation>` — The physical use of the address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**address_line_1:** `Option<String>` — The first line of the street address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**address_line_2:** `Option<String>` — The second line of the street address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**city_locality:** `Option<String>` — The city or locality.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state_province:** `Option<String>` — The state or province.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**postal_code:** `Option<String>` — The postal or ZIP code.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**country:** `Option<String>` — The two-character ISO country code.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**floor:** `Option<String>` — The floor, if applicable.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**suite_apart_number:** `Option<String>` — The suite or apartment number, if applicable.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">list_business_people</a>(business_reference: String) -> Result&lt;BusinessPersonListEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the people linked to a business, each with the relationship's role, ownership, and relationship-scoped contact details.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .list_business_people(&"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">link_business_person</a>(business_reference: String, request: LinkBusinessPersonRequest) -> Result&lt;BusinessPersonEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Links an existing person to a business, setting the relationship's role, ownership, primary-controller flag, contact fields, and addresses.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .link_business_person(
+            &"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+            &LinkBusinessPersonRequest {
+                person_reference: "01a0014d-ce1a-7110-9bac-c4c59647a88d".to_string(),
+                person_type: Some(PersonType::Owner),
+                ownership_percentage: Some(100.0),
+                is_primary_controller: Some(true),
+                is_signer: Some(true),
+                title: Some("CEO".to_string()),
+                primary_email: Some("contact@example.com".to_string()),
+                secondary_email: Some("contact.alt@example.net".to_string()),
+                primary_phone_number: Some("3055551212".to_string()),
+                secondary_phone_number: Some("3055559876".to_string()),
+                billing_address: Some(PersonAddressRequest {
+                    address_line_1: Some("123 Main Street".to_string()),
+                    city_locality: Some("Miami".to_string()),
+                    state_province: Some("FL".to_string()),
+                    postal_code: Some("33101".to_string()),
+                    country: Some("US".to_string()),
+                    r#type: Some(PersonAddressType::Billing),
+                    ..Default::default()
+                }),
+                mailing_address: Some(PersonAddressRequest {
+                    address_line_1: Some("456 Oak Avenue".to_string()),
+                    city_locality: Some("Miami".to_string()),
+                    state_province: Some("FL".to_string()),
+                    postal_code: Some("33102".to_string()),
+                    country: Some("US".to_string()),
+                    r#type: Some(PersonAddressType::Mailing),
+                    ..Default::default()
+                }),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**person_reference:** `String` — The reference of the person to link.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**person_type:** `Option<PersonType>` — The person's role on the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ownership_percentage:** `Option<f64>` — The person's ownership percentage (0 to 100). Required when `personType` is `Owner`, and must be omitted for every other role. If the combined ownership would exceed 100%, the link is rejected with a `400`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_primary_controller:** `Option<bool>` — Whether the person is the business's primary controller.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_signer:** `Option<bool>` 
+
+Whether the person signs the business's boarding applications. Only an
+owner can be the signer. Setting `isSigner` to `true` on a person with
+another `personType` returns `400` with the message
+`Only an owner can be the signer.` A business has one signer. Setting
+`isSigner` to `true` on one person removes it from every other person
+linked to the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `Option<String>` 
+
+The person's job title at this business, such as `CEO` or
+`Managing Member`, from 1 to 100 characters. A person linked to more than
+one business can have a different title at each one. A blank value is
+treated as not sent.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**primary_email:** `Option<String>` — The relationship's primary email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**secondary_email:** `Option<String>` — The relationship's secondary email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**primary_phone_number:** `Option<String>` — The relationship's primary phone number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**secondary_phone_number:** `Option<String>` — The relationship's secondary phone number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**billing_address:** `Option<PersonAddressRequest>` — The billing address for the relationship.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mailing_address:** `Option<PersonAddressRequest>` — The mailing address for the relationship.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">get_business_person</a>(business_reference: String, person_reference: String) -> Result&lt;BusinessPersonEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a single business-person link by the person's reference.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .get_business_person(
+            &"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+            &"01a0014d-ce1a-7110-9bac-c4c59647a88d".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**person_reference:** `String` — The person reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">unlink_business_person</a>(business_reference: String, person_reference: String) -> Result&lt;(), ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes the link between a person and a business. The person record itself isn't deleted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .unlink_business_person(
+            &"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+            &"01a0014d-ce1a-7110-9bac-c4c59647a88d".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**person_reference:** `String` — The person reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.businesses.<a href="/src/api/resources/businesses/client.rs">update_business_person</a>(business_reference: String, person_reference: String, request: UpdateBusinessPersonRequest) -> Result&lt;BusinessPersonEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Applies a partial update to a business-person link. Send only the fields you want to change; omitted fields are kept.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .businesses
+        .update_business_person(
+            &"019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+            &"01a0014d-ce1a-7110-9bac-c4c59647a88d".to_string(),
+            &UpdateBusinessPersonRequest {
+                is_primary_controller: Some(true),
+                primary_email: Some("updated.contact@example.com".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The business reference (`businessUuid`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**person_reference:** `String` — The person reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**person_type:** `Option<PersonType>` — The person's role on the business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ownership_percentage:** `Option<f64>` — The person's ownership percentage (0 to 100).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_primary_controller:** `Option<bool>` — Whether the person is the business's primary controller.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_signer:** `Option<bool>` 
+
+Whether the person signs the business's boarding applications. Only an
+owner can be the signer. Setting `isSigner` to `true` on a person with
+another `personType` returns `400` with the message
+`Only an owner can be the signer.` Changing the signer's `personType`
+away from `Owner` returns the same error. Setting it to `true` removes
+it from every other person linked to the business. Setting it to
+`false` leaves the business with no signer until you set another one.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `Option<Option<String>>` 
+
+The person's job title at this business, from 1 to 100 characters. Updating it changes the title
+for this business only. Omitting it, or sending `null` or a blank value,
+keeps the stored title. You can replace a title, but you can't clear it.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**primary_email:** `Option<String>` — The relationship's primary email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**secondary_email:** `Option<String>` — The relationship's secondary email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**primary_phone_number:** `Option<String>` — The relationship's primary phone number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**secondary_phone_number:** `Option<String>` — The relationship's secondary phone number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**billing_address:** `Option<PersonAddressRequest>` — The billing address for the relationship.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mailing_address:** `Option<PersonAddressRequest>` — The mailing address for the relationship.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## People
+<details><summary><code>client.people.<a href="/src/api/resources/people/client.rs">list_people</a>(name: Option&lt;Option&lt;String&gt;&gt;, email: Option&lt;Option&lt;String&gt;&gt;, verification_status: Option&lt;Option&lt;String&gt;&gt;, limit: Option&lt;Option&lt;i64&gt;&gt;, page: Option&lt;Option&lt;i64&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;, sort_order: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;ListPeopleEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists people with optional filtering and pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .people
+        .list_people(
+            &ListPeopleQueryRequest {
+                limit: Some(1),
+                page: Some(1),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `Option<String>` — Filter by name (partial match).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email:** `Option<String>` — Filter by email (partial match).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**verification_status:** `Option<String>` — Comma-separated verification status filter.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Option<i64>` — Number of results per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `Option<i64>` — Page number to return.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `Option<String>` — Field to sort by.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_order:** `Option<String>` — Sort direction.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.people.<a href="/src/api/resources/people/client.rs">create_person</a>(request: CreatePersonRequest) -> Result&lt;PersonDetailEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a person, an individual associated with a business such as an
+owner, director, or signer. Include a `businessRelationship` object to
+link the person to a business on create; the business reference, role
+(`personType`), and `ownershipPercentage` go inside that object.
+
+A person's job `title` and whether they're the signer (`isSigner`) also
+belong to the business link, so send them inside `businessRelationship`.
+A top-level `title` returns a `400` with the message
+`title moved into the businessRelationship object; send them there instead of at the top level.`
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .people
+        .create_person(
+            &CreatePersonRequest {
+                first_name: "Marcus".to_string(),
+                middle_name: Some("James".to_string()),
+                last_name: "Delgado".to_string(),
+                primary_email: Some("marcus.delgado@example.com".to_string()),
+                secondary_email: Some("m.delgado@example.net".to_string()),
+                primary_phone_number: Some("3055551212".to_string()),
+                secondary_phone_number: Some("3055559876".to_string()),
+                date_of_birth: Some("1985-03-14".to_string()),
+                ssn: Some("412-55-9021".to_string()),
+                nationality: Some("US".to_string()),
+                drivers_license_number: Some("D1234567".to_string()),
+                drivers_license_state: Some("FL".to_string()),
+                external_id: Some("person-001".to_string()),
+                custom_data: Some(HashMap::from([(
+                    "department".to_string(),
+                    serde_json::json!("finance"),
+                )])),
+                addresses: Some(vec![PersonAddressRequest {
+                    address_line_1: Some("123 Main Street".to_string()),
+                    address_line_2: Some("Suite 400".to_string()),
+                    city_locality: Some("Miami".to_string()),
+                    state_province: Some("FL".to_string()),
+                    postal_code: Some("33101".to_string()),
+                    country: Some("US".to_string()),
+                    r#type: Some(PersonAddressType::Legal),
+                    ..Default::default()
+                }]),
+                identification_documents: Some(vec![IdentificationDocumentRequest {
+                    r#type: Some("passport".to_string()),
+                    number: Some("X1234567".to_string()),
+                    issuing_country: Some("US".to_string()),
+                    expiration_date: Some("2030-06-30".to_string()),
+                    ..Default::default()
+                }]),
+                business_relationship: Some(BusinessRelationshipRequest {
+                    business_reference: "019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+                    person_type: Some(PersonType::Owner),
+                    ownership_percentage: Some(100.0),
+                    is_primary_controller: Some(true),
+                    is_signer: Some(true),
+                    title: Some("CEO".to_string()),
+                    primary_email: Some("contact@example.com".to_string()),
+                    secondary_email: Some("contact.alt@example.net".to_string()),
+                    primary_phone_number: Some("3055551212".to_string()),
+                    secondary_phone_number: Some("3055559876".to_string()),
+                    billing_address: Some(PersonAddressRequest {
+                        address_line_1: Some("123 Main Street".to_string()),
+                        city_locality: Some("Miami".to_string()),
+                        state_province: Some("FL".to_string()),
+                        postal_code: Some("33101".to_string()),
+                        country: Some("US".to_string()),
+                        r#type: Some(PersonAddressType::Billing),
+                        ..Default::default()
+                    }),
+                    mailing_address: Some(PersonAddressRequest {
+                        address_line_1: Some("456 Oak Avenue".to_string()),
+                        city_locality: Some("Miami".to_string()),
+                        state_province: Some("FL".to_string()),
+                        postal_code: Some("33102".to_string()),
+                        country: Some("US".to_string()),
+                        r#type: Some(PersonAddressType::Mailing),
+                        ..Default::default()
+                    }),
+                    ..Default::default()
+                }),
+                national_id_number: None,
+                national_id_issuer: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**first_name:** `String` — The person's first name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**middle_name:** `Option<String>` — The person's middle name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_name:** `String` — The person's last name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**primary_email:** `Option<String>` — The person's primary email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**secondary_email:** `Option<String>` — The person's secondary email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**primary_phone_number:** `Option<String>` — The person's primary phone number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**secondary_phone_number:** `Option<String>` — The person's secondary phone number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date_of_birth:** `Option<String>` — The person's date of birth (`YYYY-MM-DD`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ssn:** `Option<String>` — The person's US Social Security Number, in `XXX-XX-XXXX` or `XXXXXXXXX` format. Applies when `nationality` is `US`, and needed to validate a US owner. Create doesn't enforce it. For any other nationality, send `nationalIdNumber` and `nationalIdIssuer` instead.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**nationality:** `Option<String>` — The person's nationality, as a two-letter ISO 3166-1 alpha-2 country code. Needed to validate an owner, but create doesn't enforce it. Nationality selects which identity number applies. `US` uses `ssn`, and any other value uses `nationalIdNumber` and `nationalIdIssuer`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**national_id_number:** `Option<String>` — The person's national identification number, for an individual whose `nationality` is not `US`. Send it with `nationalIdIssuer` when `nationality` is non-US. Create doesn't enforce it.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**national_id_issuer:** `Option<String>` — The authority that issued the national ID, for example the two-letter country code. Send it with `nationalIdNumber` when `nationality` is non-US. Create doesn't enforce it.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**drivers_license_number:** `Option<String>` — The person's driver's license number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**drivers_license_state:** `Option<String>` — The two-letter state code for the driver's license.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_id:** `Option<String>` — Your own identifier for the person.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_data:** `Option<std::collections::HashMap<String, serde_json::Value>>` 
+
+Arbitrary key-value data you attach to the person. Payabli
+stores an owner's answers to a boarding template's custom
+questions under the `templateAnswers` key.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**addresses:** `Option<Vec<PersonAddressRequest>>` — Postal addresses associated with the person.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**identification_documents:** `Option<Vec<IdentificationDocumentRequest>>` — Government-issued identification documents for the person.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**business_relationship:** `Option<BusinessRelationshipRequest>` 
+
+Links the person to a business as you create them. The link's role,
+ownership, primary-controller flag, contact fields, and addresses go here.
+These relationship contact fields are separate from the person's own
+top-level contact fields above.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.people.<a href="/src/api/resources/people/client.rs">get_person</a>(person_reference: String) -> Result&lt;PersonDetailEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a person by reference. Sensitive fields such as `ssn` are masked.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .people
+        .get_person(&"01a0014d-ce1a-7110-9bac-c4c59647a88d".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**person_reference:** `String` — The person reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.people.<a href="/src/api/resources/people/client.rs">update_person</a>(person_reference: String, request: UpdatePersonRequest) -> Result&lt;PersonUpdatedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Applies a partial update to a person. Send only the fields you want to change.
+
+A person's job title belongs to their business link, not the person. Sending `title` in any form, including `null`, returns a `400` with the message `title moved to the business relationship; update it with PATCH /api/v2/businesses/{businessReference}/people/{personReference}.`
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .people
+        .update_person(
+            &"01a0014d-ce1a-7110-9bac-c4c59647a88d".to_string(),
+            &UpdatePersonRequest {
+                primary_phone_number: Some("3055550199".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**person_reference:** `String` — The person reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**first_name:** `Option<String>` — The person's first name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**middle_name:** `Option<String>` — The person's middle name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_name:** `Option<String>` — The person's last name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**primary_email:** `Option<String>` — The person's primary email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**secondary_email:** `Option<String>` — The person's secondary email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**primary_phone_number:** `Option<String>` — The person's primary phone number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**secondary_phone_number:** `Option<String>` — The person's secondary phone number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**nationality:** `Option<String>` — The person's nationality, as a two-letter ISO 3166-1 alpha-2 country code. Nationality selects which identity number applies — `US` uses `ssn`, and any other value uses `nationalIdNumber` and `nationalIdIssuer`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**national_id_issuer:** `Option<String>` — The authority that issued the national ID, used when `nationality` is not `US`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**drivers_license_number:** `Option<String>` — The person's driver's license number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**drivers_license_state:** `Option<String>` — The two-letter state code for the driver's license.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_id:** `Option<String>` — Your own identifier for the person.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_data:** `Option<std::collections::HashMap<String, serde_json::Value>>` 
+
+Key-value data to merge into the person's stored `customData`.
+Payabli stores an owner's answers to a boarding template's
+custom questions under the `templateAnswers` key.
+
+When you update a person, Payabli merges `customData` into the
+stored value, following JSON Merge Patch (RFC 7396). Keys you
+don't send are kept at every depth, and nested objects merge key
+by key. Strings, numbers, Boolean values, and arrays replace the
+stored value, and arrays aren't merged. Send a key as `null` to
+delete it, such as `{"crmId": null}`. A `customData` that isn't
+an object, such as an array, replaces the stored value whole.
+Leave out `customData` to keep it as is.
+
+The `customData` you send can be up to 65,536 bytes serialized.
+The limit applies to the request, not to the merged result.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**addresses:** `Option<Vec<PersonAddressRequest>>` — Postal addresses associated with the person.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**identification_documents:** `Option<Vec<IdentificationDocumentRequest>>` — Government-issued identification documents for the person.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.people.<a href="/src/api/resources/people/client.rs">get_person_unmasked</a>(person_reference: String) -> Result&lt;PersonDetailEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a person by reference with sensitive fields unmasked.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .people
+        .get_person_unmasked(&"01a0014d-ce1a-7110-9bac-c4c59647a88d".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**person_reference:** `String` — The person reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.people.<a href="/src/api/resources/people/client.rs">search_people</a>(request: PeopleSearchRequest, entry: Option&lt;String&gt;, org_id: Option&lt;String&gt;) -> Result&lt;PeopleSearchEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Searches for people by identity attributes during boarding. The search
+covers every business in your organization, so use it to find a person
+before you create them again. To read the people already on a
+paypoint's business, use a standard `GET` instead.
+Provide at least one of `firstName` or `lastName`. Each result has a
+`matchScore` showing how closely it matches, and an external identity
+vendor can enrich the results. Each result's `dateOfBirth` is masked.
+To get the full value, use the unmasked search.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .people
+        .search_people(
+            &SearchPeopleRequest {
+                entry: "8cfec329267".to_string(),
+                org_id: 123,
+                body: PeopleSearchRequest::Unknown(
+                    serde_json::json!({"firstName":"Marcus","lastName":"Delgado"}),
+                ),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `String` — The entry name of your organization, from `OrgEntryName` on the organization. With a paypoint's entry name instead, the search covers only that paypoint's business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**org_id:** `String` — The ID of your organization.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.people.<a href="/src/api/resources/people/client.rs">search_people_unmasked</a>(request: PeopleSearchRequest, entry: Option&lt;String&gt;, org_id: Option&lt;String&gt;) -> Result&lt;PeopleSearchEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Searches for people by identity attributes during boarding, and returns
+each result's `dateOfBirth` unmasked. The query parameters, request
+body, and other response fields match the standard people search.
+Provide at least one of `firstName` or `lastName`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .people
+        .search_people_unmasked(
+            &SearchPeopleUnmaskedRequest {
+                entry: "8cfec329267".to_string(),
+                org_id: 123,
+                body: PeopleSearchRequest::Unknown(
+                    serde_json::json!({"firstName":"Marcus","lastName":"Delgado"}),
+                ),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**entry:** `String` — The entry name of your organization, from `OrgEntryName` on the organization. With a paypoint's entry name instead, the search covers only that paypoint's business.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**org_id:** `String` — The ID of your organization.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Paypoints
+<details><summary><code>client.paypoints.<a href="/src/api/resources/paypoints/client.rs">list_paypoints</a>(business_reference: Option&lt;Option&lt;String&gt;&gt;, status: Option&lt;Option&lt;String&gt;&gt;, search: Option&lt;Option&lt;String&gt;&gt;, limit: Option&lt;Option&lt;i64&gt;&gt;, page: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;ListPaypointsEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists paypoints with optional filtering and pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .paypoints
+        .list_paypoints(
+            &PaypointsListPaypointsQueryRequest {
+                limit: Some(1),
+                page: Some(1),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `Option<String>` — Filter by the business the paypoint belongs to.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `Option<String>` — Filter by paypoint status.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `Option<String>` — Free-text search across paypoints.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Option<i64>` — Number of results per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `Option<i64>` — Page number to return.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.paypoints.<a href="/src/api/resources/paypoints/client.rs">create_paypoint</a>(request: CreatePaypointPaypointsRequest) -> Result&lt;PaypointCreatedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a paypoint. New paypoints start in `pending`. Provide exactly
+one of `businessReference` (an existing business) or `business` (to
+create the business inline).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .paypoints
+        .create_paypoint(
+            &CreatePaypointPaypointsRequest::CreatePaypointWithBusinessReference(
+                CreatePaypointWithBusinessReference {
+                    paypoint_writable_fields_fields: PaypointWritableFields {
+                        paypoint_type: Some("merchant".to_string()),
+                        doing_business_as: "Rose Gardens".to_string(),
+                        description: Some("Boutique flower shop".to_string()),
+                        website: Some("https://example.com".to_string()),
+                        customer_service_phone: Some("3055551212".to_string()),
+                        customer_service_email: Some("support@example.com".to_string()),
+                        timezone: Some("America/New_York".to_string()),
+                        ..Default::default()
+                    },
+                    business_reference: "019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+                    ..Default::default()
+                },
+            ),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.paypoints.<a href="/src/api/resources/paypoints/client.rs">get_paypoint</a>(paypoint_reference: String) -> Result&lt;PaypointDetailEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a paypoint by reference.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .paypoints
+        .get_paypoint(&"019ff064-c690-7679-a73e-688418aadc7c".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**paypoint_reference:** `String` — The paypoint reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.paypoints.<a href="/src/api/resources/paypoints/client.rs">update_paypoint</a>(paypoint_reference: String, request: UpdatePaypointRequest) -> Result&lt;PaypointUpdatedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Applies a partial update to a paypoint. Send only the fields you want to change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .paypoints
+        .update_paypoint(
+            &"019ff064-c690-7679-a73e-688418aadc7c".to_string(),
+            &UpdatePaypointRequest {
+                description: Some("Updated description".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**paypoint_reference:** `String` — The paypoint reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**paypoint_type:** `Option<String>` — The paypoint type, for example `merchant`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**doing_business_as:** `Option<String>` — The name the paypoint does business as (DBA).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `Option<String>` — A free-text description of the paypoint.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**website:** `Option<String>` — The paypoint's website URL.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**customer_service_phone:** `Option<String>` — The customer service phone number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**customer_service_email:** `Option<String>` — The customer service email address.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timezone:** `Option<String>` — The paypoint's time zone.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_id:** `Option<String>` — Your own identifier for the paypoint.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_data:** `Option<std::collections::HashMap<String, serde_json::Value>>` — Arbitrary key-value data you attach to the paypoint.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Payment methods
+<details><summary><code>client.payment_methods.<a href="/src/api/resources/payment_methods/client.rs">list_payment_methods</a>(account_owner: Option&lt;Option&lt;String&gt;&gt;, owner_type: Option&lt;Option&lt;PaymentMethodOwnerType&gt;&gt;, status: Option&lt;Option&lt;String&gt;&gt;, type_: Option&lt;Option&lt;String&gt;&gt;, limit: Option&lt;Option&lt;i64&gt;&gt;, page: Option&lt;Option&lt;i64&gt;&gt;, sort_by: Option&lt;Option&lt;String&gt;&gt;, sort_order: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;ListPaymentMethodsEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists payment methods with optional filtering and pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payment_methods
+        .list_payment_methods(
+            &ListPaymentMethodsQueryRequest {
+                limit: Some(1),
+                page: Some(1),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**account_owner:** `Option<String>` — Filter by the entity that owns the payment method.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_type:** `Option<PaymentMethodOwnerType>` — Filter by owner type.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `Option<String>` — Filter by payment method status.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type_:** `Option<String>` — Filter by payment method type.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Option<i64>` — Number of results per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `Option<i64>` — Page number to return.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_by:** `Option<String>` — Field to sort by.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort_order:** `Option<String>` — Sort direction.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payment_methods.<a href="/src/api/resources/payment_methods/client.rs">create_payment_methods</a>(request: CreatePaymentMethodsRequest) -> Result&lt;PaymentMethodsCreatedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates one or more payment methods for an entity in a single call.
+Set each payment method's `accountOwner` to the entity it belongs to.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payment_methods
+        .create_payment_methods(
+            &CreatePaymentMethodsRequest {
+                data: vec![CreatePaymentMethodRequest {
+                    r#type: CreatePaymentMethodRequestType::BankAccount,
+                    account_owner: "019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+                    owner_type: PaymentMethodOwnerType::Business,
+                    nickname: Some("Operating account".to_string()),
+                    financial_institution: Some("Bank of Example".to_string()),
+                    account_type: "checking".to_string(),
+                    account_number: "123456789".to_string(),
+                    routing_number: "021000021".to_string(),
+                    usage: vec![PaymentMethodUsage::Deposits, PaymentMethodUsage::Billing],
+                    is_default: None,
+                }],
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**data:** `Vec<CreatePaymentMethodRequest>` — The payment methods to create.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payment_methods.<a href="/src/api/resources/payment_methods/client.rs">get_payment_method</a>(payment_method_reference: String) -> Result&lt;PaymentMethodDetailEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a payment method by reference. Sensitive fields such as the account and routing numbers are masked.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payment_methods
+        .get_payment_method(&"019ff142-454b-7721-96a3-c8628b9d568f".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payment_method_reference:** `String` — The payment method reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payment_methods.<a href="/src/api/resources/payment_methods/client.rs">deactivate_payment_method</a>(payment_method_reference: String) -> Result&lt;PaymentMethodDeactivatedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deactivates a payment method. This is a soft delete: the payment
+method moves to `INACTIVE` and the record is kept.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payment_methods
+        .deactivate_payment_method(&"019ff142-454b-7721-96a3-c8628b9d568f".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payment_method_reference:** `String` — The payment method reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payment_methods.<a href="/src/api/resources/payment_methods/client.rs">update_payment_method</a>(payment_method_reference: String, request: UpdatePaymentMethodRequest) -> Result&lt;PaymentMethodUpdatedEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Applies a partial update to a payment method. Send only the fields you
+want to change. Only payment methods in `PENDING` status can be updated.
+Once a payment method is active, change it through the bank account
+change process instead.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .payment_methods
+        .update_payment_method(
+            &"019ff142-454b-7721-96a3-c8628b9d568f".to_string(),
+            &UpdatePaymentMethodRequest {
+                nickname: Some("Primary operating account".to_string()),
+                usage: Some(vec![
+                    PaymentMethodUsage::Deposits,
+                    PaymentMethodUsage::Billing,
+                ]),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**payment_method_reference:** `String` — The payment method reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**nickname:** `Option<String>` — An optional label for the payment method.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**financial_institution:** `Option<String>` — The bank or financial institution that holds the account.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_type:** `Option<String>` — The account type, for example `checking` or `savings`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_number:** `Option<String>` — The bank account number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**routing_number:** `Option<String>` — The bank routing number.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**usage:** `Option<Vec<PaymentMethodUsage>>` — What the payment method is used for. Provide at least one value.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Boarding templates
+<details><summary><code>client.boarding_templates.<a href="/src/api/resources/boarding_templates/client.rs">list_templates</a>(org_id: Option&lt;i64&gt;, status: Option&lt;Option&lt;TemplateStatus&gt;&gt;, name: Option&lt;Option&lt;String&gt;&gt;, slug: Option&lt;Option&lt;String&gt;&gt;, org_name: Option&lt;Option&lt;String&gt;&gt;, inherited: Option&lt;Option&lt;bool&gt;&gt;, from_record: Option&lt;Option&lt;i64&gt;&gt;, limit_record: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;ListTemplatesResponse, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the boarding templates an organization owns, plus templates
+inherited from ancestor organizations. Scope the listing with the
+required `orgId` query parameter. You can filter by `status`, `name`,
+`slug`, `orgName`, and `inherited`, and page through results.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .boarding_templates
+        .list_templates(
+            &BoardingTemplatesListTemplatesQueryRequest {
+                org_id: 123,
+                status: None,
+                name: None,
+                slug: None,
+                org_name: None,
+                inherited: None,
+                from_record: None,
+                limit_record: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**org_id:** `i64` — The numeric identifier of the organization to list templates for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `Option<TemplateStatus>` — Filter by template status.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `Option<String>` — Filter by exact template name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**slug:** `Option<String>` — Filter by exact template slug.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**org_name:** `Option<String>` — Filter by exact owning organization name.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**inherited:** `Option<bool>` — Filter by whether the template is inherited from an ancestor organization.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from_record:** `Option<i64>` — The number of records to skip before collecting the result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit_record:** `Option<i64>` — The maximum number of records to return. Use `0` or a negative value to return all records.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.boarding_templates.<a href="/src/api/resources/boarding_templates/client.rs">get_template</a>(uuid: String) -> Result&lt;Template, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a boarding template by UUID, including its current content version.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .boarding_templates
+        .get_template(&"019ff129-d393-7761-9a31-e5afe85b4081".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**uuid:** `String` — The template's UUID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.boarding_templates.<a href="/src/api/resources/boarding_templates/client.rs">archive_template</a>(uuid: String) -> Result&lt;(), ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Archives a boarding template by UUID. Archiving is a soft delete: the
+template stays readable with `status: archived`, so archiving an
+already-archived template returns `409`, not another success. Unknown
+templates return `404`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .boarding_templates
+        .archive_template(&"019ff129-d393-7761-9a31-e5afe85b4081".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**uuid:** `String` — The template's UUID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.boarding_templates.<a href="/src/api/resources/boarding_templates/client.rs">get_template_version</a>(uuid: String, version_uuid: String) -> Result&lt;TemplateVersion, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a specific immutable content version of a template.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .boarding_templates
+        .get_template_version(
+            &"019ff129-d393-7761-9a31-e5afe85b4081".to_string(),
+            &"019ff129-d396-74c4-86da-ae3d082d7ef9".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**uuid:** `String` — The template's UUID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version_uuid:** `String` — The version's UUID.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Applications
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">list_applications</a>(page: Option&lt;Option&lt;i64&gt;&gt;, limit: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;ListApplicationsEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists boarding applications with pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .list_applications(
+            &ApplicationsListApplicationsQueryRequest {
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `Option<i64>` — The page number to return, starting at 1.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Option<i64>` — The number of applications per page.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">create_application</a>(request: CreateApplicationRequest) -> Result&lt;ApplicationEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a boarding application for a business. The business must
+already have a paypoint. New applications start in `draft`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .create_application(
+            &CreateApplicationRequest {
+                business_reference: "019fed1a-3d6e-75d3-a81e-cba3874b0a55".to_string(),
+                external_id: Some("APP-2025-0417".to_string()),
+                tags: Some(vec!["priority".to_string()]),
+                paypoint_reference: None,
+                entity_type: None,
+                request_template: None,
+                representatives: None,
+                configurations: None,
+                services: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**business_reference:** `String` — The reference of the business to board. The business must have a paypoint.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**paypoint_reference:** `Option<String>` — The reference of the paypoint to board. Defaults to the business's paypoint when omitted.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_id:** `Option<String>` — An optional identifier from your own system.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**entity_type:** `Option<String>` — The type of entity being boarded.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_template:** `Option<String>` — The reference of the boarding template to apply. Send one on every application. Payabli assigns the underwriting policy from the template, so a submitted application without one fails in review.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `Option<Vec<String>>` — Optional labels for the application.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**representatives:** `Option<Vec<RepresentativeInput>>` — The sales or service representatives assigned to the application.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**configurations:** `Option<Option<std::collections::HashMap<String, serde_json::Value>>>` — Opaque application-level configuration. Null when not supplied.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**services:** `Option<RequestedServices>` — The services to request on the application.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">get_application</a>(requests_reference: String) -> Result&lt;ApplicationEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a boarding application by reference.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .get_application(&"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">update_application</a>(requests_reference: String, request: UpdateApplicationRequest) -> Result&lt;ApplicationEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Applies a partial update to a boarding application. Send only the fields you want to change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .update_application(
+            &"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(),
+            &UpdateApplicationRequest {
+                external_id: Some("APP-2025-0417-REV2".to_string()),
+                tags: Some(vec!["priority".to_string(), "expedited".to_string()]),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_id:** `Option<String>` — An optional identifier from your own system.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**entity_type:** `Option<String>` — The type of entity being boarded.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_template:** `Option<String>` — The reference of the boarding template to apply.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `Option<Vec<String>>` — Optional labels for the application.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**representatives:** `Option<Vec<RepresentativeInput>>` — The sales or service representatives assigned to the application.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**configurations:** `Option<Option<std::collections::HashMap<String, serde_json::Value>>>` — Opaque application-level configuration.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**services:** `Option<RequestedServices>` — The services to request on the application. Replaces the whole `services` object, so send every service you want to keep. Leave it out to keep the current services.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">validate_application</a>(requests_reference: String) -> Result&lt;ValidationResultEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Checks whether the records linked to an application (the business, its people, and its payment methods) include everything the application's requested services need. The response lists any missing or invalid fields by section. Validation doesn't change the application, and it doesn't return a validation token. The request has no body.
+
+One owner on the application must be the signer, flagged with `isSigner` on their business link. If no one is flagged, the `people` section returns a `missingFields` entry with `field` set to `people.isSigner`, `label` set to `Signer`, and `reason` set to `required — choose the person who signs the application`. The signer rule isn't reported when the application has no people.
+
+The `people` section also checks ownership. At least one person must be the primary controller, flagged with `isPrimaryController`. If no one is, the entry has `field` set to `people.isPrimaryController`, `label` set to `Primary Controller`, and `reason` set to `required — at least one principal must be designated`. Unless the business's `legalStructure` is `government` or `non-profit`, at least one owner must have an `ownershipPercentage` of 25 or more. If no one does, the entry has `field` set to `people.ownershipPercentage`, `label` set to `Qualifying Owner`, and `reason` set to `at least one principal must have an ownership stake of 25% or more`.
+
+Validation also reports required documents that have nothing uploaded. See [List application document requirements](/developers/api-reference/applications/list-application-document-requirements). The bank statement requirement appears in the `business` section, with `field` set to `documents.bankStatement`. A person document appears in the `people` section, with `field` set to `people.{personReference}.` followed by the requirement's `fieldPath`, such as `people.01a0014d-ce1a-7110-9bac-c4c59647a88d.person.documents.w9`. Submit doesn't enforce document requirements.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .validate_application(&"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">submit_application</a>(requests_reference: String, request: SubmitApplicationRequest) -> Result&lt;TransitionResultEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Submits a draft application for review. Your integration (the applicant) calls this after the business, its people, payment methods, and services are in place. Verification then runs automatically.
+
+The application must have a signer: an owner flagged with `isSigner` on their business link, or one you name in `signer.personReference`. Payabli records the signer's identity from their person record and business link, so update those before you submit. The `signer` object carries the signature details.
+
+If the application has no signer, the request fails with `422` and the error `SIGNER_REQUIRED`. If `signer.personReference` names a person who isn't an owner, the request fails with `422` and the error `SIGNER_NOT_OWNER`. If the application isn't a draft, the request fails with `409` and the error `BIZ_004`, before any signer check. If `signer.reportedSignerIp` isn't a single valid IPv4 or IPv6 address, the request fails with `400` and the error `VALIDATION_ERROR`, and the application isn't submitted.
+
+Submit doesn't check every rule that [validate](/developers/api-reference/applications/validate-an-application) reports, such as the primary controller and ownership rules. Validate the application and resolve its missing fields before you submit.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .submit_application(
+            &"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(),
+            &SubmitApplicationRequest {
+                signer: SubmitSigner {
+                    person_reference: Some("01a0014d-ce1a-7110-9bac-c4c59647a88d".to_string()),
+                    signature: Some("Marcus J Delgado".to_string()),
+                    signature_type: Some(SignatureType::Type),
+                    acceptance: Some(true),
+                    pci_attestation: Some(true),
+                    reported_signer_ip: Some("203.0.113.7".to_string()),
+                    ..Default::default()
+                },
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**signer:** `SubmitSigner` — The signature details for the application's signer, and optionally which person signs.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">provide_documents</a>(requests_reference: String) -> Result&lt;TransitionResultEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Marks the documents that Payabli requested during review as provided, when the application is in `pendingdocuments`. It returns the application to review. The request has no body.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .provide_documents(&"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">provide_response</a>(requests_reference: String) -> Result&lt;TransitionResultEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Marks the information that Payabli requested during review as provided, when the application is in `pendingresponse`. It returns the application to review. The request has no body.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .provide_response(&"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">withdraw_application</a>(requests_reference: String, request: WithdrawApplicationRequest) -> Result&lt;TransitionResultEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Withdraws a boarding application. The response returns the application's
+new status and the actions now allowed on it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .withdraw_application(
+            &"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(),
+            &WithdrawApplicationRequest {
+                reason: Some("Duplicate application".to_string()),
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `Option<String>` — An optional reason for the withdrawal, recorded in the status history.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">get_application_history</a>(requests_reference: String) -> Result&lt;StatusHistoryEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves the status transition history of a boarding application, oldest first. History records changes only. An approved application that fails enablement the same way on every attempt doesn't add entries, so use [enablement](/developers/api-reference/applications/get-application-enablement-progress) to follow that progress.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .get_application_history(&"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">get_application_enablement</a>(requests_reference: String) -> Result&lt;EnablementEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves the progress of setting up an approved application's services with their processors. An application's status stays `approved` or `autoapproved` while this runs, and it moves to `activated` after every requested service is set up. Use this endpoint to see why an approved merchant isn't live yet.
+
+Enablement doesn't send webhooks, so poll this endpoint to follow it. Until enablement starts, `state` and the other progress fields are `null`, and `services` is empty. That includes applications that are in `draft`, withdrawn, or in `error`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .get_application_enablement(&"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">list_application_document_requirements</a>(requests_reference: String) -> Result&lt;DocumentRequirementListEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the documents an application asks for, from its template and from Payabli business rules. For example, a business with an annual revenue of $1,000,000 or more needs bank statements. Each requirement gives the `fieldPath` and `subject` to send when you upload, the formats it accepts, how many documents it takes, and how many are uploaded so far.
+
+A person requirement appears once for each owner of the business, with that owner's `personReference`. The list is empty when the application asks for no documents.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .list_application_document_requirements(
+            &"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">list_application_documents</a>(requests_reference: String) -> Result&lt;ApplicationDocumentListEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the documents uploaded to an application. The list is empty when none are uploaded.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .list_application_documents(&"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">upload_application_document</a>(requests_reference: String) -> Result&lt;ApplicationDocumentEnvelope, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Uploads one document to an application as multipart form data. [List the application's document requirements](/developers/api-reference/applications/list-application-document-requirements) first. Send the requirement's `fieldPath`, one of its `subjectTypes` as `subject`, and, for a person requirement, its `personReference`.
+
+The file can be up to 10 MB, in a format the requirement accepts. Payabli checks the file's content, not only its name. Each requirement takes up to `maxUploads` documents.
+
+Uploading doesn't change the application's status. When underwriting requests documents, upload them, then call [provide documents](/developers/api-reference/applications/provide-application-documents) to return the application to review.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .upload_application_document(
+            &"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(),
+            &UploadApplicationDocumentRequest {
+                file: b"test file content".to_vec(),
+                field_path: "documents.bankStatement".to_string(),
+                subject: DocumentSubjectType::Business,
+                person_reference: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.applications.<a href="/src/api/resources/applications/client.rs">delete_application_document</a>(requests_reference: String, document_reference: String) -> Result&lt;(), ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes a document you uploaded from an application. Deleting doesn't change the application's status. A deleted document no longer counts toward its requirement, so you can upload a replacement. Deleting a document that's already deleted returns `404`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use payabli_api::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        ..Default::default()
+    };
+    let client = ApiClient::new(config).expect("Failed to build client");
+    client
+        .applications
+        .delete_application_document(
+            &"3f3caa7b-bdfe-4bf1-814b-30d54859247c".to_string(),
+            &"019ff1d7-6e14-7c8b-a2f5-91d3b7e04c62".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requests_reference:** `String` — The application reference.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**document_reference:** `String` — The document reference, from the upload response or [List application documents](/developers/api-reference/applications/list-application-documents).
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Boarding
 <details><summary><code>client.boarding.<a href="/src/api/resources/boarding/client.rs">add_application</a>(request: AddApplicationRequest) -> Result&lt;PayabliApiResponse00Responsedatanonobject, ApiError&gt;</code></summary>
 <dl>
@@ -17038,6 +22315,11 @@ Example: name(ct)=john return all records with name containing john
 
 <dl>
 <dd>
+
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [Create an application](/developers/api-reference/applications/create-an-application) instead. One legacy call becomes several intelligent boarding calls, one for each record. See [Map legacy calls to new endpoints](/guides/pay-ops-developer-boarding-legacy-migrate#map-legacy-calls-to-new-endpoints).
+</Warning>
+
 
 Creates a boarding application in an organization. This endpoint requires an application API token.
 </dd>
@@ -17244,6 +22526,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Update the record that holds the data instead, such as [the business](/developers/api-reference/businesses/update-a-business) or [a person](/developers/api-reference/people/update-a-person). Use [Update an application](/developers/api-reference/applications/update-an-application) only for the application's own fields.
+</Warning>
+
+
 Updates a boarding application by ID. This endpoint requires an application API token.
 </dd>
 </dl>
@@ -17316,6 +22603,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [Withdraw an application](/developers/api-reference/applications/withdraw-an-application) instead.
+</Warning>
+
+
 Deletes a boarding application by ID.
 </dd>
 </dl>
@@ -17379,6 +22671,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [Get an application](/developers/api-reference/applications/get-an-application) instead.
+</Warning>
+
+
 Retrieves the details for a boarding application by ID.
 </dd>
 </dl>
@@ -17441,6 +22738,11 @@ async fn main() {
 
 <dl>
 <dd>
+
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Intelligent boarding has no matching endpoint. Each application has its own hosted form link instead. See [Send merchants a boarding link](/guides/pay-ops-developer-boarding-legacy-migrate#send-merchants-a-boarding-link).
+</Warning>
+
 
 Gets a boarding application by authentication information. This endpoint requires an `application` API token.
 </dd>
@@ -17532,6 +22834,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Intelligent boarding has no matching endpoint. Each application has its own hosted form link instead. See [Send merchants a boarding link](/guides/pay-ops-developer-boarding-legacy-migrate#send-merchants-a-boarding-link).
+</Warning>
+
+
 Retrieves details for a boarding link, by ID.
 </dd>
 </dl>
@@ -17594,6 +22901,11 @@ async fn main() {
 
 <dl>
 <dd>
+
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Intelligent boarding has no matching endpoint. Each application has its own hosted form link instead. See [Send merchants a boarding link](/guides/pay-ops-developer-boarding-legacy-migrate#send-merchants-a-boarding-link).
+</Warning>
+
 
 Get details for a boarding link using the boarding template ID. This endpoint requires an application API token.
 </dd>
@@ -17660,6 +22972,11 @@ async fn main() {
 
 <dl>
 <dd>
+
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Intelligent boarding has no matching endpoint. Each application has its own hosted form link instead. See [Send merchants a boarding link](/guides/pay-ops-developer-boarding-legacy-migrate#send-merchants-a-boarding-link).
+</Warning>
+
 
 Retrieves a link and the verification code used to log into an existing boarding application. You can also use this endpoint to send a link and referenceId for an existing boarding application to an email address. The recipient can use the referenceId and email address to access and edit the application.
 </dd>
@@ -17750,6 +23067,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Intelligent boarding has no matching endpoint. Each application has its own hosted form link instead. See [Send merchants a boarding link](/guides/pay-ops-developer-boarding-legacy-migrate#send-merchants-a-boarding-link).
+</Warning>
+
+
 Retrieves the details for a boarding link, by reference name. This endpoint requires an application API token.
 </dd>
 </dl>
@@ -17816,6 +23138,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [List applications](/developers/api-reference/applications/list-applications) instead.
+</Warning>
+
+
 Returns a list of boarding applications for an organization. Use filters to limit results. Include the `exportFormat` query parameter to return the results as a file instead of a JSON response.
 </dd>
 </dl>
@@ -17843,7 +23170,7 @@ async fn main() {
         .boarding
         .list_applications(
             123,
-            &ListApplicationsQueryRequest {
+            &BoardingListApplicationsQueryRequest {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
@@ -17966,6 +23293,11 @@ Accepted comparison operators - enclosed between parentheses:
 
 <dl>
 <dd>
+
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Intelligent boarding has no matching endpoint. Each application has its own hosted form link instead. See [Send merchants a boarding link](/guides/pay-ops-developer-boarding-legacy-migrate#send-merchants-a-boarding-link).
+</Warning>
+
 
 Return a list of boarding links for an organization. Use filters to limit results.
 </dd>
@@ -18106,6 +23438,11 @@ Example: templateName(ct)=hoa return all records with template title containing 
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [Create an application](/developers/api-reference/applications/create-an-application) for a paypoint that's already boarded instead. See [Request more services with the API](/guides/pay-ops-developer-boarding-add-services).
+</Warning>
+
+
 Creates a new boarding application linked to an existing paypoint as part of the multi-product boarding flow. Use this endpoint to add new services to a paypoint without creating a duplicate record. The system copies eligible business, contact, banking, and address data from the paypoint to the new application based on 1:1 field matching. The merchant only needs to provide fields that are specific to the new service. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-product) guide for the full flow.
 </dd>
 </dl>
@@ -18213,6 +23550,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [List applications](/developers/api-reference/applications/list-applications) instead. It doesn't filter by paypoint.
+</Warning>
+
+
 Returns all boarding applications associated with a specific paypoint, including those created through the multi-product boarding flow. Use this endpoint to track underwriting progress across multiple service additions or to build reporting views. See the [Multi-product boarding](/guides/pay-ops-developer-boarding-multi-product) guide for the full flow.
 </dd>
 </dl>
@@ -18280,6 +23622,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [Archive a template](/developers/api-reference/boarding-templates/archive-a-template) instead.
+</Warning>
+
+
 Deletes a template by ID.
 </dd>
 </dl>
@@ -18342,6 +23689,11 @@ async fn main() {
 
 <dl>
 <dd>
+
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Intelligent boarding has no matching endpoint. Each application has its own hosted form link instead. See [Send merchants a boarding link](/guides/pay-ops-developer-boarding-legacy-migrate#send-merchants-a-boarding-link).
+</Warning>
+
 
 Generates a boarding link from a boarding template.
 </dd>
@@ -18414,6 +23766,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [Get a template](/developers/api-reference/boarding-templates/get-a-template) instead.
+</Warning>
+
+
 Retrieves a boarding template's details by ID.
 </dd>
 </dl>
@@ -18477,6 +23834,11 @@ async fn main() {
 <dl>
 <dd>
 
+<Warning>
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [List templates](/developers/api-reference/boarding-templates/list-templates) instead.
+</Warning>
+
+
 Retrieves a list of boarding templates for an organization. Use filters to limit results. You can't make a request that includes filters from the API console in the documentation. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client.
 </dd>
 </dl>
@@ -18504,7 +23866,7 @@ async fn main() {
         .templates
         .list_templates(
             123,
-            &ListTemplatesQueryRequest {
+            &TemplatesListTemplatesQueryRequest {
                 from_record: Some(251),
                 limit_record: Some(0),
                 sort_by: Some("desc(field_name)".to_string()),
@@ -18628,7 +23990,7 @@ Example: title(ct)=hoa return all records with title containing "hoa"
 <dd>
 
 <Warning>
-  This endpoint is deprecated. To export this data, use [List all apps for org](/developers/api-reference/boarding/get-list-of-applications-for-an-organization) with the `exportFormat` query parameter instead.
+  Legacy boarding is deprecated and will be sunset in Q2 2027. Use [List applications](/developers/api-reference/applications/list-applications) instead. It doesn't export files.
 </Warning>
 
 Export a list of boarding applications for an organization. Use filters to limit results.
@@ -29904,8 +35266,8 @@ async fn main() {
                 bank_account_holder_type: "business".to_string(),
                 bank_account_function: CaseManagementBankAccountFunction::Deposits,
                 services: BankAccountServices {
-                    money_in: Some(vec![MoneyInService::Ach]),
-                    money_out: Some(vec![MoneyOutService::Ach]),
+                    money_in: Some(vec![CaseManagementMoneyInService::Ach]),
+                    money_out: Some(vec![CaseManagementMoneyOutService::Ach]),
                     ..Default::default()
                 },
             },
@@ -30041,8 +35403,8 @@ async fn main() {
                 bank_account_holder_type: "business".to_string(),
                 bank_account_function: CaseManagementBankAccountFunction::Deposits,
                 services: BankAccountServices {
-                    money_in: Some(vec![MoneyInService::Ach]),
-                    money_out: Some(vec![MoneyOutService::Ach]),
+                    money_in: Some(vec![CaseManagementMoneyInService::Ach]),
+                    money_out: Some(vec![CaseManagementMoneyOutService::Ach]),
                     ..Default::default()
                 },
                 default: true,

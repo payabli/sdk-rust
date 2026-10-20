@@ -51,8 +51,8 @@ impl CaseManagementClient {
     ///                 bank_account_holder_type: "business".to_string(),
     ///                 bank_account_function: CaseManagementBankAccountFunction::Deposits,
     ///                 services: BankAccountServices {
-    ///                     money_in: Some(vec![MoneyInService::Ach]),
-    ///                     money_out: Some(vec![MoneyOutService::Ach]),
+    ///                     money_in: Some(vec![CaseManagementMoneyInService::Ach]),
+    ///                     money_out: Some(vec![CaseManagementMoneyOutService::Ach]),
     ///                     ..Default::default()
     ///                 },
     ///             },
@@ -130,8 +130,8 @@ impl CaseManagementClient {
     ///                 bank_account_holder_type: "business".to_string(),
     ///                 bank_account_function: CaseManagementBankAccountFunction::Deposits,
     ///                 services: BankAccountServices {
-    ///                     money_in: Some(vec![MoneyInService::Ach]),
-    ///                     money_out: Some(vec![MoneyOutService::Ach]),
+    ///                     money_in: Some(vec![CaseManagementMoneyInService::Ach]),
+    ///                     money_out: Some(vec![CaseManagementMoneyOutService::Ach]),
     ///                     ..Default::default()
     ///                 },
     ///                 default: true,
