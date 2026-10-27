@@ -2240,7 +2240,7 @@ impl QueryClient {
     ///         .query
     ///         .list_organizations(
     ///             123,
-    ///             &ListOrganizationsQueryRequest {
+    ///             &QueryListOrganizationsQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
     ///                 sort_by: Some("desc(field_name)".to_string()),
@@ -2254,7 +2254,7 @@ impl QueryClient {
     pub async fn list_organizations(
         &self,
         org_id: i64,
-        request: &ListOrganizationsQueryRequest,
+        request: &QueryListOrganizationsQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<ListOrganizationsResponse, ApiError> {
         let endpoint_auth_headers = self

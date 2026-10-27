@@ -10,12 +10,12 @@ pub struct PayabliCredentialsPascal {
     #[serde(rename = "Mode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mode: Option<i64>,
-    #[serde(rename = "MinTicket")]
+    #[serde(rename = "Minticket")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub min_ticket: Option<MinTicket>,
-    #[serde(rename = "MaxTicket")]
+    pub minticket: Option<MinTicket>,
+    #[serde(rename = "Maxticket")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub max_ticket: Option<MaxTicket>,
+    pub maxticket: Option<MaxTicket>,
     #[serde(rename = "CfeeFix")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
@@ -72,8 +72,8 @@ impl PayabliCredentialsPascal {
 pub struct PayabliCredentialsPascalBuilder {
     service: Option<String>,
     mode: Option<i64>,
-    min_ticket: Option<MinTicket>,
-    max_ticket: Option<MaxTicket>,
+    minticket: Option<MinTicket>,
+    maxticket: Option<MaxTicket>,
     cfee_fix: Option<f64>,
     cfee_float: Option<f64>,
     cfee_min: Option<f64>,
@@ -98,13 +98,13 @@ impl PayabliCredentialsPascalBuilder {
         self
     }
 
-    pub fn min_ticket(mut self, value: MinTicket) -> Self {
-        self.min_ticket = Some(value);
+    pub fn minticket(mut self, value: MinTicket) -> Self {
+        self.minticket = Some(value);
         self
     }
 
-    pub fn max_ticket(mut self, value: MaxTicket) -> Self {
-        self.max_ticket = Some(value);
+    pub fn maxticket(mut self, value: MaxTicket) -> Self {
+        self.maxticket = Some(value);
         self
     }
 
@@ -168,8 +168,8 @@ impl PayabliCredentialsPascalBuilder {
         Ok(PayabliCredentialsPascal {
             service: self.service,
             mode: self.mode,
-            min_ticket: self.min_ticket,
-            max_ticket: self.max_ticket,
+            minticket: self.minticket,
+            maxticket: self.maxticket,
             cfee_fix: self.cfee_fix,
             cfee_float: self.cfee_float,
             cfee_min: self.cfee_min,

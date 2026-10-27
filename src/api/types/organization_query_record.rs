@@ -2,20 +2,20 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct OrganizationQueryRecord {
+    #[serde(rename = "BillingInfo")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub services: Option<Vec<OrganizationQueryRecordServicesItem>>,
-    #[serde(rename = "billingInfo")]
+    pub billing_info: Option<InstrumentResponse>,
+    /// List of contacts.
+    #[serde(rename = "Contacts")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub billing_info: Option<Instrument>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub contacts: Option<ContactsField>,
+    pub contacts: Option<Vec<ContactsResponse>>,
     #[serde(rename = "createdAt")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub created_at: Option<CreatedAt>,
-    #[serde(rename = "hasBilling")]
+    #[serde(rename = "HasBilling")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub has_billing: Option<bool>,
-    #[serde(rename = "hasResidual")]
+    #[serde(rename = "HasResidual")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub has_residual: Option<bool>,
     #[serde(rename = "idOrg")]
@@ -24,56 +24,64 @@ pub struct OrganizationQueryRecord {
     #[serde(rename = "isRoot")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub is_root: Option<IsRoot>,
-    #[serde(rename = "orgAddress")]
+    #[serde(rename = "OrgAddress")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_address: Option<Orgaddress>,
-    #[serde(rename = "orgCity")]
+    #[serde(rename = "OrgCity")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_city: Option<Orgcity>,
-    #[serde(rename = "orgCountry")]
+    #[serde(rename = "OrgCountry")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_country: Option<Orgcountry>,
-    #[serde(rename = "orgEntryName")]
+    #[serde(rename = "OrgEntryName")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_entry_name: Option<Orgentryname>,
-    #[serde(rename = "orgId")]
+    /// URL of the organization's favicon.
+    #[serde(rename = "OrgFavicon")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub org_favicon: Option<String>,
+    #[serde(rename = "OrgId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_id: Option<Orgidstring>,
-    #[serde(rename = "orgLogo")]
+    /// URL of the organization's logo.
+    #[serde(rename = "OrgLogo")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub org_logo: Option<FileContent>,
-    #[serde(rename = "orgName")]
+    pub org_logo: Option<String>,
+    #[serde(rename = "OrgName")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_name: Option<Orgname>,
-    #[serde(rename = "orgParentId")]
+    #[serde(rename = "OrgParentId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_parent_id: Option<OrgParentId>,
-    #[serde(rename = "orgParentName")]
+    #[serde(rename = "OrgParentName")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_parent_name: Option<OrgParentName>,
-    #[serde(rename = "orgState")]
+    #[serde(rename = "OrgState")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_state: Option<Orgstate>,
-    #[serde(rename = "orgTimezone")]
+    #[serde(rename = "OrgTimezone")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_timezone: Option<Orgtimezone>,
-    #[serde(rename = "orgType")]
+    #[serde(rename = "OrgType")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_type: Option<Orgtype>,
-    #[serde(rename = "orgWebsite")]
+    #[serde(rename = "OrgWebsite")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_website: Option<Orgwebsite>,
-    #[serde(rename = "orgZip")]
+    #[serde(rename = "OrgZip")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub org_zip: Option<Orgzip>,
     #[serde(rename = "recipientEmailNotification")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub recipient_email_notification: Option<RecipientEmailNotification>,
-    #[serde(rename = "replyToEmail")]
+    #[serde(rename = "ReplyToEmail")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reply_to_email: Option<ReplyToEmail>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub resumable: Option<Resumable>,
+    #[serde(rename = "Services")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub services: Option<Vec<OrganizationQueryRecordServicesItem>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub summary: Option<SummaryOrg>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -89,9 +97,8 @@ impl OrganizationQueryRecord {
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
 pub struct OrganizationQueryRecordBuilder {
-    services: Option<Vec<OrganizationQueryRecordServicesItem>>,
-    billing_info: Option<Instrument>,
-    contacts: Option<ContactsField>,
+    billing_info: Option<InstrumentResponse>,
+    contacts: Option<Vec<ContactsResponse>>,
     created_at: Option<CreatedAt>,
     has_billing: Option<bool>,
     has_residual: Option<bool>,
@@ -101,8 +108,9 @@ pub struct OrganizationQueryRecordBuilder {
     org_city: Option<Orgcity>,
     org_country: Option<Orgcountry>,
     org_entry_name: Option<Orgentryname>,
+    org_favicon: Option<String>,
     org_id: Option<Orgidstring>,
-    org_logo: Option<FileContent>,
+    org_logo: Option<String>,
     org_name: Option<Orgname>,
     org_parent_id: Option<OrgParentId>,
     org_parent_name: Option<OrgParentName>,
@@ -114,22 +122,18 @@ pub struct OrganizationQueryRecordBuilder {
     recipient_email_notification: Option<RecipientEmailNotification>,
     reply_to_email: Option<ReplyToEmail>,
     resumable: Option<Resumable>,
+    services: Option<Vec<OrganizationQueryRecordServicesItem>>,
     summary: Option<SummaryOrg>,
     users: Option<Vec<UserQueryRecord>>,
 }
 
 impl OrganizationQueryRecordBuilder {
-    pub fn services(mut self, value: Vec<OrganizationQueryRecordServicesItem>) -> Self {
-        self.services = Some(value);
-        self
-    }
-
-    pub fn billing_info(mut self, value: Instrument) -> Self {
+    pub fn billing_info(mut self, value: InstrumentResponse) -> Self {
         self.billing_info = Some(value);
         self
     }
 
-    pub fn contacts(mut self, value: ContactsField) -> Self {
+    pub fn contacts(mut self, value: Vec<ContactsResponse>) -> Self {
         self.contacts = Some(value);
         self
     }
@@ -179,13 +183,18 @@ impl OrganizationQueryRecordBuilder {
         self
     }
 
+    pub fn org_favicon(mut self, value: impl Into<String>) -> Self {
+        self.org_favicon = Some(value.into());
+        self
+    }
+
     pub fn org_id(mut self, value: Orgidstring) -> Self {
         self.org_id = Some(value);
         self
     }
 
-    pub fn org_logo(mut self, value: FileContent) -> Self {
-        self.org_logo = Some(value);
+    pub fn org_logo(mut self, value: impl Into<String>) -> Self {
+        self.org_logo = Some(value.into());
         self
     }
 
@@ -244,6 +253,11 @@ impl OrganizationQueryRecordBuilder {
         self
     }
 
+    pub fn services(mut self, value: Vec<OrganizationQueryRecordServicesItem>) -> Self {
+        self.services = Some(value);
+        self
+    }
+
     pub fn summary(mut self, value: SummaryOrg) -> Self {
         self.summary = Some(value);
         self
@@ -257,7 +271,6 @@ impl OrganizationQueryRecordBuilder {
     /// Consumes the builder and constructs a [`OrganizationQueryRecord`].
     pub fn build(self) -> Result<OrganizationQueryRecord, BuildError> {
         Ok(OrganizationQueryRecord {
-            services: self.services,
             billing_info: self.billing_info,
             contacts: self.contacts,
             created_at: self.created_at,
@@ -269,6 +282,7 @@ impl OrganizationQueryRecordBuilder {
             org_city: self.org_city,
             org_country: self.org_country,
             org_entry_name: self.org_entry_name,
+            org_favicon: self.org_favicon,
             org_id: self.org_id,
             org_logo: self.org_logo,
             org_name: self.org_name,
@@ -282,6 +296,7 @@ impl OrganizationQueryRecordBuilder {
             recipient_email_notification: self.recipient_email_notification,
             reply_to_email: self.reply_to_email,
             resumable: self.resumable,
+            services: self.services,
             summary: self.summary,
             users: self.users,
         })

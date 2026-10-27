@@ -44,6 +44,10 @@ pub struct PaypointSummaryResponse {
     #[serde(rename = "customerServiceEmail")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub customer_service_email: Option<String>,
+    /// Your own identifier for the paypoint. Omitted when you haven't set one.
+    #[serde(rename = "externalId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub external_id: Option<String>,
     /// The paypoint's entrypoint name, used as the `entry` value on endpoints that target the paypoint.
     #[serde(rename = "entryName")]
     #[serde(default)]
@@ -82,6 +86,7 @@ pub struct PaypointSummaryResponseBuilder {
     timezone: Option<String>,
     customer_service_phone: Option<String>,
     customer_service_email: Option<String>,
+    external_id: Option<String>,
     entry_name: Option<String>,
     created_at: Option<String>,
     updated_at: Option<String>,
@@ -144,6 +149,11 @@ impl PaypointSummaryResponseBuilder {
         self
     }
 
+    pub fn external_id(mut self, value: impl Into<String>) -> Self {
+        self.external_id = Some(value.into());
+        self
+    }
+
     pub fn entry_name(mut self, value: impl Into<String>) -> Self {
         self.entry_name = Some(value.into());
         self
@@ -192,6 +202,7 @@ impl PaypointSummaryResponseBuilder {
             timezone: self.timezone,
             customer_service_phone: self.customer_service_phone,
             customer_service_email: self.customer_service_email,
+            external_id: self.external_id,
             entry_name: self
                 .entry_name
                 .ok_or_else(|| BuildError::missing_field("entry_name"))?,

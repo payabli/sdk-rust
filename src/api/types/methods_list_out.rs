@@ -9,9 +9,15 @@ pub struct MethodsListOut {
     /// When `true`, physical check is offered as a payout method.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub check: Option<bool>,
+    /// When `true`, Real-Time Payments (RTP) is offered as a payout method.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub rtp: Option<bool>,
     /// When `true`, virtual card (vCard) is offered as a payout method.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub vcard: Option<bool>,
+    /// When `true`, wire transfer is offered as a payout method.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub wire: Option<bool>,
 }
 
 impl MethodsListOut {
@@ -25,7 +31,9 @@ impl MethodsListOut {
 pub struct MethodsListOutBuilder {
     ach: Option<bool>,
     check: Option<bool>,
+    rtp: Option<bool>,
     vcard: Option<bool>,
+    wire: Option<bool>,
 }
 
 impl MethodsListOutBuilder {
@@ -39,8 +47,18 @@ impl MethodsListOutBuilder {
         self
     }
 
+    pub fn rtp(mut self, value: bool) -> Self {
+        self.rtp = Some(value);
+        self
+    }
+
     pub fn vcard(mut self, value: bool) -> Self {
         self.vcard = Some(value);
+        self
+    }
+
+    pub fn wire(mut self, value: bool) -> Self {
+        self.wire = Some(value);
         self
     }
 
@@ -49,7 +67,9 @@ impl MethodsListOutBuilder {
         Ok(MethodsListOut {
             ach: self.ach,
             check: self.check,
+            rtp: self.rtp,
             vcard: self.vcard,
+            wire: self.wire,
         })
     }
 }

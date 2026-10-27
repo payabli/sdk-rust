@@ -18,7 +18,7 @@ impl PaypointsClient {
     /// # Arguments
     ///
     /// * `business_reference` - Filter by the business the paypoint belongs to.
-    /// * `status` - Filter by paypoint status.
+    /// * `status` - Filter by paypoint status. One of `active`, `inactive`, `suspended`, or `closed`. Any other value, including `pending`, returns `400`.
     /// * `search` - Free-text search across paypoints.
     /// * `limit` - Number of results per page.
     /// * `page` - Page number to return.

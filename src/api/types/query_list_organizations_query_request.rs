@@ -2,7 +2,7 @@ pub use crate::prelude::*;
 
 /// Query parameters for ListOrganizations
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
-pub struct ListOrganizationsQueryRequest {
+pub struct QueryListOrganizationsQueryRequest {
     /// Export format for file downloads. When specified, returns data as a file instead of JSON.
     #[serde(rename = "exportFormat")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -73,15 +73,15 @@ pub struct ListOrganizationsQueryRequest {
     pub sort_by: Option<String>,
 }
 
-impl ListOrganizationsQueryRequest {
-    pub fn builder() -> ListOrganizationsQueryRequestBuilder {
-        <ListOrganizationsQueryRequestBuilder as Default>::default()
+impl QueryListOrganizationsQueryRequest {
+    pub fn builder() -> QueryListOrganizationsQueryRequestBuilder {
+        <QueryListOrganizationsQueryRequestBuilder as Default>::default()
     }
 }
 
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
-pub struct ListOrganizationsQueryRequestBuilder {
+pub struct QueryListOrganizationsQueryRequestBuilder {
     export_format: Option<ExportFormat>,
     from_record: Option<i64>,
     limit_record: Option<i64>,
@@ -89,7 +89,7 @@ pub struct ListOrganizationsQueryRequestBuilder {
     sort_by: Option<String>,
 }
 
-impl ListOrganizationsQueryRequestBuilder {
+impl QueryListOrganizationsQueryRequestBuilder {
     pub fn export_format(mut self, value: ExportFormat) -> Self {
         self.export_format = Some(value);
         self
@@ -115,9 +115,9 @@ impl ListOrganizationsQueryRequestBuilder {
         self
     }
 
-    /// Consumes the builder and constructs a [`ListOrganizationsQueryRequest`].
-    pub fn build(self) -> Result<ListOrganizationsQueryRequest, BuildError> {
-        Ok(ListOrganizationsQueryRequest {
+    /// Consumes the builder and constructs a [`QueryListOrganizationsQueryRequest`].
+    pub fn build(self) -> Result<QueryListOrganizationsQueryRequest, BuildError> {
+        Ok(QueryListOrganizationsQueryRequest {
             export_format: self.export_format,
             from_record: self.from_record,
             limit_record: self.limit_record,

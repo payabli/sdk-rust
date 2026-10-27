@@ -25,6 +25,7 @@
 //! - **Businesses**
 //! - **People**
 //! - **Paypoints**
+//! - **Organizations**
 //! - **Payment methods**
 //! - **Boarding templates**
 //! - **Applications**
@@ -74,6 +75,7 @@ pub mod notification;
 pub mod notificationlogs;
 pub mod ocr;
 pub mod organization;
+pub mod organizations;
 pub mod payment_link;
 pub mod payment_method_domain;
 pub mod payment_methods;
@@ -116,6 +118,7 @@ pub struct ApiClient {
     pub businesses: BusinessesClient,
     pub people: PeopleClient,
     pub paypoints: PaypointsClient,
+    pub organizations: OrganizationsClient,
     pub payment_methods: PaymentMethodsClient,
     pub boarding_templates: BoardingTemplatesClient,
     pub applications: ApplicationsClient,
@@ -165,6 +168,7 @@ impl ApiClient {
             businesses: BusinessesClient::new(config.clone())?,
             people: PeopleClient::new(config.clone())?,
             paypoints: PaypointsClient::new(config.clone())?,
+            organizations: OrganizationsClient::new(config.clone())?,
             payment_methods: PaymentMethodsClient::new(config.clone())?,
             boarding_templates: BoardingTemplatesClient::new(config.clone())?,
             applications: ApplicationsClient::new(config.clone())?,
@@ -215,6 +219,7 @@ pub use notification::NotificationClient;
 pub use notificationlogs::NotificationlogsClient;
 pub use ocr::OcrClient;
 pub use organization::OrganizationClient;
+pub use organizations::OrganizationsClient;
 pub use payment_link::PaymentLinkClient;
 pub use payment_method_domain::PaymentMethodDomainClient;
 pub use payment_methods::PaymentMethodsClient;

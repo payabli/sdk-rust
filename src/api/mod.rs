@@ -17,9 +17,10 @@ pub use resources::{
     CheckCaptureClient, CloudClient, CustomerClient, DeviceClient, ExportClient, FundingClient,
     GhostCardClient, HostedPaymentPagesClient, ImportClient, InvoiceClient, LineItemClient,
     ManagementClient, MoneyInClient, MoneyOutClient, NotificationClient, NotificationlogsClient,
-    OcrClient, OrganizationClient, PaymentLinkClient, PaymentMethodDomainClient,
-    PaymentMethodsClient, PayoutSubscriptionClient, PaypointClient, PaypointsClient, PeopleClient,
-    QueryClient, StatisticClient, SubscriptionClient, TaptopayClient, TemplatesClient, TokenClient,
-    TokenStorageClient, UserClient, VendorClient, WalletClient,
+    OcrClient, OrganizationClient, OrganizationsClient, PaymentLinkClient,
+    PaymentMethodDomainClient, PaymentMethodsClient, PayoutSubscriptionClient, PaypointClient,
+    PaypointsClient, PeopleClient, QueryClient, StatisticClient, SubscriptionClient,
+    TaptopayClient, TemplatesClient, TokenClient, TokenStorageClient, UserClient, VendorClient,
+    WalletClient,
 };
 pub use types::*;

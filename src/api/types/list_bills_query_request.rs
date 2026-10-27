@@ -32,8 +32,8 @@ pub struct ListBillsQueryRequest {
     /// **Accepted field names:**
     /// - `frequency` (`in`, `nin`, `ne`, `eq`)
     /// - `method` (`in`, `nin`, `eq`, `ne`)
-    /// - `event` (`in`, `nin`, `eq`, `ne`)
-    /// - `target` (`ct`, `nct`, `eq`, `ne`)
+    /// - `vendorNumber` (`eq`)
+    /// - `vendorId` (`eq`)
     /// - `status` (`eq`, `ne`)
     /// - `approvalUserId` (`eq`, `ne`)
     /// - `parentOrgId` (`ne`, `eq`, `nin`, `in`)

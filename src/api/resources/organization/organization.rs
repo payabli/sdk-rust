@@ -259,7 +259,7 @@ impl OrganizationClient {
     ///
     /// # Arguments
     ///
-    /// * `entry` - The paypoint's entrypoint identifier. [Learn more](/developers/api-reference/api-overview#entrypoint-vs-entry)
+    /// * `entry` - The organization's entry name (`OrgEntryName`).
     /// * `options` - Additional request options such as headers, timeout, etc.
     ///
     /// # Returns
@@ -279,7 +279,7 @@ impl OrganizationClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .organization
-    ///         .get_basic_organization(&"8cfec329267".to_string(), None)
+    ///         .get_basic_organization(&"pilgrim-planner".to_string(), None)
     ///         .await;
     /// }
     /// ```
@@ -287,7 +287,7 @@ impl OrganizationClient {
         &self,
         entry: &str,
         options: Option<RequestOptions>,
-    ) -> Result<OrganizationQueryRecord, ApiError> {
+    ) -> Result<GetBasicOrganizationResponse, ApiError> {
         let endpoint_auth_headers = self
             .http_client
             .resolve_endpoint_auth_headers(
@@ -345,7 +345,7 @@ impl OrganizationClient {
         &self,
         org_id: i64,
         options: Option<RequestOptions>,
-    ) -> Result<OrganizationQueryRecord, ApiError> {
+    ) -> Result<GetBasicOrganizationResponse, ApiError> {
         let endpoint_auth_headers = self
             .http_client
             .resolve_endpoint_auth_headers(
