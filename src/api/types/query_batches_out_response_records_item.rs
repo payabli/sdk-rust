@@ -71,6 +71,12 @@ pub struct QueryBatchesOutResponseRecordsItem {
     #[serde(rename = "BatchStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_status: Option<i64>,
+    /// The name of the `BatchStatus`: `Open`, `Closed`, `Funded`, `Processed`, `Paid`,
+    /// `Canceled`, `Funding Pending`, `Held`, or `Released`. Returns `null` for an unrecognized
+    /// code. See [Pay Out statuses](/guides/pay-out-status-reference#batch-statuses).
+    #[serde(rename = "BatchStatusLabel")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub batch_status_label: Option<String>,
     /// A text description of the batch status.
     #[serde(rename = "BatchStatusText")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -129,6 +135,14 @@ pub struct QueryBatchesOutResponseRecordsItem {
     #[serde(rename = "PaypointName")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub paypoint_name: Option<String>,
+    /// The date and time, in UTC, of the transfer that funds the batch. For a batch that
+    /// hasn't been funded yet, this field returns the time of the request instead, and
+    /// `transferDate` filters don't match that value.
+    #[serde(rename = "TransferDate")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
+    #[serde(with = "crate::core::flexible_datetime::utc::option")]
+    pub transfer_date: Option<DateTime<Utc>>,
     #[serde(rename = "VcardAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]
@@ -185,6 +199,7 @@ pub struct QueryBatchesOutResponseRecordsItemBuilder {
     batch_processing_records: Option<i64>,
     batch_records: Option<i64>,
     batch_status: Option<i64>,
+    batch_status_label: Option<String>,
     batch_status_text: Option<String>,
     card_amount: Option<f64>,
     card_records: Option<i64>,
@@ -201,6 +216,7 @@ pub struct QueryBatchesOutResponseRecordsItemBuilder {
     paypoint_dba: Option<String>,
     paypoint_id: Option<i64>,
     paypoint_name: Option<String>,
+    transfer_date: Option<DateTime<Utc>>,
     vcard_amount: Option<f64>,
     vcard_records: Option<i64>,
     vcard_status: Option<i64>,
@@ -297,6 +313,11 @@ impl QueryBatchesOutResponseRecordsItemBuilder {
         self
     }
 
+    pub fn batch_status_label(mut self, value: impl Into<String>) -> Self {
+        self.batch_status_label = Some(value.into());
+        self
+    }
+
     pub fn batch_status_text(mut self, value: impl Into<String>) -> Self {
         self.batch_status_text = Some(value.into());
         self
@@ -377,6 +398,11 @@ impl QueryBatchesOutResponseRecordsItemBuilder {
         self
     }
 
+    pub fn transfer_date(mut self, value: DateTime<Utc>) -> Self {
+        self.transfer_date = Some(value);
+        self
+    }
+
     pub fn vcard_amount(mut self, value: f64) -> Self {
         self.vcard_amount = Some(value);
         self
@@ -437,6 +463,7 @@ impl QueryBatchesOutResponseRecordsItemBuilder {
             batch_processing_records: self.batch_processing_records,
             batch_records: self.batch_records,
             batch_status: self.batch_status,
+            batch_status_label: self.batch_status_label,
             batch_status_text: self.batch_status_text,
             card_amount: self.card_amount,
             card_records: self.card_records,
@@ -453,6 +480,7 @@ impl QueryBatchesOutResponseRecordsItemBuilder {
             paypoint_dba: self.paypoint_dba,
             paypoint_id: self.paypoint_id,
             paypoint_name: self.paypoint_name,
+            transfer_date: self.transfer_date,
             vcard_amount: self.vcard_amount,
             vcard_records: self.vcard_records,
             vcard_status: self.vcard_status,

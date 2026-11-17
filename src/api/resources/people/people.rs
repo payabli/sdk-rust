@@ -432,7 +432,7 @@ impl PeopleClient {
     ///         .search_people(
     ///             &SearchPeopleRequest {
     ///                 entry: "8cfec329267".to_string(),
-    ///                 org_id: 123,
+    ///                 org_id: 900123,
     ///                 body: PeopleSearchRequest::Unknown(
     ///                     serde_json::json!({"firstName":"Marcus","lastName":"Delgado"}),
     ///                 ),
@@ -503,7 +503,7 @@ impl PeopleClient {
     ///         .search_people_unmasked(
     ///             &SearchPeopleUnmaskedRequest {
     ///                 entry: "8cfec329267".to_string(),
-    ///                 org_id: 123,
+    ///                 org_id: 900123,
     ///                 body: PeopleSearchRequest::Unknown(
     ///                     serde_json::json!({"firstName":"Marcus","lastName":"Delgado"}),
     ///                 ),

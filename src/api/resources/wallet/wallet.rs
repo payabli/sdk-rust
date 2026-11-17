@@ -40,7 +40,7 @@ impl WalletClient {
     ///             &ConfigureOrganizationRequestApplePay {
     ///                 cascade: Some(Cascade(true)),
     ///                 is_enabled: Some(IsEnabled(true)),
-    ///                 org_id: Some(OrganizationId(123)),
+    ///                 org_id: Some(OrganizationId(900123)),
     ///                 ..Default::default()
     ///             },
     ///             None,
@@ -169,7 +169,7 @@ impl WalletClient {
     ///             &ConfigureOrganizationRequestGooglePay {
     ///                 cascade: Some(Cascade(true)),
     ///                 is_enabled: Some(IsEnabled(true)),
-    ///                 org_id: Some(OrganizationId(123)),
+    ///                 org_id: Some(OrganizationId(900123)),
     ///                 ..Default::default()
     ///             },
     ///             None,

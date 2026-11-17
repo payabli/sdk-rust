@@ -49,7 +49,7 @@ impl BoardingTemplatesClient {
     ///         .boarding_templates
     ///         .list_templates(
     ///             &BoardingTemplatesListTemplatesQueryRequest {
-    ///                 org_id: 123,
+    ///                 org_id: 900123,
     ///                 status: None,
     ///                 name: None,
     ///                 slug: None,

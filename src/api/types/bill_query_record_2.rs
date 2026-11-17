@@ -137,6 +137,13 @@ pub struct BillQueryRecord2 {
     #[serde(rename = "Status")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<Billstatus>,
+    /// The name of the bill's `Status`: `Canceled`, `None`, `Active`, `Sent to Approval`,
+    /// `Partially Approved`, `Rejected`, `Approved`, `In Transit`, `Partially Paid`, or `Paid`.
+    /// Returns `null` for an unrecognized code. See
+    /// [Pay Out statuses](/guides/pay-out-status-reference#bill-statuses).
+    #[serde(rename = "StatusLabel")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub status_label: Option<String>,
     /// The payment terms for invoice. If no terms were defined initially, then response data for this field will default to `N30`.
     #[serde(rename = "Terms")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -215,6 +222,7 @@ pub struct BillQueryRecord2Builder {
     paypoint_legalname: Option<Legalname>,
     source: Option<String>,
     status: Option<Billstatus>,
+    status_label: Option<String>,
     terms: Option<Terms>,
     total_amount: Option<f64>,
     paid_amount: Option<f64>,
@@ -390,6 +398,11 @@ impl BillQueryRecord2Builder {
         self
     }
 
+    pub fn status_label(mut self, value: impl Into<String>) -> Self {
+        self.status_label = Some(value.into());
+        self
+    }
+
     pub fn terms(mut self, value: Terms) -> Self {
         self.terms = Some(value);
         self
@@ -461,6 +474,7 @@ impl BillQueryRecord2Builder {
             paypoint_legalname: self.paypoint_legalname,
             source: self.source,
             status: self.status,
+            status_label: self.status_label,
             terms: self.terms,
             total_amount: self.total_amount,
             paid_amount: self.paid_amount,

@@ -46,7 +46,7 @@ impl NotificationClient {
     ///                 }),
     ///                 frequency: NotificationStandardRequestFrequency::Untilcancelled,
     ///                 method: NotificationStandardRequestMethod::Web,
-    ///                 owner_id: Some(Ownerid(236)),
+    ///                 owner_id: Some(Ownerid(900123)),
     ///                 owner_type: Ownertype(0),
     ///                 status: Some(Statusnotification(1)),
     ///                 target: "https://webhook.site/2871b8f8-edc7-441a-b376-98d8c8e33275".to_string(),

@@ -27,6 +27,13 @@ pub struct TransactionOutQueryRecord {
     #[serde(rename = "Status")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<i64>,
+    /// The name of the payout's `Status`: `Canceled`, `Captured`, `Processing`, `Processed`,
+    /// `Held`, `Paid`, `Authorized`, `Capturing`, `Returned`, `Rejected`, `Reissued`, or
+    /// `Refunded`. Returns `null` for an unrecognized code. See
+    /// [Pay Out statuses](/guides/pay-out-status-reference#payout-transaction-statuses).
+    #[serde(rename = "StatusLabel")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub status_label: Option<String>,
     /// Timestamp when payment record was updated, in UTC.
     #[serde(rename = "LastUpdated")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -153,6 +160,7 @@ pub struct TransactionOutQueryRecordBuilder {
     paypoint_dbaname: Option<Dbaname>,
     paypoint_legalname: Option<Legalname>,
     status: Option<i64>,
+    status_label: Option<String>,
     last_updated: Option<LastModified>,
     total_amount: Option<f64>,
     net_amount: Option<Netamountnullable>,
@@ -220,6 +228,11 @@ impl TransactionOutQueryRecordBuilder {
 
     pub fn status(mut self, value: i64) -> Self {
         self.status = Some(value);
+        self
+    }
+
+    pub fn status_label(mut self, value: impl Into<String>) -> Self {
+        self.status_label = Some(value.into());
         self
     }
 
@@ -393,6 +406,7 @@ impl TransactionOutQueryRecordBuilder {
             paypoint_dbaname: self.paypoint_dbaname,
             paypoint_legalname: self.paypoint_legalname,
             status: self.status,
+            status_label: self.status_label,
             last_updated: self.last_updated,
             total_amount: self.total_amount,
             net_amount: self.net_amount,

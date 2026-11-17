@@ -28,11 +28,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -179,11 +179,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
     ///
@@ -266,7 +266,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_batch_details_org(
-    ///             123,
+    ///             900123,
     ///             &ListBatchDetailsOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -329,11 +329,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -459,11 +459,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -526,7 +526,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_batches_org(
-    ///             123,
+    ///             900123,
     ///             &ListBatchesOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -588,6 +588,7 @@ impl QueryClient {
     /// **Accepted field names**:
     ///
     /// - `batchDate` (gt, ge, lt, le, eq, ne)
+    /// - `transferDate` (gt, ge, lt, le, eq, ne)
     /// - `batchNumber` (ne, eq)
     /// - `batchAmount` (gt, ge, lt, le, eq, ne)
     /// - `parentOrgId` (ne, eq, nin, in)
@@ -682,11 +683,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -694,6 +695,7 @@ impl QueryClient {
     /// **Accepted field names**:
     ///
     /// - `batchDate` (gt, ge, lt, le, eq, ne)
+    /// - `transferDate` (gt, ge, lt, le, eq, ne)
     /// - `batchNumber` (ne, eq)
     /// - `batchAmount` (gt, ge, lt, le, eq, ne)
     /// - `parentOrgId` (ne, eq, nin, in)
@@ -725,7 +727,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_batches_out_org(
-    ///             123,
+    ///             900123,
     ///             &ListBatchesOutOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -788,11 +790,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
@@ -939,11 +941,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info> See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
     /// **Accepted field names:**
@@ -1027,7 +1029,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_chargebacks_org(
-    ///             123,
+    ///             900123,
     ///             &ListChargebacksOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -1090,11 +1092,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more details.
     ///
@@ -1231,11 +1233,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more details.
     ///
@@ -1309,7 +1311,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_customers_org(
-    ///             123,
+    ///             900123,
     ///             &ListCustomersOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -1550,11 +1552,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/devices/org/236?parameters=status=1&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/devices/org/900123?parameters=status=1&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/devices/org/236?status=1&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/devices/org/900123?status=1&limitRecord=20
     /// </Info>
     ///
     /// See [Filters and Conditions
@@ -1661,7 +1663,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_devices_org(
-    ///             123,
+    ///             900123,
     ///             &ListDevicesOrgQueryRequest {
     ///                 from_record: Some(0),
     ///                 limit_record: Some(20),
@@ -1723,11 +1725,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
@@ -1834,11 +1836,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
@@ -1884,7 +1886,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_notification_reports_org(
-    ///             123,
+    ///             900123,
     ///             &ListNotificationReportsOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -1945,11 +1947,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
@@ -2059,11 +2061,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
@@ -2112,7 +2114,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_notifications_org(
-    ///             123,
+    ///             900123,
     ///             &ListNotificationsOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -2174,11 +2176,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// **Accepted field names:**
     ///
@@ -2239,7 +2241,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_organizations(
-    ///             123,
+    ///             900123,
     ///             &QueryListOrganizationsQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -2302,11 +2304,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     /// Accepted field names:
@@ -2458,11 +2460,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// Accepted field names:
     ///
@@ -2550,7 +2552,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_payout_org(
-    ///             123,
+    ///             900123,
     ///             &ListPayoutOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -2613,11 +2615,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// **Accepted field names:**
     ///
@@ -2683,7 +2685,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_paypoints(
-    ///             123,
+    ///             900123,
     ///             &QueryListPaypointsQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -2746,11 +2748,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -2897,11 +2899,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
@@ -2985,7 +2987,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_settlements_org(
-    ///             123,
+    ///             900123,
     ///             &ListSettlementsOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -3048,11 +3050,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
     ///
@@ -3201,11 +3203,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
     ///
@@ -3291,7 +3293,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_subscriptions_org(
-    ///             123,
+    ///             900123,
     ///             &ListSubscriptionsOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -3493,11 +3495,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/payoutsubscriptions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
     /// **Accepted field names:**
@@ -3569,7 +3571,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_payout_subscriptions_org(
-    ///             123,
+    ///             900123,
     ///             &ListPayoutSubscriptionsOrgQueryRequest {
     ///                 from_record: Some(0),
     ///                 limit_record: Some(20),
@@ -3641,11 +3643,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
     ///
@@ -3812,11 +3814,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for more information.
     ///
@@ -3910,7 +3912,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_transactions_org(
-    ///             123,
+    ///             900123,
     ///             &ListTransactionsOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -3976,11 +3978,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     /// See [Filters and Conditions
@@ -4088,11 +4090,11 @@ impl QueryClient {
     ///
     /// For example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// Accepted field names:
     ///
@@ -4200,11 +4202,11 @@ impl QueryClient {
     ///
     /// For example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// Accepted field names:
     ///
@@ -4245,7 +4247,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_transfers_org(
-    ///             &Orgid(123),
+    ///             &Orgid(900123),
     ///             &ListTransfersOrgQueryRequest {
     ///                 from_record: Some(0),
     ///                 limit_record: Some(20),
@@ -4308,11 +4310,11 @@ impl QueryClient {
     ///
     /// For example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// Accepted field names:
     ///
@@ -4352,7 +4354,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_transfers_out_org(
-    ///             123,
+    ///             900123,
     ///             &ListTransfersOutOrgQueryRequest {
     ///                 from_record: Some(0),
     ///                 limit_record: Some(20),
@@ -4414,11 +4416,11 @@ impl QueryClient {
     ///
     /// For example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// Accepted field names:
     ///
@@ -4521,11 +4523,11 @@ impl QueryClient {
     ///
     /// For example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// Accepted field names:
     ///
@@ -4623,11 +4625,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
@@ -4678,7 +4680,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_users_org(
-    ///             123,
+    ///             900123,
     ///             &ListUsersOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -4739,11 +4741,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
@@ -4856,11 +4858,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
@@ -4987,11 +4989,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// See [Filters and Conditions Reference](/developers/developer-guides/pay-ops-reporting-engine-overview#filters-and-conditions-reference) for help.
     ///
@@ -5055,7 +5057,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_vendors_org(
-    ///             123,
+    ///             900123,
     ///             &ListVendorsOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -5118,11 +5120,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// Accepted field names:
     ///
@@ -5370,11 +5372,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/org/236?parameters=transactionAmount(gt)=100&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/org/900123?parameters=transactionAmount(gt)=100&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/org/236?transactionAmount(gt)=100&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/vcardsTransactions/org/900123?transactionAmount(gt)=100&limitRecord=20
     /// </Info>
     ///
     /// Accepted field names:
@@ -5435,7 +5437,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_vcards_transactions_org(
-    ///             123,
+    ///             900123,
     ///             &ListVcardsTransactionsOrgQueryRequest {
     ///                 from_record: Some(0),
     ///                 limit_record: Some(20),
@@ -5497,11 +5499,11 @@ impl QueryClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     /// Accepted field names:
     ///
@@ -5559,7 +5561,7 @@ impl QueryClient {
     ///     client
     ///         .query
     ///         .list_vcards_org(
-    ///             123,
+    ///             900123,
     ///             &ListVcardsOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),

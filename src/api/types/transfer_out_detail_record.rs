@@ -108,6 +108,13 @@ pub struct TransferOutDetailRecord {
     #[serde(rename = "Status")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<i64>,
+    /// The name of the payout's `Status`: `Canceled`, `Captured`, `Processing`, `Processed`,
+    /// `Held`, `Paid`, `Authorized`, `Capturing`, `Returned`, `Rejected`, `Reissued`, or
+    /// `Refunded`. Returns `null` for an unrecognized code. See
+    /// [Pay Out statuses](/guides/pay-out-status-reference#payout-transaction-statuses).
+    #[serde(rename = "StatusLabel")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub status_label: Option<String>,
     /// Payment ID.
     #[serde(rename = "PaymentId")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -307,6 +314,7 @@ pub struct TransferOutDetailRecordBuilder {
     paypoint_legalname: Option<String>,
     paypoint_id: Option<i64>,
     status: Option<i64>,
+    status_label: Option<String>,
     payment_id: Option<String>,
     trans_id: Option<String>,
     trans_status: Option<i64>,
@@ -462,6 +470,11 @@ impl TransferOutDetailRecordBuilder {
 
     pub fn status(mut self, value: i64) -> Self {
         self.status = Some(value);
+        self
+    }
+
+    pub fn status_label(mut self, value: impl Into<String>) -> Self {
+        self.status_label = Some(value.into());
         self
     }
 
@@ -691,6 +704,7 @@ impl TransferOutDetailRecordBuilder {
             paypoint_legalname: self.paypoint_legalname,
             paypoint_id: self.paypoint_id,
             status: self.status,
+            status_label: self.status_label,
             payment_id: self.payment_id,
             trans_id: self.trans_id,
             trans_status: self.trans_status,

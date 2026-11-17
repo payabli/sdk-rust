@@ -1,9 +1,8 @@
 pub use crate::prelude::*;
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct SubmitApplicationRequest {
     /// The signature details for the application's signer, and optionally which person signs.
-    #[serde(default)]
     pub signer: SubmitSigner,
 }
 

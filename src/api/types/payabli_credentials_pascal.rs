@@ -2,6 +2,21 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct PayabliCredentialsPascal {
+    /// When `true`, the gateway for this credential is enabled for the paypoint. The value is
+    /// `null` when the credential isn't linked to a gateway.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
+    /// The customer ID configured for this gateway. Returned only for gateways that use a
+    /// customer ID. For all other gateways, or when no customer ID is configured, the value is
+    /// `null`.
+    #[serde(rename = "customerId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub customer_id: Option<String>,
+    /// The client ID configured for this gateway. Returned only for gateways that use a client
+    /// ID. For all other gateways, or when no client ID is configured, the value is `null`.
+    #[serde(rename = "clientId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub client_id: Option<String>,
     /// The payment service that this credential applies to. A paypoint can support multiple services, each represented by its own credential object in the array. Possible values are `card` (credit/debit card), `ach` (ACH bank transfer), `check` (paper check), `vcard` (virtual card), `cloud` (card-present), `cash`, `managed` (managed payment service), and `wallet`.
     #[serde(rename = "Service")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -70,6 +85,9 @@ impl PayabliCredentialsPascal {
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
 pub struct PayabliCredentialsPascalBuilder {
+    active: Option<bool>,
+    customer_id: Option<String>,
+    client_id: Option<String>,
     service: Option<String>,
     mode: Option<i64>,
     minticket: Option<MinTicket>,
@@ -88,6 +106,21 @@ pub struct PayabliCredentialsPascalBuilder {
 }
 
 impl PayabliCredentialsPascalBuilder {
+    pub fn active(mut self, value: bool) -> Self {
+        self.active = Some(value);
+        self
+    }
+
+    pub fn customer_id(mut self, value: impl Into<String>) -> Self {
+        self.customer_id = Some(value.into());
+        self
+    }
+
+    pub fn client_id(mut self, value: impl Into<String>) -> Self {
+        self.client_id = Some(value.into());
+        self
+    }
+
     pub fn service(mut self, value: impl Into<String>) -> Self {
         self.service = Some(value.into());
         self
@@ -166,6 +199,9 @@ impl PayabliCredentialsPascalBuilder {
     /// Consumes the builder and constructs a [`PayabliCredentialsPascal`].
     pub fn build(self) -> Result<PayabliCredentialsPascal, BuildError> {
         Ok(PayabliCredentialsPascal {
+            active: self.active,
+            customer_id: self.customer_id,
+            client_id: self.client_id,
             service: self.service,
             mode: self.mode,
             minticket: self.minticket,

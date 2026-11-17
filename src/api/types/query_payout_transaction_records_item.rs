@@ -32,6 +32,13 @@ pub struct QueryPayoutTransactionRecordsItem {
     #[serde(rename = "Status")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<i64>,
+    /// The name of the payout's `Status`: `Canceled`, `Captured`, `Processing`, `Processed`,
+    /// `Held`, `Paid`, `Authorized`, `Capturing`, `Returned`, `Rejected`, `Reissued`, or
+    /// `Refunded`. Returns `null` for an unrecognized code. See
+    /// [Pay Out statuses](/guides/pay-out-status-reference#payout-transaction-statuses).
+    #[serde(rename = "StatusLabel")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub status_label: Option<String>,
     #[serde(rename = "PaymentId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_id: Option<PaymentIdString>,
@@ -201,6 +208,7 @@ pub struct QueryPayoutTransactionRecordsItemBuilder {
     paypoint_legalname: Option<Legalname>,
     paypoint_id: Option<PaypointId>,
     status: Option<i64>,
+    status_label: Option<String>,
     payment_id: Option<PaymentIdString>,
     order_id: Option<OrderId>,
     trans_id: Option<String>,
@@ -284,6 +292,11 @@ impl QueryPayoutTransactionRecordsItemBuilder {
 
     pub fn status(mut self, value: i64) -> Self {
         self.status = Some(value);
+        self
+    }
+
+    pub fn status_label(mut self, value: impl Into<String>) -> Self {
+        self.status_label = Some(value.into());
         self
     }
 
@@ -518,6 +531,7 @@ impl QueryPayoutTransactionRecordsItemBuilder {
             paypoint_legalname: self.paypoint_legalname,
             paypoint_id: self.paypoint_id,
             status: self.status,
+            status_label: self.status_label,
             payment_id: self.payment_id,
             order_id: self.order_id,
             trans_id: self.trans_id,

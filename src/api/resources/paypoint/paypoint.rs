@@ -220,7 +220,7 @@ impl PaypointClient {
     ///         .migrate(
     ///             &PaypointMoveRequest {
     ///                 entry_point: Entrypointfield("8cfec329267".to_string()),
-    ///                 new_parent_organization_id: 123,
+    ///                 new_parent_organization_id: 900123,
     ///                 notification_request: Some(NotificationRequest {
     ///                     notification_url: "https://webhook-test.yoursie.com".to_string(),
     ///                     web_header_parameters: Some(vec![WebHeaderParameter {

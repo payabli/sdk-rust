@@ -61,7 +61,7 @@ impl OrganizationClient {
     ///                 org_city: Some(Orgcity("Johnson City".to_string())),
     ///                 org_country: Some(Orgcountry("US".to_string())),
     ///                 org_entry_name: Some(Orgentryname("pilgrim-planner".to_string())),
-    ///                 org_id: Some(Orgidstring("123".to_string())),
+    ///                 org_id: Some(Orgidstring("900123".to_string())),
     ///                 org_logo: Some(FileContent {
     ///                     f_content: Some("TXkgdGVzdCBmaWxlHJ==...".to_string()),
     ///                     filename: Some("my-doc.pdf".to_string()),
@@ -70,7 +70,7 @@ impl OrganizationClient {
     ///                     ..Default::default()
     ///                 }),
     ///                 org_name: Orgname("Pilgrim Planner".to_string()),
-    ///                 org_parent_id: Some(OrgParentId(236)),
+    ///                 org_parent_id: Some(OrgParentId(900123)),
     ///                 org_state: Some(Orgstate("TN".to_string())),
     ///                 org_timezone: Some(Orgtimezone(-5)),
     ///                 org_type: Orgtype(0),
@@ -142,7 +142,7 @@ impl OrganizationClient {
     ///     client
     ///         .organization
     ///         .edit_organization(
-    ///             123,
+    ///             900123,
     ///             &OrganizationData {
     ///                 contacts: Some(ContactsField(vec![Contacts {
     ///                     contact_email: Some(Email("herman@hermanscoatings.com".to_string())),
@@ -155,7 +155,7 @@ impl OrganizationClient {
     ///                 org_city: Some(Orgcity("Johnson City".to_string())),
     ///                 org_country: Some(Orgcountry("US".to_string())),
     ///                 org_entry_name: Some(Orgentryname("pilgrim-planner".to_string())),
-    ///                 org_id: Some(Orgidstring("123".to_string())),
+    ///                 org_id: Some(Orgidstring("900123".to_string())),
     ///                 org_name: Some(Orgname("Pilgrim Planner".to_string())),
     ///                 org_state: Some(Orgstate("TN".to_string())),
     ///                 org_timezone: Some(Orgtimezone(-5)),
@@ -222,7 +222,7 @@ impl OrganizationClient {
     ///         ..Default::default()
     ///     };
     ///     let client = ApiClient::new(config).expect("Failed to build client");
-    ///     client.organization.delete_organization(123, None).await;
+    ///     client.organization.delete_organization(900123, None).await;
     /// }
     /// ```
     pub async fn delete_organization(
@@ -337,7 +337,7 @@ impl OrganizationClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .organization
-    ///         .get_basic_organization_by_id(123, None)
+    ///         .get_basic_organization_by_id(900123, None)
     ///         .await;
     /// }
     /// ```
@@ -393,7 +393,7 @@ impl OrganizationClient {
     ///         ..Default::default()
     ///     };
     ///     let client = ApiClient::new(config).expect("Failed to build client");
-    ///     client.organization.get_organization(123, None).await;
+    ///     client.organization.get_organization(900123, None).await;
     /// }
     /// ```
     pub async fn get_organization(
@@ -450,7 +450,7 @@ impl OrganizationClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .organization
-    ///         .get_settings_organization(123, None)
+    ///         .get_settings_organization(900123, None)
     ///         .await;
     /// }
     /// ```

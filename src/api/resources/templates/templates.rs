@@ -40,7 +40,7 @@ impl TemplatesClient {
     ///         ..Default::default()
     ///     };
     ///     let client = ApiClient::new(config).expect("Failed to build client");
-    ///     client.templates.delete_template(80.0, None).await;
+    ///     client.templates.delete_template(900022.0, None).await;
     /// }
     /// ```
     pub async fn delete_template(
@@ -101,7 +101,10 @@ impl TemplatesClient {
     ///         ..Default::default()
     ///     };
     ///     let client = ApiClient::new(config).expect("Failed to build client");
-    ///     client.templates.getlink_template(80.0, true, None).await;
+    ///     client
+    ///         .templates
+    ///         .getlink_template(900022.0, true, None)
+    ///         .await;
     /// }
     /// ```
     pub async fn getlink_template(
@@ -162,7 +165,7 @@ impl TemplatesClient {
     ///         ..Default::default()
     ///     };
     ///     let client = ApiClient::new(config).expect("Failed to build client");
-    ///     client.templates.get_template(80.0, None).await;
+    ///     client.templates.get_template(900022.0, None).await;
     /// }
     /// ```
     pub async fn get_template(
@@ -214,11 +217,11 @@ impl TemplatesClient {
     ///
     /// Because of a technical limitation, you can't make a request that includes filters from the API console on this page. The response won't be filtered. Instead, copy the request, remove `parameters=` and run the request in a different client, for example:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?parameters=totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?parameters=totalAmount(gt)=1000&limitRecord=20
     ///
     /// should become:
     ///
-    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/236?totalAmount(gt)=1000&limitRecord=20
+    /// --url https://api-sandbox.payabli.com/api/Query/transactions/org/900123?totalAmount(gt)=1000&limitRecord=20
     /// </Info>
     ///
     ///
@@ -269,7 +272,7 @@ impl TemplatesClient {
     ///     client
     ///         .templates
     ///         .list_templates(
-    ///             123,
+    ///             900123,
     ///             &TemplatesListTemplatesQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),

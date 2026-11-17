@@ -854,6 +854,7 @@ pub mod paypoints_list_paypoints_query_request;
 pub mod paypointstatus;
 pub mod pci_attestation;
 pub mod pending_fee_amount;
+pub mod people_search_address_response;
 pub mod people_search_envelope;
 pub mod people_search_request;
 pub mod people_search_result_response;
@@ -2146,6 +2147,7 @@ pub use paypoints_list_paypoints_query_request::PaypointsListPaypointsQueryReque
 pub use paypointstatus::Paypointstatus;
 pub use pci_attestation::PciAttestation;
 pub use pending_fee_amount::PendingFeeAmount;
+pub use people_search_address_response::PeopleSearchAddressResponse;
 pub use people_search_envelope::PeopleSearchEnvelope;
 pub use people_search_request::PeopleSearchRequest;
 pub use people_search_result_response::PeopleSearchResultResponse;

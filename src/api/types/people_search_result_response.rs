@@ -43,6 +43,13 @@ pub struct PeopleSearchResultResponse {
     #[serde(rename = "isFromVendor")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub is_from_vendor: Option<bool>,
+    /// The person's primary address. `null` when the person has no address on file.
+    #[serde(rename = "primaryAddress")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub primary_address: Option<PeopleSearchAddressResponse>,
+    /// The person's addresses on file. Empty when the person has no address.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub addresses: Option<Vec<PeopleSearchAddressResponse>>,
     /// The person's phone numbers.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub phones: Option<Vec<String>>,
@@ -82,6 +89,8 @@ pub struct PeopleSearchResultResponseBuilder {
     match_score: Option<f64>,
     is_top_match: Option<bool>,
     is_from_vendor: Option<bool>,
+    primary_address: Option<PeopleSearchAddressResponse>,
+    addresses: Option<Vec<PeopleSearchAddressResponse>>,
     phones: Option<Vec<String>>,
     emails: Option<Vec<String>>,
     address_count: Option<i64>,
@@ -140,6 +149,16 @@ impl PeopleSearchResultResponseBuilder {
         self
     }
 
+    pub fn primary_address(mut self, value: PeopleSearchAddressResponse) -> Self {
+        self.primary_address = Some(value);
+        self
+    }
+
+    pub fn addresses(mut self, value: Vec<PeopleSearchAddressResponse>) -> Self {
+        self.addresses = Some(value);
+        self
+    }
+
     pub fn phones(mut self, value: Vec<String>) -> Self {
         self.phones = Some(value);
         self
@@ -178,6 +197,8 @@ impl PeopleSearchResultResponseBuilder {
             match_score: self.match_score,
             is_top_match: self.is_top_match,
             is_from_vendor: self.is_from_vendor,
+            primary_address: self.primary_address,
+            addresses: self.addresses,
             phones: self.phones,
             emails: self.emails,
             address_count: self.address_count,

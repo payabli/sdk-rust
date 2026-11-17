@@ -75,6 +75,11 @@ pub struct VendorDataResponse {
     #[serde(rename = "VendorStatus")]
     #[serde(default)]
     pub vendor_status: Vendorstatus,
+    /// The name of the `VendorStatus`: `Inactive`, `Active`, or `Deleted`. Returns `null` for
+    /// an unrecognized code.
+    #[serde(rename = "VendorStatusLabel")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub vendor_status_label: Option<String>,
     #[serde(rename = "VendorId")]
     #[serde(default)]
     pub vendor_id: Vendorid,
@@ -197,6 +202,7 @@ pub struct VendorDataResponseBuilder {
     billing_data: Option<VendorResponseBillingData>,
     payment_method: Option<VendorDataResponsePaymentMethod>,
     vendor_status: Option<Vendorstatus>,
+    vendor_status_label: Option<String>,
     vendor_id: Option<Vendorid>,
     enrollment_status: Option<String>,
     summary: Option<VendorResponseSummary>,
@@ -322,6 +328,11 @@ impl VendorDataResponseBuilder {
 
     pub fn vendor_status(mut self, value: Vendorstatus) -> Self {
         self.vendor_status = Some(value);
+        self
+    }
+
+    pub fn vendor_status_label(mut self, value: impl Into<String>) -> Self {
+        self.vendor_status_label = Some(value.into());
         self
     }
 
@@ -546,6 +557,7 @@ impl VendorDataResponseBuilder {
             vendor_status: self
                 .vendor_status
                 .ok_or_else(|| BuildError::missing_field("vendor_status"))?,
+            vendor_status_label: self.vendor_status_label,
             vendor_id: self
                 .vendor_id
                 .ok_or_else(|| BuildError::missing_field("vendor_id"))?,

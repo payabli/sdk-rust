@@ -52,6 +52,14 @@ pub struct Owners {
     #[serde(rename = "additionalData")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub additional_data: Option<AdditionalDataMap>,
+    /// When `true`, marks this owner as the primary owner, the main principal that Payabli sends to the processor. Set it on exactly one owner. If you flag more than one owner, the request fails with HTTP 400 and the response text `Only one owner can be primary`.
+    ///
+    /// If the application has one owner and you don't flag it, Payabli flags that owner as the primary owner. If the application has two or more owners, flag one of them. Payabli accepts an application with no primary owner, but the processor can reject it at submission.
+    ///
+    /// Responses return `null` for owners that aren't the primary owner.
+    #[serde(rename = "primaryOwner")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub primary_owner: Option<bool>,
 }
 
 impl Owners {
@@ -79,6 +87,7 @@ pub struct OwnersBuilder {
     ostate: Option<String>,
     ozip: Option<String>,
     additional_data: Option<AdditionalDataMap>,
+    primary_owner: Option<bool>,
 }
 
 impl OwnersBuilder {
@@ -162,6 +171,11 @@ impl OwnersBuilder {
         self
     }
 
+    pub fn primary_owner(mut self, value: bool) -> Self {
+        self.primary_owner = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`Owners`].
     pub fn build(self) -> Result<Owners, BuildError> {
         Ok(Owners {
@@ -181,6 +195,7 @@ impl OwnersBuilder {
             ostate: self.ostate,
             ozip: self.ozip,
             additional_data: self.additional_data,
+            primary_owner: self.primary_owner,
         })
     }
 }

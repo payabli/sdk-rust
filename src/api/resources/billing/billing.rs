@@ -51,7 +51,7 @@ impl BillingClient {
     ///     client
     ///         .billing
     ///         .list_profiles(
-    ///             123,
+    ///             900123,
     ///             &ListProfilesQueryRequest {
     ///                 limit_record: Some(20),
     ///                 from_record: Some(0),
@@ -142,7 +142,7 @@ impl BillingClient {
     ///         .get_profile(
     ///             &GetProfileBillingRequestServiceGroup::PayIn,
     ///             &GetProfileBillingRequestEntityType::Organization,
-    ///             123,
+    ///             900123,
     ///             None,
     ///         )
     ///         .await;

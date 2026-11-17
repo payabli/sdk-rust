@@ -94,6 +94,13 @@ pub struct BillDetailResponse {
     #[serde(rename = "Status")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<i64>,
+    /// The name of the payout's `Status`: `Canceled`, `Captured`, `Processing`, `Processed`,
+    /// `Held`, `Paid`, `Authorized`, `Capturing`, `Returned`, `Rejected`, `Reissued`, or
+    /// `Refunded`. Returns `null` for an unrecognized code. See
+    /// [Pay Out statuses](/guides/pay-out-status-reference#payout-transaction-statuses).
+    #[serde(rename = "StatusLabel")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub status_label: Option<String>,
     /// Text description of the payout transaction status.
     #[serde(rename = "StatusText")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -190,6 +197,7 @@ pub struct BillDetailResponseBuilder {
     paypoint_legalname: Option<Legalname>,
     source: Option<Source>,
     status: Option<i64>,
+    status_label: Option<String>,
     status_text: Option<String>,
     total_amount: Option<f64>,
     vendor: Option<VendorQueryRecord>,
@@ -326,6 +334,11 @@ impl BillDetailResponseBuilder {
         self
     }
 
+    pub fn status_label(mut self, value: impl Into<String>) -> Self {
+        self.status_label = Some(value.into());
+        self
+    }
+
     pub fn status_text(mut self, value: impl Into<String>) -> Self {
         self.status_text = Some(value.into());
         self
@@ -442,6 +455,7 @@ impl BillDetailResponseBuilder {
             paypoint_legalname: self.paypoint_legalname,
             source: self.source,
             status: self.status,
+            status_label: self.status_label,
             status_text: self.status_text,
             total_amount: self.total_amount,
             vendor: self.vendor,

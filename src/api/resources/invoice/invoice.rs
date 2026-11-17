@@ -764,7 +764,7 @@ impl InvoiceClient {
     ///     client
     ///         .invoice
     ///         .list_invoices_org(
-    ///             123,
+    ///             900123,
     ///             &ListInvoicesOrgQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),

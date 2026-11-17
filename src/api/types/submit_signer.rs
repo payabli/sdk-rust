@@ -4,25 +4,25 @@ pub use crate::prelude::*;
 /// with `isSigner` on the business, and Payabli records the signer's identity
 /// from their person record and business link. Keep the signer's details
 /// current with the people endpoints before you submit, because you can't
-/// correct them here. Provide a signature with `signature` and
-/// `signatureType`, or, if the signer signed in your own e-sign tool, send
-/// `signedDocumentReference` instead. Signer identity fields such as `name`,
+/// correct them here. Every submit needs a signature in `signature` and
+/// `signatureType`. If the signer also signed in your own e-sign tool, send
+/// `signedDocumentReference` too, and Payabli records it with the
+/// signature. Signer identity fields such as `name`,
 /// `email`, `ssn`, and `address` aren't part of this object, and Payabli
 /// ignores them if you send them.
-#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct SubmitSigner {
     /// The reference of an owner linked to this business, to make them the signer before the application is submitted. Works only while the application is a draft. Leave it out when the business already has a signer. If the person isn't linked to this business, the request fails with `404`. If the person isn't an owner, the request fails with `422` and the error `SIGNER_NOT_OWNER`.
     #[serde(rename = "personReference")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub person_reference: Option<String>,
-    /// The signature. For `type` and `checkbox`, send the signer's name. For `draw`, send the image as a base64 data URL, such as the output of `canvas.toDataURL()`. Required unless you send `signedDocumentReference`.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub signature: Option<String>,
-    /// How the signer signed. Required with `signature`.
+    /// The signature. For `type` and `checkbox`, send the signer's name. For `draw`, send the image as a base64 data URL, such as the output of `canvas.toDataURL()`. Can't be empty or only whitespace.
+    #[serde(default)]
+    pub signature: String,
+    /// How the signer signed.
     #[serde(rename = "signatureType")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub signature_type: Option<SignatureType>,
-    /// The reference for a document the signer signed in your own e-sign tool, such as a DocuSign envelope ID. Send it instead of `signature` and `signatureType`.
+    pub signature_type: SignatureType,
+    /// The reference for a document the signer signed in your own e-sign tool, such as a DocuSign envelope ID. Payabli records it with the signature. It doesn't replace `signature` and `signatureType`, which every submit needs.
     #[serde(rename = "signedDocumentReference")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub signed_document_reference: Option<String>,
@@ -110,11 +110,18 @@ impl SubmitSignerBuilder {
     }
 
     /// Consumes the builder and constructs a [`SubmitSigner`].
+    /// This method will fail if any of the following fields are not set:
+    /// - [`signature`](SubmitSignerBuilder::signature)
+    /// - [`signature_type`](SubmitSignerBuilder::signature_type)
     pub fn build(self) -> Result<SubmitSigner, BuildError> {
         Ok(SubmitSigner {
             person_reference: self.person_reference,
-            signature: self.signature,
-            signature_type: self.signature_type,
+            signature: self
+                .signature
+                .ok_or_else(|| BuildError::missing_field("signature"))?,
+            signature_type: self
+                .signature_type
+                .ok_or_else(|| BuildError::missing_field("signature_type"))?,
             signed_document_reference: self.signed_document_reference,
             acceptance: self.acceptance,
             pci_attestation: self.pci_attestation,

@@ -1,13 +1,12 @@
 # Payabli Rust Library
 
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fpayabli%2Fsdk-rust)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Payabli%2FRust)
 [![crates.io shield](https://img.shields.io/crates/v/payabli_api)](https://crates.io/crates/payabli_api)
 
 The Payabli Rust library provides convenient access to the Payabli APIs from Rust.
 
 ## Table of Contents
 
-- [Documentation](#documentation)
 - [Installation](#installation)
 - [Reference](#reference)
 - [Changelog](#changelog)
@@ -24,17 +23,13 @@ The Payabli Rust library provides convenient access to the Payabli APIs from Rus
   - [Custom Client](#custom-client)
 - [Contributing](#contributing)
 
-## Documentation
-
-API reference documentation is available [here](https://docs.payabli.com).
-
 ## Installation
 
 Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-payabli_api = "2.0.21"
+payabli_api = "2.0.22"
 ```
 
 Or install via cargo:
@@ -45,7 +40,7 @@ cargo add payabli_api
 
 ## Reference
 
-A full reference for this library is available [here](https://github.com/payabli/sdk-rust/blob/HEAD/./reference.md).
+A full reference for this library is available [here](./reference.md).
 
 ## Changelog
 

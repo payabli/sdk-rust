@@ -11,6 +11,11 @@ pub struct PayoutSubscriptionQueryRecord {
     /// - 1: Active
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<i64>,
+    /// The name of the payout subscription's `status`: `Paused`, `Active`, `Completed`, `Marked
+    /// for Deletion`, or `In Progress`. Returns `null` for an unrecognized code.
+    #[serde(rename = "statusLabel")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub status_label: Option<String>,
     /// Events associated with the payout subscription.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub events: Option<Vec<GeneralEvents>>,
@@ -151,6 +156,7 @@ impl PayoutSubscriptionQueryRecord {
 pub struct PayoutSubscriptionQueryRecordBuilder {
     id_out_subscription: Option<i64>,
     status: Option<i64>,
+    status_label: Option<String>,
     events: Option<Vec<GeneralEvents>>,
     vendor: Option<PayoutSubscriptionVendor>,
     bill_data: Option<Vec<PayoutSubscriptionBill>>,
@@ -193,6 +199,11 @@ impl PayoutSubscriptionQueryRecordBuilder {
 
     pub fn status(mut self, value: i64) -> Self {
         self.status = Some(value);
+        self
+    }
+
+    pub fn status_label(mut self, value: impl Into<String>) -> Self {
+        self.status_label = Some(value.into());
         self
     }
 
@@ -361,6 +372,7 @@ impl PayoutSubscriptionQueryRecordBuilder {
         Ok(PayoutSubscriptionQueryRecord {
             id_out_subscription: self.id_out_subscription,
             status: self.status,
+            status_label: self.status_label,
             events: self.events,
             vendor: self.vendor,
             bill_data: self.bill_data,

@@ -11,7 +11,7 @@ pub struct TransferOutRecord {
     #[serde(rename = "paypointId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub paypoint_id: Option<i64>,
-    /// The batch number for the transfer.
+    /// The batch number for the transfer. Vendor enrichment and bank account verification billing transfers aren't tied to a batch, so this is an empty string for those transfers.
     #[serde(rename = "batchNumber")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_number: Option<String>,
@@ -19,15 +19,15 @@ pub struct TransferOutRecord {
     #[serde(rename = "batchCurrency")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_currency: Option<String>,
-    /// The number of records in the batch.
+    /// The number of records in the batch. Vendor enrichment and bank account verification billing transfers aren't tied to a batch, so this is `0` for those transfers.
     #[serde(rename = "batchRecords")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_records: Option<i64>,
-    /// An identifier for the transfer.
+    /// An identifier for the transfer. Vendor enrichment and bank account verification billing transfers use the format `BILL_{paypointId}_{yyyyMMdd}_{feeType}`, where `feeType` is `VendorEnrichment` or `BankAccountVerification`.
     #[serde(rename = "transferIdentifier")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transfer_identifier: Option<String>,
-    /// The ID of the batch.
+    /// The ID of the batch. Vendor enrichment and bank account verification billing transfers aren't tied to a batch, so this is `0` for those transfers.
     #[serde(rename = "batchId")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch_id: Option<i64>,
@@ -87,13 +87,19 @@ pub struct TransferOutRecord {
     #[serde(default)]
     #[serde(with = "crate::core::flexible_datetime::utc::option")]
     pub transfer_date: Option<DateTime<Utc>>,
-    /// The processor used for the transfer.
+    /// The processor used for the transfer. This is `billing` for vendor enrichment and bank account verification billing transfers.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub processor: Option<String>,
     /// The status of the transfer.
     #[serde(rename = "transferStatus")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transfer_status: Option<i64>,
+    /// The name of the `transferStatus`: `Pending`, `In Transit`, `Transferred`, `Funded
+    /// (settled)`, `Resolved`, `Exception`, `ACH Return or Chargeback`, `Held`, `Released`,
+    /// `Refunded`, or `None`. Returns `null` for an unrecognized code.
+    #[serde(rename = "transferStatusLabel")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub transfer_status_label: Option<String>,
     /// The gross amount of the transfer.
     #[serde(rename = "grossAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -161,7 +167,7 @@ pub struct TransferOutRecord {
     /// List of messages associated with the transfer.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub messages: Option<Vec<TransferOutMessage>>,
-    /// The transfer type. One of `debit`, `credit`, or `billing`.
+    /// The transfer type. One of `debit`, `credit`, or `billing`. A `billing` transfer is an ACH debit from the paypoint that collects fees. Billing transfers for payout fees belong to the payout's batch. Vendor enrichment and bank account verification charges are collected in a separate daily debit for each paypoint and fee type. These transfers aren't tied to a batch, so `batchId` and `batchRecords` are `0` and `batchNumber` is empty. Their `grossAmount`, `billingFeesAmount`, and `netTransferAmount` each hold the charge total as a negative value.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub r#type: Option<String>,
     /// The payment method for the transfer, such as `ach`, `vcard`, or `check`.
@@ -200,6 +206,7 @@ pub struct TransferOutRecordBuilder {
     transfer_date: Option<DateTime<Utc>>,
     processor: Option<String>,
     transfer_status: Option<i64>,
+    transfer_status_label: Option<String>,
     gross_amount: Option<f64>,
     charge_back_amount: Option<f64>,
     returned_amount: Option<f64>,
@@ -327,6 +334,11 @@ impl TransferOutRecordBuilder {
         self
     }
 
+    pub fn transfer_status_label(mut self, value: impl Into<String>) -> Self {
+        self.transfer_status_label = Some(value.into());
+        self
+    }
+
     pub fn gross_amount(mut self, value: f64) -> Self {
         self.gross_amount = Some(value);
         self
@@ -422,6 +434,7 @@ impl TransferOutRecordBuilder {
             transfer_date: self.transfer_date,
             processor: self.processor,
             transfer_status: self.transfer_status,
+            transfer_status_label: self.transfer_status_label,
             gross_amount: self.gross_amount,
             charge_back_amount: self.charge_back_amount,
             returned_amount: self.returned_amount,

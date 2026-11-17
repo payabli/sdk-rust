@@ -53,7 +53,7 @@ impl NotificationlogsClient {
     ///                     .with_timezone(&Utc),
     ///                 notification_event: Some("approvedpayment".to_string()),
     ///                 succeeded: Some(true),
-    ///                 org_id: Some(123),
+    ///                 org_id: Some(900123),
     ///                 page: None,
     ///                 paypoint_id: None,
     ///             },

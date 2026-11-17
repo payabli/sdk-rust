@@ -19,8 +19,7 @@ pub struct BillItem {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub item_description: Option<ItemDescription>,
     /// Internal class of item or product: value `0` is only for invoices,
-    /// `1` for bills, and `2` is common for both. Required on invoice line
-    /// items — invoice creation fails with `Invalid item data` if it's omitted.
+    /// `1` for bills, and `2` is common for both.
     #[serde(rename = "itemMode")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub item_mode: Option<i64>,
@@ -47,7 +46,9 @@ pub struct BillItem {
     #[serde(with = "crate::core::number_serializers::option")]
     pub item_tax_rate: Option<f64>,
     /// Per-line total for this item (unit cost times quantity). Distinct from
-    /// the invoice's overall total, `invoiceAmount`. Required on invoice line items.
+    /// the invoice's overall total, `invoiceAmount`. Required on invoice line
+    /// items when `itemQty` and `itemCost` are greater than 0. If it's missing,
+    /// 0, or less, invoice creation fails with `Invalid item data`.
     #[serde(rename = "itemTotalAmount")]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(default)]

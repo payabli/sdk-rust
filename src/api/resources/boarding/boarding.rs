@@ -127,7 +127,7 @@ impl BoardingClient {
     ///                 mcountry: Some(Mcountry("US".to_string())),
     ///                 mstate: Some(Mstate("TN".to_string())),
     ///                 mzip: Some(Mzip("37615".to_string())),
-    ///                 org_id: Some(Orgid(123)),
+    ///                 org_id: Some(Orgid(900123)),
     ///                 ownership: Some(vec![ApplicationDataPayInOwnershipItem(Owners {
     ///                     ownername: Some("John Smith".to_string()),
     ///                     ownertitle: Some("CEO".to_string()),
@@ -181,7 +181,7 @@ impl BoardingClient {
     ///                 },
     ///                 startdate: Some(Busstartdate("01/01/1990".to_string())),
     ///                 tax_fill_name: Some(Taxfillname("Sunshine LLC".to_string())),
-    ///                 template_id: Some(TemplateId(22)),
+    ///                 template_id: Some(TemplateId(900022)),
     ///                 ticketamt: Some(Ticketamt(1000.0)),
     ///                 website: Some(Website("www.example.com".to_string())),
     ///                 when_charged: Whencharged::WhenServiceProvided,
@@ -235,6 +235,9 @@ impl BoardingClient {
     ///
     ///
     /// Updates a boarding application by ID. This endpoint requires an application API token.
+    ///
+    ///
+    /// If you send `ownership`, it replaces the application's owners. Include every owner, and set `primaryOwner` again on the primary owner, or the application loses its primary owner. If you leave `ownership` out, the owners don't change.
     ///
     /// # Arguments
     ///
@@ -580,7 +583,7 @@ impl BoardingClient {
     ///     let client = ApiClient::new(config).expect("Failed to build client");
     ///     client
     ///         .boarding
-    ///         .get_by_template_id_link_application(80.0, None)
+    ///         .get_by_template_id_link_application(900022.0, None)
     ///         .await;
     /// }
     /// ```
@@ -822,7 +825,7 @@ impl BoardingClient {
     ///     client
     ///         .boarding
     ///         .list_applications(
-    ///             123,
+    ///             900123,
     ///             &BoardingListApplicationsQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -935,7 +938,7 @@ impl BoardingClient {
     ///     client
     ///         .boarding
     ///         .list_boarding_links(
-    ///             123,
+    ///             900123,
     ///             &ListBoardingLinksQueryRequest {
     ///                 from_record: Some(251),
     ///                 limit_record: Some(0),
@@ -1014,7 +1017,7 @@ impl BoardingClient {
     ///         .add_service_to_paypoint_from_app(
     ///             &CreateApplicationFromPaypointRequest {
     ///                 paypoint_id: 3040,
-    ///                 template_id: 456,
+    ///                 template_id: 900022,
     ///                 recipient_email: "merchant@example.com".to_string(),
     ///                 return_boarding_access_info_in_line: Some(true),
     ///                 on_create: Some(vec!["submitApplication".to_string()]),

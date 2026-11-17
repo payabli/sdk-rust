@@ -327,9 +327,9 @@ impl ApplicationsClient {
 
     /// Submits a draft application for review. Your integration (the applicant) calls this after the business, its people, payment methods, and services are in place. Verification then runs automatically.
     ///
-    /// The application must have a signer: an owner flagged with `isSigner` on their business link, or one you name in `signer.personReference`. Payabli records the signer's identity from their person record and business link, so update those before you submit. The `signer` object carries the signature details.
+    /// The application must have a signer: an owner flagged with `isSigner` on their business link, or one you name in `signer.personReference`. Payabli records the signer's identity from their person record and business link, so update those before you submit. The `signer` object carries the signature details, and every submit needs `signer.signature` and `signer.signatureType`, even when you send `signer.signedDocumentReference`.
     ///
-    /// If the application has no signer, the request fails with `422` and the error `SIGNER_REQUIRED`. If `signer.personReference` names a person who isn't an owner, the request fails with `422` and the error `SIGNER_NOT_OWNER`. If the application isn't a draft, the request fails with `409` and the error `BIZ_004`, before any signer check. If `signer.reportedSignerIp` isn't a single valid IPv4 or IPv6 address, the request fails with `400` and the error `VALIDATION_ERROR`, and the application isn't submitted.
+    /// If `signer`, `signer.signature`, or `signer.signatureType` is missing or blank, the request fails with `400` and the error `VALIDATION_ERROR`. If the application has no signer, the request fails with `422` and the error `SIGNER_REQUIRED`. If `signer.personReference` names a person who isn't an owner, the request fails with `422` and the error `SIGNER_NOT_OWNER`. If the application isn't a draft, the request fails with `409` and the error `BIZ_004`, before any signer check. If `signer.reportedSignerIp` isn't a single valid IPv4 or IPv6 address, the request fails with `400` and the error `VALIDATION_ERROR`, and the application isn't submitted.
     ///
     /// Submit doesn't check every rule that [validate](/developers/api-reference/applications/validate-an-application) reports, such as the primary controller and ownership rules. Validate the application and resolve its missing fields before you submit.
     ///
@@ -360,12 +360,13 @@ impl ApplicationsClient {
     ///             &SubmitApplicationRequest {
     ///                 signer: SubmitSigner {
     ///                     person_reference: Some("01a0014d-ce1a-7110-9bac-c4c59647a88d".to_string()),
-    ///                     signature: Some("Marcus J Delgado".to_string()),
-    ///                     signature_type: Some(SignatureType::Type),
+    ///                     signature: "Marcus J Delgado".to_string(),
+    ///                     signature_type: SignatureType::Type,
+    ///                     signed_document_reference: None,
     ///                     acceptance: Some(true),
     ///                     pci_attestation: Some(true),
     ///                     reported_signer_ip: Some("203.0.113.7".to_string()),
-    ///                     ..Default::default()
+    ///                     additional_data: None,
     ///                 },
     ///             },
     ///             None,
